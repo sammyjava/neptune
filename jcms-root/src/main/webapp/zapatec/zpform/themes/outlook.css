@@ -1,0 +1,342 @@
+/* $Id: outlook.css 15428 2009-01-26 16:51:24Z smaxim $ */
+/*
+"zpStatusImg" class images for form fields -- apply appropriate rules here.
+        The script auto-applies one of each of these CLASS attributes to a series of
+                nested <span>s with an innermost .zpStatusImg class <span> we style:
+        1) "zpIsRequired" or "zpNotRequired".
+        2) "zpIsEditing" or "zpNotEditing".
+        3) "zpIsEmpty" or "zpNotEmpty".
+        4) "zpIsValid" or "zpNotValid".
+        5) Always "zpStatusImg", this is the one styled.
+*/
+
+.zpFormOutlook .zpStatusImg,
+.zpFormOutlook .zpCheckboxStatusImg,
+.zpFormOutlook .zpRadioStatusImg { /* Container for field status image */
+        padding: 0px 12px;
+        height: 14px;
+        width: 13px;
+        background-repeat: no-repeat;
+        background-position: right;
+        margin-left:5px;
+        margin-right:3px;
+        display: inline-block;
+        vertical-align: top;
+} 
+
+.zpFormOutlook .zpCommonStatusImg {
+        opacity: 0.66;
+        filter: alpha(opacity=66);
+        padding-bottom: 5px; /* Fixes alignment of asterisk ->  don't remove! */
+}
+
+.zpFormOutlook .zpCheckboxStatusImg,
+.zpFormOutlook .zpRadioStatusImg { /* Container for checkbox and radio status images */
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+}
+
+
+.zpFormOutlook .zpIsRequired .zpStatusImg{
+        background-image: url(icons/required.gif);
+}
+
+.zpFormOutlook .zpIsEditing .zpStatusImg { /* properties of status image while editing field */
+       opacity: 1.0;
+       filter: alpha(opacity=100);
+}
+
+.zpFormOutlook .zpIsEditing .zpNotEmpty .zpCommonStatusImg{
+       background-image: url(icons/editing.gif);
+}
+
+.zpFormOutlook .zpNotEditing .zpNotEmpty .zpNotValid .zpStatusImg{
+        background-image: url(icons/invalid.gif);
+}
+
+.zpFormOutlook .zpIsValid .zpStatusImg{ /* Shown when field is valid */
+        background-image: url(icons/validated.gif);
+}
+
+.zpFormOutlook .zpIsFetching .zpStatusImg { /* shown while inputing into field */
+        background-image: url(icons/fetching.gif) !important;
+}
+
+/*
+ * Controls the look and feel of the form
+ */
+
+.zpFormOutlook .errOutput { /* style for error field */
+        background-color: #C70032;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: white;
+        display: none;
+}
+
+.zpFormOutlook .zpFormLabel { /* style for form fields labels */
+        width: 10em;
+        float: left;
+        color:#446092;
+        font-size: 12px;
+        line-height:20px;
+}
+
+.zpFormOutlook .zpExpandedTable, 
+.zpFormOutlook .zpExpandedTable td,  
+.zpFormOutlook .zpExpandedTable th  { 
+        border:1px solid #6392CE;
+        border-collapse:collapse;                        
+}
+
+.zpFormOutlook .zpExpandedTable span { /* fixes the table cell height error, caused by invisible spans */
+        display:none;
+}
+
+.zpFormOutlook .zpExpandedTable .multipleButton { /* multiply button in table container */
+        margin:2px;
+}
+
+.zpFormOutlook .multipleButton{ /* style for field multiply button (if present) */
+        margin-left: 10px; 
+        text-align: center;
+        width:20px;
+}
+
+* html .zpFormOutlook .multipleButton {  /* IE6 Fix of button height */
+        height:20px;
+}
+ 
+*:first-child+html .zpFormOutlook .multipleButton { /* IE7 Fix of button height */
+        height:20px;
+} 
+
+
+.zpFormOutlook { /* Common form properties */
+        background:#C3D9FF;
+        border:1px solid #6392CE;
+        font-size: 11px;
+        padding:10px;
+        font-family:Arial,sans-serif;
+}
+
+.zpFormOutlook .zpFormContent { /* Form content container style */
+        border:none;
+        margin: 0px 5px;
+        padding: 0px;
+        background:##EDF3FE;
+}
+
+* html .zpFormOutlook .zpFormContent{ /* IE6 fix */
+        padding-top: 10px;
+}
+
+.zpFormOutlook .button { /* style for form submit buttons */
+			  border: 1px solid #6392CE !important;
+				padding: 3px 10px;
+				overflow: hidden;
+				background: url(outlook/bg.png) repeat-x 0 0;
+				/*	line-height: 23px;*/
+				text-align: center;
+				cursor: pointer;
+				color:#2255AA;
+				user-select: none;
+				-moz-user-select: none;
+				-webkit-user-select: none;
+				-khtml-user-select: none;
+				font-size:105%;
+}
+
+.zpFormOutlook .button:hover { /* style on button mouseover */ 
+        background-position: 0 -26px;
+        border: 1px solid #6392CE;
+}
+
+.zpFormOutlook .zpFormButtons {
+        text-align: right;
+        margin: 10px;
+}
+
+.zpFormOutlook fieldset{ /* form fieldset style */
+        padding: 15px 10px 10px;
+        border:1px solid #6392CE;
+        background:#EDF3FE;
+}
+
+* html .zpFormOutlook fieldset{ /* IE6 fix */
+        margin-bottom: 10px;
+}
+
+.zpFormOutlook legend { /* form legend: sign of the fieldset */
+        color: #516589;
+        padding:0px 5px;
+        font-family:Arial,sans-serif;
+        font-size:12px;
+        font-weight:bold;
+        background:#EDF3FE;
+}
+
+.zpFormOutlook .zpFormFieldsetSeparateHeader {
+        color: #516589;
+        padding:3px 15px 5px;
+        font-family:Arial,sans-serif;
+        font-size:13px;
+        font-weight:bold;
+}
+
+zpFormFieldsetSeparateHeader
+
+* html .zpFormOutlook legend{
+        margin-bottom: 10px;
+}
+
+.zpFormOutlook select {
+        background-color:none;
+        border:1px solid #6392CE;
+        margin-bottom: 5px;
+        color:#446092;
+}
+
+                                  /* Dropdown styles */
+.zpFormOutlook .dropDownArrow { /*All Browsers*/
+        background-image: url("outlook/down_arrow.gif");
+        padding:9px 9px; 
+        padding-top:12px;
+        background-repeat: no-repeat;
+        margin-left:-1px;
+        display: inline;
+        cursor: pointer;
+} 
+
+* html .zpFormOutlook .dropDownArrow {  /*IE6*/
+        vertical-align:top; /*important -> don't remove*/
+        height: 20px;
+        background-image: url("outlook/down_arrow_hilite.gif");
+        padding: 0px 12px;
+        background-repeat: no-repeat;
+        margin-left:-1px; 
+        margin-top:1px;
+        display: inline-block;
+        cursor: pointer;
+}                                   
+
+*+html .zpFormOutlook .dropDownArrow {  /* IE7 */
+        margin-top:1px;
+        vertical-align:top !important;
+        height: 20px;
+        background-image: url("outlook/down_arrow.gif");
+        padding: 0px 12px;
+        background-repeat: no-repeat;
+        margin-left:-1px;
+        display: inline-block;
+        cursor: pointer;
+} 
+
+.zpFormOutlook .dropDownArrow:hover,
+.zpFormOutlook .dropDownArrow:active,
+.zpFormOutlook .dropDownArrow:focus { /*All Browsers hover*/
+        background-image: url("outlook/down_arrow_hilite.gif");
+} 
+                                        /* end of dropdown styles */
+.zpFormOutlook .fieldError {
+        font-weight: bold;
+}
+
+.zpFormOutlook textarea {
+        border:1px solid #6392CE;
+        color:#5b8ab6;                   
+        width: 270px;
+}
+
+.zpFormOutlook textarea:hover,
+.zpFormOutlook textarea:focus,
+.zpFormOutlook textarea:active { /* textarea mouseover style */
+        border:1px solid #6392CE;
+}
+
+.zpFormOutlook input {
+				background:#FEFEFE;
+	      border:1px solid #6392CE;
+        margin-bottom: 8px;
+        color:#5b8ab6;                   
+}
+
+.zpFormOutlook .inputField, 
+.zpFormOutlook .selectField {
+        background:#FEFEFE;
+	      border:1px solid #6392CE;
+        margin-bottom: 8px;
+        width:263px;
+        color:#5b8ab6;                   
+}
+
+* html .zpFormOutlook input.zpFormRequired { /* fix for IE 6 - fixing width  */
+				width:263px;
+}
+
+.zpFormOutlook input:hover,
+.zpFormOutlook input:focus,
+.zpFormOutlook input:active { /* mouseover style for input fields */
+        border:1px solid #6392CE;
+}
+
+.zpFormOutlook .zpFormError{ /* text: this field is required style */
+        vertical-align:top;
+        color: #F73460;
+        padding-left: 10px;
+        font-weight: normal;
+        display: inline-block;
+        /*position for error mesage*/
+        position:relative;
+				top:3px;
+}
+
+.zpFormOutlook .zpRadioLabel { /* label for checkbox and radio elements */
+        padding-left: 5px;
+        vertical-align:top;
+        color:#446092;
+}
+
+ 
+.zpFormOutlook .zpFormCheckbox { /* checkbox style */
+        border:none !important;
+        padding:0px;
+        margin:0px;
+        width:auto;
+        background:none;
+}
+
+.zpFormOutlook .zpFormRadio {  /* radio style */
+        border:none;
+        padding:0px;
+        margin:0px;
+        width:auto;
+        background:none;
+}
+
+* html .zpFormOutlook .zpFormCheckbox { /* ie6 checkbox style */
+        margin:-3px;
+        width:14px !important;
+        margin:-3px -3px -3px -1px;
+}
+       
+* html .zpFormOutlook .zpFormRadio { /* ie6 radio style */
+        vertical-align:3%;
+        width:14px !important;
+        margin:-3px -3px -3px -1px;
+}
+
+
+*+html .zpFormOutlook .zpFormCheckbox { /* ie7 checkbox style */
+        margin:-3px;
+}
+       
+*+html .zpFormOutlook .zpFormRadio { /* ie7 radio style */
+        margin:-3px;
+        vertical-align:3%;
+}
+
+.zpFormOutlook .zpWrongValue{ /* highlighting field when trying to input not allowed symbol */
+        background-color: #EA888C !important;
+}

@@ -1,0 +1,2391 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Form Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="form-field.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Form</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>form-field.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'form-field.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: form-field.js 16937 2009-04-09 08:28:43Z vasyl $</span>
+<span class="comment">/**
+ *
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ */</span>
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * The Zapatec.Form object constructor.
+ *  It would put special marks near field(basing on form config).
+ *
+ * You always could retrieve reference to this object:
+ * &lt;pre&gt;
+ *	document.getElementById('yourField').zpFormField
+ * &lt;/pre&gt;
+ * <span class="attrib">@param</span> form {Object} reference to Zapatec.Form instance. <span class="attrib">@see</span> Zapatec.Form
+ * <span class="attrib">@param</span> field {Object} reference to HTML form element.
+ */</span>
+Zapatec.Form.Field = <span class="reserved">function</span>(objArgs){
+	<span class="comment">// Call constructor of superclass</span>
+	Zapatec.Form.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Form.Field.id = <span class="literal">"Zapatec.Form.Field"</span>;
+
+<span class="comment">// Inherit SuperClass</span>
+Zapatec.inherit(Zapatec.Form.Field, Zapatec.Widget);
+
+<span class="comment">/**
+ * Configures form field. Gets called from parent init method.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(objArgs){
+	<span class="comment">// Set defaults config options</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'theme'</span>, 
+		objArgs.formConfig &amp;&amp; objArgs.formConfig.theme ? 
+		objArgs.formConfig.theme : <span class="literal">""</span>
+	);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'themePath'</span>, 
+		objArgs.formConfig &amp;&amp; objArgs.formConfig.themePath ? 
+		objArgs.formConfig.themePath : Zapatec.Form.path + <span class="literal">"../themes/"</span>
+	);
+	
+	<span class="reserved">if</span>(!objArgs.lang &amp;&amp; objArgs.formConfig.lang){
+		objArgs.lang = objArgs.formConfig.lang;
+	}
+
+	<span class="reserved">if</span>(!objArgs.langCountryCode &amp;&amp; objArgs.formConfig.langCountryCode){
+		objArgs.langCountryCode = objArgs.formConfig.langCountryCode;
+	}
+
+	<span class="reserved">if</span>(!objArgs.langEncoding &amp;&amp; objArgs.formConfig.langEncoding){
+		objArgs.langEncoding = objArgs.formConfig.langEncoding;
+	}
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'form'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'formConfig'</span>, {});
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'field'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'langId'</span>, <span class="literal">"Zapatec.Form"</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'inheritFrom'</span>, {});
+
+	<span class="comment">// Call parent method</span>
+	Zapatec.Form.SUPERclass.configure.call(<span class="reserved">this</span>, objArgs);
+
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.config.inheritFrom){
+		<span class="reserved">this</span>.config.inheritFrom = {};
+	}
+
+	<span class="reserved">this</span>.config.form = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.form);
+	<span class="reserved">this</span>.config.field = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.field);
+};
+
+<span class="comment">/**
+ * Reconfigures the widget with new config options after it was initialized.
+ * May be used to change look or behavior of the widget after it has loaded
+ * the data. In the argument pass only values for changed config options.
+ * There is no need to pass config options that were not changed.
+ *
+ * <span class="attrib">@param</span> {object} objArgs Changes to user configuration
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(objArgs) {
+	<span class="comment">// Call parent method</span>
+	Zapatec.Form.SUPERclass.reconfigure.call(<span class="reserved">this</span>, objArgs);
+};
+
+
+Zapatec.Form.Field.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs){
+	<span class="reserved">if</span> (Zapatec.Form.Utils.ignoreField(objArgs.field) || objArgs.field.zpFormField) {
+		<span class="reserved">return</span> null;
+	}
+	
+	<span class="reserved">this</span>.form = null; <span class="comment">// storing params in internal variables.</span>
+	<span class="reserved">this</span>.state = {}; <span class="comment">// variable for storing internal variables</span>
+	<span class="reserved">this</span>.features = {}; <span class="comment">// setup array of features</span>
+	<span class="reserved">this</span>.keyPressCounter = 0; <span class="comment">// this variable indicates how many key was pressed </span>
+							  <span class="comment">// during last Zapatec.Form.Field.DELAYED_INTERVAL </span>
+							  <span class="comment">// period.</span>
+	
+	<span class="reserved">this</span>.firstRun = true; <span class="comment">// default value</span>
+	<span class="reserved">this</span>.chars = null;        <span class="comment">// if field has zpFormMask - </span>
+	<span class="reserved">this</span>.enteredValue = null; <span class="comment">// it will use this arrays</span>
+	<span class="reserved">this</span>.dropDown = null; <span class="comment">// if needed - this variable will be used</span>
+	<span class="reserved">this</span>.isBooleanField = false; <span class="comment">// if this is boolean (boolean field can be </span>
+								 <span class="comment">//only in two stated - checked on unchecked)</span>
+	
+	<span class="reserved">this</span>.isEditing = false; <span class="comment">// Determines if field is editing in a moment</span>
+		
+	<span class="comment">// processing Widget functionality</span>
+	Zapatec.Form.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+	
+	<span class="reserved">this</span>.autoCompleteOptions = <span class="reserved">this</span>.config.inheritFrom.autoCompleteOptions ? 
+		<span class="reserved">this</span>.config.inheritFrom.autoCompleteOptions : []; <span class="comment">// stores values for autocompletion</span>
+
+	<span class="reserved">this</span>.field = <span class="reserved">this</span>.config.field;
+	<span class="reserved">this</span>.features = <span class="reserved">this</span>.config.inheritFrom.features ? <span class="comment">// if field is cloned one - inherit original field features.</span>
+		<span class="reserved">this</span>.config.inheritFrom.features : 
+		Zapatec.Form.Utils.getTokens(<span class="reserved">this</span>.field.className, <span class="literal">" "</span>);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormRequired"</span>)){
+		<span class="reserved">this</span>.setFeature(<span class="literal">"zpFormRequired"</span>, true);
+	}
+
+	<span class="reserved">this</span>.isBooleanField = (
+		<span class="reserved">this</span>.field.nodeName.toLowerCase() == <span class="literal">'input'</span> &amp;&amp;
+		(
+			<span class="reserved">this</span>.field.type.toLowerCase() == <span class="literal">'radio'</span> || 
+			<span class="reserved">this</span>.field.type.toLowerCase() == <span class="literal">'checkbox'</span>
+		)
+	);
+
+	var md = null;
+
+	<span class="comment">// use new "zpFormAllowedChars" instead of deprecated "zpFormAllowed-"</span>
+	<span class="reserved">if</span>(md = <span class="reserved">this</span>.field.className.match(/zpFormAllowed-(\S+)/)){
+		<span class="reserved">if</span>(!<span class="reserved">this</span>.features[<span class="literal">'zpFormAllowedChars'</span>]){
+			<span class="reserved">this</span>.features[<span class="literal">'zpFormAllowedChars'</span>] = <span class="literal">""</span>;
+		}
+
+		<span class="reserved">this</span>.features[<span class="literal">'zpFormAllowedChars'</span>] += <span class="literal">'\\'</span> + md[1].split(<span class="literal">''</span>).join(<span class="literal">'\\'</span>);
+	}
+
+	<span class="reserved">if</span>(
+		typeof(<span class="reserved">this</span>.features[<span class="literal">'zpFormAllowedChars'</span>]) != <span class="literal">'undefined'</span> &amp;&amp;
+		<span class="reserved">this</span>.getFeature(<span class="literal">'zpFormAllowedChars'</span>) == null
+	){
+		var undef;
+		<span class="reserved">this</span>.features[<span class="literal">'zpFormAllowedChars'</span>] = undef;
+	}
+
+	<span class="comment">// if this field has zpFormAutoComplete or zpFormAutoCompleteStrict - </span>
+	<span class="comment">// extract autocomplete options</span>
+	<span class="reserved">if</span>(
+		(
+			<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoComplete"</span>) ||
+			<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoCompleteStrict"</span>)
+		) &amp;&amp;
+		<span class="reserved">this</span>.field.nodeName.toUpperCase() == <span class="literal">"SELECT"</span>
+	){
+		var input = document.createElement(<span class="literal">'input'</span>);
+
+		<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.field.attributes.length; ii++){
+			var attr = <span class="reserved">this</span>.field.attributes[ii];
+
+			<span class="reserved">if</span>(attr.name == <span class="literal">'class'</span>){
+				input.className = <span class="reserved">this</span>.field.getAttribute(attr.name);
+			} <span class="reserved">else</span> {
+				input.setAttribute(attr.name, <span class="reserved">this</span>.field.getAttribute(attr.name));
+			}
+		}
+
+		<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.field.options.length; ii++){
+			<span class="reserved">this</span>.autoCompleteOptions.push(<span class="reserved">this</span>.field.options[ii].innerHTML);
+		}
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.field.selectedIndex != null){
+			var val = null;
+
+			<span class="reserved">if</span>(
+				<span class="reserved">this</span>.field.options[<span class="reserved">this</span>.field.selectedIndex].value != null &amp;&amp;
+				<span class="reserved">this</span>.field.options[<span class="reserved">this</span>.field.selectedIndex].value != <span class="literal">""</span>
+			){
+				val = <span class="reserved">this</span>.field.options[<span class="reserved">this</span>.field.selectedIndex].value;
+			} <span class="reserved">else</span> {
+				val = <span class="reserved">this</span>.field.options[<span class="reserved">this</span>.field.selectedIndex].innerHTML;
+			}
+			
+			input.value = val;
+			input.setAttribute(<span class="literal">"value"</span>, val);
+		}
+
+		Zapatec.Utils.insertAfter(<span class="reserved">this</span>.field, input);
+		Zapatec.Utils.destroy(<span class="reserved">this</span>.field);
+
+		input.type = <span class="literal">'text'</span>;
+
+		<span class="reserved">this</span>.field = input;
+	}
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoComplete"</span>) ||
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoCompleteStrict"</span>) ||
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormSuggest"</span>)
+	){
+		<span class="comment">// disable browser tips</span>
+		<span class="reserved">this</span>.field.setAttribute(<span class="literal">"autocomplete"</span>, <span class="literal">"off"</span>);
+		<span class="reserved">this</span>.field.autoComplete = <span class="literal">"off"</span>;
+	}
+
+	var self = <span class="reserved">this</span>;
+
+	<span class="reserved">this</span>.form = <span class="reserved">this</span>.config.form;
+
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.form){
+		<span class="comment">// Form widget stub</span>
+		<span class="reserved">this</span>.form = {
+			container: {elements:[<span class="reserved">this</span>.field]},
+			fireEvent: <span class="reserved">function</span>(){},
+			validate: <span class="reserved">function</span>(){<span class="reserved">return</span> self.validate()},
+			toggleSubmits: <span class="reserved">function</span>(){},
+			container: <span class="reserved">this</span>.field.parentNode
+		};
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.field.parentNode){
+			Zapatec.Utils.addClass(<span class="reserved">this</span>.field.parentNode, <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpForm"</span>}));
+		}
+	}
+	
+	<span class="comment">// initializing internal arrays for zpFormMask validation type</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+		<span class="comment">// remove maxlength attribute if present.</span>
+		<span class="comment">// It makes no sense together with mask and avoids mask to work correctly</span>
+		<span class="reserved">if</span>(<span class="reserved">this</span>.field.hasAttribute &amp;&amp; <span class="reserved">this</span>.field.hasAttribute(<span class="literal">"maxlength"</span>)){
+			<span class="reserved">this</span>.field.setAttribute(<span class="literal">"maxlength"</span>, null);
+		}
+
+		var mask = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormMask"</span>);
+
+		var maskChars = mask.split(<span class="literal">''</span>);
+		<span class="reserved">this</span>.chars = [];
+		<span class="reserved">this</span>.enteredValue = [];
+
+		<span class="reserved">for</span>(var ii = 0; ii &lt; maskChars.length; ii++){
+			var tmp = null;
+
+			switch(maskChars[ii]){
+				case <span class="literal">"0"</span>:
+					tmp = <span class="literal">"[0-9]"</span>;
+					break;
+				case <span class="literal">"L"</span>:
+					tmp = <span class="literal">"[a-zA-Z]"</span>;
+					break;
+				case <span class="literal">"A"</span>:
+					tmp = <span class="literal">"[0-9a-zA-Z]"</span>;
+					break;
+				case <span class="literal">"&amp;"</span>:
+					tmp = <span class="literal">"."</span>;
+					break;
+				case <span class="literal">'\\'</span>:
+					ii++;
+					<span class="reserved">if</span>(ii &gt;= maskChars.length)
+						break;
+					<span class="comment">// fall through</span>
+				default:
+					<span class="reserved">this</span>.chars.push(maskChars[ii]);
+					<span class="reserved">this</span>.enteredValue.push(maskChars[ii]);
+			}
+
+			<span class="reserved">if</span>(tmp != null){
+				var re = new RegExp(<span class="literal">"^"</span> + tmp + <span class="literal">"$"</span>);
+				<span class="reserved">this</span>.chars.push(re);
+
+				<span class="reserved">this</span>.enteredValue.push(null);
+			}
+		}
+	}
+
+	<span class="comment">// creating back reference</span>
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>.field, <span class="literal">"zpFormField"</span>, <span class="reserved">this</span>);
+
+	<span class="comment">// setting up special handlers for all events.</span>
+	<span class="comment">// Note: we need to get reference to Zapatec.Form.Field from field object, </span>
+	<span class="comment">//	because this can be cloned field. In that case in IE cloned object </span>
+	<span class="comment">//	will have eventlisteners from original object.</span>
+	var oldOnKeyDown = <span class="reserved">this</span>.field.onkeydown || <span class="reserved">function</span>(){<span class="reserved">return</span> true;};
+	Zapatec.Utils.createProperty(<span class="reserved">this</span>.field, <span class="literal">"onkeydown"</span>, <span class="reserved">function</span>(ev){
+		var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+		var res = oldOnKeyDown();
+		<span class="reserved">return</span> zpField.keydown(ev) &amp;&amp; res;
+	});
+
+	var oldOnKeyPress = <span class="reserved">this</span>.field.onkeypress || <span class="reserved">function</span>(){<span class="reserved">return</span> true;};
+	Zapatec.Utils.createProperty(<span class="reserved">this</span>.field, <span class="literal">"onkeypress"</span>, <span class="reserved">function</span>(ev){
+		var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+		var res = oldOnKeyPress();
+		<span class="reserved">return</span> zpField.keypress(ev) &amp;&amp; res;
+	});
+
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'keyup'</span>, <span class="reserved">function</span>(ev){
+		var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+		<span class="reserved">return</span> zpField.keyup(ev);
+	}, false, false);
+
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'focus'</span>, <span class="reserved">function</span>(ev){
+		var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+		<span class="reserved">return</span> zpField.focus(ev);
+	}, false, false);
+
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'blur'</span>, <span class="reserved">function</span>(ev){
+		var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+		<span class="reserved">return</span> zpField.blur(ev);
+	});
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.field.nodeName.toLowerCase() == <span class="literal">'select'</span>){
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'change'</span>, <span class="reserved">function</span>(ev){
+			var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+			<span class="reserved">return</span> zpField.valueChanged(ev);
+		}, false, false);
+	}
+
+	<span class="comment">// validate field when field value changes</span>
+	var onChangeFunc = <span class="reserved">function</span>(ev){
+		var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+    
+		<span class="reserved">return</span> zpField.valueChanged(ev);
+	};
+
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'keyup'</span>, onChangeFunc);
+
+	<span class="reserved">if</span>(Zapatec.is_ie){
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'paste'</span>, onChangeFunc, false, false);
+	} <span class="reserved">else</span> <span class="reserved">if</span>(Zapatec.is_gecko) {
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'input'</span>, onChangeFunc, false, false);
+	} <span class="reserved">else</span> {
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'change'</span>, onChangeFunc, false, false);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.isBooleanField){
+		<span class="reserved">this</span>.otherFields = [];
+	
+		<span class="reserved">if</span>(<span class="reserved">this</span>.field.name){
+			<span class="reserved">this</span>.otherFields = <span class="reserved">this</span>.config.form.container[<span class="reserved">this</span>.field.name];
+
+			<span class="reserved">if</span>(!<span class="reserved">this</span>.otherFields instanceof Array){
+				<span class="reserved">this</span>.otherFields = [<span class="reserved">this</span>.otherFields];
+			}
+		}
+		onChangeFunc = <span class="reserved">function</span>(ev){
+			var zpField = Zapatec.Utils.getTargetElement(ev).zpFormField;
+
+			<span class="reserved">return</span> zpField.booleanChanged();
+		};
+
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'change'</span>, onChangeFunc, false, false);
+
+		<span class="comment">// IE doesn't fire onchange on first change</span>
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.field, <span class="literal">'click'</span>, onChangeFunc, false, false);
+	}
+
+	<span class="comment">// Next some &lt;span&gt; elements, as IE doens't support multi-class selectors.</span>
+	<span class="reserved">this</span>.requiredMark = Zapatec.Utils.createElement(<span class="literal">'span'</span>);
+	<span class="reserved">this</span>.requiredMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.requiredMark.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"StatusImg1"</span>;
+
+	<span class="reserved">this</span>.editingMark = <span class="reserved">this</span>.requiredMark.appendChild(Zapatec.Utils.createElement(<span class="literal">'span'</span>));
+	<span class="reserved">this</span>.editingMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.editingMark.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"StatusImg2"</span>;
+
+	<span class="reserved">this</span>.emptyMark = <span class="reserved">this</span>.editingMark.appendChild(Zapatec.Utils.createElement(<span class="literal">'span'</span>));
+	<span class="reserved">this</span>.emptyMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.emptyMark.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"StatusImg3"</span>;
+
+	<span class="reserved">this</span>.validMark = <span class="reserved">this</span>.emptyMark.appendChild(Zapatec.Utils.createElement(<span class="literal">'span'</span>));
+	<span class="reserved">this</span>.validMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.validMark.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"StatusImg4"</span>;
+
+	<span class="reserved">this</span>.fetchingMark = <span class="reserved">this</span>.validMark.appendChild(Zapatec.Utils.createElement(<span class="literal">'span'</span>));
+	<span class="reserved">this</span>.fetchingMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.fetchingMark.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"StatusImg5"</span>;
+
+	<span class="comment">// The innermost is the one we actually style.</span>
+	<span class="reserved">this</span>.statusImg = <span class="reserved">this</span>.fetchingMark.appendChild(Zapatec.Utils.createElement(<span class="literal">'span'</span>));
+	<span class="reserved">this</span>.statusImg.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">' zpStatusImg'</span>;
+	<span class="reserved">this</span>.statusImg.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"StatusImg"</span>;
+
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">"statusImg"</span>);
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">"fetchingMark"</span>);
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">"validMark"</span>);
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">"emptyMark"</span>);
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">"editingMark"</span>);
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">"requiredMark"</span>);
+
+	<span class="comment">// An error container.</span>
+	<span class="reserved">this</span>.errorText = Zapatec.Utils.createElement(<span class="literal">'span'</span>);
+	<span class="reserved">this</span>.errorText.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"ErrorText"</span>;
+	<span class="reserved">this</span>.errorText.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">' zpFormError'</span>;
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.field.type &amp;&amp; (<span class="reserved">this</span>.field.type.toLowerCase() == <span class="literal">"hidden"</span> ||
+	                       <span class="reserved">this</span>.field.getAttribute(<span class="literal">'type'</span>) == <span class="literal">"hidden"</span>)){
+		<span class="comment">// if this is hidden field - hide dependant elements</span>
+		<span class="reserved">this</span>.errorText.style.display = <span class="literal">'none'</span>;
+		<span class="reserved">this</span>.requiredMark.style.display = <span class="literal">'none'</span>;
+	}
+
+	<span class="comment">// Radio buttons and checkboxes needs some more functionality</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.isBooleanField){
+		<span class="comment">// add custom CSS classes to checkboxes and radiobuttons</span>
+		<span class="reserved">if</span>(<span class="reserved">this</span>.field.type.toLowerCase() == <span class="literal">"checkbox"</span>){
+			<span class="reserved">this</span>.field.className += <span class="literal">" zpFormCheckbox"</span>;
+			<span class="reserved">this</span>.statusImg.className += <span class="literal">" zpCheckboxStatusImg"</span>;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.field.type.toLowerCase() == <span class="literal">"radio"</span>){
+			<span class="reserved">this</span>.field.className += <span class="literal">" zpFormRadio"</span>;
+			<span class="reserved">this</span>.statusImg.className += <span class="literal">" zpRadioStatusImg"</span>;
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.statusImg.className += <span class="literal">" zpCommonStatusImg"</span>;
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.statusImg.className += <span class="literal">" zpCommonStatusImg"</span>;
+	}
+
+	var lastNode = <span class="reserved">this</span>.field;
+
+	<span class="comment">// Attach the outermost &lt;span&gt; near the input field.</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.statusImgPos == <span class="literal">'afterField'</span>){
+		Zapatec.Utils.insertAfter(<span class="reserved">this</span>.field, <span class="reserved">this</span>.requiredMark);
+		lastNode = <span class="reserved">this</span>.requiredMark;
+	} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.statusImgPos == <span class="literal">'beforeField'</span>){
+		<span class="reserved">this</span>.field.parentNode.insertBefore(<span class="reserved">this</span>.requiredMark, <span class="reserved">this</span>.field);
+	} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.statusImgPos == <span class="literal">'last'</span>){
+		<span class="reserved">this</span>.field.parentNode.appendChild(<span class="reserved">this</span>.requiredMark);
+	}
+
+	<span class="comment">// Position it by the field if configured that way.</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'afterField'</span>){
+		Zapatec.Utils.insertAfter(<span class="reserved">this</span>.field, <span class="reserved">this</span>.errorText);
+		lastNode = <span class="reserved">this</span>.errorText;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'beforeField'</span>){
+		<span class="reserved">this</span>.field.parentNode.insertBefore(<span class="reserved">this</span>.errorText, <span class="reserved">this</span>.field);
+	} <span class="reserved">else</span> <span class="reserved">if</span> (<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'last'</span>){
+		<span class="reserved">this</span>.field.parentNode.appendChild(<span class="reserved">this</span>.errorText);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMultiple"</span>)){
+		<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>.field, <span class="literal">"zpLastNode"</span>, lastNode);
+	}
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormSuggest"</span>) ||
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoComplete"</span>) ||
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoCompleteStrict"</span>)
+	){
+		<span class="reserved">if</span>(typeof(Zapatec.AutoComplete) == <span class="literal">'undefined'</span>){
+			Zapatec.Transport.loadJS({
+				url: Zapatec.zapatecPath + <span class="literal">'../zpautocomplete/src/zpautocomplete-core.js'</span>,
+				async: true,
+				onLoad: <span class="reserved">function</span>(){
+					self.initDropDown();
+				}
+			});
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.initDropDown();
+		}
+	}
+
+	var value = <span class="reserved">this</span>.getValue();
+	<span class="reserved">if</span>(value &amp;&amp; value.length &gt; 0){
+		<span class="comment">// if field has predefined value</span>
+		<span class="reserved">this</span>.ajaxValidate();
+		<span class="reserved">this</span>.suggestValue();
+		<span class="reserved">this</span>.ajaxFill();
+	}
+
+	<span class="reserved">this</span>.setValueFromField(true);
+};
+
+<span class="comment">// interval before last keystroke and sending request to server.</span>
+Zapatec.Form.Field.DELAYED_INTERVAL = 1000;
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Create Zapatec.DropDown object
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.initDropDown = <span class="reserved">function</span>(){
+	var self = <span class="reserved">this</span>;
+
+	var arrow = Zapatec.Utils.createElement(<span class="literal">"span"</span>);
+	arrow.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">" dropDownArrow"</span>;
+	arrow.id = <span class="literal">"zpFormField"</span> + <span class="reserved">this</span>.id + <span class="literal">"DropDownArrow"</span>;
+
+	<span class="reserved">this</span>.createProperty(arrow, <span class="literal">"onclick"</span>, <span class="reserved">function</span>(ev){
+		self.field.focus(ev);
+		self.autoCompleteValue(self.getAutoCompleteOptions(true));
+
+		self.suggestValue(true);
+	});
+
+	Zapatec.Utils.insertAfter(<span class="reserved">this</span>.field, arrow);
+	
+	var tmpConfig = Zapatec.Utils.clone (<span class="reserved">this</span>.config.formConfig.autoCompleteConfig);
+	<span class="reserved">if</span> (!tmpConfig) {
+		tmpConfig = {};
+	}
+	tmpConfig.fields = [<span class="reserved">this</span>.field];
+	tmpConfig.width = <span class="literal">"auto"</span>;
+	tmpConfig.dataOnDemand = false;
+	tmpConfig.convertTip = <span class="reserved">function</span>(tipObj){
+			<span class="reserved">return</span> tipObj.title;
+	}
+	tmpConfig.selectTip = <span class="reserved">function</span>(tipObj){
+			self.setValue(tipObj.title)
+			self.valueChanged();
+			<span class="reserved">if</span> (self.field.onchange) {
+				self.field.onchange();
+			}
+		}
+	
+	<span class="reserved">this</span>.dropDown = new Zapatec.AutoComplete(tmpConfig);
+
+	<span class="reserved">this</span>.dropDown.field = <span class="reserved">this</span>.field;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * This function is called when field value is changed using copy-paste.
+ * For IE it is called when pasting clipboard into field, for FF on each field 
+ * value change(including keystrokes), for other browser - on "onchange" event.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.valueChanged = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAllowedChars"</span>) || <span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+		<span class="reserved">this</span>.setValueFromField();
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.validate();
+	}
+
+	<span class="reserved">if</span>(!ev){
+		ev = window.event;
+	}
+	
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"valueChanged"</span>, ev);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, ev, <span class="literal">"valueChanged"</span>);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"valueChanged"</span>, ev);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"all"</span>, ev, <span class="literal">"valueChanged"</span>);
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * This function is called when checkbox or radio button is checked/unchecked.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.booleanChanged = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isBooleanField){
+		<span class="reserved">return</span>;
+	}
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.otherFields.length; ii++){
+		var el = <span class="reserved">this</span>.otherFields[ii];
+
+		<span class="reserved">if</span>(!el || !el.zpFormField){
+			continue;
+		}
+		
+		<span class="reserved">if</span>(!<span class="reserved">this</span>.firstRun){
+			el.zpFormField.firstRun = false;
+		}
+
+		el.zpFormField.validate();
+	}
+
+	<span class="reserved">if</span>(!ev){
+		ev = window.event;
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"valueChanged"</span>, ev);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"booleanValueChanged"</span>, ev);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, ev, <span class="literal">"booleanValueChanged"</span>);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"valueChanged"</span>, ev);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"booleanValueChanged"</span>, ev);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"all"</span>, ev, <span class="literal">"booleanValueChanged"</span>);
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Handler for keydown event.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.keydown = <span class="reserved">function</span>(evt){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEditing){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(!evt){
+		evt = window.event;
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"keydown"</span>, evt);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"keydown"</span>);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"keydown"</span>, evt);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"keydown"</span>);
+
+	<span class="reserved">this</span>.state.lastSelectionStart = <span class="reserved">this</span>.getSelectionStart();
+	<span class="reserved">this</span>.state.lastSelectionEnd = <span class="reserved">this</span>.getSelectionEnd();
+
+	<span class="comment">// this is IE workaround - IE catches nonalphanumeric keys only on keydown.</span>
+	<span class="reserved">if</span>(
+		Zapatec.is_ie &amp;&amp;
+		(
+			<span class="reserved">this</span>.hasFeature(<span class="literal">'zpFormAllowedChars'</span>) || 
+			<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)
+		)
+	){
+		var tmpArr = Zapatec.Utils.getCharFromEvent(evt);
+		var charCode = tmpArr.charCode;
+		var newChar = tmpArr.chr;
+
+		<span class="reserved">if</span>(
+			Zapatec.Form.Utils.isSpecialKey(charCode, newChar) ||
+			<span class="reserved">this</span>.processFunctionalKeys(evt) == true
+		){
+			<span class="reserved">return</span> true;
+		}
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+			<span class="reserved">if</span>(<span class="reserved">this</span>.processCustomKeys(charCode) == true){
+				<span class="reserved">return</span> true;
+			}
+
+			<span class="reserved">return</span> false;
+		}
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">'zpFormAllowedChars'</span>)){
+			<span class="reserved">this</span>.setValueFromField();
+		}
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.dropDown){
+		<span class="reserved">this</span>.dropDown.hide();
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Handler for keypress event.
+ * <span class="attrib">@param</span> {Event} event object
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.keypress = <span class="reserved">function</span>(evt) {
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEditing){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(!evt){
+		evt = window.event;
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"keypress"</span>, evt);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"keypress"</span>);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"keypress"</span>, evt);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"keypress"</span>);
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.hasFeature(<span class="literal">'zpFormAllowedChars'</span>)){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.processFunctionalKeys(evt) == true){
+			<span class="reserved">return</span> true;
+		}
+
+		<span class="comment">//the key that was pressed</span>
+		var tmpArr = Zapatec.Utils.getCharFromEvent(evt)
+		var charCode = tmpArr.charCode;
+		var newChar = tmpArr.chr;
+
+		<span class="reserved">if</span>(
+			(
+				Zapatec.Form.Utils.isSpecialKey(charCode, newChar) ||
+				charCode == 8 ||
+				charCode == 46
+			)
+		){
+			<span class="reserved">return</span> true;
+		}
+
+		var allowed = new RegExp(<span class="literal">'['</span> + <span class="reserved">this</span>.getFeature(<span class="literal">'zpFormAllowedChars'</span>) + <span class="literal">']'</span>);
+
+		<span class="reserved">this</span>.setValueFromField();
+
+		<span class="reserved">if</span> (!(allowed.test(newChar))) {
+			Zapatec.Utils.addClass(<span class="reserved">this</span>.field, <span class="literal">"zpWrongValue"</span>);
+			<span class="reserved">this</span>.field.readonly = true;
+
+			var self = <span class="reserved">this</span>;
+			setTimeout(<span class="reserved">function</span>(){
+				Zapatec.Utils.removeClass(self.field, <span class="literal">"zpWrongValue"</span>);
+				self.field.readonly = false;
+			}, 100);
+
+			<span class="reserved">return</span> false;
+		}
+
+		<span class="reserved">return</span> true;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+		var self = <span class="reserved">this</span>;
+
+		var tmpArr = Zapatec.Utils.getCharFromEvent(evt)
+
+		var charCode = tmpArr.charCode;
+		var newChar = tmpArr.chr;
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.processFunctionalKeys(evt) == true){
+			<span class="reserved">return</span> true;
+		}
+
+		<span class="reserved">this</span>.setValueFromField();
+
+		var pos = <span class="reserved">this</span>.getSelectionStart();
+
+		<span class="reserved">if</span>(charCode == null &amp;&amp; newChar == null){
+			<span class="reserved">return</span> false;
+		}
+
+		<span class="reserved">if</span>(!Zapatec.is_ie){
+			<span class="reserved">if</span>(Zapatec.Form.Utils.isSpecialKey(charCode, newChar)){
+				<span class="reserved">return</span> true;
+			}
+
+			<span class="reserved">if</span>(<span class="reserved">this</span>.processCustomKeys(charCode) == false){
+				<span class="reserved">return</span> false;
+			}
+		}
+
+		<span class="comment">// if char under cursor is strict - search for next mask char.</span>
+		<span class="comment">// If no such char founded - leave at current position and exit</span>
+		<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[pos]) == <span class="literal">'string'</span>){
+			var newPos = <span class="reserved">this</span>.getNextAvailablePosition(pos);
+
+			<span class="reserved">if</span>(newPos == null || newPos == pos)
+				<span class="reserved">return</span> false;
+
+			<span class="reserved">this</span>.setCaretPosition(newPos);
+			pos = newPos;
+		}
+
+		<span class="comment">// check if entered char could be applied to current mask element.</span>
+		<span class="reserved">if</span>(
+			pos &gt;= <span class="reserved">this</span>.chars.length ||
+			typeof(<span class="reserved">this</span>.chars[pos]) != <span class="literal">'string'</span> &amp;&amp; !newChar.match(<span class="reserved">this</span>.chars[pos]) ||
+			typeof(<span class="reserved">this</span>.chars[pos]) == <span class="literal">'string'</span> &amp;&amp; newChar != <span class="reserved">this</span>.chars[pos]
+		){
+			Zapatec.Utils.addClass(<span class="reserved">this</span>.field, <span class="literal">"zpWrongValue"</span>);
+			<span class="reserved">this</span>.field.readonly = true;
+
+			setTimeout(<span class="reserved">function</span>(){
+				Zapatec.Utils.removeClass(self.field, <span class="literal">"zpWrongValue"</span>);
+				self.field.readonly = false;
+			}, 100);
+
+			<span class="reserved">this</span>.setValue();
+			<span class="reserved">this</span>.setCaretPosition(pos);
+		} <span class="reserved">else</span> {
+			<span class="comment">// all is ok. store and display entered char.</span>
+			<span class="reserved">this</span>.enteredValue[pos] = newChar;
+			<span class="reserved">this</span>.setValue();
+
+			var newPos = <span class="reserved">this</span>.getNextAvailablePosition(pos);
+
+			<span class="reserved">if</span>(newPos == null){
+				newPos = pos + 1;
+			}
+
+			<span class="reserved">this</span>.setCaretPosition(newPos);
+		}
+
+		<span class="reserved">if</span>(evt &amp;&amp; evt.preventDefault){
+			evt.preventDefault();
+		}
+
+		<span class="reserved">return</span> false;
+	}
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Handler for keyup event.
+ * <span class="attrib">@param</span> {Event} event object
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.keyup = <span class="reserved">function</span>(evt) {
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEditing){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(!evt){
+		evt = window.event;
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"keyUp"</span>, evt);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"keyup"</span>);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"keyUp"</span>, evt);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"keyup"</span>);
+
+	<span class="reserved">if</span>(evt){
+		var tmp = Zapatec.Utils.getCharFromEvent(evt);
+	    
+		<span class="reserved">if</span>(
+			Zapatec.Form.Utils.isSpecialKey(tmp.charCode, tmp.chr) ||
+			(
+				(
+					tmp.charCode == 8 ||
+					tmp.charCode == 46
+				) &amp;&amp;
+				<span class="reserved">this</span>.state.lastSelectionStart != <span class="reserved">this</span>.state.lastSelectionEnd
+			)
+		){
+			<span class="reserved">return</span> true;
+		}
+	}
+	    
+	<span class="reserved">this</span>.validate();
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoComplete"</span>) || <span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoCompleteStrict"</span>)){
+		<span class="reserved">this</span>.autoCompleteValue(<span class="reserved">this</span>.getAutoCompleteOptions());
+	}
+
+	<span class="reserved">this</span>.keyPressCounter++;
+	var self = <span class="reserved">this</span>;
+	setTimeout(<span class="reserved">function</span>(){self.runDelayedActions()}, Zapatec.Form.Field.DELAYED_INTERVAL);
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * handler for focus event.
+ * <span class="attrib">@param</span> {Event} event object
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.focus = <span class="reserved">function</span>(evt) {
+	<span class="reserved">if</span>(!evt){
+		evt = window.event;
+	}
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.field.readOnly){
+		<span class="reserved">return</span>;
+	}
+	
+	<span class="reserved">this</span>.isEditing = true;
+	<span class="reserved">this</span>.firstRun = false;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.isEmpty()){
+			<span class="reserved">this</span>.setValue();
+			<span class="reserved">this</span>.setCaretPosition(0);
+		}
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.isBooleanField){
+		<span class="reserved">this</span>.booleanChanged(evt);
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"focus"</span>, evt);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"focus"</span>);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"focus"</span>, evt);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"focus"</span>);
+
+	<span class="reserved">this</span>.validate();
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * handler for blur event.
+ * <span class="attrib">@param</span> {Event} event object
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.blur = <span class="reserved">function</span>(evt) {
+	<span class="reserved">if</span>(!evt){
+		evt = window.event;
+	}
+	
+	<span class="comment">// clean mask layout from field if no value was entered</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>) &amp;&amp; !<span class="reserved">this</span>.isFilled()){
+		Zapatec.Form.Utils.setValue(<span class="reserved">this</span>.field, <span class="literal">""</span>);
+	}
+
+    <span class="reserved">if</span>(!<span class="reserved">this</span>.isEditing){
+    	<span class="reserved">return</span>;
+    }
+
+	<span class="reserved">this</span>.isEditing = false;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAllowedChars"</span>)){
+		<span class="reserved">this</span>.setValueFromField(true);
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"blur"</span>, evt);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"blur"</span>);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"blur"</span>, evt);
+	<span class="reserved">this</span>.form.fireEvent(<span class="literal">"all"</span>, evt, <span class="literal">"blur"</span>);
+
+	<span class="reserved">this</span>.validate();
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * function to validate current field.
+ * <span class="attrib">@param</span> onlyValidate {boolean} If true - only validate field. Else - also 
+ *	display error message.
+ * <span class="attrib">@return</span> array of error in format 
+ * [
+ *	{
+ *		'field': [string], // field name
+ *		'errorMessage': [string], // error message
+ *		'validator': [string] // validator name
+ *	},
+ *	...
+ * ]
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.validate = <span class="reserved">function</span>(onlyValidate) {
+	<span class="reserved">if</span> (
+		!<span class="reserved">this</span>.field.className || 
+		<span class="reserved">this</span>.field.disabled
+	){
+		<span class="reserved">return</span> null;
+	}
+
+	var message = null;
+	var errors = [];
+
+	var isRequired = <span class="reserved">this</span>.isRequired();
+	
+	<span class="comment">// performance optimizations</span>
+	var isEmpty = <span class="reserved">this</span>.isEmpty();
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.isBooleanField &amp;&amp; !isRequired){
+		isEmpty = <span class="reserved">this</span>.field.checked;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.firstRun &amp;&amp; !isEmpty || <span class="reserved">this</span>.field.disabled){
+		<span class="reserved">this</span>.firstRun = false;
+	}
+
+	var validatorUsed = isRequired;
+	var validatorName = null;
+	var l10nMessage = null;
+	var messageArgument = null;
+
+	<span class="reserved">function</span> addError(self, errors, validatorName, l10nMessage, messageArgument){
+		<span class="reserved">if</span>(!validatorName){
+			<span class="reserved">return</span> null
+		}
+
+	 	var message = self.hasFeature(validatorName + <span class="literal">"Error"</span>) ? 
+	 		self.getFeature(validatorName + <span class="literal">"Error"</span>) : 
+	 		self.getMessage(l10nMessage, messageArgument);
+
+	 	<span class="reserved">if</span>(!message){
+	 		message = self.getMessage(l10nMessage, messageArgument);
+	 	}
+
+	 	message = message.replace(/&amp;/g, <span class="literal">'&amp;amp;'</span>).replace(/&lt;/g, <span class="literal">'&amp;lt;'</span>).replace(/\&gt;/g, <span class="literal">'&amp;gt;'</span>);
+		
+		errors.push({
+			field: self.field, 
+			errorMessage: message, 
+			validator: validatorName
+		});
+
+		<span class="reserved">return</span> message;
+	}
+
+	<span class="comment">// If field is empty - do not run any validations. Only display error if</span>
+	<span class="comment">// field is required.</span>
+	<span class="reserved">if</span>(isEmpty){
+		validatorUsed = true;
+
+		<span class="reserved">if</span>(isRequired){
+			validatorName = <span class="literal">"zpFormRequired"</span>;
+			l10nMessage = <span class="literal">"isRequiredError"</span>;
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">for</span>(var vName in <span class="reserved">this</span>.features){
+			<span class="reserved">if</span>(vName == <span class="literal">'zpFormMask'</span>){
+				validatorUsed = true;
+		
+				<span class="reserved">if</span>(!<span class="reserved">this</span>.isMaskFullyFilled()){
+					validatorName = <span class="literal">"zpFormMask"</span>;
+					l10nMessage = <span class="literal">'maskNotFilledError'</span>;
+					messageArgument = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormMask"</span>);
+
+					<span class="comment">// do not run any other validators until mask is filled.</span>
+					break;
+				}
+			}
+
+			<span class="reserved">if</span>(vName == <span class="literal">'zpFormAutoCompleteStrict'</span>){
+				validatorUsed = true;
+				
+				var found = false;
+				var currVal = <span class="reserved">this</span>.getValue();
+
+				<span class="reserved">for</span>(var ii = <span class="reserved">this</span>.autoCompleteOptions.length - 1; ii &gt;= 0 ; ii--){
+					<span class="reserved">if</span>(currVal == <span class="reserved">this</span>.autoCompleteOptions[ii]){
+						found = true;
+						break;
+					}
+				}
+
+				<span class="reserved">if</span>(!found){
+					validatorName = <span class="literal">"zpFormAutoCompleteStrict"</span>;
+					l10nMessage = <span class="literal">"noSuchAutoCompleteValueError"</span>;
+				}
+			}
+
+			<span class="reserved">if</span>(typeof(Zapatec.Form.dataTypes[vName]) != <span class="literal">'undefined'</span>){
+				validatorUsed = true;
+		
+				var validator = Zapatec.Form.dataTypes[vName];
+				var validatorPassed = true;
+				messageArgument = <span class="reserved">this</span>.getFeature(vName);
+
+				<span class="reserved">if</span>(validator.regex){
+					<span class="comment">// Regex validation.</span>
+					validatorPassed = validator.regex.test(<span class="reserved">this</span>.getValue());
+				} <span class="reserved">else</span> <span class="reserved">if</span> (validator.func){
+					<span class="comment">// Javascript function validation.</span>
+					validatorPassed = validator.func(<span class="reserved">this</span>.getValue(), <span class="reserved">this</span>.getFeature(vName));
+				}
+
+				<span class="reserved">if</span>(!validatorPassed){
+					validatorName = vName;
+					l10nMessage = validator.error;
+				}
+			}
+
+			<span class="reserved">if</span>(validatorName){
+				message = addError(<span class="reserved">this</span>, errors, validatorName, l10nMessage, messageArgument) || message;
+				validatorName = null;
+			}
+		}
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.ajaxError != null){
+			validatorUsed = true;
+	
+			validatorName = <span class="literal">"zpFormValidate"</span>;
+			l10nMessage = <span class="reserved">this</span>.ajaxError;
+		}
+	}
+
+	message = addError(<span class="reserved">this</span>, errors, validatorName, l10nMessage, messageArgument) || message;
+
+	<span class="reserved">if</span>(!onlyValidate &amp;&amp; validatorUsed){
+		<span class="reserved">this</span>.setImageStatus(message, isEmpty);
+	}
+
+	<span class="reserved">return</span> errors;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Sets the CLASS of the status indicator next to a form field, and its title
+ * tooltip popup.
+ * <span class="attrib">@param</span> status - [string] error message
+ * <span class="attrib">@param</span> isEmpty - [boolean] Optional. Optimization tip. Do not use it.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.setImageStatus = <span class="reserved">function</span>(status, isEmpty) {
+	var isRequired = <span class="reserved">this</span>.isRequired();
+	
+	<span class="reserved">if</span>(typeof(isEmpty) == <span class="literal">'undefined'</span>){
+		isEmpty = <span class="reserved">this</span>.isEmpty();
+	}	
+
+	<span class="comment">// clear all marks from status fields.</span>
+	<span class="reserved">this</span>.requiredMark.className = Zapatec.Form.IGNORE_CLASSNAME + (isRequired ? <span class="literal">' zpIsRequired'</span> : <span class="literal">' zpNotRequired'</span>);
+	<span class="reserved">this</span>.editingMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.emptyMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.validMark.className = Zapatec.Form.IGNORE_CLASSNAME;
+	<span class="reserved">this</span>.errorText.innerHTML = <span class="literal">""</span>;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.strict){
+		<span class="reserved">if</span>(status == null){
+			<span class="reserved">this</span>.form.toggleSubmits(<span class="reserved">this</span>.form.validate() != null);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.form.toggleSubmits(true);
+		}
+	}
+
+	<span class="comment">// process field only if this is not first round mark</span>
+	<span class="reserved">if</span>(
+		!<span class="reserved">this</span>.firstRun &amp;&amp; 
+		(
+			isRequired &amp;&amp; 
+			isEmpty || 
+			!isEmpty
+		)
+	){
+		<span class="reserved">this</span>.editingMark.className = Zapatec.Form.IGNORE_CLASSNAME + (<span class="reserved">this</span>.isEditing ? <span class="literal">' zpIsEditing'</span> : <span class="literal">' zpNotEditing'</span>);
+		<span class="reserved">this</span>.emptyMark.className = Zapatec.Form.IGNORE_CLASSNAME + (isEmpty ? <span class="literal">' zpIsEmpty'</span> : <span class="literal">' zpNotEmpty'</span>);
+		<span class="reserved">this</span>.validMark.className = Zapatec.Form.IGNORE_CLASSNAME + (!status ? <span class="literal">' zpIsValid'</span> : <span class="literal">' zpNotValid'</span>);
+
+		<span class="comment">// if field is empty but it is editing in this time - do not display</span>
+		<span class="comment">// "this field is required" message.</span>
+		<span class="reserved">if</span>(
+			( <span class="comment">// do not display error if field is required and it is empty during editing.</span>
+				isRequired &amp;&amp; 
+				isEmpty &amp;&amp; 
+				<span class="reserved">this</span>.isEditing 
+			) ||
+			( <span class="comment">// do not display error while typing if displayErrorWhileTyping is false</span>
+				<span class="reserved">this</span>.isEditing &amp;&amp; 
+				!<span class="reserved">this</span>.config.formConfig.displayErrorWhileTyping
+			)
+		){
+			<span class="reserved">if</span>(
+				!(
+					<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'tooltip'</span> &amp;&amp; 
+					Zapatec.Tooltip
+				) &amp;&amp; 
+				!<span class="reserved">this</span>.isBooleanField
+			){
+				status = null;
+			}
+		}
+
+		<span class="comment">// Error status text handling.</span>
+		<span class="reserved">if</span>(!status){
+			<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.config.formConfig.showErrors) == <span class="literal">'function'</span>){
+				<span class="reserved">this</span>.config.formConfig.showErrors(<span class="reserved">this</span>.field);
+			} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.tooltip){
+				<span class="reserved">this</span>.tooltip.hide();
+			} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.errorText){
+				<span class="reserved">this</span>.errorText.style.display = <span class="literal">"none"</span>;
+			}
+		} <span class="reserved">else</span> <span class="reserved">if</span>(status) {
+			<span class="reserved">if</span> (
+				<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'beforeField'</span> ||
+				<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'afterField'</span> ||
+				<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'last'</span>
+			){
+				<span class="reserved">this</span>.errorText.style.display = <span class="literal">""</span>;
+				<span class="reserved">this</span>.errorText.innerHTML = status;
+			} <span class="reserved">else</span> <span class="reserved">if</span>(typeof(<span class="reserved">this</span>.config.formConfig.showErrors) == <span class="literal">'function'</span>){
+				<span class="reserved">this</span>.config.formConfig.showErrors(<span class="reserved">this</span>.field, status);
+			} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.showErrors == <span class="literal">'tooltip'</span> &amp;&amp; Zapatec.Tooltip){
+				<span class="comment">// Create a tooltip on the img.</span>
+				<span class="reserved">if</span> (!<span class="reserved">this</span>.tooltip) {
+					<span class="reserved">this</span>.tooltip = new Zapatec.Tooltip({
+						target: <span class="reserved">this</span>.requiredMark, 
+						content: status,
+						parent: <span class="reserved">this</span>.form.container
+					});
+				}
+				
+				<span class="reserved">this</span>.tooltip.setContent(status);
+				
+				<span class="reserved">if</span>(<span class="reserved">this</span>.isEditing){
+					var offs = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.requiredMark);
+					<span class="reserved">this</span>.tooltip.show(offs.left, offs.top + offs.height);
+				} <span class="reserved">else</span> {
+					<span class="reserved">this</span>.tooltip.hide();
+				}
+			} <span class="reserved">else</span> {
+				<span class="comment">// Use default browser tooltip</span>
+				<span class="reserved">this</span>.statusImg.title = status;
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Check if field is empty
+ * <span class="attrib">@return</span> true, if field is empty(for zpFormMask fields field is empty -
+ * only if user don't enter any symbol to it)
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.isEmpty = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.isBooleanField){
+			<span class="reserved">if</span>(<span class="reserved">this</span>.field.checked){
+				<span class="reserved">return</span> false;
+			}
+
+			<span class="reserved">for</span>(var ii = <span class="reserved">this</span>.otherFields.length - 1; ii &gt;= 0; ii--){
+				var element = <span class="reserved">this</span>.otherFields[ii];
+				 
+				<span class="reserved">if</span>(element.checked){
+					<span class="reserved">return</span> false;
+				}
+			}
+
+			<span class="reserved">return</span> true;
+		} <span class="reserved">else</span> {
+			var currVal = <span class="reserved">this</span>.getValue();
+			<span class="reserved">return</span> (currVal == null || currVal.length == 0);
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">for</span>(ii = 0; ii &lt; <span class="reserved">this</span>.enteredValue.length; ii++){
+			<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[ii]) != <span class="literal">'string'</span> &amp;&amp; <span class="reserved">this</span>.enteredValue[ii] != null){
+				<span class="reserved">return</span> false;
+			}
+		}
+
+		<span class="reserved">return</span> true;
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Check if at least one character is entered
+ * <span class="attrib">@return</span> true, if at least one character is entered
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.isFilled = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+		<span class="reserved">for</span>(ii = 0; ii &lt; <span class="reserved">this</span>.enteredValue.length; ii++){
+			<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[ii]) != <span class="literal">'string'</span> &amp;&amp; <span class="reserved">this</span>.enteredValue[ii] != null){
+				<span class="reserved">return</span> true;
+			}
+		}
+
+		<span class="reserved">return</span> false;
+	} <span class="reserved">else</span> {
+		var currVal = <span class="reserved">this</span>.getValue();
+		<span class="reserved">return</span> (currVal != null &amp;&amp; currVal.length &gt; 0);
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Checks if mask is fully entered
+ * <span class="attrib">@return</span> true if mask is fully filled 
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.isMaskFullyFilled = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormMask"</span>)){
+		<span class="reserved">for</span>(ii = 0; ii &lt; <span class="reserved">this</span>.enteredValue.length; ii++){
+			<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[ii]) != <span class="literal">'string'</span> &amp;&amp; <span class="reserved">this</span>.enteredValue[ii] == null){
+				<span class="reserved">return</span> false;
+			}
+		}
+
+		<span class="reserved">return</span> true;
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> <span class="reserved">this</span>.isFilled();
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Checks if field has given feature.
+ * <span class="attrib">@param</span> feature - [string] feature name
+ * <span class="attrib">@return</span> true if field has given feature
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.hasFeature = <span class="reserved">function</span>(feature){
+	<span class="reserved">if</span>(
+		!feature ||
+		typeof(<span class="reserved">this</span>.features[feature]) == <span class="literal">'undefined'</span>
+	){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Returns value for given feature name
+ * <span class="attrib">@param</span> feature - [string] feature name
+ * <span class="attrib">@return</span> value for given feature name
+ * <span class="attrib">@type</span> String
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.getFeature = <span class="reserved">function</span>(feature){
+	<span class="reserved">return</span> <span class="reserved">this</span>.features[feature];
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Set value for given feature name
+ * <span class="attrib">@param</span> feature - [string] feature name
+ * <span class="attrib">@param</span> value {Object} Value to set
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.setFeature = <span class="reserved">function</span>(feature, value){
+	<span class="reserved">this</span>.features[feature] = value;
+};
+
+Zapatec.Form.Field.<span class="reserved">prototype</span>.isRequired = <span class="reserved">function</span>(){
+	var isRequired = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormRequired"</span>);
+
+	<span class="comment">// TODO provide zpFormRequiredWhen functionality here</span>
+	<span class="reserved">return</span> isRequired;
+}
+
+<span class="comment">/*
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Get position of next unfilled character in a mask..
+ * <span class="attrib">@return</span> position of next unfilled mask char into mask. Returns null if such
+ *	character not found.
+ * <span class="attrib">@type</span> int
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.getNextAvailablePosition = <span class="reserved">function</span>(pos){
+	<span class="reserved">if</span>(pos + 1 &gt;= <span class="reserved">this</span>.enteredValue.length){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[pos + 1]) == <span class="literal">'string'</span>){
+		<span class="reserved">return</span> <span class="reserved">this</span>.getNextAvailablePosition(pos + 1);
+	}
+
+	<span class="reserved">return</span> pos + 1;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Get position of next unfilled character in a mask.
+ * <span class="attrib">@return</span> position of previous unfilled mask char into mask. Returns null if 
+ *	such character not found.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.getPrevAvailablePosition = <span class="reserved">function</span>(pos){
+	<span class="reserved">if</span>(pos - 1 &lt; 0){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[pos - 1]) == <span class="literal">'string'</span>){
+		<span class="reserved">return</span> <span class="reserved">this</span>.getPrevAvailablePosition(pos - 1);
+	}
+
+	<span class="reserved">return</span> pos - 1;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Set selection inside INPUT element
+ * <span class="attrib">@param</span> startPos {int} start of selection(required).
+ * <span class="attrib">@param</span> endPos {int} end of selection(nonrequired. equal to startPos by default)
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.setCaretPosition = <span class="reserved">function</span>(startPos, endPos){
+	var valLength = <span class="reserved">this</span>.getValue().length;
+
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isSelectionAppliable() || !<span class="reserved">this</span>.isEditing){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">if</span>(isNaN(parseInt(startPos))){
+		<span class="reserved">return</span> false;
+	} <span class="reserved">else</span> {
+		startPos = parseInt(startPos);
+
+		<span class="reserved">if</span>(startPos &lt; 0){
+			startPos = 0;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(startPos &gt; valLength){
+			startPos = valLength;
+		}
+	}
+
+	<span class="reserved">if</span>(endPos == null || isNaN(parseInt(endPos)) || parseInt(endPos) &lt; startPos){
+		endPos = startPos;
+	} <span class="reserved">else</span> {
+		endPos = parseInt(endPos);
+
+		<span class="reserved">if</span>(endPos &lt; 0){
+			endPos = 0;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(endPos &gt; valLength){
+			endPos = valLength;
+		}
+	}
+	try{
+		<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.field.createTextRange) == <span class="literal">"object"</span>){
+			var range = <span class="reserved">this</span>.field.createTextRange();
+			range.moveEnd(<span class="literal">"character"</span>, endPos - <span class="reserved">this</span>.getValue().length);
+			range.moveStart(<span class="literal">"character"</span>, startPos);
+			range.select();
+	        
+			<span class="reserved">return</span> true;
+		} <span class="reserved">else</span> <span class="reserved">if</span> (typeof(<span class="reserved">this</span>.field.setSelectionRange) == <span class="literal">'function'</span>){
+			<span class="comment">// mozilla, opera, safari</span>
+			<span class="reserved">this</span>.field.setSelectionRange(startPos, endPos);
+	        
+			<span class="reserved">return</span> true;
+		}
+	} catch(e){}
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Get start position of selection in INPUT element.
+ * <span class="attrib">@return</span> start position of selection in INPUT element.
+ * <span class="attrib">@type</span> int
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.getSelectionStart = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.field.disabled || !<span class="reserved">this</span>.isSelectionAppliable() || !<span class="reserved">this</span>.isEditing){
+		<span class="reserved">return</span> 0;
+	}
+
+	try{
+		<span class="reserved">if</span> (document.selection) {
+			<span class="comment">// IE black magic</span>
+			<span class="reserved">return</span> Math.abs(
+				document.selection.createRange().moveStart(<span class="literal">"character"</span>, -1000000)
+			);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (typeof(<span class="reserved">this</span>.field.selectionStart) != <span class="literal">"undefined"</span>){
+			<span class="comment">// mozilla and opera</span>
+			var selStart = <span class="reserved">this</span>.field.selectionStart;
+		
+			<span class="comment">// Safari bug when field is focused for first time</span>
+			<span class="reserved">if</span>(selStart == 2147483647){
+				selStart = 0;
+			}
+	        
+			<span class="reserved">return</span> selStart;
+		}
+	} catch(e){}
+	
+	<span class="reserved">return</span> 0;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Get end position of selection in INPUT element.
+ * <span class="attrib">@return</span> end position of selection in INPUT element.
+ * <span class="attrib">@type</span> int
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.getSelectionEnd = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.field.disabled || !<span class="reserved">this</span>.isSelectionAppliable() || !<span class="reserved">this</span>.isEditing){
+		<span class="reserved">return</span> 0;
+	}
+
+	try{
+		<span class="reserved">if</span> (document.selection) {
+			<span class="comment">// IE black magic</span>
+			<span class="reserved">return</span> <span class="reserved">this</span>.field.value.length - Math.abs(
+				document.selection.createRange().moveEnd(<span class="literal">"character"</span>, 1000000)
+			);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (typeof(<span class="reserved">this</span>.field.selectionEnd) != <span class="literal">"undefined"</span>) {
+			<span class="comment">// mozilla and opera</span>
+			<span class="reserved">return</span> <span class="reserved">this</span>.field.selectionEnd;
+		}
+	} catch(e){} 
+
+	<span class="reserved">return</span> 0;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Processes backspace and delete keys.
+ * <span class="attrib">@param</span> charCode {int} code of the key that was pressed.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.processCustomKeys = <span class="reserved">function</span>(charCode){
+	var selStart = <span class="reserved">this</span>.getSelectionStart();
+	var selEnd = <span class="reserved">this</span>.getSelectionEnd();
+
+	<span class="reserved">if</span>(selStart == selEnd){
+		<span class="reserved">if</span>(charCode == 8){ <span class="comment">// backspace</span>
+			var newPos = <span class="reserved">this</span>.getPrevAvailablePosition(selStart);
+
+			<span class="reserved">if</span>(newPos == null || newPos == selStart){
+				<span class="reserved">return</span> false;
+			}
+
+			<span class="reserved">this</span>.enteredValue[newPos] = null;
+			<span class="reserved">this</span>.setValue();
+
+			<span class="reserved">this</span>.setCaretPosition(newPos + (Zapatec.is_opera ? 1 : 0));
+
+			<span class="reserved">return</span> false;
+		}
+
+		<span class="reserved">if</span>(charCode == 46){ <span class="comment">// delete</span>
+			<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[selStart]) == <span class="literal">'string'</span>){
+				<span class="reserved">return</span> false;
+			}
+
+			<span class="reserved">this</span>.enteredValue[selStart] = null;
+			<span class="reserved">this</span>.setValue();
+			<span class="reserved">this</span>.setCaretPosition(selStart)
+
+			<span class="reserved">return</span> false;
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">if</span>(charCode == 8 || charCode == 46){ <span class="comment">// backspace</span>
+			<span class="reserved">for</span>(var ii = selStart; ii &lt; selEnd; ii++){
+				<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[ii]) != <span class="literal">'string'</span>){
+					<span class="reserved">this</span>.enteredValue[ii] = null;
+				}
+			}
+
+			<span class="reserved">this</span>.setValue();
+			<span class="reserved">this</span>.setCaretPosition(selStart + (Zapatec.is_opera ? 1 : 0));
+
+			<span class="reserved">return</span> false;
+		}
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Custom processing for alt, ctrl and shift keys
+ * <span class="attrib">@param</span> {Event} event object
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.processFunctionalKeys = <span class="reserved">function</span>(evt){
+	var tmpArr = Zapatec.Utils.getCharFromEvent(evt)
+
+	var charCode = tmpArr.charCode;
+	var newChar = tmpArr.chr;
+
+	<span class="reserved">if</span>(evt.ctrlKey || (typeof(evt.metaKey) != <span class="literal">'undefined'</span> &amp;&amp; evt.metaKey)){
+		<span class="comment">// custom processing of ctrl+backspace and ctrl+delete shortcuts</span>
+		<span class="reserved">if</span>(charCode == 8){
+			<span class="comment">// backspace</span>
+			<span class="reserved">this</span>.setCaretPosition(0, <span class="reserved">this</span>.getSelectionStart());
+
+			<span class="reserved">return</span> false;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(charCode == 46){
+			<span class="comment">// delete</span>
+			<span class="reserved">this</span>.setCaretPosition(<span class="reserved">this</span>.getSelectionStart(), <span class="reserved">this</span>.getValue().length);
+
+			<span class="reserved">return</span> false;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(newChar == <span class="literal">'v'</span> || newChar == <span class="literal">'V'</span>){
+			<span class="reserved">this</span>.setValueFromField();
+
+			<span class="reserved">return</span> true;
+		}
+
+		<span class="reserved">return</span> true;
+	} <span class="reserved">else</span> <span class="reserved">if</span>(evt.shiftKey){
+		<span class="reserved">if</span>(charCode == 37 || charCode == 39){ <span class="comment">// left/right arrow</span>
+			<span class="reserved">return</span> true;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(charCode == 45){ <span class="comment">// insert</span>
+			<span class="reserved">this</span>.setValueFromField();
+			<span class="reserved">return</span> true;
+		}
+	} <span class="reserved">else</span> <span class="reserved">if</span>(evt.altKey){
+		<span class="reserved">return</span> true;
+	}
+
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Sets field value and value of INPUT element(this captures paste into field).
+ * <span class="attrib">@param</span> runImmediately {boolean} If false - wait 1ms before execution. 
+ *	Sometimes this is needed when you want to be sure that last keystrokes are
+ *	recorded into field value.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.setValueFromField = <span class="reserved">function</span>(runImmediately){
+	<span class="reserved">if</span>(!runImmediately){
+		var self = <span class="reserved">this</span>;
+	
+		setTimeout(
+			<span class="reserved">function</span>(){
+				self.setValueFromField(true);
+			},
+		1);
+
+		<span class="reserved">return</span>;
+	}
+
+	var selStart = <span class="reserved">this</span>.getSelectionStart();
+	var selEnd = <span class="reserved">this</span>.getSelectionEnd();
+
+	var editMode = <span class="reserved">this</span>.isEditing;
+	<span class="reserved">this</span>.isEditing = true;
+	<span class="reserved">this</span>.setValue(Zapatec.Form.Utils.getValue(<span class="reserved">this</span>.field));
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.isBooleanField){
+		<span class="reserved">this</span>.booleanChanged();
+	}
+
+	<span class="reserved">this</span>.isEditing = editMode;
+
+	<span class="reserved">this</span>.validate();
+
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEditing){
+		<span class="reserved">this</span>.blur();
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.setCaretPosition(selStart, selEnd);
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Get value of current field.
+ * <span class="attrib">@return</span> value of current field.
+ * <span class="attrib">@type</span> String
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.getValue = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> Zapatec.Form.Utils.getValue(<span class="reserved">this</span>.field);
+}
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Sets value of current field
+ * <span class="attrib">@param</span> value [String] value to set
+ * <span class="attrib">@return</span> Value that was written into field.
+ * <span class="attrib">@type</span> String
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.setValue = <span class="reserved">function</span>(value){
+	<span class="reserved">if</span>(value == null){
+		value = <span class="literal">""</span>;
+	}
+
+	<span class="comment">// remove invalid characters from the value</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.hasFeature(<span class="literal">'zpFormAllowedChars'</span>)){
+		var notallowed = new RegExp(<span class="literal">'[^'</span> + <span class="reserved">this</span>.getFeature(<span class="literal">'zpFormAllowedChars'</span>) + <span class="literal">']'</span>, <span class="literal">'g'</span>);
+		value = value.replace(notallowed, <span class="literal">""</span>);
+	}
+
+	<span class="comment">// if field has zpFormMask mark - this is special case</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.hasFeature(<span class="literal">'zpFormMask'</span>)){
+		var val = <span class="literal">""</span>;
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.isEditing || <span class="reserved">this</span>.isFilled()){
+			<span class="reserved">for</span>(ii = 0; ii &lt; <span class="reserved">this</span>.chars.length; ii++){
+				<span class="reserved">if</span>(ii &lt; value.length){
+					<span class="comment">// if value is given - fill this.enteredValue with it.</span>
+					<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[ii]) != <span class="literal">"string"</span>){
+						<span class="reserved">if</span>(<span class="reserved">this</span>.chars[ii].test(value.charAt(ii))){
+							<span class="reserved">this</span>.enteredValue[ii] = value.charAt(ii);
+							val += value.charAt(ii);
+						} <span class="reserved">else</span> {
+							<span class="reserved">this</span>.enteredValue[ii] = null;
+							<span class="reserved">if</span> (<span class="reserved">this</span>.config.formConfig.maskPlaceholder) {
+								val += <span class="reserved">this</span>.config.formConfig.maskPlaceholder;
+							}
+						}
+					} <span class="reserved">else</span> {
+						<span class="reserved">this</span>.enteredValue[ii] = <span class="reserved">this</span>.chars[ii];
+						val += <span class="reserved">this</span>.chars[ii];
+					}
+				} <span class="reserved">else</span> <span class="reserved">if</span>(arguments.length &gt; 0){
+					<span class="comment">// if value were given - clear rest of the characters</span>
+					<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[ii]) == <span class="literal">'string'</span>){
+						val += <span class="reserved">this</span>.chars[ii];
+					} <span class="reserved">else</span> {
+						<span class="reserved">this</span>.enteredValue[ii] = null;
+						<span class="reserved">if</span> (<span class="reserved">this</span>.config.formConfig.maskPlaceholder) {
+							val += <span class="reserved">this</span>.config.formConfig.maskPlaceholder;
+						}
+					}
+				} <span class="reserved">else</span> {
+					<span class="comment">// if no value were given - then form masked value from internal arrays</span>
+					<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.chars[ii]) == <span class="literal">'string'</span>){
+						val += <span class="reserved">this</span>.chars[ii];
+					} <span class="reserved">else</span> {
+						var tempHolderString;
+						<span class="reserved">if</span> (<span class="reserved">this</span>.config.formConfig.maskPlaceholder) {
+							tempHolderString = <span class="reserved">this</span>.config.formConfig.maskPlaceholder;
+						} <span class="reserved">else</span> {
+							tempHolderString = <span class="literal">""</span>;
+						}
+						val += <span class="reserved">this</span>.enteredValue[ii] == null ? tempHolderString : <span class="reserved">this</span>.enteredValue[ii];
+					}
+				}
+			}
+		}
+
+		value = val;
+	}
+
+	<span class="comment">// For textarea - we must restore scrolling position in textarea.</span>
+	var oldScrollTop = null;
+	var oldScrollLeft = null;
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.field.nodeName.toLowerCase() == <span class="literal">'textarea'</span> &amp;&amp;
+		typeof(<span class="reserved">this</span>.field.scrollTop) != <span class="literal">'undefined'</span>
+	){
+		oldScrollTop = <span class="reserved">this</span>.field.scrollTop;
+		oldScrollLeft = <span class="reserved">this</span>.field.scrollLeft;
+	}
+
+	var retVal = Zapatec.Form.Utils.setValue(<span class="reserved">this</span>.field, value);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.field.nodeName.toLowerCase() == <span class="literal">'textarea'</span> &amp;&amp; oldScrollTop != null){
+		<span class="reserved">this</span>.field.scrollTop = oldScrollTop;
+		<span class="reserved">this</span>.field.scrollLeft = oldScrollLeft;
+	}
+
+	<span class="reserved">return</span> retVal;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * This method processes delayed actions - usually this actions are
+ * executed when user finished typing in the field.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.runDelayedActions = <span class="reserved">function</span>(){
+	<span class="reserved">this</span>.keyPressCounter--;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.keyPressCounter != 0){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">this</span>.ajaxValidate();
+	<span class="reserved">this</span>.suggestValue();
+	<span class="reserved">this</span>.ajaxFill();
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Validate field value using AJAX. Response must be in format:
+ * {
+ *	"success": true | false,
+ *	"generalError": "Human readable error description"
+ * }
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.ajaxValidate = <span class="reserved">function</span>(){
+	<span class="comment">// processing zpFormValidate feature</span>
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormValidate"</span>)){
+		<span class="reserved">return</span> null;
+	}
+
+	var valid = <span class="reserved">this</span>.validate();
+
+	<span class="reserved">if</span>(!(
+			valid == null || <span class="comment">// if field has no client-side errors</span>
+			valid != null &amp;&amp;
+			(
+				valid.length == 0 ||
+				valid.length == 1 &amp;&amp; <span class="comment">// or has only one error, but it is error from this validator</span>
+				valid[0].validator == <span class="literal">"zpFormValidate"</span>
+			)
+		)
+	){
+		<span class="reserved">return</span> null;
+	}
+
+	var submitUrl = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormValidate"</span>);
+	var submitMethod = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormValidateMethod"</span>);
+	var submitParam = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormValidateParam"</span>);
+	var submitQuery = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormValidateQuery"</span>);
+
+	<span class="comment">// method by default is GET</span>
+	<span class="reserved">if</span>(typeof(submitMethod) != <span class="literal">'string'</span>){
+		submitMethod = <span class="literal">"GET"</span>
+	}
+
+	<span class="comment">// URL param name by default is equal to the field name</span>
+	<span class="reserved">if</span>(typeof(submitParam) != <span class="literal">'string'</span>){
+		submitParam = <span class="reserved">this</span>.field.name;
+	}
+
+	<span class="reserved">if</span>(typeof(submitQuery) != <span class="literal">'string'</span>){
+		submitQuery = <span class="literal">""</span>;
+	}
+
+	submitQuery += <span class="literal">"&amp;"</span> + encodeURIComponent(submitParam) + <span class="literal">"="</span> + encodeURIComponent(<span class="reserved">this</span>.getValue());
+
+	<span class="reserved">if</span>(submitUrl.indexOf(<span class="literal">"?"</span>) &lt; 0){
+		submitUrl += <span class="literal">"?"</span>;
+	}
+
+	submitUrl += <span class="literal">"&amp;"</span> + Math.random();
+
+	<span class="reserved">if</span>(submitMethod == <span class="literal">'GET'</span>){
+		submitUrl += <span class="literal">"&amp;"</span> + submitQuery;
+	}
+
+	<span class="reserved">this</span>.fetchingMark.className = <span class="literal">"zpIsFetching "</span> + Zapatec.Form.IGNORE_CLASSNAME;
+
+	var self = <span class="reserved">this</span>;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc){
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugSeparator'</span>));
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugValidateTitle'</span>, <span class="reserved">this</span>.field.name));
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(submitMethod + <span class="literal">" "</span> + submitUrl);
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugQuery'</span>, (<span class="literal">"GET"</span> ? <span class="literal">""</span> : submitQuery)));
+	}
+
+	Zapatec.Transport.fetch({
+		url: submitUrl,
+		content: submitMethod == <span class="literal">"GET"</span> ? null : submitQuery,
+		method: submitMethod,
+		onLoad: <span class="reserved">function</span>(objText){
+			<span class="reserved">if</span>(self.config.formConfig.ajaxDebugFunc){
+				self.config.formConfig.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponse'</span>, objText.responseText));
+			}
+
+			self.fetchingMark.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">"zpNotFetching"</span>;
+
+			<span class="reserved">if</span> (objText.responseText == null) {
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxValidateNoResponseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			var objResponse = Zapatec.Transport.parseJson({strJson: objText.responseText});
+
+			<span class="reserved">if</span>(objResponse == null){
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxValidateCantParseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			<span class="reserved">if</span>(!objResponse.success){
+				self.ajaxError = typeof(objResponse.generalError) != <span class="literal">'string'</span> ||
+					objResponse.generalError.length == 0 ?
+						self.getMessage(<span class="literal">'ajaxValidateValidationError'</span>) : 
+						objResponse.generalError;
+			} <span class="reserved">else</span> {
+				self.ajaxError = null;
+			}
+
+			self.validate();
+		},
+		onError : <span class="reserved">function</span>(objError){
+			var strError = <span class="literal">''</span>;
+
+			<span class="reserved">if</span> (objError.errorCode) {
+				strError += objError.errorCode + <span class="literal">' '</span>;
+			}
+
+			strError += objError.errorDescription;
+
+			self.fetchingMark.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">" zpNotFetching"</span>;
+			alert(strError);
+			self.ajaxError = null;
+
+			<span class="reserved">if</span>(self.config.formConfig.ajaxDebugFunc){
+				self.config.formConfig.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponseError'</span>, strError));
+			}
+		}
+	});
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Fill this field (and any other) using AJAX. Response must be in format:
+ * {
+ *	TODO
+ * }
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.ajaxFill = <span class="reserved">function</span>(){
+	<span class="comment">// processing zpFormValidate feature</span>
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormFillUrl"</span>)){
+		<span class="reserved">return</span> null;
+	}
+
+	var submitUrl = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormFillUrl"</span>);
+	var submitMethod = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormFillMethod"</span>);
+	var submitParam = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormFillParam"</span>);
+	var submitQuery = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormFillQuery"</span>);
+
+	<span class="comment">// method by default is GET</span>
+	<span class="reserved">if</span>(typeof(submitMethod) != <span class="literal">'string'</span>){
+		submitMethod = <span class="literal">"GET"</span>;
+	}
+
+	<span class="comment">// URL param name by default is equal to the field name</span>
+	<span class="reserved">if</span>(typeof(submitParam) != <span class="literal">'string'</span>){
+		submitParam = <span class="reserved">this</span>.field.name;
+	}
+
+	<span class="reserved">if</span>(typeof(submitQuery) != <span class="literal">'string'</span>){
+		submitQuery = <span class="literal">""</span>;
+	}
+
+	submitQuery += <span class="literal">"&amp;"</span> + encodeURIComponent(submitParam) + <span class="literal">"="</span> + encodeURIComponent(<span class="reserved">this</span>.getValue());
+
+	<span class="reserved">if</span>(submitUrl.indexOf(<span class="literal">"?"</span>) &lt; 0){
+		submitUrl += <span class="literal">"?"</span>;
+	}
+
+	submitUrl += <span class="literal">"&amp;"</span> + Math.random();
+
+	<span class="reserved">if</span>(submitMethod == <span class="literal">'GET'</span>){
+		submitUrl += <span class="literal">"&amp;"</span> + submitQuery;
+	}
+
+	<span class="reserved">this</span>.fetchingMark.className = <span class="literal">"zpIsFetching "</span> + Zapatec.Form.IGNORE_CLASSNAME;
+
+	var self = <span class="reserved">this</span>;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc){
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugSeparator'</span>));
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugFillTitle'</span>, <span class="reserved">this</span>.field.name));
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(submitMethod + <span class="literal">" "</span> + submitUrl);
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugQuery'</span>, (<span class="literal">"GET"</span> ? <span class="literal">""</span> : submitQuery)));
+	}
+	
+	Zapatec.Transport.fetch({
+		url: submitUrl,
+		content: submitMethod == <span class="literal">"GET"</span> ? null : submitQuery,
+		method: submitMethod,
+		onLoad: <span class="reserved">function</span>(objText){
+			<span class="reserved">if</span>(self.config.formConfig.ajaxDebugFunc){
+				self.config.formConfig.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponse'</span>, objText.responseText));
+			}
+
+			self.fetchingMark.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">" zpNotFetching"</span>;
+
+			<span class="reserved">if</span> (objText.responseText == null) {
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxFillNoResponseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			var objResponse = Zapatec.Transport.parseJson({strJson: objText.responseText});
+
+			<span class="reserved">if</span>(objResponse == null){
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxFillCantParseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			<span class="reserved">if</span>(!objResponse.success){
+				self.ajaxError = typeof(objResponse.generalError) != <span class="literal">'string'</span> ||
+					objResponse.generalError.length == 0 ?
+						self.getMessage(<span class="literal">'ajaxFillGeneralError'</span>) : 
+						objResponse.generalError
+				;
+			} <span class="reserved">else</span> {
+				self.ajaxError = null;
+
+				var formObject = self.form;
+				var fillData = objResponse.fillData;
+	    
+				<span class="reserved">if</span> (fillData.length == 0) {
+					<span class="reserved">return</span> null;
+				} <span class="reserved">else</span> {
+					var fields = fillData[0];
+					
+					<span class="reserved">for</span> (var ii = 0; ii &lt; fields.length; ii++) {
+						var field = formObject.container.elements[fields[ii][<span class="literal">'fieldName'</span>]];
+						
+						<span class="reserved">if</span>(!field){
+							continue;
+						}
+
+						Zapatec.Form.Utils.setValue(field, fields[ii][<span class="literal">'fieldValue'</span>]);
+	    
+						<span class="reserved">if</span>(field.zpFormField){
+							field.zpFormField.setValueFromField(true);
+						}
+					}
+				}
+			}
+
+			self.validate();
+		},
+		onError : <span class="reserved">function</span>(objError){
+			var strError = <span class="literal">''</span>;
+
+			<span class="reserved">if</span> (objError.errorCode) {
+				strError += objError.errorCode + <span class="literal">' '</span>;
+			}
+
+			strError += objError.errorDescription;
+
+			self.fetchingMark.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">" zpNotFetching"</span>;
+			alert(strError);
+			self.ajaxError = null;
+
+			<span class="reserved">if</span>(self.config.formConfig.ajaxDebugFunc){
+				self.config.formConfig.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponseError'</span>, strError));
+			}
+		}
+	});
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Provide suggestions for current field value.
+ * <span class="attrib">@param</span> showAll {boolean} if true - no current field value will be sent to 
+ *	server so it must send all possible values.
+ *	{
+ *		"success" : true, //true/false - if request processed successfully.
+ *		"generalError": "Human readable error description" // if success == false
+ *		"header": [ // table header description. Optional.
+ *			{
+ *				name: "Col name1", // text to display in column header
+ *				style: "color: blue", // apply this style to this header
+ *				colStyle: "color: blue" // apply this style to each cell in this row
+ *			},
+ *			{
+ *				name: "Col name2", // text to display in column header
+ *				className: "custom", // add this class to this header
+ *				colClassName: "customCol" // add this class to each cell in this row
+ *			}
+ *		],
+ *		"body": [ // array of data to display in rows
+ *			["str1, col1", "str1, col2"],
+ *			...
+ *		]
+ *	}
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.suggestValue = <span class="reserved">function</span>(showAll){
+	<span class="reserved">if</span>(
+		!<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormSuggest"</span>) ||
+		!showAll &amp;&amp;
+		<span class="reserved">this</span>.isEmpty()
+	){
+		<span class="reserved">return</span> null;
+	}
+
+	var suggestUrl = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormSuggest"</span>);
+	var suggestMethod = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormSuggestMethod"</span>);
+	var suggestParam = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormSuggestParam"</span>);
+	var suggestQuery = <span class="reserved">this</span>.getFeature(<span class="literal">"zpFormSuggestQuery"</span>);
+
+	<span class="comment">// method by default is GET</span>
+	<span class="reserved">if</span>(typeof(suggestMethod) != <span class="literal">'string'</span>){
+		suggestMethod = <span class="literal">"GET"</span>;
+	}
+
+	<span class="comment">// URL param name by default is equal to the field name</span>
+	<span class="reserved">if</span>(typeof(suggestParam) != <span class="literal">'string'</span>){
+		suggestParam = <span class="reserved">this</span>.field.name;
+	}
+
+	<span class="reserved">if</span>(typeof(suggestQuery) != <span class="literal">'string'</span>){
+		suggestQuery = <span class="literal">""</span>;
+	}
+
+	suggestQuery += <span class="literal">"&amp;"</span> + encodeURIComponent(suggestParam) + <span class="literal">"="</span> + (showAll ? <span class="literal">""</span> : encodeURIComponent(<span class="reserved">this</span>.getValue()));
+
+	<span class="reserved">if</span>(suggestUrl.indexOf(<span class="literal">"?"</span>) &lt; 0){
+		suggestUrl += <span class="literal">"?"</span>;
+	}
+
+	suggestUrl += <span class="literal">"&amp;"</span> + Math.random();
+
+	<span class="reserved">if</span>(suggestMethod == <span class="literal">'GET'</span>){
+		suggestUrl += <span class="literal">"&amp;"</span> + suggestQuery;
+	}
+
+	<span class="reserved">this</span>.fetchingMark.className = <span class="literal">"zpIsFetching "</span> + Zapatec.Form.IGNORE_CLASSNAME;
+
+	var self = <span class="reserved">this</span>;
+
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc){
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugSeparator'</span>));
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugSuggestTitle'</span>, <span class="reserved">this</span>.field.name));
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(suggestMethod + <span class="literal">" "</span> + suggestUrl);
+		<span class="reserved">this</span>.config.formConfig.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugQuery'</span>, (<span class="literal">"GET"</span> ? <span class="literal">""</span> : suggestQuery)));
+	}
+
+	Zapatec.Transport.fetch({
+		url: suggestUrl,
+		content: suggestMethod == <span class="literal">"GET"</span> ? null : suggestQuery,
+		method: suggestMethod,
+		onLoad: <span class="reserved">function</span>(objText){
+			<span class="reserved">if</span>(self.config.formConfig.ajaxDebugFunc){
+				self.config.formConfig.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponse'</span>, objText.responseText));
+			}
+
+			self.fetchingMark.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">" zpNotFetching"</span>;
+
+			<span class="reserved">if</span> (objText.responseText == null) {
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxSuggestNoResponseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			var objResponse = Zapatec.Transport.parseJson({strJson: objText.responseText});
+
+			<span class="reserved">if</span>(objResponse == null){
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxSuggestCantParseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			<span class="reserved">if</span>(!objResponse.success){
+				alert(typeof(objResponse.generalError) != <span class="literal">'string'</span> ||
+					objResponse.generalError.length == 0 ?
+						self.getMessage(<span class="literal">'ajaxSuggestGeneralError'</span>) : 
+						objResponse.generalError
+				);
+			} <span class="reserved">else</span> {
+				self.autoCompleteValue(objResponse);
+			}
+
+			self.validate();
+		},
+		onError : <span class="reserved">function</span>(objError){
+			var strError = <span class="literal">''</span>;
+
+			<span class="reserved">if</span> (objError.errorCode) {
+				strError += objError.errorCode + <span class="literal">' '</span>;
+			}
+
+			strError += objError.errorDescription;
+
+			self.fetchingMark.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">" zpNotFetching"</span>;
+			Zapatec.Log({description: strError});
+
+			<span class="reserved">if</span>(self.config.formConfig.ajaxDebugFunc){
+				self.config.formConfig.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponseError'</span>, strError));
+			}
+		}
+	});
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Returns array of values to autocomplete current field value
+ * <span class="attrib">@param</span> showAll {boolean} if true - no current field value will be
+ * used to filter available options.
+ * <span class="attrib">@return</span> array of values to autocomplete current field value;
+ * <span class="attrib">@type</span> Array
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.getAutoCompleteOptions = <span class="reserved">function</span>(showAll){
+	var opts = {body: []};
+	var currVal = <span class="reserved">this</span>.getValue();
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoComplete"</span>) ||
+		<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoCompleteStrict"</span>)
+	){
+		<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.autoCompleteOptions.length; ii++){
+			<span class="reserved">if</span>(
+				(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoCompleteStrict"</span>) ? 
+					<span class="reserved">this</span>.autoCompleteOptions[ii].substring(0, currVal.length) : 
+					<span class="reserved">this</span>.autoCompleteOptions[ii].substring(0, currVal.length).toLowerCase()) ==
+					(<span class="reserved">this</span>.hasFeature(<span class="literal">"zpFormAutoCompleteStrict"</span>) ? 
+						currVal : currVal.toLowerCase()
+					) ||
+				showAll
+			){
+				opts.body.push([<span class="reserved">this</span>.autoCompleteOptions[ii]]);
+			}
+		}
+	}
+
+	<span class="reserved">return</span> opts;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Autocomplete field value with given value and display dropdown list of 
+ * other available values.
+ * <span class="attrib">@param</span> opts {Object} array of values to display.
+ */</span>
+Zapatec.Form.Field.<span class="reserved">prototype</span>.autoCompleteValue = <span class="reserved">function</span>(opts){
+	<span class="reserved">if</span>(
+		typeof(opts) == <span class="literal">'undefined'</span> ||
+		opts.body == null ||
+		opts.body.length == 0 ||
+		(
+			opts.body.length == 1 &amp;&amp;
+			opts.body[0][0] == <span class="literal">""</span>
+		)
+	){
+	    <span class="reserved">if</span>(<span class="reserved">this</span>.dropDown){
+			<span class="reserved">this</span>.dropDown.config.source = {tips: []};
+			<span class="reserved">this</span>.dropDown.loadData();
+			<span class="reserved">this</span>.dropDown.hide();
+	    }
+		
+		<span class="reserved">return</span>;
+	}
+
+	var currValue = <span class="reserved">this</span>.getValue();
+	var retrValue = null;
+
+	var firstValue = opts.body[0][0];
+
+	<span class="reserved">if</span>(firstValue.substring(0, currValue.length).toLowerCase() == currValue.toLowerCase()){
+		retrValue = firstValue.substring(currValue.length);
+		<span class="reserved">this</span>.setValue(currValue + retrValue);
+		<span class="reserved">this</span>.setCaretPosition(currValue.length, <span class="reserved">this</span>.getValue().length);
+	}
+
+	<span class="reserved">this</span>.validate();
+
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.dropDown){
+		<span class="reserved">if</span>(opts.body.length == 1){
+			<span class="reserved">this</span>.dropDown.config.source = {tips: []};
+			<span class="reserved">this</span>.dropDown.loadData();
+			<span class="reserved">this</span>.dropDown.hide();
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.dropDown.config.sourceType = <span class="literal">"json"</span>;
+            
+			var tips = [];
+	    
+			<span class="reserved">for</span>(var ii = 0; ii &lt; opts.body.length; ii++){
+				var option = opts.body[ii];
+				var tmp = {};
+				
+				tmp.title = option.join(<span class="literal">" "</span>);
+				
+				tips.push(tmp);
+			}
+        
+			<span class="reserved">this</span>.dropDown.config.source = {tips: tips};
+			<span class="reserved">this</span>.dropDown.loadData();
+			<span class="reserved">this</span>.dropDown.show();
+		}
+	}
+};
+
+Zapatec.Form.Field.<span class="reserved">prototype</span>.isSelectionAppliable = <span class="reserved">function</span>(){
+	var nodeName = <span class="reserved">this</span>.field.nodeName.toLowerCase();
+	var inputType = nodeName == <span class="literal">'input'</span> ? <span class="reserved">this</span>.field.type.toLowerCase() : null;
+
+	<span class="reserved">return</span> (
+		nodeName == <span class="literal">"body"</span> || 
+		nodeName == <span class="literal">"button"</span> ||
+		nodeName === <span class="literal">"textarea"</span> ||
+		nodeName == <span class="literal">"input"</span> &amp;&amp; (
+			inputType == <span class="literal">"button"</span> ||
+			inputType == <span class="literal">"hidden"</span> ||
+			inputType == <span class="literal">"password"</span> ||
+			inputType == <span class="literal">"reset"</span> ||
+			inputType == <span class="literal">"submit"</span> ||
+			inputType == <span class="literal">"text"</span>
+		)
+ 	)
+};
+
+Zapatec.Form.Field.<span class="reserved">prototype</span>.destroy = <span class="reserved">function</span>(){
+	<span class="reserved">this</span>.discard();
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Form</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:46 2009</div>
+</body>
+</html>

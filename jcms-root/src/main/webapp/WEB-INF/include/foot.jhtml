@@ -1,0 +1,12 @@
+    </div>
+<%
+  if (debug) {
+    long endTime = new java.util.Date().getTime();
+%>
+      <div class="debug"><%=debugMessage%></div>
+      <div class="debug"><%=request.getRequestURI()%> generated in <%=(endTime-startTime)%> ms.</div>
+<%
+}
+%>
+  </body>
+</html>

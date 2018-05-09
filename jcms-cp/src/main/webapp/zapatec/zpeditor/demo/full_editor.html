@@ -1,0 +1,162 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Editor Widget - Full Editor Demo</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../../zptooltip/themes/default.css" rel="stylesheet" type="text/css">
+	<link href="../../zpwin/themes/winxp.css" rel="stylesheet" type="text/css">
+	<link href="../../zpextra/themes/colorpicker/default.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="../../zptooltip/src/zptooltip.js"></script>
+	<script type="text/javascript" src="../../zpwin/src/window.js"></script>
+	<script type="text/javascript" src="../../utils/colorpicker.js"></script>
+	<script type="text/javascript" src="../../utils/maximizable.js"></script>
+	<script type="text/javascript" src="../src/zpeditor.js"></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Full Editor Demo</div>
+
+
+
+To replace any TEXTAREA element with the Zapatec visual editor.<br /><br />
+
+Insert anywhere on your page:
+    <pre>
+&lt;script type="text/javascript"&gt;
+new Zapatec.MinimalEditor({
+  field: "target",
+  theme: "winxp",
+  toolbarElements: [...]
+});
+&lt;/script&gt;
+	</pre>
+	The following configuration options are available:
+    <ul>
+    	<li>field - reference to target textarea element. Could be the value
+    		of the ID attribute or a reference to a DOM element</li>
+    	<li>toolbarElements - array of button names that will be added to toolbar<br />
+    	The following values are available: 
+    	fontName, fontSize, bold, italic, underline, foreColor, backColor, 
+    	insertLink, insertImage, insertTable, justifyLeft, justifyCenter, 
+    	justifyRight, justifyFull, insertOrderedList, insertUnorderedList, copy, cut, 
+    	paste, outdent, indent, undo, redo, maximize, insertHorizontalRule, selectall
+    	</li>
+    	<li>theme - theme name</li>
+    	<li>themePath - path to directory where theme files are located</li>
+    </ul>
+    Useful tips:
+    <ul>
+    	<li>Buttons are added to the toolbar in same order as they described in toolbarElements.</li>
+    	<li>To add a WYSIWYG/HTML switcher, add the "switcher" option to toolbarElements.</li>
+    	<li>To start a new panel, add the "newPanel" option to toolbarElements.</li>
+    	<li>To add a new row to the toolbar, add the  "newRow" option to toolbarElements.</li>
+    	<li>To enable the Cut, Copy, and Paste features in Mozilla, please see: <a href="http://www.mozilla.org/editor/midasdemo/securityprefs.html">following page</a>.</li>
+    	<li>Undo/redo is currently not implemented in IE.</li>
+    </ul>
+    Demo:<br />
+<textarea id="target" rows="10" cols="80"><b>Some</b> <i>predefined</i> content</textarea>
+<script type="text/javascript">
+  /*
+   * Check external components
+   */
+  if (typeof Zapatec.Tooltip == 'undefined') {
+    alert('This demo shows interaction between different Zapatec components. It works only if Zapatec Tooltip component was purchased.');
+  }
+
+	var editor = new Zapatec.MinimalEditor({
+		field: "target",
+		theme: "winxp",
+		enableTooltips: true,
+		toolbarElements: [
+			'maximize',
+			'newPanel',
+
+			'fontName',
+			'fontSize',
+			'newPanel',
+
+			'bold',
+			'italic',
+			'underline',
+			'newPanel',
+
+			'foreColor',
+			'backColor',
+			'insertLink',
+			'insertImage',
+			'insertTable',
+			'insertHorizontalRule',
+			'insertSpecialChar',
+
+			'newRow',
+
+			'justifyLeft',
+			'justifyCenter',
+			'justifyRight',
+			'justifyFull',
+			'newPanel',
+
+			'insertOrderedList',
+			'insertUnorderedList',
+			'newPanel',
+
+			'selectAll',
+			'copy',
+			'cut',
+			'paste',
+			'newPanel',
+
+			'outdent',
+			'indent',
+			'newPanel',
+
+			'undo',
+			'redo',
+			'newPanel',
+
+			'switcher',
+			'newPanel',
+
+      		'browser',
+			'about'
+		]
+	});
+	// Attach the new editor instance to our original textarea html element
+	document.getElementById("target").editor = editor;
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Editor Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

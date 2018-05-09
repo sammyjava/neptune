@@ -1,0 +1,987 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Window Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="window-controlling.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Window</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>window-controlling.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'window-controlling.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: window-controlling.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/**
+ *
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ */</span>
+
+<span class="comment">/**
+ * Gets the window container.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getContainer = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.container;
+};
+
+<span class="comment">/**
+ * Sets default state values of the widget.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setDefaultState = <span class="reserved">function</span>() {
+	<span class="comment">//stores the properties which describe the state of the widget</span>
+	<span class="reserved">this</span>.state = {};
+	<span class="comment">//is window minimized, maximized or simple</span>
+	<span class="reserved">this</span>.state.state = <span class="literal">"simple"</span>;
+	<span class="comment">//X coordinate</span>
+	<span class="reserved">this</span>.state.left = 0;
+	<span class="comment">//Y coordinate</span>
+	<span class="reserved">this</span>.state.top = 0;
+	<span class="comment">//the width of the window</span>
+	<span class="reserved">this</span>.state.width = 0;
+	<span class="comment">//the height of the window</span>
+	<span class="reserved">this</span>.state.height = 0;
+	<span class="comment">//the content type of the window</span>
+	<span class="reserved">this</span>.state.contentType = <span class="literal">""</span>;
+	<span class="comment">//the content of the window</span>
+	<span class="reserved">this</span>.state.content = <span class="literal">""</span>;
+};
+
+<span class="comment">/**
+ * Updates the state object.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>._updateState = <span class="reserved">function</span>() {
+	<span class="comment">//getting position</span>
+	var pos = null;
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.getConfiguration().fixed) {
+		pos = <span class="reserved">this</span>.getPosition();
+	} <span class="reserved">else</span> {
+		pos = <span class="reserved">this</span>.getScreenPosition();
+	}
+	<span class="comment">//saving coordinates</span>
+	<span class="reserved">this</span>.state.left = pos.x;
+	<span class="reserved">this</span>.state.top = pos.y;
+	<span class="comment">//saving sizes</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"min"</span>) {
+		<span class="reserved">this</span>.state.width = <span class="reserved">this</span>.getWidth();
+		<span class="reserved">this</span>.state.height = <span class="reserved">this</span>.getHeight();
+	}
+};
+
+<span class="comment">/** 
+ * Gets the state of the window.
+ * <span class="attrib">@return</span> object with the following properties:
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *   x       | left coordinate.
+ *   y       | top coordinate.
+ *   width   | width of container.
+ *   height  | height of container.
+ *   url     | if content is set from URL, than it contains that URL, otherwise null
+ *   div     | if content is set from DIV element, than it contains it id, if it has no id its null.
+ *   text    | if content is set as text string, than it contains that text, otherwise null
+ * \endcode
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getState = <span class="reserved">function</span>() {
+	var state = {};
+	<span class="comment">//getting coordinates</span>
+	state.x = <span class="reserved">this</span>.state.left;
+	state.y = <span class="reserved">this</span>.state.top;
+	<span class="comment">//getting sizes</span>
+	state.width = <span class="reserved">this</span>.state.width;
+	state.height = <span class="reserved">this</span>.state.height;
+	<span class="comment">//getting zIndex</span>
+	state.zIndex = <span class="reserved">this</span>.getContainer().style.zIndex;
+	<span class="comment">//getting content</span>
+	switch(<span class="reserved">this</span>.state.contentType) {
+		case <span class="literal">"html/text"</span> : state.text = <span class="reserved">this</span>.state.content; break;
+		case <span class="literal">"html"</span> : state.div = <span class="reserved">this</span>.state.content; break;
+		case <span class="literal">"html/url"</span> : state.url = <span class="reserved">this</span>.state.content; break;
+	}
+	
+	<span class="reserved">return</span> state;
+};
+
+<span class="comment">/** 
+ * Sets the state of the window.
+ * <span class="attrib">@param</span> state [object] with the following properties:
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *   x       | left coordinate.
+ *   y       | top coordinate.
+ *   width   | width of container.
+ *   height  | height of container.
+ *   url     | URL content.
+ *   div     | content is set from DIV element.
+ *   text    | content is set as text string.
+ * \endcode
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setState = <span class="reserved">function</span>(state) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setState(state);})) {<span class="reserved">return</span>;}
+	<span class="comment">//setting size and coordinates</span>
+	<span class="reserved">if</span> (state.x || state.y || state.width || state.height) {
+		<span class="reserved">this</span>.setPosAndSize(state.x, state.y, state.width, state.height);
+	}
+	<span class="comment">//setting z-index</span>
+	<span class="reserved">if</span> (state.zIndex) {
+		<span class="comment">//for container</span>
+		<span class="reserved">this</span>.container.style.zIndex = state.zIndex;
+		<span class="comment">//updating global variable</span>
+		<span class="reserved">if</span>(state.zIndex &gt; Zapatec.Window.maxNumber){
+			Zapatec.Window.maxNumber = state.zIndex + 1;
+		}
+		<span class="comment">//updating WCH</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.WCH) {
+			<span class="reserved">this</span>.WCH.style.zIndex = state.zIndex - 1;
+		}
+		<span class="comment">//updating modal</span>
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.modal){
+			<span class="reserved">this</span>.modal.container.style.zIndex = state.zIndex - 2;
+		}
+	}
+	<span class="comment">//setting content</span>
+	<span class="reserved">if</span>(state.url || state.div || state.text){
+		<span class="reserved">this</span>.setContent(<span class="literal">""</span>);
+		<span class="reserved">if</span> (state.url) {
+			<span class="comment">//URL content</span>
+			<span class="reserved">this</span>.setContentUrl(state.url);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (state.div) {
+			<span class="comment">//DIV content</span>
+			<span class="reserved">this</span>.setDivContent(state.div);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (state.text) {
+			<span class="comment">//text content</span>
+			<span class="reserved">this</span>.setContent(state.text);
+		}
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Depricated. Only for backward compability.
+ *
+ * <span class="attrib">@param</span> left [integer] - X coordinate.
+ * <span class="attrib">@param</span> top [integer] - Y coordinate.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setPos = <span class="reserved">function</span>(left, top) {
+	<span class="reserved">this</span>.setScreenPosition(left, top);
+};
+
+<span class="comment">/**
+ * We overwrite implemented method to make it more 
+ * friendly to states. So actually this method sets
+ * the coordinates of Window.
+ * <span class="attrib">@param</span> left [integer] - X coordinate.
+ * <span class="attrib">@param</span> top [integer] - Y coordinate.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setPosition = <span class="reserved">function</span>(left, top) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setPosition(left, top);})) {<span class="reserved">return</span>;}
+	<span class="comment">//calling interface method in scope of this object</span>
+	Zapatec.Movable.setPosition.call(<span class="reserved">this</span>, left, top);
+	<span class="comment">//updating state object</span>
+	<span class="reserved">this</span>._updateState();
+};
+
+<span class="comment">/**
+ * We overwrite implemented method to make it more 
+ * friendly to states. This method sets the coordinates
+ * of Window on the screen.
+ * <span class="attrib">@param</span> left [integer] - X coordinate.
+ * <span class="attrib">@param</span> top [integer] - Y coordinate.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setScreenPosition = <span class="reserved">function</span>(left, top) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setScreenPosition(left, top);})) {<span class="reserved">return</span>;}
+	<span class="comment">//calling interface method in scope of this object</span>
+	Zapatec.Movable.setScreenPosition.call(<span class="reserved">this</span>, left, top);
+};
+
+<span class="comment">/**
+ * We overwrite implemented method to make it more 
+ * friendly to states. This method sets the coordinates
+ * of Window on the whole page (document.body).
+ * <span class="attrib">@param</span> left [integer] - X coordinate.
+ * <span class="attrib">@param</span> top [integer] - Y coordinate.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setPagePosition = <span class="reserved">function</span>(left, top) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setPagePosition(left, top);})) {<span class="reserved">return</span>;}
+	<span class="comment">//calling interface method in scope of this object</span>
+	Zapatec.Movable.setPagePosition.call(<span class="reserved">this</span>, left, top);
+};
+
+<span class="comment">/**
+ * Sets the width of the window. 
+ * We overwrite interface method to make
+ * it friendly for states.
+ *
+ * <span class="attrib">@param</span> width [integer] - width of the window.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setWidth = <span class="reserved">function</span>(width) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setWidth(width);})) {<span class="reserved">return</span>;}
+	<span class="comment">//we can only call this in case if Window is not minimized or maximized</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"simple"</span>) {<span class="reserved">return</span> false;}
+	<span class="comment">//calling interface method in scope of this object</span>
+	Zapatec.Sizable.setWidth.call(<span class="reserved">this</span>, width);
+	<span class="comment">//updating state object</span>
+	<span class="reserved">this</span>._updateState();
+};
+
+<span class="comment">/**
+ * Sets the height of the window.
+ * We overwrite interface method to make
+ * it friendly for states.
+ *
+ * <span class="attrib">@param</span> height [integer] - height of the window.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setHeight = <span class="reserved">function</span>(height) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setHeight(height);})) {<span class="reserved">return</span>;}
+	<span class="comment">//we can only call this in case if Window is not minimized or maximized</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"simple"</span>) {<span class="reserved">return</span> false;}
+	<span class="comment">//calling interface method in scope of this object</span>
+	Zapatec.Sizable.setHeight.call(<span class="reserved">this</span>, height);
+	<span class="comment">//updating state object</span>
+	<span class="reserved">this</span>._updateState();
+};
+
+<span class="comment">/**
+ * Sets the sizes of the window. 
+ *
+ * <span class="attrib">@param</span> width [integer] - width of the window.
+ * <span class="attrib">@param</span> height [integer] - height of the window.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setSize = <span class="reserved">function</span>(width, height) {
+	<span class="reserved">this</span>.setWidth(width);
+	<span class="reserved">this</span>.setHeight(height);
+};
+
+
+<span class="comment">/**
+ * Sets the sizes and position of the window. 
+ *
+ * <span class="attrib">@param</span> left [integer] - X coordinate.
+ * <span class="attrib">@param</span> top [integer] - Y coordinate.
+ * <span class="attrib">@param</span> width [integer] - width of the window.
+ * <span class="attrib">@param</span> height [integer] - height of the window.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setPosAndSize = <span class="reserved">function</span>(left, top, width, height) {
+	<span class="reserved">this</span>.setSize(width, height);
+	<span class="reserved">this</span>.setPos(left, top);
+};
+
+<span class="comment">/*
+ * Set the title of the window
+ * <span class="attrib">@param</span> type [string] the title to set to
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.setTitle = <span class="reserved">function</span>(text) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setTitle(text);})) {<span class="reserved">return</span>;}
+	<span class="comment">//putting text into title element</span>
+	<span class="reserved">if</span> (text !== <span class="literal">''</span>) {
+		<span class="reserved">this</span>.titleText.innerHTML = text;
+	}
+	<span class="comment">//returning success</span>
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Sets the status text of the window. 
+ *
+ * <span class="attrib">@param</span> mesage [string] - text to be shown.
+ * <span class="attrib">@param</span> mode [string] - currently mode forces to do some additional action when seting the text.
+ *                        For example, "temp" means to store the previous value.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setStatus = <span class="reserved">function</span>(message, mode) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setStatus(message, mode);})) {<span class="reserved">return</span>;}
+
+	<span class="comment">//to be able to use different mods of setting status text we use mode var</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.showStatus &amp;&amp; Zapatec.isHtmlElement(<span class="reserved">this</span>.statusText)) {
+		switch (mode) {
+			<span class="comment">//if mode "temp" current value is saved and overwritten by new one</span>
+			case <span class="literal">"temp"</span> : {
+				<span class="reserved">this</span>.prevStText = <span class="reserved">this</span>.statusText.innerHTML;
+				break;
+			}
+			
+			<span class="comment">//in case of "restore" we just restore old value saved before</span>
+			case <span class="literal">"restore"</span> : {
+				message = <span class="reserved">this</span>.prevStText || message;
+				delete <span class="reserved">this</span>.prevStText;
+				break;
+			}
+			
+		}
+		<span class="comment">//putting message into the status element</span>
+		<span class="reserved">this</span>.statusText.innerHTML = message;
+	}
+	<span class="comment">//returning success</span>
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/* 
+ * Set the content of a window.
+ * <span class="attrib">@param</span> type [string] the HTML data to set the content to.
+ */</span>
+
+Zapatec.Window.<span class="reserved">prototype</span>.setContent = <span class="reserved">function</span>(text) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setContent(text);})) <span class="reserved">return</span>;
+	<span class="comment">//setting content</span>
+	<span class="reserved">this</span>.content.setPaneContent(text, <span class="literal">"html/text"</span>);
+	<span class="comment">//updating state object</span>
+	<span class="reserved">this</span>.state.contentType = <span class="literal">"html/text"</span>;
+	<span class="reserved">this</span>.state.content = text;
+}
+
+<span class="comment">/* 
+ * Set the content of a window from HTML element(DIV).
+ * <span class="attrib">@param</span> div [string]or [object] the HTML data to set the content to.
+ */</span>
+
+Zapatec.Window.<span class="reserved">prototype</span>.setDivContent = <span class="reserved">function</span>(div) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setDivContent(div);})) <span class="reserved">return</span>;
+	<span class="comment">//setting content</span>
+	<span class="reserved">this</span>.content.setPaneContent(div, <span class="literal">"html"</span>);
+	<span class="comment">//updating state object</span>
+	<span class="reserved">this</span>.state.contentType = <span class="literal">"html"</span>;
+	<span class="reserved">if</span> (typeof div == <span class="literal">"string"</span>) {
+		<span class="reserved">this</span>.state.content = div;
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.state.content = null;
+	}
+}
+
+<span class="comment">/* 
+ * Set the content of a window from url.
+ * <span class="attrib">@param</span> div [string]or [object] the HTML data to set the content to.
+ */</span>
+
+Zapatec.Window.<span class="reserved">prototype</span>.setContentUrl = <span class="reserved">function</span>(url) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.setContentUrl(url);})) <span class="reserved">return</span>;
+	<span class="comment">//setting content</span>
+	<span class="reserved">this</span>.content.setPaneContent(url, <span class="literal">"html/url"</span>);
+	<span class="comment">//updating state object</span>
+	<span class="reserved">this</span>.state.contentType = <span class="literal">"html/url"</span>;
+	<span class="reserved">this</span>.state.content = url;
+}
+
+<span class="comment">/**
+ * Activates the window.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.activate = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.activate();})) {<span class="reserved">return</span>;}
+	<span class="comment">//if it is already active then do nothing</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.face.className.indexOf(<span class="literal">"zpWinFront"</span>) != -1) {
+		<span class="reserved">return</span> true;
+	}
+	Zapatec.Window.activating = <span class="reserved">this</span>;
+	<span class="comment">//set the current window</span>
+	<span class="reserved">if</span> (Zapatec.Window.currentWindow) {
+		Zapatec.Window.currentWindow.deactivate();
+	}
+	Zapatec.Window.currentWindow = <span class="reserved">this</span>;
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.face, <span class="literal">'zpWinBack'</span>);
+	Zapatec.Utils.addClass(<span class="reserved">this</span>.face, <span class="literal">'zpWinFront'</span>);
+	<span class="reserved">if</span> (<span class="reserved">this</span>.WCH) <span class="reserved">this</span>.WCH.style.zIndex = Zapatec.Window.maxNumber++;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.modal) <span class="reserved">this</span>.modal.container.style.zIndex = Zapatec.Window.maxNumber++;
+	<span class="reserved">this</span>.getContainer().style.zIndex = Zapatec.Window.maxNumber++;
+	<span class="comment">//if it is not the first one and it is not the same one as before</span>
+	
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onRaise"</span>, <span class="reserved">this</span>);
+	Zapatec.Window.activating = null;
+};
+
+<span class="comment">/**
+ * Deactivates the window.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.deactivate = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"shown"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.deactivate();})) {<span class="reserved">return</span>;}
+	<span class="comment">//if window is already unactive - do nothing</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.face.className.indexOf(<span class="literal">"zpWinBack"</span>) != -1) {
+		<span class="reserved">return</span> true;
+	}
+	var prevWin = Zapatec.Window.currentWindow;
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.face, <span class="literal">'zpWinFront'</span>);
+	Zapatec.Utils.addClass(<span class="reserved">this</span>.face, <span class="literal">'zpWinBack'</span>);
+	Zapatec.Window.activateFreeWindow(<span class="reserved">this</span>);
+	Zapatec.Window.lastActive = <span class="reserved">this</span>;
+};
+
+<span class="comment">/**
+ * If this window can be activated.
+ * <span class="attrib">@return</span> {Object} true if can be,
+ * false if can not, "min" if minimized.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.canActivate = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.stateReached(<span class="literal">"ready"</span>)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.state == <span class="literal">"min"</span>) {
+		<span class="reserved">return</span> <span class="literal">"min"</span>;
+	}
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Returns the visibility of the vindow.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.isVisible = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.widgetState == <span class="literal">"shown"</span> ? true : false;
+};
+
+<span class="comment">/**
+ * Shows the window.
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.show = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.show();})) {<span class="reserved">return</span>;}
+
+	<span class="reserved">this</span>.getContainer().style.display = <span class="literal">"block"</span>;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.content) {
+		<span class="reserved">this</span>.content.show();
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.modal == true &amp;&amp; <span class="reserved">this</span>.modal) {
+		var zIndex = null;
+		<span class="reserved">if</span> (<span class="reserved">this</span>.WCH) {
+			zIndex = <span class="reserved">this</span>.WCH.style.zIndex;
+		} <span class="reserved">else</span> {
+			zIndex = <span class="reserved">this</span>.getContainer().style.zIndex;
+		}
+		<span class="reserved">this</span>.modal.show(zIndex - 1);
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.WCH) {
+		<span class="reserved">this</span>.WCH.style.visibility = <span class="literal">""</span>;
+	}
+	<span class="reserved">this</span>.activate();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.getConfiguration().fixed) {
+		<span class="reserved">this</span>._updateState();
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.stateReached(<span class="literal">"ready"</span>)) {
+		<span class="reserved">this</span>.changeState(<span class="literal">"shown"</span>);
+	}
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onShow"</span>, <span class="reserved">this</span>);
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Hides the window.
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.hide = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.hide();})) <span class="reserved">return</span>;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.content){
+		<span class="reserved">this</span>.content.hide();
+	}
+
+	<span class="reserved">this</span>.getContainer().style.display = <span class="literal">"none"</span>;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.modal == true &amp;&amp; <span class="reserved">this</span>.modal) {
+		<span class="reserved">this</span>.modal.hide();
+	}
+	Zapatec.Utils.hideWCH(<span class="reserved">this</span>.WCH);
+	<span class="reserved">this</span>.deactivate();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.stateReached(<span class="literal">"ready"</span>)) {
+		<span class="reserved">this</span>.changeState(<span class="literal">"hidden"</span>);
+	}
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onHide"</span>, <span class="reserved">this</span>);
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * This function displays the calendar near a given "anchor" element, according
+ * to some rules passed in \em opts.  The \em opts argument is a string
+ * containing one or 2 letters.  The first letter decides the vertical
+ * alignment, and the second letter decides the horizontal alignment relative
+ * to the anchor element.  Following we will describe these options; in parens
+ * we will use simple descriptions like "top to bottom" which means that the
+ * top margin of the calendar is aligned with the bottom margin of the object.
+ *
+ * \b Vertical align:
+ *
+ * - T -- the calendar is completely above the element (bottom to top)
+ * - t -- the calendar is above the element but might overlap it (bottom to bottom)
+ * - C -- the calendar is vertically centered to the element
+ * - b -- the calendar is below the element but might overlap it (top to top)
+ * - B -- the calendar is completely below the element (top to bottom)
+ *
+ * \b Horizontal align (defaults to 'l' if no letter passed):
+ *
+ * - L -- the calendar is completely to the left of the element (right to left)
+ * - l -- the calendar is to the left of the element but might overlap it (right to right)
+ * - C -- the calendar is horizontally centered to the element
+ * - r -- the calendar is to the right of the element but might overlap it (left to left)
+ * - R -- the calendar is completely to the right of the element (left to right)
+ *
+ * <span class="attrib">@param</span> el [HTMLElement] the anchor element
+ * <span class="attrib">@param</span> opts [string, optional] the align options, as described above.  Defaults to "Bl" if nothing passed.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.showAtElement = <span class="reserved">function</span> (el, opts) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.showAtElement(el, opts);})) {<span class="reserved">return</span>;}
+
+	var p = Zapatec.Utils.getElementOffset(el);
+	<span class="reserved">if</span> (!opts || typeof opts != <span class="literal">"string"</span>) {
+		<span class="reserved">this</span>.showAt(p.x, p.y + el.offsetHeight);
+		<span class="reserved">return</span> true;
+	}
+	<span class="reserved">this</span>.getContainer().style.display = <span class="literal">"block"</span>;
+	var w = <span class="reserved">this</span>.getWidth();
+	var h = <span class="reserved">this</span>.getHeight();
+	<span class="reserved">this</span>.getContainer().style.display = <span class="literal">"none"</span>;
+	var valign = opts.substr(0, 1);
+	var halign = <span class="literal">"l"</span>;
+	<span class="reserved">if</span> (opts.length &gt; 1) {
+		halign = opts.substr(1, 1);
+	}
+	<span class="comment">// vertical alignment</span>
+	switch (valign) {
+	    case <span class="literal">"T"</span>: p.y -= h; break;
+	    case <span class="literal">"B"</span>: p.y += el.offsetHeight; break;
+	    case <span class="literal">"C"</span>: p.y += (el.offsetHeight - h) / 2; break;
+	    case <span class="literal">"t"</span>: p.y += el.offsetHeight - h; break;
+	    case <span class="literal">"b"</span>: break; <span class="comment">// already there</span>
+	}
+	<span class="comment">// horizontal alignment</span>
+	switch (halign) {
+	    case <span class="literal">"L"</span>: p.x -= w; break;
+	    case <span class="literal">"R"</span>: p.x += el.offsetWidth; break;
+	    case <span class="literal">"C"</span>: p.x += (el.offsetWidth - w) / 2; break;
+	    case <span class="literal">"l"</span>: p.x += el.offsetWidth - w; break;
+	    case <span class="literal">"r"</span>: break; <span class="comment">// already there</span>
+	}
+	p.width = w;
+	p.height = h;
+	<span class="comment">//Zapatec.Utils.fixBoxPosition(p);</span>
+	<span class="reserved">this</span>.showAt(p.x, p.y);
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Shows the calendar at a given absolute position (beware that, depending on
+ * the calendar element style -- position property -- this might be relative to
+ * the parent's containing rectangle).
+ *
+ * <span class="attrib">@param</span> x [int] the X position
+ * <span class="attrib">@param</span> y [int] the Y position
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.showAt = <span class="reserved">function</span> (x, y) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.showAt(x, y);})) {<span class="reserved">return</span>;}
+
+	<span class="reserved">this</span>.setPagePosition(x, y);
+	<span class="reserved">this</span>.show();
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Minimizes the window.
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.minimize = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.showMinButton) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.minimize();})) <span class="reserved">return</span>;
+
+	<span class="comment">//Do we really need to minimize</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"min"</span> &amp;&amp; <span class="reserved">this</span>.titleArea) {
+		var self = <span class="reserved">this</span>;
+		<span class="comment">//this function recursively hides all the elements in the Window except title and its parents</span>
+		<span class="reserved">function</span> hideExcept(el, exc) {
+			<span class="reserved">if</span> (el != self.container) {
+				var first = el.firstChild;
+				<span class="reserved">while</span>(first) {
+					<span class="reserved">if</span> (first &amp;&amp; first.style &amp;&amp; first != exc) {
+						<span class="reserved">if</span> (!first.restorer) {
+							first.restorer = new Zapatec.SRProp(first);
+						}
+						first.restorer.saveProp(<span class="literal">"style.display"</span>);
+						first.style.display = <span class="literal">"none"</span>;
+					}
+					first = first.nextSibling;
+				}
+				hideExcept(el.parentNode, el);
+			}
+		}
+		<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"simple"</span>) {
+			<span class="reserved">this</span>.restore();
+		}
+		hideExcept(<span class="reserved">this</span>.titleArea.parentNode, <span class="reserved">this</span>.titleArea);
+		<span class="reserved">this</span>.content.hide();
+		<span class="reserved">this</span>.restorer.saveProps(
+			<span class="literal">"_updateState"</span>, <span class="literal">"content"</span>, <span class="literal">"statusText"</span>, 
+			<span class="literal">"getConfiguration().limit.minHeight"</span>
+		);
+		<span class="reserved">this</span>.content = <span class="reserved">this</span>.statusText = <span class="reserved">this</span>.getConfiguration().limit.minHeight = null;
+		<span class="reserved">this</span>._updateState = <span class="reserved">function</span>() {};
+		<span class="reserved">this</span>.setHeight(Zapatec.Utils.getHeight(<span class="reserved">this</span>.face));
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.bottomMinimize) {
+			<span class="reserved">this</span>.setWidth(Zapatec.Window.minWinWidth);
+			<span class="comment">//Putting it to the left bottom corner in the appropriate order</span>
+			<span class="reserved">this</span>.setScreenPosition(Zapatec.Window.minimizeLeft, <span class="literal">"bottom"</span>);
+			Zapatec.Window.minimizeLeft += Zapatec.Window.minWinWidth + 5;
+		}
+		<span class="comment">//lets disable dragging</span>
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.config.dragMin) {
+			<span class="reserved">this</span>._setCanDrag(false);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>._setCanDrag(true);
+			<span class="reserved">this</span>.restorer.restoreProp(<span class="literal">"_updateState"</span>);
+		}
+		<span class="reserved">this</span>._setCanResize(false);
+		<span class="comment">//Need to hide some buttons and show restore one</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.state.state == <span class="literal">"max"</span>) {
+			<span class="reserved">this</span>.showButton(<span class="literal">"maxButton"</span>);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.showButton(<span class="literal">"restoreButton"</span>);
+		}
+		<span class="reserved">this</span>.hideButton(<span class="literal">"minButton"</span>);
+		<span class="comment">//storing old state for restore</span>
+		<span class="reserved">this</span>.state.prevState = <span class="reserved">this</span>.state.state;
+		<span class="comment">//setting new state</span>
+		<span class="reserved">this</span>.state.state = <span class="literal">"min"</span>;
+		<span class="comment">//if the window is not fixed need to fixate it on the screen</span>
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.getConfiguration().fixed) {
+			Zapatec.FixateOnScreen.register(<span class="reserved">this</span>.getContainer());
+			Zapatec.FixateOnScreen.register(<span class="reserved">this</span>.WCH);
+		}
+		<span class="comment">//deactivateing window</span>
+		<span class="reserved">this</span>.deactivate();
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//calling handler</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onMinimize"</span>, <span class="reserved">this</span>);
+
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Maximizes the window.
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.maximize = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.showMaxButton) {
+		<span class="reserved">return</span> false;
+	}
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {self.maximize();})) <span class="reserved">return</span>;
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"max"</span>) {
+		var sizes = Zapatec.Utils.getWindowSize();
+		<span class="comment">//Need to hide some buttons and show restore one, restore some properties of the window, etc.</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.state.state == <span class="literal">"min"</span>) {
+			<span class="reserved">this</span>.restore();
+		}
+		<span class="reserved">this</span>.showButton(<span class="literal">"restoreButton"</span>);
+		<span class="reserved">this</span>.hideButton(<span class="literal">"maxButton"</span>);
+		<span class="comment">//lets disable dragging</span>
+		<span class="reserved">this</span>._setCanDrag(false);
+		<span class="reserved">this</span>._setCanResize(false);
+		<span class="reserved">this</span>.restorer.saveProp(<span class="literal">"_updateState"</span>);
+		<span class="reserved">this</span>._updateState = <span class="reserved">function</span>() {};
+		<span class="reserved">this</span>.setHeight(<span class="reserved">this</span>.getHeight());
+		<span class="reserved">this</span>.setScreenPosition(0, 0);
+		<span class="reserved">this</span>.setSize(sizes.width, sizes.height);
+		<span class="comment">//setting previous state to be restored correctly</span>
+		<span class="reserved">this</span>.state.prevState = <span class="literal">"simple"</span>;
+		<span class="comment">//setting new state</span>
+		<span class="reserved">this</span>.state.state = <span class="literal">"max"</span>;
+		<span class="comment">//if the window is not fixed need to fixate it on the screen</span>
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.getConfiguration().fixed) {
+			Zapatec.FixateOnScreen.register(<span class="reserved">this</span>.getContainer());
+			Zapatec.FixateOnScreen.register(<span class="reserved">this</span>.WCH);
+		}
+		<span class="reserved">this</span>.activate();
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onMaximize"</span>, <span class="reserved">this</span>);
+	
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Restores the window.
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.restore = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.showMaxButton &amp;&amp; !<span class="reserved">this</span>.config.showMinButton) {
+		<span class="reserved">return</span> false;
+	}
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {self.restore();})) <span class="reserved">return</span>;
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.prevState == <span class="literal">"max"</span>) {
+		<span class="reserved">return</span> <span class="reserved">this</span>.maximize();
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"simple"</span>) {
+		var self = <span class="reserved">this</span>;
+		<span class="comment">//this function recursively hides all the elements in the Window except title and its parents</span>
+		<span class="reserved">function</span> showAll(el) {
+			<span class="reserved">if</span> (el != self.container) {
+				var first = el.firstChild;
+				<span class="reserved">while</span>(first) {
+					<span class="reserved">if</span> (first &amp;&amp; first.restorer) {
+						first.restorer.restoreProp(<span class="literal">"style.display"</span>);
+						first.restorer = null;
+					}
+					first = first.nextSibling;
+				}
+				showAll(el.parentNode);
+			}
+		}
+		<span class="comment">//Need to hide some buttons and show restore one</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.showMaxButton) {
+			<span class="reserved">this</span>.showButton(<span class="literal">"maxButton"</span>); 
+		}
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.showMinButton) {
+			<span class="reserved">this</span>.showButton(<span class="literal">"minButton"</span>);
+		}
+		<span class="reserved">this</span>.hideButton(<span class="literal">"restoreButton"</span>);
+		<span class="comment">//setting new state</span>
+		var wasState = <span class="reserved">this</span>.state.state;
+		<span class="reserved">this</span>.state.state = <span class="literal">"simple"</span>;
+		<span class="comment">//if the window is not fixed need to unregister </span>
+		<span class="comment">//it from being fixated on the screen</span>
+		<span class="reserved">if</span> (wasState == <span class="literal">"min"</span> &amp;&amp; <span class="reserved">this</span>.config.bottomMinimize) {
+			Zapatec.Window.sortMin(<span class="reserved">this</span>);
+		}
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.getConfiguration().fixed) {
+			Zapatec.FixateOnScreen.unregister(<span class="reserved">this</span>.getContainer());
+			Zapatec.FixateOnScreen.unregister(<span class="reserved">this</span>.WCH);
+			<span class="reserved">this</span>.setPosition(<span class="reserved">this</span>.state.left, <span class="reserved">this</span>.state.top);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.setScreenPosition(<span class="reserved">this</span>.state.left, <span class="reserved">this</span>.state.top);
+		}
+		<span class="comment">//seting the initial pos and sizes</span>
+		<span class="reserved">this</span>.setSize(<span class="reserved">this</span>.state.width, <span class="reserved">this</span>.state.height);
+		<span class="comment">//enable dragging</span>
+		<span class="reserved">this</span>._setCanDrag(true);
+		<span class="comment">//enable resizing</span>
+		<span class="reserved">this</span>._setCanResize(true);
+		<span class="reserved">if</span> (wasState == <span class="literal">"min"</span>) {
+			showAll(<span class="reserved">this</span>.titleArea);
+		}
+		<span class="reserved">this</span>.restorer.restoreProps(
+			<span class="literal">"_updateState"</span>, <span class="literal">"content"</span>, <span class="literal">"statusText"</span>,
+			<span class="literal">"getConfiguration().limit.minHeight"</span>
+		);
+		<span class="reserved">if</span> (wasState == <span class="literal">"min"</span>) {
+			<span class="reserved">this</span>.content.show();
+		}
+		<span class="comment">//activateing this window</span>
+		<span class="reserved">this</span>.activate();
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onRestore"</span>, <span class="reserved">this</span>);
+
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Closes the window. Currently does not destroys the window object, just the HTML part of it
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.close = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {self.close();})) <span class="reserved">return</span>;
+	
+	<span class="reserved">this</span>.restore();
+	<span class="reserved">this</span>.deactivate();
+	<span class="comment">// Return content back to the place it was taken from</span>
+	<span class="comment">// Destroy window</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onClose"</span>, <span class="reserved">this</span>);
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.hideOnClose) {
+		<span class="reserved">this</span>.discard();
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.hide();
+	}
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Deletes the widget.
+ */</span> 
+Zapatec.Window.<span class="reserved">prototype</span>.discard = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (null == <span class="reserved">this</span>.content) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.content.destroy) <span class="reserved">this</span>.content.destroy();
+	<span class="reserved">this</span>.content = null;
+	<span class="reserved">this</span>.restoreOfDrag();
+	<span class="reserved">this</span>.restoreOfResize();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.minButton.destroy) <span class="reserved">this</span>.minButton = <span class="reserved">this</span>.minButton.destroy();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.maxButton.destroy) <span class="reserved">this</span>.maxButton = <span class="reserved">this</span>.maxButton.destroy();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.closeButton.destroy) <span class="reserved">this</span>.closeButton = <span class="reserved">this</span>.closeButton.destroy();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.restoreButton.destroy) <span class="reserved">this</span>.restoreButton = <span class="reserved">this</span>.restoreButton.destroy();
+	<span class="reserved">for</span>(var iEl in <span class="reserved">this</span>) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>[iEl] &amp;&amp; typeof <span class="reserved">this</span>[iEl] == <span class="literal">"object"</span> &amp;&amp; <span class="reserved">this</span>[iEl].nodeType &amp;&amp; iEl != <span class="literal">"container"</span> &amp;&amp; iEl != <span class="literal">"WCH"</span>) {
+			<span class="reserved">this</span>[iEl] = null;
+		}
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.modal == true &amp;&amp; <span class="reserved">this</span>.modal) {
+		<span class="reserved">this</span>.modal.hide(true);
+		delete <span class="reserved">this</span>.modal;
+	}
+	<span class="reserved">this</span>.config = null;
+	<span class="reserved">this</span>.restorer = <span class="reserved">this</span>.restorer.destroy();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.container.outerHTML) {
+		<span class="reserved">this</span>.container.outerHTML = <span class="literal">""</span>;
+	} <span class="reserved">else</span> {
+		Zapatec.Utils.destroy(<span class="reserved">this</span>.container);
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.WCH &amp;&amp; <span class="reserved">this</span>.WCH.outerHTML) {
+		<span class="reserved">this</span>.WCH.outerHTML = <span class="literal">""</span>;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (<span class="reserved">this</span>.WCH) {
+		Zapatec.Utils.destroy(<span class="reserved">this</span>.WCH);
+	}
+	delete <span class="reserved">this</span>.container;
+	delete <span class="reserved">this</span>.WCH;
+	<span class="reserved">this</span>.changeState(<span class="literal">"destroyed"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onRestore"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onMinimize"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onMaximize"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onShow"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onHide"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onRaise"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onContentLoad"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"privileged_execution_on"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"privileged_execution_off"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"delayed_execution_on"</span>);
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"delayed_execution_off"</span>);
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Window</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:20:02 2009</div>
+</body>
+</html>

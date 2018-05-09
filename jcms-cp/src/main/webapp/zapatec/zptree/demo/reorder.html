@@ -1,0 +1,250 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" This demo shows how to move nodes between different trees using Zapatec.Tree API. 'Remove empty nodes after move' checkbox defines if empty tree nodes will be deleted after move Check 'Preserve tree structure' if you want to preserv tree structure - both trees will have same structure. Otherwise - you can move node into any location into tree. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Move nodes</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Move nodes</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>This demo shows how to move nodes between different trees using Zapatec.Tree API.</li>
+<li>"Remove empty nodes after move" checkbox defines if empty tree nodes will be deleted after move</li>
+<li>Check "Preserve tree structure" if you want to preserv tree structure - both trees will have same structure. Otherwise - you can move node into any location into tree.</li>
+
+			</ul>
+		</div>
+
+
+
+<table width="100%" style="empty-cells: show">
+	<tr>
+		<td class="treeArea">
+			<ul id="leftTree">
+				<li id="user">
+					User
+					<ul>
+						<li id="create_user">Create</li>
+						<li id="read_user">Read</li>
+						<li id="update_user">Update</li>
+						<li id="delete_user">Delete</li>
+					</ul>
+				</li>
+				<li id="role">
+					Role
+					<ul>
+						<li id="create_role">Create</li>
+						<li id="read_role">Read</li>
+						<li id="update_role">Update</li>
+						<li id="delete_role">Delete</li>
+					</ul>
+				</li>
+				<li id="page">
+					Page
+					<ul>
+						<li id="create_page">Create</li>
+						<li id="read_page">Read</li>
+						<li id="update_page">Update</li>
+						<li id="delete_page">Delete</li>
+					</ul>
+				</li>
+				<li id="domain">
+					Domain
+					<ul>
+						<li id="create_domain">Create</li>
+						<li id="read_domain">Read</li>
+						<li id="update_domain">Update</li>
+						<li id="delete_domain">Delete</li>
+					</ul>
+				</li>
+			</ul>
+		</td>
+		<td valign="middle" align="center">
+			<input type="button" value="&gt;&gt;" onclick="moveRight()" /><br />
+			<input type="button" value="&lt;&lt;" onclick="moveLeft()" /><br />
+			<table>
+				<tr>
+					<td>Remove empty nodes after move</td>
+					<td><input type="checkbox" id="purgeEmptyTrees" checked="checked" onchange="purgeEmptyTrees = this.checked" /></td>
+				</tr>
+				<tr>
+					<td>Preserve tree structure</td>
+					<td><input type="checkbox" id="preserveStructure" checked="checked" onchange="preserveStructure = this.checked" /></td>
+				</tr>
+			</table>
+		</td>                            
+		<td class="treeArea">
+			<ul id="rightTree">
+			</ul>&nbsp;
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	var purgeEmptyTrees = document.getElementById("purgeEmptyTrees").checked;
+	var preserveStructure = document.getElementById("preserveStructure").checked;
+
+	// creating tree objects
+
+	var leftTree = new Zapatec.Tree({
+		tree: "leftTree",
+		highlightSelectedNode: true,
+		deselectSelected: true
+	});
+
+	var rightTree = new Zapatec.Tree({
+		tree: "rightTree",
+		highlightSelectedNode: true,
+		deselectSelected: true
+	});
+	
+	/**
+	 * Inserts node with given structure into tree.
+	 * @private
+	 * @param nodeJson {object} JSON structure for creating node
+	 * @param tree {object} Zapatec.Tree instance where to insert node
+	 * @param parent {object} parent JSON structure
+	 */
+	function insertNode(nodeJson, tree, parent){
+		if(!tree.id2Obj[nodeJson.attributes.id]){
+			// if tree has no nodes with such ID - insert new node
+			if(parent){
+				// if node has parent - append node to its parent children
+				tree.id2Obj[parent.attributes.id].appendChild(nodeJson);
+			} else {
+				// if no parent - this is top level node
+				tree.appendChild(nodeJson);
+			}
+		} else if(nodeJson.children){
+			// do the same for all children nodes
+			for(var ii = 0; ii < nodeJson.children.length; ii++){
+				insertNode(nodeJson.children[ii], tree, nodeJson);
+			}
+		}
+	}
+
+	/** 
+	 * generic function to move node from one tree to another
+	 * @param fromTree {object} source tree
+	 * @param toTree {object} destination tree
+	 */
+	function moveNode(fromTree, toTree){
+		// locate currently selected node in the tree
+		var moveNode = fromTree.prevSelected;
+
+		if(!moveNode){
+			return null;
+		}
+		
+		// Create JSON structurewhich contains "path" from root node to selected node
+		var currNode = moveNode;
+		var struct = currNode.getState();
+		
+		if(preserveStructure){
+			while(!currNode.config.isRootNode){
+				currNode = currNode.config.parentNode;
+				
+				if(currNode.config.isRootNode){
+					break;
+				}
+				
+				var tmp = currNode.getState();
+				tmp.children = [struct];
+				struct = tmp;
+			}
+		}
+		
+		if(preserveStructure){
+			insertNode(struct, toTree, null);
+		} else {
+			var targetNode = toTree.prevSelected;
+
+			if(
+				!targetNode ||
+				!targetNode.hasSubtree() &&
+				targetNode.config.parentNode.config.isRootNode
+			){
+				// if there is no node selected or top node without children is 
+				// selected - add new node to the top level
+				toTree.appendChild(struct);
+			} else {
+				if(targetNode.hasSubtree()){
+					// if selected node has subtree - add new node into it
+					targetNode.appendChild(struct);
+				} else {
+					// otherwise - insert on same level
+					targetNode.config.parentNode.appendChild(struct);
+				}
+			}
+		}
+		
+		// Remove target node from source tree
+		var node2remove = moveNode;
+
+		// If global variable removeEmptyTrees is true - purge empty trees 
+		// after move.
+		if(purgeEmptyTrees){
+			// If this node is the only child for parent node - remove also parent 
+			// node. And remove parent for parent node, if it is empty. etc.
+			while(true){
+				var parent = node2remove.config.parentNode;
+				
+				if(parent.config.isRootNode || parent.children.length > 1){
+					break;
+				}
+				
+				node2remove = parent;
+			}
+		}
+
+		node2remove.destroy();
+	}
+	
+	function moveLeft(){
+		moveNode(rightTree, leftTree);
+	}                                    	
+	
+	function moveRight(){
+		moveNode(leftTree, rightTree);
+	}                                    	
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

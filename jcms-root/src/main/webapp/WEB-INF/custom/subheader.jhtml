@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom subheader, set customSubheader=true and put code here.
+ */
+  boolean customSubheader = false;
+%>

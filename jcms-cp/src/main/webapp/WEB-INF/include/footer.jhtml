@@ -1,0 +1,7 @@
+    <div class="footer">
+      Neptune Content Management System &copy; 2006-2012 <a target="_blank" href="http://ims.net/">IMS</a>
+    </div>
+    <% if (debug && debugMessage.length()>0) { %><p class="debug">DEBUG: <%=debugMessage%></p><p class="debug">Page generated in <%=(endTime-startTime)%> ms.</p><% } %>
+  </body>
+</html>
+

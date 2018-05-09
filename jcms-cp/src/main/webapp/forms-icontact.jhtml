@@ -1,0 +1,43 @@
+<%
+  // load iContact lists
+  Credentials creds = new Credentials(root);
+  Account account = new Account(creds, iContactAccountId);
+  ClientFolder clientFolder = new ClientFolder(creds, account, iContactClientFolderId);
+  List[] lists = List.getAll(creds, account, clientFolder);
+%>
+<hr/>
+<!-- iContact lists -->
+<a name="icontact"></a>
+<% if (icontactupdate) { %><%@ include file="/WEB-INF/include/errormessage.jhtml" %><% } %>
+
+<p>
+  <b>iContact e-mail list signup.</b><br/>
+  If you wish to display sign-up checkboxes for one or more of your iContact list(s), select them below.
+  You may enter optional sign-up instructions to be shown above the list(s).  Form field <b>email</b> must be on the form, and a value must be supplied by the user.
+  (Neptune enforces an "opt-in" policy by leaving the sign-up checkboxes unchecked by default.)
+</p>
+
+<form action="#icontact" method="post">
+  <input type="hidden" name="form_id" value="<%=form.form_id%>"/>
+  <table>
+    <tr>
+      <td colspan="2">
+        Sign-up instructions<br/>
+        <textarea cols="50" rows="2" wrap name="signupinstructions"><%=Util.blankIfNull(form.signupinstructions)%></textarea><br/>
+      </td>
+    </tr>
+    <%
+      for (int i=0; i<lists.length; i++) {
+          FormiContactList formlist = new FormiContactList(application, form.form_id, lists[i].getPrimaryKey());
+          boolean selected = formlist.form_id!=0;
+      %>
+      <tr>
+        <td align="right" valign="top"><input type="checkbox" name="listId" <% if (selected) out.print("checked"); %> value="<%=lists[i].getPrimaryKey()%>"/></td>
+        <td><b><%=lists[i].name%></b><% if (lists[i].description!=null) out.print(" - "+lists[i].description); else out.print(" [description needed]"); %></td>
+      </tr>
+      <% } %>
+      <tr>
+        <td colspan="2" align="center"><input type="submit" name="icontactupdate" class="update" value="Update"/></td>
+      </tr>
+  </table>
+</form>

@@ -1,0 +1,20 @@
+/* $Id: examples.css 4322 2006-09-04 08:49:33Z shacka $ */
+/* the div with the actual  tree */
+div.scroll-tree {
+	float:left;
+	background-color: #fff;
+	border: 1px dashed #999;
+	padding: 1em;
+}
+
+div#console{
+	background-color: #fff;
+	border: 1px solid #999;
+	padding: 1em;
+}
+
+.options {
+	float:left;
+	margin-left: 2em;
+	width:550px;
+}

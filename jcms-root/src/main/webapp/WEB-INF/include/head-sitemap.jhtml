@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <!--stopindex-->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta name="generator" content="<%=Util.APPVERSION%>" />
+    <title><%=p.headtitle%></title>
+    <link rel="shortcut icon" href="<%=designFolder%>/favicon.ico" />
+    <% if (showMobile) { %>
+      <link rel="stylesheet" type="text/css" href="<%=cssFolder%>/mobile.css" />
+    <% } else { %>
+      <link rel="stylesheet" type="text/css" href="<%=cssFolder%>/root.css" />
+    <% } %>
+    <link rel="stylesheet" type="text/css" href="<%=cssFolder%>/sitemap.css" />
+    <script language="javascript">
+        // global vars
+        var hideTimer;      // the delay timer for hiding layers
+        var hideDelay = 75; // delay hiding layer for timerDelay ms
+        var lastLayer;      // keep track of the last shown layer
+        
+        // slowly hide a layer
+        function hideLayer(layerName) {
+          var action = layerName+".style.visibility = 'hidden'";
+          hideTimer = setTimeout(action, hideDelay);
+        }
+        
+        // make a layer visible; kill the timer first if active
+        function showLayer(layerName) {
+          var layer = document.getElementById(layerName);
+          if (hideTimer && layer==lastLayer) clearTimeout(hideTimer);
+          layer.style.visibility = 'visible';
+          lastLayer = layer;
+        }
+    </script>
+    <script src="swfobject.js" type="text/javascript"></script>
+    <% if (googleTrackerEnable) { %>
+    <script type="text/javascript">
+        var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+        document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+        try {
+          var pageTracker = _gat._getTracker("<%=googleTrackerId%>");
+          pageTracker._trackPageview();
+        } catch (err) {
+        }
+    </script>
+    <% } %>
+    <% if (siteHead.length()>0) out.print(siteHead); %>
+    <!--startindex-->
+  </head>
+    
+  <body>
+    <div id="container">

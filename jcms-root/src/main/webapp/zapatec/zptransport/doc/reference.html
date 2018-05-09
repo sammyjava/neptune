@@ -1,0 +1,234 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Zapatec AJAX Transport Manual</title><link rel="stylesheet" href="../../utils/dhelp/themes/print.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.71.0"><link rel="start" href="#id2406157" title="Zapatec AJAX Transport Manual"><link rel="next" href="#get_files" title="Chapter 1. Get the Zapatec DHTML Transport files"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2406157"></a>Zapatec AJAX Transport Manual</h1></div></div><hr></div><div class="toc"><dl><dt><span class="chapter"><a href="#get_files">1. Get the Zapatec DHTML Transport files</a></span></dt><dd><dl><dt><span class="sect1"><a href="#download_zip">1. Download the Zip File</a></span></dt></dl></dd><dt><span class="chapter"><a href="#quick_startup">2. Quick Startup</a></span></dt><dd><dl><dt><span class="sect1"><a href="#set_up">1. Set Up the Transport Module</a></span></dt><dd><dl><dt><span class="sect2"><a href="#path_warn">1.1. Path Warning</a></span></dt><dt><span class="sect2"><a href="#upgrade_warn">1.2. Upgrade Warning</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#transport">3. Transport Overview</a></span></dt><dt><span class="chapter"><a href="#fetching">4. Fetching Data</a></span></dt><dd><dl><dt><span class="sect1"><a href="#fetching_html">1. Notes on Fetching an HTML Document</a></span></dt><dt><span class="sect1"><a href="#parsing_XML">2. Notes on Fetching and Parsing an XML Document</a></span></dt><dt><span class="sect1"><a href="#fetching_JSON">3. Notes on Fetching and Parsing a JSON Object</a></span></dt><dt><span class="sect1"><a href="#fetching_ASCII">4. Notes on Fetching Extended ASCII or UNICODE Characters</a></span></dt></dl></dd><dt><span class="chapter"><a href="#parsing_func">5. Parsing and Serializing Functions</a></span></dt><dd><dl><dt><span class="sect1"><a href="#parse_elements">1. Parse HTML and Javascript Elements</a></span></dt><dt><span class="sect1"><a href="#parse_string_xml">2. Parse an XML String</a></span></dt><dt><span class="sect1"><a href="#serialize_doc_into_XML">3. Serialize an XMLDocument Object into an XML String</a></span></dt><dt><span class="sect1"><a href="#parse_JSON">4. Parse a JSON String into an Object</a></span></dt><dt><span class="sect1"><a href="#serialize_JSON_into_string">5. Serialize a JSON Object into a JSON String</a></span></dt></dl></dd><dt><span class="chapter"><a href="#include_js">6. Include JS Files</a></span></dt><dd><dl><dt><span class="sect1"><a href="#fetch_load_js">1. Fetch and Load a JS File</a></span></dt><dt><span class="sect1"><a href="#include_js_file">2. Include a JS File</a></span></dt></dl></dd><dt><span class="chapter"><a href="#include_css">7. Include CSS Files</a></span></dt><dd><dl><dt><span class="sect1"><a href="#fetch_load_css">1. Fetch and Load a Style Sheet</a></span></dt><dt><span class="sect1"><a href="#load_multiple_css">2. Load Multiple CSS Files into a Document</a></span></dt><dt><span class="sect1"><a href="#preload_img">3. Preload Images</a></span></dt></dl></dd><dt><span class="chapter"><a href="#busy_giv">8. Busy Animated GIF</a></span></dt><dd><dl><dt><span class="sect1"><a href="#show_animated">1. Show Animated GIF</a></span></dt><dt><span class="sect1"><a href="#remove">2. Remove Animated GIF</a></span></dt></dl></dd><dt><span class="chapter"><a href="#misc_func">9. Miscellaneous Functions</a></span></dt><dd><dl><dt><span class="sect1"><a href="#cross_browser">1. Create Cross Browser XMLHttpRequest Object</a></span></dt><dt><span class="sect1"><a href="#evaluate_js">2. Evaluate Javascript Code in the Global Scope</a></span></dt><dt><span class="sect1"><a href="#get2loaded">3. Get Path to Loaded JS File</a></span></dt><dt><span class="sect1"><a href="#translate_url">4. Translate a URL</a></span></dt></dl></dd></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="get_files"></a>Chapter 1. Get the Zapatec DHTML Transport files</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="download_zip"></a>1. Download the Zip File</h2></div></div></div><p>The DHTML Transport files are bundled in a zip file with  any
+      of the  Zapatec products. Follow the download and installation
+      instruction for the product you have purchased and look for the
+      transport.js file in the utils folder.</p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="quick_startup"></a>Chapter 2. Quick Startup</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="set_up"></a>1. Set Up the Transport Module</h2></div></div></div><p>In your web editor (Dreamweaver, UltraEdit, etc.), open the web
+      page into which you want the Transport placed.  Paste the following script before the
+      ending &lt;/head&gt; tag:</p><pre class="programlisting">&lt;!-- Javascript Zapatec utilities file, includes transport support --&gt;  
+&lt;script type="text/javascript" src="zapatec/utils/zapatec.js"&gt;&lt;/script&gt;</pre><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="path_warn"></a>1.1. Path Warning</h3></div></div></div><p>If your web page containing the Transport is saved in the
+        zptransport folder, these lines work without any changes. If, however,
+        you save your web page in another location (for example,  directly under your
+        website root folder), you need to adjust the path for these
+        files.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrade_warn"></a>1.2. Upgrade Warning</h3></div></div></div><p>If you have been using a version of Zapatec transport that is
+        older than version 2.0 and are now migrating to the current version,
+        you need to adjust the header files.</p><p>The older transport.js is no longer supported; it has been
+        replaced by zapatec.js. To upgrade, replace the old line:</p><pre class="programlisting">&lt;script type="text/javascript" src="utils/transport.js"&gt;&lt;/script&gt;</pre><p>with the following ones:</p><pre class="programlisting">&lt;script type="text/javascript" src="zapatec/utils/zapatec.js"&gt;&lt;/script&gt;</pre></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="transport"></a>Chapter 3. Transport Overview</h2></div></div></div><p>The Zapatec Transport Library is a module for communication
+    between the web browser and the server without refreshing the page. It
+    uses XMLHttpRequest as its underlying mechanism, but it also goes far
+    beyond the basic functionality of XMLHttpRequest, providing a rich set of
+    APIs to fetch different document types.</p><p>The Transport contains functions to parse and serialize JSON, XML
+    and HTML data as well as to preload Javascript, CSS files and
+    images.</p><p>For information about JSON format, see <a href="http://json.org/" target="_top">here</a>.</p><p>There are two distinct sets of tasks involved in fetching data into
+    a web application using the Zapatec AJAX Transport: fetching the
+    data, and then parsing it, and applying it to the web page.</p><p>The following example demonstrates a standard idiom for fetching
+    HTML code and displaying it in a DIV.</p><pre class="programlisting">&lt;a href="#" onclick="fetchUrl('sample.html', 'myDiv')"&gt;Load from URL sample.html&lt;/a&gt;
+&lt;div id="myDiv" style="border: 1px solid #00F"&gt;&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+
+  function fetchUrl(sUrl, sDivId) {
+    // Fetch HTML fragment
+    Zapatec.Transport.fetch({
+
+      // URL to fetch
+      url: sUrl + '?' + Math.random(),
+
+      // Onload event handler
+      onLoad: function(oRequest) {
+        // Put fetched fragment into the div
+        Zapatec.Transport.setInnerHtml({
+          html: oRequest.responseText,
+          container: sDivId
+        });
+      }
+
+    });
+  }
+
+&lt;/script&gt;</pre><p>In this example:</p><div class="itemizedlist"><ul type="disc"><li><p>The <a href="#fetching" title="Chapter 4. Fetching Data">
+            <code class="methodname">fetchUrl</code>
+          </a> function is called with two arguments: the URL to
+        fetch and the DIV id where to insert the contents.</p></li><li><p>You need to specify at least two arguments when fetching data: the URL to be
+        fetched and a callback to be invoked after the Transport has fetched
+        the data.</p></li><li><p>The callback parses and handles the data. In this example, it
+        uses the <code class="methodname">setInnerHtml</code> method to assign the text of the response to the
+        DIV.</p></li></ul></div><p>Since the Transport can handle JSON, XML and HTML data, any
+    parsing method is required to handle the data. As you can see from the
+    example, it is easy to write a function that works specifically for your
+    environment to apply a URL to a DIV.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Some browsers implement caching for GET requests. You can
+    prevent caching by adding "r=" + <em class="parameter"><code>Math.random()</code></em> parameter to URL strings to
+    create a unique URL.</p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="fetching"></a>Chapter 4. Fetching Data</h2></div></div></div><p>Fetch the data from the server using the appropriate <code class="methodname"> Zapatec.Transport.fetch(object)</code> method for the object:</p><div class="itemizedlist"><ul type="disc"><li><p><code class="methodname">Zapatec.Transport.fetch</code>(<span class="type">object</span>) - Fetches the data from the
+        specified URL.</p></li><li><p><code class="methodname">Zapatec.Transport.fetchXmlDoc</code>(<span class="type">object</span>) - Fetches and parses an
+        XML document from the specified URL.</p></li><li><p><code class="methodname">Zapatec.Transport.fetchJsonObj</code>(<span class="type">object</span>) - Fetches and parses data
+        in JSON format from the specified URL.</p></li></ul></div><p>The fetch routines take in one argument, an object with the following
+    properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>url</code></em> <span class="type">string</span> - relative or absolute URL to fetch</p></li><li><p><em class="parameter"><code>reliable</code></em> <span class="type">boolean</span> - applies to fetchJsonObj only: false (JSON
+        string will be parsed) or true (evaluated); optional, default is
+        false</p></li><li><p><em class="parameter"><code>method</code></em> <span class="type">string</span> - ('GET', 'POST', 'HEAD', 'PUT'); optional,
+        default is 'GET'</p></li><li><p><em class="parameter"><code>async</code></em> <span class="type">boolean</span> - use asynchronous mode; optional, default is
+        true</p></li><li><p><em class="parameter"><code>contentType</code></em> <span class="type">string </span>- content type when using POST; optional,
+        default is 'application/x-www-form-urlencoded'</p></li><li><p><em class="parameter"><code>content</code></em> <span class="type">string</span> or <span class="type">object</span> - a postable string or DOM object data
+        when using POST; optional</p></li><li><p><em class="parameter"><code>onLoad</code></em> <span class="type">function</span> - a function reference to call on success;
+        optional</p></li><li><p><em class="parameter"><code>onError</code></em> <span class="type">function</span> - a function reference to call on error;
+        optional</p></li><li><p><em class="parameter"><code>username</code></em> <span class="type">string</span> - optional</p></li><li><p><em class="parameter"><code>password</code></em> <span class="type">string</span> - optional</p></li><li><p><em class="parameter"><code>busyContainer</code></em> <span class="type">string</span> or <span class="type">object</span> - an element or id of the element
+        where to put "Busy" animated GIF; optional </p></li><li><p><em class="parameter"><code>busyImage</code></em> <span class="type">string</span> - a standard image name or custom image URL;
+        optional</p></li><li><p><em class="parameter"><code>busyImageWidth</code></em> <span class="type">number</span> or <span class="type">string</span> - image width; optional</p></li><li><p><em class="parameter"><code>busyImageHeight</code></em> <span class="type">number</span> or <span class="type">string</span> - image height;
+        optional</p></li></ul></div><p>Synchronous mode means that the code will hang until a response
+    comes back from the server. It gives you ability to use outcome immediately after the
+    function call. There is no need to provide <span class="property">onLoad</span> callback when
+    you use synchronous mode. Though if it is provided, it will be called.
+    Argument passed to <span class="property">onLoad</span> callback is also returned by the fetch
+    function.</p><p>Asynchronous mode predefines that the code will not wait for response
+    from the server and continue to execute. When server response is received,
+    the appropriate callback is invoked: <span class="property">onLoad</span> on success, or <span class="property">onError</span> on
+    error. Fetch function returns null.</p><p>The <span class="property">onError</span> callback receives an object with the following
+    arguments:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>errorCode</code></em> <span class="type">number</span> - a numeric error code</p></li><li><p><em class="parameter"><code>errorDescription</code></em> <span class="type">string</span> - the human-readable error
+        description</p></li></ul></div><p>If a server error occurs, <em class="parameter"><code>errorCode</code></em> contains the server response
+    code, e.g. 404, 500, etc. Otherwise, <em class="parameter"><code>errorCode</code></em> is 0.</p><p>If you use the <code class="methodname">POST</code> method, the content argument should have the
+    format var1=value1&amp;var2=value2 with url-encoded values. If you want to
+    send other content, set appropriate content type: for example,
+    multipart/form-data or text/xml.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fetching_html"></a>1. Notes on Fetching an HTML Document</h2></div></div></div><p>Use <code class="methodname">Zapatec.Transport.fetch</code> to fetch a specified URL using a new
+      XMLHttpRequest object.</p><p>The onLoad callback receives an XMLHttpRequest object as an
+      argument and may use its multiple properties, such as <span class="property">responseText</span> or
+      <span class="property">responseXML</span>.</p><p>In synchronous mode, it returns XMLHttpRequest object on success or
+      null on error. In asynchronous mode always returns null.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="parsing_XML"></a>2. Notes on Fetching and Parsing an XML Document</h2></div></div></div><p>Use <code class="methodname">Zapatec.Transport.fetchXmlDoc</code>(<span class="type">object</span>) to fetch and parse an
+      XML document from its url argument.</p><p>If the method argument is not defined, the more efficient XMLDOM
+      (in Internet Explorer) or <code class="methodname">document.implementation.createDocument</code> (in
+      FF) is used to fetch and parse the document. Otherwise,
+      Zapatec.Transport.fetch is used to fetch the document and
+      <code class="methodname">Zapatec.Transport.parseXml</code> to parse it.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Several browsers implement caching for GET requests. Caching can be prevented by adding "r=" + <em class="parameter"><code>Math.random()</code></em> parameter to URL. </p></div><p>If you use POST method, content argument should be 'var1=value1&amp;var2=value2'. If you want to send other content, set the appropriate content type. For example, to send XML string, you should set <span class="property">contentType</span> to 'text/xml'.</p><p>The <span class="property">onLoad</span> callback receives the XMLDocument object as an argument
+      and may use its <em class="parameter"><code>documentElement</code></em> and other properties.</p><p>In synchronous mode returns XMLDocument object on success or null
+      on error. In asynchronous mode always returns null.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fetching_JSON"></a>3. Notes on Fetching and Parsing a JSON Object</h2></div></div></div><p>Use <code class="methodname">Zapatec.Transport.fetchJsonObj</code>(<span class="type">object</span>) to fetch and parse a
+      JSON object.</p><p>The <span class="property">onLoad</span> callback receives a JSON object as an
+      argument.</p><p>In synchronous mode returns JSON object on success or null on
+      error. In asynchronous mode always returns null.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fetching_ASCII"></a>4. Notes on Fetching Extended ASCII or UNICODE Characters</h2></div></div></div><p>The server must specify the charset if it serves pages containing
+      extended ASCII or UNICODE characters. This is accomplished by specifying
+      the appropriate content-type header, such as Content-type: text/plain;
+      charset=utf-8 or Content-type: text/plain; charset=windows-1251.</p><p>For a PHP server side script, an example would be:</p><pre class="programlisting">&lt;?php header("Content-type: text/plain; charset=utf-8") ?&gt;</pre><p>For an XML data source,  you should also set encoding inside the
+      document:</p><pre class="programlisting">&lt;?xml version="1.0" encoding="utf-8"?&gt;</pre></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="parsing_func"></a>Chapter 5. Parsing and Serializing Functions</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="parse_elements"></a>1. Parse HTML and Javascript Elements</h2></div></div></div><p><code class="methodname">Zapatec.Transport.setInnerHtml</code>(<span class="type">object</span>)</p><p>Assigns the passed HTML fragment to the specified element's
+      <span class="property">innerHTML</span> property and evaluates in the global scope any javascript
+      found in the fragment.</p><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>html</code></em> <span class="type">string</span> - an HTML fragment</p></li><li><p><em class="parameter"><code>container</code></em> <span class="type">string</span> or <span class="type">object</span> - an element or id of the element to put
+          HTML fragment into; optional</p></li></ul></div><p>If <em class="parameter"><code>container</code></em> is not specified, the  javascripts found will be evaluated
+      only.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Scripts are executed after an HTML fragment is assigned to
+      innerHTML. If you use external scripts, they are loaded asynchronously
+      and execution sequence is not preserved.</p></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>Global variables must be declared without "var" keyword.
+      Otherwise, they will be ignored by Safari.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="parse_string_xml"></a>2. Parse an XML String</h2></div></div></div><p><code class="methodname">Zapatec.Transport.parseXml</code>(<span class="type">object</span>)</p><p>Parses an XML string into an XMLDocument object. Returns an
+      XMLDocument object.</p><p>After parsing the XML string, invokes the appropriate callback:
+      <span class="property">onLoad</span> on success or <span class="property">onError</span> on error.</p><p>The optional <span class="property">onLoad</span> callback receives the returned XMLDocument
+      object as an argument and may use its <em class="parameter"><code>documentElement</code></em> and other
+      properties. The <span class="property">onLoad</span> option is used only if the result must be
+      returned to the callback.</p><p>The <span class="property">onError</span> callback receives an error object consisting
+      of:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>errorCode</code></em> <span class="type">number</span> - an error code, always zero</p></li><li><p><em class="parameter"><code>errorDescription</code></em> <span class="type">string</span> - the human-readable error
+          description</p></li></ul></div><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>strXml</code></em> <span class="type">string</span> - an XML string to parse</p></li><li><p><em class="parameter"><code>onLoad</code></em> <span class="type">function</span> - a function reference to call on success;
+          optional</p></li><li><p><em class="parameter"><code>onError</code></em> <span class="type">function</span> - a function reference to call on error;
+          optional</p></li></ul></div><p>Returns</p><p>XMLDocumentObject or null</p><p>Be sure to examine the returned value and its <em class="parameter"><code>documentElement</code></em>
+      property, which may be null or undefined.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="serialize_doc_into_XML"></a>3. Serialize an XMLDocument Object into an XML String</h2></div></div></div><p><code class="methodname">Zapatec.Transport.serializeXmlDoc</code>(<span class="type">object</span>)</p><p>Serializes an XMLDocument object into an XML string.</p><p>Arguments:</p><p><span class="type">object</span><em class="parameter"><code> XMLDocument object</code></em></p><p>Returns:</p><p>XML string</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="parse_JSON"></a>4. Parse a JSON String into an Object</h2></div></div></div><p><code class="methodname">Zapatec.Transport.parseJson</code>(<span class="type">object</span>)</p><p>Parses a JSON string into an object.</p><p>After parsing the JSON string, invokes the appropriate callbacks:
+      <span class="property">onLoad</span> or <span class="property">onError</span>.</p><p>The optional <span class="property">onLoad</span> callback receives a JSON object as an
+      argument.</p><p>The <span class="property">onError</span> callback function receives the following input
+      object:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>errorCode</code></em> <span class="type">number</span> - always zero</p></li><li><p><em class="parameter"><code>errorDescription</code></em> <span class="type">string </span>- the human-readable error
+          description</p></li></ul></div><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>strJson</code></em> <span class="type">string</span> - a JSON string to parse</p></li><li><p><em class="parameter"><code>reliable</code></em> <span class="type">boolean</span> - if false, string will be parsed; if true,
+          string will be evaluated; optional, false by default</p></li><li><p><em class="parameter"><code>onLoad</code></em> <span class="type">function</span> - a function reference to call on success;
+          optional</p></li><li><p><em class="parameter"><code>onError</code></em> <span class="type">function </span>- a function reference to call on error;
+          optional</p></li></ul></div><p>Returns:</p><p>JSON object or null</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="serialize_JSON_into_string"></a>5. Serialize a JSON Object into a JSON String</h2></div></div></div><p><code class="methodname">Zapatec.Transport.serializeJsonObj</code>(<span class="type">object</span>)</p><p>Serializes a JSON object into a JSON string.</p><p>Arguments:</p><p><span class="type">object</span> <em class="parameter"><code>JSON object</code></em></p><p>Returns:</p><p>JSON string</p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="include_js"></a>Chapter 6. Include JS Files</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fetch_load_js"></a>1. Fetch and Load a JS File</h2></div></div></div><p><code class="methodname">Zapatec.Transport.loadJS</code>(<span class="type">object</span>)</p><p>Fetches a JS file and evaluates it in the global scope.</p><p>When JS file is loaded successfully, <span class="property">onLoad</span> callback function is
+      called without arguments. URL is added into Zapatec.Transport.loadedJS
+      array and will not be fetched again on next function call unless <span class="property">force</span>
+      argument is set to true.</p><p>Either the module or the url attribute is required. If the url is
+      passed, the module is ignored.</p><p>The <span class="property">onError</span> callback receives the following object:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>errorCode</code></em> <span class="type">number</span> - a server status number (e.g. 404)</p></li><li><p><em class="parameter"><code>errorDescription</code></em> <span class="type">string</span> - the human-readable error
+          description</p></li></ul></div><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>url</code></em> <span class="type">string</span> - an absolute or relative URL of JS file;
+          optional</p></li><li><p><em class="parameter"><code>module</code></em> <span class="type">string</span> - a module name; a file name without a .js
+          extension; optional</p></li><li><p><em class="parameter"><code>async</code></em> <span class="type">boolean</span> - use asynchronous mode; optional, default is
+          true</p></li><li><p><em class="parameter"><code>force</code></em> <span class="type">boolean</span> - force reload if it is already loaded;
+          optional, default is false</p></li><li><p><em class="parameter"><code>onLoad</code></em> <span class="type">function</span> - a function reference to call on success;
+          optional</p></li><li><p><em class="parameter"><code>onError</code></em> <span class="type">function</span> - a function reference to call on error;
+          optional</p></li></ul></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>If <span class="property">force</span> is used, you should add 'r=' + <em class="parameter"><code>Math.random()</code></em>
+      parameter to URL to prevent loading from browser cache.</p></div><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>Global variables must be declared without "var" keyword.
+      Otherwise, they will be ignored by Safari.</p></div><p>If special <span class="property">zapatecDoNotInclude</span> flag is set, this function just
+      calls <span class="property">onLoad</span> callback function.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="include_js_file"></a>2. Include a JS File</h2></div></div></div><p><code class="methodname">Zapatec.Transport.include</code>(<span class="type">string</span> <em class="parameter"><code>sSrc</code></em>, <span class="type">string</span> <em class="parameter"><code>sId</code></em>, <span class="type">boolean</span>
+      <em class="parameter"><code>bForce</code></em>)</p><p>Writes script tag to the document. Checks if the specified JS file is
+      already loaded unless <em class="parameter"><code>bForce</code></em> argument is true.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>This function must be invoked during page load because it
+      uses <code class="methodname">document.write</code> method.</p></div><p>If special <span class="property">zapatecDoNotInclude</span> flag is set, this function does
+      nothing.</p><p>Arguments:</p><p><em class="parameter"><code>sSrc</code></em> <span class="type">string</span> - src attribute value of the script element</p><p><em class="parameter"><code>sId</code></em> <span class="type">string</span> - an id of the script element; optional</p><p><em class="parameter"><code>bForce</code></em> <span class="type">boolean</span> - force reload if it is already loaded;
+      optional</p><p><code class="methodname">Zapatec.Transport.includeJS(string sSrc, string sId)</code></p><p>Includes JS file into the page. Allows URLs from foreign domains.
+      Doesn't check if the JS file is already included. File is loaded
+      asynchronously.</p><p>If special <span class="property">zapatecDoNotInclude</span> flag is set, this function does
+      nothing.</p><p>Arguments:</p><p><em class="parameter"><code>sSrc</code></em> <span class="type">string</span> - src attribute value of the script element</p><p><em class="parameter"><code>sId</code></em> <span class="type">string</span> - an id of the script element; optional</p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="include_css"></a>Chapter 7. Include CSS Files</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fetch_load_css"></a>1. Fetch and Load a Style Sheet</h2></div></div></div><p><code class="methodname">Zapatec.Transport.loadCss</code>(<span class="type">object</span>)</p><p>Fetches a style sheet and loads it into a document.</p><p>When stylesheet is loaded successfully, <span class="property">onLoad </span>callback function
+      is called without arguments. URL is added into
+      Zapatec.Transport.loadedCss array and will not be fetched again on next
+      function call unless <span class="property">force</span> argument is set to true.</p><p>Follows @import rules inside CSS files.</p><p>Uses <code class="methodname">Zapatec.StyleSheet</code> to manipulate the stylesheets. Loads the
+      utils/stylesheet.js module automatically using
+      <code class="methodname">Zapatec.Transport.loadJS</code>.</p><p>The <span class="property">onError</span> callback receives the following object:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>errorCode</code></em> <span class="type">number</span> - a server status number (e.g.404)</p></li><li><p><em class="parameter"><code>errorDescription</code></em> <span class="type">string</span> - the human-readable error
+          description</p></li></ul></div><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>url</code></em> <span class="type">string</span>- an absolute or relative URL of CSS file</p></li><li><p><em class="parameter"><code>async</code></em> <span class="type">boolean</span> - use asynchronous mode; optional, default is
+          true</p></li><li><p><em class="parameter"><code>force</code></em> <span class="type">boolean</span> - force reload if it is already loaded;
+          optional, default is false</p></li><li><p><em class="parameter"><code>onLoad</code></em> <span class="type">function</span> - a function reference to call on success;
+          optional</p></li><li><p><em class="parameter"><code>onError</code></em> <span class="type">function</span> - a function reference to call on error;
+          optional</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>If <span class="property">force</span> is used, you should add 'r=' + <em class="parameter"><code>Math.random()</code></em>
+      parameter to URL to prevent loading from the browser cache.</p></div></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="load_multiple_css"></a>2. Load Multiple CSS Files into a Document</h2></div></div></div><p><code class="methodname">Zapatec.Transport.loadCssList</code>(<span class="type">object</span>)</p><p>Loads several CSS files one by one into a document.</p><p>This function behaves differently from other Zapatec.Transport
+      functions. The <span class="property">onLoad</span> callback is invoked in all cases, without
+      arguments, even if errors occur during loading. If there are multiple
+      errors, <span class="property">onError</span> is called once for every passed url that was not loaded
+      successfully.</p><p>The <span class="property">onError</span> callback receives the following object:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>errorCode</code></em> <span class="type">number</span> - a server status number (e.g. 404)</p></li><li><p><em class="parameter"><code>errorDescription</code></em> <span class="type">string</span> - the human-readable error
+          description</p></li></ul></div><p>Takes in one argument, an object with following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>urls</code></em> <span class="type">object</span> - an array of absolute or relative URLs of CSS
+          files to load; files are loaded in the order in which they appear in
+          the array</p></li><li><p><em class="parameter"><code>async</code></em> <span class="type">boolean</span> - use asynchronous mode; optional, default is
+          true</p></li><li><p><em class="parameter"><code>force</code></em> <span class="type">boolean</span> - force reload if it is already loaded;
+          optional, default is false</p></li><li><p><em class="parameter"><code>onLoad</code></em> <span class="type">function</span> - a function reference to call on completion;
+          optional</p></li><li><p><em class="parameter"><code>onError</code></em> <span class="type">function </span>- a function reference to call on error;
+          optional.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>If <span class="property">force</span> is used, you should add 'r=' + <em class="parameter"><code>Math.random()</code></em>
+      parameter to URL to prevent loading from browser cache.</p></div></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="preload_img"></a>3. Preload Images</h2></div></div></div><p><code class="methodname">Zapatec.Transport.preloadImages</code>(<span class="type">object</span>)</p><p>This is a wrapper for the Zapatec.PreloadImages class. It preloads
+      one image or several images at once. The utils/preloadimages.js module
+      is loaded automatically by <code class="methodname">Zapatec.Transport.loadJS</code>.</p><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>urls</code></em> <span class="type">object</span> - an array of absolute or relative image URLs to
+          preload</p></li><li><p><em class="parameter"><code>onLoad</code></em> <span class="type">function</span> - an onload event handler; optional</p></li><li><p>timeout <span class="type">number</span> - an integer representing the number of
+          milliseconds to wait for the onload event before forcing it;
+          optional</p></li></ul></div><p>The following example simply preloads three menu images:</p><pre class="programlisting">var oPreload = new Zapatec.PreloadImages({
+
+  // Images to preload
+  urls: [
+    'menu1.jpg',
+    'menu2.jpg',
+    'menu3.jpg'
+  ]
+
+});</pre><p>The next example preloads and displays three images:</p><pre class="programlisting">var oPreload = new Zapatec.PreloadImages({
+
+  // Images to preload
+  urls: [
+    'sample1.jpg',
+    'sample2.jpg',
+    'sample3.jpg'
+  ],
+
+  // onload event handler
+  onLoad: function(oArg) {
+    var aLoadedUrls = oArg.loadedUrls;
+    for (var iUrl = 0; iUrl &lt; aLoadedUrls.length; iUrl++) {
+      var oImage = document.createElement('img');
+      oImage.src = aLoadedUrls[iUrl];
+      document.getElementById('images').appendChild(oImage);
+    }
+  },
+
+  // force onload event in 5 seconds if it doesn't fire
+  timeout: 5000
+
+});</pre><p>If the <span class="property">onLoad</span> callback is provided, <code class="methodname">preloadImages</code> invokes it even
+      when errors occur during loading or when the loading process is aborted.
+      The callback receives a <em class="parameter"><code>PreloadImages</code></em> object with the following
+      properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>images</code></em> <span class="type">object</span> - an array of Image objects</p></li><li><p><em class="parameter"><code>loadedUrls</code></em> <span class="type">object </span>- an array of successfully loaded URLs</p></li><li><p><em class="parameter"><code>invalidUrls</code></em> <span class="type">object</span> - an array of URLs that were not loaded due
+          to errors</p></li><li><p><em class="parameter"><code>abortedUrls</code></em> <span class="type">object</span> - an array of URLs that were not loaded due
+          to abort</p></li><li><p><em class="parameter"><code>leftToLoad</code></em> <span class="type">number </span>- the number of images left to load if event
+          was forced</p></li></ul></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="busy_giv"></a>Chapter 8. Busy Animated GIF</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="show_animated"></a>1. Show Animated GIF</h2></div></div></div><p><code class="methodname">Zapatec.Transport.showBusy</code>(<span class="type">object</span>)</p><p>Shows animated GIF in the specified DIV.</p><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>busyContainer</code></em> <span class="type">string </span>or <span class="type">object</span> - an element where to put
+          animated GIF</p></li><li><p><em class="parameter"><code>busyImage</code></em> <span class="type">string </span>- a standard image name or custom image URL;
+          optional</p></li><li><p><em class="parameter"><code>busyImageWidth</code></em> <span class="type">number</span> or <span class="type">string</span> - image width;
+          optional</p></li><li><p><em class="parameter"><code>busyImageHeight</code></em> <span class="type">number</span> or <span class="type">string</span> - image height;
+          optional</p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="remove"></a>2. Remove Animated GIF</h2></div></div></div><p><code class="methodname">Zapatec.Transport.removeBusy</code>(<span class="type">object</span>)</p><p>Removes animated GIF which was put by showBusy from the specified
+      DIV.</p><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>busyContainer</code></em> <span class="type">string</span> or <span class="type">object</span> - an element where to put
+          animated GIF</p></li><li><p><em class="parameter"><code>busyImage</code></em> <span class="type">string</span> - a standard image name or custom image URL;
+          optional</p></li></ul></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="misc_func"></a>Chapter 9. Miscellaneous Functions</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="cross_browser"></a>1. Create Cross Browser XMLHttpRequest Object</h2></div></div></div><p><code class="methodname">Zapatec.Transport.createXmlHttpRequest()</code></p><p>Returns cross browser XMLHttpRequest object.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="evaluate_js"></a>2. Evaluate Javascript Code in the Global Scope</h2></div></div></div><p><code class="methodname">Zapatec.Transport.evalGlobalScope</code>(<span class="type">string</span>)</p><p>Evaluates passed javascript code in the global scope.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Global variables must be declared without "var" keyword.
+      Otherwise they will be ignored by Safari.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="get2loaded"></a>3. Get Path to Loaded JS File</h2></div></div></div><p><code class="methodname">Zapatec.Transport.getPath</code>(<span class="type">string</span> <em class="parameter"><code>sScriptFileName</code></em>)</p><p>Returns a path to the specified JS file. Iterates over all loaded
+      script elements starting from the end. Finds specified JS file in src
+      attribute of the script element. Splits src attribute value and returns
+      path without JS file name.</p><p>Arguments:</p><p><em class="parameter"><code>sScriptFileName</code></em> <span class="type">string</span> - script file name, e.g.
+      'zpmywidget.js'</p><p>Returns:</p><p>path to the script, e.g. '../src/' or '' if path is not
+      found</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="translate_url"></a>4. Translate a URL</h2></div></div></div><p><code class="methodname">Zapatec.Transport.translateUrl</code>(<span class="type">object</span>)</p><p>Translates a URL to the URL relative to the specified or to an
+      absolute URL.</p><p>Takes in one argument, an object with the following properties:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>url</code></em> <span class="type">string</span> - an absolute or relative URL to translate; if
+          absolute, returned unchanged</p></li><li><p><em class="parameter"><code>relativeTo</code></em> <span class="type">string </span>- URL is translated to the URL relative to
+          this absolute or relative URL; optional; default is the current
+          page's URL</p></li></ul></div><p>Returns:</p><p>translated URL string</p></div></div></div></body></html>

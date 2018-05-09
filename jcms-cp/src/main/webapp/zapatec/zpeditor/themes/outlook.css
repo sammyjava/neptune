@@ -1,0 +1,211 @@
+/* $Id: outlook.css 13498 2008-10-17 12:41:34Z smaxim $ */
+
+.zpEditorOutlookToolbar{
+	 border:1px solid #6392CE;
+   background:url(outlook/bg.jpg) repeat-x 100% 50%;
+   padding: 3px 0px 3px 0px;
+}
+
+.zpEditorOutlookToolbar .toolbarPanel select.zpEditorSelect{
+   border: 1px solid #CCCCCC;
+   margin: 1px;
+}
+
+.zpEditorOutlookToolbar .toolbarPanel{
+   margin: 0 0 0 3px;
+   padding: 0px 1px 1px; 
+   height: 21px;
+   overflow: hidden;
+   position: relative;
+   float: left;
+   border:1px solid #6392CE;
+}
+
+.zpEditorOutlookTextarea {
+   border: none;
+}
+
+.zpEditorOutlookEditorPanel {
+   border-right: 1px solid #6392CE;
+   border-left: 1px solid #6392CE;
+   border-bottom:1px solid #6392CE;
+}
+
+.zpEditorOutlookToolbar .zpEditorButton{
+   display: block;
+   float: left;
+   margin:2px !important;
+   width: 17px;
+   height: 16px;
+   background-repeat: no-repeat;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .forecolor{
+   background-image: url(outlook/forecolor.gif);
+   height:20px;
+   width:25px;
+   border:none !important;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .backcolor{
+   background-image: url(outlook/backcolor.gif);
+   height:20px;
+   width:30px;
+   border:none !important;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .backcolor .zpEditorOutlookDropDown {margin-left:19px;}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .insertspecial {background-image: url(outlook/insertspecial.gif); }
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .link{background-image: url(outlook/link.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .image{background-image: url(outlook/image.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .table{background-image: url(outlook/table.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .bold{background-image: url(outlook/bold.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .italic{background-image: url(outlook/italic.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .underline{background-image: url(outlook/underline.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .justifyleft{background-image: url(outlook/justifyleft.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .justifycenter{background-image: url(outlook/justifycenter.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .justifyright{background-image: url(outlook/justifyright.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .justifyfull{background-image: url(outlook/justifyfull.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .orderedlist{background-image: url(outlook/orderedlist.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .unorderedlist{background-image: url(outlook/unorderedlist.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .copy{background-image: url(outlook/copy.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .cut{background-image: url(outlook/cut.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .paste{background-image: url(outlook/paste.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .outdent{background-image: url(outlook/outdent.gif);height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .indent{background-image: url(outlook/indent.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .undo{background-image: url(outlook/undo.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .redo{background-image: url(outlook/redo.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .hr{background-image: url(outlook/hr.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .selectall{background-image: url(outlook/selectall.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .maximize{background-image: url(outlook/maximize.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .restore{background-image: url(outlook/restore.gif); height:16px;}
+/*.zpEditorOutlookToolbar .zpButtonOutlookContainer .fetch{background-image: url(outlook/fetch.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .save{background-image: url(outlook/save.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .browser{background-image: url(outlook/browser.gif); height:16px;}*/
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .about{background-image: url(outlook/about.gif); height:16px;}
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .html{
+  background-image: url(outlook/plain.gif);
+  width:60px;
+  height:16px;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .wysiwyg {
+  background-image: url(outlook/rich.gif);
+  width: 60px;
+  height:16px;        
+} 
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer, .zpButtonImageOutlookContainer{
+  padding: 0;
+  border: 0;
+}
+
+.zpEditorOutlookToolbar .zpButtonImageOutlookContainer .internalContainer{
+  cursor: pointer;
+  padding: 0 2px 0 2px;
+  margin: 0;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .internalContainer{
+  background-color: #fff;
+  cursor: pointer;
+  margin: 0;
+  color: #000000;
+  border: 1px solid #eee;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .internalContainer img{
+  border: 0;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .disabled .internalContainer{
+  filter: Alpha(Opacity=50);
+  -moz-opacity: 0.50;
+  margin:0px 1px 0px;
+  border:1px solid transparent !important;
+  background-color:transparent;
+  cursor:default;
+}
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .mouseOut .internalContainer{
+  border:1px solid #C3D9FF;
+  background-color:transparent;
+}
+ 
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .mouseOver .internalContainer{
+  border:1px solid #eee;
+  background-color:transparent;
+}
+
+
+.zpEditorOutlookToolbar .zpButtonOutlookContainer .mouseDown .internalContainer{
+  border: 1px solid #6392CE;
+  background-color:#c1d4f4;
+}
+
+.zpEditorOutlookColorMark {
+  position: absolute;
+  font-size:1px;
+	height:4px;
+	margin-left:0px;
+	margin-top:14px;
+	position:absolute;
+	width:16px;
+}
+
+.zpEditorOutlookDropDown {
+  margin-left: 17px;
+  height: 100%;
+  filter: Alpha(Opacity=60);
+  -moz-opacity: 0.60;
+
+}
+
+.zpEditorOutlookPane {
+  background: #fff;
+}
+
+/* style for character map table */
+table.charmap {
+  cursor:pointer;
+  background-color:#ADAD9C;
+  border:1px inset;
+}
+
+/* style for character map table cell */
+td.character {
+  font-family:Verdana,Arial,Helvetica,sans-serif;
+  font-size:14px;
+  font-weight:bold;
+  text-align:center;
+  background:#fff;
+  padding:4px;
+}
+
+/* style for hilighted character map table cell */
+td.character-hilite {
+  background:#ffd760;
+}
+
+.zpEditorOutlookLinkLabel {
+  margin: 5px 10px 0 10px;
+  width: 120px;
+  float: left;
+}
+
+.zpEditorOutlookLinkInput {
+  margin: 5px 0 0 0;
+}
+
+.zpEditorOutlookLinkButtonPane {
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+
+.zpEditorOutlookLinkOk {
+  margin: 0 10px 0 0;
+}
+
+.zpEditorOutlookLinkInputPane {
+}

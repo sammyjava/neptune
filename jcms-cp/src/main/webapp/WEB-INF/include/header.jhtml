@@ -1,0 +1,99 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta name="generator" content="<%=Util.APPVERSION%>" />
+    <title><%=siteName%> Control Panel: <%=pageTitle%></title>
+    <link href="cp.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="<%=designFolder%>/favicon.ico" />
+    <script src="fetchurl.js" type="text/javascript"></script>
+    <% if (useZapatec) { %>
+    <script src="zapatec/utils/zapatec.js" type="text/javascript"></script>
+    <script src="zapatec/zpeditor/src/zpeditor.js" type="text/javascript"></script>
+    <script src="zapatec/zpform/src/form.js" type="text/javascript"></script>
+    <script src="zapatec/zptooltip/src/zptooltip.js" type="text/javascript"></script>
+    <script src="zapatec/zptree/src/tree.js" type="text/javascript"></script>
+    <script src="zapatec/zpwin/src/window.js" type="text/javascript"></script>
+    <% } %>
+  </head>
+    
+  <body>
+      
+    <table class="header" cellspacing="0">
+      <tr>
+        <td valign="top">
+          <table cellspacing="0">
+            <tr>
+              <td class="header" align="center"><a class="header sitename" target="_blank" href="/"><%=siteName%></a></td>
+            </tr>
+          </table>
+          <% if (userLoggedIn) { %>
+          <table width="100%" cellspacing="0">
+            <tr>
+              <td class="header" align="center"><a class="header default" href="index.jsp?logout">Log Out</a></td>
+              <td class="header" align="center"><a class="header default" href="doc-index.jsp">Docs</a></td>
+            </tr>
+          </table>
+          <% } %>
+        </td>
+        <td valign="top">
+          <table cellspacing="0">
+            <tr>
+              <% if (userLoggedIn) { %>
+              <% if (cpuser.editor) { %>
+              <td class="header" align="center"><a class="header editor" href="page.jsp">Pages</a></td>
+              <td class="header" align="center"><a class="header editor" href="contenteditor.jsp">Content</a></td>
+              <td class="header" align="center"><a class="header editor" href="nodes.jsp">Nodes</a></td>
+              <td class="header" align="center"><a class="header editor" href="tree.jsp">Tree</a></td>
+              <td class="header" align="center"><a class="header editor" href="media.jsp">Media</a></td>
+              <% } %>
+              <% if (cpuser.designer) { %>
+              <td class="header" align="center"><a class="header designer" href="stylesheet.jsp">Stylesheet</a></td>
+              <td class="header" align="center"><a class="header designer" href="utilitycontent.jsp">Utility Content</a></td>
+              <td class="header" align="center"><a class="header designer" href="designmedia.jsp">Design Media</a></td>
+              <td class="header" align="center"><a class="header designer" href="layout.jsp">Layouts</a></td>
+              <% } %>
+              <% if (cpuser.admin) { %>
+              <td class="header" align="center"><a class="header admin" href="settings.jsp">Settings</a></td>
+              <td class="header" align="center"><a class="header admin" href="access.jsp">Access</a></td>
+              <td class="header" align="center"><a class="header admin" href="permissions.jsp">CP Permissions</a></td>
+              <td class="header" align="center"><a class="header admin" href="extensions.jsp">Extensions</a></td>
+              <td class="header" align="center"><a class="header admin" href="audit.jsp">Audit Log</a></td>
+              <% } %>
+              <% } %>
+            </tr>
+          </table>
+
+          <table cellspacing="0">
+            <tr>
+              <%
+                if (userLoggedIn) {
+                  // get primary extensions for navigation
+                  Extension[] extensions = Extension.getPrimary(application);
+                  for (int i=0; i<extensions.length; i++) {
+                      if (cpuser.hasPermission(application, extensions[i])) {
+                %>
+                <td class="header" align="center"><a class="header extension" href="ext.jsp?extid=<%=extensions[i].extid%>"><%=extensions[i].name%></a></td>
+                <%
+                }
+              }
+          
+              // get primary extras for navigation
+              Extra[] extras = Extra.getPrimary(application);
+              for (int i=0; i<extras.length; i++) {
+                  if (cpuser.hasPermission(application, extras[i])) {
+                    String cpurl = extras[i].cpurl;
+                    if (extras[i].extra_id==12) cpurl = Setting.getString(application,"softslate_context")+cpurl;
+                  %>
+                  <td class="header" align="center"><a class="header extra" href="<%=cpurl%>"><%=extras[i].name%></a></td>
+                  <%
+                  }
+                }
+              }
+                  %>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>

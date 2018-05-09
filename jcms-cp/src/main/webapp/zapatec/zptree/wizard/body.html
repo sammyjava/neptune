@@ -1,0 +1,410 @@
+<br/>
+<div id="content">
+	<div id="tab-bar"></div>
+	<div id="tabs">
+		<div id="pane-introduction">
+			<label accesskey="w"><u>I</u>ntroduction</label>
+			<h1>Introduction to the Zapatec DHTML Tree Wizard</h1>
+			<blockquote>
+				Using the Zapatec <b>Javascript Tree Wizard</b> you can construct a tree and choose the
+				various configuration options. When you are done, the Wizard will generate the 
+				necessary Javascript code and you can just paste the code into your HTML page.
+				<hr />
+				Please note that this wizard shows only some part of all possible features of Zapatec.Tree.
+				It is designed to help you rapidly create tree on your page.
+				For advance usage read manual
+				<hr />
+				Use the Next and Previous buttons to navigate through the tabs. To go to a specific tab, just click on the tab
+				header on top.
+				<br />
+				Move your mouse over the question marks 
+				<dfn title="Tooltip Sample">
+					These tooltips provide additional information in the Wizard. To make them go away, just move the mouse away from
+					the question mark and outside the tooltip box.
+				</dfn>
+				to see the help for specific items. 
+			</blockquote>
+		</div>
+		<div id="pane-contents">
+			<label accesskey="t"><u>T</u>ree contents</label>
+			<dfn title="Tree contents" style="float: right">
+				You will most probably like to generate a tree
+				dynamically from a database.  However, for the purpose
+				of our wizard, the generated content will be a simple
+				static list that shows you how the generation should be
+				done.
+			</dfn>
+			<h1>Tree contents</h1>
+
+			<blockquote>
+				Here you can define the layout of your tree. 
+				First click an item on the left to select it.
+				Then, use the links on the left to create/remove items and
+				sub-items relative to the selected item. You can also change
+				the text of the item in the box. 
+				<br />
+				Since the Generated tree layout is done in HTML, you may find
+				it easier to focus here on the tree features and then finish
+				moving the nodes around in your editor.
+			</blockquote>
+			<blockquote>
+				<table>
+					<tr>
+						<td valign="top" class="operations">
+							:: <a accesskey="b" href="#" onclick="return designInsert(false)">Insert Item <u>B</u>efore</a><br />
+							:: <a accesskey="a" href="#" onclick="return designInsert(true)">Insert Item <u>A</u>fter</a><br />
+							<dfn title="Keyboard saves time" style="float: right">
+								- <tt>ALT-B</tt>: insert new item before the current one<br />
+								- <tt>ALT-A</tt>: insert new item after the current one<br />
+								- <tt>ALT-S</tt>: add a subtree to the current item<br />
+								- <tt>ENTER</tt>: shorthand for <tt>ALT-A</tt>
+							</dfn>
+							:: <a href="#" onclick="return designRemove()">Remove Node</a><br />
+							:: <a accesskey="s" href="#" onclick="return designAddSubtree()">Add <u>S</u>ubtree</a>
+							<hr />
+							<input disabled="disabled" type="text" id="f_design_label" />
+						</td>
+						<td style="width: 35em" valign="top">
+							<ul id="designtree">
+								<li>
+									Home
+								</li>
+								<li>
+									Products
+									<ul>
+										<li>Calendar
+                                            <ul>
+												<li>Overview</li>
+												<li>Demo</li>
+												<li>Features</li>
+												<li>Wizard</li>
+												<li>Download</li>
+												<li>Pricing</li>
+												<li>Buy</li>
+											</ul>
+										</li>
+										<li> 
+											Tree
+											<ul>
+												<li>Overview</li>
+												<li>Demo</li>
+												<li>Features</li>
+												<li>Wizard</li>
+												<li>Download</li>
+												<li>License</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+								<li>Support
+									<ul>
+										<li>Overview </li>
+										<li>Forum </li>
+										<li>Quick Guide </li>
+										<li>Reference Manual </li>
+										<li>Request Help </li>
+									</ul>
+								</li>
+								<li>
+									About Us
+									<ul>
+										<li>Company</li>
+										<li>Management Team</li>
+										<li>Mission Statement</li>
+										<li>Jobs</li>
+										<li>Contact Us</li>
+									</ul>
+								</li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</blockquote>
+		</div>
+		<div id="pane-prefs">
+			<label accesskey="c"><u>C</u>onfiguration</label>
+			<h1>Tree configuration</h1>
+			<blockquote>
+				<p>Specify your tree's properties, and click next to see the generated tree. You can
+				go back and forth between this and the next tab to experiment with what the different options
+				do.</p>
+        <form action="" autocomplete="off">
+          <table  class="form">
+            <tr>
+              <td class="label">
+                <label for="f_theme">Tree theme</label>
+              </td>
+              <td>
+                <select id="f_theme" onchange="propChange(this, this.options[this.selectedIndex].value)">
+                  <option value="default" selected>Default</option>
+                  <option value="basic">Basic</option>
+                  <option value="image">Image</option>
+                  <option value="lines">Lines</option>
+                  <option value="lightgreen">Light green</option>
+                  <option value="purple">Purple</option>
+                  <option value="wood">Wood</option>
+                  <option value="zapatec">Zapatec</option>
+                </select>
+              </td>
+              <td>
+                <dfn title="Tree theme">
+                  You can display your tree using one of predefined themes.
+                </dfn>
+              </td>
+            </tr>
+            <tr id="display-icons_css">
+              <td class="label">
+                <label for="f_icons_css">Icons style</label>
+              </td>
+              <td>
+                <select id="f_icons_css" onchange="setActiveIcons(this)">
+                  <option value="none" selected>No Icons</option>
+                  <option value="windows">Windows</option>
+                  <option value="help">Help</option>
+                  <option value="kde">Kde</option>
+                  <option value="kde1">Kde new</option>
+                  <option value="gnome">Gnome</option>
+                </select>
+              </td>
+              <td>
+                <dfn title="CSS-based default icons">
+                  Use this menu to choose the style of
+                  CSS based icons you'd like or "none" if
+                  you do not want any icons.
+                </dfn>
+              </td>
+            </tr>
+            <tr>
+              <td class="label">
+                <input type="checkbox" id="f_compact" onclick="propChange(this, this.checked)" />
+              </td>
+              <td>
+                <label for="f_compact">Compact mode</label>
+              </td>
+              <td>
+                <dfn title="Compact mode">
+                  Check to turn on compact mode in the tree.
+                  In compact mode, a tree will only allow one
+                  expanded branch per level.  When a user expands
+                  another branch, the tree will automatically
+                  collapse the previous branch, thus keeping a
+                  compact height.  <b>This setting implies
+                  "collapsed"</b>.
+                </dfn>
+              </td>
+            </tr>
+            <tr id="display-collapsed">
+              <td class="label">
+                <input type="checkbox" id="f_collapsed" onclick="propChange(this, this.checked)" />
+              </td>
+              <td>
+                <label for="f_collapsed">Collapsed tree</label>
+              </td>
+              <td>
+                <dfn title="Initially collapsed">
+                  Check this box if you want the tree to be
+                  initially collapsed with all the branches closed.
+                </dfn>
+              </td>
+            </tr>
+            <tr id="display-initLevel">
+              <td class="label">
+                <label for="f_initLevel">Initial level:</label>
+              </td>
+              <td>
+                <input type="text" size="5" id="f_initLevel" class="validate-initLevel" />
+              </td>
+              <td>
+                <dfn title="Initial level">
+                  Check this box if you want the tree to expand only
+                  to a certain level. You specify a level and only
+                  branches included in that level will be open.
+                  <br />
+                  For instance in a family tree with level 2, children and
+                  grand children will show but not great grand children.
+                </dfn>
+              </td>
+            </tr>
+            <tr>
+              <td class="label">
+                <input type="checkbox" id="f_saveState" onclick="propChange(this, this.checked)" />
+              </td>
+              <td>
+                <label for="f_saveState">Save state</label>
+              </td>
+              <td>
+                <dfn title="Save state">
+                  Tree can store ID of currently selected node into cookie.
+                  After page reload tree will be opened to that node.
+                </dfn>
+              </td>
+            </tr>
+            <tr id="display-saveId" style="visibility: hidden">
+              <td class="label">
+                <label for="f_saveId">Save ID cookie name:</label>
+              </td>
+              <td>
+                <input type="text" size="5" id="f_saveId" />
+              </td>
+              <td>
+                <dfn title="Save ID cookie name">
+                  Determines cookie name where ID will be saved
+                </dfn>
+              </td>
+            </tr>
+            <tr>
+              <td class="label">
+                <input type="checkbox" id="f_quick" />
+              </td>
+              <td>
+                <label for="f_quick">Quick mode</label>
+              </td>
+              <td>
+                <dfn title="Quick mode">
+                  Check to turn on quick mode in the tree.
+                  Tree will work much more faster but some features will be unavailable.
+                </dfn>
+              </td>
+            </tr>
+            <tr>
+              <td class="label">
+                <input type="checkbox" id="f_highlightSelectedNode" checked="checked"/>
+              </td>
+              <td>
+                <label for="f_highlightSelectedNode">Highlight selected node</label>
+              </td>
+              <td>
+                <dfn title="Highlight selected node">
+                  Highlight selected node or not
+                </dfn>
+              </td>
+            </tr>
+
+            <tr id="display-expandOnSignClick">
+              <td class="label">
+                <input type="checkbox" id="f_expandOnSignClick" onclick="propChange(this, this.checked)" checked="checked"/>
+              </td>
+              <td>
+                <label for="f_expandOnSignClick">Expand on +/- sign click</label>
+              </td>
+              <td>
+                <dfn title="Expand on sign click">
+                  Determines if branch will expand on +/- sign click.
+                </dfn>
+              </td>
+            </tr>
+            <tr id="display-expandOnSignDblclick" style="visibility: hidden">
+              <td class="label">
+                <input type="checkbox" id="f_expandOnSignDblclick" onclick="propChange(this, this.checked)"/>
+              </td>
+              <td>
+                <label for="f_expandOnSignDblclick">Expand on +/- sign double click</label>
+              </td>
+              <td>
+                <dfn title="Expand on sign double click">
+                  Determines if branch will expand on +/- sign double click.
+                </dfn>
+              </td>
+            </tr>
+
+            <tr id="display-expandOnIconClick">
+              <td class="label">
+                <input type="checkbox" id="f_expandOnIconClick" onclick="propChange(this, this.checked)" checked="checked"/>
+              </td>
+              <td>
+                <label for="f_expandOnIconClick">Expand on icon click</label>
+              </td>
+              <td>
+                <dfn title="Expand on icon click">
+                  Determines if branch will expand on icon click.
+                </dfn>
+              </td>
+            </tr>
+            <tr id="display-expandOnIconDblclick" style="visibility: hidden">
+              <td class="label">
+                <input type="checkbox" id="f_expandOnIconDblclick" onclick="propChange(this, this.checked)"/>
+              </td>
+              <td>
+                <label for="f_expandOnIconDblclick">Expand on icon double click</label>
+              </td>
+              <td>
+                <dfn title="Expand on icon double click">
+                  Determines if branch will expand on icon double click.
+                </dfn>
+              </td>
+            </tr>
+
+            <tr id="display-expandOnLabelClick">
+              <td class="label">
+                <input type="checkbox" id="f_expandOnLabelClick" onclick="propChange(this, this.checked)"/>
+              </td>
+              <td>
+                <label for="f_expandOnLabelClick">Expand on node label click</label>
+              </td>
+              <td>
+                <dfn title="Expand on node label click">
+                  Determines if branch will expand on node label click.
+                </dfn>
+              </td>
+            </tr>
+            <tr id="display-expandOnLabelDblclick">
+              <td class="label">
+                <input type="checkbox" id="f_expandOnLabelDblclick" onclick="propChange(this, this.checked)"/>
+              </td>
+              <td>
+                <label for="f_expandOnLabelDblclick">Expand on node label  double click</label>
+              </td>
+              <td>
+                <dfn title="Expand on node label  double click">
+                  Determines if branch will expand on node label  double click.
+                </dfn>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </blockquote>
+		</div>
+		<div id="pane-preview">
+			<label onclick="doPreview()" accesskey="v">Pre<u>v</u>iew</label>
+			<h1>Tree preview</h1>
+			<p>Here is the generated tree. Click  previous if you want to change any options, or
+				next to generate the code for this tree.</p>
+			<div id="designpreview" style="overflow: auto; height: 300px; width: 300px">
+			</div>
+		</div>
+		<div id="pane-code">
+			<label onclick="makeCode()" accesskey="g"><u>G</u>et your code</label>
+			<h1>Your code is below</h1>
+			Click on <strong> select all </strong> to copy the code into the clipboard.
+			Go into your editor paste and save it.<br/>
+			The paths in the code assume that the tree file will be in the
+			same folder where the zptree folder is in, <strong> not </strong>
+			in the zptree folder itself. If you would like the file to be in a
+			different folder, you will need to adjust the paths accordingly.
+
+			<div style="text-align: right; padding-bottom: 5px;">
+				<button onclick="document.getElementById('f_code').select()">Select all</button>
+			</div>
+			
+			<textarea id="f_code" rows="20" cols="80" style="width: 100%"></textarea>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	//init the wizard object
+	initWizard();
+	//the divs are fictitious divs to match the closing ones in the footer
+</script>
+
+<div align="center">
+	<br />
+	<a href='http://www.zapatec.com/website/main/contact.jsp' class='lnkblue'>Contact Us</a> | 
+	<a href='http://www.zapatec.com/website/main/employment.jsp' class='lnkblue'>Employment</a>
+	<br />
+	<br />
+	&copy; 2004-2007
+	<strong>Zapatec, Inc.</strong>
+</div>
+</body>

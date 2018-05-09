@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom header, set customHeader=true and put code here.
+ */
+  boolean customHeader = false;
+%>

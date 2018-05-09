@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	This form uses the Zapatec Transport module to communicate with the server without refreshing the page.  	With the Zapatec Transport your form automatically performs both client-side and server-side validation. 	Here are the Client/Server rules. Note that this example will only work 		on Zapatec web server. You need to put this example on your website 		dir where execution of PHP scripts is allowed. 		 			Field is required and the client-side code enforces the data entry. 			After the client-side test is passed, the server checks that  				the login name is available. In this example, the following names are not available:  				'Joe', 'Jane', 'George', 'Judy'(case-sensitive). All other should pass the test. 			 		 	 	On failure, the alert window with error message will be shown. 	After you finish typing login name - browser would check if such login is available. 		To control this use the following parameters: 		 			zpFormValidate - url where to send request. 			zpFormValidateMethod - which HTTP method to use (GET, POST etc). The default is GET. 			zpFormValidateParam - how to name the parameter. The default is the field name.  			zpFormValidateQuery - string that will be added to the request query.  		 		Example: class='zpFormValidate='validate.php' zpFormValidateMethod=GET zpFormValidateParam='my_var' zpFormValidateQuery='ajax_check=true''  		will be transformed to validate.php?ajax_check=true&my_var=&lt;CURRENT_FIELD_VALUE&gt; 	 ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Validate single field using AJAX</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Validate single field using AJAX</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>winxp theme</b>.</li>
+				
+	<li>This form uses the Zapatec Transport module to communicate with the server without refreshing the page. </li>
+	<li>With the Zapatec Transport your form automatically performs both client-side and server-side validation.</li>
+	<li>Here are the Client/Server rules. Note that this example will only work
+		on Zapatec web server. You need to put this example on your website
+		dir where execution of PHP scripts is allowed.
+		<ul>
+			<li>Field is required and the client-side code enforces the data entry.</li>
+			<li>After the client-side test is passed, the server checks that 
+				the login name is available. In this example, the following names are not available: 
+				"Joe", "Jane", "George", "Judy"(case-sensitive). All other should pass the test.
+			</li>
+		</ul>
+	</li>
+	<li>On failure, the alert window with error message will be shown.</li>
+	<li>After you finish typing login name - browser would check if such login is available.<br />
+		To control this use the following parameters:
+		<ul>
+			<li><b>zpFormValidate</b> - url where to send request.</li>
+			<li><b>zpFormValidateMethod</b> - which HTTP method to use (GET, POST etc). The default is GET.</li>
+			<li><b>zpFormValidateParam</b> - how to name the parameter. The default is the field name. </li>
+			<li><b>zpFormValidateQuery</b> - string that will be added to the request query. </li>
+		</ul>
+		Example: <i>class='zpFormValidate="validate.php" zpFormValidateMethod=GET zpFormValidateParam="my_var" zpFormValidateQuery="ajax_check=true"'</i> 
+		will be transformed to <i>validate.php?ajax_check=true&my_var=&lt;CURRENT_FIELD_VALUE&gt;</i>
+	</li>
+
+			</ul>
+		</div>
+
+
+
+<form action="ajax_validate.html" id='userForm' class="zpFormWinXP">
+	<div id='errOutput' class="errOutput"></div>
+
+	<fieldset>
+		<label class='zpFormLabel'>Login Name</label>
+		<input class='zpFormRequired zpFormValidate="validate.php"' value="" size="40" name="name" type="text" />
+	</fieldset>
+	<div class="zpFormButtons">
+		<input value="Submit" name="Submit" onclick="" type="submit" class="button"> 
+		<input value="Clear" name="Clear" onclick="" type="reset" class="button">
+	</div>
+</form>
+
+<script type="text/javascript">
+// Run this to auto-activate all "zpForm" class forms in the document.
+Zapatec.Form.setupAll({
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput
+});
+
+checkIfLoadedFromHDD();
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

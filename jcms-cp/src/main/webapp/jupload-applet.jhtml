@@ -1,0 +1,17 @@
+<applet code="wjhk.jupload2.JUploadApplet" archive="wjhk.jupload.jar" width="640" height="400" alt="Something is wrong, JUpload applet is not working." mayscript>
+  <param name="postURL" value="jupload.jsp?photoset_id=<%=photoset.photoset_id%>" />
+  <param name="afterUploadURL" value="photosets.jsp?uploaded&photoset_id=<%=photoset.photoset_id%>" />
+  <param name="maxChunkSize" value="<%=maxChunkSize%>" />
+  <param name="uploadPolicy" value="PictureUploadPolicy" />
+  <param name="nbFilesPerRequest" value="1" />
+  <param name="maxPicHeight" value="<%=maxHeight%>" />
+  <param name="maxPicWidth" value="<%=maxWidth%>" />
+  <param name="debugLevel" value="0" />
+  <div style="border: 2px solid black; padding: 10px;">
+    <b>The photo upload applet is not available.</b><br/>
+    Java 1.5 or higher plugin required. - <a href="http://www.java.com/en/download/index.jsp">Get the latest Java Plug-in.</a><br/>
+    <br/>
+    NOTE: Older versions of Internet Explorer are NOT supported by the Photo Sets photo uploader.  Please use Firefox or Chrome or update Internet Explorer.
+  </div>
+</applet>
+

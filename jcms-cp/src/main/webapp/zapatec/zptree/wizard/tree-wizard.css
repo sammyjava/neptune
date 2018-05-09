@@ -1,0 +1,74 @@
+/* $Id: tree-wizard.css 6225 2007-02-08 20:08:30Z alex $ */
+#content, #content table { font: 11px tahoma,verdana,sans-serif; }
+button, select, input, textarea { font: 11px tahoma,verdana,sans-serif; }
+
+p { margin: 1em 0; }
+#content h1 {
+  font-size: 120%;
+  font-weight: bold;
+  margin: 0.6em 0;
+  border-bottom: 1px solid ButtonShadow;
+}
+
+pre { background-color: #fff; padding: 5px; }
+code { background-color: #fff; }
+
+#customize { background-color: ButtonFace; color: ButtonText; width: 100%;
+  vertical-align: top; -moz-border-radius: 10px; }
+
+acronym { color: #0c0; border-bottom: 1px dotted #c00; }
+
+table.form { margin: 0 1em; cursor: default; }
+table.form td.label { text-align: right; }
+label { white-space: nowrap; }
+
+td.help { padding-left: 1em; color: #2a2; }
+
+table.tokens { white-space: nowrap; font: 90% "Trebuchet MS",arial,sans-serif; }
+table.tokens a, table.tokens a:link {
+  display: block;
+  padding: 1px 5px;
+  margin: 1px;
+  text-decoration: none;
+  color: ButtonText;
+  background-color: ButtonFace;
+  border: 1px solid;
+  border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+}
+table.tokens span { font-family: monospace; }
+table.tokens a:hover { background-color: ButtonHighlight; }
+table.tokens a:active { border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow; padding: 2px 4px 0 6px; }
+
+td.border-right { border-right: 1px solid #999; }
+
+input { padding-left: 3px; }
+
+.hover { background-color: yellow; }
+
+div.separator { margin: 3px 0; background-color: ButtonShadow; overflow: auto; font-size: 0px; height: 1px; }
+
+#code { font-size: 80%; }
+
+#copyright {
+  text-align: center;
+  font-size: 90%;
+  font-family: 'Trebuchet MS',tahoma,sans-serif;
+  vertical-align: middle;
+  color: #999;
+}
+#copyright div { background-color: #eee; padding: 3px; border: 1px solid #ddd; margin: 0 1em; }
+#copyright a:link, #copyright a:visited { color: #888; }
+
+/* #calendar-anchor div { margin-right: 1em; height: 2em; font-size: 150%; } */
+
+.format-test { font-weight: bold; }
+
+#designtree li.active { color: #f00; }
+#designtree li.active ul { color: #000; }
+
+#designpreview { padding: 1em; }
+
+.operations { border-right: 1px solid #888; padding-right: 1em; white-space: nowrap; width: 15em; }
+.operations a { text-decoration: none; }
+.operations a u { color: red; }
+.operations a:hover { text-decoration: underline; background-color: #ff8; }

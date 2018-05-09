@@ -1,0 +1,234 @@
+﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" You can easily get form messages on your language. To do this - specify lang, langCountryCode and langEncoding for your Zapatec.Form constructor. You also need to include file with message resources for your language into page. For english - zpform/lang/en.js etc. In this demo first form uses english messages and second - russian. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Localization</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<!-- Theme css -->
+	<link href="../themes/alternate.css" rel="stylesheet" type="text/css">
+	<link href="../themes/lightgreen.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../lang/en.js"></script>
+	<script type="text/javascript" src="../lang/ru-utf8.js"></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Localization</div>
+
+This demo shows how to localize form messages for your language.
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>You can easily get form messages on your language. To do this - specify <i>lang</i>, <i>langCountryCode</i> and <i>langEncoding</i> for your Zapatec.Form constructor.</li>
+<li>You also need to include file with message resources for your language into page. For english - <b>zpform/lang/en.js</b> etc.</li>
+<li>In this demo first form uses english messages and second - russian.</li>
+
+			</ul>
+		</div>
+
+
+
+<form action="localization.html" id='userForm' method="post">
+	<div id='errOutput' class="errOutput"></div>
+
+	<div class="zpFormContent">
+		<fieldset>
+			<legend>Personal information</legend>
+			<label class='zpFormLabel'>Name</label>
+			<input class='zpFormRequired' value="" size="40" name="name" type="text" >
+			<br />
+
+			<label class='zpFormLabel'>Address</label>
+			<input class='zpFormRequired' value="" size="40" name="address" type="text" >
+			<br />
+
+			<label class='zpFormLabel'>Date of Birth</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate zpFormMask="00\/00\/0000"'>
+			<br />
+
+			<label class='zpFormLabel'>Date of Birth(d.m.y)</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate="%d.%m.%y"  zpFormMask="00\.00\.0000"'>
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>Zip</label>
+			<input value="" class='zpFormRequired zpFormUSZip zpFormMask="00000"' size="10" name="zip" type="text" >
+			<br />
+
+			<label class='zpFormLabel'>US Phone</label>
+			<input value="" size="23" name="usnumber" type="text" class='zpFormUSPhone zpFormMask="\(000\)\ 000\-0000"'>
+			<br />
+
+			<label class='zpFormLabel'>International phone</label>
+			<input value="" size="23" name="international_number" type="text" class='zpFormInternationalPhone'>
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>Resume</label>
+			<textarea name="resume" cols="40" rows="10" class="zpFormRequired"></textarea>
+			<br />
+		</fieldset>
+
+		<fieldset>
+			<legend>Online Information</legend>
+			<label class='zpFormLabel'>Email</label>
+			<input value="" size="40" name="email" type="text" class='zpFormEmail'>
+			<br />
+
+			<label class='zpFormLabel'>Alternate Email</label>
+			<input value="" size="40" name="alternate_email" type="text" class='zpFormRequired zpFormEmail'>
+			<br />
+
+			<label class='zpFormLabel'>URL</label>
+			<input value="" size="40" name="url" class='zpFormUrl' type="text" >
+			<br />
+			<div style="line-height: 1px; clear: both;">&nbsp;</div>
+		</fieldset>
+	</div>
+	<div class="zpFormButtons">
+		<input value="Submit" name="Submit" onclick="" type="submit" class="button"> 
+		<input value="Clear" name="Clear" onclick="" type="reset" class="button">
+	</div>
+</form>
+<p>&nbsp;</p>
+<form action="localization.html" id='userForm2' method="post">
+	<div id='errOutput2' class="errOutput"></div>
+
+	<div class="zpFormContent">
+		<fieldset>
+			<legend>Личная информация</legend>
+			<label class='zpFormLabel'>Имя</label>
+			<input class='zpFormRequired' value="" size="40" name="name" type="text" >
+			<br />
+
+			<label class='zpFormLabel'>Адрес</label>
+			<input class='zpFormRequired' value="" size="40" name="address" type="text" >
+			<br />
+
+			<label class='zpFormLabel'>Дата рождения</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate zpFormMask="00\/00\/0000"'>
+			<br />
+
+			<label class='zpFormLabel'>Дата рождения (дд.мм.гг)</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate="%d.%m.%y"  zpFormMask="00\.00\.0000"'>
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>Почтовый индекс</label>
+			<input value="" class='zpFormRequired zpFormUSZip zpFormMask="00000"' size="10" name="zip" type="text" >
+			<br />
+
+			<label class='zpFormLabel'>Телефонный номер (США)</label>
+			<input value="" size="23" name="usnumber" type="text" class='zpFormUSPhone zpFormMask="\(000\)\ 000\-0000"'>
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>Международный телефонный номер</label>
+			<input value="" size="23" name="international_number" type="text" class='zpFormInternationalPhone'>
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>Резюме</label>
+			<textarea name="resume" cols="40" rows="10" class="zpFormRequired"></textarea>
+			<br />
+		</fieldset>
+
+		<fieldset>
+			<legend>Онлайн контакты</legend>
+			<label class='zpFormLabel'>Емейл</label>
+			<input value="" size="40" name="email" type="text" class='zpFormEmail'>
+			<br />
+
+			<label class='zpFormLabel'>Вторичный емейл</label>
+			<input value="" size="40" name="alternate_email" type="text" class='zpFormRequired zpFormEmail'>
+			<br />
+
+			<label class='zpFormLabel'>Сайт</label>
+			<input value="" size="40" name="url" class='zpFormUrl' type="text" >
+			<br />
+			<div style="line-height: 1px; clear: both;">&nbsp;</div>
+		</fieldset>
+	</div>
+	<div class="zpFormButtons">
+		<input value="Submit" name="Submit" onclick="" type="submit" class="button"> 
+		<input value="Clear" name="Clear" onclick="" type="reset" class="button">
+	</div>
+	
+</form>
+
+<script type="text/javascript">
+function testErrOutput2(objErrors){
+	var message = objErrors.generalError + '<br />';
+	
+	if (objErrors.fieldErrors) {
+		for (var ii = 0; ii < objErrors.fieldErrors.length; ii++)
+			message += (ii + 1) + ': Field "' + objErrors.fieldErrors[ii].field.name + '" ' + objErrors.fieldErrors[ii].errorMessage + "<br />";
+	}
+	
+	var outputDiv = document.getElementById("errOutput2");
+	
+	if(outputDiv != null){
+		outputDiv.innerHTML = message;
+		outputDiv.style.display = "block";
+	}
+}
+
+new Zapatec.Form({
+	form: 'userForm',
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput,
+	theme: "alternate",
+	putTabIndexesOnError: false,
+	lang: "en"
+});
+
+new Zapatec.Form({
+	form: 'userForm2',
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput2,
+	theme: "lightgreen",
+	putTabIndexesOnError: false,
+	lang: "ru",
+	langEncoding: "utf8",
+	startupFocusPosition: null
+});
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

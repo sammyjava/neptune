@@ -1,0 +1,957 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="resizable.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>resizable.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'resizable.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">//$Id: resizable.js 8609 2007-10-17 21:44:47Z vkulov $</span>
+<span class="comment">/**
+ * This is a set of functionality used for resizing object
+ * and is implemented in interface (mixin) manner.
+ */</span>
+Zapatec.Resizable = {};
+
+<span class="comment">/**
+ * Makes the element resizable. This means attaching events, 
+ * and making some preparations.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Resizable.makeResizable = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.requireInterface(<span class="literal">"Zapatec.Sizable"</span>)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.requireInterface(<span class="literal">"Zapatec.CommandEvent"</span>)) {
+		<span class="reserved">return</span> false;
+	}
+	var hooks = Zapatec.Array(<span class="reserved">this</span>._getResizableHooks());
+	var measurement = <span class="reserved">this</span>.getSizableMeasurement();
+	var self = <span class="reserved">this</span>, result = false;
+	var config = <span class="reserved">this</span>.getResizeConfig();
+	<span class="comment">//if direction includes top and left resizing we need Zapatec.Movable interface</span>
+	<span class="reserved">if</span> (/(vertical|horizontal|top|left|all)/.test(config.direction) &amp;&amp; !<span class="reserved">this</span>.hasInterface(<span class="literal">"Zapatec.Movable"</span>)) {
+		Zapatec.Log({description : <span class="literal">"The object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"' has no Zapatec.Movable interface so can not be resizable!"</span>});
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//we need to save references to anonymous event listenrs</span>
+	var listenersObj = <span class="reserved">this</span>._getRestorer().getSavedProps()[<span class="literal">"resizeListeners"</span>] = {
+		mousedown : <span class="reserved">function</span>(ev) {
+			<span class="reserved">return</span> self.resizeStart(ev);
+		},
+		hover : <span class="reserved">function</span>(ev) {
+			<span class="reserved">if</span> (!self.isResizing() &amp;&amp; self.canResize()) {
+				self._toggleResizeCursor(ev);
+			}
+		},
+		mouseover : <span class="reserved">function</span>(ev) {
+			<span class="reserved">if</span> (self.hasInterface(<span class="literal">"Zapatec.Draggable"</span>)) {
+				self._setCanDrag(false);
+			}
+		},
+		mouseout : <span class="reserved">function</span>(ev) {
+			<span class="reserved">if</span> (self.hasInterface(<span class="literal">"Zapatec.Draggable"</span>)) {
+				self._setCanDrag(true);
+			}
+		}
+	};
+	hooks.each(<span class="reserved">function</span>(index, hook) {
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(hook)) {
+			<span class="reserved">return</span>;
+		}
+		<span class="comment">//if we are here than there is at least one hook :)</span>
+		result = true;
+		<span class="comment">//this for disabling text selection on resize</span>
+		<span class="reserved">if</span> (Zapatec.is_gecko) {
+			hook.style.setProperty(<span class="literal">"-moz-user-select"</span>, <span class="literal">"none"</span>, <span class="literal">""</span>);
+		}
+		<span class="comment">//adding resize start event</span>
+		Zapatec.Utils.addEvent(hook, <span class="literal">'mousedown'</span>, listenersObj.mousedown);
+		Zapatec.Utils.addEvent(hook, <span class="literal">'mouseover'</span>, listenersObj.mouseover);
+		Zapatec.Utils.addEvent(hook, <span class="literal">'mouseout'</span>, listenersObj.mouseout);
+	});
+	<span class="comment">//if there are no hooks, we use measurement border as trigger</span>
+	<span class="reserved">if</span> (!result) {
+		<span class="comment">//if it is not an HTML element then we have no trigger</span>
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(measurement)) {
+			<span class="reserved">return</span> false;
+		}
+		<span class="comment">//result is true now</span>
+		result = true;
+		<span class="comment">//adding resize events</span>
+		Zapatec.Utils.addEvent(measurement, <span class="literal">'mousedown'</span>, listenersObj.mousedown);
+		Zapatec.Utils.addEvent(measurement, <span class="literal">'mousemove'</span>, listenersObj.hover);
+	}
+	<span class="comment">//returning result</span>
+	<span class="reserved">return</span> result;	
+};
+
+<span class="comment">/**
+ * This method is used for determining cursor 
+ * for current mouse position if the resizing 
+ * trigger is elements border.
+ * <span class="attrib">@param</span> ev {object} event object.
+ */</span>
+Zapatec.Resizable._toggleResizeCursor = <span class="reserved">function</span>(ev) {
+	ev = ev || window.event;
+	var el = <span class="reserved">this</span>.getSizableMeasurement();
+	<span class="comment">//lets get the position of the mouse</span>
+	var config = <span class="reserved">this</span>.getResizeConfig();
+	<span class="comment">//mouse position</span>
+	var oPos = Zapatec.Utils.getMousePos(ev);
+	var posX = oPos.pageX;
+	var posY = oPos.pageY;
+	<span class="comment">//element boundaries</span>
+	var pos = Zapatec.Utils.getElementOffset(el);
+	var left = pos.x, right = pos.x + Zapatec.Utils.getWidth(el);
+	var top = pos.y, bottom = pos.y + Zapatec.Utils.getHeight(el);
+	<span class="comment">//resizing border thickness</span>
+	var borderThickness = config.borderThickness;
+	var cornerThickness = config.cornerThickness;
+	<span class="comment">//checks if point is in rectangle</span>
+	<span class="reserved">function</span> inRect(x, y, left, top, right, bottom) {
+		<span class="reserved">if</span> ((x &gt; left) &amp;&amp; (x &lt; right) &amp;&amp; (y &gt; top) &amp;&amp; (y &lt; bottom)) {
+			<span class="reserved">return</span> true;
+		}
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//checks if value is in range</span>
+	<span class="reserved">function</span> inRange(value, minVal, maxVal) {
+		<span class="reserved">if</span> ((value &gt; minVal) &amp;&amp; (value &lt; maxVal)) {
+			<span class="reserved">return</span> true;
+		}
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//sets cursor and disables/enables dragging</span>
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">function</span> toggleResizing(cursor) {
+		el.style.cursor = cursor;
+		<span class="reserved">if</span> (self.hasInterface(<span class="literal">"Zapatec.Draggable"</span>)) {
+			self._setCanDrag((cursor === <span class="literal">""</span>) ? true : false);
+		}
+	}
+	<span class="comment">//getting the needed direction cursor and toggling drag</span>
+	switch (true) {
+		case (inRect(posX, posY, left, top, left + borderThickness, top + borderThickness)) : {
+			toggleResizing(<span class="literal">"nw-resize"</span>);
+			break;
+		}
+		
+		case (inRect(posX, posY, right - cornerThickness, bottom - cornerThickness, right, bottom)) : {
+			toggleResizing(<span class="literal">"se-resize"</span>);
+			break;
+		}
+	
+		case (inRect(posX, posY, right - cornerThickness, top, right, top + borderThickness)) : {
+			toggleResizing(<span class="literal">"ne-resize"</span>);
+			break;
+		}
+		
+		case (inRect(posX, posY, left, bottom - cornerThickness, left + cornerThickness, bottom)) : {
+			toggleResizing(<span class="literal">"sw-resize"</span>);
+			break;
+		}
+	
+		case (inRange(posX, left, left + borderThickness)) : {
+			toggleResizing(<span class="literal">"w-resize"</span>);
+			break;
+		}
+		
+		case (inRange(posX, right - borderThickness, right)) : {
+			toggleResizing(<span class="literal">"e-resize"</span>);
+			break;
+		}
+	
+		case (inRange(posY, top, top + borderThickness)) : {
+			toggleResizing(<span class="literal">"n-resize"</span>);
+			break;
+		}
+		
+		case (inRange(posY, bottom - borderThickness, bottom)) : {
+			toggleResizing(<span class="literal">"s-resize"</span>);
+			break;
+		}
+	
+		default : {
+			toggleResizing(<span class="literal">""</span>);
+			break;
+		}
+	}
+	<span class="comment">//correcting direction</span>
+	el.style.cursor = <span class="reserved">this</span>._correctDirection(el.style.cursor);
+	<span class="reserved">if</span> (el.style.cursor == <span class="literal">""</span>) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>.hasInterface(<span class="literal">"Zapatec.Draggable"</span>)) {
+			<span class="reserved">this</span>._setCanDrag(true);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Corrects the cursor value to fit the
+ * direction config option.
+ * <span class="attrib">@param</span> direction {string} cursor value, 
+ * meaning the direction of resizing.
+ * <span class="attrib">@return</span> {string} new cursor, meaning the
+ * enabled direction.
+ */</span>
+Zapatec.Resizable._correctDirection = <span class="reserved">function</span>(direction) {
+	<span class="comment">//getting config</span>
+	var config = <span class="reserved">this</span>.getResizeConfig();
+	<span class="comment">//taking direction part</span>
+	direction = direction.replace(<span class="literal">"-resize"</span>, <span class="literal">""</span>);
+	<span class="comment">//excluding impossible action</span>
+	<span class="reserved">for</span> (var i = 0; i &lt; direction.length; ++i) {
+		switch(direction.charAt(i)) {
+			case <span class="literal">"n"</span> : {
+				<span class="reserved">if</span> (!/(all|vertical|top)/.test(config.direction)) {
+					direction = direction.replace(<span class="literal">"n"</span>, <span class="literal">""</span>);
+				}
+			}
+			case <span class="literal">"s"</span> : {
+				<span class="reserved">if</span> (!/(all|vertical|bottom)/.test(config.direction)) {
+					direction = direction.replace(<span class="literal">"s"</span>, <span class="literal">""</span>);
+				}
+			}
+			case <span class="literal">"w"</span> : {
+				<span class="reserved">if</span> (!/(all|horizontal|left)/.test(config.direction)) {
+					direction = direction.replace(<span class="literal">"w"</span>, <span class="literal">""</span>);
+				}
+			}
+			case <span class="literal">"e"</span> : {
+				<span class="reserved">if</span> (!/(all|horizontal|right)/.test(config.direction)) {
+					direction = direction.replace(<span class="literal">"e"</span>, <span class="literal">""</span>);
+				}
+			}
+		}
+	}
+	<span class="comment">//returning new cursor</span>
+	<span class="reserved">if</span> (direction != <span class="literal">""</span>) {
+		<span class="reserved">return</span> direction + <span class="literal">"-resize"</span>;
+	}
+	<span class="reserved">return</span> <span class="literal">""</span>;
+};
+ 
+<span class="comment">/**
+ * This is an event handler for the mouse down event 
+ * of the hook element.
+ * <span class="attrib">@param</span> ev {MouseEvent} this is mouse event triggered by
+ * mouse down action.
+ * <span class="attrib">@return</span> {false} false for stoping events in some browsers.
+ */</span>
+Zapatec.Resizable.resizeStart = <span class="reserved">function</span>(ev, deb) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.canResize()) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//getting event object</span>
+	ev = ev || window.event;
+	<span class="comment">//check mouse button, only left one is valid</span>
+	var iButton = ev.button || ev.which;
+	<span class="reserved">if</span> (iButton &gt; 1) {
+		<span class="reserved">return</span> true;
+	}
+	var self = <span class="reserved">this</span>;
+	var config = <span class="reserved">this</span>.getResizeConfig();
+	<span class="comment">//getting the direction of resizement</span>
+	var target = ev.currentTarget || ev.srcElement;
+	<span class="reserved">while</span>(target != document.body &amp;&amp; target.style.cursor.indexOf(<span class="literal">"resize"</span>) == -1) {
+		target = target.parentNode;
+	}
+	<span class="comment">//it is pointed in the cursor style property of trigger element</span>
+	<span class="reserved">if</span> (target.style.cursor.indexOf(<span class="literal">"resize"</span>) == -1) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//correction direction</span>
+	var direction = <span class="reserved">this</span>._correctDirection(target.style.cursor);
+	<span class="reserved">if</span> (direction == <span class="literal">""</span>) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"beforeResizeInit"</span>, ev) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//calling global event handler</span>
+	<span class="reserved">if</span> (Zapatec.GlobalEvents.fireEvent(<span class="literal">"beforeResizeInit"</span>, ev, <span class="reserved">this</span>) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//now we started resizing!</span>
+	<span class="reserved">this</span>._setResizing(true);
+	<span class="comment">//preparing elements</span>
+	<span class="reserved">this</span>._proceedResizableElements(<span class="literal">"resizeStart"</span>);
+	<span class="comment">//lets get the starting position of the mouse</span>
+	var oPos = Zapatec.Utils.getMousePos(ev);
+	var mouseX = oPos.pageX;
+	var mouseY = oPos.pageY;
+	<span class="comment">//making object sizable</span>
+	<span class="reserved">this</span>.makeSizable();
+	<span class="comment">//starting sizing</span>
+	<span class="reserved">this</span>.startSizing();
+	<span class="reserved">if</span> (/(vertical|horizontal|top|left|all)/.test(config.direction)) {
+		<span class="comment">//making object movable</span>
+		<span class="reserved">this</span>.makeMovable();
+		<span class="comment">//starting movement</span>
+		<span class="reserved">this</span>.startMove();
+	}
+	
+	Zapatec.Utils.cover.show(
+		1000001,
+		direction,
+		<span class="reserved">function</span>(ev) {
+			<span class="reserved">return</span> self.resizeMove(ev);
+		},
+		<span class="reserved">function</span>(ev) {
+			<span class="reserved">return</span> self.resizeEnd(ev);
+		}
+	);
+	<span class="reserved">this</span>._setResizingPoint(mouseX, mouseY, direction.replace(<span class="literal">"-resize"</span>, <span class="literal">""</span>));
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onResizeInit"</span>, ev);
+
+	<span class="comment">//calling the global handler</span>
+	Zapatec.GlobalEvents.fireEvent(<span class="literal">"onResizeInit"</span>, ev, <span class="reserved">this</span>);
+	
+	<span class="reserved">if</span> (config.stopEvent) {
+		<span class="reserved">return</span> Zapatec.Utils.stopEvent(ev);
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> true;
+	}
+};
+
+<span class="comment">/**
+ * This is an event handler for the mouse move event 
+ * of the cover element.
+ * <span class="attrib">@param</span> ev {MouseEvent} this is mouse event triggered by
+ * mouse move action.
+ * <span class="attrib">@return</span> {false} false for stoping events in some browsers.
+ */</span>
+Zapatec.Resizable.resizeMove = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isResizing()) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//getting event object</span>
+	ev = ev || window.event;
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"beforeResize"</span>, ev) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//calling global event handler</span>
+	<span class="reserved">if</span> (Zapatec.GlobalEvents.fireEvent(<span class="literal">"beforeResize"</span>, ev, <span class="reserved">this</span>) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//mouse position</span>
+	var oPos = Zapatec.Utils.getMousePos(ev);
+	var x = oPos.pageX;
+	var y = oPos.pageY;
+	var movePoint = <span class="reserved">this</span>.getResizingPoint();
+	var direction = Zapatec.Utils.cover.style.cursor;
+	direction = direction.replace(<span class="literal">"-resize"</span>, <span class="literal">""</span>);
+	<span class="reserved">if</span> (direction.indexOf(<span class="literal">"w"</span>) &gt; -1) {
+		var width = <span class="reserved">this</span>.getWidth();
+		<span class="reserved">this</span>.setWidth(width + (movePoint.x - x));
+		<span class="reserved">if</span> (width != <span class="reserved">this</span>.getWidth()) {
+			<span class="reserved">this</span>.moveFor(width - <span class="reserved">this</span>.getWidth(), null);
+		}
+	}
+	<span class="reserved">if</span> (direction.indexOf(<span class="literal">"e"</span>) &gt; -1) {
+		<span class="reserved">this</span>.setWidth(<span class="reserved">this</span>.getWidth() + (x - movePoint.x));
+	}
+	<span class="reserved">if</span> (direction.indexOf(<span class="literal">"n"</span>) &gt; -1) {
+		var height = <span class="reserved">this</span>.getHeight();
+		<span class="reserved">this</span>.setHeight(height + (movePoint.y - y));
+		<span class="reserved">if</span> (height != <span class="reserved">this</span>.getHeight()) {
+			<span class="reserved">this</span>.moveFor(null, height - <span class="reserved">this</span>.getHeight());
+		}
+	}
+	<span class="reserved">if</span> (direction.indexOf(<span class="literal">"s"</span>) &gt; -1) {
+		<span class="reserved">this</span>.setHeight(<span class="reserved">this</span>.getHeight() + (y - movePoint.y));
+	}
+	<span class="reserved">this</span>._setResizingPoint(x, y, direction);
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onResize"</span>, ev);
+
+	<span class="comment">//calling global event handler</span>
+	Zapatec.GlobalEvents.fireEvent(<span class="literal">"onResize"</span>, ev, <span class="reserved">this</span>);
+
+	<span class="comment">// Stop event</span>
+	<span class="reserved">return</span> Zapatec.Utils.stopEvent(ev);
+};
+
+<span class="comment">/**
+ * This is an event handler for the mouse up event 
+ * of the cover element.
+ * <span class="attrib">@param</span> ev {MouseEvent} this is mouse event triggered by
+ * mouse up action.
+ * <span class="attrib">@return</span> {false} false for stoping events in some browsers.
+ */</span>
+Zapatec.Resizable.resizeEnd = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isResizing()) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//getting event object</span>
+	ev = ev || window.event;
+	var self = <span class="reserved">this</span>;
+	var config = <span class="reserved">this</span>.getResizeConfig();
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"beforeResizeEnd"</span>, ev) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//calling global event handler</span>
+	<span class="reserved">if</span> (Zapatec.GlobalEvents.fireEvent(<span class="literal">"beforeResizeEnd"</span>, ev, <span class="reserved">this</span>) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//unprepareing elements</span>
+	<span class="reserved">this</span>._proceedResizableElements(<span class="literal">"resizeEnd"</span>);
+	<span class="comment">//hiding the cover</span>
+	Zapatec.Utils.cover.hide();
+	<span class="comment">//clearing moving point</span>
+	<span class="reserved">this</span>._setResizingPoint(null, null);
+	<span class="comment">//now we ended dragging!</span>
+	<span class="reserved">this</span>._setResizing(false);
+	<span class="comment">//ending sizing</span>
+	<span class="reserved">this</span>.endSizing();
+	<span class="reserved">if</span> (/(vertical|horizontal|top|left|all)/.test(config.direction)) {
+		<span class="comment">//ending movement</span>
+		<span class="reserved">this</span>.endMove();
+	}
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onResizeEnd"</span>, ev);
+
+	<span class="comment">//calling global event handler</span>
+	Zapatec.GlobalEvents.fireEvent(<span class="literal">"onResizeEnd"</span>, ev, <span class="reserved">this</span>);
+
+	<span class="comment">// Stop event</span>
+	<span class="reserved">return</span> Zapatec.Utils.stopEvent(ev);
+};
+
+<span class="comment">/**
+ * Restores object from resizing.
+ */</span>
+Zapatec.Resizable.restoreOfResize = <span class="reserved">function</span>() {
+	var config = <span class="reserved">this</span>.getResizeConfig();
+	<span class="reserved">this</span>.restoreOfSizing();
+	<span class="reserved">if</span> (/(vertical|horizontal|top|left|all)/.test(config.direction)) {
+		<span class="reserved">this</span>.restoreOfMove();
+	}
+	var hooks = Zapatec.Array(<span class="reserved">this</span>._getResizableHooks());
+	var self = <span class="reserved">this</span>;
+	var result = false;
+	<span class="comment">//we need to save references to anonymous event listenrs</span>
+	var listenersObj = <span class="reserved">this</span>._getRestorer().getSavedProps()[<span class="literal">"resizeListeners"</span>];
+	hooks.each(<span class="reserved">function</span>(index, hook) {
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(hook)) {
+			<span class="reserved">return</span>;
+		}
+		result = true;
+		<span class="reserved">if</span> (Zapatec.is_gecko) {
+			hook.style.setProperty(<span class="literal">"-moz-user-select"</span>, <span class="literal">""</span>, <span class="literal">""</span>);
+		}
+		Zapatec.Utils.removeEvent(hook, <span class="literal">'mousedown'</span>, listenersObj.mousedown);
+		Zapatec.Utils.removeEvent(hook, <span class="literal">'mouseover'</span>, listenersObj.mouseover);
+		Zapatec.Utils.removeEvent(hook, <span class="literal">'mouseout'</span>, listenersObj.mouseout);
+	});
+	<span class="reserved">if</span> (!result) {
+		var measurement = <span class="reserved">this</span>.getSizableMeasurement();
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(measurement)) {
+			<span class="reserved">return</span> false
+		}
+		<span class="reserved">if</span> (listenersObj) {
+			Zapatec.Utils.removeEvent(measurement, <span class="literal">'mousedown'</span>, listenersObj.mousedown);
+			Zapatec.Utils.removeEvent(measurement, <span class="literal">'mousemove'</span>, listenersObj.hover);
+		}
+	}
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * This method should return the array of elements that
+ * are handles for resizing. These are elements that 
+ * trigger resize start. This is almost empty method
+ * that should be overwritten in implementing class.
+ * <span class="attrib">@return</span> {array} array of hook elements.
+ */</span>
+Zapatec.Resizable._getResizableHooks = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.getContainer) {
+		<span class="reserved">return</span> <span class="reserved">this</span>.getContainer();
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> null;
+	}
+};
+
+<span class="comment">/**
+ * This method returns true if object started
+ * resizing, otherwise false.
+ * <span class="attrib">@return</span> {boolean} true if object is resizing,
+ * otherwise false.
+ */</span>
+Zapatec.Resizable.isResizing = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.resizing;
+};
+
+<span class="comment">/**
+ * This method returns true if resizing is enabled,
+ * otherwise it should return false.
+ * <span class="attrib">@return</span> {boolean} true if resizing enabled, otherwise false.
+ */</span>
+Zapatec.Resizable.canResize = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.canResize;
+};
+
+<span class="comment">/**
+ * Turns on or off resizing.
+ * <span class="attrib">@param</span> on {boolean} whether we want to 
+ * turn on or off resizing.
+ */</span>
+Zapatec.Resizable._setCanResize = <span class="reserved">function</span>(on) {
+	<span class="reserved">this</span>.canResize = on;
+};
+
+<span class="comment">/**
+ * Should returns the resizing configuration.
+ * <span class="attrib">@return</span> {object} configuration object.
+ */</span>
+Zapatec.Resizable.getResizeConfig = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration();
+};
+
+<span class="comment">/**
+ * Sets the resizing configuration.
+ * <span class="attrib">@param</span> config {object} a set of new configuration.
+ */</span>
+Zapatec.Resizable.setResizeConfig = <span class="reserved">function</span>(config) {
+	<span class="reserved">this</span>.reconfigure(config);
+};
+
+<span class="comment">/**
+ * Sets the flag of resizing to on or off.
+ * <span class="attrib">@param</span> on {boolean} true to turn on, otherwise false.
+ */</span>
+Zapatec.Resizable._setResizing = <span class="reserved">function</span>(on) {
+	<span class="reserved">this</span>.resizing = on;
+};
+
+<span class="comment">/**
+ * This method handles overflow of the size.
+ * <span class="attrib">@param</span> limit {number} limit that was overflowed.
+ * <span class="attrib">@param</span> dimension {string} dimension of size.
+ * <span class="attrib">@return</span> {number or boolean} new size or false.
+ */</span>
+Zapatec.Resizable._handleSizeOverflow = <span class="reserved">function</span>(limit, dimension) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isResizing()) {
+		Zapatec.Sizable._handleSizeOverflow.call(<span class="reserved">this</span>, limit, dimension);
+	}
+	<span class="reserved">return</span> limit;
+};
+
+<span class="comment">/**
+ * Returns the Zapatec.SRProp object.
+ * It is used for saving and restoring
+ * object properties.
+ * <span class="attrib">@return</span> {object} Zapatec.SRProp object.
+ */</span>
+Zapatec.Resizable._getRestorer = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.restorer || <span class="reserved">this</span>.restorer.constructor != Zapatec.SRProp) {
+		 <span class="reserved">this</span>.restorer = new Zapatec.SRProp(<span class="reserved">this</span>);
+	}
+	<span class="reserved">return</span> <span class="reserved">this</span>.restorer;
+};
+
+<span class="comment">/**
+ * Proceeds the resizable elements, to create
+ * a separate array for elements that are actually sizing.
+ * This is used to handle method of resizing.
+ * <span class="attrib">@param</span> resizeState {string} "resizeStart" or "resizeEnd" string 
+ * to point the state of resizing.
+ */</span>
+Zapatec.Resizable._proceedResizableElements = <span class="reserved">function</span>(resizeState) {
+	<span class="comment">//drag configuration</span>
+	var config = <span class="reserved">this</span>.getResizeConfig(), 
+	copy = null, measurement = null, self = <span class="reserved">this</span>;
+	switch (config.method) {
+		case <span class="literal">"copy"</span> : {
+			<span class="reserved">if</span> (resizeState == <span class="literal">"resizeStart"</span>) {
+				var measurement = <span class="reserved">this</span>.getSizableMeasurement();
+				<span class="reserved">if</span> (!Zapatec.isHtmlElement(measurement)) {
+					<span class="reserved">return</span> false;
+				}
+				copy = measurement.cloneNode(false);
+				measurement.parentNode.insertBefore(copy, measurement);
+				<span class="comment">//we substitute method of Zapatec.Sizable</span>
+				<span class="comment">//interface to get needed result</span>
+				<span class="reserved">this</span>._getRestorer().saveProp(<span class="literal">"getSizableElements"</span>);
+				<span class="comment">//we need to move copy</span>
+				<span class="reserved">this</span>.getSizableElements = <span class="reserved">function</span>() {
+					<span class="reserved">return</span> copy;
+				};
+				<span class="reserved">this</span>._getRestorer().saveProp(<span class="literal">"getSizableMeasurement"</span>);
+				<span class="comment">//we need to use copy as measurement</span>
+				<span class="reserved">this</span>.getSizableMeasurement = <span class="reserved">function</span>() {
+					<span class="reserved">return</span> copy;
+				};
+				<span class="reserved">if</span> (/(vertical|horizontal|top|left|all)/.test(config.direction)) {
+					<span class="comment">//we substitute method of Zapatec.Movable</span>
+					<span class="comment">//interface to get needed result</span>
+					<span class="reserved">this</span>._getRestorer().saveProp(<span class="literal">"getMovableElements"</span>);
+					<span class="comment">//we need to move copy</span>
+					<span class="reserved">this</span>.getMovableElements = <span class="reserved">function</span>(resetArray) {
+						<span class="reserved">return</span> copy;
+					};
+					<span class="reserved">this</span>._getRestorer().saveProp(<span class="literal">"getMovableMeasurement"</span>);
+					<span class="comment">//we need to use copy as measurement</span>
+					<span class="reserved">this</span>.getMovableMeasurement = <span class="reserved">function</span>() {
+						<span class="reserved">return</span> copy;
+					};
+				}
+			} <span class="reserved">else</span> <span class="reserved">if</span> (resizeState == <span class="literal">"resizeEnd"</span>) {
+				<span class="comment">//destroying elements if needed</span>
+				copy = <span class="reserved">this</span>.getMovableElements();
+				var width = <span class="reserved">this</span>.getWidth();
+				var height = <span class="reserved">this</span>.getHeight();
+				var pos = null;
+				<span class="reserved">if</span> (/(vertical|horizontal|top|left|all)/.test(config.direction)) {
+					pos = <span class="reserved">this</span>.getPosition();
+				}
+				copy.parentNode.removeChild(copy);
+				<span class="comment">//returning old methods</span>
+				<span class="reserved">this</span>._getRestorer().restoreProp(<span class="literal">"getSizableElements"</span>);
+				<span class="reserved">this</span>._getRestorer().restoreProp(<span class="literal">"getSizableMeasurement"</span>);
+				<span class="reserved">this</span>._getRestorer().restoreProp(<span class="literal">"getMovableElements"</span>);
+				<span class="reserved">this</span>._getRestorer().restoreProp(<span class="literal">"getMovableMeasurement"</span>);
+				<span class="reserved">this</span>.setWidth(width);
+				<span class="reserved">this</span>.setHeight(height);
+				<span class="reserved">if</span> (pos) {
+					<span class="reserved">this</span>.setPosition(pos.x, pos.y);
+				}
+			}
+			break;
+		}
+		default : {
+			break;
+		}
+	}
+};
+
+<span class="comment">/**
+ * Sets the coordinates of the point which is thought as
+ * the center of resizement of the object.
+ * <span class="attrib">@param</span> x {number} x coordinate of the point.
+ * <span class="attrib">@param</span> y {number} y coordinate of the point.
+ * <span class="attrib">@param</span> direction {string} direction of resizing.
+ */</span>
+Zapatec.Resizable._setResizingPoint = <span class="reserved">function</span>(x, y, direction) {
+	var resizingPoint = <span class="reserved">this</span>._getResizingPointObject();
+	<span class="comment">//this means resize end, so we should reset the object</span>
+	<span class="reserved">if</span> (x === null || y === null) {
+		resizingPoint.x = null;
+		resizingPoint.y = null;
+		resizingPoint.offsetX = null;
+		resizingPoint.offsetY = null;
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">//this means resize start, so we fill object</span>
+	<span class="reserved">if</span> (resizingPoint.x === null || resizingPoint.y === null) {
+		resizingPoint.x = x;
+		resizingPoint.y = y;
+		var width = <span class="reserved">this</span>.getWidth();
+		var height = <span class="reserved">this</span>.getHeight();
+		<span class="reserved">if</span> (direction.match(/(n|w)/)) {
+			var pos = <span class="reserved">this</span>.getScreenPosition();
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"n"</span>) != -1) {
+			resizingPoint.offsetY = y - pos.y;
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"w"</span>) != -1) {
+			resizingPoint.offsetX = x - pos.x;
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"e"</span>) != -1) {
+			resizingPoint.offsetX = x - width;
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"s"</span>) != -1) {
+			resizingPoint.offsetY = y - height;
+		}
+		resizingPoint.offsetX = resizingPoint.offsetX || 0;
+		resizingPoint.offsetY = resizingPoint.offsetY || 0;
+	} <span class="reserved">else</span> {<span class="comment">//changing point coordinates as this is drag move</span>
+		var diffX = 0;
+		var diffY = 0;
+		var width = <span class="reserved">this</span>.getWidth();
+		var height = <span class="reserved">this</span>.getHeight();
+		<span class="reserved">if</span> (direction.match(/(n|w)/)) {
+			var pos = <span class="reserved">this</span>.getScreenPosition();
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"n"</span>) != -1) {
+			diffY = pos.y;
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"w"</span>) != -1) {
+			diffX = pos.x;
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"e"</span>) != -1) {
+			diffX = width;
+		}
+		<span class="reserved">if</span> (direction.indexOf(<span class="literal">"s"</span>) != -1) {
+			diffY = height;
+		}
+		resizingPoint.x = diffX + resizingPoint.offsetX;
+		resizingPoint.y = diffY + resizingPoint.offsetY;
+	}
+	<span class="reserved">return</span>;
+};
+
+<span class="comment">/**
+ * Returns the coordinate of the resizing point.
+ * Its the point which is thought to be the 
+ * center of resizement.
+ * <span class="attrib">@return</span> {object} object with x and y properties.
+ */</span>
+Zapatec.Resizable.getResizingPoint = <span class="reserved">function</span>() {
+	var resizingPoint = <span class="reserved">this</span>._getResizingPointObject();
+	<span class="reserved">return</span> {x : resizingPoint.x, y : resizingPoint.y};
+};
+
+<span class="comment">/**
+ * Returns the object which holds the information about resizing point.
+ * <span class="attrib">@return</span> {object} object with x, y, offsetX and offsetY properties.
+ */</span>
+Zapatec.Resizable._getResizingPointObject = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.resizingPoint || typeof <span class="reserved">this</span>.resizingPoint != <span class="literal">"object"</span>) {
+		<span class="reserved">this</span>.resizingPoint = {x : null, y : null, offsetX : null, offsetY : null};
+	}
+	<span class="reserved">return</span> <span class="reserved">this</span>.resizingPoint;
+};
+
+<span class="comment">/**
+ * This is Zapatec.Utils.Resizable object definition.
+ * It represents most of the routines and
+ * events connected to resizing of the object.
+ * <span class="attrib">@param</span> config {object} - all parameters are passed as the properties of this object.
+ * 
+ * Constructor recognizes the following properties of the config object (rest options are inherited
+ * from Zapatec.Utils.Sizable object, see sizable.js comments)
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *  method           | {string} Method of resizing, can be "self" or "copy" (default "self").
+ *  stopEvent        | {boolean} Should we stop mousedown event of the handler (default true). 
+ *  handlers         | {array} Array of handles of resizing, otherwise container border will be 
+ *                   | used as a trigger (default null).
+ *  direction        | {string} Direction in which you can resize. Can be "all", "vertical", 
+ *                   | "horizontal", "top", "left", "right", "bottom" and their combinations
+ *                   | using "-" separator (default "all").
+ *  borderThickness  | {number} If there is no handler for resizing, this is the thickness of 
+ *                   | the container border which still triggers resizing.
+ *  cornerThickness  | {number} If there is no handler for resizing, this is the thickness of 
+ *                   | the container corner which still triggers resizing.
+ *
+ * \endcode
+ */</span>
+Zapatec.Utils.Resizable = <span class="reserved">function</span>(config) {
+	Zapatec.Utils.Resizable.SUPERconstructor.call(<span class="reserved">this</span>, config);
+};
+
+Zapatec.Utils.Resizable.id = <span class="literal">"Zapatec.Utils.Resizable"</span>;
+Zapatec.inherit(Zapatec.Utils.Resizable, Zapatec.Utils.Sizable);
+Zapatec.implement(Zapatec.Utils.Resizable, <span class="literal">"Zapatec.Movable"</span>);
+Zapatec.implement(Zapatec.Utils.Resizable, <span class="literal">"Zapatec.Resizable"</span>);
+
+<span class="comment">/**
+ * Inits the object with set of config options.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Resizable.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(config) {
+	<span class="comment">//calling parent init</span>
+	Zapatec.Utils.Resizable.SUPERclass.init.call(<span class="reserved">this</span>, config);
+	<span class="reserved">this</span>.restoreOfSizing();
+	<span class="comment">//makes object resizable </span>
+	<span class="reserved">this</span>.makeResizable();
+};
+
+<span class="comment">/**
+ * Sets the default configuration of the object and
+ * inits it with user defined values.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Resizable.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(config) {
+	<span class="comment">//method of resizing</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"method"</span>, <span class="literal">"self"</span>);
+	<span class="comment">//should we stop mouse down event!</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"stopEvent"</span>, true);
+	<span class="comment">//the handlers for resizing</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"handlers"</span>, null);
+	<span class="comment">//the border thickness for resizing, when no handler is ussed</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"borderThickness"</span>, 10);
+	<span class="comment">//the corner thickness for resizing, when no handler is ussed</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"cornerThickness"</span>, 10);
+	<span class="comment">//direction of resizing</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"direction"</span>, <span class="literal">"all"</span>);
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.Resizable.SUPERclass.configure.call(<span class="reserved">this</span>, config);
+	config = <span class="reserved">this</span>.getConfiguration();
+	<span class="comment">//correcting handlers option</span>
+	config.handlers = Zapatec.Array(config.handlers);
+	config.handlers.each(<span class="reserved">function</span>(index, handler) {
+		handler = Zapatec.Widget.getElementById(handler);
+		handler = Zapatec.Utils.img2div(handler);
+		config.handlers[index] = handler;
+	});
+};
+
+<span class="comment">/**
+ * Reconfigures the object with new parameters.
+ * <span class="attrib">@param</span> config {object} new configuration parameters.
+ */</span>
+Zapatec.Utils.Resizable.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(config) {
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.Resizable.SUPERclass.reconfigure.call(<span class="reserved">this</span>, config);
+};
+
+<span class="comment">/**
+ * Returns the handlers.
+ * <span class="attrib">@return</span> {array} handler elements.
+ */</span>
+Zapatec.Utils.Resizable.<span class="reserved">prototype</span>._getResizableHooks = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration().handlers;
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

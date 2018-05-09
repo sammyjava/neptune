@@ -1,0 +1,195 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	This page demonstrates conditional fields. This feature is 		useful, in a form where some fields should be entered only when other fields are set to some value. 	There are two possible options: 		 			zpFormDisplayWhen=callbackFunction - when callbackFunction returns true -  				the dependant field is shown. When false - hiden. When the fields are hidden  				they don't use any space in the form. 			zpFormVisibleWhen=callbackFunction - when callbackFunction returns true - 				the dependant field is shown. When false - hiden. In this 				case the fields use the space even when they're hidden. 		 	 	The callback functions should be defined before creating the Zapatec.Form object. 	Using conditionalEvents config option you can define events when conditional fields will be checked. Possible values: 		 			focus - when field gets focus 			blur - when field loses focus 			keydown - when some field in the form fires 'keydown' event 			keypress - when some field in the form fires 'keypress' event 			keyup - when some field in the form fires 'keyup' event 			valueChanged - when value in field changes 			booleanValueChanged - when checkbox/radio button field is changed 			 		 	 	Usually you will need to use conditionalEvents: ['booleanValueChanged'] or conditionalEvents: ['valueChanged']. By default - conditional fields are checked at all form events. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Conditional Fields</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Conditional Fields</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>default theme</b>.</li>
+				
+	<li>This page demonstrates <strong>conditional fields</strong>. This feature is
+		useful, in a form where some fields should be entered only when other fields are set to some value.</li>
+	<li>There are two possible options:
+		<ol>
+			<li><b>zpFormDisplayWhen=callbackFunction</b> - when callbackFunction returns true - 
+				the dependant field is shown. When false - hiden.<br /> When the fields are hidden 
+				they don't use any space in the form.</li>
+			<li><b>zpFormVisibleWhen=callbackFunction</b> - when callbackFunction returns true -
+				the dependant field is shown. When false - hiden.<br /> In this
+				case the fields use the space even when they're hidden.</li>
+		</ol>
+	</li>
+	<li>The callback functions should be defined before creating the Zapatec.Form object.</li>
+	<li>Using <i>conditionalEvents</i> config option you can define events when conditional fields will be checked. Possible values:
+		<ul>
+			<li>focus - when field gets focus</li>
+			<li>blur - when field loses focus</li>
+			<li>keydown - when some field in the form fires "keydown" event</li>
+			<li>keypress - when some field in the form fires "keypress" event</li>
+			<li>keyup - when some field in the form fires "keyup" event</li>
+			<li>valueChanged - when value in field changes</li>
+			<li>booleanValueChanged - when checkbox/radio button field is changed</li>
+			<li></li>
+		</ul>
+	</li>
+	<li>Usually you will need to use <b>conditionalEvents: ["booleanValueChanged"]</b> or <b>conditionalEvents: ["valueChanged"]</b>. By default - conditional fields are checked at all form events.</li>
+
+			</ul>
+		</div>
+
+
+
+This page demonstrates how a form can conditionally display or hide fields based on the return value of a callback.<br /> 
+
+This feature is particularly useful for a form in which some fields should be filled only when other fields are set to a particular value.<br />
+
+The conditional fields  feature is implemented by a callback associated with the <strong>zpFormDisplayWhen</strong>  or <strong>zpFormVisible </strong> property. When the callback function returns true, the dependent field is displayed. When the callback returns false, the field is hidden.<br /> 
+
+If you use the <strong>zpFormDisplayWhen </strong> property, hidden fields do not use any space in the form. If you use 
+<strong>zpFormVisibleWhen</strong>, fields always use the space, even when they are hidden.<br /> 
+
+Define the callback functions before creating the Zapatec.Form object.<br /><br />
+
+<form action="conditional.html" id='userForm' method="post">
+	<div id='errOutput' class="errOutput"></div>
+
+	<div class="zpFormContent">
+		<br />
+		<span>
+			<input type="checkbox" id="show_personal_info" />
+			<label for="show_personal_info" class="zpRadioLabel">Show personal info (using zpFormDisplayWhen)</label>
+		</span>
+		<br />
+		<br /> 
+		<fieldset class="zpFormDisplayWhen=showPersonalInfo">
+			<legend>Personal information</legend>
+			<label class='zpFormLabel'>Name</label>
+			<input class='zpFormRequired' value="" size="40" name="name" type="text" />
+			<br />
+
+			<label class='zpFormLabel'>Address</label>
+			<input class='zpFormRequired' value="" size="40" name="address" type="text" />
+			<br />
+
+			<label class='zpFormLabel'>Date of Birth</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate zpFormMask="00\/00\/0000"' />
+			<br />
+
+			<label class='zpFormLabel'>Date of Birth(d.m.y)</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate="%d.%m.%y" zpFormMask="00\.00\.0000"' />
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>Zip</label>
+			<input value="" class='zpFormRequired zpFormUSZip zpFormMask="00000"' size="10" name="zip" type="text" />
+			<br />
+
+			<label class='zpFormLabel'>US Phone</label>
+			<input value="" size="23" name="usnumber" type="text" class='zpFormUSPhone zpFormMask="\(000\)\ 000\-0000"' />
+			<br />
+
+			<label class='zpFormLabel'>Credit card number</label>
+			<input value="" size="23" name="credit_card" type="text" class='zpFormCreditCard zpFormMask="0000-0000-0000-0000"' />
+			<br />
+
+			<label class='zpFormLabel'>Resume</label>
+			<textarea name="resume" cols="40" rows="10" class="zpFormRequired"></textarea>
+			<br />
+		</fieldset>
+
+		<span>
+			<input type="checkbox" id="show_online_info" />
+			<label for="show_online_info" class="zpRadioLabel">Show online info (using zpFormVisibleWhen property)</label>
+		</span>
+		<br />
+		<br />    
+
+		<fieldset class="zpFormVisibleWhen=showOnlineInfo">
+			<legend>Online Information</legend>
+
+			<label class='zpFormLabel'>Email</label>
+			<input value="" size="40" name="email" type="text" class='zpFormEmail' />
+			<br />
+
+			<label class='zpFormLabel'>Alternate Email</label>
+			<input value="" size="40" name="alternate_email" type="text" class='zpFormRequired zpFormEmail' />
+			<br />
+
+			<label class='zpFormLabel'>URL</label>
+			<input value="" size="40" name="url" class='zpFormUrl' type="text" />
+			<br />
+			<div style="line-height: 1px; clear: both;">&nbsp;</div>
+		</fieldset>
+	</div>
+	<div class="zpFormButtons">
+		<input value="Submit" name="Submit" onclick="" type="submit" class="button" />
+		<input value="Clear" name="Clear" onclick="" type="reset" class="button" />
+	</div>
+	
+</form>
+
+<script type="text/javascript">
+function showOnlineInfo(){
+	return document.getElementById('show_online_info').checked
+}
+
+function showPersonalInfo(){
+	return document.getElementById('show_personal_info').checked
+}
+
+// Run this to auto-activate all "zpForm" class forms in the document.
+var form = new Zapatec.Form({
+	form: 'userForm',
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput,
+	theme: "default",
+	conditionalEvents: ["booleanValueChanged"]
+});
+
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

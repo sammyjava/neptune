@@ -1,0 +1,523 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Window Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="window-utils.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Window</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>window-utils.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'window-utils.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: window-utils.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/**
+ *
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ */</span>
+
+<span class="comment">/**
+ * Parses given DOM element to save references into objects properties.
+ * All the elements to be saved as a reference had to have a word starting
+ * with 'area' in there class name. So for example an element with class name
+ * areaTitle will be parsed into this.title property and those className will 
+ * be removed.
+ * <span class="attrib">@param</span> el [HTML element] - element to parse;
+ * <span class="attrib">@return</span> - true if success, otherwise false;
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.parseDom = <span class="reserved">function</span>(el) {
+	var classes = <span class="literal">""</span>;
+	<span class="comment">//the el needs to be a DOM HTML element</span>
+	<span class="reserved">if</span> (!el || typeof el != <span class="literal">"object"</span> || !el.nodeType) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//seeks the elements with the className starting with word 'area',</span>
+	<span class="comment">//extracts the rest part of this class name, creates the reference </span>
+	<span class="comment">//(a property of the object) with such name, removes this class.</span>
+	<span class="comment">//I didn't knew which way to mark the elements which needed to have reference</span>
+	<span class="comment">//in our object, and decided (by advise) to use className starting with 'area'.</span>
+	<span class="comment">//Example: 'areaContent', 'areaTitle', etc. will create this.content, this.title, etc.</span>
+	<span class="reserved">if</span> (el.className) {
+		classes = el.className.match(/area(\w+)/);
+		<span class="comment">//this way we mark all the elements which belong to the widget with a reference to it.</span>
+		el.win = true;
+		<span class="reserved">if</span> (classes) {
+			el.id = <span class="literal">"zpWin"</span> + <span class="reserved">this</span>.id + classes[1];
+			classes[1] = classes[1].charAt(0).toLowerCase() + classes[1].substring(1);
+			<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, classes[1], el);
+			Zapatec.Utils.removeClass(el, classes[0]);
+		}
+	}
+	<span class="comment">//to go through all the childs we use recursive calls of this function for every child.</span>
+	var child = el.firstChild;
+	<span class="reserved">while</span>(child) {
+		<span class="reserved">this</span>.parseDom(child);
+		child = child.nextSibling;
+	}
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Shows the specified button of the window.
+ * <span class="attrib">@param</span> button {string} string pointing to button name.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.showButton = <span class="reserved">function</span>(button) {
+	<span class="reserved">this</span>.restorer.restoreProp(button + <span class="literal">".getContainer().parentNode.style.display"</span>);
+};
+
+<span class="comment">/**
+ * Hides the specified button of the window.
+ * <span class="attrib">@param</span> button {string} string pointing to button name.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.hideButton = <span class="reserved">function</span>(button) {
+	<span class="reserved">this</span>.restorer.saveProp(button + <span class="literal">".getContainer().parentNode.style.display"</span>);
+	<span class="reserved">this</span>[button].getContainer().parentNode.style.display = <span class="literal">"none"</span>;
+};
+
+<span class="comment">/**
+ * Reconfigurating the object due to the config options.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.reconfig = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"ready"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.reconfig();})) {<span class="reserved">return</span>;}
+	var config = <span class="reserved">this</span>.getConfiguration();
+	<span class="comment">//Hiding title if needed</span>
+	<span class="reserved">if</span> (!config.showTitle) {
+		<span class="reserved">this</span>.restorer.saveProp(<span class="literal">"titleArea.style.display"</span>);
+		<span class="reserved">this</span>.titleArea.style.display = <span class="literal">"none"</span>;
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.restorer.restoreProp(<span class="literal">"titleArea.style.display"</span>);
+		<span class="comment">//hiding buttons if needed</span>
+		<span class="reserved">if</span> (!config.showMinButton || <span class="reserved">this</span>.state.state == <span class="literal">"min"</span>) {
+			<span class="reserved">this</span>.hideButton(<span class="literal">"minButton"</span>);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.showButton(<span class="literal">"minButton"</span>);
+		}
+		<span class="reserved">if</span> (!config.showMaxButton || <span class="reserved">this</span>.state.state == <span class="literal">"max"</span>) {
+			<span class="reserved">this</span>.hideButton(<span class="literal">"maxButton"</span>);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.showButton(<span class="literal">"maxButton"</span>);
+		}
+		<span class="reserved">if</span> (<span class="reserved">this</span>.state.state != <span class="literal">"max"</span> &amp;&amp; <span class="reserved">this</span>.state.state != <span class="literal">"min"</span>) {
+			<span class="reserved">this</span>.hideButton(<span class="literal">"restoreButton"</span>);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.showButton(<span class="literal">"restoreButton"</span>);
+		}
+		<span class="reserved">if</span> (!config.showCloseButton) {
+			<span class="reserved">this</span>.hideButton(<span class="literal">"closeButton"</span>);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.showButton(<span class="literal">"closeButton"</span>);
+		}
+	}
+	<span class="comment">//Hiding status if needed</span>
+	<span class="reserved">if</span> (!config.showStatus) {
+		<span class="reserved">this</span>.restorer.saveProp(<span class="literal">"statusText.style.display"</span>);
+		<span class="reserved">this</span>.statusText.style.display = <span class="literal">"none"</span>;
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.restorer.restoreProp(<span class="literal">"statusText.style.display"</span>);
+	}
+	<span class="comment">//making the modal cover</span>
+	<span class="reserved">if</span> (config.modal &amp;&amp; !<span class="reserved">this</span>.modal) {
+		<span class="reserved">this</span>.modal = new Zapatec.Modal({
+			themePath : Zapatec.zapatecPath + <span class="literal">"../zpextra/themes/indicator/"</span>
+		});
+		<span class="reserved">this</span>.modal.create();
+	}
+};
+
+
+<span class="comment">/**
+ * This function assigns event handlers and implements "pushed" element finding.
+ *
+ * "Pushed" element finding is implemented the following way: all the event handlers see one
+ * global variable target. When mouse is down on some element we try to get its buttonType property
+ * or seek this property in elements parents. If the element with the buttonType is found it is put
+ * into target variable. 
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.addEvents = <span class="reserved">function</span> () {
+	var self = <span class="reserved">this</span>, target = null;
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.container, <span class="literal">"mousedown"</span>, <span class="reserved">function</span> (ev) {
+		ev = ev || window.event; 
+		target = Zapatec.Utils.getTargetElement(ev);
+		<span class="reserved">while</span>(!target.buttonType &amp;&amp; (target != self.container)) {
+			target = target.parentNode;
+		}
+		<span class="reserved">if</span> (!target.buttonType) {target = null;}
+		var result = Zapatec.Window.mouseDown(ev, self, target);
+		target = null;
+		<span class="reserved">return</span> result;
+	});
+	<span class="reserved">if</span> (Zapatec.is_gecko) {
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.container, <span class="literal">"click"</span>, <span class="reserved">function</span> (ev) {
+			var result = null;
+			ev = ev || window.event; 
+			<span class="reserved">if</span> (ev.detail &gt; 1) {
+				target = Zapatec.Utils.getTargetElement(ev);
+				<span class="reserved">while</span>(!target.buttonType &amp;&amp; (target != self.container)) {
+					target = target.parentNode;
+				}
+				<span class="reserved">if</span> (!target.buttonType) {target = null;}
+				result = Zapatec.Window.dblClick(ev, self, target);
+			}
+			target = null;
+			<span class="reserved">return</span> result;
+		});
+	} <span class="reserved">else</span> {
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.container, <span class="literal">"dblclick"</span>, <span class="reserved">function</span> (ev) {
+			ev = ev || window.event; 
+			target = Zapatec.Utils.getTargetElement(ev);
+			<span class="reserved">while</span>(!target.buttonType &amp;&amp; (target != self.container)) {
+				target = target.parentNode;
+			}
+			<span class="reserved">if</span> (!target.buttonType) {target = null;}
+			var result = Zapatec.Window.dblClick(ev, self, target);
+			target = null;
+			<span class="reserved">return</span> result;
+		});
+	}
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>._getDraggableHooks = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.titleText;
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.canDrag = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration().canDrag;
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ * <span class="attrib">@param</span> on {boolean} turning on or off.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>._setCanDrag = <span class="reserved">function</span>(on) {
+	<span class="reserved">if</span> (!on) {
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.restorer.getProp(<span class="literal">"getConfiguration().canDrag"</span>) == <span class="literal">"undefined"</span>) {
+			<span class="reserved">this</span>.restorer.saveProp(<span class="literal">"getConfiguration().canDrag"</span>);
+		}
+		<span class="reserved">this</span>.getConfiguration().canDrag = on;
+	} <span class="reserved">else</span> {
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.restorer.getProp(<span class="literal">"getConfiguration().canDrag"</span>) != <span class="literal">"undefined"</span>) {
+			<span class="reserved">this</span>.restorer.restoreProp(<span class="literal">"getConfiguration().canDrag"</span>);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getDragConfig = <span class="reserved">function</span>() {
+	var config = <span class="reserved">this</span>.getConfiguration();
+	<span class="reserved">return</span> {
+		method : config.dragMethod,
+		dragCSS : config.addDragCSS,
+		overwriteCSS : config.newDragCSS,
+		copyChilds : false,
+		stopEvent : false,
+		eventCapture : true
+	};
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ * <span class="attrib">@param</span> config {object} new set of configuration.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setDragConfig = <span class="reserved">function</span>(config) {};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ * <span class="attrib">@param</span> dim {string} dimension of sizing.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getSizableElements = <span class="reserved">function</span>(dim) {
+	<span class="reserved">if</span> (dim == <span class="literal">"width"</span>) {
+		<span class="reserved">return</span> [
+			<span class="reserved">this</span>.titleText, 
+			<span class="reserved">this</span>.content ? <span class="reserved">this</span>.content.getContainer() : null, 
+			<span class="reserved">this</span>.getConfiguration().showStatus ? <span class="reserved">this</span>.statusText : null, 
+			<span class="reserved">this</span>.getContainer(), 
+			<span class="reserved">this</span>.WCH
+		];
+	} <span class="reserved">else</span> <span class="reserved">if</span> (dim == <span class="literal">"height"</span>) {
+		<span class="reserved">return</span> [
+			<span class="reserved">this</span>.content ? <span class="reserved">this</span>.content.getContainer() : null, 
+			<span class="reserved">this</span>.getContainer(), 
+			<span class="reserved">this</span>.WCH
+		];
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> [
+			<span class="reserved">this</span>.titleText, 
+			<span class="reserved">this</span>.content ? <span class="reserved">this</span>.content.getContainer() : null, 
+			<span class="reserved">this</span>.getConfiguration().showStatus ? <span class="reserved">this</span>.statusText : null, 
+			<span class="reserved">this</span>.getContainer(), 
+			<span class="reserved">this</span>.WCH
+		];
+	}
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>._getAutoSizableElement = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.content.getContainer();
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getSizingConfig = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> {
+		limit : <span class="reserved">this</span>.getConfiguration().limit,
+		direction : <span class="literal">"both"</span>
+	};
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ * <span class="attrib">@param</span> config {object} new set of configuration.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setSizingConfig = <span class="reserved">function</span>(config) {
+	<span class="reserved">if</span> (typeof config.limit == <span class="literal">"object"</span>) {
+		<span class="reserved">this</span>.getConfiguration().limit.minWidth = config.limit.minWidth;
+		<span class="reserved">this</span>.getConfiguration().limit.maxWidth = config.limit.maxWidth;
+		<span class="reserved">this</span>.getConfiguration().limit.minHeight = config.limit.minHeight;
+		<span class="reserved">this</span>.getConfiguration().limit.maxHeight = config.limit.maxHeight;
+	}
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getMovableElements = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> [<span class="reserved">this</span>.getContainer(), <span class="reserved">this</span>.WCH];
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getMoveConfig = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> {
+		limit : <span class="reserved">this</span>.getConfiguration().limit,
+		moveLayer : document.body,
+		direction : <span class="literal">"both"</span>,
+		preserveSizes : true,
+		followShape : false
+	};
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ * <span class="attrib">@param</span> config {object} new set of configuration.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setMoveConfig = <span class="reserved">function</span>(config) {
+	<span class="reserved">if</span> (typeof config.limit == <span class="literal">"object"</span>) {
+		<span class="reserved">this</span>.getConfiguration().limit.minX = config.limit.minX;
+		<span class="reserved">this</span>.getConfiguration().limit.maxX = config.limit.maxX;
+		<span class="reserved">this</span>.getConfiguration().limit.minY = config.limit.minY;
+		<span class="reserved">this</span>.getConfiguration().limit.maxY = config.limit.maxY;
+	}
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>._getResizableHooks = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> null;
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.canResize = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration().canResize;
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ * <span class="attrib">@param</span> on {boolean} turning on or off.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>._setCanResize = <span class="reserved">function</span>(on) {
+	<span class="reserved">if</span> (!on) {
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.restorer.getProp(<span class="literal">"getConfiguration().canResize"</span>) == <span class="literal">"undefined"</span>) {
+			<span class="reserved">this</span>.restorer.saveProp(<span class="literal">"getConfiguration().canResize"</span>);
+		}
+		<span class="reserved">this</span>.getConfiguration().canResize = on;
+	} <span class="reserved">else</span> {
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>.restorer.getProp(<span class="literal">"getConfiguration().canResize"</span>) != <span class="literal">"undefined"</span>) {
+			<span class="reserved">this</span>.restorer.restoreProp(<span class="literal">"getConfiguration().canResize"</span>);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.getResizeConfig = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> {
+		stopEvent : false,
+		eventCapture : true,
+		direction : <span class="reserved">this</span>.getConfiguration().resizeDirection,
+		borderThickness : 10,
+		cornerThickness : 10
+	};
+};
+
+<span class="comment">/**
+ * Overwriting interface method.
+ * <span class="attrib">@param</span> config {object} new set of configuration.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.setResizeConfig = <span class="reserved">function</span>(config) {
+	<span class="reserved">if</span> (typeof config.direction == <span class="literal">"string"</span> &amp;&amp; config.direction.length &gt; 2) {
+		<span class="reserved">this</span>.getConfiguration().resizeDirection = config.direction;
+	}
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Window</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:20:02 2009</div>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<list>
+	<item>
+		<attribute name="name">subchild1</attribute>
+		<attribute name="class">someClass</attribute>
+		<attribute name="id">subchild1</attribute>
+		<label>dynamically retrieved subchild1</label>
+	</item>
+	<item>
+		<label>dynamically retrieved subchild2</label>
+	</item>
+	<item isExpanded="true">
+		<label>dynamically retrieved subchild3 with subtree</label>
+		<list>
+			<item>
+				<label>subsubchild1</label>
+			</item>
+			<item>
+				<label>subsubchild2</label>
+			</item>
+			<item>
+				<label>subsubchild3</label>
+			</item>
+			<item>
+				<label>subsubchild4</label>
+			</item>
+		</list>
+	</item>
+	<item sourceType="xml/url" source="xml_branch.xml">
+		<label>recursive branch</label>
+	</item>
+</list>

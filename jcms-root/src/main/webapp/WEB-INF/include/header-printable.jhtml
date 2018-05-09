@@ -1,0 +1,20 @@
+<!-- printable header -->
+<!--stopindex-->
+<table id="header" cellspacing="0">
+  <tr>
+    <td class="header-left"></td>
+    <%
+      // printable logo
+      String printableLogo = Setting.getString(application, "printable_logo");
+      if (printableLogo!=null) {
+        int printableLogoWidth = Setting.getInt(application, "printable_logo_width");
+        int printableLogoHeight = Setting.getInt(application, "printable_logo_height");
+    %>
+    <td class="header"><img src="<%=printableLogo%>" width="<%=printableLogoWidth%>" height="<%=printableLogoHeight%>"/></td>
+    <%
+    }
+    %>
+    <td class="header-right"></td>
+  </tr>
+</table>
+<!--startindex-->

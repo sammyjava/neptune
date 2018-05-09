@@ -1,0 +1,4 @@
+<script type="text/javascript">
+  <% if (error!=null && error.length()!=0) { %>top.document.getElementById('error').innerHTML = "<%=error%>";<% } %>
+  <% if (message!=null) { %>top.document.getElementById('message').innerHTML = "<%=message%>";<% } %>
+</script>

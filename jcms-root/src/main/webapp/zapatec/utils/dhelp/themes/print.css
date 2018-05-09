@@ -1,0 +1,119 @@
+/* Docbook stylesheet */
+  
+body {
+  padding:10px;
+  margin:0px;
+}
+
+/*  Common containers for all page. Change [lang=XX], 
+ *  where XX = your lang propertie to control custom 
+ *  options for choosen lang  
+ */
+
+.book {}  
+.book [lang=en] {}
+
+ /* Main title of manual page */
+.titlepage h1 { padding-bottom:20px; border-bottom:1px solid #5B9ABC;} 
+
+.titlepage h1.title {font-family:Arial; font-size:36px; width: 100%; padding-left:10px; color:#0c479d; background:white url('img/logo.gif') no-repeat top right;}
+
+ /* common TOC container */
+.toc { padding-left:25px; font-size:18px; font-family: Arial, Helvetica, sans-serif; line-height: 26px; border-bottom:1px solid #5B9ABC; }
+.toc p {font-size:19px; color:#0c479d;}
+
+
+ /* TOC Chapter */
+.toc span.chapter a { color:#086afd;}
+
+.toc span.sect1 { color:#086afd; } 
+.toc span.sect1 a { color:#086afd; margin-left:-20px; }
+
+.toc  .sect2 { color:#086afd; }
+.toc  .sect2 a {color:#086afd; margin-left:-40px;}
+
+ /* TOC mouseover, visited */
+.toc span.chapter a:visited, .toc span.sect1 a:visited, .toc .sect2 a:visited { color:#5599bd; }
+.toc span.chapter a:hover, .toc span.sect1 a:hover, .toc .sect2 a:hover { color:#CC0000; }
+ /* end of toc properties */
+ 
+ /* Chapter Container */
+div.chapter { }
+
+/* Chapter Title */
+div.titlepage { }
+
+div.sect1 span.type { color:#BF3B3B;  }
+
+div.sect1 p a { color:#086afd; }
+div.sect1 p a:hover { color:#CC0000; }
+div.sect1 p a:visited { color:#5599bd; }
+
+
+div.sect1 p a span.property, div.sect1 p span.property a { color:#086afd; }
+div.sect1 p a:hover span.property, div.sect1 p span.property a:hover { color:#CC0000; }
+div.sect1 p a:visited span.property, div.sect1 p span.property a:visited { color:#5599bd; }
+
+/* Chapter Text */
+.chapter p { color:black; padding-left:25px; font-family: Arial, Helvetica, sans-serif; font-size:17px; margin-top:-12px; }
+
+
+.chapter h2.title { font-family: Arial, Helvetica, sans-serif; font-size:19px; color:#0c479d; padding-left:25px; padding-bottom:5px;}/* toplevel chapter header */
+.chapter .sect1 h2.title { font-family: Arial, Helvetica, sans-serif; font-size:16px; color:#0c479d; padding-left:25px; } /* sublevel1 chapter header */
+.chapter .sect1 h2.title .property {color:#0c479d; background:none;}/* fix of colors in TOC */
+.chapter .sect1 p { }
+.chapter .sect2 h3.title { font-family: Arial, Helvetica, sans-serif; font-size:16px; color:#0c479d; padding-left:25px; } /* sublevel2 chapter header */
+.chapter .sect2 p { }
+
+code.methodname { background:#ffffdf; color:#860303; } /* style for code fragments in text */
+span.property a { color:#860303; } /* style for properties */
+span.property { color:#860303; } /* style for properties */
+
+.calloutlist {
+  margin:0px;
+}
+
+.calloutlist p {
+  margin-top:-2px;
+  margin-left:-20px;
+}
+
+
+pre.programlisting { /* code example in highlited area */
+  font-size: 10pt;
+  background:#FFFFDF;
+  color:#860303;
+  border:1px solid #ccc;
+  padding: 3px 0px 3px 25px;
+  margin-left:25px;
+  margin-bottom:35px;
+  width:auto;
+}
+
+.parameter {
+  color:#860303;
+  font-style:normal;
+}
+
+img {margin-left:25px; border:1px solid #ccc;} /* style for included images */
+
+span.bold a, .chapter .itemizedlist a { color:#086afd; } /* link in itemized list and/or in text */
+span.bold a:visited, .chapter .itemizedlist a:visited { color:#5599bd; } /* visited link in itemized list and/or in text */
+span.bold a:hover, .chapter .itemizedlist a:hover { color:#CC0000; } /* mouseover link in itemized list and/or in text */
+
+
+/* list types */
+.chapter .itemizedlist {padding-left:0px; margin-left:-13px; } /* list properties */
+.chapter .itemizedlist a {}
+.chapter .itemizedlist p { padding-left:0px;} /* text in list aligning */
+.chapter .orderedlist { padding-left:5px; }   /* ordered list properties */
+.chapter .orderedlist p  { padding-left:0px; }  /* text in ordered list properties */
+
+
+/* table properties */
+.informaltable table { margin-left:25px; border:1px solid #ccc; border-collapse: collapse; font-family:Arial, Helvetica, sans-serif; font-size:14px; margin-bottom:25px; } /* common aligning for tables in text */
+.informaltable table th { border:1px solid #ccc; border-collapse: collapse; background-color:#ffffdc; padding: 2px 4px; font-size:13px; }  /* table header */
+.informaltable table td { border:1px solid #ccc; border-collapse: collapse; padding: 3px 4px; font-size:13px; }  /* content cells */
+
+/* fixes */
+hr { display:none; } /* disable ugly line under the Page Title */

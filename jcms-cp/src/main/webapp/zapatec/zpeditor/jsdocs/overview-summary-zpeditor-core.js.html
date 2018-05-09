@@ -1,0 +1,3977 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Editor Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="zpeditor-core.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Editor</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>zpeditor-core.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Basic Rich Text editor (see Midas specification)
+ This file provides functionality to create a new editor out of a given
+ container id and adjust various styles and actual behavior in design mode
+
+ <BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/MinimalEditor.html">Zapatec.MinimalEditor</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/MinimalEditor/Undo.html">Zapatec.MinimalEditor.Undo</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ *$Id: zpeditor-core.js 17449 2009-05-08 11:54:43Z nmaxim $
+ * <span class="attrib">@fileoverview</span> Basic Rich Text editor (see Midas specification)
+ * This file provides functionality to create a new editor out of a given
+ * container id and adjust various styles and actual behavior in design mode
+ *
+ * <span class="attrib">@link</span> http://www.mozilla.org/editor/midas-spec.html
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/**
+ * Zapatec.MinimalEditor constructor. Creates a new editor object with given
+ * parameters.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@extends</span> Zapatec.Widget
+ * <span class="attrib">@param</span> {object} objArgs Editor configuration
+ *
+ * Constructor recognizes the following properties of the config object
+ * \code
+ *	property name			| description
+ *-------------------------------------------------------------------------------------------------
+ *	field    | [string or object] Reference to DOM element to be used as
+ *           | prototype for the editor. The editor pane will be created right
+ *           | after this element and will take its size.
+ * toolbarElements | [array] Array of strings representing toolbar buttons to
+ *           | be added to the editor toolbar. The buttons will be added to
+ *           | the toolbar in the order they are specified in this array.
+ * maximizedBorder | [number] A margin between the editor and the browser window
+ *           | border when in maximized mode (pixels)
+ * enableTooltips | [boolean] Specifies if toolbar button tooltips are to appear
+ * dumpHtml | [boolean] Specifies the way html source is obtained from iframe.
+ *          | If set to false innerHtml will be used to get html from design mode.
+ *          | If set to true. the html is achieved by manually dumping the root DOM element.
+ *          | Default is false.
+ * generateXhtml | [boolean] If this option is true the editor will produce
+ *          | valid xhtml 1.0 strict
+ * customUndo | [boolean] Specifies the way undo works. If this option is true
+ *          | a custom JavaScript undo stack will be maintained. Otherwise execCommand
+ *          | will be used. Default is true.
+ * preserveImgSrc | [boolean] Under IE relative image paths are
+ *          | automatically converted to absolute paths. Set this
+ *          | option to true in order to pre-process the html every time the
+ *          | user switches from HTML to WYSIWYG mode and vice versa. Default is
+ *          | true for IE and false otherwise.
+ * preserveAnchorHref | [boolean] Under IE relative anchor hrefs are
+ *          | automatically converted to absolute href URLs. Set this
+ *          | option to true in order to pre-process the html every time the
+ *          | user switches from HTML to WYSIWYG mode and vice versa. Default is
+ *          | true for IE and false otherwise.
+ * externalBrowserNoScript | [boolean] Setting this option to true will remove all
+ *          | script tags from html being previewed when "View in external browser window"
+ *          | is pressed. Default is false.
+ * win      | Existing Zapatec.Win object can be provided to show dialogs.
+ *          | Otherwise new window is created.
+ * \endcode
+ *
+ * Constructor recognizes the following strings as elements of toolbarElements
+ * array
+ * \code
+ *	toolbar element name		| description
+ *-------------------------------------------------------------------------------------------------
+ *	maximize          | A toggle button for maximizing/restoring the editor to full page boundaries
+ *	fontName					| A font name select field
+ *	fontSize     			| A font size select field
+ *	foreColor					| A font color picker button
+ *	backColor				  | A background color picker button
+ *	insertLink			  | A button for inserting hyperlinks
+ *	insertImage			  | A button for inserting images
+ *	insertTable			  | A button for inserting tables
+ *	insertHorizontalRule | A button for inserting horizontal rules
+ *	insertSpecialChar | A button for showing a character map window for selecting a special character to insert
+ *	bold		      	  | A button for toggling bold style on selected text
+ *	italic			      | A button for toggling italic style on selected text
+ *	underline			    | A button for toggling underline style on selected text
+ *	justifyLeft		    | A button for making paragraphs left justified
+ *	justifyCenter	    | A button for making paragraphs centered
+ *	justifyRight	    | A button for making paragraphs right justified
+ *	justifyFull  	    | A button for making paragraphs full justified
+ *	insertOrderedList | A button for inserting ordered numbered lists
+ *	insertUnorderedList | A button for inserting unordered bulleted lists
+ *	selectAll         | A button for selecting all editor content
+ *	copy              | A copy button
+ *	cut               | A cut button
+ *	paste             | A paste button
+ *	outdent           | A button for decreasing indentation
+ *	indent            | A button for increasing indentation
+ *	undo              | An undo button
+ *	redo              | A redo button
+ *	about             | About this editor button
+ *	browser           | A button for previewing editor html content in a new browser window
+ *	switcher          | A toggle button to switch between HTML and WYSIWYG mode
+ *	fetch             | A button for loading editor html content from a remote location
+ *	save              | A button for sending editor html content to a remote location
+ *	newPanel          | This element will make the next button appear in
+ *                    | a new toolbar panel
+ *	newRow            | This element will make the next button appear in
+ *                    | a new row
+ * \endcode
+ *
+ */</span>
+Zapatec.MinimalEditor = <span class="reserved">function</span>(objArgs) {
+	<span class="reserved">if</span> (arguments.length == 0) {
+		objArgs = {};
+	}
+
+	<span class="comment">// Call constructor of superclass</span>
+	Zapatec.MinimalEditor.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+}
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.id = <span class="literal">'Zapatec.MinimalEditor'</span>;
+
+<span class="comment">/**
+ * Shortcut for faster access to {<span class="attrib">@link</span> Zapatec#MinimalEditor}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecEditor = Zapatec.MinimalEditor;
+
+<span class="comment">// Inherit Zapatec.Widget</span>
+Zapatec.inherit(Zapatec.MinimalEditor, Zapatec.Widget);
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs) {
+
+	<span class="comment">// processing Widget functionality</span>
+	Zapatec.MinimalEditor.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+
+	<span class="reserved">this</span>.createEditor();
+
+	<span class="reserved">this</span>.initEditor();
+}
+
+<span class="comment">/**
+ * Creates editor DOM elements
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.createEditor = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'container'</span>, null);
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'editorPanel'</span>, null);
+	<span class="comment">// Holds all created toolbar buttons</span>
+	<span class="reserved">this</span>.buttons = [];
+	<span class="comment">// Stores created tooltips for buttons</span>
+	<span class="reserved">this</span>.tooltips = [];
+	<span class="comment">// Stores created color pickers for the 2 color buttons</span>
+	<span class="reserved">this</span>.colorPickers = [];
+	<span class="comment">// Hides native controls that are under the editor when it is maximized</span>
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'wch'</span>, null);
+
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'undo'</span>, new Zapatec.MinimalEditor.Undo(<span class="reserved">this</span>));
+
+	<span class="reserved">this</span>.doctype = <span class="literal">""</span>;
+	<span class="reserved">this</span>.isDefaultFullHtml = true;
+
+	<span class="reserved">if</span> (Zapatec.is_webkit) {
+		<span class="reserved">this</span>.fillWebKitMap();
+	}
+	<span class="comment">// Get original textarea field dimensions</span>
+	var fieldWidth = <span class="reserved">this</span>.config.field.clientWidth;
+	var fieldHeight = <span class="reserved">this</span>.config.field.clientHeight;
+
+	<span class="comment">// Creare a container element</span>
+	<span class="reserved">this</span>.container = Zapatec.Utils.createElement(<span class="literal">"div"</span>);
+	<span class="reserved">this</span>.container.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Container'</span>;
+
+	<span class="comment">// Add container element after the original textarea</span>
+	Zapatec.Utils.insertAfter(<span class="reserved">this</span>.config.field, <span class="reserved">this</span>.container);
+	<span class="comment">// Copy styles from textarea to our main container</span>
+	<span class="reserved">if</span> (!Zapatec.is_opera) {
+		<span class="reserved">this</span>.container.style.cssText = <span class="reserved">this</span>.config.field.style.cssText;
+	}
+	<span class="reserved">else</span> {
+		<span class="reserved">for</span> (var i in <span class="reserved">this</span>.config.field.style) {
+			try {
+				<span class="reserved">this</span>.container.style[i] = <span class="reserved">this</span>.config.field.style[i];
+			} catch (e) {
+			}
+		}
+	}
+	<span class="reserved">this</span>.config.field.style.position = <span class="literal">"static"</span>;
+	<span class="reserved">this</span>.config.field.style.left = <span class="literal">""</span>;
+	<span class="reserved">this</span>.config.field.style.top = <span class="literal">""</span>;
+	<span class="reserved">this</span>.config.field.style.margin = <span class="literal">"0"</span>;
+
+	<span class="comment">// Creare an editor panel element</span>
+	<span class="reserved">this</span>.editorPanel = document.createElement(<span class="literal">"div"</span>);
+	<span class="reserved">this</span>.editorPanel.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'EditorPanel'</span>;
+
+	<span class="comment">// Add editor panel to the container</span>
+	<span class="reserved">this</span>.container.appendChild(<span class="reserved">this</span>.editorPanel);
+	<span class="comment">// Set editor panel style class</span>
+	<span class="reserved">this</span>.editorPanel.className = <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpEditor"</span>,
+		suffix: <span class="literal">"EditorPanel"</span>
+	});
+
+	<span class="comment">// Remove textarea</span>
+	<span class="reserved">this</span>.config.field.parentNode.removeChild(<span class="reserved">this</span>.config.field);
+	<span class="comment">// Add textarea inside our container</span>
+	<span class="reserved">this</span>.editorPanel.appendChild(<span class="reserved">this</span>.config.field);
+
+	<span class="comment">// Set textfield style class</span>
+	<span class="reserved">this</span>.config.field.className = <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpEditor"</span>,
+		suffix: <span class="literal">"Textarea"</span>
+	});
+
+	<span class="comment">// Create WCH</span>
+	<span class="reserved">this</span>.wch = Zapatec.Utils.createWCH(<span class="reserved">this</span>.editorPanel);
+	<span class="comment">// Put WCH under container</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.wch) {
+		<span class="reserved">this</span>.wch.style.zIndex = -1;
+	}
+
+	<span class="comment">// Add toolbar buttons</span>
+	<span class="reserved">this</span>.addButtons();
+
+	<span class="comment">// Get iframe pane dimensions</span>
+	var paneSize = <span class="reserved">this</span>.getPaneSize(fieldWidth, fieldHeight);
+
+	<span class="comment">// Create editor pane</span>
+	<span class="reserved">this</span>.pane = new Zapatec.Pane({
+		parent: <span class="reserved">this</span>.editorPanel,
+		containerType: <span class="literal">'iframe'</span>,
+		width: paneSize.width,
+		height: paneSize.height,
+		showLoadingIndicator: false
+	})
+	<span class="comment">// Remove iframe border</span>
+	<span class="reserved">this</span>.pane.removeBorder();
+	<span class="comment">// Set editor pane style class</span>
+	<span class="reserved">this</span>.pane.getContainer().className = <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpEditor"</span>,
+		suffix: <span class="literal">"Pane"</span>
+	});
+
+	<span class="comment">// Set editor dimenisons</span>
+	<span class="reserved">this</span>.setSize(fieldWidth, fieldHeight);
+
+	<span class="comment">// Hide html text area</span>
+	<span class="reserved">this</span>.config.field.style.display = <span class="literal">"none"</span>;
+
+	<span class="comment">// set current mode to WYSIWYG(visual formatting)</span>
+	<span class="reserved">this</span>.mode = <span class="literal">"WYSIWYG"</span>;
+
+	<span class="comment">// Disable toolbar buttons</span>
+	<span class="reserved">this</span>.toggleButtons(false);
+}
+
+<span class="comment">/**
+ * Configures the widget. Gets called from init and reconfigure methods of
+ * superclass.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(objArgs) {
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'field'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'asyncTheme'</span>, true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'maximizedBorder'</span>, 6);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'toolbarElements'</span>, [
+					<span class="literal">'fontName'</span>,
+					<span class="literal">'fontSize'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'bold'</span>,
+					<span class="literal">'italic'</span>,
+					<span class="literal">'underline'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'foreColor'</span>,
+					<span class="literal">'backColor'</span>,
+					<span class="literal">'insertLink'</span>,
+					<span class="literal">'insertImage'</span>,
+					<span class="literal">'insertTable'</span>,
+					<span class="literal">'insertHorizontalRule'</span>,
+
+					<span class="literal">'newRow'</span>,
+
+					<span class="literal">'justifyLeft'</span>,
+					<span class="literal">'justifyCenter'</span>,
+					<span class="literal">'justifyRight'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'insertOrderedList'</span>,
+					<span class="literal">'insertUnorderedList'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'selectall'</span>,
+					<span class="literal">'copy'</span>,
+					<span class="literal">'cut'</span>,
+					<span class="literal">'paste'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'outdent'</span>,
+					<span class="literal">'indent'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'undo'</span>,
+					<span class="literal">'redo'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'switcher'</span>,
+					<span class="literal">'newPanel'</span>,
+
+					<span class="literal">'about'</span>
+					]);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'langId'</span>, Zapatec.MinimalEditor.id);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'lang'</span>, <span class="literal">"eng"</span>);
+	
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'persistKey'</span>, null);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'persistPath'</span>, null);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'externalBrowserWidth'</span>, 450);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'externalBrowserHeight'</span>, 350);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'externalBrowserNoScript'</span>, false);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'enableTooltips'</span>, false);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'fullPage'</span>, false);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'dumpHtml'</span>, false);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'generateXhtml'</span>, false);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'customUndo'</span>, true);
+
+	<span class="comment">// Maximum key strikes before an undo step is stored</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'maxUndoTypes'</span>, 25);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'maxUndoLevels'</span>, 100);
+
+	<span class="comment">// Foreground and background colors</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'foreColor'</span>, <span class="literal">""</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'backColor'</span>, <span class="literal">""</span>);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'preserveImgSrc'</span>, Zapatec.is_ie);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'preserveAnchorHref'</span>, Zapatec.is_ie);
+
+	<span class="comment">// If set to true toolbar dimensions won't be taken into account</span>
+	<span class="comment">// when  calculating editor size</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'excludeToolbar'</span>, false);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'documentBodyMargin'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'documentBodyPadding'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'disableMultiLine'</span>, false);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'paneSize'</span>);
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'linksTarget'</span>,  false);
+	                                             
+	<span class="comment">// Zapatec.Win object can be provided to show dialogs</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'win'</span>);
+
+	<span class="comment">// Call parent method</span>
+	Zapatec.MinimalEditor.SUPERclass.configure.call(<span class="reserved">this</span>, objArgs);
+
+	<span class="comment">// Change all toobar element names to lower case</span>
+	<span class="reserved">for</span> (var ii = 0; ii &lt; <span class="reserved">this</span>.config.toolbarElements.length; ii++) {
+		<span class="reserved">this</span>.config.toolbarElements[ii] = <span class="reserved">this</span>.config.toolbarElements[ii].toLowerCase();
+	}
+
+	<span class="comment">// Check if required param "field" is defined</span>
+	<span class="reserved">if</span> (typeof(<span class="reserved">this</span>.config.field) == <span class="literal">"undefined"</span>) {
+		Zapatec.Log({description: <span class="reserved">this</span>.getMessage(<span class="literal">'noTextareaError'</span>)});
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// Get textarea</span>
+	var oTextarea = zapatecWidget.getElementById(<span class="reserved">this</span>.config.field);
+	<span class="reserved">if</span> (!oTextarea) {
+		<span class="reserved">this</span>.debug(<span class="reserved">this</span>.getMessage(<span class="literal">'noTextareaError'</span>));
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">// Save changed properties to be able to restore them later</span>
+	var oTextareaStyle = oTextarea.style;
+	<span class="reserved">this</span>.textareaStyle = {
+		position: oTextareaStyle.position,
+		left: oTextareaStyle.left,
+		top: oTextareaStyle.top,
+		margin: oTextareaStyle.margin,
+		width: oTextareaStyle.width,
+		height: oTextareaStyle.height,
+		display: <span class="literal">''</span>
+	};
+	<span class="reserved">this</span>.config.field = oTextarea;
+
+	<span class="comment">// Check if a DOM element was found for "field" and it's text area</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.field == null ||
+	    <span class="reserved">this</span>.config.field.nodeType != 1 ||
+	    <span class="reserved">this</span>.config.field.nodeName.toLowerCase() != <span class="literal">"textarea"</span>) {
+		Zapatec.Log({description: <span class="reserved">this</span>.getMessage(<span class="literal">'fieldIsNotTextareaError'</span>)})
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// Disable tooltips if they are not defined</span>
+	<span class="reserved">if</span> (typeof Zapatec.Tooltip == <span class="literal">'undefined'</span>) {
+		<span class="reserved">this</span>.config.enableTooltips = false;
+	}
+};
+
+<span class="comment">/**
+ * Turn on design mode for the editor iframe pane
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.initEditor = <span class="reserved">function</span>(counter) {
+	var self = <span class="reserved">this</span>;
+	counter = counter || 0;
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.pane == null || !<span class="reserved">this</span>.pane.isReady()) {
+	    <span class="reserved">if</span>(counter &lt; 1000){
+		    <span class="comment">// if less then 10 seconds since editor init and pane is not loaded</span>
+		    <span class="comment">// yet - try one more time</span>
+			setTimeout(<span class="reserved">function</span>() {
+				self.initEditor(++counter)
+			}, 100);
+		}
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="comment">// Revalidate editor size</span>
+	<span class="reserved">this</span>.setSize();
+
+	<span class="comment">// Install mouse and key listeners</span>
+	<span class="reserved">this</span>.installListeners();
+
+	<span class="comment">// Enable design mode</span>
+	<span class="reserved">this</span>.toggleDesignMode(true);
+
+	<span class="comment">// copy value from field to editor pane</span>
+	<span class="reserved">this</span>.loadContentFromField();
+
+	<span class="comment">// Store an undo step</span>
+	<span class="reserved">this</span>.undo.saveUndo();
+
+	<span class="comment">// Enable all toolbar buttons</span>
+	<span class="reserved">this</span>.toggleButtons(true);
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onInit"</span>);
+}
+
+<span class="comment">/**
+ * Installs key and mouse listeners to the document inside the WYSIWYG editor
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.installListeners = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
+
+	<span class="comment">// Handly Enter key manually in IE to write &lt;br&gt; instead of &lt;p&gt;</span>
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		<span class="reserved">this</span>.pane.getContentElement().onbeforedeactivate = <span class="reserved">function</span>() {
+			self.fireEvent(<span class="literal">'onBlur'</span>, self);
+
+			var sel = self.pane.getContainer().contentWindow.document.selection;
+			<span class="reserved">if</span> (sel) {
+
+				try {
+					<span class="comment">// Focus editor</span>
+					var range = sel.createRange();
+
+					self.oldSelectionRange = range;
+				}
+				catch(e) {
+				}
+			}
+		}
+
+		<span class="comment">// Add focus listener</span>
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getIframeDocument().body, <span class="literal">'focus'</span>, <span class="reserved">function</span>() {
+			self.fireEvent(<span class="literal">'focus'</span>, self);
+		});
+
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getContainer(), <span class="literal">'focus'</span>, <span class="reserved">function</span>() {
+		    self.pane.getIframeDocument().body.focus();
+		});
+	}
+	<span class="reserved">else</span> {
+		<span class="comment">// Add onBlur listener</span>
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getIframeDocument(), <span class="literal">'blur'</span>, <span class="reserved">function</span>() {
+			self.fireEvent(<span class="literal">'onBlur'</span>, self);
+		});
+
+		<span class="comment">// Add focus listener</span>
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getIframeDocument(), <span class="literal">'focus'</span>, <span class="reserved">function</span>() {
+			self.fireEvent(<span class="literal">'focus'</span>, self);
+		});
+	}
+
+	<span class="comment">// on each keydown event write value to original field</span>
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getIframeDocument(), <span class="literal">"keydown"</span>,
+					<span class="reserved">function</span>(e) {
+						var isPrevent = false;
+
+						<span class="reserved">if</span> (!e) {
+							e = self.pane.getIframeDocument().event;
+						}
+
+						<span class="comment">// Notify undo manager that a key is pressed</span>
+						self.undo.onKeyDown();
+
+						switch (e.keyCode) {
+							case 13:
+								<span class="reserved">if</span> (self.config.disableMultiLine) {
+									<span class="comment">// Prevent default handling</span>
+									isPrevent = true;
+								}
+
+								<span class="reserved">if</span> (!(e.ctrlKey || e.altKey || e.shiftKey)) {
+									<span class="comment">// Handle enter key</span>
+									var isHandled = self.onEnterPressed();
+									<span class="reserved">if</span> (isHandled) {
+
+										<span class="comment">// Prevent default handling</span>
+										isPrevent = true;
+									}
+								};
+								break;
+
+						}
+
+						<span class="reserved">if</span> (isPrevent) {
+							<span class="comment">// Prevent default handling</span>
+							Zapatec.Utils.stopEvent(e);
+
+							<span class="reserved">return</span> false;
+						}
+
+					});
+
+	<span class="comment">// on each keyup event write value to original field</span>
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getIframeDocument(), <span class="literal">"keyup"</span>,
+					<span class="reserved">function</span>() {
+						self.saveContentToField();
+						self.invokeUpdateToolbar();
+					});
+
+	<span class="comment">// on each click event update toolbar icon states</span>
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getIframeDocument(), <span class="literal">"click"</span>,
+					<span class="reserved">function</span>() {
+						self.invokeUpdateToolbar();
+					});
+
+	<span class="comment">// on each contextmenu event update toolbar icon states</span>
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.pane.getIframeDocument(), <span class="literal">"contextmenu"</span>,
+					<span class="reserved">function</span>() {
+						self.invokeUpdateToolbar();
+					});
+
+}
+
+<span class="comment">/**
+ * Sets widget size in pixels
+ *
+ * <span class="attrib">@public</span>
+ * <span class="attrib">@param</span> {number} width Editor container width
+ * <span class="attrib">@param</span> {number} height Editor container height
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.setSize = <span class="reserved">function</span>(width, height) {
+	<span class="reserved">if</span> (!width) {
+		width = parseInt(<span class="reserved">this</span>.container.style.width);
+	}
+	<span class="reserved">if</span> (!height) {
+		height = parseInt(<span class="reserved">this</span>.container.style.height);
+	}
+
+	<span class="comment">// Set container dimensions</span>
+	<span class="reserved">this</span>.container.style.width = width + <span class="literal">'px'</span>;
+	<span class="reserved">this</span>.container.style.height = height + <span class="literal">'px'</span>;
+
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.excludeToolbar &amp;&amp; <span class="reserved">this</span>.toolbar) {
+		<span class="comment">// Set toolbar width</span>
+		<span class="reserved">this</span>.toolbar.style.width = width + <span class="literal">'px'</span>;
+	}
+
+	<span class="comment">// Get iframe pane size</span>
+	var paneSize = <span class="reserved">this</span>.getPaneSize(width, height);
+	var paneWidth = paneSize.width;
+	var paneHeight = paneSize.height;
+
+	var iframeWidth = paneWidth;
+	var iframeHeight = paneHeight;
+
+	<span class="reserved">if</span> (!Zapatec.is_ie &amp;&amp; !Zapatec.is_khtml) {
+		iframeHeight -= 4;
+
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.isMaximize) {
+			iframeWidth -= 4;
+		}
+	}
+
+	<span class="reserved">if</span> (Zapatec.is_ie7) {
+		iframeWidth -= 1;
+		iframeHeight -= 3;
+	}
+
+	<span class="comment">// Set iframe dimensions</span>
+	<span class="reserved">this</span>.pane.getContainer().style.width = iframeWidth + <span class="literal">'px'</span>;
+	<span class="reserved">this</span>.pane.getContainer().style.height = iframeHeight + <span class="literal">'px'</span>;
+
+	var editorPanelHeight = paneHeight;
+	var editorPanelWidth = width - 2;
+	<span class="reserved">if</span> (!Zapatec.is_ie &amp;&amp; !Zapatec.is_khtml) {
+		editorPanelHeight -= 4;
+	}
+	<span class="reserved">if</span> (Zapatec.is_ie7) {
+		editorPanelHeight -= 1;
+	}
+
+	<span class="comment">// Set editor panel dimensions</span>
+	<span class="reserved">this</span>.editorPanel.style.width = editorPanelWidth + <span class="literal">'px'</span>;
+	<span class="reserved">this</span>.editorPanel.style.height = editorPanelHeight + <span class="literal">'px'</span>;
+
+	<span class="comment">// Setup WCH</span>
+	Zapatec.Utils.setupWCH(<span class="reserved">this</span>.wch, 0, 0, width, paneHeight);
+
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		paneWidth -= 2;
+		paneHeight -= 2;
+		<span class="reserved">if</span> (Zapatec.is_ie7) {
+			paneWidth -= 5;
+			paneHeight -= 6;
+		}
+	}
+	<span class="reserved">else</span> {
+		<span class="reserved">if</span> (!Zapatec.is_khtml) {
+			<span class="reserved">if</span> (<span class="reserved">this</span>.isMaximize) {
+				paneHeight -= 5;
+			}
+			<span class="reserved">else</span> {
+				paneHeight -= 5;
+				paneWidth -= 4;
+			}
+		}
+	}
+	<span class="comment">// Set textarea field dimensions</span>
+	<span class="reserved">this</span>.config.field.style.width = paneWidth + <span class="literal">'px'</span>;
+	<span class="reserved">this</span>.config.field.style.height = paneHeight + <span class="literal">'px'</span>;
+}
+
+<span class="comment">/**
+ * Gets iframe size in pixels. Extracts toolbar dimensions from whole size
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {number} width Editor container width
+ * <span class="attrib">@param</span> {number} height Editor container height
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.getPaneSize = <span class="reserved">function</span>(width, height) {
+
+	var paneWidth = width;
+	var paneHeight = height;
+
+	<span class="comment">// If there are toolbar buttons</span>
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.excludeToolbar &amp;&amp; 0 &lt; <span class="reserved">this</span>.config.toolbarElements.length) {
+		paneHeight -= <span class="reserved">this</span>.toolbar.offsetHeight;
+
+		<span class="reserved">if</span> (paneHeight &lt; 50) {
+			paneHeight = 50;
+		}
+	}
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.paneSize) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.paneSize.width) paneWidth = <span class="reserved">this</span>.config.paneSize.width;
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.paneSize.height) paneHeight = <span class="reserved">this</span>.config.paneSize.height;
+	}
+
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		paneWidth -= 2;
+	}
+	<span class="reserved">else</span> {
+		<span class="reserved">if</span> (Zapatec.is_khtml) {
+			paneWidth -= 2;
+		}
+		<span class="reserved">else</span> {
+			<span class="reserved">if</span> (<span class="reserved">this</span>.isMaximize) {
+				paneWidth -= 2;
+			}
+			<span class="reserved">else</span> {
+				paneWidth += 2;
+			}
+		}
+	}
+
+	<span class="reserved">return</span> {width: paneWidth, height: paneHeight};
+}
+
+<span class="comment">/**
+ * Loads content from TEXTAREA to editor area
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.loadContentFromField = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.setHTML(<span class="reserved">this</span>.config.field.value);
+	<span class="comment">// Fix: FF bug for BackSpace</span>
+	<span class="reserved">if</span> (Zapatec.is_gecko &amp;&amp; <span class="reserved">this</span>.pane.getIframeDocument().execCommand) {
+		<span class="reserved">this</span>.pane.getIframeDocument().execCommand(<span class="literal">"inserthtml"</span>, false, <span class="literal">"-"</span>);
+		<span class="reserved">this</span>.pane.getIframeDocument().execCommand(<span class="literal">"undo"</span>, false, null); 
+	}
+}
+
+<span class="comment">/**
+ * Saves value from editor designer area to original TEXTAREA element 
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.saveContentToField = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.mode == <span class="literal">"WYSIWYG"</span>) {
+		var sVal = <span class="reserved">this</span>.getHTML()
+		var oTextarea = <span class="reserved">this</span>.config.field;
+		<span class="reserved">if</span> (oTextarea.tagName.toLowerCase() == <span class="literal">'textarea'</span>) {
+			<span class="comment">// For Safari</span>
+			<span class="comment">// IE raises exception</span>
+			try {
+				oTextarea.innerHTML = sVal;
+			} catch (oException) {};
+		}
+		oTextarea.value = sVal;
+	}
+}
+
+<span class="comment">/**
+ * Toggles design mode for editor
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {boolean} enable enable/disable design mode
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.toggleDesignMode = <span class="reserved">function</span>(enable) {
+	try {
+		<span class="reserved">if</span> (Zapatec.is_ie) {
+			<span class="reserved">this</span>.pane.getContentElement().contentEditable = enable;
+		}
+		<span class="reserved">else</span> {
+			<span class="reserved">this</span>.pane.getContainer().contentWindow.document.designMode = enable ? <span class="literal">"on"</span> : <span class="literal">"off"</span>;
+		}
+	} catch (oException) {};
+}
+
+<span class="comment">/**
+ * Invokes execCommand in a browser compatible way
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} command command to execute
+ * <span class="attrib">@param</span> {object} arg1 command argument 1
+ * <span class="attrib">@param</span> {object} arg2 command argument 2
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.execCommand = <span class="reserved">function</span>(command, arg1, arg2) {
+	var object = null;
+
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		object = <span class="reserved">this</span>.pane.getIframeDocument();
+	}
+	<span class="reserved">else</span> {
+		object = <span class="reserved">this</span>.pane.getContainer().contentWindow.document;
+	}
+
+	<span class="reserved">return</span> object.execCommand(command, arg1, arg2);
+}
+
+<span class="comment">/**
+ * Invokes queryCommandValue in a browser compatible way
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} command command to query
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.queryCommandValue = <span class="reserved">function</span>(command) {
+	var object = <span class="reserved">this</span>.pane.getIframeDocument();
+	<span class="reserved">return</span> object.queryCommandValue(command);
+}
+
+<span class="comment">/**
+ * Invokes queryCommandState in a browser compatible way
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} command command to query
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.queryCommandState = <span class="reserved">function</span>(command) {
+	var object = <span class="reserved">this</span>.pane.getIframeDocument();
+	<span class="reserved">return</span> object.queryCommandState(command);
+}
+
+<span class="comment">/**
+ * Invokes queryCommandEnabled in a browser compatible way
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} command command to query
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.queryCommandEnabled = <span class="reserved">function</span>(command) {
+	var object = <span class="reserved">this</span>.pane.getIframeDocument();
+	<span class="reserved">return</span> object.queryCommandEnabled(command);
+}
+
+<span class="comment">/**
+ * Make the WYSIWYG editor focused
+ * <span class="attrib">@public</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.focus = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (Zapatec.is_khtml || Zapatec.is_opera) {
+		<span class="comment">// Call focus on the iframe</span>
+		<span class="reserved">this</span>.pane.getContainer().focus();
+	}
+	<span class="reserved">else</span> {
+		<span class="reserved">if</span> (Zapatec.is_gecko) {
+			<span class="comment">// Focus some other element before focusing the editor</span>
+			<span class="comment">// otherwise focusing might not work</span>
+			document.body.focus();
+		}
+		<span class="reserved">this</span>.pane.getContainer().contentWindow.focus();
+	}
+}
+
+<span class="comment">/**
+ * Make the HTML text area focused
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.focusHtml = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (Zapatec.is_ie7) {
+		<span class="comment">// Store page vertical scroll position</span>
+		var scrollTop = Zapatec.Utils.getPageScrollY();
+	}
+	<span class="reserved">this</span>.config.field.focus();
+	<span class="reserved">if</span> (Zapatec.is_ie7) {
+		<span class="comment">// Restore page vertical scroll position</span>
+		window.scroll(0, scrollTop);
+	}
+}
+
+<span class="comment">/**
+ * Creates toolbar with buttons under editor
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.addButtons = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.toolbarElements.length == 0) {
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">this</span>.toolbar = document.createElement(<span class="literal">"table"</span>);
+	<span class="reserved">this</span>.toolbar.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'ToolbarTable'</span>;
+	<span class="comment">// Add toolbar before original html textarea field</span>
+	<span class="reserved">this</span>.container.insertBefore(<span class="reserved">this</span>.toolbar, <span class="reserved">this</span>.editorPanel);
+
+	<span class="reserved">this</span>.toolbar.border = 0;
+	<span class="reserved">this</span>.toolbar.className = <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpEditor"</span>, suffix: <span class="literal">"Toolbar"</span>});
+	<span class="reserved">this</span>.toolbar.style.width = <span class="reserved">this</span>.config.field.clientWidth + <span class="literal">'px'</span>;
+
+	var tbody = document.createElement(<span class="literal">"tbody"</span>);
+	<span class="reserved">this</span>.toolbar.appendChild(tbody);
+
+	var tr = document.createElement(<span class="literal">"tr"</span>);
+	tbody.appendChild(tr)
+
+	var td = document.createElement(<span class="literal">"td"</span>);
+	td.setAttribute(<span class="literal">"nowrap"</span>, <span class="literal">"true"</span>);
+	tr.appendChild(td);
+
+	var span = document.createElement(<span class="literal">"span"</span>);
+	span.className = <span class="literal">"toolbarPanel"</span>;
+	td.appendChild(span)
+
+	var self = <span class="reserved">this</span>;
+
+	<span class="comment">// For each element in toolbar config</span>
+	<span class="reserved">for</span> (var ii = 0; ii &lt; <span class="reserved">this</span>.config.toolbarElements.length; ii++) {
+		var element = <span class="reserved">this</span>.config.toolbarElements[ii];
+
+		<span class="comment">// Skip button if not supported in current WebKit version</span>
+		<span class="reserved">if</span> (Zapatec.is_webkit &amp;&amp;
+		    Zapatec.webkitVersion &amp;&amp; <span class="reserved">this</span>.webKitMap[element] &amp;&amp;
+		    Zapatec.webkitVersion &lt; <span class="reserved">this</span>.webKitMap[element]) {
+			continue;
+		}
+
+		switch (element) {
+			case <span class="literal">"maximize"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'maximizeTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"maximize"</span>, tooltip, null, <span class="reserved">function</span>() {
+					self.resizeEditor();
+					<span class="comment">// Focus editor</span>
+					self.focus();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Maximize'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"fontname"</span>:
+				var fontNameSelect = <span class="reserved">this</span>.createSelect(
+								[<span class="literal">"Font"</span>, <span class="literal">"Arial"</span>, <span class="literal">"Courier"</span>, <span class="literal">"Times New Roman"</span>],
+								[<span class="literal">"Font"</span>, <span class="literal">"Arial"</span>, <span class="literal">"Courier"</span>, <span class="literal">"Times New Roman"</span>],
+								<span class="reserved">function</span>() {
+									self.execCommand(<span class="literal">"fontname"</span>, false, <span class="reserved">this</span>.options[<span class="reserved">this</span>.options.selectedIndex].value);
+									self.saveContentToField();
+
+									<span class="comment">// Focus editor</span>
+									self.focus();
+
+									<span class="comment">// Store an undo step</span>
+									self.undo.saveUndo();
+
+									<span class="comment">// Update toolbar icon states</span>
+									self.updateToolbar();
+								}
+								);
+				fontNameSelect.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'FontName'</span>;
+				span.appendChild(fontNameSelect);
+				break;
+			case <span class="literal">"fontsize"</span>:
+				var fontSizeSelect = <span class="reserved">this</span>.createSelect(
+								[<span class="literal">"Size"</span>, <span class="literal">"1"</span>, <span class="literal">"2"</span>, <span class="literal">"3"</span>, <span class="literal">"4"</span>, <span class="literal">"5"</span>, <span class="literal">"6"</span>, <span class="literal">"7"</span>],
+								[<span class="literal">"Size"</span>, <span class="literal">"1"</span>, <span class="literal">"2"</span>, <span class="literal">"3"</span>, <span class="literal">"4"</span>, <span class="literal">"5"</span>, <span class="literal">"6"</span>, <span class="literal">"7"</span>],
+								<span class="reserved">function</span>() {
+									self.execCommand(<span class="literal">"fontsize"</span>, false,
+													<span class="reserved">this</span>.options[<span class="reserved">this</span>.options.selectedIndex].value);
+									self.saveContentToField();
+
+									<span class="comment">// Focus editor</span>
+									self.focus();
+
+									<span class="comment">// Store an undo step</span>
+									self.undo.saveUndo();
+
+									<span class="comment">// Update toolbar icon states</span>
+									self.updateToolbar();
+								}
+								);
+				fontSizeSelect.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'FontSize'</span>;
+				span.appendChild(fontSizeSelect);
+				break;
+			case <span class="literal">"forecolor"</span>:
+			<span class="comment">// Fall through</span>
+			case <span class="literal">"backcolor"</span>:
+				var button = <span class="reserved">this</span>.createColorButton(element == <span class="literal">"forecolor"</span>);
+				span.appendChild(button);
+
+				break;
+			case <span class="literal">"insertlink"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'insertLinkTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"link"</span>, tooltip, <span class="reserved">function</span>() {
+					<span class="comment">// Show a insert link window</span>
+					self.showInsertLinkWindow();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'InsertLink'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"insertimage"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'insertImageTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"image"</span>, tooltip, null, <span class="reserved">function</span>() {
+					var text = self.getMessage(<span class="literal">'insertImagePrompt'</span>);
+					var imgUrl = prompt(text, <span class="literal">"http://"</span>);
+
+					<span class="reserved">if</span> (imgUrl != null &amp;&amp; imgUrl != <span class="literal">""</span>) {
+						self.execCommand(<span class="literal">"insertimage"</span>, false, imgUrl);
+						self.saveContentToField();
+
+						<span class="comment">// Focus editor</span>
+						self.focus();
+
+						<span class="comment">// Store an undo step</span>
+						self.undo.saveUndo();
+
+						<span class="comment">// Update toolbar icon states</span>
+						self.updateToolbar();
+					}
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'InsertImage'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"inserttable"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'insertTableTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"table"</span>, tooltip, null, <span class="reserved">function</span>() {
+
+					<span class="reserved">if</span> (Zapatec.is_khtml) {
+						self.storeSelection();
+					}
+
+					<span class="comment">// Ask for number of rows in table</span>
+					var rowsText = self.getMessage(<span class="literal">'insertTableRowsPrompt'</span>);
+					var rowsAnswer = prompt(rowsText, 2);
+					<span class="reserved">if</span> (null == rowsAnswer || <span class="literal">''</span> == rowsAnswer) {
+						<span class="reserved">return</span>;
+					}
+					var rows = parseInt(rowsAnswer);
+
+					<span class="comment">// Ask for number of cols in table</span>
+					var colsText = self.getMessage(<span class="literal">'insertTableColsPrompt'</span>);
+					var colsAnswer = prompt(colsText, 2);
+					<span class="reserved">if</span> (null == colsAnswer || <span class="literal">''</span> == colsAnswer) {
+						<span class="reserved">return</span>;
+					}
+					var cols = parseInt(colsAnswer);
+
+					<span class="comment">// Ask for table border in pixels</span>
+					var borderWidthText = self.getMessage(<span class="literal">'insertTableBorderWidthPrompt'</span>);
+					var borderAnswer = prompt(borderWidthText, 2);
+					<span class="reserved">if</span> (null == borderAnswer || <span class="literal">''</span> == borderAnswer) {
+						<span class="reserved">return</span>;
+					}
+					var borderWidth = parseInt(borderAnswer);
+
+					<span class="reserved">if</span> (isNaN(borderWidth)) {
+						borderWidth = 1;
+					}
+
+					<span class="reserved">if</span> (!isNaN(rows) &amp;&amp; rows &gt; 0 &amp;&amp; !isNaN(cols) &amp;&amp; cols &gt; 0) {
+						var tbl = self.pane.getIframeDocument().createElement(<span class="literal">"table"</span>);
+						tbl.setAttribute(<span class="literal">"border"</span>, borderWidth);
+						tbl.setAttribute(<span class="literal">"cellpadding"</span>, <span class="literal">"1"</span>);
+						tbl.setAttribute(<span class="literal">"cellspacing"</span>, <span class="literal">"1"</span>);
+
+						var tbltbody = self.pane.getIframeDocument().createElement(<span class="literal">"tbody"</span>);
+
+						<span class="reserved">for</span> (var kk = 0; kk &lt; rows; kk++) {
+							var tbltr = self.pane.getIframeDocument().createElement(<span class="literal">"tr"</span>);
+
+							<span class="reserved">for</span> (var jj = 0; jj &lt; cols; jj++) {
+								var tbltd = self.pane.getIframeDocument().createElement(<span class="literal">"td"</span>);
+								tbltd.setAttribute(<span class="literal">"width"</span>, 10);
+
+								var tblbr = self.pane.getIframeDocument().createElement(<span class="literal">"br"</span>);
+								tbltd.appendChild(tblbr);
+								tbltr.appendChild(tbltd);
+							}
+
+							tbltbody.appendChild(tbltr);
+						}
+
+						tbl.appendChild(tbltbody);
+
+						<span class="reserved">if</span> (Zapatec.is_khtml) {
+							self.restoreSelection();
+						}
+
+						self.insertNodeAtSelection(tbl);
+					}
+
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'InsertTable'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"inserthorizontalrule"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'insertHorizontalRule'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"hr"</span>, tooltip, <span class="reserved">function</span>() {
+
+					var hr = self.pane.getIframeDocument().createElement(<span class="literal">"hr"</span>);
+					self.insertNodeAtSelection(hr);
+
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'InsertHorizontalRule'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"insertspecialchar"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'insertSpecialCharacter'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"insertspecial"</span>, tooltip,
+					<span class="reserved">function</span>() {
+						<span class="reserved">if</span> (Zapatec.is_khtml) {
+							self.storeSelection();
+						}
+					},
+					<span class="reserved">function</span>() {
+						<span class="comment">// Show a character map window</span>
+						self.showCharMapWindow();
+						<span class="comment">// Focus editor</span>
+						self.focus();
+					});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'InsertSpecialChar'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"selectall"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'selectAllTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"selectall"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"selectall"</span>);
+
+					self.focus();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'SelectAll'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"bold"</span>:
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"bold"</span>, <span class="literal">"Bold"</span>, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"bold"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Bold'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"italic"</span>:
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"italic"</span>, <span class="literal">"Italic"</span>, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"italic"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Italic'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"underline"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'underlineTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"underline"</span>, tooltip, <span class="reserved">function</span>() {
+				self.execCommand(<span class="literal">"underline"</span>, false, null);
+				self.saveContentToField();
+
+				<span class="comment">// Focus editor</span>
+				self.focus();
+
+				<span class="comment">// Store an undo step</span>
+				self.undo.saveUndo();
+
+				<span class="comment">// Update toolbar icon states</span>
+				self.updateToolbar();
+			});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Underline'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"justifyleft"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'justifyLeftTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"justifyleft"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"justifyleft"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'JustifyLeft'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"justifycenter"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'justifyCenterTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"justifycenter"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"justifycenter"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'JustifyCenter'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"justifyright"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'justifyRightTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"justifyright"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"justifyright"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'JustifyRight'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"justifyfull"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'justifyFullTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"justifyfull"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"justifyfull"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'JustifyFull'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"insertorderedlist"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'orderedListTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"orderedlist"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"insertorderedlist"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'InsertOrderedList'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"insertunorderedlist"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'unorderedListTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"unorderedlist"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"insertunorderedlist"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'InsertUnorderedList'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"copy"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'copyTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"copy"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"copy"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Copy'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"cut"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'cutTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"cut"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"cut"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Cut'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"paste"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'pasteTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"paste"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"paste"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Paste'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"outdent"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'outdentTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"outdent"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"outdent"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Outdent'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"indent"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'indentTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"indent"</span>, tooltip, <span class="reserved">function</span>() {
+					self.execCommand(<span class="literal">"indent"</span>, false, null);
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Indent'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"undo"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'undoTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"undo"</span>, tooltip, <span class="reserved">function</span>() {
+					<span class="comment">// Restore to previous undo step</span>
+					self.undo.undo();
+
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Undo'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"redo"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'redoTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"redo"</span>, tooltip, <span class="reserved">function</span>() {
+					<span class="comment">// Restore to next redo step</span>
+					self.undo.redo();
+
+					self.saveContentToField();
+
+					<span class="comment">// Focus editor</span>
+					self.focus();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Redo'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"about"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'aboutTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"about"</span>, tooltip, null, <span class="reserved">function</span>() {
+					var aboutText = self.getMessage(<span class="literal">'aboutText'</span>);
+
+					alert(aboutText);
+				}, <span class="literal">"?"</span>);
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'About'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"fetch"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'fetchTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"fetch"</span>, tooltip, <span class="reserved">function</span>() {
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					self.fetch();
+
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Fetch'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"save"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'saveTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"save"</span>, tooltip, <span class="reserved">function</span>() {
+					<span class="comment">// Store an undo step</span>
+					self.undo.saveUndo();
+
+					self.save();
+
+					<span class="comment">// Update toolbar icon states</span>
+					self.updateToolbar();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Save'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"browser"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'browserTooltip'</span>);
+				var button = <span class="reserved">this</span>.createButton(<span class="literal">"browser"</span>, tooltip, null, <span class="reserved">function</span>() {
+
+					var attributes = <span class="literal">"status=1, width="</span> + self.config.externalBrowserWidth +
+					                 <span class="literal">", height="</span> + self.config.externalBrowserHeight +
+					                 <span class="literal">", resizable=yes"</span>;
+					var win = window.open(<span class="literal">""</span>, <span class="literal">"previewWindow"</span>, attributes);
+					var html = self.getHTML();
+					<span class="reserved">if</span> (!self.config.fullPage) {
+						html = <span class="literal">'&lt;html&gt;&lt;body&gt;'</span> + html + <span class="literal">'&lt;/body&gt;&lt;/html&gt;'</span>;
+					}
+					<span class="reserved">if</span> (self.config.externalBrowserNoScript) {
+						html = html.replace(/&lt;script[\s\S]+?&lt;\/script&gt;/gi, <span class="literal">''</span>);
+					}
+					win.document.write(html);
+					win.document.close();
+				});
+				button.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Browser'</span>;
+				span.appendChild(button);
+				break;
+			case <span class="literal">"switcher"</span>:
+				var tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'htmlTooltip'</span>);
+				var htmlButton = <span class="reserved">this</span>.createButton(<span class="literal">"html"</span>, tooltip, null, <span class="reserved">function</span>() {
+					<span class="reserved">if</span> (self.mode == <span class="literal">"WYSIWYG"</span>) {
+						self.switchToHTML();
+						var button = <span class="reserved">this</span>;
+						setTimeout(<span class="reserved">function</span>() {
+							htmlButton.style.display = <span class="literal">'none'</span>;
+							htmlButton.zpEditorWYSIWYGButton.style.display = <span class="literal">'block'</span>;
+						}, 10);
+
+						<span class="comment">// Focus html editor</span>
+						self.focusHtml();
+					}
+				});
+
+				tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'wysiwygTooltip'</span>);
+				var wysiwygButton = <span class="reserved">this</span>.createButton(<span class="literal">"wysiwyg"</span>, tooltip, null, <span class="reserved">function</span>() {
+					<span class="reserved">if</span> (self.mode == <span class="literal">"HTML"</span>) {
+						self.switchToWYSIWYG();
+
+						setTimeout(<span class="reserved">function</span>() {
+							wysiwygButton.style.display = <span class="literal">'none'</span>;
+							wysiwygButton.zpEditorHTMLButton.style.display = <span class="literal">'block'</span>;
+						}, 10);
+
+						<span class="comment">// Focus editor</span>
+						self.focus();
+					}
+				});
+
+				htmlButton.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Html'</span>;
+				wysiwygButton.id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'Wysiwyg'</span>;
+
+				htmlButton.zpEditorWYSIWYGButton = wysiwygButton;
+				wysiwygButton.zpEditorHTMLButton = htmlButton;
+				wysiwygButton.style.display = <span class="literal">'none'</span>;
+
+				htmlButton.className += <span class="literal">" switch"</span>;
+				wysiwygButton.className += <span class="literal">" switch"</span>;
+
+				span.appendChild(htmlButton);
+				span.appendChild(wysiwygButton);
+
+				break;
+			case <span class="literal">"newpanel"</span>:
+				<span class="reserved">if</span> (span.childNodes.length == 0) {
+					<span class="comment">// if last created panel is empty - do not add new panel</span>
+					continue;
+				}
+
+				span = document.createElement(<span class="literal">"span"</span>);
+				span.className = <span class="literal">"toolbarPanel"</span>
+				td.appendChild(span);
+				break;
+			case <span class="literal">"newrow"</span>:
+				<span class="reserved">if</span> (td.childNodes.length == 1 &amp;&amp; span.childNodes.length == 0) {
+					<span class="comment">// if last created row is empty - do not add new row</span>
+					continue;
+				}
+
+				tr = document.createElement(<span class="literal">"tr"</span>);
+				tbody.appendChild(tr);
+				td = document.createElement(<span class="literal">"td"</span>);
+				tr.appendChild(td);
+				span = document.createElement(<span class="literal">"span"</span>);
+				span.className = <span class="literal">"toolbarPanel"</span>;
+				td.appendChild(span);
+				break;
+			default:
+				Zapatec.Log({description: <span class="reserved">this</span>.getMessage(<span class="literal">'unknownToolbarElementError'</span>, element)})
+		}
+	}
+}
+
+<span class="comment">/**
+ * Creates a color drop-down button
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {boolean} isForeground If true a foreground color button will be created,
+ * otherwise a background color button will be created
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.createColorButton = <span class="reserved">function</span>(isForeground) {
+	var colorButton = [];
+	var self = <span class="reserved">this</span>;
+
+	<span class="comment">// Generate color accessors and button id, name, class, tooltip</span>
+	var getter, setter, command, id, strClass, tooltip;
+	<span class="reserved">if</span> (isForeground) {
+		getter = <span class="reserved">function</span>() {
+			<span class="reserved">return</span> self.config.foreColor;
+		};
+		setter = <span class="reserved">function</span>(color) {
+			self.config.foreColor = color;
+		};
+		command = <span class="literal">"forecolor"</span>;
+		strClass = <span class="literal">"forecolor"</span>;
+		tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'fontColorTooltip'</span>);
+		id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'ForeColor'</span>;
+	}
+	<span class="reserved">else</span> {
+		getter = <span class="reserved">function</span>() {
+			<span class="reserved">return</span> self.config.backColor;
+		};
+		setter = <span class="reserved">function</span>(color) {
+			self.config.backColor = color;
+		};
+
+		<span class="reserved">if</span> (Zapatec.is_ie || Zapatec.is_khtml) {
+			command = <span class="literal">"backcolor"</span>;
+		}
+		<span class="reserved">else</span> {
+			command = <span class="literal">"hilitecolor"</span>;
+		}
+		strClass = <span class="literal">"backcolor"</span>;
+		tooltip = <span class="reserved">this</span>.getMessage(<span class="literal">'bgColorTooltip'</span>);
+		id = <span class="literal">'zpEditor'</span> + <span class="reserved">this</span>.id + <span class="literal">'BackColor'</span>;
+	}
+
+	var setColor = <span class="reserved">function</span>(color) {
+		<span class="comment">// Change button icon color</span>
+		colorButton[0].colorDiv.style.background = color;
+		<span class="comment">// Store selected foreground color</span>
+		setter(color);
+
+		<span class="reserved">if</span> (Zapatec.is_khtml) {
+			self.restoreSelection();
+		}
+
+		self.execCommand(command, false, color);
+		self.saveContentToField();
+
+		<span class="comment">// Focus editor</span>
+		self.focus();
+
+		<span class="comment">// Store an undo step</span>
+		self.undo.saveUndo();
+
+		<span class="comment">// Update toolbar icon states</span>
+		self.updateToolbar();
+	};
+
+	colorButton[0] = <span class="reserved">this</span>.createButton(strClass, tooltip,
+					<span class="reserved">function</span>(ev) {
+						<span class="reserved">if</span> (Zapatec.is_khtml) {
+							self.storeSelection();
+						}
+
+						var target = Zapatec.Utils.getTargetElement(ev);
+						var isDropAction = target.isDropArrow;
+						<span class="comment">// Get current color</span>
+						var color = getter();
+						<span class="comment">// A picker is to be shown if arrow is clicked or color is not set yet</span>
+						var isShowPicker = isDropAction || null == color || <span class="literal">""</span> == color;
+						<span class="reserved">if</span> (isShowPicker) {
+							<span class="comment">// Will show color picker on mouse release</span>
+							<span class="reserved">return</span>;
+						}
+						setColor(color);
+					},
+					<span class="reserved">function</span>(ev) {
+						var target = Zapatec.Utils.getTargetElement(ev);
+						var isDropAction = target.isDropArrow;
+						<span class="comment">// Get current color</span>
+						var color = getter();
+						<span class="comment">// A picker is to be shown if arrow is clicked or color is not set yet</span>
+						var isShowPicker = isDropAction || null == color || <span class="literal">""</span> == color;
+						<span class="reserved">if</span> (isShowPicker) {
+
+							var iColorPicker = isForeground?0:1;
+							<span class="comment">// Iterate all created color pickers</span>
+							<span class="reserved">for</span> (var i = 0; i &lt;= 1; ++i) {
+								var livePicker = self.colorPickers[i];
+								<span class="comment">// If color picker is already visible</span>
+								<span class="reserved">if</span> (livePicker &amp;&amp; livePicker.isShown) {
+									<span class="comment">// If color picker is for current color button</span>
+									<span class="reserved">if</span> (i == iColorPicker) {
+										<span class="reserved">return</span>;
+									}
+									livePicker.hide();
+								}
+							}
+
+							var show = <span class="reserved">function</span>() {
+								<span class="comment">// Create new color picker</span>
+								var colorPicker = new Zapatec.ColorPicker({
+									button: colorButton[0],
+									color: color,
+									handleButtonClick: false,
+									closeOnDocumentClick: false,
+									eventListeners:{select: setColor}
+								});
+								<span class="comment">// Show color picker</span>
+								colorPicker.show();
+								<span class="comment">// Store shown color picker for current color button</span>
+								self.colorPickers[iColorPicker] = colorPicker;
+							};
+							<span class="comment">// Invoke color picker show later</span>
+							setTimeout(show, 100);
+						}
+					},
+					null, true, getter());
+	colorButton[0].id = id;
+	<span class="reserved">return</span> colorButton[0];
+}
+
+
+<span class="comment">/**
+ * Insert DOM element in place of the current selection
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} insertNode A html DOM reference to insert
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.insertNodeAtSelection = <span class="reserved">function</span>(insertNode) {
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		var self = <span class="reserved">this</span>;
+		setTimeout(<span class="reserved">function</span>() {
+			var sel = self.pane.getContainer().contentWindow.document.selection;
+			var range = sel.createRange();
+			range.pasteHTML(insertNode.outerHTML);
+		}, 10);
+	}
+	<span class="reserved">else</span> {
+		<span class="reserved">if</span> (Zapatec.is_khtml) {
+			var sel;
+			<span class="reserved">if</span> (<span class="reserved">this</span>.oldSelection) {
+				sel = <span class="reserved">this</span>.oldSelection;
+			}
+			<span class="reserved">else</span> {
+				sel = <span class="reserved">this</span>.pane.getContainer().contentWindow.getSelection();
+			}
+			var range = <span class="reserved">this</span>.pane.getContainer().contentWindow.document.createRange();
+
+			var isRangeSet = false;
+			<span class="reserved">if</span> (sel.baseNode == sel.extentNode &amp;&amp; sel.baseOffset == sel.extentOffset) {
+				<span class="reserved">if</span> (sel.type == <span class="literal">"Range"</span>) {
+					range.setStartBefore(sel.baseNode);
+					range.setEndAfter(sel.extentNode);
+					isRangeSet = true;
+				}
+			}
+			<span class="reserved">if</span> (!isRangeSet) {
+				range.setStart(sel.baseNode, sel.baseOffset);
+				range.setEnd(sel.extentNode, sel.extentOffset);
+			}
+		}
+		<span class="reserved">else</span> {
+			var sel = <span class="reserved">this</span>.pane.getContainer().contentWindow.getSelection();
+			var range = sel.getRangeAt(0);
+			sel.removeAllRanges();
+		}
+
+		range.deleteContents();
+
+		var container = range.startContainer;
+		var pos = range.startOffset;
+		var doc = <span class="reserved">this</span>.pane.getIframeDocument();
+		range = doc.createRange();
+
+		<span class="reserved">if</span> (container.nodeType == 3 &amp;&amp; insertNode.nodeType == 3) {
+			container.insertData(pos, insertNode.nodeValue);
+			range.setEnd(container, pos + insertNode.length);
+			range.setStart(container, pos + insertNode.length);
+		}
+		<span class="reserved">else</span> {
+			var afterNode;
+			<span class="reserved">if</span> (container.nodeType == 3) {
+				var textNode = container;
+				container = textNode.parentNode;
+				var text = textNode.nodeValue;
+
+				var textBefore = text.substr(0, pos);
+				var textAfter = text.substr(pos);
+
+				var beforeNode = doc.createTextNode(textBefore);
+				afterNode = doc.createTextNode(textAfter);
+
+				container.insertBefore(afterNode, textNode);
+				container.insertBefore(insertNode, afterNode);
+				container.insertBefore(beforeNode, insertNode);
+
+				container.removeChild(textNode);
+			}
+			<span class="reserved">else</span> {
+				afterNode = container.childNodes[pos];
+				container.insertBefore(insertNode, afterNode);
+
+				<span class="reserved">if</span> (!afterNode) {
+					<span class="comment">// Move carret after currently inserted node</span>
+					range.setEnd(insertNode, 1);
+					range.setStart(insertNode, 1);
+				}
+			}
+
+			<span class="reserved">if</span> (afterNode) {
+				<span class="comment">// Move carret at the node after currently inserted node</span>
+				range.setEnd(afterNode, 0);
+				range.setStart(afterNode, 0);
+			}
+		}
+
+		<span class="reserved">if</span> (sel.addRange) {
+			sel.addRange(range);
+		}
+	}
+}
+
+<span class="comment">/**
+ * Set a given html inside the editor
+ * <span class="attrib">@public</span>
+ * <span class="attrib">@param</span> {string} html A html content to set inside the editor
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.setHTML = <span class="reserved">function</span>(html) {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.mode == <span class="literal">"WYSIWYG"</span>) {
+	    <span class="reserved">if</span>(!<span class="reserved">this</span>.pane.ready){
+			var self = <span class="reserved">this</span>;
+			<span class="reserved">this</span>.pane.addEventListener(<span class="literal">"onReady"</span>, <span class="reserved">function</span>(){self.setHTML(html)}, true);
+			<span class="reserved">return</span>;
+		}
+
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.fullPage) {
+			<span class="reserved">this</span>.setFullHTML(html);
+		}
+		<span class="reserved">else</span> {
+			<span class="reserved">this</span>.setBodyHTML(html);
+		}
+
+		<span class="comment">// If editor is configured to maintain a body margin</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.documentBodyMargin) {
+			<span class="reserved">this</span>.pane.getIframeDocument().body.style.margin = <span class="reserved">this</span>.config.documentBodyMargin;
+		}
+		<span class="comment">// If editor is configured to maintain a body padding</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.documentBodyPadding) {
+			<span class="reserved">this</span>.pane.getIframeDocument().body.style.padding = <span class="reserved">this</span>.config.documentBodyPadding;
+		}
+	}
+	<span class="reserved">else</span> {
+		<span class="comment">// Set html inside the HTML textfield</span>
+		var oTextarea = <span class="reserved">this</span>.config.field;
+		<span class="reserved">if</span> (oTextarea.tagName.toLowerCase() == <span class="literal">'textarea'</span>) {
+			<span class="comment">// For Safari</span>
+			<span class="comment">// IE raises exception</span>
+			try {
+				oTextarea.innerHTML = html;
+			} catch (oException) {};
+		}
+		oTextarea.value = html;
+	}
+}
+
+<span class="comment">/**
+ * Gets html content inside the editor
+ * <span class="attrib">@public</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.getHTML = <span class="reserved">function</span>() {
+	var html;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.mode == <span class="literal">"WYSIWYG"</span>) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.fullPage) {
+			html = <span class="reserved">this</span>.getFullHTML();
+		}
+		<span class="reserved">else</span> {
+			html = <span class="reserved">this</span>.getBodyHTML();
+		}
+	}
+	<span class="reserved">else</span> {
+		html = <span class="reserved">this</span>.config.field.value;
+	}
+	<span class="reserved">return</span>	html;
+}
+
+<span class="comment">/**
+ * Set a given html inside the body tag of the WYSIWYG editor
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} html content to set inside the body tag
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.setBodyHTML = <span class="reserved">function</span>(html) {
+    <span class="reserved">if</span>(!<span class="reserved">this</span>.pane.isReady){
+		var self = <span class="reserved">this</span>;
+    	<span class="reserved">this</span>.pane.addEventListener(<span class="literal">"onReady"</span>, <span class="reserved">function</span>(){self.setBodyHTML(html)}, true);
+    	<span class="reserved">return</span>;
+    }
+
+	html = <span class="reserved">this</span>.massageHTML(html);
+	<span class="reserved">this</span>.pane.getIframeDocument().body.innerHTML = html;
+}
+
+<span class="comment">/**
+ * Set a full html (including &lt;html&gt; tags) inside the WYSIWYG editor
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} html Full html content to set inside the editor
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.setFullHTML = <span class="reserved">function</span>(html) {
+	html = <span class="reserved">this</span>.massageHTML(html);
+
+	var doctypeRegExp = /(&lt;!doctype((.|\n|\r)*?)&gt;)\n?/i;
+	<span class="comment">// If html starts with a doctype</span>
+	<span class="reserved">if</span> (html.match(doctypeRegExp)) {
+		<span class="reserved">this</span>.doctype = RegExp.$1;
+		<span class="comment">// Remove doctype from full html</span>
+		html = html.replace(doctypeRegExp, <span class="literal">""</span>);
+	}
+	<span class="reserved">else</span> {
+		<span class="reserved">this</span>.doctype = <span class="literal">""</span>;
+	}
+
+	var doc = <span class="reserved">this</span>.pane.getIframeDocument();
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		doc.open();
+		doc.write(html);
+		doc.close();
+		doc.body.contentEditable = true;
+
+		<span class="comment">// Install mouse and key listeners</span>
+		<span class="reserved">this</span>.installListeners();
+	}
+	<span class="reserved">else</span> {
+		var headRegExp = /&lt;head[^&gt;]*&gt;((.|\n|\r)*?)&lt;\/head&gt;/i;
+		<span class="comment">// If html contains a head tag</span>
+		<span class="reserved">if</span> (html.match(headRegExp)) {
+			var elHead = doc.getElementsByTagName(<span class="literal">"head"</span>)[0];
+			<span class="reserved">if</span> (Zapatec.is_khtml) {
+				<span class="comment">// Can't set head in Safari</span>
+				<span class="comment">/*var par = elHead.parentNode;
+				par.removeChild(elHead);
+				var newHead = doc.createElement('head');
+				alert(RegExp.$1);
+				newHead.outerHtml = RegExp.$0;
+				par.insertBefore(newHead, doc.body);*/</span>
+			}
+			<span class="reserved">else</span> {
+				elHead.innerHTML = RegExp.$1;
+			}
+		}
+		<span class="comment">// If html contains a body tag</span>
+		var bodyRegExp = /(&lt;body[^&gt;]*&gt;)((.|\n|\r)*?)&lt;\/body&gt;/i;
+		var res = html.match(bodyRegExp);
+		var body = RegExp.$1;
+		var inBodyHtml = RegExp.$2;
+		<span class="reserved">if</span> (res) {
+			<span class="reserved">this</span>.setBodyHTML(inBodyHtml);
+		}
+		<span class="reserved">else</span> {
+			<span class="comment">// No body tag</span>
+			<span class="comment">// Assume plain html is provided and use it instead</span>
+			<span class="reserved">this</span>.setBodyHTML(html);
+			<span class="reserved">return</span>;
+		}
+
+	  body = body.replace(/&gt;$/, <span class="literal">"/&gt;"</span>);
+
+		<span class="comment">// Parse body html tag to extract attributes</span>
+		Zapatec.Transport.parseXml({
+			strXml: body,
+			onLoad: <span class="reserved">function</span>(oDoc) {
+				var htmlBody = oDoc.documentElement;
+				var htmlBodyAttrs = htmlBody.attributes;
+
+				<span class="comment">// Apply body attributes from html to our document body</span>
+				<span class="reserved">for</span> (var i = 0; i &lt; htmlBodyAttrs.length; ++i) {
+					var attr = htmlBodyAttrs.item(i);
+					<span class="reserved">if</span> (!attr.specified) {
+						continue;
+					}
+					var name = attr.nodeName;
+					var value = attr.nodeValue;
+					<span class="comment">// Apply current attirubte to document body</span>
+					doc.body.setAttribute(name, value);
+				}
+
+				<span class="comment">// Remove document body attributes not found in html body</span>
+				var docBodyAttrs = doc.body.attributes;
+				<span class="reserved">for</span> (var i = 0; i &lt; docBodyAttrs.length; ++i) {
+					var attr = docBodyAttrs.item(i);
+					<span class="reserved">if</span> (!attr.specified) {
+						continue;
+					}
+					var name = attr.nodeName;
+					var value = attr.nodeValue;
+					<span class="comment">// If current document body attribute is not found in html body</span>
+					<span class="reserved">if</span> (!htmlBody.getAttribute(name)) {
+						doc.body.removeAttribute(name);
+					}
+				}
+			}
+		});
+	}
+
+	<span class="reserved">this</span>.isDefaultFullHtml = false;
+}
+
+<span class="comment">/**
+ * Gets full html content (including &lt;html&gt; tags) that is currently in the WYSIWYG editor
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.getFullHTML = <span class="reserved">function</span>() {
+	var html = <span class="literal">""</span>;
+	<span class="reserved">if</span> (<span class="literal">""</span> != <span class="reserved">this</span>.doctype) {
+		html += <span class="reserved">this</span>.doctype + <span class="literal">"\n"</span>;
+	}
+
+	var root = <span class="reserved">this</span>.pane.getIframeDocument().documentElement;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.dumpHtml) {
+		html += dump.getHTML(root, true, 0);
+	}
+	<span class="reserved">else</span> {
+		html += root.innerHTML;
+
+		<span class="comment">// Opera doesn't close the body tag</span>
+		<span class="reserved">if</span> (Zapatec.is_opera) {
+			<span class="comment">// If closing body tag is missing</span>
+			var bodyExp = /&lt;\/body&gt;/i;
+			<span class="reserved">if</span> (!html.match(bodyExp)) {
+				<span class="comment">// Add a closing body tag</span>
+				html += <span class="literal">"&lt;/BODY&gt;"</span>;
+			}
+		}
+		<span class="reserved">if</span> (Zapatec.is_ie) {
+			var contentEditableExp = /(&lt;body[^&gt;]*)( contentEditable=true)([^&gt;]*&gt;)/gi;
+			html = html.replace(contentEditableExp, <span class="literal">"$1$3"</span>);
+		}
+
+		<span class="comment">// Surround html with openning and closing &lt;html&gt; tags</span>
+		html = <span class="literal">"&lt;html&gt;"</span> + html + <span class="literal">"&lt;/html&gt;"</span>;
+	}
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.isDefaultFullHtml || Zapatec.is_khtml) {
+		var headRegExp = /&lt;head[^&gt;]*&gt;((.|\n|\r)*?)&lt;\/head&gt;/i;
+		<span class="comment">// Remove default html header from full html</span>
+		html = html.replace(headRegExp, <span class="literal">"&lt;head&gt;&lt;/head&gt;"</span>);
+	}
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.isDefaultFullHtml) {
+		var onLoadRegExp = /(&lt;body[^&gt;]*)( onload=\<span class="literal">"?init\(\);\"</span>?)([^&gt;]*&gt;)/gi;
+		html = html.replace(onLoadRegExp, <span class="literal">"$1$3"</span>);
+	}
+
+	html = <span class="reserved">this</span>.unmassageHTML(html);
+
+	<span class="reserved">return</span> html;
+}
+
+<span class="comment">/**
+ * Gets html inside the body tag of the WYSIWYG editor
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.getBodyHTML = <span class="reserved">function</span>() {
+	var html;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.dumpHtml) {
+		html = dump.getHTML(<span class="reserved">this</span>.pane.getIframeDocument().body, false, 0);
+	}
+	<span class="reserved">else</span> {
+		html = <span class="reserved">this</span>.pane.getContentElement().innerHTML;
+	}
+
+	html = <span class="reserved">this</span>.unmassageHTML(html);
+
+	<span class="reserved">return</span> html;
+}
+
+<span class="comment">/**
+ * Removes custom html attributes from html and prepare it to be passed to the user
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} html html to process
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.unmassageHTML = <span class="reserved">function</span>(html) {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.preserveImgSrc) {
+		<span class="comment">// Replace src attribute with the value of the respective _zpSrc attribute</span>
+		<span class="comment">// in every img. Remove _zpSrc attribute</span>
+		html = html.replace(/(&lt;img[^&gt;]+)(src=(<span class="literal">"|')[^"</span><span class="literal">']*\3)([^&gt;]*)(_zpSrc=("|'</span>)([^<span class="literal">"']*)\6)([^&gt;]*&gt;)/gi,
+						"</span>$1src=$3$7$3$4$8<span class="literal">");
+		html = html.replace(/(&lt;img[^&gt;]+)(_zpSrc=("</span>|<span class="literal">')([^"'</span>]*)\3)([^&gt;]*)(src=(<span class="literal">"|')[^"</span><span class="literal">']*\7)([^&gt;]*&gt;)/gi,
+						"$1src=$3$4$3$5$8");
+	}
+	if (this.config.preserveAnchorHref) {
+		// Replace href attribute with the value of the respective _zpHref attribute
+		// in every img. Remove _zpHref attribute
+		html = html.replace(/(&lt;a[^&gt;]+)(href=("|'</span>)[^<span class="literal">"']*\3)([^&gt;]*)(_zpHref=("</span>|<span class="literal">')([^"'</span>]*)\6)([^&gt;]*&gt;)/gi,
+						<span class="literal">"$1href=$3$7$3$4$8"</span>);
+		html = html.replace(/(&lt;a[^&gt;]+)(_zpHref=(<span class="literal">"|')([^"</span><span class="literal">']*)\3)([^&gt;]*)(href=("|'</span>)[^<span class="literal">"']*\7)([^&gt;]*&gt;)/gi,
+						"</span>$1href=$3$4$3$5$8<span class="literal">");
+	}
+	// If we need xhtml output
+	if (this.config.generateXhtml) {
+		html = html2Xhtml.convert(html);
+	}
+	return html;
+}
+
+/**
+ * Adds custom html attributes to html to preserve relative links and images
+ * @private
+ * @param {string} html html to process
+ */
+Zapatec.MinimalEditor.prototype.massageHTML = function(html) {
+	if (this.config.preserveImgSrc) {
+		// Add additional _zpSrc attribute to every &lt;img&gt; element using the same
+		// value as the src attribute
+		html = html.replace(/(&lt;img[^&gt;]+)(src=("</span>|<span class="literal">')([^"'</span>]*)\3)([^&gt;]*&gt;)/gi,
+						<span class="literal">"$1$2 _zpSrc=$3$4$3 $5"</span>);
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.preserveAnchorHref) {
+		<span class="comment">// Add additional _zpHref attribute to every &lt;a&gt; element using the same</span>
+		<span class="comment">// value as the href attribute</span>
+		html = html.replace(/(&lt;a[^&gt;]+)(href=(<span class="literal">"|')([^"</span><span class="literal">']*)\3)([^&gt;]*&gt;)/gi,
+						"$1$2 _zpHref=$3$4$3 $5");
+	}
+	return html;
+}
+
+/**
+ * Switch editor to HTML mode
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.switchToHTML = function() {
+	if (this.mode != "WYSIWYG") {
+		return false;
+	}
+
+	var html = this.getHTML();
+
+	this.mode = "HTML";
+	this.toggleButtons(false);
+
+	this.setHTML(html);
+
+	// show original field
+	this.config.field.style.display = '</span><span class="literal">';
+
+	// hide editable iframe
+	if (Zapatec.is_khtml) {
+		this.pane.getContainer().style.visibility = "hidden";
+		// Store pane height
+		this.pane.getContainer().hiddenHeight = this.pane.getContainer().style.height;
+		// Make pane with 0 height
+		this.pane.getContainer().style.height = "0";
+	}
+	else {
+		this.pane.getContainer().style.display = "none";
+	}
+}
+
+/**
+ * Switch editor to WYSIWYG mode
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.switchToWYSIWYG = function() {
+	if (this.mode != "HTML") {
+		return false;
+	}
+
+	var html = this.getHTML();
+
+	this.mode = "WYSIWYG";
+
+	// Enable all toolbar buttons
+	this.toggleButtons(true);
+	this.setHTML(html);
+
+	// hide original field
+	this.config.field.style.display = "none";
+
+	// show editable iframe
+	if (Zapatec.is_khtml) {
+		this.pane.getContainer().style.visibility = "";
+		// Restore pane height
+		this.pane.getContainer().style.height = this.pane.getContainer().hiddenHeight;
+	}
+	else {
+		this.pane.getContainer().style.display = "block";
+	}
+}
+
+/**
+ * Creates a new toolbar button after the last one
+ * @private
+ * @param buttonClass - [string] A css class to apply to the button
+ * @param tooltip - [string] Tooltip text
+ * @param func - [function] An action handler function the be attached
+ * @param isOnMouseDown - [boolean] If true the action will be triggered on
+ * mouse down, otherwise it will trigger on click. Default is true.
+ * @param buttonTitle - [string] Button text
+ */
+Zapatec.MinimalEditor.prototype.createButton = function(buttonClass,
+                                                        tooltip, downAction, clickAction, text,
+                                                        isDropDown, color) {
+	// If text param is not specified
+	if (null == text) {
+		text = "";
+	}
+
+	var params = {
+		theme: this.config.theme,
+		themePath: this.config.themePath,
+		text: text,
+	//		image: this.config.themePath + "px.gif",
+		className: "zpEditorButton " + buttonClass,
+		repeatEnabled: false
+	};
+
+	if (isDropDown) {
+		var img = Zapatec.zapatecPath + "../zpeditor/themes/" + this.config.theme + '</span>/dropdown.gif<span class="literal">';
+		params.image = img;
+	}
+
+	// Attach downAction if any
+	if (downAction) {
+		params.downAction = downAction;
+	}
+	// Attach clickAction if any
+	if (clickAction) {
+		params.clickAction = clickAction;
+	}
+
+	// Create a new button
+	var button = new Zapatec.Button(params);
+	this.createProperty(button.getContainer(), "button", button);
+	if (isDropDown) {
+		button.img.isDropArrow = true;
+		// Create a div that represents current color
+		var colorDiv = document.createElement("img");
+		// Set color div style
+		Zapatec.Utils.addClass(colorDiv, this.getClassName({
+			prefix: "zpEditor",
+			suffix: "ColorMark"
+		}));
+		button.internalContainer.insertBefore(colorDiv, button.img);
+
+		// Attach color marker element to its respective button
+		this.createProperty(button.getContainer(), "colorDiv", colorDiv);
+		// Set initial color of color marker
+		if (color) {
+			colorDiv.background = color;
+		}
+
+		// Set correct style of drop down button
+		Zapatec.Utils.addClass(button.getContainer(), this.getClassName({
+			prefix: "zpButton",
+			suffix: "Container"
+		}));
+		Zapatec.Utils.removeClass(button.getContainer(), this.getClassName({
+			prefix: "zpButtonImage",
+			suffix: "Container"
+		}));
+
+		// Set correct style of drop down arrow image
+		Zapatec.Utils.addClass(button.img, this.getClassName({
+			prefix: "zpEditor",
+			suffix: "DropDown"
+		}));
+	}
+
+	// Create tooltip
+	if (tooltip &amp;&amp; this.config.enableTooltips) {
+		var div = document.createElement("div");
+		div.innerHTML = tooltip;
+		var objTooltip = new Zapatec.Tooltip({
+			target: button.container,
+			tooltip: div,
+			parent: this.container
+		});
+
+		this.tooltips.push(objTooltip);
+	}
+
+	this.buttons.push(button);
+
+	return button.getContainer();
+}
+
+/**
+ * Help function for creating selects
+ * @private
+ * @param {array} options Array of string options to appear inside the select
+ * @param {array} values Array of values to be associated with each option
+ * @param {function} func A select onChange handler function to be attached
+ */
+Zapatec.MinimalEditor.prototype.createSelect = function(options, values, func) {
+	if (options.length != values.length) {
+		Zapatec.Log({description: this.getMessage('</span>optionsNotEqualValuesError<span class="literal">')});
+		return null;
+	}
+
+	var select = document.createElement("select");
+	select.tabindex = 0;
+	select.className = "zpEditorSelect";
+	for (var ii = 0; ii &lt; options.length; ii++) {
+		select.options[ii] = new Option(options[ii], values[ii])
+	}
+
+	select.onchange = func;
+
+	return select;
+}
+
+/**
+ * Enable/disable all buttons in the toolbar except the HTML/WYSIWYG switcher
+ *
+ * @private
+ * @param {boolean} enable true to enable, false to disable
+ */
+Zapatec.MinimalEditor.prototype.toggleButtons = function(enable) {
+	for (var ii = 0; ii &lt; this.buttons.length; ii++) {
+		var button = this.buttons[ii];
+
+		var className = button.getContainer().className;
+		// Skip HTML/WYSIWYG toggle buttons
+		if (/switch/.test(className)) {
+			continue;
+		}
+
+		if (enable) {
+			button.enable();
+		}
+		else {
+			button.disable();
+		}
+	}
+}
+
+/**
+ * Gets a toolbar button given its id
+ *
+ * @private
+ * @param {string} id button id
+ */
+Zapatec.MinimalEditor.prototype.getButton = function(id) {
+	for (var ii = 0; ii &lt; this.buttons.length; ii++) {
+		var button = this.buttons[ii];
+
+		var currentId = button.getContainer().id;
+		if (currentId == id) {
+			return button;
+		}
+
+	}
+	return null;
+}
+
+/**
+ * Handles Enter key pressed event. Deletes currently selected text and inserts
+ * a &amp;lt;br&amp;gt; tag. This handler is attached only in IE where Enter produces
+ * a &amp;lt;p&amp;gt; rather than &amp;lt;br&amp;gt; tag
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.onEnterPressed = function() {
+    if(!Zapatec.is_ie){
+    	return false;
+    }
+
+	var iframeDocument = this.pane.getIframeDocument();
+	if (typeof iframeDocument.selection != '</span>undefined<span class="literal">') {
+		var selection = iframeDocument.selection;
+
+		if (selection.type.toLowerCase() == '</span>control<span class="literal">') {
+			// Delete selection
+			selection.clear();
+		}
+
+		var range = selection.createRange();
+
+		// If we are inside an ordered/bulleted list
+		if (iframeDocument.queryCommandState('</span>InsertOrderedList<span class="literal">') ||
+		    iframeDocument.queryCommandState('</span>InsertUnorderedList<span class="literal">')) {
+			return false;
+		}
+
+		// Insert &lt;br&gt;
+		range.pasteHTML('</span>&lt;br&gt;<span class="literal">');
+
+		// Move cursor after &lt;br&gt;
+		range.collapse(false);
+		range.select();
+
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Maximizes and Restores the editor frame.  The icon is updated as
+ * needed.
+ *
+ * @param {boolean} isMaximize if true the editor iframe is to be maximized,
+ * otherwise it is to be restored to its original state. If omitted the function
+ * will act as a toggle inverting the maximize state in each call.
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.resizeEditor = function() {
+
+	var isMaximize;
+	if (!this.maximizer) {
+		this.maximizer = new Zapatec.Utils.Maximizable({
+			container: this.container,
+			maximizedBorder: this.config.maximizedBorder
+		});
+		var self = this;
+		// Attach to onBeforeMaximize events
+		this.maximizer.addEventListener('</span>onBeforeMaximize<span class="literal">', function(restoreState) {
+
+			// Store editor panel size
+			restoreState.editorPanelRestorer = new Zapatec.SRProp(self.editorPanel);
+			restoreState.editorPanelRestorer.saveProps("style.width", "style.height");
+
+			// Store pane size
+			restoreState.paneRestorer = new Zapatec.SRProp(self.pane.getContainer());
+			restoreState.paneRestorer.saveProps("style.width", "style.height");
+
+			// Store field size
+			restoreState.fieldRestorer = new Zapatec.SRProp(self.config.field);
+			restoreState.fieldRestorer.saveProps("style.width", "style.height");
+
+			// Store toolbar width
+			restoreState.toolbarRestorer = new Zapatec.SRProp(self.toolbar);
+			restoreState.toolbarRestorer.saveProps("style.width");
+		});
+
+		// Attach to onAfterRestore events
+		this.maximizer.addEventListener('</span>onAfterRestore<span class="literal">', function(restoreState) {
+
+			// Restore editor panel size
+			restoreState.editorPanelRestorer.restoreProps("style.width", "style.height");
+
+			// Restore iframe size
+			restoreState.paneRestorer.restoreProps("style.width", "style.height");
+
+			// Restore text area size
+			restoreState.fieldRestorer.restoreProps("style.width", "style.height");
+
+			// Restore toolbar width
+			restoreState.toolbarRestorer.restoreProps("style.width");
+		});
+
+		// Attach to onAfterSize events
+		this.maximizer.addEventListener('</span>onAfterSize<span class="literal">', function(width, height) {
+			self.setSize(width, height);
+		});
+
+		isMaximize = true;
+	}
+	else {
+		isMaximize = !this.maximizer.isMaximized;
+	}
+
+	this.maximizer.setMaximized(isMaximize);
+
+	// Enumerate all toolbar buttons
+	for (var ii = 0; ii &lt; this.buttons.length; ii++) {
+		var button = this.buttons[ii];
+
+		var buttonClass = button.config.className;
+
+		if (-1 != buttonClass.indexOf('</span>maximize<span class="literal">')) {
+			if (isMaximize) {
+				Zapatec.Utils.removeClass(button.internalContainer, '</span>maximize<span class="literal">');
+				Zapatec.Utils.addClass(button.internalContainer, '</span>restore<span class="literal">');
+			}
+			else {
+				Zapatec.Utils.removeClass(button.internalContainer, '</span>restore<span class="literal">');
+				Zapatec.Utils.addClass(button.internalContainer, '</span>maximize<span class="literal">');
+			}
+			break;
+		}
+	}
+}
+
+/**
+ * Gets the key under which the html content is to be saved/fetched server-side
+ *
+ * @public
+ */
+Zapatec.MinimalEditor.prototype.getPersistKey = function() {
+	// If persist key is assigned by user
+	if (null != this.config.persistKey) {
+		// Return it
+		return this.config.persistKey;
+	}
+
+	var persistKeyInput = document.getElementById("persistKey");
+	if (null != persistKeyInput) {
+		return persistKeyInput.value;
+	}
+
+	return null;
+}
+
+/**
+ * Sets the key under which the html content is to be saved/fetched server-side
+ *
+ * @public
+ * @param {string} persistKey A key under which the html content is to be
+ * saved/fetched server-side
+ */
+Zapatec.MinimalEditor.prototype.setPersistKey = function(persistKey) {
+	this.config.persistKey = persistKey;
+}
+
+/**
+ * Saves the editor content to a remote server.
+ *
+ * @public
+ */
+Zapatec.MinimalEditor.prototype.save = function() {
+	var key = this.getPersistKey();
+
+	if (null == key || 0 == key.length) {
+		return false;
+	}
+
+	var url = this.config.persistPath + "?key=" + escape(key) + '</span>&amp;r=<span class="literal">' + Math.random();
+	var self = this;
+
+	Zapatec.Transport.fetch({
+		url: url,
+		method: "POST",
+		content: "content=" + escape(self.getHTML()),
+		onLoad: function(result) {
+		},
+		onError: function(error) {
+			switch (error.errorCode) {
+				case 404:
+					alert(self.getMessage('</span>noSuchFileError<span class="literal">'));
+					break;
+				case 403:
+					alert(self.getMessage('</span>writeAccessForbiddenError<span class="literal">'));
+					break;
+				default:
+					alert(self.getMessage('</span>fetchError<span class="literal">', error.errorCode, 
+									error.errorDescription));
+			}
+		}
+	});
+
+	return true;
+};
+
+/**
+ * Loads editor content from a remove server
+ *
+ * @public
+ */
+Zapatec.MinimalEditor.prototype.fetch = function() {
+	var key = this.getPersistKey();
+
+	if (null == key || 0 == key.length) {
+		return false;
+	}
+
+	var url = this.config.persistPath + "?key=" + escape(key) + '</span>&amp;r=<span class="literal">' + Math.random();
+
+	var self = this;
+	Zapatec.Transport.fetch({
+		url: url,
+		method: "GET",
+		onLoad: function(result) {
+			// Unescape unicode characters
+			var html = self.unicodeToText(result.responseText);
+			self.setHTML(html);
+		},
+		onError: function(error) {
+			switch (error.errorCode) {
+				case 404:
+					alert(self.getMessage('</span>noSuchFileError<span class="literal">'));
+					break;
+				case 403:
+					alert(self.getMessage('</span>readAccessForbiddenError<span class="literal">'));
+					break;
+				default:
+					alert(self.getMessage('</span>fetchError<span class="literal">', error.errorCode,
+									error.errorDescription));
+			}
+		}
+	});
+
+	return true;
+};
+
+/**
+ * Converts text in for of %u0075%u006e%u0069%u0063%u006f%u0064%u0065
+ * to its text un-escaped equivalent
+ *
+ * @param {string} escapedUnicodeText text to convert
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.unicodeToText = function(escapedUnicodeText) {
+	if (-1 == escapedUnicodeText.indexOf("%u")) {
+		// Nothing to un-escape
+		return escapedUnicodeText;
+	}
+	escapedUnicodeText = escapedUnicodeText.replace(/%u/g, "\\u");
+
+	// If there are quotes in string
+	if (-1 != escapedUnicodeText.indexOf("\"")) {
+		// Escape quotes before passing to eval to avoid JS error
+		escapedUnicodeText = escapedUnicodeText.replace(/\"/g, "&amp;quot;");
+	}
+	var text = eval("\"" + escapedUnicodeText + "\"");
+	return text;
+}
+
+/**
+ * Shows a special character input window
+ *
+ * @public
+ */
+Zapatec.MinimalEditor.prototype.showCharMapWindow = function() {
+	// If character map windows is not yet closed
+	if (this.characterMapWindow) {
+		return;
+	}
+
+	var characters =
+					[
+									'</span>&amp;Yuml;<span class="literal">', '</span>&amp;scaron;<span class="literal">', '</span>&amp;#064;<span class="literal">', '</span>&amp;quot;<span class="literal">', '</span>&amp;iexcl;<span class="literal">', '</span>&amp;cent;<span class="literal">', '</span>&amp;pound;<span class="literal">', '</span>&amp;curren;<span class="literal">', '</span>&amp;yen;<span class="literal">', '</span>&amp;brvbar;<span class="literal">',
+									'</span>&amp;sect;<span class="literal">', '</span>&amp;uml;<span class="literal">', '</span>&amp;copy;<span class="literal">', '</span>&amp;ordf;<span class="literal">', '</span>&amp;laquo;<span class="literal">', '</span>&amp;not;<span class="literal">', '</span>&amp;macr;<span class="literal">', '</span>&amp;deg;<span class="literal">', '</span>&amp;plusmn;<span class="literal">', '</span>&amp;sup2;<span class="literal">',
+									'</span>&amp;sup3;<span class="literal">', '</span>&amp;acute;<span class="literal">', '</span>&amp;micro;<span class="literal">', '</span>&amp;para;<span class="literal">', '</span>&amp;middot;<span class="literal">', '</span>&amp;cedil;<span class="literal">', '</span>&amp;sup1;<span class="literal">', '</span>&amp;ordm;<span class="literal">', '</span>&amp;raquo;<span class="literal">', '</span>&amp;frac14;<span class="literal">',
+									'</span>&amp;frac12;<span class="literal">', '</span>&amp;frac34;<span class="literal">', '</span>&amp;iquest;<span class="literal">', '</span>&amp;times;<span class="literal">', '</span>&amp;Oslash;<span class="literal">', '</span>&amp;divide;<span class="literal">', '</span>&amp;oslash;<span class="literal">', '</span>&amp;fnof;<span class="literal">', '</span>&amp;circ;<span class="literal">',
+									'</span>&amp;tilde;<span class="literal">', '</span>&amp;ndash;<span class="literal">', '</span>&amp;mdash;<span class="literal">', '</span>&amp;lsquo;<span class="literal">', '</span>&amp;rsquo;<span class="literal">', '</span>&amp;sbquo;<span class="literal">', '</span>&amp;ldquo;<span class="literal">', '</span>&amp;rdquo;<span class="literal">', '</span>&amp;bdquo;<span class="literal">',
+									'</span>&amp;dagger;<span class="literal">', '</span>&amp;Dagger;<span class="literal">', '</span>&amp;bull;<span class="literal">', '</span>&amp;hellip;<span class="literal">', '</span>&amp;permil;<span class="literal">', '</span>&amp;lsaquo;<span class="literal">', '</span>&amp;rsaquo;<span class="literal">', '</span>&amp;euro;<span class="literal">', '</span>&amp;trade;<span class="literal">',
+									'</span>&amp;Agrave;<span class="literal">', '</span>&amp;Aacute;<span class="literal">', '</span>&amp;Acirc;<span class="literal">', '</span>&amp;Atilde;<span class="literal">', '</span>&amp;Auml;<span class="literal">', '</span>&amp;Aring;<span class="literal">', '</span>&amp;AElig;<span class="literal">', '</span>&amp;Ccedil;<span class="literal">', '</span>&amp;Egrave;<span class="literal">',
+									'</span>&amp;Eacute;<span class="literal">', '</span>&amp;Ecirc;<span class="literal">', '</span>&amp;Euml;<span class="literal">', '</span>&amp;Igrave;<span class="literal">', '</span>&amp;Iacute;<span class="literal">', '</span>&amp;Icirc;<span class="literal">', '</span>&amp;Iuml;<span class="literal">', '</span>&amp;ETH;<span class="literal">', '</span>&amp;Ntilde;<span class="literal">',
+									'</span>&amp;Ograve;<span class="literal">', '</span>&amp;Oacute;<span class="literal">', '</span>&amp;Ocirc;<span class="literal">', '</span>&amp;Otilde;<span class="literal">', '</span>&amp;Ouml;<span class="literal">', '</span>&amp;reg;<span class="literal">', '</span>&amp;times;<span class="literal">', '</span>&amp;Ugrave;<span class="literal">', '</span>&amp;Uacute;<span class="literal">',
+									'</span>&amp;Ucirc;<span class="literal">', '</span>&amp;Uuml;<span class="literal">', '</span>&amp;Yacute;<span class="literal">', '</span>&amp;THORN;<span class="literal">', '</span>&amp;szlig;<span class="literal">', '</span>&amp;agrave;<span class="literal">', '</span>&amp;aacute;<span class="literal">', '</span>&amp;acirc;<span class="literal">', '</span>&amp;atilde;<span class="literal">',
+									'</span>&amp;auml;<span class="literal">', '</span>&amp;aring;<span class="literal">', '</span>&amp;aelig;<span class="literal">', '</span>&amp;ccedil;<span class="literal">', '</span>&amp;egrave;<span class="literal">', '</span>&amp;eacute;<span class="literal">', '</span>&amp;ecirc;<span class="literal">', '</span>&amp;euml;<span class="literal">', '</span>&amp;igrave;<span class="literal">',
+									'</span>&amp;iacute;<span class="literal">', '</span>&amp;icirc;<span class="literal">', '</span>&amp;iuml;<span class="literal">', '</span>&amp;eth;<span class="literal">', '</span>&amp;ntilde;<span class="literal">', '</span>&amp;ograve;<span class="literal">', '</span>&amp;oacute;<span class="literal">', '</span>&amp;ocirc;<span class="literal">', '</span>&amp;otilde;<span class="literal">',
+									'</span>&amp;ouml;<span class="literal">', '</span>&amp;divide;<span class="literal">', '</span>&amp;oslash;<span class="literal">', '</span>&amp;ugrave;<span class="literal">', '</span>&amp;uacute;<span class="literal">', '</span>&amp;ucirc;<span class="literal">', '</span>&amp;uuml;<span class="literal">', '</span>&amp;yacute;<span class="literal">', '</span>&amp;thorn;<span class="literal">',
+									'</span>&amp;yuml;<span class="literal">', '</span>&amp;OElig;<span class="literal">', '</span>&amp;oelig;<span class="literal">', '</span>&amp;Scaron;<span class="literal">'
+									];
+
+	var html = '</span>&lt;table class=<span class="literal">"charmap"</span> border=<span class="literal">"0"</span> cellspacing=<span class="literal">"1"</span> cellpadding=<span class="literal">"0"</span> width=<span class="literal">"100%"</span>&gt;<span class="literal">';
+	for (var charIndex = 0; charIndex &lt; characters.length; ++charIndex) {
+		var charStr = characters[charIndex];
+		if (charIndex % 16 == 0) {
+			if (0 != charIndex) {
+				html += '</span>&lt;/tr&gt;<span class="literal">';
+			}
+			html += '</span>&lt;tr&gt;<span class="literal">';
+		}
+
+		html += '</span>&lt;td class=<span class="literal">"character"</span> onmouseover=<span class="literal">"';
+		html += 'Zapatec.MinimalEditor.OnMouseOverChar(' + this.id + ', this)"</span> <span class="literal">';
+		html += '</span>onclick=<span class="literal">"return Zapatec.MinimalEditor.InsertChar(' + this.id + ', \'' +
+		        charStr + '\')"</span>&gt;<span class="literal">' + charStr + '</span>&lt;/td&gt;<span class="literal">';
+	}
+	html += '</span>&lt;td class=<span class="literal">"character"</span> colspan=<span class="literal">"4"</span>&gt;&amp;nbsp;&lt;/td&gt;<span class="literal">';
+	html += '</span>&lt;/tr&gt;<span class="literal">';
+	html += '</span>&lt;/table&gt;<span class="literal">';
+
+	// Try to use provided Zapatec.Win object
+	var oWin = this.config.win;
+	if (oWin) {
+		// Open dialog
+		oWin.open({
+			headline: zapatecTranslate(this.getMessage('</span>characterMapTitle<span class="literal">')),
+			source: html
+		});
+	} else {
+		var self = this;
+		var onClose = function(win) {
+			self.characterMapWindow = null;
+			// Hide modal
+			self.setIsModal(false);
+		}
+		var title = this.getMessage('</span>characterMapTitle<span class="literal">');
+		this.characterMapWindow = this.createWindow(420, 245, title, html, onClose);
+	}
+}
+
+/**
+ * Called internally when the mouse goes over a character cell in character map
+ *
+ * @private
+ * @param {string} id editor id
+ * @param {object} cell reference to character cell
+ */
+Zapatec.MinimalEditor.OnMouseOverChar = function(id, cell) {
+	// Get editor by id
+	var objEditor = Zapatec.Widget.getWidgetById(id);
+
+	if (objEditor.oldHiliteCell) {
+		objEditor.oldHiliteCell.className = "character";
+	}
+
+	var cellClass = cell.className;
+	if (-1 == cellClass.indexOf("character-hilite")) {
+		cell.className = "character character-hilite";
+		objEditor.oldHiliteCell = cell;
+	}
+}
+
+/**
+ * Called internally when a character cell is clicked
+ *
+ * @private
+ * @param {string} id editor id
+ * @param {string} character selected character
+ */
+Zapatec.MinimalEditor.prototype.insertText = function(text) {
+
+	if (Zapatec.is_ie) {
+		var range = this.oldSelectionRange;
+		if (!range) {
+			var sel = this.pane.getContainer().contentWindow.document.selection;
+
+			range = sel.createRange();
+		}
+
+		var self = this;
+		setTimeout(function() {
+			range.pasteHTML(text);
+
+			range.select();
+
+			// Store an undo step
+			self.undo.saveUndo();
+
+			// Update toolbar icon states
+			self.updateToolbar();
+		}, 500);
+
+	}
+	else {
+		if (Zapatec.is_khtml) {
+			this.restoreSelection();
+		}
+
+		var charElement = this.pane.getIframeDocument().createTextNode(text);
+		this.insertNodeAtSelection(charElement);
+
+		this.focus();
+
+		// Store an undo step
+		this.undo.saveUndo();
+
+		// Update toolbar icon states
+		this.updateToolbar();
+	}
+}
+
+/**
+ * Called internally when a character cell is clicked
+ *
+ * @private
+ * @param {string} id editor id
+ * @param {string} character selected character
+ */
+Zapatec.MinimalEditor.InsertChar = function(id, character) {
+
+	// Get editor by id
+	var objEditor = Zapatec.Widget.getWidgetById(id);
+
+	// Close window
+	var oWin = objEditor.config.win;
+	if (oWin) {
+		oWin.hide();
+	} else {
+		objEditor.characterMapWindow.close();
+	}
+
+	// Change selection text into our text field value
+	objEditor.insertText(character);
+	objEditor.saveContentToField();
+}
+
+/**
+ * Stores current selection state and its range. Safari specific.
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.storeSelection = function() {
+	var sel = this.pane.getContainer().contentWindow.getSelection();
+
+	var range = this.pane.getContainer().contentWindow.document.createRange();
+
+	var isRangeSet = false;
+	if (sel.baseNode == sel.extentNode &amp;&amp; sel.baseOffset == sel.extentOffset) {
+		if (sel.type == "Range") {
+			range.setStartBefore(sel.baseNode);
+			range.setEndAfter(sel.extentNode);
+			isRangeSet = true;
+		}
+	}
+	if (!isRangeSet &amp;&amp; sel.baseNode) {
+		range.setStart(sel.baseNode, sel.baseOffset);
+		range.setEnd(sel.extentNode, sel.extentOffset);
+	}
+
+
+	this.oldSelection = sel;
+	this.oldRange = range;
+}
+
+/**
+ * Restores a previously stored selection state and its range. Safari specific.
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.restoreSelection = function() {
+	var sel = this.oldSelection;
+
+	var newSelection = this.pane.getContainer().contentWindow.getSelection();
+	newSelection.setBaseAndExtent(this.oldRange.startContainer,
+					this.oldRange.startOffset, this.oldRange.endContainer,
+					this.oldRange.endOffset);
+}
+
+/**
+ * Checks if some selection exists in the editor
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.isSelectionExists = function() {
+
+	var range = null;
+	var sel = null;
+	if (Zapatec.is_ie) {
+		sel = this.pane.getContainer().contentWindow.document.selection;
+
+		range = sel.createRange();
+	}
+	else {
+		sel = this.pane.getContainer().contentWindow.getSelection();
+
+		if (!Zapatec.is_khtml) {
+			range = sel.getRangeAt(0);
+		}
+	}
+
+	var compare = 0;
+	if (Zapatec.is_ie)
+	{
+
+		if (sel.type == "Control")
+		{
+			compare = range.length;
+		}
+		else
+		{
+			compare = range.compareEndPoints("StartToEnd", range);
+		}
+	}
+	else {
+		if (Zapatec.is_khtml) {
+			var selectionType = '</span><span class="literal">' + sel.type;
+			if (selectionType == "Range") {
+				return true;
+			}
+			if (selectionType == "Caret") {
+				return false;
+			}
+		}
+		else {
+			compare = range.compareBoundaryPoints(range.START_TO_END, range);
+		}
+	}
+
+	if (compare === 0)
+	{
+		return false;
+	}
+
+	return true;
+}
+
+/**
+ * Gets currently selected text
+ *
+ * @public
+ */
+Zapatec.MinimalEditor.prototype.getSelectionText = function() {
+	var range = null;
+	var sel = null;
+	if (Zapatec.is_ie) {
+		sel = this.pane.getContainer().contentWindow.document.selection;
+		range = sel.createRange();
+		return range.text;
+	}
+	else {
+		sel = this.pane.getContainer().contentWindow.getSelection();
+		return sel;
+	}
+}
+
+/**
+ * Gets current selection parent element
+ *
+ * @public
+ */
+Zapatec.MinimalEditor.prototype.getSelectionParent = function() {
+	var result = null;
+	var range = null;
+	var sel = null;
+	if (Zapatec.is_ie) {
+		sel = this.pane.getContainer().contentWindow.document.selection;
+		range = sel.createRange();
+
+		if (sel.type == "Control") {
+			result = range(0);
+		}
+		else {
+			result = range.parentElement();
+		}
+	}
+	else {
+		sel = this.pane.getContainer().contentWindow.getSelection();
+		if (sel &amp;&amp; sel.rangeCount &gt; 0) {
+			range = sel.getRangeAt(0);
+
+			var container = range.commonAncestorContainer;
+			result = container;
+
+			// text node
+			if (container.nodeType == 3) {
+				result = container.parentNode;
+			}
+			else if (range.startContainer.nodeType == 1 &amp;&amp;
+			         range.startContainer == range.endContainer &amp;&amp;
+			         (range.endOffset - range.startOffset) &lt;= 1)
+			{
+				// single object selected
+				result = range.startContainer.childNodes[range.startOffset];
+			}
+
+		}
+		else {
+			result = this.pane.getIframeDocument().body;
+		}
+	}
+
+	return result;
+}
+
+/**
+ * Gets html from document start to caret position
+ *
+ * @public
+ * @return size html text from document beginning to caret position
+ * @type size string
+ */
+Zapatec.MinimalEditor.prototype.getHtmlFromBeginToCaret = function() {
+	var result = null;
+	var range = null;
+	var sel = null;
+	if (Zapatec.is_ie) {
+		// Get current selection
+		sel = this.pane.getContainer().contentWindow.document.selection;
+		range = sel.createRange();
+
+		// Move selection start to document start
+		range.moveStart('</span>textedit<span class="literal">', -1);
+		// Get range html
+		result = range.htmlText;
+	}
+	else {
+		// Get current selection
+		sel = this.pane.getContainer().contentWindow.getSelection();
+		if (sel &amp;&amp; sel.rangeCount &gt; 0) {
+			// Get first range
+			range = sel.getRangeAt(0);
+			// Clone range
+			var newRange = range.cloneRange();
+			// Move range start to document start
+			var body = this.pane.getIframeDocument().body;
+			newRange.setStart(body, 0);
+			var clonedSelection = newRange.cloneContents();
+			// Get range html
+			var div = document.createElement('</span>div<span class="literal">');
+			div.appendChild(clonedSelection);
+			result = div.innerHTML;
+		}
+		else {
+			result = this.pane.getIframeDocument().body;
+		}
+	}
+
+	return result;
+}
+
+/**
+ * Gets html from caret position to document end
+ *
+ * @public
+ * @return size html text from caret position to document end
+ * @type size string
+ */
+Zapatec.MinimalEditor.prototype.getHtmlFromCaretToEnd = function() {
+	var result = null;
+	var range = null;
+	var sel = null;
+	if (Zapatec.is_ie) {
+		// Get current selection
+		sel = this.pane.getContainer().contentWindow.document.selection;
+		range = sel.createRange();
+
+		// Move selection start to document start
+		range.moveEnd('</span>textedit<span class="literal">');
+		// Get range html
+		result = range.htmlText;
+	}
+	else {
+		// Get current selection
+		sel = this.pane.getContainer().contentWindow.getSelection();
+		if (sel &amp;&amp; sel.rangeCount &gt; 0) {
+			// Get first range
+			range = sel.getRangeAt(0);
+			// Clone range
+			var newRange = range.cloneRange();
+			// Move range start to document start
+			var body = this.pane.getIframeDocument().body;
+			newRange.setEnd(body, body.childNodes.length);
+			var clonedSelection = newRange.cloneContents();
+			// Get range html
+			var div = document.createElement('</span>div<span class="literal">');
+			div.appendChild(clonedSelection);
+			result = div.innerHTML;
+		}
+		else {
+			result = this.pane.getIframeDocument().body;
+		}
+	}
+
+	return result;
+}
+
+/**
+ * Gets size in pixels of document inside the editor
+ *
+ * @public
+ * @return size Document width and height
+ * @type size object
+ */
+Zapatec.MinimalEditor.prototype.getDocumentSize = function() {
+	var iframeDoc = this.pane.getIframeDocument();
+	var size = {};
+	if (Zapatec.is_ie) {
+		size.width = iframeDoc.body.scrollWidth;
+		size.height = iframeDoc.body.scrollHeight;
+	}
+	else {
+		size.width = iframeDoc.body.parentNode.clientWidth;
+		size.height = iframeDoc.body.parentNode.clientHeight;
+	}
+	return size;
+}
+
+/**
+ * Gets the element of specified type that encloses the selection
+ *
+ * @public
+ * @param {string} tagName Selection enclosing element tag name
+ */
+Zapatec.MinimalEditor.prototype.getSelectedElementByTagName = function(tagName) {
+	var selParent = this.getSelectionParent();
+	tagName = tagName.toLowerCase();
+
+	while (selParent) {
+		var tag = selParent.tagName;
+		if (tag) {
+			tag = tag.toLowerCase();
+		}
+		if (tagName == tag || tag == '</span>body<span class="literal">') {
+			break;
+		}
+
+		selParent = selParent.parentNode;
+	}
+
+	return selParent;
+}
+
+/**
+ * Deletes currently selected text
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.deleteSelection = function() {
+	var range = null;
+	var sel = null;
+	if (Zapatec.is_ie) {
+		var iframeDocument = this.pane.getIframeDocument();
+		if (typeof iframeDocument.selection != '</span>undefined<span class="literal">') {
+			var selection = iframeDocument.selection;
+
+			if (selection.type.toLowerCase() == '</span>control<span class="literal">') {
+				// Delete selection
+				selection.clear();
+			}
+		}
+	}
+	else {
+		sel = this.pane.getContainer().contentWindow.getSelection();
+		sel.deleteFromDocument();
+	}
+}
+
+/**
+ * Updates the state of a toolbar select option box.
+ *
+ * @private
+ * @param {object} select Reference to select element
+ * @param {object} value Select value to make currently selected
+ */
+Zapatec.MinimalEditor.prototype.updateToolbarSelect = function(select, value) {
+	value = value.toLowerCase();
+
+	var isSelected = false;
+	var optionCount = select.options.length;
+	for (var i = 0; i &lt; optionCount; ++i) {
+		var currentValue = select.options[i].value;
+		if (currentValue.toLowerCase() == value) {
+			select.selectedIndex = i;
+			isSelected = true;
+			break;
+		}
+	}
+
+	if (!isSelected) {
+		select.selectedIndex = 0;
+	}
+}
+
+/**
+ * Updates toolbar icon states.
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.updateToolbar = function() {
+	var fontNameSelect = document.getElementById(
+					'</span>zpEditor<span class="literal">' + this.id + '</span>FontName<span class="literal">');
+	if (fontNameSelect) {
+		var fontName = '</span><span class="literal">' + this.queryCommandValue('</span>fontname<span class="literal">');
+		this.updateToolbarSelect(fontNameSelect, fontName);
+	}
+
+	var fontSizeSelect = document.getElementById(
+					'</span>zpEditor<span class="literal">' + this.id + '</span>FontSize<span class="literal">');
+	if (fontSizeSelect) {
+		var fontSize = '</span><span class="literal">' + this.queryCommandValue('</span>fontsize<span class="literal">');
+		this.updateToolbarSelect(fontSizeSelect, fontSize);
+	}
+
+	var boldButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>Bold<span class="literal">');
+	if (boldButton) {
+		var boldState = this.queryCommandState('</span>bold<span class="literal">');
+		boldButton.setPressed(boldState);
+	}
+
+	var italicButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>Italic<span class="literal">');
+	if (italicButton) {
+		var italicState = this.queryCommandState('</span>italic<span class="literal">');
+		italicButton.setPressed(italicState);
+	}
+
+	var underlineButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>Underline<span class="literal">');
+	if (underlineButton) {
+		var underlineState = this.queryCommandState('</span>underline<span class="literal">');
+		underlineButton.setPressed(underlineState);
+	}
+
+	var justifyLeftButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>JustifyLeft<span class="literal">');
+	if (justifyLeftButton) {
+		var justifyLeftState = this.queryCommandState('</span>justifyleft<span class="literal">');
+		justifyLeftButton.setPressed(justifyLeftState);
+	}
+
+	var justifyCenterButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>JustifyCenter<span class="literal">');
+	if (justifyCenterButton) {
+		var justifyCenterState = this.queryCommandState('</span>justifycenter<span class="literal">');
+		justifyCenterButton.setPressed(justifyCenterState);
+	}
+
+	var justifyRightButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>JustifyRight<span class="literal">');
+	if (justifyRightButton) {
+		var justifyRightState = this.queryCommandState('</span>justifyright<span class="literal">');
+		justifyRightButton.setPressed(justifyRightState);
+	}
+
+	var justifyFullButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>JustifyFull<span class="literal">');
+	if (justifyFullButton) {
+		var justifyFullState = this.queryCommandState('</span>justifyfull<span class="literal">');
+		justifyFullButton.setPressed(justifyFullState);
+	}
+
+	// Check if undo button is to be enabled
+	var undoButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>Undo<span class="literal">');
+	if (undoButton) {
+		var undoState = this.undo.checkUndoState();
+		if (undoState) {
+			undoButton.enable();
+		}
+		else {
+			undoButton.disable();
+		}
+	}
+
+	// Check if redo button is to be enabled
+	var redoButton = this.getButton('</span>zpEditor<span class="literal">' + this.id + '</span>Redo<span class="literal">');
+	if (redoButton) {
+		var redoState = this.undo.checkRedoState();
+		if (redoState) {
+			redoButton.enable();
+		}
+		else {
+			redoButton.disable();
+		}
+	}
+}
+
+/**
+ * Queues an update toolbar call for later.
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.invokeUpdateToolbar = function() {
+	var self = this;
+	setTimeout(function() {
+		self.updateToolbar();
+	}, 250);
+}
+
+
+Zapatec.MinimalEditor.Undo = function(editor) {
+	this.editor = editor;
+	this.undoStack = new Array();
+	this.undoStackIndex = -1;
+	this.typesCount = this.editor.config.maxUndoTypes;
+	this.isTyping = false;
+	this.lastTypeTime = -1;
+}
+
+Zapatec.MinimalEditor.Undo.prototype.saveUndo = function() {
+	if (!this.editor.config.customUndo) {
+		return;
+	}
+
+	// Get editor html content
+	var html = this.editor.pane.getContentElement().innerHTML;
+
+	// If undo is available and current html is the same as last undo state
+	if (0 &lt;= this.undoStackIndex &amp;&amp;
+	    html == this.undoStack[this.undoStackIndex][0]) {
+		return;
+	}
+	// Ignore forward stack
+	this.undoStack = this.undoStack.slice(0, this.undoStackIndex + 1);
+
+	if (this.undoStackIndex + 1 &gt;= this.editor.config.maxUndoLevels) {
+		this.undoStack.shift();
+	}
+	else {
+		++this.undoStackIndex;
+	}
+
+	var bookmark = null;
+	if (Zapatec.is_ie) {
+		var sel = this.editor.pane.getContainer().contentWindow.document.selection;
+		var range = sel.createRange();
+		try {
+			bookmark = range.getBookmark();
+		}
+		catch (e) {
+		}
+	}
+	this.undoStack[this.undoStackIndex] = [html, bookmark];
+}
+
+Zapatec.MinimalEditor.Undo.prototype.onKeyDown = function() {
+	if (!this.editor.config.customUndo) {
+		return;
+	}
+
+	// Get time since last keystroke
+	var now = (new Date()).getTime();
+	this.lastTypeTime = now;
+
+	this.processKeyDown();
+}
+
+Zapatec.MinimalEditor.Undo.prototype.processKeyDown = function() {
+	if (this.isProcessPending) {
+		return;
+	}
+
+	// Get time since last keystroke
+	var now = (new Date()).getTime();
+	var timeSinceLastType = now - this.lastTypeTime;
+
+	if (timeSinceLastType &lt; 2000) {
+		var self = this;
+		if (!self.isProcessPending) {
+			self.isProcessPending = true;
+			setTimeout(function() {
+				self.isProcessPending = false;
+
+				self.processKeyDown();
+			}, 200);
+		}
+		return;
+	}
+
+	// If this is the first key stroke or the first in 2 seconds
+	if (!this.isTyping || 2000 &lt;= timeSinceLastType) {
+		// Save undo step
+		this.saveUndo();
+		this.isTyping = true;
+	}
+
+	++this.typesCount;
+	if (this.typesCount &gt; this.editor.config.maxUndoTypes) {
+		this.typesCount = 0;
+		this.saveUndo();
+	}
+}
+
+Zapatec.MinimalEditor.Undo.prototype.checkUndoState = function() {
+	if (this.editor.config.customUndo) {
+		return (this.isTyping || this.undoStackIndex &gt; 0);
+	}
+	else {
+		return this.editor.queryCommandEnabled('</span>Undo<span class="literal">');
+	}
+}
+
+Zapatec.MinimalEditor.Undo.prototype.checkRedoState = function() {
+	if (this.editor.config.customUndo) {
+		return (!this.isTyping &amp;&amp; this.undoStackIndex &lt; (this.undoStack.length - 1));
+	}
+	else {
+		return this.editor.queryCommandEnabled('</span>Redo<span class="literal">');
+	}
+}
+
+Zapatec.MinimalEditor.Undo.prototype.undo = function() {
+	if (this.editor.config.customUndo) {
+		if (this.checkUndoState()) {
+			if (this.undoStackIndex == (this.undoStack.length - 1)) {
+				this.saveUndo();
+			}
+			this.restoreUndo(--this.undoStackIndex);
+		}
+	}
+	else {
+		this.editor.execCommand("undo", false, null);
+	}
+}
+
+Zapatec.MinimalEditor.Undo.prototype.redo = function() {
+	if (this.editor.config.customUndo) {
+		if (this.checkRedoState()) {
+			this.restoreUndo(++this.undoStackIndex);
+		}
+	}
+	else {
+		this.editor.execCommand("redo", false, null);
+	}
+}
+
+Zapatec.MinimalEditor.Undo.prototype.restoreUndo = function(undoIndex) {
+	var pair = this.undoStack[undoIndex];
+	if (!pair) {
+		return;
+	}
+	this.editor.setHTML(pair[0]);
+	if (pair[1]) {
+		if (Zapatec.is_ie) {
+			var range = this.editor.pane.getIframeDocument().selection.createRange();
+			range.moveToBookmark(pair[1]);
+			range.select();
+		}
+	}
+	this.typesCount = 0;
+	this.isTyping = false;
+}
+
+/**
+ * Shows a insert link input window
+ *
+ * @public
+ */
+Zapatec.MinimalEditor.prototype.showInsertLinkWindow = function() {
+	// If insert link window is not yet closed
+	if (this.insertLinkWindow) {
+		return;
+	}
+
+	var text = "";
+	var url = "http://";
+
+	var isSelection = this.isSelectionExists();
+	if (!isSelection) {
+	}
+	else {
+		text = this.getSelectionText();
+	}
+
+	if (Zapatec.is_khtml) {
+		this.storeSelection();
+	}
+	else if (Zapatec.is_ie) {
+		// Store selection before showing the window
+		this.oldSelection = this.pane.getContainer().contentWindow.document.selection;
+		this.oldRange = this.oldSelection.createRange();
+		this.oldBookmark = this.oldRange.getBookmark();
+	}
+	else if (Zapatec.is_opera) {
+		this.oldSelection = this.pane.getContainer().contentWindow.getSelection();
+		this.oldRange = this.oldSelection.getRangeAt(0);
+	}
+
+	// Gets if some anchor is currently selected
+	var selAnchor = this.getSelectedElementByTagName('</span>a<span class="literal">');
+	if (selAnchor &amp;&amp; selAnchor.tagName &amp;&amp; selAnchor.tagName.toLowerCase() == '</span>a<span class="literal">') {
+		text = selAnchor.innerHTML;
+		url = null;
+		if (this.config.preserveAnchorHref) {
+			url = selAnchor.getAttribute('</span>_zpHref<span class="literal">');
+		}
+		if (null == url) {
+			url = selAnchor.getAttribute('</span>href<span class="literal">');
+		}
+		// Store anchor we are about to modify
+		this.insertLinkAnchor = selAnchor;
+	}
+
+	var linkLabelClass = this.getClassName({prefix: "zpEditor",
+		suffix: "LinkLabel"
+	});
+	var linkInputClass = this.getClassName({prefix: "zpEditor",
+		suffix: "LinkInput"
+	});
+	var buttonPaneClass = this.getClassName({prefix: "zpEditor",
+		suffix: "LinkButtonPane"
+	});
+	var inputPaneClass = this.getClassName({prefix: "zpEditor",
+		suffix: "LinkInputPane"
+	});
+	var okClass = this.getClassName({prefix: "zpEditor",
+		suffix: "LinkOk"
+	});
+
+	var textId = "zpInsertLink" + this.id + "Text";
+	var urlId = "zpInsertLink" + this.id + "Url";
+
+	var linkTextLabel = this.getMessage('</span>insertLinkTextLabel<span class="literal">');
+	// Write text and address input fields
+	var html = '</span>&lt;div class=<span class="literal">"' + inputPaneClass + '"</span>&gt;<span class="literal">';
+	html += '</span>&lt;span class=<span class="literal">"' + linkLabelClass + '"</span>&gt;<span class="literal">' + linkTextLabel + '</span>&lt;/span&gt;<span class="literal">';
+	html += '</span>&lt;input class=<span class="literal">"' + linkInputClass + '"</span> type=<span class="literal">"text"</span> id=<span class="literal">"' + textId +
+	        '"</span> value=<span class="literal">"' + text + '"</span> originalValue=<span class="literal">"' + text + '"</span> /&gt;<span class="literal">';
+	html += '</span>&lt;br /&gt;<span class="literal">';
+
+	var linkAddressLabel = this.getMessage('</span>insertLinkAddressLabel<span class="literal">');
+	html += '</span>&lt;span class=<span class="literal">"' + linkLabelClass + '"</span>&gt;<span class="literal">' + linkAddressLabel + '</span>&lt;/span&gt;<span class="literal">';
+	html += '</span>&lt;input class=<span class="literal">"' + linkInputClass + '"</span> type=<span class="literal">"text"</span> id=<span class="literal">"' + urlId +
+	        '"</span> value=<span class="literal">"' + url + '"</span> /&gt;<span class="literal">';
+	html += '</span>&lt;/div&gt;<span class="literal">';
+
+	// Try to use provided Zapatec.Win object
+	var oWin = this.config.win;
+	if (oWin) {
+		// OK and Cancel buttons
+		html += '</span>&lt;div class=<span class="literal">"' + buttonPaneClass + '"</span>&gt;<span class="literal">';
+		html += '</span>&lt;input class=<span class="literal">"' + okClass + '"</span> type=<span class="literal">"button"</span> value=<span class="literal">"OK"</span><span class="literal">';
+		html += '</span>onclick=<span class="literal">"return Zapatec.MinimalEditor.InsertLink(\'' + this.id +
+		        '\', \'' + textId + '\', \'' + urlId + '\')"</span> /&gt;<span class="literal">';
+		html += '</span>&lt;input type=<span class="literal">"button"</span> value=<span class="literal">"' + zapatecTranslate('Cancel') + '"</span><span class="literal">';
+		html += '</span> onclick=<span class="literal">"zapatecWidgetCallMethod(' + this.id + ',\'hideWin\')"</span>/&gt;<span class="literal">';
+		html += '</span>&lt;/div&gt;<span class="literal">';
+		// Open dialog
+		oWin.open({
+			headline: zapatecTranslate(this.getMessage('</span>insertLinkTitle<span class="literal">')),
+			source: html
+		});
+	} else {
+		// OK and Cancel buttons
+		html += '</span>&lt;div class=<span class="literal">"' + buttonPaneClass + '"</span>&gt;<span class="literal">';
+		html += '</span>&lt;input class=<span class="literal">"' + okClass + '"</span> type=<span class="literal">"button"</span> value=<span class="literal">"OK"</span><span class="literal">';
+		html += '</span>onclick=<span class="literal">"return Zapatec.MinimalEditor.InsertLink(\'' + this.id +
+		        '\', \'' + textId + '\', \'' + urlId + '\')"</span> /&gt;<span class="literal">';
+		html += '</span>&lt;input type=<span class="literal">"button"</span> value=<span class="literal">"Cancel"</span><span class="literal">';
+		html += '</span> onclick=<span class="literal">"return Zapatec.MinimalEditor.HideInsertLink(\'' + this.id +
+		        '\')"</span>/&gt;<span class="literal">';
+		html += '</span>&lt;/div&gt;<span class="literal">';
+		var self = this;
+		var onClose = function(win) {
+			self.insertLinkWindow = null;
+			// Hide modal
+			self.setIsModal(false);
+		}
+		var title = this.getMessage('</span>insertLinkTitle<span class="literal">');
+		this.insertLinkWindow = this.createWindow(320, 130, title, html, onClose);
+	}
+}
+
+/**
+ * Hides miscellaneous dialogs.
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.hideWin = function() {
+	var oWin = this.config.win;
+	if (oWin) {
+		oWin.hide();
+	}
+};
+
+/**
+ * Called internally when a OK is pressed in the Insert Link window
+ *
+ * @private
+ * @param {object} id editor widget id
+ * @param {string} textId text to display in link
+ * @param {string} url link url
+ */
+Zapatec.MinimalEditor.InsertLink = function(id, textId, urlId) {
+
+	// Get editor by id
+	var objEditor = Zapatec.Widget.getWidgetById(id);
+
+	var elText = document.getElementById(textId);
+	var originalText = elText.getAttribute("originalValue");
+	var text = elText.value;
+	var elUrl = document.getElementById(urlId);
+	var url = elUrl.value;
+
+	// Close window
+	var oWin = objEditor.config.win;
+	if (oWin) {
+		oWin.hide();
+	} else {
+		objEditor.insertLinkWindow.close();
+	}
+
+	// If we are modifying some anchor
+	if (objEditor.insertLinkAnchor) {
+		objEditor.insertLinkAnchor.setAttribute('</span>href<span class="literal">', url);
+		if (objEditor.config.preserveAnchorHref) {
+			objEditor.insertLinkAnchor.setAttribute('</span>_zpHref<span class="literal">', url);
+		}
+
+		objEditor.insertLinkAnchor.innerHTML = text;
+		objEditor.insertLinkAnchor = null;
+		return;
+	}
+
+	var beginNode = null;
+	var beginOffset = null;
+
+	// Store selection before changing it
+	var range = null;
+	var sel = null;
+	if (Zapatec.is_ie) {
+		sel = objEditor.oldSelection;
+		range = objEditor.oldRange;
+	}
+	else if (Zapatec.is_opera) {
+		sel = objEditor.oldSelection;
+		sel = objEditor.pane.getContainer().contentWindow.getSelection();
+		sel.addRange(objEditor.oldRange);
+	}
+	else {
+		sel = objEditor.pane.getContainer().contentWindow.getSelection();
+	}
+
+	beginNode = sel.anchorNode;
+	beginOffset = sel.anchorOffset;
+
+	// If link text has been changed
+	if (originalText != text) {
+		if (!Zapatec.is_opera) {
+			objEditor.focus();
+		}
+
+		// Change currently selected text to value in Text field
+		var charEl = objEditor.insertText(text);
+
+		if (Zapatec.is_ie) {
+
+			var completeFunc = function() {
+				sel = objEditor.pane.getContainer().contentWindow.document.selection;
+				var newRange = sel.createRange();
+
+				// Select text
+				newRange.findText(text, -text.length, 0);
+				newRange.select();
+
+				// Create new link from current text selection
+				objEditor.createLink(url);
+			}
+			setTimeout(completeFunc, 50);
+
+			return;
+		}
+		else {
+			sel = objEditor.pane.getContainer().contentWindow.getSelection();
+			var doc = objEditor.pane.getIframeDocument();
+
+			var endNode = sel.anchorNode;
+			var endOffset = sel.anchorOffset;
+
+			range = doc.createRange();
+
+			range.setStart(beginNode, beginOffset);
+			range.setEnd(endNode, endOffset);
+
+			sel.addRange(range);
+		}
+	}
+	else {
+		if (Zapatec.is_ie) {
+			range.select();
+		}
+	}
+
+
+	// Create new link from current selection
+	objEditor.createLink(url);
+}
+
+/**
+ * Shows a insert link input window
+ *
+ * @public
+ * @param {string} url URL to set on new link href
+ */
+Zapatec.MinimalEditor.prototype.createLink = function(url) {
+	if (url == null || url == "") {
+		return;
+	}
+
+	if (Zapatec.is_khtml) {
+		this.restoreSelection();
+	}
+
+	this.execCommand("createlink", false, url);
+	
+	if (this.config.linksTarget &amp;&amp; object.links) {
+		if (Zapatec.is_ie) {
+			object = this.pane.getIframeDocument();
+		}	else {
+			object = this.pane.getContainer().contentWindow.document;
+		}
+		for (var iLink = 0; iLink &lt; object.links.length; iLink++) {
+			if (!object.links[iLink].getAttribute("target")) {
+				object.links[iLink].setAttribute("target", this.config.linksTarget);
+			}
+		}
+	}
+	
+	this.saveContentToField();
+
+	// Focus editor
+	this.focus();
+
+	// Store an undo step
+	this.undo.saveUndo();
+
+	// Update toolbar icon states
+	this.updateToolbar();
+}
+
+/**
+ * Called internally when a Cancel is pressed in the Insert Link window
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.HideInsertLink = function(id) {
+	// Get editor by id
+	var objEditor = Zapatec.Widget.getWidgetById(id);
+
+	// Close character map widow
+	objEditor.insertLinkWindow.close();
+}
+
+/**
+ * Creates a new zapatec window
+ *
+ * @private
+ * @param {number} width window width
+ * @param {number} height window height
+ * @param {string} title window title
+ * @param {string} html window html content
+ * @param {function} onClose callback on window close
+ */
+Zapatec.MinimalEditor.prototype.createWindow = function(width, height, title, html, onClose) {
+	var oOffset = Zapatec.Utils.getElementOffset(this.container);
+
+	var top = oOffset.y - 100;
+
+	var pageScrollY = Zapatec.Utils.getPageScrollY();
+	if (0 &lt; pageScrollY) {
+		top -= pageScrollY;
+	}
+
+	// Limit window location to page top
+	if (top &lt; 0) {
+		top = 0;
+		if (this.isMaximize) {
+			top += this.config.maximizedBorder;
+		}
+	}
+
+	// Show modal (Make editor panel gray)
+	this.setIsModal(true);
+
+	return Zapatec.Window.setup({
+		left : oOffset.x + 100,
+		top : top,
+		width : width,
+		height : height,
+		raiseOnlyOnTitle : false,
+		showStatus : false,
+		canResize : false,
+		showMaxButton : false,
+		showMinButton : false,
+		theme : '</span>winxp<span class="literal">',
+		content : html,
+		title : title,
+		onClose : onClose
+	});
+}
+
+/**
+ * Fill WebKit supported fetures matrix
+ *
+ * @private
+ */
+Zapatec.MinimalEditor.prototype.fillWebKitMap = function() {
+	this.webKitMap = [];
+	this.webKitMap['</span>fontname<span class="literal">'] = 420;
+	this.webKitMap['</span>fontsize<span class="literal">'] = 420;
+	this.webKitMap['</span>bold<span class="literal">'] = 312;
+	this.webKitMap['</span>italic<span class="literal">'] = 312;
+	this.webKitMap['</span>underline<span class="literal">'] = 312;
+	this.webKitMap['</span>justifyleft<span class="literal">'] = 312;
+	this.webKitMap['</span>justifycenter<span class="literal">'] = 312;
+	this.webKitMap['</span>justifyright<span class="literal">'] = 312;
+	this.webKitMap['</span>justifyfull<span class="literal">'] = 420;
+	this.webKitMap['</span>inserthorizontalrule<span class="literal">'] = 420;
+	this.webKitMap['</span>insertorderedlist<span class="literal">'] = 420;
+	this.webKitMap['</span>insertunorderedlist<span class="literal">'] = 420;
+	this.webKitMap['</span>indent<span class="literal">'] = 420;
+	this.webKitMap['</span>outdent<span class="literal">'] = 420;
+	this.webKitMap['</span>forecolor<span class="literal">'] = 312;
+	this.webKitMap['</span>backcolor<span class="literal">'] = 312;
+	this.webKitMap['</span>insertlink<span class="literal">'] = 420;
+	this.webKitMap['</span>insertimage<span class="literal">'] = 420;
+	this.webKitMap['</span>cut<span class="literal">'] = 312;
+	this.webKitMap['</span>copy<span class="literal">'] = 312;
+	this.webKitMap['</span>paste<span class="literal">'] = 1000;  // not supported
+	this.webKitMap['</span>undo<span class="literal">'] = 312;
+	this.webKitMap['</span>redo'] = 312;
+}
+
+<span class="comment">/**
+ * Shows/hides modality
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {boolean} isModal if true shows a gray panel over the editor, false
+ * hides the gray box.
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.setIsModal = <span class="reserved">function</span>(isModal) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.modal) {
+		<span class="reserved">this</span>.modal = new Zapatec.Modal({
+			themePath : Zapatec.zapatecPath + <span class="literal">"../zpextra/themes/indicator/"</span>,
+			container: <span class="reserved">this</span>.container
+		});
+		<span class="reserved">this</span>.modal.create();
+	}
+
+	<span class="reserved">if</span> (isModal) {
+		<span class="reserved">this</span>.modal.show(2);
+	}
+	<span class="reserved">else</span> {
+		<span class="reserved">this</span>.modal.hide();
+	}
+}
+
+<span class="comment">/**
+ * Loads passed data into already initialized editor to view or edit it.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   data: [object] html string data
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.receiveData = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Call parent method</span>
+	Zapatec.MinimalEditor.SUPERclass.receiveData.call(<span class="reserved">this</span>, oArg);
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg.data) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">this</span>.setHTML(oArg.data);
+}
+
+<span class="comment">/**
+ * Prepares processed data to return them back to the sender in the same format
+ * as they were received in {<span class="attrib">@link</span> Zapatec.MinimalEditor#receiveData}.
+ *
+ * <span class="attrib">@return</span> html currently in editor
+ * <span class="attrib">@type</span> html string
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.replyData = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getHTML();
+};
+
+<span class="comment">/**
+ * Prepares object for garbage collector.
+ */</span>
+Zapatec.MinimalEditor.<span class="reserved">prototype</span>.discard = <span class="reserved">function</span>() {
+	var oContainer = <span class="reserved">this</span>.container;
+	
+	<span class="reserved">if</span> (oContainer &amp;&amp; oContainer.parentNode) {
+		var oTextarea = <span class="reserved">this</span>.config.field;
+		<span class="reserved">if</span> (oTextarea) {
+			oContainer.parentNode.replaceChild(oTextarea, oContainer);
+			<span class="comment">// Restore textarea style</span>
+			var oTextareaStyle = oTextarea.style;
+			var oOrigTextareaStyle = <span class="reserved">this</span>.textareaStyle;
+			<span class="reserved">for</span> (var sProp in oOrigTextareaStyle) {
+				oTextareaStyle[sProp] = oOrigTextareaStyle[sProp];
+			}
+		} <span class="reserved">else</span> {
+			oContainer.parentNode.removeChild(oContainer);
+		}
+	}
+	
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.tooltips.length; ii++){
+		<span class="reserved">this</span>.tooltips[ii].discard();	
+	}
+	
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.buttons.length; ii++){
+		<span class="reserved">this</span>.buttons[ii].discard();	
+	}
+
+	<span class="reserved">this</span>.container = null;
+	<span class="reserved">this</span>.editorPanel = null;
+	<span class="reserved">this</span>.wch = null;
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.pane) {
+		<span class="reserved">this</span>.pane.destroy();
+		<span class="reserved">this</span>.pane = null;
+	}
+	
+	<span class="reserved">this</span>.config = null;
+	
+	<span class="comment">// Call parent method</span>
+	zapatecEditor.SUPERclass.discard.call(<span class="reserved">this</span>);
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Editor</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:43 2009</div>
+</body>
+</html>

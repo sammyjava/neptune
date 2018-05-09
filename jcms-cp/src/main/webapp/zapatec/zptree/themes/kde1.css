@@ -1,0 +1,13 @@
+/* $Id: kde1.css 5406 2006-11-30 11:28:34Z andrew $ */
+div.tree-item td.customIcon {
+	background: url("kde1/document.png") no-repeat 0 50%;
+}
+
+div.tree-item-expanded td.customIcon {
+	background: url("kde1/folder_open.png") no-repeat 0 50%;
+}
+
+div.tree-item-collapsed td.customIcon {
+	background: url("kde1/folder.png") no-repeat 0 50%;
+}
+

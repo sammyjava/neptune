@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" Use keyboardNavigation config option to turn on keyboad navigation for tree. Following keys are avaiable: 	 		Up arrow - previous node. 		Down arrow - next node. 		Left arrow - parent node/collapse branch. 		Right arrow - expand branch/go to first child. 		Enter/spacebar - toggle branch visibility. 		Esc - leave tree (disable navigation). 	 Using deselectOnLeave config option you can define, that selected node must be deselected if user leaves tree. User can leave tree (keyboard navigation will be disabled) by pressing Esc key or clicking somewhere at the page outside tree. It is impossible to use keyboardNavigation togeteher with selectMultiple. If selectMultiple config option is true - keyboardNavigation config option will be ignored. If keyboardNavigation is true and deselectOnLeave is not defined explicitly - it will be treated as true. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Keyboard navigation</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Keyboard navigation</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>Use <i>keyboardNavigation</i> config option to turn on keyboad navigation for tree. Following keys are avaiable:
+	<ul>
+		<li><b>Up arrow</b> - previous node.</li>
+		<li><b>Down arrow</b> - next node.</li>
+		<li><b>Left arrow</b> - parent node/collapse branch.</li>
+		<li><b>Right arrow</b> - expand branch/go to first child.</li>
+		<li><b>Enter/spacebar</b> - toggle branch visibility.</li>
+		<li><b>Esc</b> - leave tree (disable navigation).</li>
+	</ul>
+</li>
+<li>Using <i>deselectOnLeave</i> config option you can define, that selected node must be deselected if user leaves tree.</li>
+<li>User can leave tree (keyboard navigation will be disabled) by pressing <b>Esc</b> key or clicking somewhere at the page outside tree.</li>
+<li>It is impossible to use <i>keyboardNavigation</i> togeteher with <i>selectMultiple</i>. If <i>selectMultiple</i> config option is true - <i>keyboardNavigation</i> config option will be ignored.</li>
+<li>If <i>keyboardNavigation</i> is true and <i>deselectOnLeave</i> is not defined explicitly - it will be treated as true.</li>
+
+			</ul>
+		</div>
+
+
+
+<div style="width: 200px">
+<ul id="tree">
+	<li id="games">
+		Games
+		<ul>
+			<li>Video Games
+				<ul>
+					<li>SPS</li>
+					<li>X-Box</li>
+				</ul>
+			</li>
+			<li>RPG
+				<ul>
+					<li>Gamebooks</li>
+					<li>Live Action</li>
+					<li>Tabletop</li>
+				</ul>
+			</li>
+			<li>Gambling
+				<ul>
+					<li>Baccarat</li>
+					<li>Bingo</li>
+					<li>Roulette</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li id="computers">Computers
+		<ul>
+			<li>Computer Science
+				<ul>
+					<li>Academic Departments</li>
+					<li>Artificial Intelligence</li>
+					<li>Research Institutes</li>
+					<li>Theoretical</li>
+				</ul>
+			</li>
+			<li id="internet">Internet
+				<ul>
+					<li>Chat</li>
+					<li>DHTML libraries
+						<ul>
+							<li id="zapatec">Zapatec Suite</li>
+						</ul>
+					</li>
+					<li>E-mail</li>
+				</ul>
+			</li>
+			<li>Security
+				<ul>
+					<li>Authentification</li>
+					<li>Cryptography</li>
+					<li>Internet security</li>
+					<li>Secure Programming</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>Business</li>
+</ul>
+</div>
+<script type="text/javascript">
+	var tree = new Zapatec.Tree({
+		tree: "tree",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true,
+		keyboardNavigation: true,
+		deselectOnLeave: true
+	});
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

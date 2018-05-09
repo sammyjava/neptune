@@ -1,0 +1,764 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Tooltip Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="zptooltip-core.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Tooltip</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>zptooltip-core.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec Tooltip widget.
+
+ <pre>
+ Copyright (c) 2004-2008 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Tooltip.html">Zapatec.Tooltip</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec Tooltip widget.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2008 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id$ */</span>
+
+<span class="comment">/**
+ * Zapatec.Tooltip constructor. Creates a new tooltip object with
+ * given parameters.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@extends</span> Zapatec.Widget
+ * <span class="attrib">@param</span> {object} objArgs Tooltip configuration
+ *
+ * Constructor recognizes the following properties of the config object
+ * \code
+ *  property name     | description
+ *-------------------------------------------------------------------------------------------------
+ * target   | [string or object] Reference to DOM element that is being described
+ *          | by the tooltip. Tooltip appears when mouse hovers over this element.
+ * source   | [string or object] Reference to DOM element of the actual tooltip.
+ * sourceType | type of source that will be fetched. See Zapatec.Widget documentation for examples.
+ * parent   | [string or object] Reference to DOM element that is going to be used
+ *          | for tooltip parent
+ * movable  | [boolean] Makes the tooltip move with the mouse.
+ * content  | [string] Tooltip html content
+ * \endcode
+ *
+ */</span>
+Zapatec.Tooltip = <span class="reserved">function</span>(objArgs) {
+  <span class="reserved">if</span> (arguments.length == 0) {
+    objArgs = {};
+  }
+
+  <span class="comment">// Call constructor of superclass</span>
+  Zapatec.Tooltip.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Tooltip.id = <span class="literal">'Zapatec.Tooltip'</span>;
+
+<span class="comment">// Inherit Widget</span>
+Zapatec.inherit(Zapatec.Tooltip, Zapatec.Widget);
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs)
+{
+  <span class="comment">// Call parent init</span>
+  Zapatec.Tooltip.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+
+  <span class="comment">//. Flag for tooltip createtion</span>
+  <span class="reserved">this</span>.isCreate = false;
+
+ 
+  <span class="reserved">this</span>.setEvents();
+};
+
+<span class="comment">/**
+ * Configures the widget. Gets called from init and reconfigure methods of
+ * superclass.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(objArgs) {
+  <span class="comment">// Target element</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'target'</span>, null);
+  <span class="comment">// Tooltip element</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'tooltip'</span>, null); <span class="comment">// Deprecated param. Use "tooltip" option instead. If given - Zapatec.Tooltip will replace "tooltip" element</span>
+  <span class="comment">// Tooltip parent element</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'parent'</span>, null);
+  <span class="comment">// Tooltip moves with mouse parameter</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'movable'</span>, false);
+  <span class="comment">// Tooltip html content parameter</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'content'</span>, null);
+  <span class="comment">// Tooltip source option</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'source'</span>, null);
+  <span class="comment">// Tooltip sourceType option</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'sourceType'</span>, <span class="literal">'html'</span>);
+  <span class="comment">// If set - save/load cookie</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'isCashed'</span>, false);
+  	
+  <span class="comment">// Offsets from mouse cursor to tooltip</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'offsetX'</span>, 2);
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'offsetY'</span>, 20);
+
+  <span class="comment">// Call parent method</span>
+  Zapatec.Tooltip.SUPERclass.configure.call(<span class="reserved">this</span>, objArgs);
+
+  <span class="comment">// Check target config option</span>
+  <span class="reserved">if</span> (typeof <span class="reserved">this</span>.config.target == <span class="literal">"string"</span>) {
+  	<span class="reserved">this</span>.config.target = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.target);
+  }
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.config.target) {
+    Zapatec.Log({description: <span class="literal">"Can't find tooltip target (\"</span>target\<span class="literal">" config option)"</span>});
+    <span class="reserved">return</span> false;
+  }
+  
+  <span class="comment">// Check tooltip config option</span>
+  <span class="reserved">if</span> (typeof <span class="reserved">this</span>.config.source == <span class="literal">"string"</span>) {
+  	<span class="reserved">this</span>.config.source = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.source);
+  }
+
+  <span class="comment">// Old engine</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.config.tooltip != null &amp;&amp; <span class="reserved">this</span>.config.source == null) {
+  	<span class="reserved">this</span>.config.source = <span class="reserved">this</span>.config.tooltip;
+	<span class="reserved">this</span>.config.sourceType = <span class="literal">'html'</span>;
+	<span class="comment">// Check tooltip config option</span>
+  	<span class="reserved">if</span> (typeof <span class="reserved">this</span>.config.source == <span class="literal">"string"</span>) {
+  		<span class="reserved">this</span>.config.source = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.source);
+  	}
+	
+	<span class="comment">// If tooltip config option is not provided</span>
+  	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.source) {
+    	<span class="comment">// If tooltip html content config option is provided</span>
+    	<span class="reserved">if</span> (<span class="reserved">this</span>.config.content) {
+      		<span class="reserved">this</span>.tooltip = Zapatec.Utils.createElement(<span class="literal">"div"</span>);
+    	}
+    	<span class="reserved">else</span> {
+      		Zapatec.Log({description: <span class="literal">"Can't find \"</span>source\<span class="literal">" config option"</span>});
+      		<span class="reserved">return</span> false;
+    	}
+  	}
+   	<span class="comment">// If tooltip html content config option is provided</span>
+  	<span class="reserved">if</span> (<span class="reserved">this</span>.config.content) {
+ 	   <span class="reserved">this</span>.setContent(<span class="reserved">this</span>.config.content);
+  	}
+   }	
+  
+  <span class="comment">// Hide tooltip data</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.config.source &amp;&amp; <span class="reserved">this</span>.config.source.style)
+  	<span class="reserved">this</span>.config.source.style.display = <span class="literal">'none'</span>;		
+  
+  <span class="comment">// Check parent config option</span>
+  <span class="reserved">if</span> (typeof <span class="reserved">this</span>.config.parent == <span class="literal">"string"</span>) {
+    <span class="reserved">this</span>.config.parent = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.parent);
+  }
+};
+
+Zapatec.Tooltip.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(oArg) {
+  <span class="comment">// Call parent method</span>
+  Zapatec.Tooltip.SUPERclass.reconfigure.call(<span class="reserved">this</span>, oArg);
+
+  <span class="reserved">this</span>.init();
+};
+
+<span class="comment">/**
+ * Creates elements needed by the tooltip. This function links a
+ * tooltip element which can be anywhere in the DOM tree to some target
+ * element.  Then, when the end-user hovers the target element, the tooltip
+ * will appear near the mouse position.
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.createTooltip = <span class="reserved">function</span> () {
+  var self = <span class="reserved">this</span>;
+  <span class="comment">// Prevent tooltip from showing on the page</span>
+  <span class="reserved">this</span>.loadCookie();
+  
+  <span class="reserved">this</span>.tooltip = Zapatec.Utils.createElement(<span class="literal">"div"</span>);		
+  <span class="reserved">this</span>.visible = false;
+  <span class="reserved">this</span>.tooltip.style.position = <span class="literal">'absolute'</span>;
+  <span class="reserved">this</span>.inTooltip = false;
+  <span class="reserved">this</span>.timeout = null;
+  var parentNotDefined = !<span class="reserved">this</span>.config.parent;
+  <span class="reserved">if</span> (parentNotDefined) {
+    <span class="reserved">this</span>.config.parent = <span class="reserved">this</span>.config.target;
+  }
+  var parent = <span class="reserved">this</span>.config.parent;
+  <span class="reserved">if</span> (parentNotDefined &amp;&amp; parent.tagName &amp;&amp; parent.tagName.toLowerCase() == <span class="literal">"input"</span>) {
+    document.body.appendChild(<span class="reserved">this</span>.tooltip);
+  }
+  <span class="reserved">else</span> {
+    parent.appendChild(<span class="reserved">this</span>.tooltip);
+  }
+  Zapatec.Utils.addClass(<span class="reserved">this</span>.tooltip,
+          <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpTooltip"</span>, suffix: <span class="literal">""</span>}));
+  
+  <span class="comment">// Load tooltip data</span>
+  Zapatec.Transport.showBusy({busyContainer: <span class="reserved">this</span>.tooltip});
+  <span class="reserved">this</span>.loadData();
+  <span class="reserved">this</span>.saveCookie();
+  Zapatec.Transport.removeBusy({busyContainer: <span class="reserved">this</span>.tooltip});
+     
+  <span class="reserved">if</span> (<span class="reserved">this</span>.tooltip.title) {
+    var title = Zapatec.Utils.createElement(<span class="literal">"div"</span>);
+    <span class="reserved">this</span>.tooltip.insertBefore(title, <span class="reserved">this</span>.tooltip.firstChild);
+
+    title.className = <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpTooltip"</span>, suffix: <span class="literal">"Title"</span>});
+    title.innerHTML = unescape(<span class="reserved">this</span>.tooltip.title);
+    <span class="comment">// Remove browser tooltip</span>
+    <span class="reserved">this</span>.tooltip.title = <span class="literal">""</span>;
+  }
+
+  <span class="comment">// Create WCH</span>
+  <span class="reserved">this</span>.wch = Zapatec.Utils.createWCH(<span class="reserved">this</span>.tooltip);
+  <span class="comment">// Put WCH under container</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.wch) {
+    <span class="reserved">this</span>.wch.style.zIndex = -1;
+  }
+
+  <span class="comment">// Create mouse over listener for the tooltip element</span>
+  <span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'_tooltipMouseOverListener'</span>, <span class="reserved">function</span>(ev) {
+    self.inTooltip = true;
+    <span class="reserved">return</span> true;
+  });
+  Zapatec.Utils.addEvent(<span class="reserved">this</span>.tooltip, <span class="literal">"mouseover"</span>,
+          <span class="reserved">this</span>._tooltipMouseOverListener);
+
+  <span class="comment">// Create mouse out listener for the tooltip element</span>
+  <span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'_tooltipMouseOutListener'</span>, <span class="reserved">function</span>(ev) {
+    ev || (ev = window.event);
+    <span class="reserved">if</span> (!Zapatec.Utils.isRelated(self.tooltip, ev)) {
+      self.inTooltip = false;
+      self.hide();
+    }
+    <span class="reserved">return</span> true;
+  });
+  Zapatec.Utils.addEvent(<span class="reserved">this</span>.tooltip, <span class="literal">"mouseout"</span>,
+          <span class="reserved">this</span>._tooltipMouseOutListener);
+		  
+  <span class="reserved">this</span>.isCreate = true;	
+}
+
+<span class="comment">/**
+ * Set an event listeners tio the target element
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.setEvents = <span class="reserved">function</span> () {
+	var self = <span class="reserved">this</span>;
+		
+	<span class="comment">// Create mouse over listener for the target element</span>
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'_targetMouseOverListener'</span>, <span class="reserved">function</span>(ev) {
+    	<span class="reserved">return</span> self._onMouseMove(ev);
+  	});
+  	Zapatec.Utils.addEvent(<span class="reserved">this</span>.config.target, <span class="literal">"mouseover"</span>,
+    	<span class="reserved">this</span>._targetMouseOverListener);
+
+	<span class="comment">// If tooltip is to move with mouse</span>
+  	<span class="reserved">if</span> (<span class="reserved">this</span>.config.movable) {
+    	<span class="comment">// Create mouse movement listener for the target element</span>
+    		<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'_targetMouseMoveListener'</span>, <span class="reserved">function</span>(ev) {
+      			<span class="reserved">return</span> self._onMouseMove(ev);
+    		});
+    	Zapatec.Utils.addEvent(<span class="reserved">this</span>.config.target, <span class="literal">"mousemove"</span>,
+        	<span class="reserved">this</span>._targetMouseMoveListener);
+  	}
+
+  	<span class="comment">// Create mouse out listener for the target element</span>
+  	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">'_targetMouseOutListener'</span>, <span class="reserved">function</span>(ev) {
+    	<span class="reserved">return</span> self._onMouseOut(ev);
+  	});
+  	Zapatec.Utils.addEvent(<span class="reserved">this</span>.config.target, <span class="literal">"mouseout"</span>,
+    	<span class="reserved">this</span>._targetMouseOutListener);
+}
+
+<span class="comment">/**
+ * Destroys elements needed by the tooltip and removes events.
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.destroy = <span class="reserved">function</span> () {
+  <span class="comment">// Hide tooltip if needed</span>
+  <span class="reserved">this</span>.hide();
+
+  <span class="comment">// Remove events associated with the target element</span>
+  Zapatec.Utils.removeEvent(<span class="reserved">this</span>.config.target, <span class="literal">"mouseover"</span>,
+          <span class="reserved">this</span>._targetMouseOverListener);
+  Zapatec.Utils.removeEvent(<span class="reserved">this</span>.config.target, <span class="literal">"mousemove"</span>,
+          <span class="reserved">this</span>._targetMouseMoveListener);
+  Zapatec.Utils.removeEvent(<span class="reserved">this</span>.config.target, <span class="literal">"mouseout"</span>,
+          <span class="reserved">this</span>._targetMouseOutListener);
+
+  <span class="comment">// Remove events associated with the tooltip element</span>
+  Zapatec.Utils.removeEvent(<span class="reserved">this</span>.tooltip, <span class="literal">"mouseover"</span>,
+          <span class="reserved">this</span>._tooltipMouseOverListener);
+  Zapatec.Utils.removeEvent(<span class="reserved">this</span>.tooltip, <span class="literal">"mouseout"</span>,
+          <span class="reserved">this</span>._tooltipMouseOutListener);
+
+  <span class="reserved">if</span> (<span class="reserved">this</span>.wch) {
+    <span class="comment">// Destroy WCH</span>
+    <span class="reserved">this</span>.wch.parentNode.removeChild(<span class="reserved">this</span>.wch);
+  }
+}
+
+<span class="comment">/**
+ * Automagically create tooltips from DFN tags.  The HTML syntax is simple:
+ *
+ * \code
+ *   &lt;dfn title="Tooltip title"&gt;
+ *      Tooltip contents
+ *   &lt;/dfn&gt;
+ * \endcode
+ *
+ * Calling this function once when the document has finished loading
+ * (body.onload) will turn all DFN tags into tooltips.  Nice, eh?
+ *
+ * The optional "class_re" parameter allows one to filter elements by some
+ * class name.  It can be a RegExp object or a string; if it's a string, only
+ * DFN-s containing that string in the value of the "class" attribute will be
+ * considered.  If it's a RegExp, only those DFN-s where the value of the class
+ * attribute matches the RegExp will be considered.
+ *
+ * The DFN tag is a standard HTML element.  It's purpose is to markup a
+ * \em definition, which seems fairly close to the purpose of a tooltip.
+ *
+ * <span class="attrib">@param</span> class_re [string or RegExp, optional] -- filter the DFN elements that display tooltip
+ */</span>
+Zapatec.Tooltip.setupFromDFN = <span class="reserved">function</span>(class_re) {
+  <span class="comment">// init tooltips</span>
+  var dfns = document.getElementsByTagName(<span class="literal">"dfn"</span>);
+  <span class="reserved">if</span> (typeof class_re == <span class="literal">"string"</span>)
+    class_re = new RegExp(<span class="literal">"(^|\\s)"</span> + class_re + <span class="literal">"(\\s|$)"</span>, <span class="literal">"i"</span>);
+  
+  var dfn, div, oTooltip, dfnClass;
+  <span class="reserved">for</span> (var i = dfns.length-1; i &gt;= 0; i--) {
+    dfn = dfns[i];
+    <span class="reserved">if</span> (!class_re || class_re.test(dfn.className)) {
+      div = document.createElement(<span class="literal">"div"</span>);
+	  <span class="reserved">if</span> (dfn.title) {
+        div.title = dfn.title;
+        dfn.title = <span class="literal">""</span>;
+      }
+      div.className = dfn.className;
+      <span class="reserved">if</span> (dfn.style.width) {
+		 div.style.width = dfn.style.width;
+	  }
+      <span class="reserved">if</span> (dfn.style.height) {
+		div.style.height = dfn.style.height;
+	  }
+      
+      <span class="reserved">while</span> (dfn.firstChild)
+        div.appendChild(dfn.firstChild);
+      dfn.innerHTML = <span class="literal">"?"</span>;
+      oTooltip = new Zapatec.Tooltip({
+        target: dfn,
+		parent: document.body,
+        source: div
+      });
+      dfnClass = oTooltip.getClassName({
+        prefix: <span class="literal">"zpTooltip"</span>,
+        suffix: <span class="literal">"Dfn"</span>
+      });
+	  
+      Zapatec.Utils.addClass(dfn, dfnClass);
+    }
+  }
+  <span class="comment">// nice isn't it? :D</span>
+};
+
+<span class="comment">/** &lt; [internal] keeps a reference to the currently displayed tooltip */</span>
+Zapatec.Tooltip._currentTooltip = null;
+
+<span class="comment">/**
+ * Called automatically when "onmouseover" or "onmousemove" occurs on the
+ * target element.  This function takes care to display the tooltip, if not
+ * already visible, and to clear the timeout if the tooltip was set to hide.
+ *
+ * <span class="attrib">@param</span> ev [Event] the event object
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>._onMouseMove = <span class="reserved">function</span>(ev) {
+  	ev || (ev = window.event);
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isCreate)
+  		<span class="reserved">this</span>.createTooltip();
+  	<span class="reserved">if</span> (!<span class="reserved">this</span>.isCreate) 
+  		<span class="reserved">this</span>.createTooltip();
+	<span class="reserved">if</span> (<span class="reserved">this</span>.timeout) {
+    	clearTimeout(<span class="reserved">this</span>.timeout);
+    	<span class="reserved">this</span>.timeout = null;
+  	}
+  	<span class="reserved">if</span> ((!<span class="reserved">this</span>.visible || <span class="reserved">this</span>.config.movable) &amp;&amp;
+    	  !Zapatec.Utils.isRelated(<span class="reserved">this</span>.config.target, ev)) {
+    	var oPos = Zapatec.Utils.getMousePos(ev);
+    	<span class="reserved">this</span>.show(oPos.pageX + <span class="reserved">this</span>.config.offsetX, oPos.pageY + <span class="reserved">this</span>.config.offsetY);
+  	}
+
+  	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Called automatically when "onmouseout" occurs on the target element.  This
+ * function sets a timeout that will hide the tooltip in 150 milliseconds.
+ * This timeout can be cancelled if during this time the mouse returns to the
+ * target element or enters the tooltip element.
+ *
+ * <span class="attrib">@param</span> ev [Event] the event object.
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>._onMouseOut = <span class="reserved">function</span>(ev) {
+  ev || (ev = window.event);
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.isCreate)
+  	<span class="reserved">this</span>.createTooltip();
+  var self = <span class="reserved">this</span>;
+  <span class="reserved">if</span> (!Zapatec.Utils.isRelated(<span class="reserved">this</span>.config.target, ev)) {
+    <span class="reserved">if</span> (<span class="reserved">this</span>.timeout) {
+      clearTimeout(<span class="reserved">this</span>.timeout);
+      <span class="reserved">this</span>.timeout = null;
+    }
+    <span class="reserved">this</span>.timeout = setTimeout(<span class="reserved">function</span>() {
+      self.hide();
+    }, 150);
+  }
+  <span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Show the tooltip at a specified position.
+ *
+ * <span class="attrib">@param</span> x [number] the X coordinate
+ * <span class="attrib">@param</span> y [number] the Y coordinate
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.show = <span class="reserved">function</span>(x, y) {
+  <span class="reserved">if</span> (Zapatec.Tooltip._currentTooltip) {
+    <span class="reserved">if</span> (Zapatec.Tooltip._currentTooltip.timeout) {
+      clearTimeout(Zapatec.Tooltip._currentTooltip.timeout);
+      Zapatec.Tooltip._currentTooltip.timeout = null;
+    }
+    Zapatec.Tooltip._currentTooltip.hide();
+  }
+
+  <span class="comment">// Display tooltip</span>
+  <span class="reserved">this</span>.tooltip.style.display = <span class="literal">'block'</span>;
+  <span class="comment">// If tooltip position is not specified</span>
+  <span class="reserved">if</span> (null == x &amp;&amp; null == y) {
+    var targetOffset = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.config.target);
+    x = targetOffset.left;
+    y = targetOffset.top;
+  }
+
+  <span class="reserved">this</span>.tooltip.style.left = x + <span class="literal">'px'</span>;
+  <span class="reserved">this</span>.tooltip.style.top = y + <span class="literal">'px'</span>;
+
+  <span class="comment">// Adjust tooltip position because it may be inside relatively positioned element</span>
+  var oOffset = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.tooltip);
+  var iDiffLeft = x - oOffset.left;
+  <span class="reserved">if</span> (iDiffLeft) {
+    x += iDiffLeft;
+    <span class="reserved">this</span>.tooltip.style.left = x + <span class="literal">'px'</span>;
+  }
+  var iDiffTop = y - oOffset.top;
+  <span class="reserved">if</span> (iDiffTop) {
+    y += iDiffTop;
+    <span class="reserved">this</span>.tooltip.style.top = y + <span class="literal">'px'</span>;
+  }
+  <span class="comment">// Adjust tooltip position if it is displayed outside of visible area</span>
+  oOffset = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.tooltip);
+  var iRight = oOffset.left + oOffset.width;
+  var iBottom = oOffset.top + oOffset.height;
+  var oWindowSize = Zapatec.Utils.getWindowSize();
+  var iWinW = Zapatec.Utils.getPageScrollX() + oWindowSize.width;
+  var iWinH = Zapatec.Utils.getPageScrollY() + oWindowSize.height;
+  <span class="reserved">if</span> (iRight &gt; iWinW) {
+    x += iWinW - iRight;
+    <span class="reserved">this</span>.tooltip.style.left = x + <span class="literal">'px'</span>;
+  }
+  <span class="reserved">if</span> (iBottom &gt; iWinH) {
+    y += iWinH - iBottom;
+    <span class="reserved">this</span>.tooltip.style.top = y + <span class="literal">'px'</span>;
+  }
+  <span class="comment">// Setup WCH</span>
+  Zapatec.Utils.setupWCH(<span class="reserved">this</span>.wch, 0, 0, oOffset.width, oOffset.height);
+
+  Zapatec.Utils.addClass(<span class="reserved">this</span>.config.target,
+          <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpTooltip"</span>, suffix: <span class="literal">"Hover"</span>}));
+  <span class="reserved">this</span>.visible = true;
+  Zapatec.Tooltip._currentTooltip = <span class="reserved">this</span>;
+};
+
+<span class="comment">/**
+ * Hides the tooltip.
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.hide = <span class="reserved">function</span>() {
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.inTooltip) {
+    <span class="reserved">this</span>.tooltip.style.display = <span class="literal">"none"</span>;
+    Zapatec.Utils.hideWCH(<span class="reserved">this</span>.wch);
+    Zapatec.Utils.removeClass(<span class="reserved">this</span>.config.target,
+            <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpTooltip"</span>, suffix: <span class="literal">"Hover"</span>}));
+    <span class="reserved">this</span>.visible = false;
+  }
+};
+
+<span class="comment">/**
+ * Set tooltip html content
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.setContent = <span class="reserved">function</span>(html) {
+  <span class="reserved">this</span>.tooltip.innerHTML = html;
+};
+
+<span class="comment">/**
+ * Load cookie, if it was saved.
+ * no paramiters
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.loadCookie = <span class="reserved">function</span>() {
+  <span class="reserved">if</span> (<span class="reserved">this</span>.config.isCashed) { <span class="comment">//If saveDate is on We're saving the date in a cookie</span>
+    <span class="comment">//fetch the cookie</span>
+    var cookieName = window.location.href + <span class="literal">"--"</span> + <span class="reserved">this</span>.config.target.id;
+    var text = Zapatec.Utils.getCookie(cookieName);
+	<span class="reserved">if</span> (text) {
+    	tmp = Zapatec.Utils.loadPref(text);
+    	<span class="reserved">if</span> (tmp)
+      	Zapatec.Utils.mergeObjects(<span class="reserved">this</span>.tooltip, tmp);
+  	}
+  }	
+};
+
+<span class="comment">/**
+ * Set cookie.
+ * no paramiters
+ */</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.saveCookie = <span class="reserved">function</span> (){
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.isCashed) {
+		var cookieName = window.location.href + <span class="literal">"--"</span> + <span class="reserved">this</span>.config.target.id;
+		Zapatec.Utils.writeCookie(cookieName, Zapatec.Utils.makePref(<span class="reserved">this</span>.tooltip), null, <span class="literal">'/'</span>, 30);
+	}
+}; 
+
+<span class="comment">/**
+* <span class="attrib">@private</span> Function to load tree content on tree load from JSON source.
+* <span class="attrib">@param</span> objResponse {Object} Server response
+*/</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.loadDataJson = <span class="reserved">function</span>(objResponse){
+  <span class="reserved">if</span>(objResponse == null){
+    <span class="reserved">return</span> null;
+  }
+  
+  <span class="reserved">if</span> (!objResponse[<span class="literal">"Tooltip"</span>]) 
+	<span class="reserved">return</span> null;
+  
+  <span class="reserved">if</span> (objResponse[<span class="literal">"Tooltip"</span>][0][<span class="literal">"title"</span>])
+  	<span class="reserved">this</span>.tooltip.title = objResponse[<span class="literal">"Tooltip"</span>][0][<span class="literal">"title"</span>]; 
+  <span class="reserved">this</span>.setContent(objResponse[<span class="literal">"Tooltip"</span>][0][<span class="literal">"label"</span>] || <span class="literal">""</span>);
+};
+
+<span class="comment">/**
+* <span class="attrib">@private</span> Function to load tree content on tree load
+* <span class="attrib">@param</span> objResponse {Object} Server response
+* TODO add format description
+*/</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.loadDataXml = <span class="reserved">function</span>(objSource){
+  <span class="reserved">if</span>(objSource == null || objSource.documentElement == null){
+    <span class="reserved">return</span> null;
+  }
+ 
+  var tooltip = objSource.documentElement; 
+	
+  <span class="reserved">for</span>(var ii = 0; ii &lt; tooltip.childNodes.length; ii++) {
+	var el = tooltip.childNodes[ii];
+	<span class="reserved">if</span> (el.nodeName.toLowerCase() == <span class="literal">"title"</span>)	
+  		<span class="reserved">this</span>.tooltip.title = el.childNodes[0].nodeValue;
+	<span class="reserved">if</span> (el.nodeName.toLowerCase() == <span class="literal">"label"</span>)	 
+  		<span class="reserved">this</span>.setContent(el.childNodes[0].nodeValue);
+ } 
+};
+
+<span class="comment">/**
+* \internal Function to load tree content on tree load from HTML element
+* <span class="attrib">@param</span> objResponse {Object} Server response
+* Format description: Common HTML list - &amp;lt;UL&amp;gt;&amp;lt;LI&amp;gt;...&amp;lt;/LI&amp;gt;...&amp;lt;/UL&amp;gt;
+*/</span>
+Zapatec.Tooltip.<span class="reserved">prototype</span>.loadDataHtml = <span class="reserved">function</span>(objSource) {
+  <span class="reserved">if</span>(objSource == null){
+    <span class="reserved">return</span> null;
+  }
+
+  <span class="reserved">if</span> (objSource.title)	
+  	<span class="reserved">this</span>.tooltip.title = objSource.title; 	
+  <span class="reserved">if</span> (objSource.style)
+  	<span class="reserved">for</span> (var attr in objSource.style)	
+  		<span class="reserved">this</span>.tooltip.style.attr = objSource.style[objSource.style[attr]];
+    
+  <span class="reserved">this</span>.setContent(objSource.innerHTML || <span class="literal">''</span>);
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Tooltip</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:20:06 2009</div>
+</body>
+</html>

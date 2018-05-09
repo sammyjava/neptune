@@ -1,0 +1,514 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="html2xhtml.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>html2xhtml.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		A convertor from html to xhtml
+
+ <pre>
+ Copyright (c) 2004-2008 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ *$Id: html2xhtml.js $
+ * <span class="attrib">@fileoverview</span> A convertor from html to xhtml
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2008 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+html2Xhtml = <span class="reserved">function</span>() {
+  
+};
+
+<span class="comment">/**
+ * Converts html string into xhtml
+ * <span class="attrib">@public</span>
+ * <span class="attrib">@param</span> {string} html Html to convert
+ */</span>
+html2Xhtml.convert = <span class="reserved">function</span>(html) {
+  <span class="comment">// Remove font tags</span>
+  html = html.replace(/&lt;(font)[^&gt;]*&gt;/gi, <span class="literal">""</span>);
+  html = html.replace(/&lt;(\/font)&gt;/gi, <span class="literal">""</span>);
+
+  var state = 0;
+  var xhtml = <span class="literal">''</span>;
+  var p = 0;
+  var unget = false;
+  var tagname = <span class="literal">''</span>;
+  var attrname = <span class="literal">''</span>;
+  var attrval = <span class="literal">''</span>;
+  var quot = <span class="literal">''</span>;
+  var len = html.length;
+  var phpval = <span class="literal">''</span>;
+  var tagtype = 0;
+  var insidepre = false;
+  <span class="reserved">while</span> (1) {
+    <span class="reserved">if</span> (p &gt;= len &amp;&amp; !unget) {
+      <span class="reserved">return</span> xhtml
+    }
+    <span class="reserved">if</span> (unget) {
+      unget = false
+    }
+    <span class="reserved">else</span> {
+      var c = html.substr(p++, 1)
+    }
+    switch (state) {
+      case 0:
+        <span class="reserved">if</span> (c == <span class="literal">'&lt;'</span>) {
+          state = 1;
+          break
+        }
+        var cc = c.charCodeAt();
+        <span class="reserved">if</span> (html2Xhtml.charEntities[cc]) {
+          xhtml += <span class="literal">'&amp;'</span> + html2Xhtml.charEntities[cc] + <span class="literal">';'</span>
+        }
+        <span class="reserved">else</span> {
+        xhtml += c
+        }
+        break;
+      case 1:
+        <span class="reserved">if</span> (/[a-zA-Z]/.test(c)) {
+          state = 2;
+          tagtype = 1;
+          tagname = c.toLowerCase();
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'/'</span>) {
+          state = 2;
+          tagtype = -1;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'!'</span>) {
+          <span class="reserved">if</span> (html.substr(p, 2) == <span class="literal">'--'</span>) {
+            xhtml += <span class="literal">'&lt;!--'</span>;
+            p += 2;
+            state = 9;
+            break
+          }
+          xhtml += <span class="literal">'&lt;!'</span>;
+          state = 10;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'?'</span>) {
+          state = 11;
+          xhtml += <span class="literal">'&lt;'</span> + <span class="literal">'?'</span>;
+          break
+        }
+        xhtml += <span class="literal">'&amp;lt;'</span>;
+        unget = true;
+        state = 0;
+        break;
+      case 2:
+        <span class="reserved">if</span> (html2Xhtml.isSpaceChar[c]) {
+          var spaceChar = (!insidepre &amp;&amp; tagtype &gt; 0 &amp;&amp;
+                           html2Xhtml.hasNLBefore[tagname] &amp;&amp; xhtml.length &amp;&amp;
+                           xhtml.substr(xhtml.length - 1, 1) != <span class="literal">'\n'</span>?<span class="literal">'\n'</span>:<span class="literal">''</span>);
+          xhtml += spaceChar + (tagtype &gt; 0?<span class="literal">'&lt;'</span>:<span class="literal">'&lt;/'</span>) + tagname;
+          state = 3;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'/'</span>) {
+          var spaceChar = (!insidepre &amp;&amp; tagtype &gt; 0 &amp;&amp;
+                           html2Xhtml.hasNLBefore[tagname] &amp;&amp; xhtml.length &amp;&amp;
+                           xhtml.substr(xhtml.length - 1, 1) != <span class="literal">'\n'</span>?<span class="literal">'\n'</span>:<span class="literal">''</span>);
+          xhtml += spaceChar + (tagtype &gt; 0?<span class="literal">'&lt;'</span>:<span class="literal">'&lt;/'</span>) + tagname;
+          <span class="reserved">if</span> (html.substr(p, 1) != <span class="literal">'&gt;'</span>) {
+            state = 3;
+            break
+          }
+          state = 4;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'&gt;'</span>) {
+          var spaceChar = (!insidepre &amp;&amp; tagtype &gt; 0 &amp;&amp;
+                           html2Xhtml.hasNLBefore[tagname] &amp;&amp; xhtml.length &amp;&amp;
+                           xhtml.substr(xhtml.length - 1, 1) != <span class="literal">'\n'</span>?<span class="literal">'\n'</span>:<span class="literal">''</span>);
+          xhtml += spaceChar + (tagtype &gt; 0?<span class="literal">'&lt;'</span>:<span class="literal">'&lt;/'</span>) + tagname;
+          unget = true;
+          state = 4;
+          break
+        }
+        tagname += c.toLowerCase();
+        break;
+      case 3:
+        <span class="reserved">if</span> (html2Xhtml.isSpaceChar[c]) {
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'/'</span>) {
+          <span class="reserved">if</span> (html.substr(p, 1) != <span class="literal">'&gt;'</span>) {
+            break
+          }
+          state = 4;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'&gt;'</span>) {
+          unget = true;
+          state = 4;
+          break
+        }
+        attrname = c.toLowerCase();
+        attrval = <span class="literal">''</span>;
+        state = 5;
+        break;
+      case 4:
+        xhtml += (html2Xhtml.isEmptyTag[tagname]?<span class="literal">' /&gt;'</span>:<span class="literal">'&gt;'</span>) +
+                 (!insidepre &amp;&amp; tagtype &lt; 0 &amp;&amp; html2Xhtml.hasNLAfter[tagname] &amp;&amp;
+                  p &lt; len &amp;&amp; html.substr(p, 1) != <span class="literal">'\n'</span>?<span class="literal">'\n'</span>:<span class="literal">''</span>);
+        <span class="reserved">if</span> (tagtype &gt; 0 &amp;&amp; html2Xhtml.dontAnalyzeContent[tagname]) {
+          state = 13;
+          attrname = attrval = quot = <span class="literal">''</span>;
+          tagtype = 0;
+          break
+        }
+        <span class="reserved">if</span> (tagname == <span class="literal">'pre'</span>) {
+          insidepre = !insidepre
+        }
+        state = 0;
+        tagname = attrname = attrval = quot = <span class="literal">''</span>;
+        tagtype = 0;
+        break;
+      case 5:
+        <span class="reserved">if</span> (html2Xhtml.isSpaceChar[c]) {
+          xhtml += <span class="literal">' '</span> + attrname;
+          <span class="reserved">if</span> (html2Xhtml.isEmptyAttr[attrname]) {
+            xhtml += <span class="literal">'="'</span> + attrname + <span class="literal">'"'</span>
+          }
+          state = 3;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'/'</span>) {
+          xhtml += <span class="literal">' '</span> + attrname;
+          <span class="reserved">if</span> (html2Xhtml.isEmptyAttr[attrname]) {
+            xhtml += <span class="literal">'="'</span> + attrname + <span class="literal">'"'</span>
+          }
+          <span class="reserved">if</span> (html.substr(p, 1) != <span class="literal">'&gt;'</span>) {
+            state = 3;
+            break
+          }
+          state = 4;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'&gt;'</span>) {
+          xhtml += <span class="literal">' '</span> + attrname;
+          <span class="reserved">if</span> (html2Xhtml.isEmptyAttr[attrname]) {
+            xhtml += <span class="literal">'="'</span> + attrname + <span class="literal">'"'</span>
+          }
+          unget = true;
+          state = 4;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'='</span>) {
+          xhtml += <span class="literal">' '</span> + attrname + <span class="literal">'='</span>;
+          state = 6;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'"'</span> || c == <span class="literal">"'"</span>) {
+          attrname += <span class="literal">'?'</span>
+        }
+        <span class="reserved">else</span> {
+          attrname += c.toLowerCase()
+        }
+        break;
+      case 6:
+        <span class="reserved">if</span> (html2Xhtml.isSpaceChar[c]) {
+          xhtml += (html2Xhtml.isEmptyAttr[attrname]?<span class="literal">'"'</span> + attrname + <span class="literal">'"'</span>:<span class="literal">'""'</span>);
+          state = 3;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'&gt;'</span>) {
+          xhtml += (html2Xhtml.isEmptyAttr[attrname]?<span class="literal">'"'</span> + attrname + <span class="literal">'"'</span>:<span class="literal">'""'</span>);
+          unget = true;
+          state = 4;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'/'</span> &amp;&amp; html.substr(p, 1) == <span class="literal">'&gt;'</span>) {
+          xhtml += (html2Xhtml.isEmptyAttr[attrname]?<span class="literal">'"'</span> + attrname + <span class="literal">'"'</span>:<span class="literal">'""'</span>);
+          state = 4;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'"'</span> || c == <span class="literal">"'"</span>) {
+          quot = c;
+          state = 8;
+          break
+        }
+        attrval = c;
+        state = 7;
+        break;
+      case 7:
+        <span class="reserved">if</span> (html2Xhtml.isSpaceChar[c]) {
+          xhtml += <span class="literal">'"'</span> + html2Xhtml.escapeQuot(attrval, <span class="literal">'"'</span>) + <span class="literal">'"'</span>;
+          state = 3;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'/'</span> &amp;&amp; html.substr(p, 1) == <span class="literal">'&gt;'</span>) {
+          xhtml += <span class="literal">'"'</span> + html2Xhtml.escapeQuot(attrval, <span class="literal">'"'</span>) + <span class="literal">'"'</span>;
+          state = 4;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'&gt;'</span>) {
+          unget = true;
+          xhtml += <span class="literal">'"'</span> + html2Xhtml.escapeQuot(attrval, <span class="literal">'"'</span>) + <span class="literal">'"'</span>;
+          state = 4;
+          break
+        }
+        attrval += c;
+        break;
+      case 8:
+        <span class="reserved">if</span> (c == quot) {
+          xhtml += <span class="literal">'"'</span> + html2Xhtml.escapeQuot(attrval, <span class="literal">'"'</span>) + <span class="literal">'"'</span>;
+          state = 3;
+          break
+        }
+        attrval += c;
+        break;
+      case 9:
+        <span class="reserved">if</span> (c == <span class="literal">'-'</span> &amp;&amp; html.substr(p, 2) == <span class="literal">'-&gt;'</span>) {
+          p += 2;
+          xhtml += <span class="literal">'--&gt;'</span>;
+          state = 0;
+          break
+        }
+        xhtml += c;
+        break;
+      case 10:
+        <span class="reserved">if</span> (c == <span class="literal">'&gt;'</span>) {
+          state = 0
+        }
+        xhtml += c;
+        break;
+      case 11:
+        <span class="reserved">if</span> (c == <span class="literal">"'"</span> || c == <span class="literal">'"'</span>) {
+          quot = c;
+          state = 12;
+          break
+        }
+        <span class="reserved">if</span> (c == <span class="literal">'?'</span> &amp;&amp; html.substr(p, 1) == <span class="literal">'&gt;'</span>) {
+          state = 0;
+          xhtml += <span class="literal">'?'</span> + <span class="literal">'&gt;'</span>;
+          p++;
+          break
+        }
+        xhtml += c;
+        break;
+      case 12:
+        <span class="reserved">if</span> (c == quot) {
+          state = 11;
+          xhtml += quot + html2Xhtml.escapeQuot(phpval, quot) + quot;
+          phpval = quot = <span class="literal">''</span>;
+          break
+        }
+        phpval += c;
+        break;
+      case 13:
+        <span class="reserved">if</span> (c == <span class="literal">'&lt;'</span> &amp;&amp; html.substr(p, tagname.length + 1).toLowerCase() ==
+                        <span class="literal">'/'</span> + tagname) {
+          unget = true;
+          state = 0;
+          tagname = <span class="literal">''</span>;
+          break
+        }
+        <span class="reserved">if</span> (tagname == <span class="literal">'textarea'</span>) {
+          xhtml += html2Xhtml.escapeHTMLChar(c)
+        }
+        <span class="reserved">else</span> {
+          xhtml += c
+        }
+        break
+    }
+  }
+
+  <span class="reserved">return</span> xhtml
+};
+
+html2Xhtml.escapeQuot = <span class="reserved">function</span>(str, quot) {
+  <span class="reserved">if</span> (!quot) {
+    quot = <span class="literal">'"'</span>
+  }
+  <span class="reserved">if</span> (quot == <span class="literal">'"'</span>) {
+    <span class="reserved">return</span> str.replace(/<span class="literal">"/ig, '\\"</span><span class="literal">')
+  }
+  return str.replace(/'</span>/ig, <span class="literal">"\\'"</span>)
+};
+
+html2Xhtml.escapeHTMLChar = <span class="reserved">function</span>(c) {
+  <span class="reserved">if</span> (c == <span class="literal">'&amp;'</span>) {
+    <span class="reserved">return</span><span class="literal">'&amp;amp;'</span>
+  }
+  <span class="reserved">if</span> (c == <span class="literal">'&lt;'</span>) {
+    <span class="reserved">return</span><span class="literal">'&amp;lt;'</span>
+  }
+  <span class="reserved">if</span> (c == <span class="literal">'&gt;'</span>) {
+    <span class="reserved">return</span><span class="literal">'&amp;gt;'</span>
+  }
+  var cc = c.charCodeAt();
+  <span class="reserved">if</span> (html2Xhtml.charEntities[cc]) {
+    <span class="reserved">return</span><span class="literal">'&amp;'</span> + html2Xhtml.charEntities[cc] + <span class="literal">';'</span>
+  }
+  <span class="reserved">else</span> {
+    <span class="reserved">return</span> c
+  }
+};
+html2Xhtml.isSpaceChar = {<span class="literal">' '</span>:1,<span class="literal">'\r'</span>:1,<span class="literal">'\n'</span>:1,<span class="literal">'\t'</span>:1};
+html2Xhtml.isEmptyTag = {<span class="literal">'area'</span>:1,<span class="literal">'base'</span>:1,<span class="literal">'basefont'</span>:1,<span class="literal">'br'</span>:1,<span class="literal">'hr'</span>:1,<span class="literal">'img'</span>:1,<span class="literal">'input'</span>:1,<span class="literal">'link'</span>:1,<span class="literal">'meta'</span>:1,<span class="literal">'param'</span>:1};
+html2Xhtml.isEmptyAttr = {<span class="literal">'checked'</span>:1,<span class="literal">'compact'</span>:1,<span class="literal">'declare'</span>:1,<span class="literal">'defer'</span>:1,<span class="literal">'disabled'</span>:1,<span class="literal">'ismap'</span>:1,<span class="literal">'multiple'</span>:1,<span class="literal">'noresize'</span>:1,<span class="literal">'nosave'</span>:1,<span class="literal">'noshade'</span>:1,<span class="literal">'nowrap'</span>:1,<span class="literal">'readonly'</span>:1,<span class="literal">'selected'</span>:1};
+html2Xhtml.hasNLBefore = {<span class="literal">'div'</span>:1,<span class="literal">'p'</span>:1,<span class="literal">'table'</span>:1,<span class="literal">'tbody'</span>:1,<span class="literal">'tr'</span>:1,<span class="literal">'td'</span>:1,<span class="literal">'th'</span>:1,<span class="literal">'title'</span>:1,<span class="literal">'head'</span>:1,<span class="literal">'body'</span>:1,<span class="literal">'script'</span>:1,<span class="literal">'comment'</span>:1,<span class="literal">'li'</span>:1,<span class="literal">'meta'</span>:1,<span class="literal">'h1'</span>:1,<span class="literal">'h2'</span>:1,<span class="literal">'h3'</span>:1,<span class="literal">'h4'</span>:1,<span class="literal">'h5'</span>:1,<span class="literal">'h6'</span>:1,<span class="literal">'hr'</span>:1,<span class="literal">'ul'</span>:1,<span class="literal">'ol'</span>:1,<span class="literal">'option'</span>:1,<span class="literal">'link'</span>:1};
+html2Xhtml.hasNLAfter = {<span class="literal">'html'</span>:1,<span class="literal">'head'</span>:1,<span class="literal">'body'</span>:1,<span class="literal">'p'</span>:1,<span class="literal">'th'</span>:1,<span class="literal">'style'</span>:1};
+html2Xhtml.dontAnalyzeContent = {<span class="literal">'textarea'</span>:1,<span class="literal">'script'</span>:1,<span class="literal">'style'</span>:1};
+html2Xhtml.charEntities = {160:<span class="literal">'nbsp'</span>,161:<span class="literal">'iexcl'</span>,162:<span class="literal">'cent'</span>,163:<span class="literal">'pound'</span>,164:<span class="literal">'curren'</span>,165:<span class="literal">'yen'</span>,166:<span class="literal">'brvbar'</span>,167:<span class="literal">'sect'</span>,168:<span class="literal">'uml'</span>,169:<span class="literal">'copy'</span>,170:<span class="literal">'ordf'</span>,171:<span class="literal">'laquo'</span>,172:<span class="literal">'not'</span>,173:<span class="literal">'shy'</span>,174:<span class="literal">'reg'</span>,175:<span class="literal">'macr'</span>,176:<span class="literal">'deg'</span>,177:<span class="literal">'plusmn'</span>,178:<span class="literal">'sup2'</span>,179:<span class="literal">'sup3'</span>,180:<span class="literal">'acute'</span>,181:<span class="literal">'micro'</span>,182:<span class="literal">'para'</span>,183:<span class="literal">'middot'</span>,184:<span class="literal">'cedil'</span>,185:<span class="literal">'sup1'</span>,186:<span class="literal">'ordm'</span>,187:<span class="literal">'raquo'</span>,188:<span class="literal">'frac14'</span>,189:<span class="literal">'frac12'</span>,190:<span class="literal">'frac34'</span>,191:<span class="literal">'iquest'</span>,192:<span class="literal">'agrave'</span>,193:<span class="literal">'aacute'</span>,194:<span class="literal">'acirc'</span>,195:<span class="literal">'atilde'</span>,196:<span class="literal">'auml'</span>,197:<span class="literal">'aring'</span>,198:<span class="literal">'aelig'</span>,199:<span class="literal">'ccedil'</span>,200:<span class="literal">'egrave'</span>,201:<span class="literal">'eacute'</span>,202:<span class="literal">'ecirc'</span>,203:<span class="literal">'euml'</span>,204:<span class="literal">'igrave'</span>,205:<span class="literal">'iacute'</span>,206:<span class="literal">'icirc'</span>,207:<span class="literal">'iuml'</span>,208:<span class="literal">'eth'</span>,209:<span class="literal">'ntilde'</span>,210:<span class="literal">'ograve'</span>,211:<span class="literal">'oacute'</span>,212:<span class="literal">'ocirc'</span>,213:<span class="literal">'otilde'</span>,214:<span class="literal">'ouml'</span>,215:<span class="literal">'times'</span>,216:<span class="literal">'oslash'</span>,217:<span class="literal">'ugrave'</span>,218:<span class="literal">'uacute'</span>,219:<span class="literal">'ucirc'</span>,220:<span class="literal">'uuml'</span>,221:<span class="literal">'yacute'</span>,222:<span class="literal">'thorn'</span>,223:<span class="literal">'szlig'</span>,224:<span class="literal">'agrave'</span>,225:<span class="literal">'aacute'</span>,226:<span class="literal">'acirc'</span>,227:<span class="literal">'atilde'</span>,228:<span class="literal">'auml'</span>,229:<span class="literal">'aring'</span>,230:<span class="literal">'aelig'</span>,231:<span class="literal">'ccedil'</span>,232:<span class="literal">'egrave'</span>,233:<span class="literal">'eacute'</span>,234:<span class="literal">'ecirc'</span>,235:<span class="literal">'euml'</span>,236:<span class="literal">'igrave'</span>,237:<span class="literal">'iacute'</span>,238:<span class="literal">'icirc'</span>,239:<span class="literal">'iuml'</span>,240:<span class="literal">'eth'</span>,241:<span class="literal">'ntilde'</span>,242:<span class="literal">'ograve'</span>,243:<span class="literal">'oacute'</span>,244:<span class="literal">'ocirc'</span>,245:<span class="literal">'otilde'</span>,246:<span class="literal">'ouml'</span>,247:<span class="literal">'divide'</span>,248:<span class="literal">'oslash'</span>,249:<span class="literal">'ugrave'</span>,250:<span class="literal">'uacute'</span>,251:<span class="literal">'ucirc'</span>,252:<span class="literal">'uuml'</span>,253:<span class="literal">'yacute'</span>,254:<span class="literal">'thorn'</span>,255:<span class="literal">'yuml'</span>,338:<span class="literal">'oelig'</span>,339:<span class="literal">'oelig'</span>,352:<span class="literal">'scaron'</span>,353:<span class="literal">'scaron'</span>,376:<span class="literal">'yuml'</span>,710:<span class="literal">'circ'</span>,732:<span class="literal">'tilde'</span>,8194:<span class="literal">'ensp'</span>,8195:<span class="literal">'emsp'</span>,8201:<span class="literal">'thinsp'</span>,8204:<span class="literal">'zwnj'</span>,8205:<span class="literal">'zwj'</span>,8206:<span class="literal">'lrm'</span>,8207:<span class="literal">'rlm'</span>,8211:<span class="literal">'ndash'</span>,8212:<span class="literal">'mdash'</span>,8216:<span class="literal">'lsquo'</span>,8217:<span class="literal">'rsquo'</span>,8218:<span class="literal">'sbquo'</span>,8220:<span class="literal">'ldquo'</span>,8221:<span class="literal">'rdquo'</span>,8222:<span class="literal">'bdquo'</span>,8224:<span class="literal">'dagger'</span>,8225:<span class="literal">'dagger'</span>,8240:<span class="literal">'permil'</span>,8249:<span class="literal">'lsaquo'</span>,8250:<span class="literal">'rsaquo'</span>,8364:<span class="literal">'euro'</span>,402:<span class="literal">'fnof'</span>,913:<span class="literal">'alpha'</span>,914:<span class="literal">'beta'</span>,915:<span class="literal">'gamma'</span>,916:<span class="literal">'delta'</span>,917:<span class="literal">'epsilon'</span>,918:<span class="literal">'zeta'</span>,919:<span class="literal">'eta'</span>,920:<span class="literal">'theta'</span>,921:<span class="literal">'iota'</span>,922:<span class="literal">'kappa'</span>,923:<span class="literal">'lambda'</span>,924:<span class="literal">'mu'</span>,925:<span class="literal">'nu'</span>,926:<span class="literal">'xi'</span>,927:<span class="literal">'omicron'</span>,928:<span class="literal">'pi'</span>,929:<span class="literal">'rho'</span>,931:<span class="literal">'sigma'</span>,932:<span class="literal">'tau'</span>,933:<span class="literal">'upsilon'</span>,934:<span class="literal">'phi'</span>,935:<span class="literal">'chi'</span>,936:<span class="literal">'psi'</span>,937:<span class="literal">'omega'</span>,945:<span class="literal">'alpha'</span>,946:<span class="literal">'beta'</span>,947:<span class="literal">'gamma'</span>,948:<span class="literal">'delta'</span>,949:<span class="literal">'epsilon'</span>,950:<span class="literal">'zeta'</span>,951:<span class="literal">'eta'</span>,952:<span class="literal">'theta'</span>,953:<span class="literal">'iota'</span>,954:<span class="literal">'kappa'</span>,955:<span class="literal">'lambda'</span>,956:<span class="literal">'mu'</span>,957:<span class="literal">'nu'</span>,958:<span class="literal">'xi'</span>,959:<span class="literal">'omicron'</span>,960:<span class="literal">'pi'</span>,961:<span class="literal">'rho'</span>,962:<span class="literal">'sigmaf'</span>,963:<span class="literal">'sigma'</span>,964:<span class="literal">'tau'</span>,965:<span class="literal">'upsilon'</span>,966:<span class="literal">'phi'</span>,967:<span class="literal">'chi'</span>,968:<span class="literal">'psi'</span>,969:<span class="literal">'omega'</span>,977:<span class="literal">'thetasym'</span>,978:<span class="literal">'upsih'</span>,982:<span class="literal">'piv'</span>,8226:<span class="literal">'bull'</span>,8230:<span class="literal">'hellip'</span>,8242:<span class="literal">'prime'</span>,8243:<span class="literal">'prime'</span>,8254:<span class="literal">'oline'</span>,8260:<span class="literal">'frasl'</span>,8472:<span class="literal">'weierp'</span>,8465:<span class="literal">'image'</span>,8476:<span class="literal">'real'</span>,8482:<span class="literal">'trade'</span>,8501:<span class="literal">'alefsym'</span>,8592:<span class="literal">'larr'</span>,8593:<span class="literal">'uarr'</span>,8594:<span class="literal">'rarr'</span>,8595:<span class="literal">'darr'</span>,8596:<span class="literal">'harr'</span>,8629:<span class="literal">'crarr'</span>,8656:<span class="literal">'larr'</span>,8657:<span class="literal">'uarr'</span>,8658:<span class="literal">'rarr'</span>,8659:<span class="literal">'darr'</span>,8660:<span class="literal">'harr'</span>,8704:<span class="literal">'forall'</span>,8706:<span class="literal">'part'</span>,8707:<span class="literal">'exist'</span>,8709:<span class="literal">'empty'</span>,8711:<span class="literal">'nabla'</span>,8712:<span class="literal">'isin'</span>,8713:<span class="literal">'notin'</span>,8715:<span class="literal">'ni'</span>,8719:<span class="literal">'prod'</span>,8721:<span class="literal">'sum'</span>,8722:<span class="literal">'minus'</span>,8727:<span class="literal">'lowast'</span>,8730:<span class="literal">'radic'</span>,8733:<span class="literal">'prop'</span>,8734:<span class="literal">'infin'</span>,8736:<span class="literal">'ang'</span>,8743:<span class="literal">'and'</span>,8744:<span class="literal">'or'</span>,8745:<span class="literal">'cap'</span>,8746:<span class="literal">'cup'</span>,8747:<span class="literal">'int'</span>,8756:<span class="literal">'there4'</span>,8764:<span class="literal">'sim'</span>,8773:<span class="literal">'cong'</span>,8776:<span class="literal">'asymp'</span>,8800:<span class="literal">'ne'</span>,8801:<span class="literal">'equiv'</span>,8804:<span class="literal">'le'</span>,8805:<span class="literal">'ge'</span>,8834:<span class="literal">'sub'</span>,8835:<span class="literal">'sup'</span>,8836:<span class="literal">'nsub'</span>,8838:<span class="literal">'sube'</span>,8839:<span class="literal">'supe'</span>,8853:<span class="literal">'oplus'</span>,8855:<span class="literal">'otimes'</span>,8869:<span class="literal">'perp'</span>,8901:<span class="literal">'sdot'</span>,8968:<span class="literal">'lceil'</span>,8969:<span class="literal">'rceil'</span>,8970:<span class="literal">'lfloor'</span>,8971:<span class="literal">'rfloor'</span>,9001:<span class="literal">'lang'</span>,9002:<span class="literal">'rang'</span>,9426:<span class="literal">'copy'</span>,9674:<span class="literal">'loz'</span>,9824:<span class="literal">'spades'</span>,9827:<span class="literal">'clubs'</span>,9829:<span class="literal">'hearts'</span>,9830:<span class="literal">'diams'</span>};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

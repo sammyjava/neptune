@@ -1,0 +1,25 @@
+<% if (showMobile && showNavSecondary) { %><%@ include file="nav-secondary-mobile.jhtml" %><% } %>
+<!-- main region -->
+<table id="main" cellspacing="0" width="100%">
+  <tr>
+    <% if (showSidebar) { %><td id="main-left" valign="top"><% } %>
+      <% if (showSidebar) { %><%@ include file="sidebar-top.jhtml" %><% } %>
+      <% if (showSidebar && showNavSecondary && !showNavVertical) { %><%@ include file="nav-secondary.jhtml" %><% } %>
+      <% if (showSidebar && showNavVertical) { %><%@ include file="nav-vertical.jhtml" %><% } %>
+      <% if (showSidebar) { %><%@ include file="sidebar-bottom.jhtml" %><% } %>
+    <% if (showSidebar) { %></td><% } %>
+    <td id="main-right" valign="top">
+      <% if (accessAllowed) { %>
+      <% if (showBreadCrumbs) { %><%@ include file="breadcrumbs.jhtml" %><% } %>
+      <% if (showPageTitle) { %><%@ include file="pagetitle.jhtml" %><% } %>
+      <% if (showNavQuaternary) { %><%@ include file="nav-quaternary.jhtml" %><% } %>
+      <%@ include file="content.jhtml" %>
+      <% } else { p.title = Setting.getString(application,"access_denied_title"); %>
+      <% if (showBreadCrumbs) { %><%@ include file="breadcrumbs.jhtml" %><% } %>
+      <% if (showPageTitle) { %><%@ include file="pagetitle.jhtml" %><% } %>
+      <%@ include file="accessdenied.jhtml" %>
+      <% } %>
+    </td>
+  </tr>
+</table>
+

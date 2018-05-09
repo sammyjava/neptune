@@ -1,0 +1,35 @@
+    <h2>Please confirm your payment.</h2>
+    <p>
+      Press the button below to submit it to PayPal.
+    </p>
+
+    <div class="payment-confirmation">
+    
+      <h3><%=paymentOption.name%></h3>
+      <% if (paymentOption.description!=null) { %><p><%=paymentOption.description%></p><% } %>
+      
+      <h3>Amount: <%=mf.format(amount)%></h3>
+      
+      <p>
+	<%=firstname%> <%=lastname%><br/>
+	<%=street%><br/>
+	<%=city%>, <%=state%> <%=zip%><br/>
+      </p>
+      <p>
+	Phone: <%=phone%><br/>
+	Email: <%=email%>
+      </p>
+      
+      <% if (comments.length()>0) { %><p><%=comments%></p><% } %>
+      
+      <form method="post">
+	<input type="hidden" name="token" value="<%=(String)paypal.responseMap.get("TOKEN")%>"/>
+	<input type="hidden" name="payerid" value="<%=(String)paypal.responseMap.get("PAYERID")%>"/>
+	<input type="hidden" name="amount" value="<%=(String)paypal.responseMap.get("PAYMENTREQUEST_0_AMT")%>"/>
+	<input type="hidden" name="description" value="<%=(String)paypal.responseMap.get("PAYMENTREQUEST_0_DESC")%>"/>
+	<input type="hidden" name="currencycode" value="<%=(String)paypal.responseMap.get("PAYMENTREQUEST_0_CURRENCYCODE")%>"/>
+	<input type="image" name="finishExpressCheckout" value="true" src="https://merchant.paypal.com/cms_content/US/en_US/images/merchant/scr_buynow_94x30.gif" border="0" /></td>
+      </form>
+
+    </div>
+

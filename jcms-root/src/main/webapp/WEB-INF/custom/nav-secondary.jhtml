@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom secondary nav, set customSecondaryNav=true and put code here.
+ */
+  boolean customSecondaryNav = false;
+%>

@@ -1,0 +1,11 @@
+/* $Id: windows.css 4322 2006-09-04 08:49:33Z shacka $ */
+div.tree-item td.customIcon {
+	background: url("windows/menu_link_txt.gif") no-repeat 0 50%;
+}
+div.tree-item-expanded td.customIcon {
+	background: url("windows/menu_folder_open.gif") no-repeat 0 50%;
+}
+div.tree-item-collapsed td.customIcon {
+	background: url("windows/menu_folder_closed.gif") no-repeat 0 50%;
+}
+

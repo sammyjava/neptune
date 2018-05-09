@@ -1,0 +1,95 @@
+/* $Id: default.css 6183 2007-02-05 12:42:26Z slip $ */
+@import url("base.css");
+
+.zpWinDefaultContainer .zpWinFront, .zpWinDefaultContainer .zpWinBack {
+	background-color: #F2EFDD;
+	border-style: solid;
+	border-width: 2px; 
+	border-color: #f0f0f0 #606060 #404040 #d0d0d0;
+	padding: 2px; 
+}
+
+.zpWinDefaultContainer .zpWinTitleArea {
+	height: 17px;
+	text-align:left;
+	color:white;
+}
+
+.zpWinDefaultContainer .zpWinTitleText {
+}
+
+.zpWinDefaultContainer .zpWinFront .zpWinTitleArea {
+	background-color: blue;
+	
+}
+
+.zpWinDefaultContainer .zpWinBack .zpWinTitleArea {
+	background-color: #397E8C;
+}
+
+.zpWinDefaultContainer td.zpWinTitleFirstCell,
+.zpWinDefaultContainer td.zpWinTitleLastCell {
+	display : none;
+}
+
+.zpWinDefaultContainer .zpWinCloseButton, 
+.zpWinDefaultContainer .zpWinMinButton, 
+.zpWinDefaultContainer .zpWinMaxButton, 
+.zpWinDefaultContainer .zpWinRestoreButton {
+	height: 14px;
+	width: 15px;
+	margin : 2px 1px;
+	display : block;
+	overflow : hidden;
+}
+
+.zpWinDefaultContainer .zpWinButtonHolder {
+	height: 18px;
+	width: 17px;
+}
+
+.zpWinDefaultContainer .zpWinCloseButton {
+	background: url(default/"close.gif") no-repeat;
+}
+
+.zpWinDefaultContainer .zpWinMinButton {
+	background: url(default/"minimize.gif") no-repeat;
+}
+
+.zpWinDefaultContainer .zpWinMaxButton {
+	background: url(default/"maximize.gif") no-repeat;
+}
+
+.zpWinDefaultContainer .zpWinRestoreButton {
+	background: url(default/"restore.gif") no-repeat;
+}
+
+.zpWinDefaultContainer .zpWinContentBorder {
+	background-color: #ffffff;
+	border-style: solid;
+	border-width: 3px;
+	border-color: #404040 #e0e0e0 #f0f0f0 #505050;
+}
+
+.zpWinDefaultContainer .zpWinContent {
+	padding: 0px;
+}
+
+.zpWinDefaultContainer td.zpWinStatusCell {
+}
+
+.zpWinDefaultContainer .zpWinBottomBorder {
+	height : 1px;
+	line-height : 1px;
+	overflow : hidden;
+	font-size : 1px
+}
+
+.zpWinDefaultContainer .zpWinStatus {
+	height:19px;
+	line-height : 16px;
+	text-align:center;
+	background-color: yellow;
+	border: black solid 1px;
+	color:black;
+}

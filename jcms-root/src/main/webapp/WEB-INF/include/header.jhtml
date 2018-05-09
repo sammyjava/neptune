@@ -1,0 +1,17 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/header.jhtml" %>
+<% if (!customHeader) { %>
+<!-- header -->
+<table id="header" cellspacing="0" width="100%">
+  <tr>
+    <td class="header-left"></td>
+    <%
+      String tdClass = "header";
+      UtilityContent[] uc = UtilityContent.getByLocation(application, 'H');
+    %>
+    <%@ include file="utilitycontent.jhtml" %>
+    <td class="header-right"></td>
+  </tr>
+</table>
+<% } %>
+<!--startindex-->

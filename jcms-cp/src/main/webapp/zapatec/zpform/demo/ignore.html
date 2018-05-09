@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	Sometimes it is useful to make Zapatec.Form to ignore some fields in the form. For example you have some complicated functionality which conflicts with Zapatec.Form functionality. 	Just add zpIgnoreField to field's CSS class name ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Ignore fields</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/lightgreen.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Ignore fields</div>
+
+This form demonstrates how to force Zapatec.Form ignore some fields in the form.
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>lightgreen theme</b>.</li>
+				
+	<li>Sometimes it is useful to make Zapatec.Form to ignore some fields in the form. For example you have some complicated functionality which conflicts with Zapatec.Form functionality.</li>
+	<li>Just add <i>zpIgnoreField</i> to field's CSS class name</li>
+
+			</ul>
+		</div>
+
+
+
+<form action="ignore.html" id='userForm' method="post">
+	<div id='errOutput' class="errOutput"></div>
+
+	<div class="zpFormContent">
+		<fieldset>
+			<legend>Personal information</legend>
+			<label class='zpFormLabel'>This is Zapatec.Form field</label>
+			<input class='zpFormRequired' value="" size="40" name="name" type="text" >
+			<br />
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>This is another Zapatec.Form field</label>
+			<input class='zpFormRequired' value="" size="40" name="address" type="text" >
+			<br />
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>And this field will be ignored by Zapatec.Form</label>
+			<input value="" size="23" name="dob" type="text" class='zpIgnoreField'>
+		</fieldset>
+	</div>
+	<div class="zpFormButtons">
+		<input value="Submit" name="Submit" onclick="" type="submit" class="button"> 
+		<input value="Clear" name="Clear" onclick="" type="reset" class="button">
+	</div>
+	
+</form>
+
+<script type="text/javascript">
+// Run this to auto-activate all "zpForm" class forms in the document.
+new Zapatec.Form({
+	form: 'userForm',
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput,
+	theme: "lightgreen"
+});
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

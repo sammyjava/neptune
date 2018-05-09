@@ -1,0 +1,334 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content="This demo shows how to add icons to tree in defferent ways Using defaultIcons config option you can add additional cell left to the node content with CSS class equal to config option value (first tree in demo) After that using CSS you can style different states of node: 	 		.tree-item-expanded .customIcon - this style will be applied to expanded branch 		.tree-item-collapsed .customIcon - this style will be applied to collapsed branch 		.tree-item .customIcon - this style will be applied to node without branch 	 Also you can add custom icons for each node. If tree is constructed from JSON source - define fields expandedIcon, collapsedIcon, fetchingIcon, elementIcon If tree is constructed from HTML source - just put some &lt;IMG&gt; tags inside node content If tree prevCompatible config option is set to true (second tree - default behaviour) first &lt;IMG&gt; tag will be treated as collapsed icon and second as expanded icon. If node has no subtree - first &lt;IMG&gt; tag will be treated as node icon If prevCompativle is false (third tree) you must assign custom CSS classes to &lt;IMG&gt;: 	 		expandedIcon - icon for expanded branch. 		collapsedIcon - icon for collapsed branch. 		fetchingIcon - icon for fetching branch which is fetching its content from server. 		elementIcon - icon for node without subtree. 	 ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Adding icons</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+	<link href="../themes/empty.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Adding icons</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				<li>This demo shows how to add icons to tree in defferent ways</li>
+<li>Using <i>defaultIcons</i> config option you can add additional cell left to the node content with CSS class equal to config option value (first tree in demo)</li>
+<li>After that using CSS you can style different states of node:
+	<ul>
+		<li><i>.tree-item-expanded .customIcon</i> - this style will be applied to expanded branch</li>
+		<li><i>.tree-item-collapsed .customIcon</i> - this style will be applied to collapsed branch</li>
+		<li><i>.tree-item .customIcon</i> - this style will be applied to node without branch</li>
+	</ul>
+</li>
+<li>Also you can add custom icons for each node.</li>
+<li>If tree is constructed from JSON source - define fields <i>expandedIcon</i>, <i>collapsedIcon</i>, <i>fetchingIcon</i>, <i>elementIcon</i></li>
+<li>If tree is constructed from HTML source - just put some &lt;IMG&gt; tags inside node content</li>
+<li>If tree <i>prevCompatible</i> config option is set to true (second tree - default behaviour) first &lt;IMG&gt; tag will be treated as collapsed icon and second as expanded icon.</li>
+<li>If node has no subtree - first &lt;IMG&gt; tag will be treated as node icon</li>
+<li>If <i>prevCompativle</i> is false (third tree) you must assign custom CSS classes to &lt;IMG&gt;:
+	<ul>
+		<li><i>expandedIcon</i> - icon for expanded branch.</li>
+		<li><i>collapsedIcon</i> - icon for collapsed branch.</li>
+		<li><i>fetchingIcon</i> - icon for fetching branch which is fetching its content from server.</li>
+		<li><i>elementIcon</i> - icon for node without subtree.</li>
+	</ul>
+</li>
+
+			</ul>
+		</div>
+
+
+
+<table width="100%">
+<tr>
+	<th>defaultIcons</th>
+	<th>icons with prevCompatible=true</th>
+	<th>icons with prevCompatible=false</th>
+</tr>
+<tr><td width="33%" valign="top">
+<ul id="tree_defaults">
+	<li id="games">
+		Games
+		<ul>
+			<li>Video Games
+				<ul>
+					<li>PSP</li>
+					<li>X-Box</li>
+				</ul>
+			</li>
+			<li>RPG
+				<ul>
+					<li>Gamebooks</li>
+					<li>Live Action</li>
+					<li>Tabletop</li>
+				</ul>
+			</li>
+			<li>Gambling
+				<ul>
+					<li>Baccarat</li>
+					<li>Bingo</li>
+					<li>Roulette</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li id="computers">Computers
+		<ul>
+			<li>Computer Science
+				<ul>
+					<li>Academic Departments</li>
+					<li>Artificial Intelligence</li>
+					<li>Research Institutes</li>
+					<li>Theoretical</li>
+				</ul>
+			</li>
+			<li id="internet">Internet
+				<ul>
+					<li>Chat</li>
+					<li>DHTML libraries
+						<ul>
+							<li id="zapatec">Zapatec Suite</li>
+						</ul>
+					</li>
+					<li>E-mail</li>
+				</ul>
+			</li>
+			<li>Security
+				<ul>
+					<li>Authentication</li>
+					<li>Cryptography</li>
+					<li>Internet security</li>
+					<li>Secure Programming</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>Business</li>
+</ul>
+</td>
+<td width="34%" valign="top">
+<ul id="tree_compat">
+	<li>
+		<img src="../themes/kde/1downarrow.png" width="16" height="16" alt="Expanded" />
+		<img src="../themes/kde/1rightarrow.png" width="16" height="16" alt="Collapsed" />
+		KDE style
+		<ul>
+			<li>
+				<img src="../themes/kde/1downarrow.png" width="16" height="16" alt="Expanded" />
+				<img src="../themes/kde/1rightarrow.png" width="16" height="16" alt="Collapsed" />
+				Folder
+				<ul>
+					<li>
+						<img src="../themes/kde/text_left.png" width="16" height="16" alt="" />
+						File
+					</li>
+					<li>
+						<img src="../themes/kde/text_left.png" width="16" height="16" alt="" />
+						File
+					</li>
+				</ul>
+			</li>
+			<li>
+				<img src="../themes/kde/text_left.png" width="16" height="16" alt="" />
+				File
+			</li>
+		</ul>
+	</li>
+	<li>
+		<img src="../themes/windows/menu_folder_open.gif" width="18" height="18" alt="Expanded" />
+		<img src="../themes/windows/menu_folder_closed.gif" width="18" height="18" alt="Collapsed" />
+		Windows style
+		<ul>
+			<li>
+				<img src="../themes/windows/menu_folder_open.gif" width="18" height="18" alt="Expanded" />
+				<img src="../themes/windows/menu_folder_closed.gif" width="18" height="18" alt="Collapsed" />
+				Folder
+				<ul>
+					<li>
+						<img src="../themes/windows/menu_link_txt.gif" width="18" height="18" alt="" />
+						File
+					</li>
+					<li>
+						<img src="../themes/windows/menu_link_txt.gif" width="18" height="18" alt="" />
+						File
+					</li>
+				</ul>
+			</li>
+			<li>
+				<img src="../themes/windows/menu_link_txt.gif" width="18" height="18" alt="" />
+				File
+			</li>
+		</ul>
+	</li>
+	<li>
+		<img src="../themes/help/book-open.gif" width="16" height="16" alt="Expanded" />
+		<img src="../themes/help/book-closed.gif" width="16" height="16" alt="Collapsed" />
+		Help system
+		<ul>
+			<li>
+				<img src="../themes/help/book-open.gif" width="16" height="16" alt="Expanded" />
+				<img src="../themes/help/book-closed.gif" width="16" height="16" alt="Collapsed" />
+				Folder
+				<ul>
+					<li>
+						<img src="../themes/help/document.gif" width="18" height="18" alt="" />
+						File
+					</li>
+					<li>
+						<img src="../themes/help/document.gif" width="18" height="18" alt="" />
+						File
+					</li>
+				</ul>
+			</li>
+			<li>
+				<img src="../themes/help/document.gif" width="18" height="18" alt="" />
+				File
+			</li>
+		</ul>
+	</li>
+</ul>
+</td>
+<td width="33%" valign="top">
+<ul id="tree_strict">
+	<li>
+		<img src="../themes/kde/1rightarrow.png" class="collapsedIcon" width="16" height="16" alt="Collapsed" />
+		<img src="../themes/kde/1downarrow.png" class="expandedIcon" width="16" height="16" alt="Expanded" />
+		KDE style
+		<ul>
+			<li>
+				<img src="../themes/kde/1rightarrow.png" class="collapsedIcon" width="16" height="16" alt="Collapsed" />
+				<img src="../themes/kde/1downarrow.png" class="expandedIcon" width="16" height="16" alt="Expanded" />
+				Folder
+				<ul>
+					<li>
+						<img src="../themes/kde/text_left.png" class="elementIcon" width="16" height="16" alt="" />
+						File
+					</li>
+					<li>
+						<img src="../themes/kde/text_left.png" class="elementIcon" width="16" height="16" alt="" />
+						File
+					</li>
+				</ul>
+			</li>
+			<li>
+				<img src="../themes/kde/text_left.png" class="elementIcon" width="16" height="16" alt="" />
+				File
+			</li>
+		</ul>
+	</li>
+	<li>
+		<img src="../themes/windows/menu_folder_closed.gif" class="collapsedIcon" width="18" height="18" alt="Collapsed" />
+		<img src="../themes/windows/menu_folder_open.gif" class="expandedIcon" width="18" height="18" alt="Expanded" />
+		Windows style
+		<ul>
+			<li>
+				<img src="../themes/windows/menu_folder_closed.gif" class="collapsedIcon" width="18" height="18" alt="Collapsed" />
+				<img src="../themes/windows/menu_folder_open.gif" class="expandedIcon" width="18" height="18" alt="Expanded" />
+				Folder
+				<ul>
+					<li>
+						<img src="../themes/windows/menu_link_txt.gif" class="elementIcon" width="18" height="18" alt="" />
+						File
+					</li>
+					<li>
+						<img src="../themes/windows/menu_link_txt.gif" class="elementIcon" width="18" height="18" alt="" />
+						File
+					</li>
+				</ul>
+			</li>
+			<li>
+				<img src="../themes/windows/menu_link_txt.gif" class="elementIcon" width="18" height="18" alt="" />
+				File
+			</li>
+		</ul>
+	</li>
+	<li>
+		<img src="../themes/help/book-closed.gif" class="collapsedIcon" width="16" height="16" alt="Collapsed" />
+		<img src="../themes/help/book-open.gif" class="expandedIcon" width="16" height="16" alt="Expanded" />
+		Help system
+		<ul>
+			<li>
+				<img src="../themes/help/book-closed.gif" class="collapsedIcon" width="16" height="16" alt="Collapsed" />
+				<img src="../themes/help/book-open.gif" class="expandedIcon" width="16" height="16" alt="Expanded" />
+				Folder
+				<ul>
+					<li>
+						<img src="../themes/help/document.gif" class="elementIcon" width="18" height="18" alt="" />
+						File
+					</li>
+					<li>
+						<img src="../themes/help/document.gif" class="elementIcon" width="18" height="18" alt="" />
+						File
+					</li>
+				</ul>
+			</li>
+			<li>
+				<img src="../themes/help/document.gif" class="elementIcon" width="18" height="18" alt="" />
+				File
+			</li>
+		</ul>
+	</li>
+</ul>
+</td>
+</tr>
+</table>
+<script type="text/javascript">
+	var tree_defaults = new Zapatec.Tree({
+		tree: "tree_defaults",
+		defaultIcons: "customIcon",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true
+	});
+
+	var tree_compat = new Zapatec.Tree({
+		tree: "tree_compat",
+		theme: "empty",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true,
+		prevCompatible: true
+	});
+
+	var tree_strict = new Zapatec.Tree({
+		tree: "tree_strict",
+		theme: "empty",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true
+	});
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

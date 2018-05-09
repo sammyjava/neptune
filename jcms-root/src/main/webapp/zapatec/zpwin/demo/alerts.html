@@ -1,0 +1,90 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 		 You can insert HTML inside the dialog boxes.  Some of the  examples have an HTML link.  		 The alert and confirm dialogs are modal. This means that you cannot activate the page behind the dialog. These modal windows are different from Javascript dialogs, in that you  can  switch to a different browser window or tab and click there or close the window or tab that contains the dialog.  ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Window Widget - Dialog Windows</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/window.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/dialog.css" rel="stylesheet" type="text/css">
+	<link href="../themes/minimal.css" rel="stylesheet" type="text/css">
+	<link href="../../zpextra/themes/indicator/default.css" rel="stylesheet" type="text/css">
+	<link href="../../zpextra/themes/button/default.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../src/dialog.js"></script>
+	<script type="text/javascript" src="../../utils/indicator.js"></script>
+	<script type="text/javascript" src="../../utils/buttons.js"></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Dialog Windows</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+		<li> You can insert HTML inside the dialog boxes.  Some of the  examples have an HTML link. </li>
+		<li> The alert and confirm dialogs are modal. This means that you cannot activate the page behind the dialog. These modal windows are different from Javascript dialogs, in that you <strong> can </strong> switch to a different browser window or tab and click there or close the window or tab that contains the dialog. </li>
+
+			</ul>
+		</div>
+
+
+			<script type='text/javascript'>
+				function myAlert(strTitle, message) {
+					var win1 = new Zapatec.AlertWindow({message:message, title:strTitle, modal:true, width : 180, theme : "minimal", top: 100});
+				}
+
+				function myConfirm(strTitle, message) {
+					var win1 = new Zapatec.ConfirmWindow({message:message, title:strTitle, modal:true, width : 180, theme : "minimal", top: 100});
+					win1.getResponse(function (res) {
+						if (res == true) 
+							alert("You have selected OK");
+						else {
+							alert("You have selected Cancel");
+						}
+					}); 
+				}
+				function myDialog(strTitle, message) {
+					var win1 = new Zapatec.DialogWindow(message, {title : strTitle, buttons : ["Red", "Blue", "Yellow"], width : 230, theme : "minimal", top: 100});
+					win1.getResponse(function (res) {
+						alert(res + " is a nice color");
+					});
+				}
+			</script>
+			<a href="#" onclick="myAlert('Hi Alert', '<span>Hi</span>&nbsp;<a href=\'http://www.zapatec.com\'>Visit Zapatec</a>'); return false;">Alert dialog</a>  -- Shows a modal DHTML dialog similar to a Javascript alert.<br/>
+			<a href="#" onclick="myConfirm('Hi Confirm', '<span>Hi</span>&nbsp;<a href=\'http://www.zapatec.com\'>Visit Zapatec</a>'); return false;">Confirm dialog</a>  -- Shows a modal DHTML dialog similar to a Javascript confirm.<br/>
+			<a href="#" onclick="myDialog('Choose a color', '<span>What is your favorite color?</span>&nbsp;<a href=\'http://www.zapatec.com\'>Visit Zapatec</a>'); return false;">Generic dialog</a>  -- Shows a custom DHTML dialog. You can easily create a dialog that contains custom buttons and write a function to retrieve the selected button.<br/>
+			<br/>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Window Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

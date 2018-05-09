@@ -1,0 +1,19 @@
+<!-- error message -->
+<table id="main" cellspacing="0" width="100%">
+  <tr>
+    <% if (showSidebar) { %><td id="main-left" valign="top"><% } %>
+      <% if (showSidebar) { %><%@ include file="sidebar-top.jhtml" %><% } %>
+      <% if (showSidebar && showNavSecondary && !showNavVertical) { %><%@ include file="nav-secondary.jhtml" %><% } %>
+      <% if (showSidebar && showNavVertical) { %><%@ include file="nav-vertical.jhtml" %><% } %>
+      <% if (showSidebar) { %><%@ include file="sidebar-bottom.jhtml" %><% } %>
+    <% if (showSidebar) { %></td><% } %>
+    <td id="main-right" valign="top">
+      <div id="pagetitle"><%=errorPageTitle%></div>
+      <table id="l1" cellspacing="0" width="100%">
+        <tr>
+          <td valign="top" id="l1_p1"><div class="error"><%=errorContent%></div></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>

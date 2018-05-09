@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" If you will use compact config option - then only one branch can be expanded at a time ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Compact tree</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Compact tree</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>If you will use <i>compact</i> config option - then only one branch can be expanded at a time</li>
+
+			</ul>
+		</div>
+
+
+
+<form action="">
+	<ul id="tree">
+		<li>
+			Font effects
+			<ul>
+				<li><strong>bold</strong></li>
+				<li><i>italic</i></li>
+				<li><u>Underline</u></li>
+				<li>  
+					<div style='border:1px solid; padding:1px; margin:1px;'>
+						multiple <br/>
+						lines
+					</div>
+				</li>
+				<li>
+					Sizes
+					<ul>
+						<li><h1>H1</h1></li>
+						<li><h2>H2</h2></li>
+						<li><h3>H3</h3></li>
+						<li><h4>H4</h4></li>
+						<li><h5>H5</h5></li>
+					</ul>
+				</li>
+				<li>
+					Colors
+					<ul>
+						<li><span style='color:red'>red</span></li>
+						<li><span style='color:blue'>blue</span></li>
+						<li><span style='color:green'>green</span></li>
+						<li><span style='color:yellow'>yellow</span></li>
+						<li><span style='color:purple'>purple</span></li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			<div>Form examples. About me.</div>
+			<ul>
+				<li>
+					Name
+					<ul>
+						<li>First Name: <input type="text" name="first" size='10' /></li>
+						<li>Last Name: <input type="text" name="first" size='10' /></li>
+					</ul>
+				</li>
+				<li>
+					Radio buttons -- your gender
+					<ul>
+						<li>
+							<input type="radio" name="gender" value="male" id="male" /><label for="male">I am male</label>
+						</li>
+						<li>
+							<input type="radio" name="gender" value="female" id="female" /><label for="female">I am female</label>
+						</li>
+						<li>
+							<input type="radio" name="gender" value="neither" id="neither" /><label for="neither">I am neither</label>
+						</li>
+					</ul>
+				</li>
+				<li>
+					Checkboxes -- My favorite things:
+					<ul>
+						<li>
+							<input type="checkbox" id="checkbox1" /><label for="checkbox1">Raindrops on roses</label>
+						</li>
+						<li>
+							<input type="checkbox" id="checkbox2" /><label for="checkbox2">whiskers on kittens</label>
+						</li>
+						<li>
+							<input type="checkbox" id="checkbox3" /><label for="checkbox3">Bright copper kettles</label>
+						</li>
+						<li>
+							<input type="checkbox" id="checkbox4" /><label for="checkbox4">Cream colored ponies</label>
+						</li>
+						<li>
+							<input type="checkbox" id="checkbox5" /><label for="checkbox5">crisp apple streudels</label>
+						</li>
+						<li>
+							<input type="checkbox" id="checkbox6" /><label for="checkbox6">Doorbells and sleigh bells</label>
+						</li>
+						<li>
+							<input type="checkbox" id="checkbox7" /><label for="checkbox7">schnitzel with noodles</label>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li>
+		<li>
+			Other
+			<ul>
+				<li>
+					Links
+					<ul>
+						<li><a href='http://www.zapatec.com'>A regular link</a>
+						<li><a href='http://www.zapatec.com'><img border='0' src='http://www.zapatec.com/website/main/images/logoNew.gif' alt='Javascript Tree'></a> An image link
+						<li><a href='javascript:alert("You Clicked Master?")'>A javascript link</a>
+					</ul>
+				</li>
+			</ul>
+		</li>
+	</ul>
+</form>
+<script type="text/javascript">
+	var tree = new Zapatec.Tree({
+		tree: "tree",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true,
+		compact: true
+	});
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

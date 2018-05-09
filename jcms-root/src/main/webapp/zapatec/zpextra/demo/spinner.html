@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" A default spinner.  A spinner with minTextLength option set to 2 and initial value set to 5.  A spinner with initial value set to 10 and min and max set to -50 and 1000 respectively.  ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Zapatec Spinner</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<script type='text/javascript' src='../../utils/spinner.js'></script>
+	<link href="../themes/spinner/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Zapatec Spinner</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>A default spinner. </li><div id="spin1"></div>
+<li>A spinner with minTextLength option set to 2 and initial value set to 5. </li><div id="spin2"></div>
+<li>A spinner with initial value set to 10 and min and max set to -50 and 1000 respectively. </li><div id="spin3"></div>
+
+			</ul>
+		</div>
+
+
+
+<script type="text/javascript">
+	var objSpin = new Zapatec.Spinner({
+	  // ID of parent where the spinner is to be inserted
+	  parent: 'spin1',
+	  // Theme to use for the tabs
+	  theme: 'default',
+		themePath: "../themes/spinner/"
+	});
+
+	var objSpin2 = new Zapatec.Spinner({
+	  // ID of parent where the spinner is to be inserted
+	  parent: 'spin2',
+	  // Theme to use for the tabs
+	  theme: 'default',
+		themePath: "../themes/spinner/",
+	  minTextLength: 2,
+	  value: 5
+	});
+
+	var objSpin3 = new Zapatec.Spinner({
+	  // ID of parent where the spinner is to be inserted
+	  parent: 'spin3',
+	  // Theme to use for the tabs
+	  theme: 'default',
+		themePath: "../themes/spinner/",
+	  value: 10,
+	  min: -50,
+	  max: 1000
+	});
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

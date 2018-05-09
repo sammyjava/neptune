@@ -1,0 +1,369 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="maximizable.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>maximizable.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'maximizable.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Utils/Maximizable.html">Zapatec.Utils.Maximizable</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">//$Id: maximizable.js 6643 2007-03-18 20:10:03Z vkulov $</span>
+<span class="comment">/**
+ * This is Zapatec.Utils.Maximizer object definition.
+ * This is done in the "interface" manner.
+ * It represents most of the routines and
+ * events connected to maximizing of the object.
+ * <span class="attrib">@param</span> config {object} - all parameters are passed as the properties of this object.
+ *
+ * Constructor recognizes the following properties of the config object
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *  container        | {HTML element} The main element to be maximized (default null).
+ *  maximizedBorder | [number] A margin between the widget when in maximized
+ *                  | mode and the browser window (pixels)
+ *
+ * Each maximizable objects fires the following events during operation:
+ * \code
+ *    event. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *  onBeforeMaximize    | {event} Called when object is about to be maximized.
+ *  onBeforeRestore     | {event} Called when object is about to be restored.
+ *  onAfterRestore      | {event} Called after object has been restored.
+ *  onAfterSize        | {event} Called on each window resize.
+ *
+ * \endcode
+ */</span>
+Zapatec.Utils.Maximizable = <span class="reserved">function</span>(config) {
+	Zapatec.Utils.Maximizable.SUPERconstructor.call(<span class="reserved">this</span>, config);
+};
+
+Zapatec.Utils.Maximizable.id = <span class="literal">"Zapatec.Utils.Maximizable"</span>;
+Zapatec.inherit(Zapatec.Utils.Maximizable, Zapatec.Widget);
+
+<span class="comment">/**
+ * Inits the object with set of config options.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Maximizable.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(config) {
+	<span class="comment">//calling parent init</span>
+	Zapatec.Utils.Maximizable.SUPERclass.init.call(<span class="reserved">this</span>, config);
+
+  <span class="reserved">this</span>.isMaximized = false;
+};
+
+<span class="comment">/**
+ * Sets the default configuration of the object and
+ * inits it with user defined values.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Maximizable.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(config) {
+	<span class="comment">//container, which is actually sized too and also</span>
+	<span class="comment">//is used as a measurement</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"container"</span>, null);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"theme"</span>, null);
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'maximizedBorder'</span>, 6);
+
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.Maximizable.SUPERclass.configure.call(<span class="reserved">this</span>, config);
+
+  config = <span class="reserved">this</span>.getConfiguration();
+
+  <span class="comment">// if required param "container" is a string</span>
+  <span class="reserved">if</span>(typeof(config.container) == <span class="literal">"string"</span>){
+    <span class="comment">// Get DOM element with specified id</span>
+    config.container = document.getElementById(<span class="reserved">this</span>.config.container);
+  }
+
+};
+
+<span class="comment">/**
+ * Reconfigures the object with new parameters.
+ * <span class="attrib">@param</span> config {object} new configuration parameters.
+ */</span>
+Zapatec.Utils.Maximizable.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(config) {
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.Maximizable.SUPERclass.reconfigure.call(<span class="reserved">this</span>, config);
+};
+
+<span class="comment">/**
+ * Returns the container of the maximizable object.
+ * <span class="attrib">@return</span> {HTML element or null} container element.
+ */</span>
+Zapatec.Utils.Maximizable.<span class="reserved">prototype</span>.getContainer = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration().container;
+};
+
+<span class="comment">/**
+ * Sets if widget is maximized
+ *
+ * <span class="attrib">@param</span> isMaximized {boolean} maximized state
+ */</span>
+Zapatec.Utils.Maximizable.<span class="reserved">prototype</span>.setMaximized = <span class="reserved">function</span>(isMaximized) {
+  <span class="comment">// If maximized state is already set to the same value</span>
+  <span class="reserved">if</span> (isMaximized == <span class="reserved">this</span>.isMaximized) {
+    <span class="reserved">return</span>;
+  }
+
+  <span class="reserved">this</span>.isMaximized = isMaximized;
+
+  var body;
+  <span class="reserved">if</span> (Zapatec.is_ie)  {
+    body = document.getElementsByTagName(<span class="literal">'html'</span>);
+  }
+  <span class="reserved">else</span> {
+    body = document.getElementsByTagName(<span class="literal">'body'</span>);
+  }
+
+  <span class="reserved">if</span> (true == isMaximized) {
+    <span class="comment">// Create an object for saving the state before maximization</span>
+    <span class="reserved">this</span>.restoreState = {};
+
+    <span class="reserved">this</span>.restoreState.containerRestorer = new Zapatec.SRProp(
+            <span class="reserved">this</span>.config.container);
+
+    <span class="comment">// saving properties that will be changed</span>
+    <span class="reserved">this</span>.restoreState.containerRestorer.saveProps(<span class="literal">"style.left"</span>, <span class="literal">"style.top"</span>,
+            <span class="literal">"style.width"</span>, <span class="literal">"style.height"</span>, <span class="literal">"style.position"</span>);
+
+    <span class="reserved">this</span>.fireEvent(<span class="literal">'onBeforeMaximize'</span>, <span class="reserved">this</span>.restoreState);
+
+    <span class="comment">// Store current vertical scroller position</span>
+    <span class="reserved">this</span>.restoreState.scrollTop = Zapatec.Utils.getPageScrollY();
+    <span class="comment">// Store current onresize handler</span>
+    <span class="reserved">this</span>.restoreState.onresize = window.onresize;
+
+    <span class="comment">// Position container</span>
+    <span class="reserved">this</span>.config.container.style.position = <span class="literal">'absolute'</span>;
+    <span class="reserved">this</span>.config.container.style.left = <span class="reserved">this</span>.config.maximizedBorder + <span class="literal">'px'</span>;
+    <span class="reserved">this</span>.config.container.style.top = <span class="reserved">this</span>.config.maximizedBorder + <span class="literal">'px'</span>;
+
+    <span class="comment">// Scroll to top</span>
+    window.scroll(0,0);
+
+    <span class="comment">// Store original body overflow style</span>
+    <span class="reserved">this</span>.restoreState.oldBodyOverflow = body[0].style.overflow;
+    <span class="comment">// Remove body scroller (if any)</span>
+    body[0].style.overflow = <span class="literal">"hidden"</span>;
+
+    var self = <span class="reserved">this</span>;
+    var resizeFunc = <span class="reserved">function</span>() {
+      <span class="comment">// Get current browser window size</span>
+      var size = Zapatec.Utils.getWindowSize();
+
+      <span class="comment">// Determine editor container dimensions</span>
+      var width = size.width - 2*self.config.maximizedBorder -4;
+      var height = size.height - 2*self.config.maximizedBorder;
+
+      <span class="comment">// Set editor container size</span>
+      self.setSize(width, height);
+    }
+
+    <span class="comment">// Size editor according to current browser window size</span>
+    resizeFunc();
+
+    <span class="comment">// Attach as a window resize event listener</span>
+    window.onresize = resizeFunc;
+  }
+  <span class="reserved">else</span> {
+    <span class="reserved">this</span>.fireEvent(<span class="literal">'onBeforeRestore'</span>, <span class="reserved">this</span>.restoreState);
+
+    <span class="comment">// Restore old window resize event listener</span>
+    window.onresize = <span class="reserved">this</span>.restoreState.onresize;
+
+    <span class="comment">// Restore original body overflow style</span>
+    body[0].style.overflow = <span class="reserved">this</span>.restoreState.oldBodyOverflow;
+
+    <span class="comment">// Restore container size and position</span>
+    <span class="reserved">this</span>.restoreState.containerRestorer.restoreProps(<span class="literal">"style.left"</span>, <span class="literal">"style.top"</span>,
+            <span class="literal">"style.width"</span>, <span class="literal">"style.height"</span>, <span class="literal">"style.position"</span>);
+
+    <span class="comment">// Scroll to where we were before maximizing</span>
+    window.scroll(0, <span class="reserved">this</span>.restoreState.scrollTop);
+
+    <span class="reserved">this</span>.fireEvent(<span class="literal">'onAfterRestore'</span>, <span class="reserved">this</span>.restoreState);
+
+    <span class="reserved">this</span>.restoreState = null;
+  }
+}
+
+<span class="comment">/**
+ * Sets widget size in pixels
+ *
+ * <span class="attrib">@public</span>
+ * <span class="attrib">@param</span> {number} width Editor container width
+ * <span class="attrib">@param</span> {number} height Editor container height
+ */</span>
+Zapatec.Utils.Maximizable.<span class="reserved">prototype</span>.setSize = <span class="reserved">function</span>(width, height) {
+  <span class="reserved">if</span> (!width &amp;&amp; !height) {
+    width = parseInt(<span class="reserved">this</span>.config.container.style.width);
+    height = parseInt(<span class="reserved">this</span>.config.container.style.height);
+  }
+
+  <span class="comment">// Set container dimensions</span>
+  <span class="reserved">this</span>.config.container.style.width = width + <span class="literal">'px'</span>;
+  <span class="reserved">this</span>.config.container.style.height = height + <span class="literal">'px'</span>;
+
+  <span class="reserved">this</span>.fireEvent(<span class="literal">'onAfterSize'</span>, width, height);
+}</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Independant fields</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/lightgreen.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Independant fields</div>
+
+Shows how to use single fields without whole form.<br />
+You can use field validation features without having a form.<br />
+You need to call new Zapatec.Form.Field({field: "fieldId", formConfig: {...}})<br />
+<i>formConfig</i> is object with same structure as for Zapatec.Form.
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>lightgreen theme</b>.</li>
+				
+
+			</ul>
+		</div>
+
+
+	<div class="zpFormContent">
+		<fieldset id="parent">
+			<legend>Personal information</legend>
+			<div style="border: 0">
+				<!-- first independant field -->
+				<label class='zpFormLabel'>First name</label>
+				<input id="fname" class='zpFormRequired' value="" size="40" name="fname" type="text" >
+			</div>
+			<div style="border: 0">
+				<!-- second independant field -->
+				<label class='zpFormLabel'>Last name</label>
+				<input id="lname" class='zpFormRequired' value="" size="40" name="lname" type="text" >
+			</div>
+		</fieldset>
+	</div>
+
+	You can add new text field and configure it:
+	<form id="addField" action="#" onsubmit="return addField();">
+		<fieldset>
+			<legend>Field name</legend>
+			<label class="zpFormLabel" for="labelText">Label</label>
+			<input type="text" id="labelText" class="zpFormRequired" />
+		</fieldset>
+		<fieldset id="html_properties">
+			<legend>HTML properties</legend>
+			<label class="zpFormLabel" for="fieldName">Name</label>
+			<input type="text" id="fieldName" name='name' class="zpFormRequired" />
+			<br />
+			<label class="zpFormLabel" for="fieldId">ID</label>
+			<input type="text" id="fieldId" name='id' class="zpFormRequired" />
+			<br />
+		</fieldset>
+		<fieldset id="zpform_properties">
+			<legend>Zapatec.Form properties</legend>
+			<input type="checkbox" id="zpFormRequired" name='' /><label for="zpFormRequired">Is required</label><br /><br />
+			<input type="radio" id="" name='radio' /><label for="zpFormDate">no</label><br /><br />
+			<input type="radio" id="zpFormDate" name='radio' /><label for="zpFormDate">Is date field</label><br /><br />
+			<input type="radio" id="zpFormEmail" name='radio' /><label for="zpFormEmail">Is email field</label><br /><br />
+			<input type="radio" id="zpFormUrl" name='radio' /><label for="zpFormUrl">Is URL field</label><br /><br />
+		</fieldset>
+		<div class="zpFormButtons">
+			<input value="Add new" name="Submit" onclick="" type="submit" class="button"> 
+			<input value="Clear" name="Clear" onclick="" type="reset" class="button">
+		</div>
+	</form>
+
+<script type="text/javascript">
+function addField(){
+	var labelText = document.getElementById("labelText").value;
+	var className = "";
+
+	// construct string with input field
+	var str = "<div style='border: 0'><label class='zpFormLabel'>" + labelText + "</label><input type='text'"
+
+	// collect HTML properties 
+	var hEls = document.getElementById("html_properties").getElementsByTagName("input");
+	
+	for(var ii = 0; ii < hEls.length; ii++){
+		if(hEls[ii].name == 'class'){
+			className = hEls[ii].value;
+			continue;
+		}
+
+		str += " " + hEls[ii].name + "='" + hEls[ii].value.replace(/'/g, "\\'") +"'";
+	}
+
+	// collect fields with zpForm properties
+	hEls = document.getElementById("zpform_properties").getElementsByTagName("input");
+	
+	for(var ii = 0; ii < hEls.length; ii++){
+		var el = hEls[ii];
+		
+		if(el.checked){
+			className += " " + el.id;
+		}
+	}
+
+	// add className
+	str += " class='" + className + "' /></div>";
+
+	// append newly created element to DOM tree.
+	var input = document.getElementById('parent').appendChild(Zapatec.Utils.convertHTML2DOM(str)).getElementsByTagName("input")[0];
+
+	// initialize field
+	new Zapatec.Form.Field({
+		field: input,
+		formConfig: {
+			statusImgPos: 'beforeField',
+			showErrors: 'afterField',
+			showErrorsOnSubmit: true,
+			submitErrorFunc: testErrOutput,
+			theme: "lightgreen"
+		}
+	});
+
+	return false;
+}
+
+// initialize form with field properties
+new Zapatec.Form({
+	form: "addField",
+	statusImgPos: 'beforeField',
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput,
+	theme: "lightgreen"
+});
+
+// initialize first field
+new Zapatec.Form.Field({
+	field: "fname",
+	formConfig: {
+		statusImgPos: 'beforeField',
+		showErrors: 'afterField',
+		showErrorsOnSubmit: true,
+		submitErrorFunc: testErrOutput,
+		theme: "lightgreen"
+	}
+});
+
+// initialize second field
+new Zapatec.Form.Field({
+	field: "lname",
+	formConfig: {
+		statusImgPos: 'beforeField',
+		showErrors: 'afterField',
+		showErrorsOnSubmit: true,
+		submitErrorFunc: testErrOutput,
+		theme: "lightgreen"
+	}
+});
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

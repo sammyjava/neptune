@@ -1,0 +1,255 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	 When you enter any text in a field, the autocomplete feature offers suggestions for the rest of the string. 	 Enter a state name into the AJAX Suggest field. Zapatec will request from the server a suggestion for completing the string. Let's assume that we entered 'Mi' as a value. The server must respond with the JSON object in the following format: 		 {     'success': true,     'header': [ 		{    		 			'name': 'State name', 			'style': 'background-color: #6699CC; color: #FFFFFF' 		} 	], 	'body': [ 		['Michigan'], 		['Minnesota'], 		['Mississippi'], 		['Missouri'] 	] }	                                In case no variants were found starting with letters you provided, the server response will be as follows:          {     'success': true, 	'header': [ 		{ 			'name': 'State name', 			'style': 'background-color: #6699CC; color: #FFFFFF' 		} 	], 	'body': [ 		 	] }                          	 		Enter any value into the Client-side autocomplete field. Zapatec will consult a list of state names to get a suggestion for completing the string. 	 		Enter a state name into the Strict client-side autocomplete field. Zapatec will consult a list of options to get a suggestion for completing the string. If you enter a state without initial letter being capitalized or a string that does not match a state name, the field will not be validated.           ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Auto-Complete with Suggestions</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+	<link href="../../zpautocomplete/themes/default.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../zpautocomplete/src/zpautocomplete.js"></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Auto-Complete with Suggestions</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+	<li> When you enter any text in a field, the autocomplete feature offers suggestions for the rest of the string.</li>
+	<li> Enter a state name into the AJAX Suggest field. Zapatec will request from the server a suggestion for completing the string. Let's assume that we entered 'Mi' as a value. The server must respond with the JSON object in the following format:</li>
+		<pre>
+{
+
+    "success": true,
+    "header": [
+
+		{   
+		
+			"name": "State name",
+			"style": "background-color: #6699CC; color: #FFFFFF"
+		}
+	],
+
+	"body": [
+
+		["Michigan"],
+
+		["Minnesota"],
+
+		["Mississippi"],
+
+		["Missouri"]
+	]
+
+}	
+        </pre>
+        
+    <li>
+        In case no variants were found starting with letters you provided, the server response will be as follows:</li>
+
+        <pre>
+{
+    "success": true,
+
+	"header": [
+
+		{
+			"name": "State name",
+
+			"style": "background-color: #6699CC; color: #FFFFFF"
+		}
+	],
+
+	"body": [
+		
+	]
+}       
+        </pre>
+        
+	<li>
+		Enter any value into the Client-side autocomplete field. Zapatec will consult a list of state names to get a suggestion for completing the string.</li>
+	<li>
+		Enter a state name into the Strict client-side autocomplete field. Zapatec will consult a list of options to get a suggestion for completing the string. If you enter a state without initial letter being capitalized or a string that does not match a state name, the field will not be validated.
+    </li>
+    
+
+			</ul>
+		</div>
+
+
+
+<form action="auto_complete.html" id='userForm' class="zpFormWinXP" method="POST">
+	<div id='errOutput' class="errOutput"></div>
+
+	<fieldset>
+		<legend>US states</legend>
+
+		<label class='zpFormLabel'>AJAX suggest</label>
+		<input class='zpFormRequired zpFormSuggest="suggest.php"' value="" size="40" name="suggest_state" type="text" />
+		<br />
+		<br />
+
+		<label class='zpFormLabel'>Client-side autocomplete</label>
+		<select name="state_name" class="zpFormAutoComplete">
+		    <option></option>
+			<option>Alabama</option>
+			<option>Alaska</option>
+			<option>Arizona</option>
+			<option>Arkansas</option>
+			<option>California</option>
+			<option>Colorado</option>
+			<option>Connecticut</option>
+			<option>Delaware</option>
+			<option>Florida</option>
+			<option>Georgia</option>
+			<option>Hawaii</option>
+			<option>Idaho</option>
+			<option>Illinois</option>
+			<option>Indiana</option>
+			<option>Iowa</option>
+			<option>Kansas</option>
+			<option>Kentucky</option>
+			<option>Louisiana</option>
+			<option>Maine</option>
+			<option>Maryland</option>
+			<option>Massachusetts</option>
+			<option>Michigan</option>
+			<option>Minnesota</option>
+			<option>Mississippi</option>
+			<option>Missouri</option>
+			<option>Montana</option>
+			<option>Nebraska</option>
+			<option>Nevada</option>
+			<option>New Hampshire</option>
+			<option>New Mexico</option>
+			<option>New York</option>
+			<option>North Carolina</option>
+			<option>North Dakota</option>
+			<option>Ohio</option>
+			<option>Oklahoma</option>
+			<option>Oregon</option>
+			<option>Pennsylvania</option>
+			<option>Rhode Island</option>
+			<option>South Carolina</option>
+			<option>South Dakota</option>
+			<option>Tennessee</option>
+			<option>Texas</option>
+			<option>Utah</option>
+			<option>Vermont</option>
+			<option>Virginia</option>
+			<option>Washington</option>
+			<option>West Virginia</option>
+			<option>Wisconsin</option>
+			<option>Wyoming</option>
+		</select>
+		<br />	
+		<br />	
+		<br />	
+
+		<label class='zpFormLabel'>Strict client-side autocomplete (don't forget about capital letters)</label>
+		<select name="strict_state_name" class="zpFormAutoCompleteStrict">
+		    <option></option>
+			<option>Alabama</option>
+			<option>Alaska</option>
+			<option>Arizona</option>
+			<option>Arkansas</option>
+			<option>California</option>
+			<option>Colorado</option>
+			<option>Connecticut</option>
+			<option>Delaware</option>
+			<option>Florida</option>
+			<option>Georgia</option>
+			<option>Hawaii</option>
+			<option>Idaho</option>
+			<option>Illinois</option>
+			<option>Indiana</option>
+			<option>Iowa</option>
+			<option>Kansas</option>
+			<option>Kentucky</option>
+			<option>Louisiana</option>
+			<option>Maine</option>
+			<option>Maryland</option>
+			<option>Massachusetts</option>
+			<option>Michigan</option>
+			<option>Minnesota</option>
+			<option>Mississippi</option>
+			<option>Missouri</option>
+			<option>Montana</option>
+			<option>Nebraska</option>
+			<option>Nevada</option>
+			<option>New Hampshire</option>
+			<option>New Mexico</option>
+			<option>New York</option>
+			<option>North Carolina</option>
+			<option>North Dakota</option>
+			<option>Ohio</option>
+			<option>Oklahoma</option>
+			<option>Oregon</option>
+			<option>Pennsylvania</option>
+			<option>Rhode Island</option>
+			<option>South Carolina</option>
+			<option>South Dakota</option>
+			<option>Tennessee</option>
+			<option>Texas</option>
+			<option>Utah</option>
+			<option>Vermont</option>
+			<option>Virginia</option>
+			<option>Washington</option>
+			<option>West Virginia</option>
+			<option>Wisconsin</option>
+			<option>Wyoming</option>
+		</select>
+		<br />
+		<br />
+	</fieldset>
+
+	<input value="Submit" name="Submit" onclick="" type="submit" class="button" />
+	<input value="Clear" name="Clear" onclick="" type="reset" class="button" />
+</form>
+
+<script type="text/javascript">
+// Run this to auto-activate all "zpForm" class forms in the document.
+Zapatec.Form.setupAll({
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput
+});
+
+checkIfLoadedFromHDD();
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

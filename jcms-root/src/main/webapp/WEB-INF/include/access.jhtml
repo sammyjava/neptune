@@ -1,0 +1,41 @@
+<% if (accessLoginFailed) { %>
+<div class="error">
+    Your login is invalid:<br/>
+    <br/>
+    <b><%=accessLoginError%></b><br/>
+    <br/>
+    Please try again.
+</div>
+<% } %>
+  
+<% if (au.isDefault()) { %>
+
+<%   if (accessLogoutSuccessful) { %>
+<div class="access">
+    You have logged out.
+</div>
+<%   } %>
+
+<div class="access">
+    <%=Setting.getString(application,"access_denied_instructions")%>
+    <!-- access control login form -->
+    <form method="post" class="access">
+        <%=au.getUsernameLabel()%><br/>
+        <input class="access-text" type="text" name="accessloginusername" /><br/>
+        Password<br/>
+        <input type="password" class="access-text" name="accessloginpassword" /><br/>
+        <input type="submit" class="access-submit" name="access-login" value="LOG IN"/>
+    </form>
+</div>
+  
+<% } else { %>
+  
+<div class="access">
+    You are currently logged in as <b><%=au.getUsername()%></b>
+    <!-- access control logout form -->
+    <form method="post" class="access">
+        <input type="submit" class="access-submit" name="access-logout" value="LOG OUT" />
+    </form>
+</div>
+<% } %>
+

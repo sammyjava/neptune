@@ -1,0 +1,771 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="dom.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>dom.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'dom.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">//$Id: dom.js 10792 2008-04-10 20:41:50Z andrew $</span>
+<span class="comment">/**
+ * Gets the width of the HTML element. This
+ * is used to take out the measurement of sizing.
+ * Currently offset measurement is used, cause
+ * its equal for different box sizings.
+ * <span class="attrib">@param</span> el {HTML element} element to get width of.
+ * <span class="attrib">@return</span> {number} the measurement width of the element,
+ * if not HTML element then false.
+ */</span>
+Zapatec.Utils.getWidth = <span class="reserved">function</span>(el) {
+	<span class="comment">//checking for valid element type</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//returning the width</span>
+	<span class="reserved">return</span> el.offsetWidth
+};
+
+<span class="comment">/**
+ * Gets the height of the HTML element. This
+ * is used to take out the measurement of sizing.
+ * Currently offset measurement is used, cause
+ * its equal for different box sizings.
+ * <span class="attrib">@param</span> el {HTML element} element to get height of.
+ * <span class="attrib">@return</span> {number} the measurement height of the element,
+ * if not HTML element then false.
+ */</span>
+Zapatec.Utils.getHeight = <span class="reserved">function</span>(el) {
+	<span class="comment">//checking for valid element type</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//returning the height</span>
+	<span class="reserved">return</span> el.offsetHeight
+};
+
+<span class="comment">/**
+ * Sets the width of the HTML element. This is
+ * cross-browser implementation that is based on
+ * Zapatec.Utils.getWidth value for this element. 
+ * <span class="attrib">@param</span> el {HTML element} element to set width.
+ * <span class="attrib">@param</span> width {number} width to set.
+ * <span class="attrib">@return</span> {boolean} true if width set, otherwise false.
+ */</span>
+Zapatec.Utils.setWidth = <span class="reserved">function</span>(el, width) {
+	<span class="comment">//getting integer value</span>
+	width = Math.round(width);
+	<span class="comment">//checking for valid element type and valid width</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el) || width &lt;= 0) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//saving old style width to restore if fail</span>
+	var oldWidth = el.style.width, newWidth;
+	<span class="comment">//trying to set width (first try)</span>
+	el.style.width = width + <span class="literal">"px"</span>;
+	<span class="comment">//checking if it was set correctly</span>
+	<span class="reserved">if</span> (Zapatec.Utils.getWidth(el) != width) {
+		<span class="comment">//if not lets try to calculate correct value</span>
+		newWidth = width - (Zapatec.Utils.getWidth(el) - width);
+		<span class="reserved">if</span> (newWidth &gt; 0) {
+			<span class="comment">//and if its a valid number for size let's try again to set it</span>
+			el.style.width = newWidth + <span class="literal">"px"</span>;
+			<span class="comment">//if still wrong result we need to restore old size,</span>
+			<span class="comment">//report the warning and return false</span>
+			<span class="reserved">if</span> (Zapatec.Utils.getWidth(el) != width) {
+				el.style.width = oldWidth;
+				Zapatec.Log({description : <span class="literal">"Can't set the width - "</span> + width + <span class="literal">"px!"</span>, type : <span class="literal">"warning"</span>});
+				<span class="reserved">return</span> false;
+			}
+		} <span class="reserved">else</span> {
+			<span class="comment">//if number isn't valid we need to restore old size,</span>
+			<span class="comment">//report the warning and return false</span>
+			el.style.width = oldWidth;
+			Zapatec.Log({description : <span class="literal">"Can't set the width - "</span> + width + <span class="literal">"px!"</span>, type : <span class="literal">"warning"</span>});
+			<span class="reserved">return</span> false;
+		}
+	}
+	<span class="comment">//returning success</span>
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Sets the height of the HTML element. This is
+ * cross-browser implementation that is based on
+ * Zapatec.Utils.getHeight value for this element. 
+ * <span class="attrib">@param</span> el {HTML element} element to set height.
+ * <span class="attrib">@param</span> width {number} height to set.
+ * <span class="attrib">@return</span> {boolean} true if height set, otherwise false.
+ */</span>
+Zapatec.Utils.setHeight = <span class="reserved">function</span>(el, height) {
+	<span class="comment">//getting integer value</span>
+	height = Math.round(height);
+	<span class="comment">//checking for valid element type and valid height</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el) || height &lt;= 0) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//saving old style height to restore if fail</span>
+	var oldHeight = el.style.height, newHeight;
+	<span class="comment">//trying to set height (first try)</span>
+	el.style.height = height + <span class="literal">"px"</span>;
+	<span class="comment">//checking if it was set correctly</span>
+	<span class="reserved">if</span> (Zapatec.Utils.getHeight(el) != height) {
+		<span class="comment">//if not lets try to calculate correct value</span>
+		newHeight = height - (Zapatec.Utils.getHeight(el) - height);
+		<span class="reserved">if</span> (newHeight &gt; 0) {
+			<span class="comment">//and if its a valid number for size let's try again to set it</span>
+			el.style.height = newHeight + <span class="literal">"px"</span>;
+			<span class="comment">//if still wrong result we need to restore old size,</span>
+			<span class="comment">//report the warning and return false</span>
+			<span class="reserved">if</span> (Zapatec.Utils.getHeight(el) != height) {
+				el.style.height = oldHeight;
+				Zapatec.Log({description : <span class="literal">"Can't set the height - "</span> + height + <span class="literal">"px!"</span>, type : <span class="literal">"warning"</span>});
+				<span class="reserved">return</span> false;
+			}
+		} <span class="reserved">else</span> {
+			<span class="comment">//if number isn't valid we need to restore old size,</span>
+			<span class="comment">//report the warning and return false</span>
+			el.style.height = oldHeight;
+			Zapatec.Log({description : <span class="literal">"Can't set the height - "</span> + height + <span class="literal">"px!"</span>, type : <span class="literal">"warning"</span>});
+			<span class="reserved">return</span> false;
+		}
+	}
+	<span class="comment">//returning success</span>
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Fixates the width of HTML element in pixels.
+ * <span class="attrib">@param</span> el {HTML element} element to fixate width of.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Utils.fixateWidth = <span class="reserved">function</span>(el) {
+	<span class="reserved">return</span> Zapatec.Utils.setWidth(el, Zapatec.Utils.getWidth(el));
+};
+
+<span class="comment">/**
+ * Fixates the height of HTML element in pixels.
+ * <span class="attrib">@param</span> el {HTML element} element to fixate height of.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Utils.fixateHeight = <span class="reserved">function</span>(el) {
+	<span class="reserved">return</span> Zapatec.Utils.setHeight(el, Zapatec.Utils.getHeight(el));
+};
+
+<span class="comment">/**
+ * Makes some routines to make element correctly sizable.
+ * This is mostly preserving sizes and making overflow
+ * "hidden" or "scroll" (depends on "scrollable" parameter).
+ * <span class="attrib">@param</span> el {HTML element} element to make safely sizable.
+ * <span class="attrib">@param</span> restorer {object} Zapatec.SRProp object.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Utils.makeSafelySizable = <span class="reserved">function</span>(el, restorer) {
+	<span class="reserved">if</span> (el.sizable) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//checking if HTML element was passed</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//trying to take the exsistant restorer</span>
+	<span class="reserved">if</span> (!restorer) {
+		restorer = el.restorer;
+	}
+	<span class="comment">//checking for restorer, if there is no or the one given won't do</span>
+	<span class="comment">//we create new one</span>
+	<span class="reserved">if</span> (!restorer || !restorer.getObject || restorer.getObject() != el) {
+		restorer = new Zapatec.SRProp(el);
+	}
+	<span class="comment">//saving properties that will be changed</span>
+	restorer.saveProps(<span class="literal">"style.width"</span>, <span class="literal">"style.height"</span>, <span class="literal">"style.overflow"</span>);
+	<span class="comment">//fixateing sizes</span>
+	Zapatec.Utils.fixateWidth(el);
+	Zapatec.Utils.fixateHeight(el);
+	<span class="comment">//getting overflow to know if we are sizing correct</span>
+	var overflow = Zapatec.Utils.getStyleProperty(el, <span class="literal">"overflow"</span>);
+	<span class="reserved">if</span> (overflow == <span class="literal">""</span> || overflow == <span class="literal">"visible"</span>) {
+		Zapatec.Log({description : <span class="literal">"There is the chance that this element with overflow visible will not be sized correctly!"</span>, type : <span class="literal">"warning"</span>});
+	}
+	el.sizable = true;
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Restores the element of sizing, if it was prepared
+ * by Zapatec.Utils.makeSafelySizable function.
+ * <span class="attrib">@param</span> el {HTML element} element to restore.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Utils.restoreOfSizing = <span class="reserved">function</span>(el) {
+	<span class="comment">//checking if something was saved</span>
+	<span class="reserved">if</span> (!el || !el.restorer || !el.sizable) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//restoreing needed properties</span>
+	el.restorer.restoreProps(<span class="literal">"style.width"</span>, <span class="literal">"style.height"</span>, <span class="literal">"style.overflow"</span>);
+	<span class="reserved">if</span> (el.restorer.isEmpty()) {
+		el.restorer.destroy();
+	}
+	el.sizable = false;
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Prepares elelement to be safely moved by Zapatec.Utils.moveTo. To be moved element should be positioned 
+ * absolute and should be direct child of within parameter, should have margin set to 0px.
+ * <span class="attrib">@param</span> el {HTML element} the element to move
+ * <span class="attrib">@param</span> within {HTML element} if you want to move the element within some other element, 
+ * <span class="attrib">@param</span> restorer {SRProp object} the SRProp object you want to use to restore our 
+ * elements properties, if you have already one.
+ * pass the refference to it through this var (default is document.body)
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false
+ */</span>
+Zapatec.Utils.makeSafelyMovable = <span class="reserved">function</span>(el, within, restorer) {
+	<span class="comment">//Checking if the element is of the right type</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//take default within element</span>
+	<span class="reserved">if</span> (!within) {
+		within = document.body;
+	}
+	<span class="comment">//maybe element is already prepared</span>
+	<span class="reserved">if</span> (el.within == within) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//trying to take the exsistant restorer</span>
+	<span class="reserved">if</span> (!restorer) {
+		restorer = el.restorer;
+	}
+	<span class="comment">//checking for restorer and creating new one if existing does not </span>
+	<span class="comment">//fit our needs</span>
+	<span class="reserved">if</span> (!restorer || !restorer.getObject || restorer.getObject() != el) {
+		restorer = new Zapatec.SRProp(el);
+	} 
+	<span class="comment">//To make it work we need the 'within' to be positioned relatively</span>
+	<span class="comment">//except it is BODY (which means screen)</span>
+	el.within = within;
+	<span class="reserved">if</span> (within != document.body &amp;&amp; within.style.position != <span class="literal">"absolute"</span>) {
+		restorer.saveProp(<span class="literal">"within.style.position"</span>);
+		within.style.position = <span class="literal">"relative"</span>;
+	}
+	<span class="comment">//Need to preserve elements position after we prepare it for move</span>
+	<span class="reserved">if</span> (within != document.body) {
+		var pos1 = Zapatec.Utils.getElementOffset(within);
+	} <span class="reserved">else</span> {
+		var pos1 = {x : 0, y : 0};
+	}
+	var pos2 = Zapatec.Utils.getElementOffset(el);
+	var x = pos2.x - pos1.x;
+	var y = pos2.y - pos1.y;
+	restorer.saveProps(<span class="literal">"style.left"</span>, <span class="literal">"style.top"</span>);
+	el.style.left = x + <span class="literal">"px"</span>;
+	el.style.top = y + <span class="literal">"px"</span>;
+	<span class="comment">//Checks if the element is positioned absolute.</span>
+	<span class="reserved">if</span> (el.style.position != <span class="literal">"absolute"</span>) {
+		restorer.saveProp(<span class="literal">"style.position"</span>);
+		el.style.position = <span class="literal">"absolute"</span>;
+	}
+	<span class="comment">//withon should be direct parent of the draggable element</span>
+	<span class="reserved">if</span> (el.parentNode != within) {
+		restorer.saveProps(<span class="literal">"parentNode"</span>, <span class="literal">"nextSibling"</span>);
+		within.appendChild(el);
+	}
+	<span class="comment">//element must have margin 0px.</span>
+	restorer.saveProp(<span class="literal">"style.margin"</span>);
+	el.style.margin = <span class="literal">"0px"</span>;
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Moves elelement to the specified position. To be moved element should be positioned absolute 
+ * and should be direct child of 'within' element. If there is no el.within property, 
+ * document.body will be taken. If you want safe move use Zapatec.Utils.makeSafelyMovable.
+ * <span class="attrib">@param</span> el {HTML element} - the element to move
+ * <span class="attrib">@param</span> x {number} - the x coordinate to move to
+ * <span class="attrib">@param</span> y {number} - the y coordinate to move to
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false
+ */</span>
+Zapatec.Utils.moveTo = <span class="reserved">function</span>(el, x, y) {
+	<span class="comment">//Checking if the element is of the right type</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+		<span class="reserved">return</span> false;
+	}
+	var pos = null;
+	<span class="reserved">if</span> (Zapatec.FixateOnScreen.isRegistered(el)) {
+		pos = Zapatec.FixateOnScreen.correctCoordinates(x, y);
+		<span class="reserved">if</span> (Zapatec.is_ie &amp;&amp; !Zapatec.is_ie7) {
+			el.style.setExpression(<span class="literal">"left"</span>, pos.x);
+			el.style.setExpression(<span class="literal">"top"</span>, pos.y);
+			<span class="reserved">return</span> true;
+		}
+	} <span class="reserved">else</span> {
+		pos = {
+			x : parseInt(x, 10) + <span class="literal">"px"</span>, 
+			y : parseInt(y, 10) + <span class="literal">"px"</span>
+		};
+	}
+	<span class="comment">//setting of coordinates</span>
+	<span class="reserved">if</span> (x || x === 0) {
+		el.style.left = pos.x;
+	}
+	<span class="reserved">if</span> (y || y === 0) {
+		el.style.top = pos.y;
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/** 
+ * Gets the element position within another one (this depends on your implementation). 
+ * <span class="attrib">@param</span> el {HTML element} - we are getting the position of this element
+ * <span class="attrib">@return</span> {object} object with x and y properties or false if failed.
+ */</span>
+Zapatec.Utils.getPos = <span class="reserved">function</span>(el) {
+	<span class="comment">//Checking if the element is of the right type</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+		<span class="reserved">return</span> false;
+	}
+	var pos = null;
+	<span class="reserved">if</span> (pos = Zapatec.FixateOnScreen.parseCoordinates(el)) {
+		<span class="reserved">return</span> pos;
+	}
+	<span class="comment">//parsing coordinates</span>
+	<span class="reserved">return</span> {
+		x : el.offsetLeft,
+		y : el.offsetTop
+	}
+};
+
+<span class="comment">/**
+ * Moves element by the given offset in the 'within' element.
+ * <span class="attrib">@param</span> el {HTML element} - element to move
+ * <span class="attrib">@param</span> offsetX {number} - x offset to move for
+ * <span class="attrib">@param</span> offsetY {number} - y offset to move for
+ * <span class="attrib">@return</span> {boolean} true if succeeds, otherwise false
+ */</span>
+Zapatec.Utils.moveFor = <span class="reserved">function</span>(el, offsetX, offsetY) {	
+	<span class="comment">//getting current position</span>
+	var oldPos = Zapatec.Utils.getPos(el);
+	<span class="comment">//assigning the offset</span>
+	<span class="reserved">if</span> (oldPos) {
+		<span class="reserved">return</span> Zapatec.Utils.moveTo(el, oldPos.x + offsetX, oldPos.y + offsetY);
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> false;
+	}
+};
+
+<span class="comment">/**
+ * Restores all the changes made in the element by Zapatec.Utils.makeSafelyMovable. 
+ * <span class="attrib">@param</span> el {HTML element} - the element to restore
+ * <span class="attrib">@return</span> {boolean} true if successful, otherwise false
+ */</span>
+Zapatec.Utils.restoreOfMove = <span class="reserved">function</span>(el) {
+	<span class="reserved">if</span> (!el.within){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(!el || !el.restorer){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">//restoreing properies if everything is okay</span>
+	el.restorer.restoreProps(
+		<span class="literal">"style.position"</span>,
+		<span class="literal">"parentNode"</span>,
+		<span class="literal">"style.margin"</span>,
+		<span class="literal">"nextSibling"</span>,
+		<span class="literal">"within.style.position"</span>,
+		<span class="literal">"style.left"</span>,
+		<span class="literal">"style.top"</span>
+	);
+	
+	<span class="reserved">if</span> (el.restorer.isEmpty()) {
+		el.restorer.destroy();
+	}
+	
+	el.within = null;
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * returns array of elements which has attribute 'attr' with value 'val'
+ * by giving 'el' you can finetune your search
+ * <span class="attrib">@param</span> attribute {string} attribute to search
+ * <span class="attrib">@param</span> value {mixed} searched attributes value.
+ * <span class="attrib">@param</span> within {HTML element} reference to the element.
+ * <span class="attrib">@param</span> recursive {boolean} searches in childs.
+ * <span class="attrib">@param</span> match {boolean} if true and attribute is string,
+ * tries to seek within it.
+ * <span class="attrib">@return</span> {array} array of elements found.
+ */</span>
+Zapatec.Utils.getElementsByAttribute = <span class="reserved">function</span>(attribute, value, within, recursive, match){
+	<span class="comment">//no attributte to seek - no action</span>
+	<span class="reserved">if</span> (!attribute) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//trying to get element within what we need to search</span>
+	within = Zapatec.Widget.getElementById(within);
+	<span class="comment">//if none given taking document.body</span>
+	within || (within = document.body);
+	<span class="comment">//iterating through all the elements childs</span>
+	var element = within.firstChild; result = [];
+	<span class="reserved">while</span> (element) {
+		<span class="comment">//element has attribute???</span>
+		<span class="reserved">if</span> (element[attribute]) {
+			<span class="comment">//than if there's no value passed or values match adding it to resulting array</span>
+			<span class="reserved">if</span> (typeof value == <span class="literal">"undefined"</span> || element[attribute] == value) {
+				result.push(element);
+			} <span class="reserved">else</span> <span class="reserved">if</span> (match &amp;&amp; typeof element[attribute] == <span class="literal">"string"</span> &amp;&amp; element[attribute].indexOf(value) != -1) {
+				result.push(element);
+			}
+		};
+		<span class="comment">//if recursive, going through all the childs</span>
+		<span class="reserved">if</span> (recursive &amp;&amp; element.hasChildNodes()) {
+			result = result.concat(Zapatec.Utils.getElementsByAttribute(attribute, value, element, recursive, match));
+		}
+		<span class="comment">//taking next sibling</span>
+		element = element.nextSibling
+	};
+	<span class="comment">//returning result</span>
+	<span class="reserved">return</span> Zapatec.Array(result);
+};
+
+<span class="comment">/**
+ * Creates an instance of object using passed
+ * constructor, for each element in array.
+ * The element will be passed as a "container"
+ * option by default, but you can redefine
+ * it using parameter configOption. Using
+ * third parameter you can pass other config
+ * options for the constructor.
+ * <span class="attrib">@param</span> constructor {function} constructor function.
+ * <span class="attrib">@param</span> elements {array} array of elements that the
+ * consstructor will be apllied to.
+ * <span class="attrib">@param</span> config {object} config obect for constructor.
+ * <span class="attrib">@param</span> configOption {string} config option that will
+ * be filled with the element, default is "container".
+ * <span class="attrib">@return</span> {array} array of created widgets.
+ */</span>
+Zapatec.Utils.applyToElements = <span class="reserved">function</span>(constructor, elements, config, configOption) {
+	<span class="reserved">if</span> (typeof constructor != <span class="literal">"function"</span> || !Zapatec.isArray(elements)) {
+		<span class="reserved">return</span> false;
+	}
+	elements = Zapatec.Array(elements);
+	<span class="reserved">if</span> (!configOption) {
+		configOption = <span class="literal">"container"</span>;
+	}
+	<span class="comment">//correcting or creating config object</span>
+	<span class="reserved">if</span> (!config || typeof config != <span class="literal">"object"</span>) {
+		config = {};
+	}
+	<span class="comment">//resulting array of Zapoatec.Utils.Draggable objects</span>
+	var result = Zapatec.Array();
+	elements.each(<span class="reserved">function</span>(index, element) {
+		<span class="comment">//filling config with current element</span>
+		config[configOption] = element;
+		<span class="comment">//saving resulting object</span>
+		result.push(new constructor(config));
+	});
+	<span class="comment">//returning result</span>
+	<span class="reserved">return</span> result;
+};
+
+<span class="comment">/**
+ * Replaces the image with DIV element, and sets the image as background-image.
+ * this is not good for images with changed size, because you cant change the background-image size and it will tile.
+ * <span class="attrib">@param</span> el {HTML element} reference to the element.
+ * <span class="attrib">@return</span> {HTML element} the needed element.
+ */</span>
+Zapatec.Utils.img2div = <span class="reserved">function</span>(el){
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="comment">//FIX ME: maybe this can be changed to div/img from just div with background</span>
+	<span class="reserved">if</span> ((/img/i).test(el.nodeName)) {
+		var div = document.createElement(<span class="literal">'div'</span>);
+	    <span class="comment">// Set div width and height when image is loaded</span>
+	    var objImage = new Image();
+	    objImage.onload = <span class="reserved">function</span>() {
+	      div.style.width = objImage.width + <span class="literal">'px'</span>;
+	      div.style.height = objImage.height + <span class="literal">'px'</span>;
+	      div.style.fontSize = <span class="literal">'0px'</span>;
+	      objImage.onload = null;
+	    };
+	    objImage.src = el.src;
+	    <span class="comment">// Replace image with the div</span>
+	    div.style.backgroundImage = <span class="literal">'url('</span> + el.src + <span class="literal">')'</span>;
+	    div.style.backgroundColor = <span class="literal">'transparent'</span>;
+		var id = el.id;
+		var className = el.className;
+		el.parentNode.replaceChild(div, el);
+		div.id = id;
+		div.className = className;
+		<span class="reserved">return</span> div
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> el
+	}
+};
+
+<span class="comment">/**
+ * Returns the string with numbers representing 
+ * the path in the DOM tree from the element 
+ * passed as parent to the element you need.
+ * Example - "1-3-1-8".
+ * <span class="attrib">@param</span> element {HTML element} element to get path of.
+ * <span class="attrib">@param</span> parent {HTML element} we stop on this element.
+ * <span class="attrib">@return</span> {string} string representing path.
+ */</span>
+Zapatec.Utils.getElementPath = <span class="reserved">function</span>(element, parent) {
+	<span class="comment">//there always should be parameters passed</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(element) || !Zapatec.isHtmlElement(parent)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//array of numbers from path</span>
+	var res = [];
+	var el = element;
+	<span class="comment">//going up the tree and counting previous siblings</span>
+	<span class="reserved">while</span>(el &amp;&amp; el != parent) {
+		<span class="comment">//at first we think that this is the first node :)</span>
+		var number = 1;
+		<span class="comment">//counting previous siblings</span>
+		<span class="reserved">while</span>(el.previousSibling) {
+			++number;
+			el = el.previousSibling;
+		}
+		<span class="comment">//adding a number in the beggining of the array</span>
+		res.unshift(number);
+		<span class="comment">//taking parent node</span>
+		el = el.parentNode;
+	}
+	<span class="comment">//joining the resulting array to have a string value.</span>
+	<span class="reserved">return</span> res.join(<span class="literal">"-"</span>);
+};
+
+<span class="comment">//This is an HTML element used as a cover to imitate mousemove action correctly.</span>
+Zapatec.Utils.cover = Zapatec.Utils.createElement(<span class="literal">"div"</span>);
+Zapatec.Utils.cover.style.overflow = <span class="literal">"hidden"</span>;
+Zapatec.Utils.cover.style.position = <span class="literal">"absolute"</span>;
+<span class="comment">//This is the workaround for IE who doesn't firest needed events if the element is empty</span>
+Zapatec.Utils.cover.style.backgroundImage = <span class="literal">"url("</span> + Zapatec.zapatecPath + <span class="literal">"zpempty.gif)"</span>;
+Zapatec.Utils.cover.style.display = <span class="literal">"none"</span>;
+Zapatec.Utils.cover.id = <span class="literal">"zpCoverControl"</span>;
+
+<span class="comment">/**
+ * Shows the cover.
+ * <span class="attrib">@param</span> zIndex {number} - z-index of the cover.
+ * <span class="attrib">@param</span> cursor {string} - cursor to be assigned.
+ * <span class="attrib">@param</span> mouseMoveHandler {function} - handler function for mouse move
+ * <span class="attrib">@param</span> mouseUpHandler {function} - handler function for mouse up
+ */</span>
+Zapatec.Utils.cover.show = <span class="reserved">function</span>(zIndex, cursor, mouseMoveHandler, mouseUpHandler) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.parentNode) {
+		document.body.appendChild(<span class="reserved">this</span>);
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.style.display != <span class="literal">"none"</span>) {
+		<span class="reserved">this</span>.hide();
+	}
+	<span class="reserved">this</span>.style.display = <span class="literal">"block"</span>;
+	<span class="comment">//formatting it to be over all the others(even our draggable element)</span>
+	Zapatec.Utils.makeSafelyMovable(<span class="reserved">this</span>, null, document.body);
+	<span class="comment">//initial position</span>
+	var x = 0;
+	var y = 0;
+	<span class="comment">//need to correct it with window scrolling</span>
+	y += Zapatec.Utils.getPageScrollY();
+	x += Zapatec.Utils.getPageScrollX();
+	<span class="comment">//moving cover</span>
+	Zapatec.Utils.moveTo(<span class="reserved">this</span>, x, y);
+	<span class="comment">//setting sizes</span>
+	var dim = Zapatec.Utils.getWindowSize();
+	<span class="reserved">this</span>.style.width = dim.width + <span class="literal">"px"</span>;
+	<span class="reserved">this</span>.style.height = dim.height + <span class="literal">"px"</span>;
+	<span class="comment">//registering it to scroll</span>
+	Zapatec.FixateOnScreen.register(<span class="reserved">this</span>);
+	<span class="comment">//setting proper cursor and z-index</span>
+	<span class="reserved">this</span>.style.zIndex = zIndex;
+	<span class="reserved">this</span>.style.cursor = cursor;
+	<span class="comment">//adding event listeners</span>
+	<span class="reserved">if</span> (typeof mouseMoveHandler == <span class="literal">"function"</span>) {
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>, <span class="literal">'mousemove'</span>, mouseMoveHandler);
+	}
+	<span class="reserved">if</span> (typeof mouseUpHandler == <span class="literal">"function"</span>) {
+		Zapatec.Utils.addEvent(<span class="reserved">this</span>, <span class="literal">'mouseup'</span>, mouseUpHandler);
+	}
+	<span class="comment">//saving references to the event hanlers to remove them on hide.</span>
+	<span class="reserved">this</span>.mouseMoveHandler = mouseMoveHandler;
+	<span class="reserved">this</span>.mouseUpHandler = mouseUpHandler;
+};
+
+<span class="comment">/**
+ * Hides the cover.
+ */</span>
+Zapatec.Utils.cover.hide = <span class="reserved">function</span>() {
+	<span class="comment">//unregistering cover from being scrolled with window</span>
+	Zapatec.FixateOnScreen.unregister(<span class="reserved">this</span>);
+	<span class="comment">//removing event handlers</span>
+	<span class="reserved">if</span> (typeof <span class="reserved">this</span>.mouseMoveHandler == <span class="literal">"function"</span>) {
+		Zapatec.Utils.removeEvent(<span class="reserved">this</span>, <span class="literal">'mousemove'</span>, <span class="reserved">this</span>.mouseMoveHandler);
+	}
+	<span class="reserved">if</span> (typeof <span class="reserved">this</span>.mouseUpHandler == <span class="literal">"function"</span>) {
+		Zapatec.Utils.removeEvent(<span class="reserved">this</span>, <span class="literal">'mouseup'</span>, <span class="reserved">this</span>.mouseUpHandler);
+	}
+	<span class="comment">//mouse move handler</span>
+	<span class="reserved">this</span>.mouseMoveHandler = null;
+	<span class="reserved">this</span>.mouseUpHandler = null;
+	<span class="comment">//clearing the cursor and z-index</span>
+	<span class="reserved">this</span>.style.zIndex = <span class="literal">""</span>;
+	<span class="reserved">this</span>.style.cursor = <span class="literal">""</span>;
+	<span class="comment">//hiding elements</span>
+	<span class="reserved">this</span>.style.display = <span class="literal">"none"</span>;
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

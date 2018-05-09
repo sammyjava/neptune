@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Neptune Control Panel: <%=pageTitle%></title>
+    <link href="cp.css" rel="stylesheet" type="text/css"/>
+    <script src="swfobject.js" type="text/javascript"></script>
+    <% if (useZapatec) { %>
+    <script src="zapatec/utils/zapatec.js" type="text/javascript"></script>
+    <script src="zapatec/zpeditor/src/zpeditor.js" type="text/javascript"></script>
+    <script src="zapatec/zptooltip/src/zptooltip.js" type="text/javascript"></script>
+    <script src="zapatec/zpwin/src/window.js" type="text/javascript"></script>
+    <script src="zapatec/zpform/src/form.js" type="text/javascript"></script>
+    <% } %>
+    <!-- check that video and Flash uploads have width and height entered -->
+    <script type="text/javascript">
+      function checkupload() {
+      var video = document.upload.mediatype[4].checked;
+      var flash = document.upload.mediatype[5].checked;
+      var blankdim = (document.upload.width.value=="" || document.upload.height.value=="");
+      if (video && blankdim) {
+      alert("You must enter the width and height of your video.");
+      return false;
+      } else if (flash && blankdim) {
+      alert("You must enter the width and height of your Flash movie.");
+      return false;
+      } else {
+      return true;
+      }
+      }
+    </script>
+  </head>
+  <body>

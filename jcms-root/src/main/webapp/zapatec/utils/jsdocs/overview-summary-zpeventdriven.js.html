@@ -1,0 +1,786 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="zpeventdriven.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>zpeventdriven.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec EventDriven library. Base EventDriven class. Contains
+ functions to handle events and basic methods for event-driven class.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/EventDriven.html">Zapatec.EventDriven</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec EventDriven library. Base EventDriven class. Contains
+ * functions to handle events and basic methods for event-driven class.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: zpeventdriven.js 15736 2009-02-06 15:29:25Z nikolai $ */</span>
+
+<span class="reserved">if</span> (typeof Zapatec == <span class="literal">'undefined'</span>) {
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span> Namespace definition.
+	 */</span>
+	Zapatec = <span class="reserved">function</span>() {};
+}
+
+<span class="comment">/**
+ * Base event-driven class.
+ * <span class="attrib">@constructor</span>
+ */</span>
+Zapatec.EventDriven = <span class="reserved">function</span>() {};
+
+<span class="comment">/**
+ * Shortcut for faster access to {<span class="attrib">@link</span> Zapatec#EventDriven}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecEventDriven = Zapatec.EventDriven;
+
+<span class="comment">/**
+ * Initializes object.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>() {
+	<span class="comment">// Holds events of this object</span>
+	<span class="reserved">this</span>.events = {};
+};
+
+<span class="comment">/**
+ * Adds event listener to the end of list.
+ *
+ * &lt;pre&gt;
+ * If multiple identical event listeners are registered on the same event, the
+ * duplicate instances are discarded. They do not cause the event listener to be
+ * called twice, and since the duplicates are discarded, they do not need to be
+ * removed manually with the removeEventListener method.
+ *
+ * Synopsis:
+ *
+ * oEventDriven.addEventListener('eventName', fEventListener);
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.addEventListener('globalEventName', fEventListener);
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@param</span> {boolean} bOnetime Optional. If true, event listener is removed
+ * automatically after first firing of the event
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.addEventListener = <span class="reserved">function</span>(sEvent, fListener, bOnetime) {
+	<span class="reserved">if</span> (typeof fListener != <span class="literal">'function'</span>) {
+		<span class="reserved">return</span> false;
+	}
+	var oEvents = <span class="reserved">this</span>.events;
+	var oEvent = oEvents[sEvent];
+	<span class="reserved">if</span> (!oEvent) {
+		oEvents[sEvent] = {
+			listeners: []
+		};
+		oEvent = oEvents[sEvent];
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.removeEventListener(sEvent, fListener);
+	}
+	<span class="reserved">if</span> (bOnetime) {
+		oEvent.listeners.push({
+			listener: fListener,
+			onetime: true
+		});
+	} <span class="reserved">else</span> {
+		oEvent.listeners.push(fListener);
+	}
+};
+
+<span class="comment">/**
+ * Adds one-time event listener to global event to the end of list. Simply calls
+ * {<span class="attrib">@link</span> Zapatec.EventDriven#addEventListener}.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.addOnetimeEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	<span class="reserved">return</span> <span class="reserved">this</span>.addEventListener(sEvent, fListener, true);
+};
+
+<span class="comment">/**
+ * Adds event listener to the beginning of list. Note that there is no guarantee
+ * that it will be always first in the list. It will become second once this
+ * method is called again. Never rely on that!
+ *
+ * &lt;pre&gt;
+ * If multiple identical event listeners are registered on the same event, the
+ * duplicate instances are discarded. They do not cause the event listener to be
+ * called twice, and since the duplicates are discarded, they do not need to be
+ * removed manually with the removeEventListener method.
+ *
+ * Synopsis:
+ *
+ * oEventDriven.unshiftEventListener('eventName', fEventListener);
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.unshiftEventListener('globalEventName', fEventListener);
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.unshiftEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	<span class="reserved">if</span> (typeof fListener != <span class="literal">'function'</span>) {
+		<span class="reserved">return</span> false;
+	}
+	var oEvents = <span class="reserved">this</span>.events;
+	var oEvent = oEvents[sEvent];
+	<span class="reserved">if</span> (!oEvent) {
+		oEvents[sEvent] = {
+			listeners: []
+		};
+		oEvent = oEvents[sEvent];
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.removeEventListener(sEvent, fListener);
+	}
+	oEvent.listeners.unshift(fListener);
+};
+
+<span class="comment">/**
+ * Removes event listener.
+ *
+ * &lt;pre&gt;
+ * Synopsis:
+ *
+ * oEventDriven.removeEventListener('eventName', fEventListener);
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.removeEventListener('globalEventName', fEventListener);
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@return</span> Number of listeners removed
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.removeEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	var oEvents = <span class="reserved">this</span>.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> 0;
+	}
+	var aListeners = oEvents[sEvent].listeners;
+	var iRemoved = 0;
+	var oListener;
+	<span class="reserved">for</span> (var iListener = aListeners.length - 1; iListener &gt;= 0; iListener--) {
+		oListener = aListeners[iListener];
+		<span class="reserved">if</span> (oListener == fListener || oListener.listener == fListener) {
+			aListeners.splice(iListener, 1);
+			iRemoved++;
+		}
+	}
+	<span class="reserved">return</span> iRemoved;
+};
+
+<span class="comment">/**
+ * Removes all one-time event listeners of the specified event.
+ *
+ * &lt;pre&gt;
+ * Synopsis:
+ *
+ * oEventDriven.removeOnetimeEventListeners('eventName');
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.removeOnetimeEventListeners('globalEventName');
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@return</span> Number of listeners removed
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.removeOnetimeEventListeners = <span class="reserved">function</span>(sEvent) {
+	var oEvents = <span class="reserved">this</span>.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> 0;
+	}
+	var aListeners = oEvents[sEvent].listeners;
+	var iRemoved = 0;
+	<span class="reserved">for</span> (var iListener = aListeners.length - 1; iListener &gt;= 0; iListener--) {
+		<span class="reserved">if</span> (aListeners[iListener].onetime) {
+			aListeners.splice(iListener, 1);
+			iRemoved++;
+		}
+	}
+	<span class="reserved">return</span> iRemoved;
+};
+
+<span class="comment">/**
+ * Returns array of listeners for the specified event.
+ *
+ * &lt;pre&gt;
+ * Synopsis:
+ *
+ * oEventDriven.getEventListeners('eventName');
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.getEventListeners('globalEventName');
+ *
+ * One-time event listeners appear in the result array as objects in following
+ * format:
+ * {
+ *   listener: [function] event listener,
+ *   onetime: [boolean] always true
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@return</span> Array of function references
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.getEventListeners = <span class="reserved">function</span>(sEvent) {
+	var oEvents = <span class="reserved">this</span>.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> [];
+	}
+	<span class="reserved">return</span> oEvents[sEvent].listeners;
+};
+
+<span class="comment">/**
+ * Checks if the event listener is attached to the event.
+ *
+ * &lt;pre&gt;
+ * Synopsis:
+ *
+ * oEventDriven.isEventListener('eventName', fEventListener);
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.isEventListener('globalEventName', fEventListener);
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@return</span> True if event listener is attached to the event
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.isEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	var oEvents = <span class="reserved">this</span>.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> false;
+	}
+	var aListeners = oEvents[sEvent].listeners;
+	var oListener;
+	<span class="reserved">for</span> (var iListener = aListeners.length - 1; iListener &gt;= 0; iListener--) {
+		oListener = aListeners[iListener];
+		<span class="reserved">if</span> (oListener == fListener || oListener.listener == fListener) {
+			<span class="reserved">return</span> true;
+		}
+	}
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Checks if the event exists.
+ *
+ * &lt;pre&gt;
+ * Synopsis:
+ *
+ * oEventDriven.isEvent('eventName');
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.isEvent('globalEventName');
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@return</span> Exists
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.isEvent = <span class="reserved">function</span>(sEvent) {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.events[sEvent]) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Removes all listeners for the event.
+ *
+ * &lt;pre&gt;
+ * Synopsis:
+ *
+ * oEventDriven.removeEvent('eventName');
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.removeEvent('globalEventName');
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.removeEvent = <span class="reserved">function</span>(sEvent) {
+	var oEvents = <span class="reserved">this</span>.events;
+	<span class="reserved">if</span> (oEvents[sEvent]) {
+		var undef;
+		oEvents[sEvent] = undef;
+	}
+};
+
+<span class="comment">/**
+ * Fires event. Takes in one mandatory argument sEvent and optionally any number
+ * of other arguments that should be passed to the listeners.
+ *
+ * &lt;pre&gt;
+ * Synopsis:
+ *
+ * oEventDriven.fireEvent('eventName');
+ *
+ * There is also static method doing the same with global events:
+ *
+ * Zapatec.EventDriven.fireEvent('globalEventName');
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ */</span>
+Zapatec.EventDriven.<span class="reserved">prototype</span>.fireEvent = <span class="reserved">function</span>(sEvent) {
+	var oEvents = <span class="reserved">this</span>.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Duplicate array because it may be modified from within the listeners</span>
+	var aListeners = oEvents[sEvent].listeners.slice();
+	var iListeners = aListeners.length;
+	var aArgs, oListener;
+	<span class="reserved">for</span> (var iListener = 0; iListener &lt; iListeners; iListener++) {
+		<span class="comment">// Remove first argument</span>
+		aArgs = [].slice.call(arguments, 1);
+		<span class="comment">// Call event listener in scope of this object</span>
+		oListener = aListeners[iListener];
+		<span class="reserved">if</span> (typeof oListener == <span class="literal">'function'</span>) {
+			oListener.apply(<span class="reserved">this</span>, aArgs);
+		} <span class="reserved">else</span> {
+			oListener.listener.apply(<span class="reserved">this</span>, aArgs);
+		}
+	}
+	<span class="comment">// Remove one-time event listeners</span>
+	<span class="reserved">this</span>.removeOnetimeEventListeners(sEvent);
+};
+
+<span class="comment">/**
+ * Holds global events.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.EventDriven.events = {};
+
+<span class="comment">/**
+ * Adds event listener to global event to the end of list.
+ *
+ * &lt;pre&gt;
+ * If multiple identical event listeners are registered on the same event, the
+ * duplicate instances are discarded. They do not cause the event listener to be
+ * called twice, and since the duplicates are discarded, they do not need to be
+ * removed manually with the removeEventListener method.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@param</span> {boolean} bOnetime Optional. If true, event listener is removed
+ * automatically after first firing of the event
+ */</span>
+Zapatec.EventDriven.addEventListener = <span class="reserved">function</span>(sEvent, fListener, bOnetime) {
+	<span class="reserved">if</span> (typeof fListener != <span class="literal">'function'</span>) {
+		<span class="reserved">return</span> false;
+	}
+	var oEvents = zapatecEventDriven.events;
+	var oEvent = oEvents[sEvent];
+	<span class="reserved">if</span> (!oEvent) {
+		oEvents[sEvent] = {
+			listeners: []
+		};
+		oEvent = oEvents[sEvent];
+	} <span class="reserved">else</span> {
+		zapatecEventDriven.removeEventListener(sEvent, fListener);
+	}
+	<span class="reserved">if</span> (bOnetime) {
+		oEvent.listeners.push({
+			listener: fListener,
+			onetime: true
+		});
+	} <span class="reserved">else</span> {
+		oEvent.listeners.push(fListener);
+	}
+};
+
+<span class="comment">/**
+ * Adds one-time event listener to global event to the end of list. Simply calls
+ * {<span class="attrib">@link</span> Zapatec.EventDriven#addEventListener}.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ */</span>
+Zapatec.EventDriven.addOnetimeEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	<span class="reserved">return</span> zapatecEventDriven.addEventListener(sEvent, fListener, true);
+};
+
+<span class="comment">/**
+ * Adds event listener to global event to the beginning of list. Note that there
+ * is no guarantee that it will be always first in the list. It will become
+ * second once this method is called again. Never rely on that!
+ *
+ * &lt;pre&gt;
+ * If multiple identical event listeners are registered on the same event, the
+ * duplicate instances are discarded. They do not cause the event listener to be
+ * called twice, and since the duplicates are discarded, they do not need to be
+ * removed manually with the removeEventListener method.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ */</span>
+Zapatec.EventDriven.unshiftEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	<span class="reserved">if</span> (typeof fListener != <span class="literal">'function'</span>) {
+		<span class="reserved">return</span> false;
+	}
+	var oEvents = zapatecEventDriven.events;
+	var oEvent = oEvents[sEvent];
+	<span class="reserved">if</span> (!oEvent) {
+		oEvents[sEvent] = {
+			listeners: []
+		};
+		oEvent = oEvents[sEvent];
+	} <span class="reserved">else</span> {
+		zapatecEventDriven.removeEventListener(sEvent, fListener);
+	}
+	oEvent.listeners.unshift(fListener);
+};
+
+<span class="comment">/**
+ * Removes event listener from global event.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@return</span> number of listeners removed
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.EventDriven.removeEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	var oEvents = zapatecEventDriven.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> 0;
+	}
+	var iRemoved = 0;
+	var aListeners = oEvents[sEvent].listeners;
+	var oListener;
+	<span class="reserved">for</span> (var iListener = aListeners.length - 1; iListener &gt;= 0; iListener--) {
+		oListener = aListeners[iListener];
+		<span class="reserved">if</span> (oListener == fListener || oListener.listener == fListener) {
+			aListeners.splice(iListener, 1);
+			iRemoved++;
+		}
+	}
+	<span class="reserved">return</span> iRemoved;
+};
+
+<span class="comment">/**
+ * Removes all one-time event listeners of the specified global event.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@return</span> Number of listeners removed
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.EventDriven.removeOnetimeEventListeners = <span class="reserved">function</span>(sEvent) {
+	var oEvents = zapatecEventDriven.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> 0;
+	}
+	var aListeners = oEvents[sEvent].listeners;
+	var iRemoved = 0;
+	<span class="reserved">for</span> (var iListener = aListeners.length - 1; iListener &gt;= 0; iListener--) {
+		<span class="reserved">if</span> (aListeners[iListener].onetime) {
+			aListeners.splice(iListener, 1);
+			iRemoved++;
+		}
+	}
+	<span class="reserved">return</span> iRemoved;
+};
+
+<span class="comment">/**
+ * Returns array of listeners for the specified global event.
+ *
+ * &lt;pre&gt;
+ * One-time event listeners appear in the result array as objects in following
+ * format:
+ * {
+ *   listener: [function] event listener,
+ *   onetime: [boolean] always true
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@return</span> Array of function references
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.EventDriven.getEventListeners = <span class="reserved">function</span>(sEvent) {
+	var oEvents = zapatecEventDriven.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> [];
+	}
+	<span class="reserved">return</span> oEvents[sEvent].listeners;
+};
+
+<span class="comment">/**
+ * Checks if the event listener is attached to the global event.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@return</span> True if event listener is attached to the event
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.EventDriven.isEventListener = <span class="reserved">function</span>(sEvent, fListener) {
+	var oEvents = zapatecEventDriven.events;
+	<span class="reserved">if</span> (!oEvents[sEvent]) {
+		<span class="reserved">return</span> false;
+	}
+	var aListeners = oEvents[sEvent].listeners;
+	var oListener;
+	<span class="reserved">for</span> (var iListener = aListeners.length - 1; iListener &gt;= 0; iListener--) {
+		oListener = aListeners[iListener];
+		<span class="reserved">if</span> (oListener == fListener || oListener.listener == fListener) {
+			<span class="reserved">return</span> true;
+		}
+	}
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Checks if the global event exists.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@return</span> Exists
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.EventDriven.isEvent = <span class="reserved">function</span>(sEvent) {
+	<span class="reserved">if</span> (zapatecEventDriven.events[sEvent]) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Removes all listeners for the global event.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ */</span>
+Zapatec.EventDriven.removeEvent = <span class="reserved">function</span>(sEvent) {
+	var oEvents = zapatecEventDriven.events;
+	<span class="reserved">if</span> (oEvents[sEvent]) {
+		var undef;
+		oEvents[sEvent] = undef;
+	}
+};
+
+<span class="comment">/**
+ * Fires global event. Takes in one mandatory argument sEvent and optionally any
+ * number of other arguments that should be passed to the listeners.
+ *
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ */</span>
+Zapatec.EventDriven.fireEvent = <span class="reserved">function</span>(sEvent) {
+	var oEvents = zapatecEventDriven.events;
+	var oEvent = oEvents[sEvent];
+	<span class="reserved">if</span> (!oEvent) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Duplicate array because it may be modified from within the listeners</span>
+	var aListeners = oEvent.listeners.slice();
+	var iListeners = aListeners.length;
+	var oListener, aArgs;
+	<span class="reserved">for</span> (var iListener = 0; iListeners--; iListener++) {
+		<span class="comment">// Remove first argument</span>
+		aArgs = [].slice.call(arguments, 1);
+		<span class="comment">// Call event listener</span>
+		oListener = aListeners[iListener];
+		<span class="reserved">if</span> (typeof oListener == <span class="literal">'function'</span>) {
+			oListener.apply(oListener, aArgs);
+		} <span class="reserved">else</span> {
+			oListener.listener.apply(oListener, aArgs);
+		}
+	}
+	<span class="comment">// Remove one-time event listeners</span>
+	Zapatec.EventDriven.removeOnetimeEventListeners(sEvent);
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# runs LicenseGenerator to generate a license using the "hostname expiration feature" string on the command line
+# example: ./generate mso.ims.net 2008-12-31 0  
+#
+
+java -cp ../jcms/build/libs/jcms.jar net.ims.jcms.tools.LicenseGenerator "$1 $2 $3"

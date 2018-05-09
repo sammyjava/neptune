@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" This demo shows how tree can be used to select data from the tree using selection selectMultiple:true config option tells that tree can have more than one selected node at a time deselectSelected:true config option tells that when you click on already selected node - it will be deselected selectOnSignClick: false, selectOnSignDblclick: false, selectOnIconClick: false, selectOnIconDblclick: false  allows node selection only on label click. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Customize node selection in the tree</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Customize node selection in the tree</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>This demo shows how tree can be used to select data from the tree using selection</li>
+<li><i>selectMultiple:true</i> config option tells that tree can have more than one selected node at a time</li>
+<li><i>deselectSelected:true</i> config option tells that when you click on already selected node - it will be deselected</li>
+<li><i>selectOnSignClick: false, selectOnSignDblclick: false, selectOnIconClick: false, selectOnIconDblclick: false</i>
+ allows node selection only on label click.
+</li>
+
+			</ul>
+		</div>
+
+
+
+<table width="100%"><tr><td width="40%" valign="top">
+<ul id="tree">
+	<li id="games">
+		Games
+		<ul>
+			<li>Video Games
+				<ul>
+					<li>SPS</li>
+					<li>X-Box</li>
+				</ul>
+			</li>
+			<li>RPG
+				<ul>
+					<li>Gamebooks</li>
+					<li>Live Action</li>
+					<li>Tabletop</li>
+				</ul>
+			</li>
+			<li>Gambling
+				<ul>
+					<li>Baccarat</li>
+					<li>Bingo</li>
+					<li>Roulette</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li id="computers">Computers
+		<ul>
+			<li>Computer Science
+				<ul>
+					<li>Academic Departments</li>
+					<li>Artificial Intelligence</li>
+					<li>Research Institutes</li>
+					<li>Theoretical</li>
+				</ul>
+			</li>
+			<li id="internet">Internet
+				<ul>
+					<li>Chat</li>
+					<li>DHTML libraries
+						<ul>
+							<li id="zapatec">Zapatec Suite</li>
+						</ul>
+					</li>
+					<li>E-mail</li>
+				</ul>
+			</li>
+			<li>Security
+				<ul>
+					<li>Authentification</li>
+					<li>Cryptography</li>
+					<li>Internet security</li>
+					<li>Secure Programming</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>Business</li>
+</ul>
+</td>
+<td valign="top">
+	<input type="button" value="Show selected nodes" onclick="displayResults(tree.findAll(function(node){return node.data.isSelected}))">
+</td>
+</tr></table>
+
+<script type="text/javascript">
+	var tree = new Zapatec.Tree({
+		tree: "tree",
+		highlightSelectedNode: true,
+		selectMultiple: true,
+		deselectSelected: true,
+		selectOnSignClick: false,
+		selectOnSignDblclick: false,
+		selectOnIconClick: false,
+		selectOnIconDblclick: false
+	});
+
+	function displayResults(result){
+		if(result == null || result.length == 0){
+			alert("No nodes found");
+		} else {
+			var content = ["These nodes are selected: "];
+
+			for(var ii = 0; ii < result.length; ii++){
+				var str = result[ii].data.label.replace(/\n/g, "").replace(/^\s*/, "").replace(/\s*$/, "");
+				content.push(str);
+			}
+
+			alert(content.join("\n"));
+		}
+	}
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

@@ -1,0 +1,211 @@
+/* $Id: apd.css 13913 2008-11-11 15:46:43Z smaxim $ */
+
+.zpEditorApdToolbar{
+	 border:1px solid #6392CE;
+   background:url(apd/bg.jpg) repeat-x 100% 50%;
+   padding: 3px 0px 3px 0px;
+}
+
+.zpEditorApdToolbar .toolbarPanel select.zpEditorSelect{
+   border: 1px solid #CCCCCC;
+   margin: 0px;
+}
+
+.zpEditorApdToolbar .toolbarPanel{
+   margin: 0 0 0 3px;
+   padding: 0px 1px 1px; 
+   height: 21px;
+   overflow: hidden;
+   position: relative;
+   float: left;
+   border:1px solid #6392CE;
+}
+
+.zpEditorApdTextarea {
+   border: none;
+}
+
+.zpEditorApdEditorPanel {
+   border-right: 1px solid #6392CE;
+   border-left: 1px solid #6392CE;
+   border-bottom:1px solid #6392CE;
+}
+
+.zpEditorApdToolbar .zpEditorButton{
+   display: block;
+   float: left;
+   margin:2px !important;
+   width: 17px;
+   height: 16px;
+   background-repeat: no-repeat;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .forecolor{
+   background-image: url(apd/forecolor.gif);
+   height:20px;
+   width:25px;
+   border:none !important;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .backcolor{
+   background-image: url(apd/backcolor.gif);
+   height:20px;
+   width:30px;
+   border:none !important;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .backcolor .zpEditorApdDropDown {margin-left:19px;}
+
+.zpEditorApdToolbar .zpButtonApdContainer .insertspecial {background-image: url(apd/insertspecial.gif); }
+.zpEditorApdToolbar .zpButtonApdContainer .link{background-image: url(apd/link.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .image{background-image: url(apd/image.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .table{background-image: url(apd/table.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .bold{background-image: url(apd/bold.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .italic{background-image: url(apd/italic.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .underline{background-image: url(apd/underline.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .justifyleft{background-image: url(apd/justifyleft.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .justifycenter{background-image: url(apd/justifycenter.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .justifyright{background-image: url(apd/justifyright.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .justifyfull{background-image: url(apd/justifyfull.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .orderedlist{background-image: url(apd/orderedlist.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .unorderedlist{background-image: url(apd/unorderedlist.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .copy{background-image: url(apd/copy.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .cut{background-image: url(apd/cut.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .paste{background-image: url(apd/paste.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .outdent{background-image: url(apd/outdent.gif);height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .indent{background-image: url(apd/indent.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .undo{background-image: url(apd/undo.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .redo{background-image: url(apd/redo.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .hr{background-image: url(apd/hr.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .selectall{background-image: url(apd/selectall.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .maximize{background-image: url(apd/maximize.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .restore{background-image: url(apd/restore.gif); height:16px;}
+/*.zpEditorApdToolbar .zpButtonApdContainer .fetch{background-image: url(apd/fetch.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .save{background-image: url(apd/save.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .browser{background-image: url(apd/browser.gif); height:16px;}*/
+.zpEditorApdToolbar .zpButtonApdContainer .about{background-image: url(apd/about.gif); height:16px;}
+.zpEditorApdToolbar .zpButtonApdContainer .html{
+  background-image: url(apd/plain.gif);
+  width:60px;
+  height:16px;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .wysiwyg {
+  background-image: url(apd/rich.gif);
+  width: 60px;
+  height:16px;        
+} 
+
+.zpEditorApdToolbar .zpButtonApdContainer, .zpButtonImageApdContainer{
+  padding: 0;
+  border: 0;
+}
+
+.zpEditorApdToolbar .zpButtonImageApdContainer .internalContainer{
+  cursor: pointer;
+  padding: 0 2px 0 2px;
+  margin: 0;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .internalContainer{
+  background-color: #fff;
+  cursor: pointer;
+  margin: 0;
+  color: #000000;
+  border: 1px solid #eee;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .internalContainer img{
+  border: 0;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .disabled .internalContainer{
+  filter: Alpha(Opacity=50);
+  -moz-opacity: 0.50;
+  margin:0px 1px 0px;
+  border:1px solid transparent !important;
+  background-color:transparent;
+  cursor:default;
+}
+
+.zpEditorApdToolbar .zpButtonApdContainer .mouseOut .internalContainer{
+  border:1px solid #C3D9FF;
+  background-color:transparent;
+}
+ 
+.zpEditorApdToolbar .zpButtonApdContainer .mouseOver .internalContainer{
+  border:1px solid #eee;
+  background-color:transparent;
+}
+
+
+.zpEditorApdToolbar .zpButtonApdContainer .mouseDown .internalContainer{
+  border: 1px solid #6392CE;
+  background-color:#c1d4f4;
+}
+
+.zpEditorApdColorMark {
+  position: absolute;
+  font-size:1px;
+	height:4px;
+	margin-left:0px;
+	margin-top:14px;
+	position:absolute;
+	width:16px;
+}
+
+.zpEditorApdDropDown {
+  margin-left: 17px;
+  height: 100%;
+  filter: Alpha(Opacity=60);
+  -moz-opacity: 0.60;
+
+}
+
+.zpEditorApdPane {
+  background: #fff;
+}
+
+/* style for character map table */
+table.charmap {
+  cursor:pointer;
+  background-color:#ADAD9C;
+  border:1px inset;
+}
+
+/* style for character map table cell */
+td.character {
+  font-family:Verdana,Arial,Helvetica,sans-serif;
+  font-size:14px;
+  font-weight:bold;
+  text-align:center;
+  background:#fff;
+  padding:4px;
+}
+
+/* style for hilighted character map table cell */
+td.character-hilite {
+  background:#ffd760;
+}
+
+.zpEditorApdLinkLabel {
+  margin: 5px 10px 0 10px;
+  width: 120px;
+  float: left;
+}
+
+.zpEditorApdLinkInput {
+  margin: 5px 0 0 0;
+}
+
+.zpEditorApdLinkButtonPane {
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+
+.zpEditorApdLinkOk {
+  margin: 0 10px 0 0;
+}
+
+.zpEditorApdLinkInputPane {
+}

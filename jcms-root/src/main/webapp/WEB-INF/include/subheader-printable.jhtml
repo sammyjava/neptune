@@ -1,0 +1,14 @@
+<!--stopindex-->
+<!-- printable subheader -->
+<table id="subheader" cellspacing="0">
+  <tr>
+    <td class="subheader-left"></td>
+    <td class="subheader" nowrap>
+      <c:import context="/" url="/currentdate.jsp">
+        <c:param name="location" value="S"/>
+      </c:import>
+    </td>
+    <td class="subheader-right"></td>
+  </tr>
+</table>
+<!--startindex-->

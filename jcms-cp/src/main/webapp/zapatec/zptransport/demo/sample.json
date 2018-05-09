@@ -1,0 +1,19 @@
+{
+	"students": [
+		{
+			"name": "Diane Ice",
+			"department": "Department of Management",
+			"program": "Major in Human Resource Management"
+		},
+		{
+			"name": "John Brown",
+			"department": "Department of Marketing",
+			"program": "Major in Multinational Business"
+		},
+		{
+			"name": "Betty Smith",
+			"department": "Accounting Department",
+			"program": "Major in Accounting"
+		}
+	]
+}

@@ -1,0 +1,1044 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="sizable.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>sizable.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'sizable.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Utils/Sizable.html">Zapatec.Utils.Sizable</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">//$Id: sizable.js 9110 2007-12-06 10:46:00Z nmaxim $</span>
+<span class="comment">/**
+ * This is a set of functionality used for sizing object
+ * and is implemented in interface (mixin) manner.
+ */</span>
+Zapatec.Sizable = {};
+
+<span class="comment">/**
+ * Sets the width of the object. Basically the width parameter
+ * is connected to the measurement element and its resulting width
+ * will be equal to this value, but it doesn't mean that the
+ * method will directly set the width of it, it can work with
+ * it's childs actually.
+ * <span class="attrib">@param</span> width {number} width to set.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable.setWidth = <span class="reserved">function</span>(width) {
+  <span class="reserved">return</span> <span class="reserved">this</span>._setDimension(width, <span class="literal">"width"</span>);
+};
+
+<span class="comment">/**
+ * Sets the height of the object. Basically the height parameter
+ * is connected to the measurement element and its resulting height
+ * will be equal to this value, but it doesn't mean that the
+ * method will directly set the height of it, it can work with
+ * it's childs actually.
+ * <span class="attrib">@param</span> height {number} height to set.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable.setHeight = <span class="reserved">function</span>(height) {
+  <span class="reserved">return</span> <span class="reserved">this</span>._setDimension(height, <span class="literal">"height"</span>);
+};
+
+<span class="comment">/**
+ * This method is used for the objects that use
+ * such concept as orientation. Method reacts on
+ * two types of orientation: "vertical" and "horizontal".
+ * <span class="attrib">@param</span> width {number} oriented width to set.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable.setOrientedWidth = <span class="reserved">function</span>(width) {
+  <span class="comment">//getOrientation should return the orientation of the</span>
+  <span class="comment">//object. You can extend two types overwriting</span>
+  <span class="comment">//handleOrientedWidth method.</span>
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.getOrientation) {
+    <span class="reserved">return</span> false;
+  }
+  switch (<span class="reserved">this</span>.getOrientation()) {
+    case <span class="literal">"vertical"</span> :
+      <span class="comment">//vertical orientation means height</span>
+      <span class="reserved">return</span> <span class="reserved">this</span>._setDimension(width, <span class="literal">"height"</span>);
+    case <span class="literal">"horizontal"</span> :
+      <span class="comment">//horizontal orientation means width</span>
+      <span class="reserved">return</span> <span class="reserved">this</span>._setDimension(width, <span class="literal">"width"</span>);
+  }
+};
+
+<span class="comment">/**
+ * This method is used for the objects that use
+ * such concept as orientation. Method reacts on
+ * two types of orientation: "vertical" and "horizontal".
+ * <span class="attrib">@param</span> height {number} oriented height to set.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable.setOrientedHeight = <span class="reserved">function</span>(height) {
+  <span class="comment">//getOrientation should return the orientation of the</span>
+  <span class="comment">//object. You can extend two types overwriting</span>
+  <span class="comment">//handleOrientedHeight method.</span>
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.getOrientation) {
+    <span class="reserved">return</span> false;
+  }
+  switch (<span class="reserved">this</span>.getOrientation()) {
+    case <span class="literal">"vertical"</span> :
+      <span class="comment">//vertical orientation means width</span>
+      <span class="reserved">return</span> <span class="reserved">this</span>._setDimension(height, <span class="literal">"width"</span>);
+    case <span class="literal">"horizontal"</span> :
+      <span class="comment">//horizontal orientation means height</span>
+      <span class="reserved">return</span> <span class="reserved">this</span>._setDimension(height, <span class="literal">"height"</span>);
+  }
+};
+
+<span class="comment">/**
+ * Sets the size of the passed dimension.
+ * <span class="attrib">@param</span> val {number or string} value to set.
+ * <span class="attrib">@param</span> dimension {string} "width" or "height".
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable._setDimension = <span class="reserved">function</span>(val, dimension) {
+  <span class="comment">//same string just with first character uper case, it is used for event names</span>
+  var evDim = dimension.charAt(0).toUpperCase() + dimension.slice(1);
+  <span class="comment">//preparations which can depend on the Widget.</span>
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.isSizableSafely(dimension)) {
+    Zapatec.Log({description : <span class="literal">"The object "</span> + dimension + <span class="literal">" ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"' was not prepared for sizing! Use obj.makeSizable() to do so!"</span>, type : <span class="literal">"warning"</span>});
+    <span class="reserved">return</span> false;
+  }
+  <span class="comment">//_parseSize takes the width value and first of all</span>
+  <span class="comment">//tryes to return the numeric representation in pixels.</span>
+  <span class="comment">//Also if it returns null value (false, "", 0 are also</span>
+  <span class="comment">//treated so) method stops execution without making something.</span>
+  <span class="comment">//This can be useful for implementing restrictions.</span>
+  var msgValue = val + <span class="literal">""</span>;
+  val = <span class="reserved">this</span>._parseSize(val, dimension);
+  <span class="reserved">if</span> (!val) {
+    Zapatec.Log({description : <span class="literal">"The "</span> + dimension + <span class="literal">" "</span> + msgValue + <span class="literal">" can not be set for object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"'!"</span>, type : <span class="literal">"warning"</span>});
+    <span class="reserved">return</span> false;
+  }
+  <span class="comment">//getSizableElements returns the array of elements</span>
+  <span class="comment">//that actually are sized. Param passed is the dimension</span>
+  <span class="comment">//we size.</span>
+  var elements = Zapatec.Array(<span class="reserved">this</span>.getSizableElements(dimension));
+  <span class="comment">//this array is used for saving previous widths and associated sizable objects,</span>
+  <span class="comment">//this way we can restore all widths, if sizing fails on some stage</span>
+  var toRestore = [], self = <span class="reserved">this</span>;
+  <span class="comment">//firing event</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"before"</span> + evDim + <span class="literal">"Change"</span>, val) === false) {
+    <span class="reserved">return</span> false;
+  }
+  <span class="reserved">if</span> (Zapatec.GlobalEvents.fireEvent(<span class="literal">"before"</span> + evDim + <span class="literal">"Change"</span>, val, <span class="reserved">this</span>) === false) {
+    <span class="reserved">return</span> false;
+  }
+  <span class="comment">//checking if we didn't fail during the loop,</span>
+  <span class="reserved">if</span> (!<span class="reserved">this</span>._proceedElementsSizes(val, dimension, elements, toRestore)) {
+    <span class="comment">//if failure we need to return back all heights</span>
+    <span class="reserved">this</span>._rollBackSizing(toRestore, dimension);
+    <span class="reserved">this</span>.fireEvent(dimension + <span class="literal">"ChangeFailure"</span>, val)
+    Zapatec.GlobalEvents.fireEvent(dimension + <span class="literal">"ChangeFailure"</span>, val, <span class="reserved">this</span>)
+    Zapatec.Log({description : <span class="literal">"Impossible to set the "</span> + dimension + <span class="literal">" "</span> + msgValue + <span class="literal">" for the object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"'!"</span>, type : <span class="literal">"warning"</span>});
+    <span class="reserved">return</span> false;
+  } <span class="reserved">else</span> {
+    <span class="reserved">if</span> (<span class="reserved">this</span>.isSizing()) {
+      <span class="reserved">if</span> (dimension == <span class="literal">"width"</span>) {
+        <span class="reserved">this</span>.fireEvent(<span class="literal">"onSizing"</span>, val, <span class="reserved">this</span>.getHeight());
+        Zapatec.GlobalEvents.fireEvent(<span class="literal">"onSizing"</span>, val, <span class="reserved">this</span>.getHeight(), <span class="reserved">this</span>);
+      } <span class="reserved">else</span> {
+        <span class="reserved">this</span>.fireEvent(<span class="literal">"onSizing"</span>, <span class="reserved">this</span>.getWidth(), val);
+        Zapatec.GlobalEvents.fireEvent(<span class="literal">"onSizing"</span>, <span class="reserved">this</span>.getWidth(), val, <span class="reserved">this</span>);
+      }
+    }
+    <span class="reserved">this</span>.fireEvent(<span class="literal">"on"</span> + evDim + <span class="literal">"Change"</span>, val);
+    Zapatec.GlobalEvents.fireEvent(<span class="literal">"on"</span> + evDim + <span class="literal">"Change"</span>, val, <span class="reserved">this</span>);
+  }
+  <span class="comment">//reporting success.</span>
+  <span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Strats the event of sizing. This is used
+ * to send message to interested objects that
+ * sizing was started. This involves the calling
+ * of "onSizing" event from setWidth and setHeight.
+ * endSizing method stops the action.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false
+ */</span>
+Zapatec.Sizable.startSizing = <span class="reserved">function</span>() {
+  <span class="comment">//preparations which can depend on the Widget.</span>
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.isSizableSafely()) {
+    Zapatec.Log({description : <span class="literal">"The object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"' was not prepared for sizing! Use obj.makeSizable() to do so!"</span>, type : <span class="literal">"warning"</span>});
+    <span class="reserved">return</span> false;
+  }
+  <span class="reserved">this</span>.fireEvent(<span class="literal">"sizingStart"</span>);
+  Zapatec.GlobalEvents.fireEvent(<span class="literal">"sizingStart"</span>, <span class="reserved">this</span>);
+  <span class="reserved">this</span>._setSizingState(true);
+  <span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Ends the event of sizing. This is used
+ * to send message to interested objects that
+ * sizing was ended. This stops the calling
+ * of "onSizing" event from setWidth and setHeight.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false
+ */</span>
+Zapatec.Sizable.endSizing = <span class="reserved">function</span>() {
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.isSizing()) {
+    Zapatec.Log({description : <span class="literal">"The sizing for object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"' was not started!"</span>, type : <span class="literal">"warning"</span>});
+    <span class="reserved">return</span> false;
+  }
+  <span class="reserved">this</span>.fireEvent(<span class="literal">"sizingEnd"</span>);
+  Zapatec.GlobalEvents.fireEvent(<span class="literal">"sizingEnd"</span>, <span class="reserved">this</span>);
+  <span class="reserved">this</span>._setSizingState(false);
+  <span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Gets the state of sizing. It returns
+ * true if sizing was started, otherwise
+ * it returns false.
+ * <span class="attrib">@return</span> {boolean} true if sizing started, otherwise false
+ */</span>
+Zapatec.Sizable.isSizing = <span class="reserved">function</span>() {
+  <span class="reserved">return</span> <span class="reserved">this</span>.sizingState;
+};
+
+<span class="comment">/**
+ * Sets the state of sizing to true or false.
+ * This is used internally and can be overwritten
+ * in child classes to use another propety for the flag.
+ */</span>
+Zapatec.Sizable._setSizingState = <span class="reserved">function</span>(on) {
+  <span class="reserved">this</span>.sizingState = on;
+};
+
+<span class="comment">/**
+ * Returns the width of the measurement element.
+ * If there is no such, then the biggest width
+ * of sizable elements will be taken.
+ * <span class="attrib">@return</span> {number or boolean} the width or false iif failure.
+ */</span>
+Zapatec.Sizable.getWidth = <span class="reserved">function</span>() {
+  <span class="comment">//trying to get measurement of sizing</span>
+  var el = <span class="reserved">this</span>.getSizableMeasurement(<span class="literal">"width"</span>);
+  <span class="comment">//if we success then return its width or its value</span>
+  <span class="reserved">if</span> (Zapatec.isHtmlElement(el) || typeof el == <span class="literal">"number"</span>) {
+    <span class="reserved">return</span> Zapatec.Utils.getWidth(el) || el;
+  }
+  <span class="comment">//otherwise reporting failure</span>
+  Zapatec.Log({description : <span class="literal">"Can't calculate width for object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"'!"</span>, type : <span class="literal">"warning"</span>});
+  <span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Returns the height of the measurement element.
+ * If there is no such, then the biggest height
+ * of sizable elements will be taken.
+ * <span class="attrib">@return</span> {number or boolean} the height or false iif failure.
+ */</span>
+Zapatec.Sizable.getHeight = <span class="reserved">function</span>() {
+  <span class="comment">//trying to get measurement of sizing</span>
+  var el = <span class="reserved">this</span>.getSizableMeasurement(<span class="literal">"height"</span>);
+  <span class="comment">//if we success then return its height or its value</span>
+  <span class="reserved">if</span> (Zapatec.isHtmlElement(el) || typeof el == <span class="literal">"number"</span>) {
+    <span class="reserved">return</span> Zapatec.Utils.getHeight(el) || el;
+  }
+  <span class="comment">//otherwise reporting failure</span>
+  Zapatec.Log({description : <span class="literal">"Can't calculate height for object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"'!"</span>, type : <span class="literal">"warning"</span>});
+  <span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Is object prepared for sizing.
+ * Mostly you will need to redefine this method,
+ * to use some other property as a flag.
+ * <span class="attrib">@return</span> {boolean} true if prepared, otherwise false.
+ */</span>
+Zapatec.Sizable.isSizableSafely = <span class="reserved">function</span>(dimension) {
+  <span class="reserved">return</span> <span class="reserved">this</span>.safelySizable;
+};
+
+<span class="comment">/**
+ * Makes all sizable elements safely sizable.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable.makeSizable = <span class="reserved">function</span>() {
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.hasInterface(<span class="literal">"Zapatec.CommandEvent"</span>)) {
+    Zapatec.Log({description : <span class="literal">"The object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"' has no Zapatec.CommandEvent interface!"</span>});
+    <span class="reserved">return</span> false;
+  }
+  <span class="reserved">if</span> (<span class="reserved">this</span>.isSizableSafely()) {
+    <span class="reserved">return</span> true;
+  }
+  <span class="comment">//getting array of elements which should be sizable</span>
+  <span class="comment">//without parameters this function should always</span>
+  <span class="comment">//return all possible sizable elements</span>
+  var elements = Zapatec.Array(<span class="reserved">this</span>.getSizableElements()),
+  success = true, self = <span class="reserved">this</span>;
+  <span class="comment">//trying to prepare each element</span>
+  elements.each(<span class="reserved">function</span>(index, sizable) {
+    sizable = Zapatec.Array(sizable);
+    sizable.each(<span class="reserved">function</span>(index, sizable) {
+      <span class="reserved">if</span> (Zapatec.isHtmlElement(sizable)) {
+        <span class="comment">//prepareing HTML elements</span>
+        <span class="reserved">if</span> (!Zapatec.Utils.makeSafelySizable(sizable)) {
+          success = false;
+          <span class="reserved">return</span> <span class="literal">"break"</span>;
+        }
+        self.createProperty(sizable, <span class="literal">"sizingObj"</span>, self);
+      } <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isSizableObj(sizable)) {
+        <span class="comment">//prepareing sizable objects</span>
+        <span class="reserved">if</span> (!sizable.makeSizable()) {
+          success = false;
+          <span class="reserved">return</span> <span class="literal">"break"</span>;
+        }
+      }
+    });
+  });
+  <span class="comment">//if there was failure we need roll back all the preparations</span>
+  <span class="reserved">if</span> (!success) {
+    <span class="comment">//restoreing elements or objects</span>
+    <span class="reserved">this</span>.restoreOfSizing();
+    <span class="comment">//reporting error</span>
+    Zapatec.Log({description : <span class="literal">"Can not make the object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"' sizable!"</span>});
+    <span class="reserved">return</span> false;
+  }
+  <span class="comment">//reporting success</span>
+  <span class="reserved">this</span>._setSizableSafely(true);
+  <span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Restoreing object of sizable state.
+ * <span class="attrib">@return</span> {boolean} always returns true.
+ */</span>
+Zapatec.Sizable.restoreOfSizing = <span class="reserved">function</span>() {
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.isSizableSafely()) {
+    <span class="reserved">return</span> true;
+  }
+  <span class="comment">//getting all sizable elements</span>
+  var elements = Zapatec.Array(<span class="reserved">this</span>.getSizableElements());
+  <span class="comment">//restoreing each item</span>
+  elements.each(<span class="reserved">function</span>(index, sizable) {
+    sizable = Zapatec.Array(sizable);
+    sizable.each(<span class="reserved">function</span>(index, sizable) {
+      <span class="reserved">if</span> (Zapatec.isHtmlElement(sizable)) {
+        Zapatec.Utils.restoreOfSizing(sizable);
+        sizable.sizingObj = null;
+      } <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isSizableObj(sizable)) {
+        sizable.restoreOfSizing();
+      }
+    });
+  });
+  <span class="comment">//returning success</span>
+  <span class="reserved">this</span>._setSizableSafely(false);
+  <span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Replaces the element with the given
+ * one. The given one will be made
+ * sizable.
+ * <span class="attrib">@param</span> element {HTML element} element to replace.
+ * <span class="attrib">@param</span> withEl {HTML element} replacement element.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable.replaceWithSizable = <span class="reserved">function</span>(element, withEl) {
+  <span class="reserved">if</span> (!Zapatec.isHtmlElement(element) || !Zapatec.isHtmlElement(withEl)) {
+    <span class="reserved">return</span> false;
+  }
+  var width = Zapatec.Utils.getWidth(element);
+  var height = Zapatec.Utils.getHeight(element);
+  element.parentNode.insertBefore(withEl, element.nextSibling);
+  <span class="reserved">if</span> (Zapatec.is_ie) {
+    element.style.display = <span class="literal">"none"</span>;
+  } <span class="reserved">else</span> {
+    element.parentNode.removeChild(element);
+  }
+
+  <span class="reserved">if</span> (!Zapatec.Utils.makeSafelySizable(withEl)) {
+    <span class="reserved">return</span> false;
+  }
+  <span class="reserved">if</span> (Zapatec.Utils.setWidth(withEl, width) &amp;&amp; Zapatec.Utils.setHeight(withEl, height)) {
+    <span class="reserved">return</span> true;
+  }
+  <span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Fills some flag with the true or false value.
+ * Same flag should be used in isSafelySizable method.
+ * <span class="attrib">@param</span> on {boolean} turn on or turn of.
+ */</span>
+Zapatec.Sizable._setSizableSafely = <span class="reserved">function</span>(on) {
+  <span class="reserved">this</span>.safelySizable = on;
+};
+
+<span class="comment">/**
+ * Parses the value of the size argument
+ * to calculate the number in pixels.
+ * if this method returns null or false
+ * or "" or 0 nothing is done at all.
+ * Currently recognizes "auto", px and % size.
+ * <span class="attrib">@param</span> width {string} string representation of the size.
+ * <span class="attrib">@param</span> dimension {string} dimension in which we should parse.
+ * <span class="attrib">@return</span> {number or null} null if nothing should be done
+ * by setWidth or setHeight method, otherwise returns the size in pixels.
+ */</span>
+Zapatec.Sizable._parseSize = <span class="reserved">function</span>(size, dimension) {
+  switch (true) {
+    case (size == <span class="literal">"auto"</span>) : {
+      size = <span class="reserved">this</span>._parseAutoSize(dimension);
+      break;
+    }
+    case ((/^\d+px$/).test(String(size))) : {
+      size = parseInt(size, 10);
+      break;
+    }
+    case ((/^\d+%$/).test(String(size))) : {
+      size = <span class="reserved">this</span>._parsePercentSize(size, dimension);
+      break;
+    }
+    case (typeof size == <span class="literal">"number"</span>) : {
+      break;
+    }
+  }
+  <span class="reserved">return</span> <span class="reserved">this</span>._canSetSize(size, dimension);
+};
+
+<span class="comment">/**
+ * Returns the value to be used as size in pixels for
+ * the measure element used for auto sizing the element
+ * returned by _getAutoSizableElement.
+ * <span class="attrib">@param</span> dimension {string} dimension to parse for value.
+ * <span class="attrib">@return</span> {number or null} needed width or null if can not
+ * do this.
+ */</span>
+Zapatec.Sizable._parseAutoSize = <span class="reserved">function</span>(dimension) {
+  <span class="comment">//getting measurement and autosizable element. Auto sizable means</span>
+  <span class="comment">//we'll try to size element to fit this elements content.</span>
+  var measurement = <span class="reserved">this</span>.getSizableMeasurement(dimension);
+  var autoSizable = <span class="reserved">this</span>._getAutoSizableElement(dimension);
+  <span class="reserved">if</span> (!Zapatec.isHtmlElement(autoSizable)) {
+    <span class="reserved">return</span> null;
+  }
+  var dim = dimension.charAt(0).toUpperCase() + dimension.slice(1).toLowerCase();
+  <span class="comment">//calculateing difference between this element and measurement (if there is one)</span>
+  var diff = 0;
+  <span class="reserved">if</span> (Zapatec.isHtmlElement(measurement) || typeof measurement == <span class="literal">"number"</span>) {
+    diff = (Zapatec.Utils[<span class="literal">"get"</span> + dim](measurement) || measurement) - Zapatec.Utils[<span class="literal">"get"</span> + dim](autoSizable);
+  }
+  <span class="comment">//workaround for iframe</span>
+  var el = autoSizable;
+  <span class="reserved">if</span> (el.tagName.toLowerCase() == <span class="literal">"iframe"</span>) {
+    try {
+      <span class="reserved">if</span> (el.contentDocument != null) {
+        el = el.contentDocument.body;
+      } <span class="reserved">else</span> <span class="reserved">if</span> (el.contentWindow.document != null) {
+        el = el.contentWindow.document.body;
+      }
+      <span class="reserved">if</span> (!Zapatec.isHtmlElement(el)) {
+        throw <span class="literal">"No element to calculate auto size!"</span>;
+      }
+    } catch(e) {
+      Zapatec.Log({description : <span class="literal">"Can't calculate auto size for the IFRAME in the object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"'!"</span>, type : <span class="literal">"warning"</span>});
+      <span class="reserved">return</span> null;
+    }
+  }
+  <span class="comment">//returning new size.</span>
+  <span class="reserved">return</span> el[<span class="literal">"scroll"</span> + dim] + diff;
+};
+
+<span class="comment">/**
+ * Returns the value to be used as size in pixels for
+ * the measure element used for sizing it in percents
+ * to _getSizableParent.
+ * <span class="attrib">@param</span> value {string} value to parse.
+ * <span class="attrib">@param</span> dimension {string} dimension to parse in.
+ * <span class="attrib">@return</span> {number or null} needed width or null if can not
+ * do this.
+ */</span>
+Zapatec.Sizable._parsePercentSize = <span class="reserved">function</span>(value, dimension) {
+  <span class="comment">//getting the parent element to calculate percents of its size.</span>
+  var sizableParent = <span class="reserved">this</span>._getSizableParent(dimension);
+  <span class="reserved">if</span> (!Zapatec.isHtmlElement(sizableParent)) {
+    <span class="reserved">return</span> null;
+  }
+  var dim = dimension.charAt(0).toUpperCase() + dimension.slice(1).toLowerCase();
+  value = parseInt(value, 10);
+  <span class="comment">//calculating percents</span>
+  <span class="reserved">return</span> Math.round((value / 100) * Zapatec.Utils[<span class="literal">"get"</span> + dim](sizableParent));
+};
+
+<span class="comment">/**
+ * Returns value if this value for this dimension can be set.
+ * This is currently default method, but you can overwrite it
+ * for implementing your way of restriction.
+ * <span class="attrib">@param</span> value {string} value to check.
+ * <span class="attrib">@param</span> dimension {string} dimension to check.
+ * <span class="attrib">@return</span> {number or boolean} coordinate if the size can be set,
+ * otherwise false.
+ */</span>
+Zapatec.Sizable._canSetSize = <span class="reserved">function</span>(value, dimension) {
+  <span class="reserved">if</span> (typeof value != <span class="literal">"number"</span>) {
+    <span class="reserved">return</span> false;
+  }
+  var dim = dimension.charAt(0).toUpperCase() + dimension.slice(1).toLowerCase();
+  var sizingConfig = <span class="reserved">this</span>.getSizingConfig();
+  var limit = sizingConfig.limit;
+  var direction = sizingConfig.direction;
+  <span class="reserved">if</span> (dim == <span class="literal">"Width"</span> &amp;&amp; direction == <span class="literal">"vertical"</span>) {
+    <span class="reserved">return</span> <span class="reserved">this</span>._handleSizeOverflow(<span class="reserved">this</span>.getWidth());
+  }
+  <span class="reserved">if</span> (dim == <span class="literal">"Height"</span> &amp;&amp; direction == <span class="literal">"horizontal"</span>) {
+    <span class="reserved">return</span> <span class="reserved">this</span>._handleSizeOverflow(<span class="reserved">this</span>.getHeight());
+  }
+  <span class="reserved">if</span> (typeof limit[<span class="literal">"min"</span> + dim] == <span class="literal">"number"</span> &amp;&amp; value &lt; limit[<span class="literal">"min"</span> + dim]) {
+    <span class="reserved">return</span> <span class="reserved">this</span>._handleSizeOverflow(limit[<span class="literal">"min"</span> + dim]);
+  }
+  <span class="reserved">if</span> (typeof limit[<span class="literal">"max"</span> + dim] == <span class="literal">"number"</span> &amp;&amp; value &gt; limit[<span class="literal">"max"</span> + dim]) {
+    <span class="reserved">return</span> <span class="reserved">this</span>._handleSizeOverflow(limit[<span class="literal">"max"</span> + dim]);
+  }
+  <span class="reserved">return</span> value;
+};
+
+<span class="comment">/**
+ * A method to handle size overflow of the limit.
+ * <span class="attrib">@param</span> limit {number} limit that was overflowed.
+ * <span class="attrib">@param</span> dimension {string} dimension of sizing.
+ * <span class="attrib">@return</span> {boolean or number} false if can not set,
+ * otherwise new coordinate.
+ */</span>
+Zapatec.Sizable._handleSizeOverflow = <span class="reserved">function</span>(limit, dimension) {
+  <span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Returns the configuration of sizable object.
+ * <span class="attrib">@return</span> {object} object with configuration.
+ */</span>
+Zapatec.Sizable.getSizingConfig = <span class="reserved">function</span>() {
+  <span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration();
+};
+
+<span class="comment">/**
+ * Sets the sizing configuration.
+ * <span class="attrib">@param</span> config {object} a set of new configuration.
+ */</span>
+Zapatec.Sizable.setSizingConfig = <span class="reserved">function</span>(config) {
+  <span class="reserved">this</span>.reconfigure(config);
+};
+
+<span class="comment">/**
+ * Gets the element to be used for getting size which fits
+ * its content without overflow. It will mostly always
+ * be overwritten by your function.
+ * <span class="attrib">@param</span> dimension {string} dimension we are working with.
+ * <span class="attrib">@return</span> {HTML element} should always be HTML element.
+ */</span>
+Zapatec.Sizable._getAutoSizableElement = <span class="reserved">function</span>(dimension) {
+  <span class="reserved">return</span> <span class="reserved">this</span>.getContainer();
+};
+
+<span class="comment">/**
+ * Gets the element to be used for getting size in percents
+ * of its size. It will mostly always be overwritten by your function.
+ * <span class="attrib">@param</span> dimension {string} dimension we are working with.
+ * <span class="attrib">@return</span> {HTML element} should always be HTML element.
+ */</span>
+Zapatec.Sizable._getSizableParent = <span class="reserved">function</span>(dimension) {
+  <span class="reserved">return</span> <span class="reserved">this</span>.getContainer().parentNode;
+};
+
+<span class="comment">/**
+ * Returns the measurement element for this sizable
+ * object. This a generous method, and mostly will
+ * be overwritten in implementing class.
+ * <span class="attrib">@param</span> dimension {string} string pointing to dimension that is
+ * setting or calculating. You can use this to make difference
+ * between dimensions.
+ * <span class="attrib">@return</span> {null or number or HTML element} method should return
+ * null if there is no measure, or number or HTML element to
+ * calculate measurement.
+ */</span>
+Zapatec.Sizable.getSizableMeasurement = <span class="reserved">function</span>(dimension) {
+  <span class="reserved">return</span> <span class="reserved">this</span>.getContainer();
+};
+
+<span class="comment">/**
+ * Returns the array of elements to be sized in this
+ * object. This a generous method, and mostly will
+ * be overwritten in implementing class.
+ * <span class="attrib">@param</span> dimension {string} string pointing to dimension that is
+ * setting or calculating. You can use this to make difference
+ * between dimensions.
+ * <span class="attrib">@return</span> {mixed} method should return null if there is no sizable
+ * elements, or array of HTML elements or Zapatec.Sizable objects
+ * to size them or get their size or prepare them.
+ */</span>
+Zapatec.Sizable.getSizableElements = <span class="reserved">function</span>(dimension) {
+  <span class="reserved">return</span> <span class="reserved">this</span>.getContainer();
+};
+
+<span class="comment">/**
+ * Returns the container element.
+ * <span class="attrib">@return</span> {HTML element} container element.
+ */</span>
+Zapatec.Sizable.getContainer = <span class="reserved">function</span>() {
+  <span class="reserved">return</span> <span class="reserved">this</span>.getSizingConfig().container;
+};
+
+<span class="comment">/**
+ * Sets the size of the particular element.
+ * <span class="attrib">@param</span> size {number} the size to set.
+ * <span class="attrib">@param</span> sizable {mixed} element or object to be sized.
+ * <span class="attrib">@param</span> dimension {string} dimension to set.
+ * <span class="attrib">@return</span> {object or boolean} object with two properties: "sizable" - sizable object,
+ * "oldSize" - its old size for restoring on failure; or it returns false if failure
+ * or true if this was not sizable element.
+ */</span>
+Zapatec.Sizable._setElementSize = <span class="reserved">function</span>(size, sizable, dimension) {
+  var dim = dimension.charAt(0).toUpperCase() + dimension.slice(1).toLowerCase();
+  <span class="comment">//we take each element</span>
+  <span class="reserved">if</span> (Zapatec.isHtmlElement(sizable)) {
+    <span class="comment">//trying to set the height of the element</span>
+    <span class="reserved">if</span> (Zapatec.Utils[<span class="literal">"set"</span> + dim](sizable, size)) {
+      <span class="reserved">return</span> true;
+    } <span class="reserved">else</span> {
+      <span class="reserved">return</span> false;
+    }
+  } <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isSizableObj(sizable)) {
+    <span class="comment">//trying to set the height of the Zapatec.Sizable object</span>
+    <span class="reserved">if</span> (sizable[<span class="literal">"set"</span> + dim](size)) {
+      <span class="reserved">return</span> true;
+    } <span class="reserved">else</span> {
+      <span class="reserved">return</span> false;
+    }
+  }
+
+  <span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Proceeds the matrix (2dim array) of elements to size them accordingly.
+ * <span class="attrib">@param</span> value {number} value of the size to be proceed.
+ * <span class="attrib">@param</span> dimension {string} dimension to be proceed.
+ * <span class="attrib">@param</span> elArr {array} array of elements to be proceed.
+ * <span class="attrib">@param</span> restArr {array} array of elements to be restored if failure
+ * (it is filled during the method work).
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Sizable._proceedElementsSizes = <span class="reserved">function</span>(value, dimension, elArr, restArr) {
+  var diff = null, self = <span class="reserved">this</span>, sizes = Zapatec.Array();
+  <span class="comment">//getSizableMeasurement is used to get the</span>
+  <span class="comment">//measurement element or some number. This</span>
+  <span class="comment">//variable is used as a measurement of current</span>
+  <span class="comment">//size. Param passed is the dimension we size.</span>
+  var measurement = <span class="reserved">this</span>.getSizableMeasurement(dimension);
+  var dim = dimension.charAt(0).toUpperCase() + dimension.slice(1).toLowerCase();
+  <span class="reserved">if</span> (typeof measurement == <span class="literal">"number"</span> || Zapatec.isHtmlElement(measurement)) {
+    <span class="comment">//if there is measurement then height of our element is changed by the following</span>
+    <span class="comment">//value - (height - measurement)</span>
+    diff = value - (Zapatec.Utils[<span class="literal">"get"</span> + dim](measurement) || measurement);
+  }
+  <span class="comment">//elements array should be 2 dimensional, at least it will be</span>
+  <span class="comment">//emulated so. Second dimension holds the elements that share one difference.</span>
+  elArr = Zapatec.Array(elArr);
+  <span class="comment">//calculating the array of sizes to be set</span>
+  elArr.each(<span class="reserved">function</span>(row, val) {
+    var oneDiff = diff, size = value;
+    val = Zapatec.Array(val);
+    <span class="comment">//if there is difference we share it between elements,</span>
+    <span class="comment">//otherwise we share size!</span>
+    <span class="reserved">if</span> (diff) {
+      oneDiff = Math.round(oneDiff / val.length);
+    } <span class="reserved">else</span> {
+      size = Math.round(size / val.length);
+    }
+    <span class="comment">//adding new row to sizes array</span>
+    sizes[row] = [];
+    <span class="comment">//iterating through second dimension</span>
+    val.each(<span class="reserved">function</span>(index, sizable) {
+      var setSize = null;
+      var elSize = null;
+      <span class="comment">//taking element size</span>
+      <span class="reserved">if</span> (Zapatec.isHtmlElement(sizable)) {
+        elSize = Zapatec.Utils[<span class="literal">"get"</span> + dim](sizable)
+      } <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isSizableObj(sizable)) {
+        elSize = sizable[<span class="literal">"get"</span> + dim]();
+      } <span class="reserved">else</span> {
+        <span class="reserved">return</span>;
+      }
+      <span class="reserved">if</span> (oneDiff || oneDiff === 0) {
+        <span class="comment">//can't make mistakes :)</span>
+        <span class="reserved">if</span> (index != val.length - 1) {
+          setSize = elSize + oneDiff;
+        } <span class="reserved">else</span> {
+          setSize = elSize + (diff - oneDiff * index);
+        }
+      } <span class="reserved">else</span> {
+        <span class="comment">//can't make mistakes :)</span>
+        <span class="reserved">if</span> (index != val.length - 1) {
+          setSize = size;
+        } <span class="reserved">else</span> {
+          setSize = value - size * index;
+        }
+      }
+      <span class="comment">//saving size</span>
+      sizes[row][index] = {setSize : setSize, elSize : elSize};
+    });
+  });
+  var res = elArr.each(<span class="reserved">function</span>(row, val) {
+    val = Zapatec.Array(val);
+    <span class="comment">//iterating through second dimension</span>
+    var res = val.each(<span class="reserved">function</span>(index, sizable) {
+      <span class="reserved">if</span> (!sizes[row][index]) {
+        <span class="reserved">return</span>;
+      }
+      var res = self._setElementSize(sizes[row][index].setSize, sizable, dimension);
+      <span class="reserved">if</span> (!res &amp;&amp; res === false) {
+        <span class="reserved">return</span> <span class="literal">"break"</span>;
+      } <span class="reserved">else</span> {
+        restArr.push({sizable : sizable, oldSize : sizes[row][index].elSize});
+      }
+    });
+    <span class="reserved">if</span> (!res &amp;&amp; res === false) {
+      <span class="reserved">return</span> <span class="literal">"break"</span>;
+    }
+  });
+  <span class="reserved">return</span> res;
+};
+
+<span class="comment">/**
+ * Rolls back the size of elements from the array.
+ * <span class="attrib">@param</span> rollBackArr {array} array of objects of the following structure:
+ * {sizable : HTML element or Sizable object, oldSize : size to restore}.
+ * <span class="attrib">@param</span> dimension {string} dimension to roll back.
+ */</span>
+Zapatec.Sizable._rollBackSizing = <span class="reserved">function</span>(rollBackArr, dimension) {
+  var dim = dimension.charAt(0).toUpperCase() + dimension.slice(1).toLowerCase();
+  rollBackArr = Zapatec.Array(rollBackArr);
+  rollBackArr.each(<span class="reserved">function</span>(index, obj) {
+    <span class="reserved">if</span> (Zapatec.isHtmlElement(obj.sizable)) {
+      Zapatec.Utils[<span class="literal">"set"</span> + dim](obj.sizable, obj.oldSize);
+    } <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isSizableObj(obj.sizable)) {
+      obj.sizable[<span class="literal">"set"</span> + dim](obj.oldSize);
+    }
+  });
+};
+
+<span class="comment">/**
+ * This is Zapatec.Utils.Sizable object definition.
+ * This is done in the "interface" manner.
+ * It represents most of the routines and
+ * events connected to sizing of the object.
+ * <span class="attrib">@param</span> config {object} - all parameters are passed as the properties of this object.
+ *
+ * Constructor recognizes the following properties of the config object
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *  container        | {HTML element} The main element to be sizable (default null).
+ *  syncVertically   | {array} Elements to be synchronize in vertical sizing. The important thing
+ *                   | about this is that each element of this array can be array too and this means
+ *                   | that elements from that sub array will share the height change proportionally,
+ *                   | otherwise, if there is only one element or it is not sub array but one element,
+ *                   | it will tkae all the height change. To illustrate this: if you pass [el1, [el2, el3]]
+ *                   | and your container has height 200px, after you cahnge the height to 300px
+ *                   | el1 will change its height for 100px, but el2 and el3 will change their height
+ *                   | for 50px both. (default []).
+ *  syncHorizontally | {array} Elements to be synchronize in horizontal sizing. The important thing
+ *                   | about this is that each element of this array can be array too and this means
+ *                   | that elements from that sub array will share the width change proportionally,
+ *                   | otherwise, if there is only one element or it is not sub array but one element,
+ *                   | it will tkae all the width change. To illustrate this: if you pass [el1, [el2, el3]]
+ *                   | and your container has width 200px, after you cahnge the width to 300px
+ *                   | el1 will change its width for 100px, but el2 and el3 will change their width
+ *                   | for 50px both. (default []).
+ *  direction        | {string} Enabled direction of sizing. Can be "vertical", "horizontal" or "both"
+ *                   | (default "both").
+ *  limit            | {object} Object with properties "minWidth", "maxWidth", "minHeight" and "maxHeight",
+ *                   | that are used as restrictions for setting size.
+ *
+ * \endcode
+ */</span>
+Zapatec.Utils.Sizable = <span class="reserved">function</span>(config) {
+  Zapatec.Utils.Sizable.SUPERconstructor.call(<span class="reserved">this</span>, config);
+};
+
+Zapatec.Utils.Sizable.id = <span class="literal">"Zapatec.Utils.Sizable"</span>;
+Zapatec.inherit(Zapatec.Utils.Sizable, Zapatec.Widget);
+<span class="comment">//implementing Zapatec.CommandEvent interface</span>
+Zapatec.implement(Zapatec.Utils.Sizable, <span class="literal">"Zapatec.CommandEvent"</span>);
+<span class="comment">//implementing Zapatec.Sizable interface</span>
+Zapatec.implement(Zapatec.Utils.Sizable, <span class="literal">"Zapatec.Sizable"</span>);
+
+<span class="comment">/**
+ * Inits the object with set of config options.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Sizable.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(config) {
+  <span class="comment">//calling parent init</span>
+  Zapatec.Utils.Sizable.SUPERclass.init.call(<span class="reserved">this</span>, config);
+  <span class="comment">//makes object sizable (means all elements that are sizable)</span>
+  <span class="reserved">this</span>.makeSizable();
+};
+
+<span class="comment">/**
+ * Sets the default configuration of the object and
+ * inits it with user defined values.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Sizable.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(config) {
+  <span class="comment">//set of elements to be sized with container vertically</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"syncVertically"</span>, []);
+  <span class="comment">//set of elements to be sized with container horizontally</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"syncHorizontally"</span>, []);
+  <span class="comment">//container, which is actually sized too and also</span>
+  <span class="comment">//is used as a measurement</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"container"</span>, null);
+  <span class="comment">//direction of sizing (you can enable sizing only in one direction)</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"direction"</span>, <span class="literal">"both"</span>);
+  <span class="comment">//limitations of the sizing</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"limit"</span>, {
+    minWidth : 10,
+    maxWidth : null,
+    minHeight : 10,
+    maxHeight : null
+  });
+  <span class="comment">//no theme</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"theme"</span>, null);
+  <span class="comment">// Call parent method</span>
+  Zapatec.Utils.Sizable.SUPERclass.configure.call(<span class="reserved">this</span>, config);
+  config = <span class="reserved">this</span>.getConfiguration();
+  <span class="comment">//checking if limit object wasn't overwritten</span>
+  <span class="reserved">if</span> (!config.limit || typeof config.limit != <span class="literal">"object"</span>) {
+    config.limit = {
+      minWidth : null,
+      maxWidth : null,
+      minHeight : null,
+      maxHeight : null
+    };
+  }
+  var self = <span class="reserved">this</span>;
+  <span class="comment">//making sure that config.syncVertically will be Array.</span>
+  config.syncVertically = Zapatec.Array(config.syncVertically);
+  config.syncVertically.each(<span class="reserved">function</span>(index, subArr) {
+    config.syncVertically[index] = Zapatec.Array(subArr);
+    config.syncVertically[index].each(<span class="reserved">function</span>(elIndex, element) {
+      <span class="reserved">if</span> (element === null) {
+        <span class="reserved">return</span>;
+      }
+      element = Zapatec.Widget.getElementById(element);
+      <span class="reserved">if</span> (!element) {
+        Zapatec.Log({description : <span class="literal">"Wrong element in syncVertically array for the sizable object with ID '"</span> + self.id + <span class="literal">"'!"</span>});
+      } <span class="reserved">else</span> {
+        config.syncVertically[index][elIndex] = element;
+      }
+    });
+  });
+  <span class="comment">//making sure that config.syncVertically will be Array.</span>
+  config.syncHorizontally = Zapatec.Array(config.syncHorizontally);
+  config.syncHorizontally.each(<span class="reserved">function</span>(index, subArr) {
+    config.syncHorizontally[index] = Zapatec.Array(subArr);
+    config.syncHorizontally[index].each(<span class="reserved">function</span>(elIndex, element) {
+      <span class="reserved">if</span> (element === null) {
+        <span class="reserved">return</span>;
+      }
+      element = Zapatec.Widget.getElementById(element);
+      <span class="reserved">if</span> (!element) {
+        Zapatec.Log({description : <span class="literal">"Wrong element in syncHorizontally array for the sizable object with ID '"</span> + self.id + <span class="literal">"'!"</span>});
+      } <span class="reserved">else</span> {
+        config.syncHorizontally[index][elIndex] = element;
+      }
+    });
+  });
+  <span class="comment">//setting default container element</span>
+  <span class="reserved">if</span> (!Zapatec.isHtmlElement(config.container = Zapatec.Widget.getElementById(config.container))) {
+    config.container = null;
+  }
+};
+
+<span class="comment">/**
+ * Reconfigures the object with new parameters.
+ * <span class="attrib">@param</span> config {object} new configuration parameters.
+ */</span>
+Zapatec.Utils.Sizable.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(config) {
+  <span class="comment">// Call parent method</span>
+  Zapatec.Utils.Sizable.SUPERclass.reconfigure.call(<span class="reserved">this</span>, config);
+};
+
+<span class="comment">/**
+ * We overwrite the method of Zapatec.Sizable interface
+ * to return the array of needed sizable elements.
+ * <span class="attrib">@param</span> {array} array of sizable elements.
+ */</span>
+Zapatec.Utils.Sizable.<span class="reserved">prototype</span>.getSizableElements = <span class="reserved">function</span>(dimension) {
+  var config = <span class="reserved">this</span>.getConfiguration();
+  <span class="reserved">if</span> (dimension &amp;&amp; dimension.toLowerCase() == <span class="literal">"width"</span>) {
+    <span class="reserved">return</span> config.syncHorizontally.concat(config.container);
+  } <span class="reserved">else</span> <span class="reserved">if</span> (dimension &amp;&amp; dimension.toLowerCase() == <span class="literal">"height"</span>) {
+    <span class="reserved">return</span> config.syncVertically.concat(config.container);
+  } <span class="reserved">else</span> {
+    <span class="reserved">return</span> config.syncVertically.concat(config.syncHorizontally).concat(config.container);
+  }
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

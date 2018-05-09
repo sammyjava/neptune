@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content="This demo shows how to load data into tree in different ways.">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Dynamically load data from server</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Dynamically load data from server</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				<li>This demo shows how to load data into tree in different ways.</li>
+			</ul>
+		</div>
+
+
+
+<table width="100%"><tr><td width="40%" valign="top">
+<ul id="tree">
+	<li>
+		static node
+	</li>
+	<li>
+		static branch
+		<ul>
+			<li>first(2)</li>
+			<li id="second(2)">
+				second(2)
+				<ul>
+					<li id="syncThis">first(3)</li>
+					<li id="second(3)">
+						second(3)
+						<ul>
+							<li id="first(4)">first(4)</li>
+						</ul>
+					</li>
+					<li>third(3)</li>
+				</ul>
+			</li>
+			<li>third(2)</li>
+		</ul>
+	</li>
+	<li class="zpLoadJSON=json_branch.txt">
+		load children from <a href="json_branch.txt" target="_blank">remote JSON file</a>
+		<ul>
+			<li>predefined subchild1</li>
+			<li>predefined subchild2</li>
+			<li>predefined subchild3</li>
+		</ul>
+	</li>
+	<li class="zpLoadHTML=html_branch.txt">
+		load from <a href="html_branch.txt" target="_blank">remote HTML file</a>
+		<ul>
+			<li>predefined subchild1</li>
+			<li>predefined subchild2</li>
+			<li>predefined subchild3</li>
+		</ul>
+	</li>
+	<li class="zpLoadXML=xml_branch.xml">
+		load from <a href="xml_branch.xml" target="_blank">remote XML file</a>
+		<ul>
+			<li>predefined subchild1</li>
+			<li>predefined subchild2</li>
+			<li>predefined subchild3</li>
+		</ul>
+	</li>
+	<li class="zpLoadJSON=slow_json.php?slow">
+		slow loading
+		<ul>
+			<li>predefined subchild1</li>
+			<li>predefined subchild2</li>
+			<li>predefined subchild3</li>
+		</ul>
+	</li>
+	<li class="zpLoadAlways zpLoadJSON=slow_json.php?refresh">
+		always fresh (fetch content on each expand)
+	</li>
+	<li>
+		third(1)
+	</li>
+</ul>
+</td>
+<td valign="top">
+	<ul id="navigationTree">
+		<li id="expand-collapse">
+			Expand/collapse many nodes at once
+			<ul>
+				<li><span onclick='tree.expandAll()'>Expand all</span></li>
+				<li><span onclick='tree.collapseAll()'>Collapse all</span></li>
+				<li><span onclick='tree.expandToLevel(1)'>Expand to first level</span></li>
+				<li><span onclick='tree.collapseToLevel(1)'>Collapse to first level</span></li>
+				<li><span onclick='tree.expandToLevel(2)'>Expand to second level</span></li>
+				<li><span onclick='tree.collapseToLevel(2)'>Collapse to second level</span></li>
+				<li><span onclick='tree.expandToLevel(3)'>Expand to third level</span></li>
+			</ul>
+		</li>
+		<li>
+			Adding nodes using source && sourceType
+			<ul>
+				<li><span onclick='loadJSON({label:"", children:[{label:"new node from JSON source"}]})'>Create new node from JSON string</span></li>
+				<li><span onclick='loadHTML("<li><ul><li>new node from HTML string</li></ul></li>")'>Create new node from HTML string</span></li>
+				<li><span onclick='loadXML("<item><list><item><label>new node from XML string</label></item></list></item>")'>Create new node from XML string</span></li>
+			</ul>
+		</li>
+	</ul>
+</td>
+</tr></table>
+
+<script type="text/javascript">
+	var tree = new Zapatec.Tree({
+		tree: "tree",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true
+	});
+
+	new Zapatec.Tree({
+		tree: "navigationTree",
+		initLevel: 2
+	});
+
+	function loadJSON(jsonObj){
+		tree.rootNode.config.source = jsonObj;
+		tree.rootNode.config.sourceType="json"; 
+		tree.rootNode.loadData()
+	}
+
+	function loadHTML(htmlString){
+		tree.rootNode.config.source = htmlString;
+		tree.rootNode.config.sourceType="html/text"; 
+		tree.rootNode.loadData()
+	}
+
+	function loadXML(xmlString){
+		tree.rootNode.config.source = xmlString;
+		tree.rootNode.config.sourceType="xml"; 
+		tree.rootNode.loadData()
+	}
+
+	if(document.location.toString().indexOf('http') != 0) {
+		alert(
+			'"slow loading" branch emulates a slow internet connection. It loads the branch with delay of 5 seconds. \n' + 
+			'To test it - you should put this demo on the directory on your web-server where executing PHP scripts is allowed'
+		);
+	}
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

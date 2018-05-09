@@ -1,0 +1,179 @@
+/* $Id: image.css 9279 2007-12-21 09:38:24Z andrew $ */
+.zpTreeImageContainer{
+  background-color: #fff;
+  border: 1px dotted #999;
+  padding-top: .5em;
+  padding-bottom: .5em;
+  background-color:#F2F2F2;
+}
+
+.zpTreeImageContainer div.tree-item{
+  color: #000000; 
+  background: transparent url("img/dot.gif") no-repeat 1px 50%;
+}
+
+*:first-child+html .zpTreeImageContainer div.tree-item { /* ie7 fix */
+  1width:200px;
+  text-align:left;
+}
+
+* html .zpTreeImageContainer div.tree-item {  /* ie6 fix */
+  1width:200px;
+  text-align:left;
+}
+
+.zpTreeImageContainer .tree,
+.zpTreeImageContainer .tree-item table.tree-table { 
+  font: 11px tahoma,verdana,sans-serif; 
+}
+
+.zpTreeImageContainer .tree-item-more {
+  padding-left: 1px;
+}
+
+
+.zpTreeImageContainer .tree-item .label { 
+  cursor: pointer; 
+  cursor: hand;
+  color: black;
+}
+
+.zpTreeImageContainer .tree-item table.tree-table {
+}
+
+.zpTreeImageContainer .tree-item table.tree-table td.label{ 
+  padding: 0px 2px; 
+}
+
+.zpTreeImageContainer .tree-item .tgb {
+  width: 9px; 
+  height: 9px; 
+  vertical-align: middle; 
+  cursor: default;
+}
+
+.zpTreeImageContainer .tree-item .icon { 
+  cursor: pointer; 
+  cursor: hand;
+  width: 18px; 
+  height: 18px; 
+  text-align: center; 
+  vertical-align: middle; 
+}
+
+.zpTreeImageContainer .tree-item-selected table.tree-table td.label { 
+  background-color: #0A246A; 
+  color: #fff; 
+}
+
+.zpTreeImageContainer div.tree-item,
+.zpTreeImageContainer div.tree-item:hover {
+  cursor:pointer;
+  cursor: hand;
+  text-align:center;
+  font-weight:bold;
+  color:#DDDDDD;
+}
+
+.zpTreeImageContainer div.tree-item a{
+  text-decoration:none;
+}
+
+.zpTreeImageContainer div.tree-item:hover {
+  background-color:#8DD1FB;
+}
+
+.zpTreeImageContainer div.tree-item-expanded,
+.zpTreeImageContainer div.tree-item-expanded:hover,
+.zpTreeImageContainer div.tree-item-collapsed,
+.zpTreeImageContainer div.tree-item-collapsed:hover {
+  cursor:pointer;
+  cursor: hand;
+  text-align:center;
+  font-weight:bold;
+  font-size:140%;
+  color:#DDDDDD;
+}
+
+.zpTreeImageContainer div.tree-item-expanded div.tree-item-collapsed{
+  background-color:#6EA4C5;
+}
+
+.zpTreeImageContainer div.tree-item-expanded:hover {
+  background-color:#89CCF5;
+}
+
+
+.zpTreeImageContainer div.tree-item-collapsed:hover {
+  background-color:#89CCF5;
+}
+
+/* Makes an indent for each subtree */
+.zpTreeImageContainer .tree {
+  padding-left: 25px;
+}
+
+.zpTreeImageContainer .tree-item .plus {
+  background: transparent url("img/plus.gif") no-repeat 0 50%;
+  padding-right: 7px;
+}
+
+.zpTreeImageContainer .tree-item .minus {
+  background: transparent url("img/minus.gif") no-repeat 0 50%;
+  padding-right: 7px;
+}
+
+.zpTreeImageContainer .tree-item .fetching {
+  background: transparent url("img/fetching.gif") no-repeat 0 50%;
+  padding-right: 7px;
+}
+
+/* lines */
+
+.zpTreeImageContainer .tree-lines-c {
+  background: transparent url("img/lines-c.gif") no-repeat 1px 50%;
+}
+
+.zpTreeImageContainer .tree-lines-b {
+  background: transparent url("img/lines-b.gif") no-repeat 1px 50%;
+}
+
+.zpTreeImageContainer .tree-lines-t {
+  background: transparent url("img/lines-t.gif") no-repeat 1px 50%;
+}
+
+.zpTreeImageContainer .tree-lines-s {
+  background: transparent url("img/lines-s.gif") no-repeat 1px 50%;
+}
+
+.zpTreeImageContainer .tree-lined {
+  background: transparent url("img/lines-v.gif") repeat-y 1px 0;
+  background-color:#DFDFDF;
+}
+
+.zpTreeImageContainer .submenu{
+  text-indent:7px;
+}
+
+.zpTreeImageContainer .checkboxContainer {
+  cursor: pointer; 
+  cursor: hand;
+  width: 12px; 
+  height: 12px; 
+  text-align: center; 
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: 1px 50%;
+}
+
+.zpTreeImageContainer .checkboxChecked {
+	background-image: url(img/checkbox_checked.png);
+}
+
+.zpTreeImageContainer .checkboxUnchecked {
+	background-image: url(img/checkbox_unchecked.png);
+}
+
+.zpTreeImageContainer .checkboxHalfChecked {
+	background-image: url(img/checkbox_halfchecked.png);
+}

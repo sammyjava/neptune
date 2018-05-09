@@ -1,0 +1,44 @@
+<div class="serverstats">
+
+  <p>
+    Licensed host: <b><%=license.hostname%></b><br/>
+    License expires: <b><%=dateFormat.format(license.expiration)%></b><br/>
+  </p>
+
+  <%
+    try {
+      long svnRevisionNumber = Util.getSVNRevisionNumber(application.getRealPath("/")+"WEB-INF/lib/jcms.jar");
+      java.util.Date svnRevisionDate = Util.getSVNRevisionDate(application.getRealPath("/")+"WEB-INF/lib/jcms.jar");
+  %>
+  <p>
+    API revision: <b><%=svnRevisionNumber%></b><br/>
+    [<%=svnRevisionDate%>]
+  </p>
+  <%
+  } catch (Exception ex) {
+    out.print("<p>"+ex.getMessage()+"</p>");
+  }
+  %>
+
+  <p>
+    Database version: <b><%=Updatelog.getDBVersion(application)%></b><br/>
+    Database name: <%=dbName%><br/>
+    Database time zone: <%=dbTimeZone%><br/>
+  </p>
+
+  <p>
+    Database update history: 
+    <%
+    Updatelog[] updates = Updatelog.getAll(application, "db_version");
+    for (int i=0; i<updates.length; i++) out.print(updates[i].value+" ");
+    %>
+  </p>
+    
+    <p>
+      Operating system: <%=System.getProperty("os.name")%> <%=System.getProperty("os.arch")%> <%=System.getProperty("os.version")%><br/>
+      Java version: <%=System.getProperty("java.vendor")%> <%=System.getProperty("java.version")%><br/>
+      Servlet engine: <%=application.getServerInfo()%>; Servlet API version: <%=application.getMajorVersion()%>.<%=application.getMinorVersion()%>.<br/>
+      Database server version: <%=dbVersion%>
+    </p>
+    
+</div>

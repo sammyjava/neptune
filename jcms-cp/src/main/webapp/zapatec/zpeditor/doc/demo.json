@@ -1,0 +1,1 @@
+{"children": [{"children": [{"attributes": {"themes": ["picker\/picker"], "demo": "full_editor.html"}, "label": "Full Editor Demo"}, {"attributes": {"themes": ["winxp"], "demo": "minimal_editor.html"}, "label": "Minimal Editor Demo"}, {"attributes": {"themes": ["picker\/picker"], "demo": "save.html"}, "label": "Editor Save\/Load Demo"}], "label": "Basic"}]}

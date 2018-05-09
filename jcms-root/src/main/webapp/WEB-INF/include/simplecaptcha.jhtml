@@ -1,0 +1,11 @@
+<%@ page import="nl.captcha.Captcha" %>
+      <div class="formfield captcha">
+	<%=Setting.getString(application,"simplecaptcha_instructions")%><br/>
+	<table cellspacing="0">
+	  <tr>
+	    <td class="captcha"><img name="captcha" onClick="this.src='/Captcha#'+Math.ceil(100*Math.random())" src="/Captcha" alt="captcha" /></td>
+	    <td valign="middle" class="required"><input class="captcha" type="text" name="captchafield" size="<%=Setting.getString(application,"simplecaptcha_inputsize")%>"/></td>
+	  </tr>
+	</table>
+	<%=Setting.getString(application, "simplecaptcha_regenerate")%>
+      </div>

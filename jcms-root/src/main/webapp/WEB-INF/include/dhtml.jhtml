@@ -1,0 +1,9 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/dhtml.jhtml" %>
+<%
+if (!customDhtml) {
+  DhtmlCache dhtmlCache = new DhtmlCache(application, au);
+  out.println(dhtmlCache.dhtml);
+}
+%>
+<!--startindex-->

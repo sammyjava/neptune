@@ -1,0 +1,14 @@
+<!--stopindex-->
+<!-- printable footer -->
+<table id="footer" cellspacing="0">
+  <tr>
+    <td class="footer-left"></td>
+    <td class="footer">
+      <c:import context="/" url="/copyright.jsp">
+        <c:param name="location" value="S"/>
+      </c:import>
+    </td>
+    <td class="footer-right"></td>
+  </tr>
+</table>
+<!--startindex-->

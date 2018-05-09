@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	You can make textarea and upload fields required. 	You can designate an upload area to accept only zip files (.zip extension). 	You can require  user to make a selection from a dropdown menu. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Different HTML Form Elements</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Different HTML Form Elements</div>
+
+	This form demonstrates the behavior of various HTML form elements
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>winxp theme</b>.</li>
+				
+	<li>You can make textarea and upload fields required.</li>
+	<li>You can designate an upload area to accept only zip files (.zip extension).</li>
+	<li>You can require  user to make a selection from a dropdown menu.</li>
+
+			</ul>
+		</div>
+
+
+
+<form action="var_fields.html" id='userForm' method="post">
+	<div id='errOutput' class="errOutput"></div>
+
+	<div class="zpFormContent">
+		<fieldset>
+			<label class='zpFormLabel'>input type="text"</label>
+			<input class='zpFormRequired' value="" size="40" name="address" type="text" >
+			<br />
+
+			<label class='zpFormLabel'>input type="file"</label>
+			<input size="20" name="photo" type="file" class='zpFormRequired'/>
+			<br />
+			
+			<label class='zpFormLabel'>input type="file"(zip archive only)</label>
+			<input size="20" name="photo" type="file" class='zpFormZipArc'/>
+			<br />
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>select</label>
+			<select name="age" class="zpFormRequired">
+				<option value="">--select--</option>
+				<option value="less_20">&lt;20</option>
+				<option value="20-40">20-40</option>
+				<option value="40-60">40-60</option>
+				<option value="greater_60">&gt;60</option>
+			</select>
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>textarea</label>
+			<textarea name="resume" cols="40" rows="10" class="zpFormRequired zpFormMinLength20"></textarea>
+			<br />
+
+			<label class='zpFormLabel'>input type="radio" (choose any option)</label>
+			<div style="margin-left: 10.2em">
+				<input value="1" name="radio" type="radio" class="zpFormRequired"/><label class="zpRadioLabel"> option 1</label><br />
+				<input value="2" name="radio" type="radio" class="zpFormRequired"/><label class="zpRadioLabel"> option 2</label><br />
+				<input value="3" name="radio" type="radio" class="zpFormRequired"/><label class="zpRadioLabel"> option 3</label><br />
+			</div>
+			<br />
+
+			<label class='zpFormLabel'>input type="checkbox" (check at least one)</label>
+			<div style="margin-left: 10.2em">
+				<input value="1" name="checkbox" type="checkbox" class="zpFormRequired"/><label class="zpRadioLabel"> option 1</label><br />
+				<input value="2" name="checkbox" type="checkbox" class="zpFormRequired"/><label class="zpRadioLabel"> option 2</label><br />
+				<input value="3" name="checkbox" type="checkbox" class="zpFormRequired"/><label class="zpRadioLabel"> option 3</label><br />
+			</div>
+			<br />
+		</fieldset>
+	</div>
+	<div class="zpFormButtons">
+		<input value="Submit" name="Submit" onclick="" type="submit" class="button"> 
+		<input value="Clear" name="Clear" onclick="" type="reset" class="button">
+	</div>
+	
+</form>
+
+<script type="text/javascript">
+Zapatec.Form.Validator.addDataType(
+	// Zapatec Name to be put in INPUT class
+	'zpFormZipArc',
+
+	// Friendly description
+	'Zip archive',    
+
+	// Regular Expression for Validation
+	/\.zip$/,
+
+	// Error message
+	"Not a zip archive",
+
+	// Help message
+	"Upload valid zip archive",  
+
+	// Function
+	null  
+);
+
+Zapatec.Form.Validator.addDataType(
+	// Zapatec Name to be put in INPUT class
+	'zpFormMinLength20',
+
+	// Friendly description
+	'Enter at least 20 symbols',
+
+	// Regular Expression for Validation
+	/^.{20,}$/,
+
+	// Error message
+	"Enter at least 20 symbols",
+
+	// Help message
+	"Enter at least 20 symbols",
+
+	// Function
+	null  
+);
+
+// Run this to auto-activate all "zpForm" class forms in the document.
+new Zapatec.Form({
+	form: 'userForm',
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput,
+	theme: "WinXP"
+});
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

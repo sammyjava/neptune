@@ -1,0 +1,492 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="edit_inline.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>edit_inline.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		EditInline class derived from Widget. See description of
+ base Widget class at http://trac.zapatec.com:8000/trac/wiki/Widget.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/EditInline.html">Zapatec.EditInline</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> EditInline class derived from Widget. See description of
+ * base Widget class at http://trac.zapatec.com:8000/trac/wiki/Widget.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: edit_inline.js 15736 2009-02-06 15:29:25Z nikolai $ */</span>
+
+<span class="comment">/**
+ * EditInline class.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@extends</span> Zapatec.Widget
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.EditInline = <span class="reserved">function</span>(objArgs) {
+  <span class="comment">// Call constructor of superclass</span>
+  Zapatec.EditInline.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.EditInline.id = <span class="literal">'Zapatec.EditInline'</span>;
+
+<span class="comment">// Inherit Widget</span>
+Zapatec.inherit(Zapatec.EditInline, Zapatec.Widget);
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs) {
+	<span class="comment">// Call init method of superclass</span>
+	Zapatec.EditInline.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+
+	<span class="reserved">this</span>.isActive = false;
+	<span class="reserved">this</span>.isClicked = false;
+
+	var self = <span class="reserved">this</span>;
+	
+	<span class="reserved">this</span>.container = document.createElement(<span class="literal">"textarea"</span>);
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>.container, <span class="literal">"zpEditInline"</span>, <span class="reserved">this</span>);
+	<span class="reserved">this</span>.container.style.position = <span class="literal">"absolute"</span>;
+	<span class="reserved">this</span>.container.style.border = <span class="literal">"1px solid black"</span>;
+	<span class="reserved">this</span>.container.onclick = <span class="reserved">function</span>(){
+		self.isClicked = true;
+	}
+	
+	<span class="comment">// process all document key hits</span>
+	<span class="comment">// For IE we must use "keydown" instead of "keypress"</span>
+	Zapatec.Utils.addEvent(document, <span class="literal">"keydown"</span>, 
+		<span class="reserved">function</span>(evt){
+			self.keyEvent(evt);
+	});
+		
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.hideOnClick){
+		<span class="comment">// process all document clicks</span>
+		Zapatec.Utils.addEvent(document, <span class="literal">'click'</span>, <span class="reserved">function</span>(evt){
+			setTimeout(<span class="reserved">function</span>(evt){self.documentClick(evt)}, 1);
+		});
+	}
+	
+	<span class="comment">// resize textarea on clipboard events</span>
+	var changeEvent = null;
+
+	<span class="reserved">if</span>(Zapatec.is_ie){
+		changeEvent = <span class="literal">'paste'</span>;
+	} <span class="reserved">else</span> <span class="reserved">if</span>(Zapatec.is_gecko) {
+		changeEvent = <span class="literal">'input'</span>;
+	} <span class="reserved">else</span> {
+		changeEvent = <span class="literal">'change'</span>;
+	}
+	
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.container, changeEvent, 
+		<span class="reserved">function</span>(){self.resizeToContent()});
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.showImmediately &amp;&amp; <span class="reserved">this</span>.config.target){
+		<span class="reserved">this</span>.show(<span class="reserved">this</span>.config.target);
+	}
+};
+
+Zapatec.EditInline.<span class="reserved">prototype</span>.documentClick = <span class="reserved">function</span>(evt){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isActive){
+		<span class="reserved">return</span>;
+	}
+
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isClicked){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.saveOnClick){
+			<span class="reserved">this</span>.saveAndHide();
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.hide();
+		}
+	}
+	
+	<span class="reserved">this</span>.isClicked = false;
+}
+
+Zapatec.EditInline.<span class="reserved">prototype</span>.keyEvent = <span class="reserved">function</span>(evt){
+	<span class="comment">// do nothing is widget is not active</span>
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isActive){
+		<span class="reserved">return</span>;
+	}
+	
+	<span class="reserved">if</span>(!evt){
+		evt = window.event;
+	}
+	
+	var res = Zapatec.Utils.getCharFromEvent(evt);
+
+	<span class="reserved">if</span>(!res){
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.hideOnEsc){
+		<span class="reserved">if</span>(res.charCode == 27){ <span class="comment">// ESC key</span>
+			<span class="reserved">this</span>.hide();
+			<span class="reserved">return</span>;
+		}
+	}
+
+	<span class="comment">// save content and close on ctrl+enter</span>
+	<span class="reserved">if</span>(
+		(
+			evt.ctrlKey || 
+			(typeof(evt.metaKey) != <span class="literal">'undefined'</span> &amp;&amp; evt.metaKey)
+		) &amp;&amp; 
+		res.charCode == 13
+	){
+		<span class="reserved">this</span>.saveAndHide();
+		<span class="reserved">return</span>;
+	}
+	
+	<span class="comment">// resize textarea according to content</span>
+	<span class="reserved">this</span>.resizeToContent();
+}
+
+<span class="comment">/**
+ * Configures the widget. Gets called from init and reconfigure methods of
+ * superclass.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(objArgs) {
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"theme"</span>, <span class="literal">""</span>); <span class="comment">// this widget does not uses themes.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"target"</span>, null); <span class="comment">// target element.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"showImmediately"</span>, true); <span class="comment">// show textarea when calling constructor using "target" config option</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"hideOnEsc"</span>, true); <span class="comment">// hide when ESC button is pressed.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"hideOnClick"</span>, true); <span class="comment">// hide when user clicks outside element.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"editAsText"</span>, false); <span class="comment">// convert HTML entities into plain symbols on editing</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"loadCallback"</span>); <span class="comment">// this function will be called when loading content from element. Function must accept one argument and return transformed content.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"saveCallback"</span>); <span class="comment">// this function will be called when saving content to element. Function must accept one argument and return transformed content.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"saveOnClick"</span>, true); <span class="comment">// save content if user clicks outside textarea. This function is used only if hideOnClick is true.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"hideTarget"</span>, true); <span class="comment">// hide target element when showing textarea.</span>
+	
+	<span class="comment">// Call parent method</span>
+	Zapatec.EditInline.SUPERclass.configure.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Use this function to show EditInline under element. 
+ * <span class="attrib">@param</span> {Object} target Reference to target element to edit. 
+ * <span class="attrib">@param</span> {String} newContent Default textarea content.
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.show = <span class="reserved">function</span>(target){
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"showStart"</span>);
+
+	<span class="reserved">if</span>(target){
+		<span class="reserved">this</span>.hide();
+		
+		<span class="reserved">this</span>.config.target = target;
+		<span class="reserved">this</span>.setContent(<span class="literal">""</span>);
+	}
+	
+	<span class="reserved">this</span>.isActive = true;
+	<span class="reserved">this</span>.isClicked = !Zapatec.is_ie;
+	<span class="reserved">this</span>.container.value = <span class="literal">""</span>;
+	
+	<span class="reserved">this</span>.setContent(<span class="reserved">this</span>.config.target.innerHTML);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.hideTarget){
+		<span class="reserved">this</span>.config.target.zpOrigVisibility = <span class="reserved">this</span>.config.target.style.visibility;
+		<span class="reserved">this</span>.config.target.style.visibility = <span class="literal">"hidden"</span>; 
+	}
+	document.body.appendChild(<span class="reserved">this</span>.container);
+
+	var parentCoords = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.config.target);
+	<span class="reserved">this</span>.container.style.left = parentCoords.left + <span class="literal">"px"</span>;
+	<span class="reserved">this</span>.container.style.top = parentCoords.top + <span class="literal">"px"</span>;
+
+	<span class="reserved">this</span>.resizeToContent();
+	<span class="reserved">this</span>.container.focus();
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"showFinish"</span>);
+}
+
+<span class="comment">/**
+ * Function to set textarea content
+ * <span class="attrib">@param</span> {String} newContent
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.setContent = <span class="reserved">function</span>(newContent){
+	<span class="reserved">if</span>(typeof(newContent) != <span class="literal">"string"</span>){
+		<span class="reserved">return</span>;
+	}
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.loadCallback){
+		newContent = <span class="reserved">this</span>.config.loadCallback(newContent);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.editAsText){
+		newContent = newContent.replace(/\&lt;br(\s*\/)?\&gt;/ig, <span class="literal">"\n"</span>).replace(/&amp;lt;/g, <span class="literal">"&lt;"</span>).replace(/&amp;gt;/g, <span class="literal">"&gt;"</span>).replace(/&amp;amp;/g, <span class="literal">"&amp;"</span>);
+	}
+
+	<span class="reserved">this</span>.container.value = newContent;
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"setContent"</span>, newContent);
+}
+
+<span class="comment">/**
+ * Function to copy value from textarea back to element. innerHTML property 
+ * will be redefined.
+ * <span class="attrib">@return</span> Edited content
+ * <span class="attrib">@type</span> String
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.saveContent = <span class="reserved">function</span>(){
+	var val = <span class="reserved">this</span>.container.value;
+	
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.saveCallback){
+		val = <span class="reserved">this</span>.config.saveCallback(val);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.editAsText){
+		val = val.replace(/&amp;/g, <span class="literal">"&amp;amp;"</span>).replace(/\&lt;/g, <span class="literal">"&amp;lt;"</span>).replace(/\&gt;/g, <span class="literal">"&amp;gt;"</span>).replace(/\&lt;br(\s*\/)?\&gt;\n/ig, <span class="literal">"\n"</span>).replace(/\n/g, <span class="literal">"&lt;br /&gt;"</span>);
+	}
+	
+	<span class="reserved">this</span>.config.target.innerHTML = val;
+	
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"saveContent"</span>, val);
+	<span class="reserved">return</span> <span class="reserved">this</span>.container.value;
+}
+
+<span class="comment">/**
+ * Hide EditInline element
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.hide = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isActive){
+		<span class="reserved">return</span>;
+	}
+	
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"hideStart"</span>);
+	
+	<span class="reserved">this</span>.isActive = false;
+	
+	<span class="reserved">this</span>.container.parentNode.removeChild(<span class="reserved">this</span>.container);
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.hideTarget){
+		<span class="reserved">if</span>(Zapatec.is_opera &amp;&amp; !<span class="reserved">this</span>.config.target.zpOrigVisibility){
+			<span class="reserved">this</span>.config.target.zpOrigVisibility = <span class="literal">""</span>;
+		}
+		
+		<span class="reserved">this</span>.config.target.style.visibility = <span class="reserved">this</span>.config.target.zpOrigVisibility; 
+		<span class="reserved">this</span>.config.target.zpOrigVisibility = null;
+	}
+
+	<span class="reserved">this</span>.config.target = null;
+	
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"hideFinish"</span>);
+}
+
+<span class="comment">/**
+ * Copy textarea content back to element (innerHTML property will be used) and 
+ * hide widget.
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.saveAndHide = <span class="reserved">function</span>(){
+	<span class="reserved">this</span>.saveContent();
+	<span class="reserved">this</span>.hide();
+	
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"saveAndHide"</span>);
+}
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Resize textarea size according to content.
+ */</span>
+Zapatec.EditInline.<span class="reserved">prototype</span>.resizeToContent = <span class="reserved">function</span>(){
+	var val = <span class="reserved">this</span>.container.value;
+	var tmp = val.split(<span class="literal">'\n'</span>);
+
+	var maxLength = tmp[0].length;
+	
+	<span class="reserved">for</span>(var ii = 1; ii &lt; tmp.length; ii++){
+		<span class="reserved">if</span>(tmp[ii].length &gt; maxLength){
+			maxLength = tmp[ii].length; 
+		}
+	}
+	<span class="reserved">this</span>.container.cols = maxLength + (Zapatec.is_ie || Zapatec.is_khtml ? 1 : 0);
+	<span class="reserved">this</span>.container.rows = tmp.length + (Zapatec.is_ie || Zapatec.is_khtml || Zapatec.is_opera ? 1 : 0) - (Zapatec.is_gecko ? 1 : 0);
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

@@ -1,0 +1,191 @@
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content="   When you designate an input as  multiple, the form adds a '+' button next to it.   When the user clicks the button, the input field is duplicated and the user can enter another field of data.   Next to each of the duplicates is a '-' button. The user can remove that input       field, by clicking the '-' button.   In the form, the name of the added input field is the original name with '-n' appended,     where n indicates the order in which the field was duplicated.   You can use either zpFormMultiple or zpFormMultipleInside as the class name. zpFormMultiple adds the '+' after the   HTML element, zpFormMultipleInside adds it inside of the element, and in case of a table, inside a new cell. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Multiple Fields</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+	<link href="../../zpcal/themes/aqua.css" rel="stylesheet" type="text/css">
+	<link href="../../zpcal/themes/bluexp.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../utils/zpdict.js"></script>
+	<script type="text/javascript" src="../../utils/lang/zpdate-en.js"></script>
+	<script type="text/javascript" src="../../utils/zpdate.js"></script>
+	<script type="text/javascript" src="../../zpcal/src/calendar.js"></script>
+	<style type="text/css">
+		.zpCalendar .button {
+			width:auto !important;
+			height:auto !important;
+		}
+	</style>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Multiple Fields</div>
+
+  The form demonstrates the <strong> multiple </strong> feature. This feature is useful when user needs to 
+  enter a variable number of inputs. For instance, in your registration form you can ask for an indeterminate number
+  of email addresses.
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>default theme</b>.</li>
+				
+  <li>When you designate an input as <strong> multiple</strong>, the form adds a '+' button next to it.</li>
+  <li>When the user clicks the button, the input field is duplicated and the user can enter another field of data.</li>
+  <li>Next to each of the duplicates is a '-' button. The user can remove that input
+      field, by clicking the '-' button.</li>
+  <li>In the form, the name of the added input field is the original name with "-n" appended,
+    where n indicates the order in which the field was duplicated.</li>
+  <li>You can use either zpFormMultiple or zpFormMultipleInside as the class name. zpFormMultiple adds the '+' after the
+  HTML element, zpFormMultipleInside adds it inside of the element, and in case of a table, inside a new cell.</li>
+
+			</ul>
+		</div>
+
+
+
+To control the proliferation of cloned elements use the  <b>zpFormMultipleLimit</b> property.<br />
+<br />
+
+<form action="multiple.html" id='userForm' method="post">
+  <div id='errOutput' class="errOutput"></div>
+
+  <div class="zpFormContent">
+    <fieldset>
+      <label class='zpFormLabel'>Address(5 lines max)</label>
+      <div style="margin-left: 10em" class="zpFormMultipleInside zpFormMultipleLimit=5">
+        <input class='zpFormRequired' value="" size="40" name="address" type="text" />
+      </div>
+
+      <div class="zpFormMultipleInside">
+        <label class='zpFormLabel'>Credit card numbers</label>
+        <input value="" size="20" name="credit-card" type="text" class='zpFormCreditCard zpFormMask="0000-0000-0000-0000"' />
+      </div>
+    </fieldset>
+    <fieldset>
+      <fieldset class="zpFormMultipleInside">
+        <legend>Children information</legend>
+        <label class='zpFormLabel'>Age</label>
+        <input value="" size="5" name="child-age" type="text" class='zpFormRequired zpFormInt' />
+        <br />
+
+        <label class='zpFormLabel'>Gender</label>
+        <select name="child-gender" class="zpFormRequired">
+          <option value="">--choose--</option>
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+        <br />
+      </fieldset>
+    </fieldset>
+
+    <fieldset>
+      <table class="zpExpandedTable" cellpadding="1" cellspacing="0">
+        <tr align="center">
+          <th width="200">First name</th>
+          <th width="200">Last name</th>
+          <th width="200">Address</th>
+        </tr>
+        <tr class="zpFormMultiple" align="center">
+          <td><input type="text" name="name" style="margin:0px"></td>
+          <td><input type="text" name="surname" style="margin:0px"></td>
+          <td><input type="text" name="address" style="margin:0px"></td>
+        </tr>
+      </table>
+    </fieldset>
+
+    <fieldset>
+    	<legend>Using other widgets together with multiple functionality (requires Zapatec.Calendar)</legend>
+
+    	<div id="date_example" class="zpFormMultipleInside">
+    		<label>Enter date</label>
+    		<input type="text" name="date" id="date" />
+    		<input type="button" id="selector-date" value="..." />
+    	</div>
+    </fieldset>
+  </div>
+  <div class="zpFormButtons">
+    <input value="Submit" name="Submit" onclick="" type="submit" class="button"> 
+    <input value="Clear" name="Clear" onclick="" type="reset" class="button">
+  </div>
+  
+</form>
+
+<script type="text/javascript">
+// Run this to auto-activate all "zpForm" class forms in the document.
+new Zapatec.Form({
+  form: 'userForm',
+  showErrors: 'afterField',
+  showErrorsOnSubmit: true,
+  submitErrorFunc: testErrOutput,
+  theme: "default",
+  eventListeners: {
+  	afterCloneMultiple: function(original, clone){
+  		if(original.id != 'date_example' || typeof(Zapatec.Calendar) == 'undefined'){
+  			return;
+  		}
+
+  		var inputs = clone.getElementsByTagName("input");
+
+		new Zapatec.Calendar.setup({
+			inputField: inputs[0],
+			ifFormat: "%Y-%m-%d",
+			button: inputs[1],
+			showsTime: false
+		});
+
+  	}
+  }
+});
+
+if(Zapatec.Calendar){
+	var cal = new Zapatec.Calendar.setup({
+		inputField: "date",
+		ifFormat: "%Y-%m-%d",
+		button: "selector-date",
+		showsTime: false
+	});
+} else {
+	alert("This demo requires Zapatec.Calendar to show some examples");
+}
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

@@ -1,0 +1,1597 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="zpdate.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>zpdate.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec Date library. Used to perform various operations with
+ dates. Translations into several languages available in the utils/lang/
+ directory. TRANSLATION PLUG-IN IS REQUIRED for zpdate.js to work correctly.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Date.html">Zapatec.Date</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec Date library. Used to perform various operations with
+ * dates. Translations into several languages available in the utils/lang/
+ * directory. TRANSLATION PLUG-IN IS REQUIRED for zpdate.js to work correctly.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: zpdate.js 16970 2009-04-10 10:02:01Z nmaxim $ */</span>
+
+<span class="reserved">if</span> (typeof zapatecDate != <span class="literal">'function'</span>) {
+
+<span class="reserved">if</span> (typeof Zapatec == <span class="literal">'undefined'</span>) {
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span> Namespace definition.
+	 */</span>
+	Zapatec = <span class="reserved">function</span>() {};
+}
+
+<span class="comment">/**
+ * <span class="attrib">@constructor</span>
+ */</span>
+Zapatec.Date = <span class="reserved">function</span>() {};
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDate = Zapatec.Date;
+
+<span class="comment">/**
+ * Day names.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.dayNames = [
+	<span class="literal">'date.day.sun'</span>,
+	<span class="literal">'date.day.mon'</span>,
+	<span class="literal">'date.day.tue'</span>,
+	<span class="literal">'date.day.wed'</span>,
+	<span class="literal">'date.day.thu'</span>,
+	<span class="literal">'date.day.fri'</span>,
+	<span class="literal">'date.day.sat'</span>,
+	<span class="literal">'date.day.sun'</span>
+];
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDateDayNames = zapatecDate.dayNames;
+
+<span class="comment">/**
+ * Short day names.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.shortDayNames = [
+	<span class="literal">'date.shortDay.sun'</span>,
+	<span class="literal">'date.shortDay.mon'</span>,
+	<span class="literal">'date.shortDay.tue'</span>,
+	<span class="literal">'date.shortDay.wed'</span>,
+	<span class="literal">'date.shortDay.thu'</span>,
+	<span class="literal">'date.shortDay.fri'</span>,
+	<span class="literal">'date.shortDay.sat'</span>,
+	<span class="literal">'date.shortDay.sun'</span>
+];
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDateShortDayNames = zapatecDate.shortDayNames;
+
+<span class="comment">/**
+ * Month names.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.monthNames = [
+	<span class="literal">'date.month.jan'</span>,
+	<span class="literal">'date.month.feb'</span>,
+	<span class="literal">'date.month.mar'</span>,
+	<span class="literal">'date.month.apr'</span>,
+	<span class="literal">'date.month.may'</span>,
+	<span class="literal">'date.month.jun'</span>,
+	<span class="literal">'date.month.jul'</span>,
+	<span class="literal">'date.month.aug'</span>,
+	<span class="literal">'date.month.sep'</span>,
+	<span class="literal">'date.month.oct'</span>,
+	<span class="literal">'date.month.nov'</span>,
+	<span class="literal">'date.month.dec'</span>
+];
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDateMonthNames = zapatecDate.monthNames;
+
+<span class="comment">/**
+ * Short month names.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.shortMonthNames = [
+	<span class="literal">'date.shortMonth.jan'</span>,
+	<span class="literal">'date.shortMonth.feb'</span>,
+	<span class="literal">'date.shortMonth.mar'</span>,
+	<span class="literal">'date.shortMonth.apr'</span>,
+	<span class="literal">'date.shortMonth.may'</span>,
+	<span class="literal">'date.shortMonth.jun'</span>,
+	<span class="literal">'date.shortMonth.jul'</span>,
+	<span class="literal">'date.shortMonth.aug'</span>,
+	<span class="literal">'date.shortMonth.sep'</span>,
+	<span class="literal">'date.shortMonth.oct'</span>,
+	<span class="literal">'date.shortMonth.nov'</span>,
+	<span class="literal">'date.shortMonth.dec'</span>
+];
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDateShortMonthNames = zapatecDate.shortMonthNames;
+
+<span class="comment">/**
+ * AM.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.AM = <span class="literal">'date.misc.AM'</span>;
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDateAM = zapatecDate.AM;
+
+<span class="comment">/**
+ * PM.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.PM = <span class="literal">'date.misc.PM'</span>;
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDatePM = zapatecDate.PM;
+
+<span class="comment">/**
+ * am.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.am = <span class="literal">'date.misc.am'</span>;
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDateAm = zapatecDate.am;
+
+<span class="comment">/**
+ * pm.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.pm = <span class="literal">'date.misc.pm'</span>;
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecDatePm = zapatecDate.pm;
+
+
+<span class="comment">/**
+ * Translates constants.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Date.translate = <span class="reserved">function</span>() {
+	zapatecTranslateArray(zapatecDateDayNames);
+	zapatecTranslateArray(zapatecDateShortDayNames);
+	zapatecTranslateArray(zapatecDateMonthNames);
+	zapatecTranslateArray(zapatecDateShortMonthNames);
+	zapatecDateAM = zapatecDate.AM = zapatecTranslate(zapatecDateAM);
+	zapatecDatePM = zapatecDate.PM = zapatecTranslate(zapatecDatePM);
+	zapatecDateAm = zapatecDate.am = zapatecTranslate(zapatecDateAm);
+	zapatecDatePm = zapatecDate.pm = zapatecTranslate(zapatecDatePm);
+};
+
+<span class="comment">// Translate constants</span>
+zapatecDate.translate();
+
+Zapatec.Date._MD = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; <span class="comment">/**&lt; Number of days in each month */</span>
+
+<span class="comment">/** Returns true if year is a leap year
+ * optional; if not passed, the current year of \b this Date object is
+ * assumed.
+ *
+ * <span class="attrib">@param</span> year [int, optional] the year number.
+ */</span>
+Zapatec.Date.isLeapYear = <span class="reserved">function</span> (date, year) {
+	<span class="reserved">if</span> (typeof year == <span class="literal">"undefined"</span>) {
+		var year = date.getFullYear();
+	}
+
+	<span class="reserved">if</span> ((0 == (year%4)) &amp;&amp; ( (0 != (year%100)) || (0 == (year%400)))) {
+		<span class="reserved">return</span> true;
+	}	<span class="reserved">else</span> {
+		<span class="reserved">return</span> false;
+	}
+}
+
+<span class="comment">/** Returns the number of days in the month.  The \em month parameter is
+ * optional; if not passed, the current month of \b this Date object is
+ * assumed.
+ *
+ * <span class="attrib">@param</span> month [int, optional] the month number, 0 for January.
+ */</span>
+Zapatec.Date.getMonthDays = <span class="reserved">function</span>(date, month) {
+	var year = date.getFullYear();
+	<span class="reserved">if</span> (typeof month == <span class="literal">"undefined"</span>) {
+		month = date.getMonth();
+	}
+	<span class="reserved">if</span> (Zapatec.Date.isLeapYear(date) &amp;&amp; month == 1) {
+		<span class="reserved">return</span> 29;
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> zapatecDate._MD[month];
+	}
+};
+
+<span class="comment">/** Returns true if year is a leap year
+ * optional; if not passed, the current year of \b this Date object is
+ * assumed.
+ *
+ * <span class="attrib">@param</span> year [int, optional] the year number.
+ */</span>
+Zapatec.Date.getYearDays = <span class="reserved">function</span>(date, year) {
+	var days = 365;
+
+	<span class="reserved">if</span> (Zapatec.Date.isLeapYear(date, year)) {
+		days++;
+	} 
+
+	<span class="reserved">return</span> days;	
+};
+
+<span class="comment">/** Returns the number of the current day in the current year. */</span>
+Zapatec.Date.getDayOfYear = <span class="reserved">function</span>(date) {
+	var now = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+	var then = new Date(date.getFullYear(), 0, 0, 0, 0, 0);
+	var time = now - then;
+	<span class="reserved">return</span> Math.round(time / 86400000);
+};
+
+<span class="comment">/** Returns the number of the week in year, as defined in ISO 8601. */</span>
+Zapatec.Date.getWeekNumber = <span class="reserved">function</span>(date) {
+	var d = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0, 0);
+	var DoW = d.getDay();
+	d.setDate(d.getDate() - (DoW + 6) % 7 + 3); <span class="comment">// Nearest Thu</span>
+	var ms = d.valueOf(); <span class="comment">// GMT</span>
+	d.setMonth(0);
+	d.setDate(4); <span class="comment">// Thu in Week 1</span>
+	<span class="reserved">return</span> Math.round((ms - d.valueOf()) / (7 * 864e5)) + 1;
+};
+
+<span class="comment">/** Returns the number of the year and week according to ISO 8601 format
+ equal to %Y W%w but gives correct year number for leap weaks
+ **/</span>
+Zapatec.Date.getWeekAndYearNumber = <span class="reserved">function</span> (date) {
+    var wn = Zapatec.Date.getWeekNumber (date);
+    var day = date.getDate();
+    var year = date.getFullYear();
+    <span class="reserved">if</span> (day &gt; 28 &amp;&amp; wn == 1){
+	year =  Math.round(year) + 1;
+    };
+    <span class="reserved">if</span> (day &lt; 4 &amp;&amp; wn &gt; 51){
+	year = Math.round(year) - 1;
+    };
+    <span class="reserved">return</span> (year + <span class="literal">" W"</span>+wn);
+};
+
+<span class="comment">/** Checks dates equality.  Checks time too. */</span>
+Zapatec.Date.equalsTo = <span class="reserved">function</span>(date1, date2) {
+	<span class="reserved">if</span> (!date1 || !date2) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">return</span> ((date1.getFullYear() == date2.getFullYear()) &amp;&amp;
+		(date1.getMonth() == date2.getMonth()) &amp;&amp;
+		(date1.getDate() == date2.getDate()) &amp;&amp;
+		(date1.getHours() == date2.getHours()) &amp;&amp;
+		(date1.getMinutes() == date2.getMinutes()));
+};
+
+<span class="comment">/** Checks dates equality.  Ignores time. */</span>
+Zapatec.Date.dateEqualsTo = <span class="reserved">function</span>(date1, date2) {
+	<span class="reserved">if</span> (!date1 || !date2) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">return</span> ((date1.getFullYear() == date2.getFullYear()) &amp;&amp;
+		(date1.getMonth() == date2.getMonth()) &amp;&amp;
+		(date1.getDate() == date2.getDate()));
+};
+
+<span class="comment">/** Set only the year, month, date parts (keep existing time) */</span>
+Zapatec.Date.setDateOnly = <span class="reserved">function</span>(date1, date2) {
+	var tmp = new Date(date2);
+	date1.setDate(1);
+	date1.setFullYear(tmp.getFullYear());
+	date1.setMonth(tmp.getMonth());
+	date1.setDate(tmp.getDate());
+};
+
+<span class="comment">/** Prints the date in a string according to the given format.
+ *
+ * The format (\b str) may contain the following specialties:
+ *
+ * - %%a - Abbreviated weekday name
+ * - %%A - Full weekday name
+ * - %%b - Abbreviated month name
+ * - %%B - Full month name
+ * - %%C - Century number
+ * - %%d - The day of the month (00 .. 31)
+ * - %%e - The day of the month (0 .. 31)
+ * - %%H - Hour (00 .. 23)
+ * - %%I - Hour (01 .. 12)
+ * - %%j - The day of the year (000 .. 366)
+ * - %%k - Hour (0 .. 23)
+ * - %%l - Hour (1 .. 12)
+ * - %%m - Month (01 .. 12)
+ * - %%M - Minute (00 .. 59)
+ * - %%n - A newline character
+ * - %%o - added by Mike to display correct year number for leap year: 2009-01 for 30st of December 2009 for instance;
+ * - %%p - "PM" or "AM"
+ * - %%P - "pm" or "am"
+ * - %%S - Second (00 .. 59)
+ * - %%s - Number of seconds since Epoch
+ * - %%t - A tab character
+ * - %%W - The week number (as per ISO 8601)
+ * - %%u - The day of week (1 .. 7, 1 = Monday)
+ * - %%w - The day of week (0 .. 6, 0 = Sunday)
+ * - %%y - Year without the century (00 .. 99)
+ * - %%Y - Year including the century (ex. 1979)
+ * - %%% - A literal %% character
+ *
+ * They are almost the same as for the POSIX strftime function.
+ *
+ * <span class="attrib">@param</span> str [string] the format to print date in.
+ */</span>
+Zapatec.Date.print = <span class="reserved">function</span> (date, str) {
+	var m = date.getMonth();
+	var d = date.getDate();
+	var y = date.getFullYear();
+	var wn = /%U|%W|%V/.test(str) ? zapatecDate.getWeekNumber(date) : <span class="literal">""</span>;
+	var w = date.getDay();
+	var s = {};
+	var hr = date.getHours();
+	var pm = (hr &gt;= 12);
+	var ir = (pm) ? (hr - 12) : hr;
+	var dy = /%j/.test(str) ? zapatecDate.getDayOfYear(date) : <span class="literal">""</span>;
+	<span class="reserved">if</span> (ir == 0) {
+		ir = 12;
+	}
+	var min = date.getMinutes();
+	var sec = date.getSeconds();
+	<span class="comment">// Calendar still wants to translate in its own way</span>
+	<span class="reserved">if</span> (Zapatec.Calendar &amp;&amp; <span class="reserved">this</span> instanceof Zapatec.Calendar) {
+		s[<span class="literal">"%a"</span>] = /%a/.test(str) ? Zapatec.Calendar.i18n(w, <span class="literal">"sdn"</span>, <span class="reserved">this</span>) : <span class="literal">""</span>; <span class="comment">// abbreviated weekday name</span>
+		s[<span class="literal">"%A"</span>] = /%A/.test(str) ? Zapatec.Calendar.i18n(w, <span class="literal">"dn"</span>, <span class="reserved">this</span>) : <span class="literal">""</span>; <span class="comment">// full weekday name</span>
+		s[<span class="literal">"%b"</span>] = /%b/.test(str) ? Zapatec.Calendar.i18n(m, <span class="literal">"smn"</span>, <span class="reserved">this</span>) : <span class="literal">""</span>; <span class="comment">// abbreviated month name</span>
+		s[<span class="literal">"%B"</span>] = /%B/.test(str) ? Zapatec.Calendar.i18n(m, <span class="literal">"mn"</span>, <span class="reserved">this</span>) : <span class="literal">""</span>; <span class="comment">// full month name</span>
+	} <span class="reserved">else</span> {
+		s[<span class="literal">"%a"</span>] = /%a/.test(str) ? zapatecDateShortDayNames[w] : <span class="literal">""</span>; <span class="comment">// abbreviated weekday name</span>
+		s[<span class="literal">"%A"</span>] = /%A/.test(str) ? zapatecDateDayNames[w] : <span class="literal">""</span>; <span class="comment">// full weekday name</span>
+		s[<span class="literal">"%b"</span>] = /%b/.test(str) ? zapatecDateShortMonthNames[m] : <span class="literal">""</span>; <span class="comment">// abbreviated month name</span>
+		s[<span class="literal">"%B"</span>] = /%B/.test(str) ? zapatecDateMonthNames[m] : <span class="literal">""</span>; <span class="comment">// full month name</span>
+	}
+	<span class="comment">// FIXME: %c : preferred date and time representation for the current locale</span>
+	s[<span class="literal">"%C"</span>] = 1 + Math.floor(y / 100); <span class="comment">// the century number</span>
+	s[<span class="literal">"%d"</span>] = (d &lt; 10) ? (<span class="literal">"0"</span> + d) : d; <span class="comment">// the day of the month (range 01 to 31)</span>
+	s[<span class="literal">"%e"</span>] = d; <span class="comment">// the day of the month (range 1 to 31)</span>
+	<span class="comment">// FIXME: %D : american date style: %m/%d/%y</span>
+	<span class="comment">// FIXME: %E, %F, %G, %g, %h (man strftime)</span>
+	s[<span class="literal">"%H"</span>] = (hr &lt; 10) ? (<span class="literal">"0"</span> + hr) : hr; <span class="comment">// hour, range 00 to 23 (24h format)</span>
+	s[<span class="literal">"%I"</span>] = (ir &lt; 10) ? (<span class="literal">"0"</span> + ir) : ir; <span class="comment">// hour, range 01 to 12 (12h format)</span>
+	s[<span class="literal">"%j"</span>] = (dy &lt; 100) ? ((dy &lt; 10) ? (<span class="literal">"00"</span> + dy) : (<span class="literal">"0"</span> + dy)) : dy; <span class="comment">// day of the year (range 001 to 366)</span>
+	s[<span class="literal">"%k"</span>] = hr ? hr :  <span class="literal">"0"</span>; <span class="comment">// hour, range 0 to 23 (24h format)</span>
+	s[<span class="literal">"%l"</span>] = ir;       <span class="comment">// hour, range 1 to 12 (12h format)</span>
+	s[<span class="literal">"%m"</span>] = (m &lt; 9) ? (<span class="literal">"0"</span> + (1+m)) : (1+m); <span class="comment">// month, range 01 to 12</span>
+	s[<span class="literal">"%M"</span>] = (min &lt; 10) ? (<span class="literal">"0"</span> + min) : min; <span class="comment">// minute, range 00 to 59</span>
+	s[<span class="literal">"%n"</span>] = <span class="literal">"\n"</span>;     <span class="comment">// a newline character</span>
+	<span class="comment">// Calendar still wants to translate in its own way</span>
+	<span class="reserved">if</span> (Zapatec.Calendar &amp;&amp; <span class="reserved">this</span> instanceof Zapatec.Calendar) {
+		s[<span class="literal">"%p"</span>] = pm ? Zapatec.Calendar.i18n(<span class="literal">"PM"</span>, <span class="literal">"AMPM"</span>, <span class="reserved">this</span>) : Zapatec.Calendar.i18n(<span class="literal">"AM"</span>, <span class="literal">"AMPM"</span>, <span class="reserved">this</span>);
+		s[<span class="literal">"%P"</span>] = pm ? Zapatec.Calendar.i18n(<span class="literal">"pm"</span>, <span class="literal">"AMPM"</span>, <span class="reserved">this</span>) : Zapatec.Calendar.i18n(<span class="literal">"am"</span>, <span class="literal">"AMPM"</span>, <span class="reserved">this</span>);
+		<span class="reserved">if</span> (!s[<span class="literal">"%p"</span>]) {
+			s[<span class="literal">"%p"</span>] = s[<span class="literal">"%P"</span>];
+		}
+	} <span class="reserved">else</span> {
+		s[<span class="literal">"%p"</span>] = pm ? zapatecDatePM : zapatecDateAM;
+		s[<span class="literal">"%P"</span>] = pm ? zapatecDatePm : zapatecDateAm;
+	}
+	<span class="comment">//FIXME %o - added by Mike to display correct year number for leap year: 2009-01 for 30st of December 2009 for instance;</span>
+	s[<span class="literal">"%o"</span>] = /%o/.test(str) ? Zapatec.Date.getWeekAndYearNumber(date) : <span class="literal">""</span>;
+	<span class="comment">// FIXME: %r : the time in am/pm notation %I:%M:%S %p</span>
+	<span class="comment">// FIXME: %R : the time in 24-hour notation %H:%M</span>
+	s[<span class="literal">"%s"</span>] = Math.floor(date.getTime() / 1000);
+	s[<span class="literal">"%S"</span>] = (sec &lt; 10) ? (<span class="literal">"0"</span> + sec) : sec; <span class="comment">// seconds, range 00 to 59</span>
+	s[<span class="literal">"%t"</span>] = <span class="literal">"\t"</span>;     <span class="comment">// a tab character</span>
+	<span class="comment">// FIXME: %T : the time in 24-hour notation (%H:%M:%S)</span>
+	s[<span class="literal">"%U"</span>] = s[<span class="literal">"%W"</span>] = s[<span class="literal">"%V"</span>] = (wn &lt; 10) ? (<span class="literal">"0"</span> + wn) : wn;
+	s[<span class="literal">"%u"</span>] = (w == 0) ? 7 : w; <span class="comment">// the day of the week (range 1 to 7, 1 = MON)</span>
+	s[<span class="literal">"%w"</span>] = w ? w : <span class="literal">"0"</span>;      <span class="comment">// the day of the week (range 0 to 6, 0 = SUN)</span>
+	<span class="comment">// FIXME: %x : preferred date representation for the current locale without the time</span>
+	<span class="comment">// FIXME: %X : preferred time representation for the current locale without the date</span>
+	s[<span class="literal">"%y"</span>] = <span class="literal">''</span> + y % 100; <span class="comment">// year without the century (range 00 to 99)</span>
+	<span class="reserved">if</span> (s[<span class="literal">"%y"</span>] &lt; 10) {
+		s[<span class="literal">"%y"</span>] = <span class="literal">"0"</span> + s[<span class="literal">"%y"</span>];
+	}
+	s[<span class="literal">"%Y"</span>] = y;        <span class="comment">// year with the century</span>
+	s[<span class="literal">"%%"</span>] = <span class="literal">"%"</span>;      <span class="comment">// a literal '%' character</span>
+	<span class="reserved">if</span> (/%z/.test(str)) {
+		var minutes = new String(date.getTimezoneOffset()%60);
+		var hours = new String(Math.abs(date.getTimezoneOffset()/60));
+		s[<span class="literal">"%z"</span>] = <span class="literal">"GMT"</span>+ (date.getTimezoneOffset() &gt; 0 ? <span class="literal">"-"</span> : <span class="literal">"+"</span>);
+		hours.length &lt; 2 ? s[<span class="literal">"%z"</span>]+=<span class="literal">"0"</span> : <span class="literal">""</span>;
+		s[<span class="literal">"%z"</span>] += Math.abs(date.getTimezoneOffset()/60) + <span class="literal">":"</span> + date.getTimezoneOffset()%60;
+		minutes.length &lt; 2 ? s[<span class="literal">"%z"</span>]+=<span class="literal">"0"</span> : <span class="literal">""</span>;
+	}
+	<span class="reserved">if</span> (/%Z/.test(str)) {
+		s[<span class="literal">"%Z"</span>] = (date.getTimezoneOffset() &gt; 0 ? <span class="literal">"-"</span> : <span class="literal">"+"</span>);
+		hours.length &lt; 2 ? s[<span class="literal">"%Z"</span>] += <span class="literal">"0"</span> : <span class="literal">""</span>;
+		s[<span class="literal">"%Z"</span>] += Math.abs(date.getTimezoneOffset()/60) + <span class="literal">""</span> + date.getTimezoneOffset()%60;
+		minutes.length &lt; 2 ? s[<span class="literal">"%Z"</span>] += <span class="literal">"0"</span> : <span class="literal">""</span>;
+	}
+	var re = /%./g;
+	var a = str.match(re) || [];
+	var tmp, ln = a.length;
+	<span class="reserved">for</span> (var i = 0; i &lt; ln; i++) {
+		tmp = s[a[i]];
+		<span class="reserved">if</span> (tmp) {
+			re = new RegExp(a[i], <span class="literal">'g'</span>);
+			str = str.replace(re, tmp);
+		}
+	}
+	<span class="reserved">return</span> str;
+};
+
+<span class="comment">/**
+ * Parses a date from a string in the specified format.
+ * This function requires strict following of the string to
+ * the format template, and any difference causes failure
+ * to be returned. Also function refuses to parse formats
+ * which containing number rules that have not fixed length
+ * and are not separated from the next number rule by any
+ * character string, as this requires complication of algorythm
+ * and still sometimes is impossible to parse.
+ *
+ * <span class="attrib">@param</span> str [string] the date as a string
+ * <span class="attrib">@param</span> format [string] the format to try to parse the date in
+ *
+ * <span class="attrib">@return</span> [Date] a date object containing the parsed date or \b null if for
+ * some reason the date couldn't be parsed.
+ */</span>
+Zapatec.Date.parseDate = <span class="reserved">function</span> (str, format) {
+	var fmt = format, strPointer = 0, token = null, parseFunc = null,
+		valueLength = null, valueRange = null, date = new Date(), values = {},
+		valueType = <span class="literal">''</span>;
+	<span class="comment">//need to have a way to determine whether rule is number</span>
+	var numberRules = [<span class="literal">"%d"</span>, <span class="literal">"%H"</span>, <span class="literal">"%I"</span>, <span class="literal">"%m"</span>, <span class="literal">"%M"</span>, <span class="literal">"%S"</span>, <span class="literal">"%s"</span>, <span class="literal">"%W"</span>, <span class="literal">"%u"</span>,
+		<span class="literal">"%w"</span>, <span class="literal">"%y"</span>, <span class="literal">"%e"</span>, <span class="literal">"%k"</span>, <span class="literal">"%l"</span>, <span class="literal">"%s"</span>, <span class="literal">"%Y"</span>, <span class="literal">"%C"</span>, <span class="literal">"%z"</span>, <span class="literal">"%Z"</span>];
+	var aNames;
+	<span class="comment">//parses string value from translation table</span>
+	<span class="reserved">function</span> parseString() {
+		<span class="reserved">for</span>(var iString = valueRange[0]; iString &lt; valueRange[1]; ++iString) {
+			<span class="comment">// Calendar still wants to translate in its own way</span>
+			var value;
+			<span class="reserved">if</span> (Zapatec.Calendar &amp;&amp; <span class="reserved">this</span> instanceof Zapatec.Calendar) {
+				value = Zapatec.Calendar.i18n(iString, valueType, <span class="reserved">this</span>);
+			} <span class="reserved">else</span> {
+				value = aNames[iString];
+			}
+			<span class="reserved">if</span> (!value) {
+				<span class="reserved">return</span> null;
+			}
+			<span class="comment">//comparing with our part of the string</span>
+			<span class="reserved">if</span> (value == str.substr(strPointer, value.length)) {
+				<span class="comment">//increasing string pointer</span>
+				valueLength = value.length;
+				<span class="reserved">return</span> iString;
+			}
+		}
+		<span class="reserved">return</span> null;
+	}
+	<span class="comment">//parses the number from beginning of string</span>
+	<span class="reserved">function</span> parseNumber() {
+		var val = str.substr(strPointer, valueLength);
+		<span class="reserved">if</span> (val.length != valueLength || /$\d+^/.test(val)) {
+			<span class="reserved">return</span> null;
+		}
+		<span class="reserved">return</span> parseInt(val, 10);
+	}
+	<span class="comment">//parses AM PM rule</span>
+	<span class="reserved">function</span> parseAMPM() {
+		var result = str.substr(strPointer, valueLength).toLowerCase() == Zapatec.Date.Pm ? true : false;
+		<span class="reserved">return</span> result || (str.substr(strPointer, valueLength).toLowerCase() == Zapatec.Date.Am ? false : null);
+	}
+	<span class="comment">//parses GMT time format</span>
+	<span class="reserved">function</span> parseGMT() {
+		var val = str.substr(strPointer, valueLength);
+			<span class="reserved">if</span> (val.length != valueLength || !/(\w){3}(\+|-)+((\d){4}|(\d)+:(\d))+/.test(val)) {
+				<span class="reserved">return</span> null;
+			}
+		var sgn = val.substr(3, 1);
+		values[<span class="literal">"%zm"</span>] = (sgn == <span class="literal">"-"</span> ? (-1) * parseInt(val.substr(7, 2), 10) : parseInt(val.substr(7, 2), 10));
+		<span class="reserved">return</span> parseInt(val.substr(3, 3), 10);
+	}
+	<span class="comment">//parses RFC822 time format</span>
+	<span class="reserved">function</span> parseRFC() {
+		var val = str.substr(strPointer, valueLength);
+			<span class="reserved">if</span> (val.length != valueLength || !/(\+|-)+((\d){4}|(\d)+:(\d))+/.test(val)) {
+				<span class="reserved">return</span> null;
+			}
+		var sgn = val.substr(0, 1);
+		values[<span class="literal">"%Zm"</span>] = (sgn == <span class="literal">"-"</span> ? (-1) * parseInt(val.substr(3, 2), 10) : parseInt(val.substr(3, 2), 10));
+		<span class="reserved">return</span> parseInt(val.substr(0, 3), 10);
+	}
+	<span class="comment">//function determines if rule value was parsed</span>
+	<span class="reserved">function</span> wasParsed(rule) {
+		<span class="reserved">if</span> (typeof rule == <span class="literal">"undefined"</span> || rule === null) {
+			<span class="reserved">return</span> false;
+		}
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//gets first defined value or null if no</span>
+	<span class="reserved">function</span> getValue() {
+		<span class="reserved">for</span>(var i = 0; i &lt; arguments.length; ++i) {
+			<span class="reserved">if</span> (arguments[i] !== null &amp;&amp; typeof arguments[i] != <span class="literal">"undefined"</span> &amp;&amp; !isNaN(arguments[i])) {
+				<span class="reserved">return</span> arguments[i];
+			}
+		}
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (typeof fmt != <span class="literal">"string"</span> || typeof str != <span class="literal">"string"</span> || str == <span class="literal">""</span> || fmt == <span class="literal">""</span>) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="comment">//cycle breaks format into tokens and checks or parses them</span>
+	<span class="reserved">while</span>(fmt) {
+		<span class="comment">//this is the default value type</span>
+		parseFunc = parseNumber;
+		<span class="comment">//taking char token(that doesn't hold any information)</span>
+		valueLength = fmt.indexOf(<span class="literal">"%"</span>);
+		valueLength = (valueLength == -1) ? fmt.length : valueLength;
+		token = fmt.slice(0, valueLength);
+		<span class="comment">//checking if we have same token in parsed string</span>
+		<span class="reserved">if</span> (token != str.substr(strPointer, valueLength)) {
+			<span class="reserved">return</span> null;
+		}
+		<span class="comment">//skiping it</span>
+		strPointer += valueLength;
+		fmt = fmt.slice(valueLength);
+		<span class="reserved">if</span> (fmt == <span class="literal">""</span>) {
+			break;
+		}
+		<span class="comment">//taking formating rule</span>
+		token = fmt.slice(0, 2);
+		<span class="comment">//this is the default length of value, as it is very often one for rules</span>
+		valueLength = 2;
+		switch (token) {
+			case <span class="literal">"%A"</span> :
+			case <span class="literal">"%a"</span> : {
+				<span class="reserved">if</span> (<span class="literal">"%A"</span> == token) {
+					aNames = zapatecDateDayNames;
+					valueType = <span class="literal">"dn"</span>;
+				} <span class="reserved">else</span> {
+					aNames = zapatecDateShortDayNames;
+					valueType = <span class="literal">"sdn"</span>;
+				}
+				valueRange = [0, 7];
+				parseFunc = parseString;
+				break;
+			}
+			case <span class="literal">"%B"</span> :
+			case <span class="literal">"%b"</span> : {
+				<span class="reserved">if</span> (<span class="literal">"%B"</span> == token) {
+					aNames = zapatecDateMonthNames;
+					valueType = <span class="literal">"mn"</span>;
+				} <span class="reserved">else</span> {
+					aNames = zapatecDateShortMonthNames;
+					valueType = <span class="literal">"smn"</span>;
+				}
+				valueRange = [0, 12];
+				parseFunc = parseString;
+				break;
+			}
+			case <span class="literal">"%p"</span> :
+			case <span class="literal">"%P"</span> : {
+				parseFunc = parseAMPM;
+				break;
+			}
+			case <span class="literal">"%Y"</span> : {
+				valueLength = 4;
+				<span class="reserved">if</span> (zapatecUtils.arrIndexOf(numberRules, fmt.substr(2, 2)) != -1) {
+					<span class="reserved">return</span> null;
+				}
+				<span class="reserved">while</span>(isNaN(parseInt(str.charAt(strPointer + valueLength - 1))) &amp;&amp; valueLength &gt; 0) {
+					--valueLength;
+				}
+				<span class="reserved">if</span> (valueLength == 0) {break;}
+				break;
+			}
+			case <span class="literal">"%C"</span> :
+			case <span class="literal">"%s"</span> : {
+				valueLength = 1;
+				<span class="reserved">if</span> (zapatecUtils.arrIndexOf(numberRules, fmt.substr(2, 2)) != -1) {
+					<span class="reserved">return</span> null;
+				}
+				<span class="reserved">while</span>(!isNaN(parseInt(str.charAt(strPointer + valueLength)))) {
+					++valueLength;
+				}
+				break;
+			}
+			case <span class="literal">"%k"</span> :
+			case <span class="literal">"%l"</span> :
+			case <span class="literal">"%e"</span> : {
+				valueLength = 1;
+				<span class="reserved">if</span> (zapatecUtils.arrIndexOf(numberRules, fmt.substr(2, 2)) != -1) {
+					<span class="reserved">return</span> null;
+				}
+				<span class="reserved">if</span> (!isNaN(parseInt(str.charAt(strPointer + 1)))) {
+					++valueLength;
+				}
+				break;
+			}
+			case <span class="literal">"%j"</span> : valueLength = 3; break;
+			case <span class="literal">"%u"</span> :
+			case <span class="literal">"%w"</span> : valueLength = 1;
+			case <span class="literal">"%y"</span> :
+			case <span class="literal">"%m"</span> :
+			case <span class="literal">"%d"</span> :
+			case <span class="literal">"%W"</span> :
+			case <span class="literal">"%H"</span> :
+			case <span class="literal">"%I"</span> :
+			case <span class="literal">"%M"</span> :
+			case <span class="literal">"%S"</span> : {
+				break;
+			}
+			case <span class="literal">"%z"</span> :
+				valueLength = 9;
+				parseFunc = parseGMT;
+				break;
+			case <span class="literal">"%Z"</span> :
+				<span class="reserved">if</span> (values[<span class="literal">"%z"</span>]) break;
+				valueLength = 5;
+				parseFunc = parseRFC;
+				break;
+		}
+		<span class="reserved">if</span> ((values[token] = parseFunc()) === null) {
+			<span class="reserved">return</span> null;
+		}
+		<span class="comment">//increasing pointer</span>
+		strPointer += valueLength;
+		<span class="comment">//skipint it</span>
+		fmt = fmt.slice(2);
+	}
+	<span class="reserved">if</span> (wasParsed(values[<span class="literal">"%s"</span>])) {
+		date.setTime(values[<span class="literal">"%s"</span>] * 1000);
+	} <span class="reserved">else</span> {
+		var year = getValue(values[<span class="literal">"%Y"</span>], values[<span class="literal">"%y"</span>] + --values[<span class="literal">"%C"</span>] * 100,
+			values[<span class="literal">"%y"</span>] + (date.getFullYear() - date.getFullYear() % 100),
+			values[<span class="literal">"%C"</span>] * 100 + date.getFullYear() % 100);
+		var month = getValue(values[<span class="literal">"%m"</span>] - 1, values[<span class="literal">"%b"</span>], values[<span class="literal">"%B"</span>]);
+		var day = getValue(values[<span class="literal">"%d"</span>] || values[<span class="literal">"%e"</span>]);
+		<span class="reserved">if</span> (day === null || month === null) {
+			var dayOfWeek = getValue(values[<span class="literal">"%a"</span>], values[<span class="literal">"%A"</span>], values[<span class="literal">"%u"</span>] == 7 ? 0 : values[<span class="literal">"%u"</span>], values[<span class="literal">"%w"</span>]);
+		}
+		var hour = getValue(values[<span class="literal">"%H"</span>], values[<span class="literal">"%k"</span>]<span class="comment">/*, values["%z"]*/</span>);
+		<span class="reserved">if</span> (hour === null &amp;&amp; (wasParsed(values[<span class="literal">"%p"</span>]) || wasParsed(values[<span class="literal">"%P"</span>]))) {
+			var pm = getValue(values[<span class="literal">"%p"</span>], values[<span class="literal">"%P"</span>]);
+			hour = getValue(values[<span class="literal">"%I"</span>], values[<span class="literal">"%l"</span>]);
+			hour = pm ? ((hour == 12) ? 12 : (hour + 12)) : ((hour == 12) ? (0) : hour);
+		}
+		<span class="reserved">if</span> (year || year === 0) {
+			date.setFullYear(year);
+		}
+		<span class="reserved">if</span> (month || month === 0) {
+			date.setMonth(month, 1);
+		}
+		<span class="reserved">if</span> (day || day === 0) {
+			date.setDate(day);
+		}
+		<span class="reserved">if</span> (wasParsed(values[<span class="literal">"%j"</span>])) {
+			date.setMonth(0);
+			date.setDate(1);
+			date.setDate(values[<span class="literal">"%j"</span>]);
+		}
+		<span class="reserved">if</span> (wasParsed(dayOfWeek)) {
+			date.setDate(date.getDate() + (dayOfWeek - date.getDay()));
+		}
+		<span class="reserved">if</span> (wasParsed(values[<span class="literal">"%W"</span>])) {
+			var weekNumber = zapatecDate.getWeekNumber(date);
+			<span class="reserved">if</span> (weekNumber != values[<span class="literal">"%W"</span>]) {
+				date.setDate(date.getDate() + (values[<span class="literal">"%W"</span>] - weekNumber) * 7);
+			}
+		}
+		<span class="reserved">if</span> (hour !== null) {
+			date.setHours(hour);
+		}
+		<span class="reserved">if</span> (wasParsed(values[<span class="literal">"%M"</span>]<span class="comment">/*, values["%zm"]*/</span>)) {
+			date.setMinutes(values[<span class="literal">"%M"</span>]);
+		}
+		<span class="reserved">if</span> (wasParsed(values[<span class="literal">"%S"</span>])) {
+			date.setSeconds(values[<span class="literal">"%S"</span>]);
+		}
+		<span class="reserved">if</span> (wasParsed(values[<span class="literal">"%z"</span>])) {
+			date.setUTCHours(date.getUTCHours() + (date.getTimezoneOffset()/60 + parseInt(values[<span class="literal">"%z"</span>], 10)));
+			date.setUTCMinutes(date.getUTCMinutes() + (-1) * (date.getTimezoneOffset()%60 - parseInt(values[<span class="literal">"%zm"</span>], 10)))
+		}
+		<span class="reserved">if</span> (wasParsed(values[<span class="literal">"%Z"</span>])) {
+			date.setUTCHours(date.getUTCHours() + (date.getTimezoneOffset()/60 + parseInt(values[<span class="literal">"%Z"</span>], 10)));
+			date.setUTCMinutes(date.getUTCMinutes() + (-1) * (date.getTimezoneOffset()%60 - parseInt(values[<span class="literal">"%Zm"</span>], 10)))
+		}
+	}
+	<span class="comment">//printing date in the same format and checking if we'll get the same string</span>
+	<span class="reserved">if</span> (zapatecDate.print(date, format) != str) {
+		<span class="comment">//if not returning error</span>
+		<span class="reserved">return</span> null;
+	}
+	<span class="comment">//or returning parsed date</span>
+	<span class="reserved">return</span> date;
+};
+
+<span class="comment">/**
+ * This function replaces the original Date.setFullYear() with a "safer"
+ * function which makes sure that the month or date aren't modified (unless in
+ * the exceptional case where the date is February 29 but the new year doesn't
+ * contain it).
+ *
+ * <span class="attrib">@param</span> y [int] the new year to move this date to
+ */</span>
+Zapatec.Date.setFullYear = <span class="reserved">function</span>(date, y) {
+	var d = new Date(date);
+	d.setFullYear(y);
+	<span class="reserved">if</span> (d.getMonth() != date.getMonth()) {
+		date.setDate(28);
+	}
+	date.setFullYear(y);
+};
+
+<span class="comment">/**
+ * This function compares only years, months and days of two date objects.
+ *
+ * <span class="attrib">@return</span> [int] -1 if date1&gt;date2, 1 if date2&gt;date1 or 0 if they are equal
+ *
+ * <span class="attrib">@param</span> date1 [Date] first date to compare
+ * <span class="attrib">@param</span> date1 [Date] second date to compare
+ */</span>
+Zapatec.Date.compareDatesOnly = <span class="reserved">function</span> (date1,date2) {
+	var year1 = date1.getYear();
+	var year2 = date2.getYear();
+	var month1 = date1.getMonth();
+	var month2 = date2.getMonth();
+	var day1 = date1.getDate();
+	var day2 = date2.getDate();
+	<span class="reserved">if</span> (year1 &gt; year2) { <span class="reserved">return</span> -1; }
+	<span class="reserved">if</span> (year2 &gt; year1) { <span class="reserved">return</span> 1; } <span class="comment">//years are equal</span>
+	<span class="reserved">if</span> (month1 &gt; month2) { <span class="reserved">return</span> -1; }
+	<span class="reserved">if</span> (month2 &gt; month1) { <span class="reserved">return</span> 1; } <span class="comment">//years and months are equal</span>
+	<span class="reserved">if</span> (day1 &gt; day2) { <span class="reserved">return</span> -1; }
+	<span class="reserved">if</span> (day2 &gt; day1) { <span class="reserved">return</span> 1; } <span class="comment">//days are equal</span>
+	<span class="reserved">return</span> 0;
+};
+
+<span class="comment">/**
+ * Keeps regexp used in {<span class="attrib">@link</span> Zapatec.Date#parseTime}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.dateRegexpTime =
+	/^(\d{1,2})(\D+(\d{1,2}))?(\D+(\d{1,2}))?\W*(AM|PM|A|P)?\s*(.*)/i;
+
+<span class="comment">/**
+ * Parses time string into object.
+ *
+ * &lt;pre&gt;
+ * Result format:
+ * {
+ *   hours: [number, optional] hours,
+ *   minutes: [number, optional] minutes,
+ *   tail: [string] the rest of the string
+ * }
+ *
+ * String may contain not only time, but must be started from time. If it
+ * contains anything else after the time, the rest will be returned as tail.
+ *
+ * If hours and minutes are not defined in the result, this means time was not
+ * found in the beginning of passed string.
+ *
+ * Following time formats are recognized:
+ * 1) HH:MM:SS
+ * 2) HH:MM:SS AM/PM
+ * 3) HH:MM
+ * 4) HH:MM AM/PM
+ * 5) HH AM/PM
+ * Any type of separator can be used.
+ * Examples: 1.40A, 05-06-02, 3:8:1, 02:05[PM], 7pm, etc.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sTime Time string
+ * <span class="attrib">@return</span> Result
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Date.parseTime = <span class="reserved">function</span>(sTime) {
+	<span class="comment">// Result object</span>
+	var oResult = {
+		tail: sTime
+	};
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!sTime) {
+		<span class="reserved">return</span> oResult;
+	}
+	sTime = sTime.replace(/^\s+/, <span class="literal">''</span>).replace(/\s+$/, <span class="literal">''</span>);
+	<span class="comment">// Parse time</span>
+	var aMatches = sTime.match(zapatecDate.dateRegexpTime);
+	<span class="reserved">if</span> (aMatches &amp;&amp; aMatches[1]) {
+		<span class="comment">// Hours</span>
+		var iHours = aMatches[1] * 1;
+		<span class="reserved">if</span> (aMatches[6]) {
+			var sAmPm = aMatches[6].toUpperCase();
+			<span class="reserved">if</span> (sAmPm == <span class="literal">'PM'</span> || sAmPm == <span class="literal">'P'</span>) {
+				<span class="reserved">if</span> (iHours &lt; 12) {
+					iHours += 12;
+				}
+			} <span class="reserved">else</span> { <span class="comment">// AM</span>
+				<span class="reserved">if</span> (iHours == 12) {
+					iHours = 0;
+				}
+			}
+		}
+		oResult.hours = iHours;
+		<span class="comment">// Minutes</span>
+		oResult.minutes = aMatches[3] ? aMatches[3] * 1 : 0;
+		<span class="comment">// Tail</span>
+		oResult.tail = aMatches[7];
+	}
+	<span class="reserved">return</span> oResult;
+};
+
+<span class="comment">/**
+ * Converts number to string and adds '0' in the beginning if number &lt; 10.
+ *
+ * <span class="attrib">@param</span> {number} i Integer &gt; 0
+ * <span class="attrib">@return</span> String with length &gt;= 2
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Date.padTwo = <span class="reserved">function</span>(i) {
+	<span class="reserved">return</span> (i &lt; 10 ? <span class="literal">'0'</span> : <span class="literal">''</span>) + i;
+};
+
+<span class="comment">/**
+ * Keeps regexp used in {<span class="attrib">@link</span> Zapatec.Date#isFloatingDate}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.dateRegexpNotFloating = /(?:Z|[+-]\d{1,2}(?::\d{1,2})?)$/;
+
+<span class="comment">/**
+ * Checks if date in RFC 2445 or ISO 8601 format is floating (not bound to any
+ * timezone).
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} sDTStamp date in RFC 2445 format
+ * <span class="attrib">@return</span> true if sDTStamp is floating, false otherwise
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Date.isFloatingDate = <span class="reserved">function</span>(sDTStamp) {
+	<span class="reserved">if</span> (!sDTStamp) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">return</span> !zapatecDate.dateRegexpNotFloating.test(sDTStamp);
+};
+
+<span class="comment">/**
+ * Converts Date object to date-time string in RFC 2445 format. Conversion is
+ * done according to http://tools.ietf.org/html/rfc2445#section-4.3.5
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   date: [object] Date object,
+ *   floating: [boolean, optional] if true, result value will be floating (not
+ *    bound to any time zone)
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date-time in RFC 2445 format or empty string in case of invalid
+ * arguments
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Date.dateToTimeStamp = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	var oDate = oArg.date;
+	<span class="reserved">if</span> (!(oDate instanceof Date)) {
+		<span class="reserved">return</span> oDate + <span class="literal">''</span>;
+	}
+	<span class="comment">// Convert</span>
+	var fPadTwo = zapatecDate.padTwo;
+	<span class="reserved">if</span> (!oArg.floating) {
+		<span class="comment">// Convert to UTC</span>
+		oDate = new Date(oDate.getTime() + (oDate.getTimezoneOffset() * 60000));
+	}
+	<span class="reserved">return</span> [
+		oDate.getFullYear(),
+		fPadTwo(oDate.getMonth() + 1),
+		fPadTwo(oDate.getDate()),
+		<span class="literal">'T'</span>,
+		fPadTwo(oDate.getHours()),
+		fPadTwo(oDate.getMinutes()),
+		fPadTwo(oDate.getSeconds()),
+		oArg.floating ? <span class="literal">''</span> : <span class="literal">'Z'</span>
+	].join(<span class="literal">''</span>);
+};
+
+<span class="comment">/**
+ * Converts Date object to date string in RFC 2445 format. Conversion is done
+ * according to http://tools.ietf.org/html/rfc2445#section-4.3.4
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   date: [object] Date object
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date in RFC 2445 format or empty string in case of invalid arguments
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Date.dateToDateStamp = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	var oDate = oArg.date;
+	<span class="reserved">if</span> (!(oDate instanceof Date)) {
+		<span class="reserved">return</span> oDate + <span class="literal">''</span>;
+	}
+	<span class="comment">// Convert</span>
+	var fPadTwo = zapatecDate.padTwo;
+	<span class="reserved">return</span> [
+		oDate.getFullYear(),
+		fPadTwo(oDate.getMonth() + 1),
+		fPadTwo(oDate.getDate())
+	].join(<span class="literal">''</span>);
+};
+
+<span class="comment">/**
+ * Keeps regexp used in {<span class="attrib">@link</span> Zapatec.Date#timeStampToDate}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.dateRegexpTimeStamp =
+ /^(\d{4})(\d{2})(\d{2})T?(\d{2})?(\d{2})?(\d{2})?(Z)?$/;
+
+<span class="comment">/**
+ * Converts date-time in RFC 2445 format to Date object. Conversion is done
+ * according to http://tools.ietf.org/html/rfc2445#section-4.3.5
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   dtstamp: [string] date-time in RFC 2445 format
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date object or undefined in case of invalid arguments
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Date.timeStampToDate = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span>;
+	}
+	var sDTStamp = oArg.dtstamp;
+	<span class="reserved">if</span> (typeof sDTStamp != <span class="literal">'string'</span>) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Parse</span>
+	var aMatches = sDTStamp.match(zapatecDate.dateRegexpTimeStamp);
+	<span class="reserved">if</span> (!aMatches) {
+		<span class="reserved">return</span>;
+	}
+	var iYear = parseInt(aMatches[1], 10);
+	var iMonth = parseInt(aMatches[2], 10) - 1;
+	var iDay = parseInt(aMatches[3], 10);
+	var iHour = parseInt(aMatches[4], 10);
+	<span class="reserved">if</span> (isNaN(iHour)) {
+		<span class="reserved">return</span> new Date(iYear, iMonth, iDay);
+	}
+	iHour = parseInt(iHour, 10);
+	var iMinute = parseInt(aMatches[5], 10);
+	var iSecond = parseInt(aMatches[6], 10);
+	<span class="reserved">if</span> (aMatches[7]) {
+		<span class="comment">// Floating</span>
+		<span class="reserved">return</span> new Date(Date.UTC(iYear, iMonth, iDay, iHour, iMinute, iSecond));
+	}
+	<span class="reserved">return</span> new Date(iYear, iMonth, iDay, iHour, iMinute, iSecond);
+};
+
+<span class="comment">/**
+ * Converts Date object to date-time string ISO 8601 format. Conversion is done
+ * according to http://tools.ietf.org/html/rfc3339
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   date: [object] Date object,
+ *   floating: [boolean, optional] if true, result value will be floating (not
+ *    bound to any time zone)
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date-time in ISO 8601 format or empty string in case of invalid
+ * arguments
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Date.dateToTimeIso = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	var oDate = oArg.date;
+	<span class="reserved">if</span> (!(oDate instanceof Date)) {
+		<span class="reserved">return</span> oDate + <span class="literal">''</span>;
+	}
+	<span class="comment">// Convert</span>
+	var fPadTwo = zapatecDate.padTwo;
+	<span class="comment">// Convert to UTC</span>
+	oDate = new Date(oDate.getTime() + (oDate.getTimezoneOffset() * 60000));
+	<span class="reserved">return</span> [
+		oDate.getFullYear(),
+		<span class="literal">'-'</span>,
+		fPadTwo(oDate.getMonth() + 1),
+		<span class="literal">'-'</span>,
+		fPadTwo(oDate.getDate()),
+		<span class="literal">'T'</span>,
+		fPadTwo(oDate.getHours()),
+		<span class="literal">':'</span>,
+		fPadTwo(oDate.getMinutes()),
+		<span class="literal">':'</span>,
+		fPadTwo(oDate.getSeconds()),
+		oArg.floating ? <span class="literal">''</span> : <span class="literal">'Z'</span>
+	].join(<span class="literal">''</span>);
+};
+
+<span class="comment">/**
+ * Converts Date object to date string ISO 8601 format. Conversion is done
+ * according to http://tools.ietf.org/html/rfc3339
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   date: [object] Date object
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date in ISO 8601 format or empty string in case of invalid arguments
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Date.dateToDateIso = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	var oDate = oArg.date;
+	<span class="reserved">if</span> (!(oDate instanceof Date)) {
+		<span class="reserved">return</span> oDate + <span class="literal">''</span>;
+	}
+	<span class="comment">// Convert</span>
+	var fPadTwo = zapatecDate.padTwo;
+	<span class="reserved">return</span> [
+		oDate.getFullYear(),
+		fPadTwo(oDate.getMonth() + 1),
+		fPadTwo(oDate.getDate())
+	].join(<span class="literal">'-'</span>);
+};
+
+<span class="comment">/**
+ * Keeps regexp used in {<span class="attrib">@link</span> Zapatec.Date#dateIsoToDate}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Date.dateRegexpTimeIso =
+ /(\d{4,})(?:-(\d{1,2})(?:-(\d{1,2})(?:[T ](\d{1,2}):(\d{1,2})(?::(\d{1,2})(?:\.(\d+))?)?(?:(Z)|([+-])(\d{1,2})(?::(\d{1,2}))?)?)?)?)?/;
+
+<span class="comment">/**
+ * Converts date-time in ISO 8601 format to Date object. Conversion is done
+ * according to http://tools.ietf.org/html/rfc3339
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   dateIso: [string] date-time in ISO 8601 format
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date object or undefined in case of invalid arguments
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Date.timeIsoToDate = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span>;
+	}
+	var sDateIso = oArg.dateIso + <span class="literal">''</span>;
+	<span class="reserved">if</span> (typeof sDateIso != <span class="literal">'string'</span> || !sDateIso.length) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Parse</span>
+	var aMatches = sDateIso.match(zapatecDate.dateRegexpTimeIso);
+	<span class="reserved">if</span> (!aMatches) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Year</span>
+	var iYear = parseInt(aMatches[1], 10);
+	<span class="comment">// Month</span>
+	var iMonth = aMatches[2];
+	<span class="reserved">if</span> (typeof iMonth == <span class="literal">'undefined'</span> || iMonth === <span class="literal">''</span>) {
+		<span class="reserved">return</span> new Date(iYear);
+	}
+	iMonth = parseInt(iMonth, 10) - 1;
+	<span class="comment">// Date</span>
+	var iDay = parseInt(aMatches[3], 10);
+	<span class="comment">// Hours</span>
+	var iHour = aMatches[4];
+	<span class="reserved">if</span> (typeof iHour == <span class="literal">'undefined'</span> || iHour === <span class="literal">''</span>) {
+		<span class="reserved">return</span> new Date(iYear, iMonth, iDay);
+	}
+	iHour = parseInt(iHour, 10);
+	<span class="comment">// Minutes</span>
+	var iMinute = parseInt(aMatches[5], 10);
+	<span class="comment">// Seconds</span>
+	var iSecond = aMatches[6];
+	<span class="reserved">if</span> (typeof iSecond == <span class="literal">'undefined'</span> || iSecond === <span class="literal">''</span>) {
+		iSecond = 0;
+	} <span class="reserved">else</span> {
+		iSecond = parseInt(iSecond, 10);
+	}
+	<span class="comment">// Milliseconds</span>
+	var iMSecond = aMatches[7];
+	<span class="reserved">if</span> (typeof iMSecond == <span class="literal">'undefined'</span> || iMSecond === <span class="literal">''</span>) {
+		iMSecond = 0;
+	} <span class="reserved">else</span> {
+		iMSecond = Math.round(1000.0 * parseFloat(<span class="literal">'0.'</span> + iMSecond));
+	}
+	<span class="comment">// Time zone</span>
+	var iTimezoneOffset = 0;
+	<span class="comment">// Z means UTC</span>
+	var sTimezoneZ = aMatches[8];
+	<span class="reserved">if</span> (typeof sTimezoneZ == <span class="literal">'undefined'</span> || sTimezoneZ === <span class="literal">''</span>) {
+		<span class="comment">// Not UTC</span>
+		var sTimezoneSign = aMatches[9];
+		<span class="reserved">if</span> (typeof sTimezoneSign == <span class="literal">'undefined'</span> || sTimezoneSign === <span class="literal">''</span>) {
+			<span class="comment">// No time zone</span>
+			<span class="reserved">return</span> new Date(iYear, iMonth, iDay, iHour, iMinute, iSecond, iMSecond);
+		}
+		<span class="comment">// Time zone hours</span>
+		iTimezoneOffset = parseInt(aMatches[10], 10) * 3600000;
+		<span class="comment">// Time zone minutes</span>
+		var iTimezoneMinute = aMatches[11];
+		<span class="reserved">if</span> (typeof iTimezoneMinute != <span class="literal">'undefined'</span> &amp;&amp; iTimezoneMinute !== <span class="literal">''</span>) {
+			iTimezoneOffset += parseInt(iTimezoneMinute, 10) * 60000;
+		}
+		<span class="reserved">if</span> (sTimezoneSign == <span class="literal">'-'</span>) {
+			iTimezoneOffset *= -1;
+		}
+	}
+	<span class="reserved">return</span> new Date(Date.UTC(iYear, iMonth, iDay, iHour, iMinute, iSecond,
+	 iMSecond) - iTimezoneOffset);
+};
+
+<span class="comment">/**
+ * Converts date or date-time from RFC 2445 to ISO 8601 format.
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   dtstamp: [string] date or date-time in RFC 2445 format
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date or date-time in ISO 8601 format or empty string in case of
+ * invalid arguments
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Date.timeStampToTimeIso = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	var sDTStamp = oArg.dtstamp;
+	<span class="reserved">if</span> (!sDTStamp) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	<span class="reserved">if</span> (sDTStamp.length == 8) {
+		<span class="comment">// Date</span>
+		<span class="reserved">return</span> sDTStamp.substr(0, 4) + <span class="literal">'-'</span> + sDTStamp.substr(4, 2) + <span class="literal">'-'</span> +
+			sDTStamp.substr(6, 2);
+	} <span class="reserved">else</span> {
+		<span class="comment">// Date/Time</span>
+		<span class="reserved">return</span> zapatecDate.dateToTimeIso({
+			date: zapatecDate.timeStampToDate(oArg),
+			floating: zapatecDate.isFloatingDate(sDTStamp)
+		});
+	}
+};
+
+<span class="comment">/**
+ * Converts date-time from ISO 8601 to RFC 2445 format.
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   dateIso: [string] date in ISO 8601 format
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date-time in RFC 2445 format or empty string in case of invalid
+ * arguments
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Date.timeIsoToTimeStamp = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	var sDateIso = oArg.dateIso + <span class="literal">''</span>;
+	<span class="reserved">if</span> (typeof sDateIso != <span class="literal">'string'</span> || !sDateIso.length) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	<span class="comment">// Convert</span>
+	<span class="reserved">if</span> (sDateIso.indexOf(<span class="literal">'-'</span>) &gt; 0) {
+		<span class="reserved">if</span> (sDateIso.length == 10) {
+			<span class="comment">// Date</span>
+			<span class="reserved">return</span> sDateIso.substr(0, 4) + sDateIso.substr(5, 2) +
+				sDateIso.substr(8, 2);
+		} <span class="reserved">else</span> {
+			<span class="comment">// Date/Time</span>
+			<span class="reserved">return</span> zapatecDate.dateToTimeStamp({
+				date: zapatecDate.timeIsoToDate(oArg),
+				floating: zapatecDate.isFloatingDate(sDateIso)
+			});
+		}
+	} <span class="reserved">else</span> {
+		<span class="comment">// Not ISO format</span>
+		<span class="reserved">return</span> sDateIso;
+	}
+};
+
+<span class="comment">/**
+ * Calculates date of specified week day on the same week as passed date.
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   date: [object, optional] Date object, default: today,
+ *   weekDay: [number, optional] zero-based number of day from 0 (Sunday) to 6
+ *    (Saturday), default: 0 (Sunday)
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date object
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Date.getWeekDay = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (!oArg) {
+		oArg = {};
+	}
+	var oDate = oArg.date;
+	<span class="reserved">if</span> (!oDate) {
+		oDate = new Date();
+	}
+	var iWeekDay = oArg.weekDay;
+	<span class="reserved">if</span> (typeof iWeekDay != <span class="literal">'number'</span> || iWeekDay &lt; 0 || iWeekDay &gt; 6) {
+		iWeekDay = 0;
+	}
+	<span class="reserved">return</span> zapatecDate.getTomorrow({
+		date: oDate,
+		days: iWeekDay - oDate.getDay()
+	});
+};
+
+<span class="comment">/**
+ * Calculates date of specified day of the month. The month is same as month of
+ * passed date.
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   date: [object, optional] Date object, default: today,
+ *   day: [number, optional] number of day between 1 and 31 or -31 and -1,
+ *    default: 1
+ * }
+ * Negative day means day starting from the end of month. For example, -1 is the
+ * last day of month.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments
+ * <span class="attrib">@return</span> Date object
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Date.getMonthDay = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (!oArg) {
+		oArg = {};
+	}
+	var oDate = oArg.date;
+	<span class="reserved">if</span> (!oDate) {
+		oDate = new Date();
+	}
+	var iDay = oArg.day;
+	<span class="reserved">if</span> (typeof iDay != <span class="literal">'number'</span>) {
+		iDay = 1;
+	}
+	var iMonth = oDate.getMonth();
+	<span class="reserved">if</span> (iDay &lt; 1) {
+		<span class="reserved">if</span> (iDay &lt; 0) {
+			<span class="comment">// Negative day</span>
+			iDay++;
+		}
+		iMonth++;
+	}
+	<span class="reserved">return</span> new Date(oDate.getFullYear(), iMonth, iDay);
+};
+
+<span class="comment">/**
+ * Calculates tomorrow date from the passed date.
+ *
+ * &lt;pre&gt;
+ * Arguments format:
+ * {
+ *   date: [object, optional] Date object, default: today,
+ *   days: [number, optional] number of days to add, default: 1
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oDate Date object
+ * <span class="attrib">@return</span> Tomorrow date
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Date.getTomorrow = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (!oArg) {
+		oArg = {};
+	}
+	var oDate = oArg.date;
+	<span class="reserved">if</span> (oDate) {
+		oDate = new Date(oDate.getTime());
+	} <span class="reserved">else</span> {
+		oDate = new Date();
+	}
+	var iDays = oArg.days;
+	<span class="reserved">if</span> (typeof iDays != <span class="literal">'number'</span>) {
+		iDays = 1;
+	}
+	<span class="reserved">if</span> (iDays) {
+		oDate.setDate(oDate.getDate() + iDays);
+	}
+	<span class="reserved">return</span> oDate;
+};
+
+<span class="comment">/**
+ * Compares two dates and returns difference between them in days.
+ *
+ * <span class="attrib">@param</span> {object} oDate1 Date object
+ * <span class="attrib">@param</span> {object} oDate2 Date object
+ * <span class="attrib">@return</span> Difference between oDate1 and oDate2 in days: &lt; 0 if oDate1 &lt; oDate2;
+ * &gt; 0 if oDate1 &gt; oDate2; 0 if oDate1 == oDate2
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Date.compareDates = <span class="reserved">function</span>(oDate1, oDate2) {
+	oDate1 = new Date(oDate1.getFullYear(), oDate1.getMonth(), oDate1.getDate());
+	oDate2 = new Date(oDate2.getFullYear(), oDate2.getMonth(), oDate2.getDate());
+	var iDays = (oDate1.getTime() - oDate2.getTime()) / 86400000;
+	<span class="reserved">return</span> Math.round(iDays);
+};
+
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

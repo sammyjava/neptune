@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom quaternary nav, set customQuaternaryNav=true and put code here.
+ */
+  boolean customQuaternaryNav = false;
+%>

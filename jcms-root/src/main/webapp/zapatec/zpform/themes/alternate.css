@@ -1,0 +1,332 @@
+/* $Id: alternate.css 10008 2008-02-15 12:00:49Z smaxim $ */
+/*
+"zpStatusImg" class images for form fields -- apply appropriate rules here.
+        The script auto-applies one of each of these CLASS attributes to a series of
+                nested <span>s with an innermost .zpStatusImg class <span> we style:
+        1) "zpIsRequired" or "zpNotRequired".
+        2) "zpIsEditing" or "zpNotEditing".
+        3) "zpIsEmpty" or "zpNotEmpty".
+        4) "zpIsValid" or "zpNotValid".
+        5) Always "zpStatusImg", this is the one styled.
+*/
+
+.zpFormAlternate .zpStatusImg,
+.zpFormAlternate .zpCheckboxStatusImg,
+.zpFormAlternate .zpRadioStatusImg { /* Container for field status image */
+        padding: 0px 12px;
+        height: 14px;
+        width: 13px;
+        background-repeat: no-repeat;
+        background-position: right;
+        margin-left:5px;
+        margin-right:3px;
+        display: inline-block;
+        vertical-align: top;
+} 
+
+.zpFormAlternate .zpCommonStatusImg {
+        opacity: 0.66;
+        filter: alpha(opacity=66);
+        padding-bottom: 5px; /* Fixes alignment of asterisk ->  don't remove! */
+}
+
+.zpFormAlternate .zpCheckboxStatusImg,
+.zpFormAlternate .zpRadioStatusImg { /* Container for checkbox and radio status images */
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+}
+
+
+.zpFormAlternate .zpIsRequired .zpStatusImg{
+        background-image: url(icons/required.gif);
+}
+
+.zpFormAlternate .zpIsEditing .zpStatusImg { /* properties of status image while editing field */
+       opacity: 1.0;
+       filter: alpha(opacity=100);
+}
+
+.zpFormAlternate .zpIsEditing .zpNotEmpty .zpCommonStatusImg{
+       background-image: url(icons/editing.gif);
+}
+
+.zpFormAlternate .zpNotEditing .zpNotEmpty .zpNotValid .zpStatusImg{
+        background-image: url(icons/invalid.gif);
+}
+
+.zpFormAlternate .zpIsValid .zpStatusImg{ /* Shown when field is valid */
+        background-image: url(icons/validated.gif);
+}
+
+.zpFormAlternate .zpIsFetching .zpStatusImg { /* shown while inputing into field */
+        background-image: url(icons/fetching.gif) !important;
+}
+
+/*
+ * Controls the look and feel of the form
+ */
+
+.zpFormAlternate .errOutput { /* style for error field */
+        background-color: #C70032;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: white;
+        display: none;
+}
+
+.zpFormAlternate .zpFormLabel { /* style for form fields labels */
+        width: 10em;
+        float: left;
+        color:#446092;
+        font-size: 12px;
+        line-height:20px;
+}
+
+.zpFormAlternate .zpExpandedTable, 
+.zpFormAlternate .zpExpandedTable td,  
+.zpFormAlternate .zpExpandedTable th  { 
+        border:1px solid #B8CDE0;
+        border-collapse:collapse;                        
+}
+
+.zpFormAlternate .zpExpandedTable span { /* fixes the table cell height error, caused by invisible spans */
+        display:none;
+}
+
+.zpFormAlternate .zpExpandedTable .multipleButton { /* multiply button in table container */
+        margin:2px;
+}
+
+.zpFormAlternate .multipleButton{ /* style for field multiply button (if present) */
+        margin-left: 10px; 
+        text-align: center;
+        width:20px;
+}
+
+* html .zpFormAlternate .multipleButton {  /* IE6 Fix of button height */
+        height:20px;
+}
+ 
+*:first-child+html .zpFormAlternate .multipleButton { /* IE7 Fix of button height */
+        height:20px;
+} 
+
+
+.zpFormAlternate { /* Common form properties */
+        background:#fcfbed;
+        border:1px solid #ccc;
+        font-size: 11px;
+        padding:10px;
+        font-family: "MS Sans Serif" , Arial, Tahoma, Verdana, sans-serif;
+}
+
+.zpFormAlternate .zpFormContent { /* Form content container style */
+        border:1px solid #ccc;
+        margin: 0px 10px;
+        padding: 0px 10px 10px 10px;
+        background:#f9fafc;
+}
+
+* html .zpFormAlternate .zpFormContent{ /* IE6 fix */
+        padding-top: 10px;
+}
+
+.zpFormAlternate .button{ /* style for form submit buttons */
+        border: none !important;
+        background: url("alternate/button.gif");
+        height: 26px;
+        width: 69px;
+        border: none;
+        line-height: 16px;
+        font-family:Verdana, "MS Sans Serif" , Arial;
+        font-size: 11px;
+        font-weight:bold;
+        margin-left: 10px;
+        padding-bottom:2px;
+        color:#516589;
+        
+}
+
+.zpFormAlternate .button:hover { /* style on button mouseover */ 
+        border:none;
+        background: url("alternate/button_hilite.gif");
+}
+
+* html .zpFormAlternate .button { /* IE6 fix */
+        padding-bottom:0px;
+        background: url("alternate/button_hilite.gif");
+}
+
+.zpFormAlternate .zpFormButtons {
+        text-align: right;
+        margin: 10px;
+}
+
+.zpFormAlternate fieldset{ /* form fieldset style */
+        margin: 10px 1px 10px 1px;
+        padding: 10px;
+        border:1px solid #B8CDE0;
+        background:#fcfbed;
+}
+
+* html .zpFormAlternate fieldset{ /* IE6 fix */
+        margin-bottom: 10px;
+
+}
+
+.zpFormAlternate legend{ /* form legend: sign of the fieldset */
+        color: #516589;
+        padding:0px 5px;
+        font-family:Verdana, "MS Sans Serif" , Arial;
+        font-size:12px;
+        font-weight:bold;
+}
+
+* html .zpFormAlternate legend{
+        margin-bottom: 10px;
+}
+
+.zpFormAlternate select {
+        background-color:none;
+        border:1px solid #7F9DB9;
+        margin-bottom: 5px;
+        color:#446092;
+}
+
+                                  /* Dropdown styles */
+.zpFormAlternate .dropDownArrow { /*All Browsers*/
+        background-image: url("alternate/down_arrow.gif");
+        padding:9px 9px; 
+        padding-top:12px;
+        background-repeat: no-repeat;
+        margin-left:-1px;
+        display: inline;
+        cursor: pointer;
+} 
+
+* html .zpFormAlternate .dropDownArrow {  /*IE6*/
+        vertical-align:top; /*important -> don't remove*/
+        height: 20px;
+        background-image: url("alternate/down_arrow_hilite.gif");
+        padding: 0px 12px;
+        background-repeat: no-repeat;
+        margin-left:-1px; 
+        margin-top:1px;
+        display: inline-block;
+        cursor: pointer;
+}                                   
+
+*+html .zpFormAlternate .dropDownArrow {  /* IE7 */
+        margin-top:1px;
+        vertical-align:top !important;
+        height: 20px;
+        background-image: url("alternate/down_arrow.gif");
+        padding: 0px 12px;
+        background-repeat: no-repeat;
+        margin-left:-1px;
+        display: inline-block;
+        cursor: pointer;
+} 
+
+.zpFormAlternate .dropDownArrow:hover,
+.zpFormAlternate .dropDownArrow:active,
+.zpFormAlternate .dropDownArrow:focus { /*All Browsers hover*/
+        background-image: url("alternate/down_arrow_hilite.gif");
+} 
+                                        /* end of dropdown styles */
+.zpFormAlternate .fieldError {
+        font-weight: bold;
+}
+
+.zpFormAlternate textarea {
+        border:1px solid #B8CDE0;
+        color:#5b8ab6;                   
+        width: 270px;
+}
+
+.zpFormAlternate textarea:hover,
+.zpFormAlternate textarea:focus,
+.zpFormAlternate textarea:active { /* textarea mouseover style */
+        border:1px solid #9eb9ef;
+}
+
+
+.zpFormAlternate input {
+        background:#FEFEFE;
+        border:1px solid #b8cde0;
+        margin-bottom: 8px;
+        width:auto;
+        color:#5b8ab6;                   
+}
+
+* html .zpFormAlternate input.zpFormRequired { /* fix for IE 6 - fixing width  */
+				width:270px;
+}
+
+
+.zpFormAlternate input:hover,
+.zpFormAlternate input:focus,
+.zpFormAlternate input:active { /* mouseover style for input fields */
+        border:1px solid #9eb9ef;
+}
+
+.zpFormAlternate .zpFormError{ /* text: this field is required style */
+        vertical-align:top;
+        color: #F73460;
+        padding-left: 10px;
+        font-weight: normal;
+        display: inline-block;
+        /*position for error mesage*/
+        position:relative;
+				top:3px;
+}
+
+.zpFormAlternate .zpRadioLabel { /* label for checkbox and radio elements */
+        padding-left: 5px;
+        vertical-align:top;
+        color:#446092;
+}
+
+ 
+.zpFormAlternate .zpFormCheckbox { /* checkbox style */
+        border:none !important;
+        padding:0px;
+        margin:0px;
+        width:auto;
+        background:none;
+}
+
+.zpFormAlternate .zpFormRadio {  /* radio style */
+        border:none;
+        padding:0px;
+        margin:0px;
+        width:auto;
+        background:none;
+}
+
+* html .zpFormAlternate .zpFormCheckbox { /* ie6 checkbox style */
+        margin:-3px;
+        width:14px !important;
+        margin:-3px -3px -3px -1px;
+}
+       
+* html .zpFormAlternate .zpFormRadio { /* ie6 radio style */
+        vertical-align:3%;
+        width:14px !important;
+        margin:-3px -3px -3px -1px;
+}
+
+
+*+html .zpFormAlternate .zpFormCheckbox { /* ie7 checkbox style */
+        margin:-3px;
+}
+       
+*+html .zpFormAlternate .zpFormRadio { /* ie7 radio style */
+        margin:-3px;
+        vertical-align:3%;
+}
+
+.zpFormAlternate .zpWrongValue{ /* highlighting field when trying to input not allowed symbol */
+        background-color: #EA888C !important;
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Zapatec Button</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<script type='text/javascript' src='../../utils/button.js'></script>
+	<link href="../themes/button/default.css" rel="stylesheet" type="text/css">
+
+	<style type="text/css">
+		h1.title{
+			font-size: medium;
+		}
+
+		table.example tr td{
+			background-color: #EEEEEE;
+			border: 1px dotted black;
+			padding: 20px;
+			text-align: center;
+			vertical-align: top;
+		}
+
+		.example4_out{
+			background-color: #F00 !important;
+		}
+
+		.example4_over{
+			background-color: #0F0 !important;
+		}
+
+		.example4_down{
+			background-color: #00F !important;
+		}
+	</style>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Zapatec Button</div>
+
+
+
+This demo shows you how to use the Zapatec.Button object.
+<table border="0" cellspacing="10" class="example">
+	<tr>
+		<td id="target1">
+		    <h1 class="title">simple text button</h1>
+		</td>
+		<td id="target2">
+            <h1 class="title">enable/disable</h1>
+			<input type="button" onclick="button2.disable()" value="disable" />
+			<input type="button" onclick="button2.enable()" value="enable" />
+			<br />
+			<br />
+		</td>
+		<td id="target3">
+		    <h1 class="title">simple image button</h1>
+		</td>
+		<td id="target4">
+		    <h1 class="title">apply custom classes</h1>
+		</td>
+	</tr>
+	<tr>
+		<td id="target5">
+		    <h1 class="title">apply custom styles</h1>
+		</td>
+		<td id="target6">
+		    <h1 class="title">custom mouse events</h1>
+			<input type="button" onclick="button6.disable()" value="disable" />
+			<input type="button" onclick="button6.enable()" value="enable" />
+			<br />
+			<br />
+		</td>
+		<td id="target7">
+			<h1 class="title">converting common elements to Zapatec.Button</h1>
+			<form action="button.html" onsubmit="alert('submitting form')">
+			    <input type="text" name="form_param" value="field value" /><br /><br />
+				<input type="button" value="input type='button'"/><br /><br />
+				<input type="image" src="button-image.gif" name="image_button" value="input type='image'" /><br /><br />
+				<input type="submit" value="input type='submit'" name="submit_button" type='submit' /><br /><br />
+				<input type="reset" value="input type='reset'" />
+			</form>
+		</td>
+		<td id="target8">
+			<h1 class="title">converted elements saves their events</h1>
+			<input type="button" value="input type='button'"
+				onclick="alert('original onclick event')"
+				onmousedown="alert('original onmousedown event')"
+				onmouseover="alert('original onmouseover event')"
+				onmouseout="alert('original onmouseout event')"
+			/>
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	var button1 = new Zapatec.Button({
+		text: "test button",
+		theme: 'default',
+		themePath: "../themes/button/"
+	});
+
+	document.getElementById("target1").appendChild(button1.getContainer());
+
+	var button2 = new Zapatec.Button({
+		text: "test button",
+		theme: 'default',
+		themePath: "../themes/button/"
+	});
+
+	document.getElementById("target2").appendChild(button2.getContainer());
+
+	var button3 = new Zapatec.Button({
+		text: "test button",
+		image: "button-out.gif",
+		overImage: "button-over.gif",
+		downImage: "button-down.gif",
+		theme: null,
+		themePath: "../themes/button/"
+	});
+
+	document.getElementById("target3").appendChild(button3.getContainer());
+
+	var button4 = new Zapatec.Button({
+		text: "test button",
+		className: "example4_out",
+		overClass: "example4_over",
+		downClass: "example4_down",
+		theme: 'default',
+		themePath: "../themes/button/"
+	});
+
+	document.getElementById("target4").appendChild(button4.getContainer());
+
+	var button5 = new Zapatec.Button({
+		text: "test button",
+		style: "background-color: #FF0000",
+		overStyle: "background-color: #00FF00",
+		downStyle: "background-color: #0000FF",
+		theme: 'default',
+		themePath: "../themes/button/"
+	});
+
+	document.getElementById("target5").appendChild(button5.getContainer());
+
+	var button6 = new Zapatec.Button({
+		text: "test button",
+		overAction: function(){alert("over")},
+		outAction: function(){alert("out")},
+		downAction: function(){alert("down")},
+		clickAction: function(){alert("click")},
+		theme: 'default',
+		themePath: "../themes/button/"
+	});
+
+	button6.disable();
+
+	document.getElementById("target6").appendChild(button6.getContainer());
+
+	Zapatec.Button.setupAll('target7', {
+		theme: 'default',
+		themePath: "../themes/button/"
+	})
+
+	Zapatec.Button.setupAll('target8', {
+		theme: 'default',
+		themePath: "../themes/button/"
+	})
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

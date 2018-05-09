@@ -1,0 +1,12 @@
+/* $Id: tree-default-icons.css 5406 2006-11-30 11:28:34Z andrew $ */
+div.tree-item td.customIcon {
+	background: url("img/fs/document2.png") no-repeat 0 50%;
+}
+
+div.tree-item-expanded td.customIcon {
+	background: url("img/fs/folder-open.png") no-repeat 0 50%;
+}
+
+div.tree-item-collapsed td.customIcon {
+	background: url("img/fs/folder.png") no-repeat 0 50%;
+}

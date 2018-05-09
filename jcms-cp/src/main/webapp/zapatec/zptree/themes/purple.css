@@ -1,0 +1,117 @@
+/* $Id: purple.css 6078 2007-01-25 14:44:47Z smaxim $ */
+
+
+/* Overall the background and layoutfor the tree */
+.zpTreePurpleContainer {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  background: url("purple/bg_main.gif")  100% 100%;
+}
+
+/* Hrefs in a tree item */
+.zpTreePurpleContainer div.tree-item td.a {
+  text-decoration:none;
+}
+
+.zpTreePurpleContainer div.tree-item a{
+  color:#fff;
+  font-weight:normal;
+}
+
+/* General setting of the tree */
+.zpTreePurpleContainer .tree, 
+.zpTreePurpleContainer .tree-item table.tree-table { 
+  color:#D6D7FF;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight:bold;
+}
+
+.zpTreePurpleContainer .tree-item-more {
+  padding-left: 1px;
+}
+
+.zpTreePurpleContainer .tree-item .label { 
+  cursor: pointer; 
+  cursor: hand;
+}
+
+.zpTreePurpleContainer .tree-item table.tree-table td.label{ 
+  padding: 0 1px; 
+}
+
+.zpTreePurpleContainer .tree-item .tgb {
+  width: 9px; 
+  height: 9px; 
+  vertical-align: middle; 
+  cursor: default;
+}
+
+.zpTreePurpleContainer .tree-item .icon { 
+  cursor: pointer; 
+  cursor: hand;
+  width: 17px; 
+  height: 17px; 
+  text-align: center; 
+  vertical-align: middle; 
+}
+
+.zpTreePurpleContainer .tree-item-selected table.tree-table td.label{ 
+  background-color: #6462AE; 
+  color: #FFF; 
+}                                                                     
+
+.zpTreePurpleContainer .tree-item-selected table.tree-table td.menutitle { 
+  background-color: #6462AE; 
+  color: #FFF; 
+}                                                                     
+
+.zpTreePurpleContainer div.tree-item, 
+.zpTreePurpleContainer div.tree-item:hover {
+  cursor:pointer;
+  cursor: hand;
+  font-weight:bold;
+  color:#DDDDDD;
+}
+
+.zpTreePurpleContainer div.tree-item a{
+  text-decoration:none;
+}
+
+.zpTreePurpleContainer div.tree-item:hover {
+  background-color:#6462AE;
+}
+
+/* custom icons for expanded and closed folder */
+
+.zpTreePurpleContainer div.tree-item-expanded td.customIcon {
+  background: url("purple/arrow_down.gif") no-repeat 0 50%;
+  line-height:17px;
+}
+
+.zpTreePurpleContainer div.tree-item-collapsed td.customIcon {
+  background: url("purple/arrow_right.gif") no-repeat 0 50%;
+  line-height:17px;
+}
+
+/* Makes an indent for each subtree */
+.zpTreePurpleContainer .tree { 
+  padding-left: 5px; 
+  padding-right:5px;
+}
+
+.zpTreePurpleContainer .menutitle{
+  width:102px;
+  line-height:17px;
+  color:#2C2C2C;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  background: url("purple/bg_menutitle.gif") no-repeat 100% 100%;
+  text-indent:5px;
+  margin-left:-2px;
+  margin-top:1px;
+}
+
+.zpTreePurpleContainer .menutitle:hover{
+  text-decoration:underline;
+}

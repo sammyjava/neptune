@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom DHTML; set customDhtml=true and put code here.
+ */
+  boolean customDhtml = false;
+%>

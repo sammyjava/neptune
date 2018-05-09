@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom vertical nav, set customVerticalNav=true and put code here.
+ */
+  boolean customVerticalNav = false;
+%>

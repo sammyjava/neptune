@@ -1,0 +1,15 @@
+<!-- main region, printable -->
+<table id="main" cellspacing="0" width="100%">
+  <tr>
+    <td id="main-right" valign="top">
+      <!--stopindex-->
+      <% if (accessAllowed) { %>
+        <% if (showPageTitle) { %><%@ include file="/WEB-INF/include/pagetitle.jhtml" %><% } %>
+        <%@ include file="/WEB-INF/include/content.jhtml" %>
+      <% } else { %>
+        <%@ include file="/WEB-INF/include/accessdenied.jhtml" %>
+      <% } %>
+      <!--startindex-->
+    </td>
+  </tr>
+</table>

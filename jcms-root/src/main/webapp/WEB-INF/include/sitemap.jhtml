@@ -1,0 +1,85 @@
+<%@ include file="/WEB-INF/custom/sitemap.jhtml" %>
+<% if (!customSitemap) { %>
+<!-- site map table begins -->
+<table class="sitemap" align="center" cellspacing="0">
+  <%
+    { // enclosure to keep vars local
+      String url;
+  %>
+  <tr>
+    <%
+      // level 1
+      NodeListIterator rootIterator = root.getNodeListIterator(application);
+      while (rootIterator.hasNext()) {
+        Node l1 = rootIterator.nextNode();
+        if (l1.isVisible() && (!accessEnabled || au.mayAccess(application, l1))) {
+          if (l1.ssl) {
+	    url = "https://"+sslHost+application.getContextPath()+l1.url;
+          } else {
+            url = l1.url;
+	  }
+    %>
+    <td class="sitemap" valign="top">
+      <% if (navPrimaryLevel1Enable) { %>
+      <div class="sitemap1"><a class="sitemap1" <% if (l1.isExternal()) { %>target="_blank"<% } %> href="<%=url%>"><%=l1.nodename%></a></div>
+      <% } else { %>
+      <div class="sitemap1"><%=l1.nodename%></div>
+      <% } %>
+      <% if (softslateSitemap && l1.url.equals(softslateContext)) { %><c:import context="<%=softslateContext%>" url="/Sitemap.do" charEncoding="UTF-8" /><% } %>
+      <%
+        // level 2
+        NodeListIterator l1Iterator = l1.getNodeListIterator(application);
+        while (l1Iterator.hasNext()) {
+          Node l2 = l1Iterator.nextNode();
+          if (l2.isVisible() && (!accessEnabled || au.mayAccess(application, l2))) {
+	    if (l2.ssl) {
+	      url = "https://"+sslHost+application.getContextPath()+l2.url;
+	    } else {
+	      url = l2.url;
+	    }
+      %>
+      <div class="sitemap2"><a class="sitemap2" <% if (l2.isExternal()) { %>target="_blank"<% } %> href="<%=url%>"><%=l2.nodename%></a></div>
+      <%
+        // level 3
+        NodeListIterator l2Iterator = l2.getNodeListIterator(application);
+        while (l2Iterator.hasNext()) {
+          Node l3 = l2Iterator.nextNode();
+          if (l3.isVisible() && (!accessEnabled || au.mayAccess(application, l3))) {
+	    if (l3.ssl) {
+	      url = "https://"+sslHost+application.getContextPath()+l3.url;
+	    } else {
+	      url = l3.url;
+	    }
+      %>
+      <div class="sitemap3"><a class="sitemap3" <% if (l3.isExternal()) { %>target="_blank"<% } %> href="<%=url%>"><%=l3.nodename%></a></div>
+      <%
+        // level 4
+        NodeListIterator l3Iterator = l3.getNodeListIterator(application);
+        while (l3Iterator.hasNext()) {
+          Node l4 = l3Iterator.nextNode();
+          if (l4.isVisible() && (!accessEnabled || au.mayAccess(application, l4))) {
+	    if (l4.ssl) {
+	      url = "https://"+sslHost+application.getContextPath()+l4.url;
+	    } else {
+	      url = l4.url;
+	    }
+      %>
+      <div class="sitemap4"><a class="sitemap4" <% if (l4.isExternal()) { %>target="_blank"<% } %> href="<%=url%>"><%=l4.nodename%></a></div>
+      <%
+      } // if l4 visible
+    } // level 4
+  } // if level 3 visible
+} // level 3
+} // if level 2 visible
+} // level 2
+      %>
+    </td>
+    <%
+    } // if level 1 visible
+  } // level 1
+} // enclosure
+    %>
+  </tr>
+</table>
+<!-- site map table ends -->
+<% } %>

@@ -1,0 +1,17 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/sectionheader.jhtml" %>
+<% if (!customSectionHeader) { %>
+<!-- section header -->
+<table id="sectionheader" cellspacing="0" width="100%">
+  <tr>
+    <td class="sectionheader-left"></td>
+    <%
+      String tdClass = "sectionheader";
+      UtilityContent[] uc = UtilityContent.getByLocation(application, 'Z');
+    %>
+    <%@ include file="utilitycontent.jhtml" %>
+    <td class="sectionheader-right"></td>
+  </tr>
+</table>
+<% } %>
+<!--startindex-->

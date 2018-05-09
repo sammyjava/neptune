@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom footer, set customFooter=true and put code here.
+ */
+  boolean customFooter = false;
+%>

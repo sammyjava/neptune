@@ -1,0 +1,17 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/footer.jhtml" %>
+<% if (!customFooter) { %>
+<!-- footer -->
+<table id="footer" cellspacing="0" width="100%">
+  <tr>
+    <td class="footer-left"></td>
+    <%
+      String tdClass = "footer";
+      UtilityContent[] uc = UtilityContent.getByLocation(application, 'F');
+    %>
+    <%@ include file="utilitycontent.jhtml" %>
+    <td class="footer-right"></td>
+  </tr>
+</table>
+<% } %>
+<!--startindex-->

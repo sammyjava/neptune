@@ -1,0 +1,174 @@
+/* $Id: silverxp.css 6183 2007-02-05 12:42:26Z slip $ */
+@import url("base.css");
+
+.zpWinSilverxpContainer .zpWinTitleArea {
+  font-family: "Trebuchet MS", Verdana, Arial , Heltvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  height: 28px;
+  text-align:left;
+}
+
+.zpWinSilverxpContainer .zpWinFront .zpWinTitleArea td {
+  background: url(silverxp/titlebar_on_bg.gif) repeat-x right  top;
+}
+
+.zpWinSilverxpContainer .zpWinBack .zpWinTitleArea td {
+  background: url(silverxp/titlebar_off_bg.gif) repeat-x right  top;
+}
+
+.zpWinSilverxpContainer .zpWinFront td.zpWinTitleFirstCell {
+  background: url(silverxp/titlebar_on_left_corner.gif) no-repeat left  top;
+}
+
+.zpWinSilverxpContainer .zpWinBack td.zpWinTitleFirstCell {
+  background: url(silverxp/titlebar_off_left_corner.gif) no-repeat left  top;
+}
+.zpWinSilverxpContainer td.zpWinTitleFirstCell {
+  width : 13px;
+}
+
+.zpWinSilverxpContainer .zpWinFront td.zpWinTitleLastCell {
+  background: url(silverxp/titlebar_on_right_corner.gif) no-repeat right  top;
+}
+
+.zpWinSilverxpContainer .zpWinBack td.zpWinTitleLastCell {
+  background: url(silverxp/titlebar_off_right_corner.gif) no-repeat right  top;
+}
+
+.zpWinSilverxpContainer td.zpWinTitleLastCell {
+  width : 5px;
+}
+
+.zpWinSilverxpContainer .zpWinTitleText {
+    white-space: nowrap;
+    padding-top:5px;
+  padding-left:6px;
+}
+
+.zpWinSilverxpContainer .zpWinCloseButton, 
+.zpWinSilverxpContainer .zpWinMinButton, 
+.zpWinSilverxpContainer .zpWinMaxButton, 
+.zpWinSilverxpContainer .zpWinRestoreButton {
+    height: 21px;
+    width: 21px;
+    margin-right:2px;
+    margin-top:2px;
+	display : block;
+	overflow : hidden;
+}
+
+.zpWinSilverxpContainer .zpWinButtonHolder {
+    height: 23px;
+    width: 23px;
+}
+
+.zpWinSilverxpContainer .zpWinFront .zpWinCloseButton{
+  background: url(silverxp/close.gif) no-repeat;
+}
+
+.zpWinSilverxpContainer .zpWinFront .zpWinMinButton{
+  background: url(silverxp/minimize.gif) no-repeat;
+}
+
+.zpWinSilverxpContainer .zpWinFront .zpWinMaxButton{
+  background: url(silverxp/maximize.gif) no-repeat;
+}
+
+.zpWinSilverxpContainer .zpWinFront .zpWinRestoreButton {
+  background: url(silverxp/restore.gif) no-repeat;
+}
+
+.zpWinSilverxpContainer .zpWinBack .zpWinCloseButton{
+  background: url(silverxp/close_inactive.gif) no-repeat;
+}
+
+.zpWinSilverxpContainer .zpWinBack .zpWinMinButton{
+  background: url(silverxp/minimize_inactive.gif) no-repeat;
+}
+
+.zpWinSilverxpContainer .zpWinBack .zpWinMaxButton{
+  background: url(silverxp/maximize_inactive.gif) no-repeat;
+}
+
+.zpWinSilverxpContainer .zpWinBack .zpWinRestoreButton {
+  background: url(silverxp/restore_inactive.gif) no-repeat 0 0;
+}
+
+.zpWinSilverxpContainer td.zpWinContentCell {  /* Top part border properties (width) */
+  border-left-width : 1px;
+  border-right-width : 1px;
+  border-left-style : solid;
+  border-right-style : solid;
+  padding : 0px 2px 0px 2px;
+}
+
+.zpWinSilverxpContainer .zpWinFront td.zpWinContentCell { /* Top part border color */
+  border-left-color : #66667e;
+  border-right-color : #66667e;
+  background-color : #e0e0e1;
+}
+
+.zpWinSilverxpContainer .zpWinBack td.zpWinContentCell {  /* Top part borer color when inactive */
+  border-left-color : #EAEDF5;
+  border-right-color : #EAEDF5;
+  background-color : #e0e0e5;
+}
+
+.zpWinSilverxpContainer .zpWinContentBorder { /* Iternal border color */
+  background-color: #ffffff;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #777792	#777792 #777792 #777792;
+}
+
+.zpWinSilverxpContainer .zpWinContent {
+  padding: 0px;
+}
+
+.zpWinSilverxpContainer td.zpWinStatusCell {    /* Status part border properties */
+  border-left-width : 1px;
+  border-right-width : 1px;
+  border-bottom-width : 1px;
+  border-left-style : solid;
+  border-right-style : solid;
+  border-bottom-style : solid;
+  padding : 0px 2px;
+}
+
+.zpWinSilverxpContainer .zpWinBottomBorder {
+  height : 1px;
+  line-height : 1px;
+  overflow : hidden;
+  font-size : 1px;
+}
+
+.zpWinSilverxpContainer .zpWinFront td.zpWinStatusCell {     /* Status part border color  */
+  border-left-color : #66667e;
+  border-right-color : #66667e;
+  border-bottom-color : #66667e;
+  background-color : #e0e0e1;
+}
+
+.zpWinSilverxpContainer .zpWinBack td.zpWinStatusCell {
+  border-left-color : #EAEDF5;
+  border-right-color : #EAEDF5;
+  border-bottom-color : #EAEDF5;
+  background-color : #e0e0e5;
+}
+
+.zpWinSilverxpContainer .zpWinStatus {
+  height: 24px;
+  line-height: 24px;
+  text-align:left;
+  background: url(silverxp/status.gif);
+  color:black;
+  vertical-align: middle;
+  font-family: Arial, Heltvetica, Verdana, sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+  padding-left: 3px;
+  margin : 0px;
+  border-left:1px solid #777792;
+  border-right:1px solid #777792;
+}

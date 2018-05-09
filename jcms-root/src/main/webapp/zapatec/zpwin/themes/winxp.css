@@ -1,0 +1,174 @@
+/* $Id: winxp.css 6941 2007-04-16 13:22:05Z smaxim $ */
+@import url("base.css");
+
+.zpWinWinxpContainer .zpWinTitleArea {
+  font-family: "Trebuchet MS", Verdana, Arial , Heltvetica, sans-serif;
+  font-size: 13px;
+  font-weight: bold;
+  height: 28px;
+  text-align:left;
+}
+
+.zpWinWinxpContainer .zpWinFront .zpWinTitleArea td {
+  background: url(winxp/titlebar_on_bg.gif) repeat-x right  top;
+}
+
+.zpWinWinxpContainer .zpWinBack .zpWinTitleArea td {
+  background: url(winxp/titlebar_off_bg.gif) repeat-x right  top;
+}
+
+.zpWinWinxpContainer .zpWinFront td.zpWinTitleFirstCell {
+  background: url(winxp/titlebar_on_left_corner.gif) no-repeat left  top;
+}
+
+.zpWinWinxpContainer .zpWinBack td.zpWinTitleFirstCell {
+  background: url(winxp/titlebar_off_left_corner.gif) no-repeat left  top;
+}
+.zpWinWinxpContainer td.zpWinTitleFirstCell {
+  width: 13px;
+}
+
+.zpWinWinxpContainer .zpWinFront td.zpWinTitleLastCell {
+  background: url(winxp/titlebar_on_right_corner.gif) no-repeat right  top;
+}
+
+.zpWinWinxpContainer .zpWinBack td.zpWinTitleLastCell {
+  background: url(winxp/titlebar_off_right_corner.gif) no-repeat right  top;
+}
+
+.zpWinWinxpContainer td.zpWinTitleLastCell {
+  width: 5px;
+}
+
+.zpWinWinxpContainer .zpWinTitleText {
+  white-space: nowrap;
+  padding-top: 5px;
+  padding-left: 6px;
+}
+
+.zpWinWinxpContainer .zpWinCloseButton, 
+.zpWinWinxpContainer .zpWinMinButton, 
+.zpWinWinxpContainer .zpWinMaxButton, 
+.zpWinWinxpContainer .zpWinRestoreButton {
+  height: 21px;
+  width: 21px;
+  margin-right: 2px;
+  margin-top:3px;
+  display: block;
+  overflow:  hidden;
+}
+
+.zpWinWinxpContainer .zpWinButtonHolder {
+  height: 24px;
+  width: 23px;
+}
+
+.zpWinWinxpContainer .zpWinFront .zpWinCloseButton{
+  background: url(winxp/close.gif) no-repeat;
+}
+
+.zpWinWinxpContainer .zpWinFront .zpWinMinButton{
+  background: url(winxp/minimize.gif) no-repeat;
+}
+
+.zpWinWinxpContainer .zpWinFront .zpWinMaxButton{
+  background: url(winxp/maximize.gif) no-repeat;
+}
+
+.zpWinWinxpContainer .zpWinFront .zpWinRestoreButton {
+  background: url(winxp/restore.gif) no-repeat;
+}
+
+.zpWinWinxpContainer .zpWinBack .zpWinCloseButton{
+  background: url(winxp/close_inactive.gif) no-repeat;
+}
+
+.zpWinWinxpContainer .zpWinBack .zpWinMinButton{
+  background: url(winxp/minimize_inactive.gif) no-repeat;
+}
+
+.zpWinWinxpContainer .zpWinBack .zpWinMaxButton{
+  background: url(winxp/maximize_inactive.gif) no-repeat;
+}
+
+.zpWinWinxpContainer .zpWinBack .zpWinRestoreButton {
+  background: url(winxp/restore_inactive.gif) no-repeat 0 0;
+}
+
+.zpWinWinxpContainer td.zpWinContentCell {
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-left-style: solid;
+  border-right-style: solid;
+  padding: 0px 3px 0px 2px;
+}
+
+.zpWinWinxpContainer .zpWinFront td.zpWinContentCell {
+  border-left-color: #00138b;
+  border-right-color: #00138b;
+  background-color: #0855dd;
+}
+
+.zpWinWinxpContainer .zpWinBack td.zpWinContentCell {
+  border-left-color: #5b5ec5;
+  border-right-color: #5b5ec5;
+  background-color: #7689d9;
+}
+
+.zpWinWinxpContainer .zpWinContentBorder {
+  background-color: #ffffff;
+/*  border:1px solid #505050;
+  border-right:none;*/
+  border-bottom:1px solid #505050;
+  border-left:1px solid #0855DD;
+}
+
+.zpWinWinxpContainer .zpWinContent {
+  padding: 0px;
+}
+
+.zpWinWinxpContainer td.zpWinStatusCell {
+  border-left-width: 1px;
+  border-right-width: 1px;
+  border-bottom-width: 1px;
+  border-left-style: solid;
+  border-right-style: solid;
+  border-bottom-style: solid;
+  padding: 0px 3px 0px 3px;
+}
+
+.zpWinWinxpContainer .zpWinBottomBorder {
+  height: 3px;
+  line-height: 1px;
+  overflow: hidden;
+  font-size: 1px;
+}
+
+.zpWinWinxpContainer .zpWinFront td.zpWinStatusCell {
+  border-left-color: #00138b;
+  border-right-color: #00138b;
+  border-bottom-color: #00138b;
+  background-color: #0855dd;
+}
+
+.zpWinWinxpContainer .zpWinBack td.zpWinStatusCell {
+  border-left-color: #5b5ec5;
+  border-right-color: #5b5ec5;
+  border-bottom-color: #5b5ec5;
+  background-color: #7689d9;
+}
+
+.zpWinWinxpContainer .zpWinStatus {
+  height: 21px;
+  line-height: 21px;
+  text-align:left;
+  background: url(winxp/status.gif);
+  color:black;
+  vertical-align: middle;
+  font-family: Arial, Heltvetica, Verdana, sans-serif;
+  font-size: 11px;
+  white-space: nowrap;
+  padding-left: 3px;
+  margin: 0px;
+/*  border-right:1px solid #0855DD;*/
+}

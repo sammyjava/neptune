@@ -1,0 +1,13 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/sidebar-top.jhtml" %>
+<% if (!customTopSidebar) { %>
+<!-- sidebar -->
+<div id="sidebar-top">
+  <%
+    String divClass = "sidebar";
+    UtilityContent[] uc = UtilityContent.getByLocation(application, 'T');
+  %>
+  <%@ include file="utilitycontent-vertical.jhtml" %>
+</div>
+<% } %>
+<!--startindex-->

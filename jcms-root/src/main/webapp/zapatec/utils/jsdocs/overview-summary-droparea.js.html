@@ -1,0 +1,394 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="droparea.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>droparea.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'droparea.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Utils/DropArea.html">Zapatec.Utils.DropArea</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">//$Id: droparea.js 6943 2007-04-16 13:53:11Z slip $</span>
+<span class="comment">/** 
+ * This is Zapatec.Utils.DropArea object definition.
+ * It represents most of the routines connected to 
+ * dropping to some area and tracking global events 
+ * connected to dragging of the object.
+ * <span class="attrib">@param</span> config {object} - all parameters are passed as the properties of this object.
+ * 
+ * Constructor recognizes the following properties of the config object 
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *  container        | {string or HTML element} Element to be made the droparea (required).
+ *  dropName         | {string} id of droparea
+ *  listeners        | recognizes the following listeners:
+ *                   |  - onDrop - drop event listener;
+ *                   |  - onDragInit - dragging start event listener;
+ *                   |  - onDragOver - drag over the droparea event listener (is fired only first 
+ *                   |                 time the element came over);
+ *                   |  - onDragOut - drag out of the droparea event listener (is fired only first 
+ *                   |                 time the element went out);
+ *                   |  - onDragEnd - dragging end event listener;
+ *
+ * This is the new interface of this object, but for backward compability we leave old one, where
+ * all this parameters are passed as arguments in the following order: container, dropname, onDrop,
+ * onDragInit, onDragOver, onDragOut, onDragEnd. This way is depricated on the current moment.
+ */</span>
+Zapatec.Utils.DropArea = <span class="reserved">function</span>(config) {
+	<span class="comment">//this is for backward compability</span>
+	<span class="reserved">if</span> (arguments.length &gt; 1) {
+		config = {container : config};
+		config.dropName = arguments[1];
+		config.eventListeners = {
+			onDrop : arguments[2],
+			onDragInit : arguments[3],
+			onDragOver : arguments[4],
+			onDragOut : arguments[5],
+			onDragEnd : arguments[6]
+		}
+	}
+	Zapatec.Utils.DropArea.SUPERconstructor.call(<span class="reserved">this</span>, config);
+	
+	
+};
+
+Zapatec.Utils.DropArea.id = <span class="literal">"Zapatec.DropArea"</span>;
+Zapatec.inherit(Zapatec.Utils.DropArea, Zapatec.Widget);
+Zapatec.implement(Zapatec.Utils.DropArea, <span class="literal">"Zapatec.CommandEvent"</span>);
+
+<span class="comment">/**
+ * Inits the object with set of config options.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(config) {
+	<span class="comment">//calling parent init</span>
+	Zapatec.Utils.DropArea.SUPERclass.init.call(<span class="reserved">this</span>, config);
+	<span class="comment">//backward compability.</span>
+	<span class="reserved">this</span>.dropArea = <span class="reserved">this</span>.getConfiguration().container;
+	<span class="comment">//a flag for the element which is currently over the droparea.</span>
+	<span class="comment">//This is used to prevent endless calls to onDragOver and onDragOut.</span>
+	<span class="comment">//Now this handlers are called only once.</span>
+	<span class="reserved">this</span>.elementOver = false;
+	<span class="comment">//saving all the given handlers</span>
+	<span class="reserved">this</span>.addListeners();
+};
+
+<span class="comment">/**
+ * Sets the default configuration of the object and
+ * inits it with user defined values.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(config) {
+	<span class="comment">//drop area element</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"container"</span>, null);
+	<span class="comment">//name of the drop area</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"dropName"</span>, null);
+	<span class="comment">//no theme</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"theme"</span>, null);
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.DropArea.SUPERclass.configure.call(<span class="reserved">this</span>, config);
+	config = <span class="reserved">this</span>.getConfiguration();
+	<span class="comment">//Retreiveing droparea HTMLElement</span>
+	config.container = Zapatec.Widget.getElementById(config.container);
+};
+
+<span class="comment">/**
+ * Reconfigures the object with new parameters.
+ * <span class="attrib">@param</span> config {object} new configuration parameters.
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(config) {
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.DropArea.SUPERclass.reconfigure.call(<span class="reserved">this</span>, config);
+};
+
+<span class="comment">/**
+ * Drag Init event
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.dragInit = <span class="reserved">function</span>(ev, movable) {
+	<span class="comment">//retreiving the move point</span>
+	<span class="reserved">this</span>.mousePos = movingPoint = movable.getMovingPoint();
+	<span class="comment">//retreiving the droparea position</span>
+	var dropArea = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.dropArea);
+	<span class="comment">//getting movable elements</span>
+	var elems = Zapatec.Array(movable.getMovableElements());
+	<span class="reserved">if</span> (elems.length == 1) {
+		elems = elems[0];
+	}
+	<span class="comment">//if the mouse is over the droparea so lets point it in elementOver flag</span>
+	<span class="reserved">if</span> ((movingPoint.x &gt; dropArea.x) &amp;&amp; (movingPoint.x &lt; dropArea.x + dropArea.width) &amp;&amp; 
+	    (movingPoint.y &gt; dropArea.y) &amp;&amp; (movingPoint.y &lt; dropArea.y + dropArea.height)) {
+			<span class="reserved">this</span>.elementOver = elems;
+	}
+	<span class="comment">//if we have dragInit handler fire it</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragInit"</span>, elems, <span class="reserved">this</span>) == <span class="literal">"parent-re-execute"</span>) {
+		<span class="reserved">return</span> <span class="literal">"re-execute"</span>;
+	}
+	<span class="comment">//if we have dragOver handler and eventually the element was over the droparea on the start</span>
+	<span class="comment">//lets fire it </span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.elementOver) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragOver"</span>, elems, <span class="reserved">this</span>) == <span class="literal">"parent-re-execute"</span>) {
+			<span class="reserved">return</span> <span class="literal">"re-execute"</span>;
+		}
+	}
+};
+
+<span class="comment">/**
+ * Drag Move event
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.dragMove = <span class="reserved">function</span>(ev, movable) {
+	<span class="comment">//retreiving the move point</span>
+	<span class="reserved">this</span>.mousePos = movingPoint = movable.getMovingPoint();
+	<span class="comment">//retreiving the droparea position</span>
+	var dropArea = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.dropArea);
+	<span class="comment">//getting movable elements</span>
+	var elems = Zapatec.Array(movable.getMovableElements());
+	<span class="reserved">if</span> (elems.length == 1) {
+		elems = elems[0];
+	}
+	<span class="comment">//if the mouse is over the droparea so lets point it in elementOver flag</span>
+	<span class="comment">//otherwise lets give it value null</span>
+	<span class="reserved">if</span> ((movingPoint.x &gt; dropArea.x) &amp;&amp; (movingPoint.x &lt; dropArea.x + dropArea.width) &amp;&amp; 
+	    (movingPoint.y &gt; dropArea.y) &amp;&amp; (movingPoint.y &lt; dropArea.y + dropArea.height)) {
+		<span class="comment">//if we have dragOver handler fire it</span>
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.elementOver) {
+			<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragOver"</span>, elems, <span class="reserved">this</span>) == <span class="literal">"parent-re-execute"</span>) {
+				<span class="reserved">return</span> <span class="literal">"re-execute"</span>;
+			}
+		}
+		<span class="reserved">this</span>.elementOver = elems;
+	} <span class="reserved">else</span> {
+		<span class="comment">//if we have dragOut handler fire it</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.elementOver) {
+			<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragOut"</span>, elems, <span class="reserved">this</span>) == <span class="literal">"parent-re-execute"</span>) {
+				<span class="reserved">return</span> <span class="literal">"re-execute"</span>;
+			}
+		}
+		<span class="reserved">this</span>.elementOver = null;
+	}
+};
+
+<span class="comment">/**
+ * Drag End event
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.dragEnd = <span class="reserved">function</span>(ev, movable) {
+	<span class="comment">//getting movable elements</span>
+	var elems = Zapatec.Array(movable.getMovableElements());
+	<span class="reserved">if</span> (elems.length == 1) {
+		elems = elems[0];
+	}
+	<span class="comment">//if we have drop handler fire it</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.elementOver) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"onDrop"</span>, elems, <span class="reserved">this</span>) == <span class="literal">"parent-re-execute"</span>) {
+			<span class="reserved">return</span> <span class="literal">"re-execute"</span>;
+		}
+	}
+	<span class="comment">//if we have dragEnd handler fire it</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragEnd"</span>, elems, <span class="reserved">this</span>) == <span class="literal">"parent-re-execute"</span>) {
+		<span class="reserved">return</span> <span class="literal">"re-execute"</span>;
+	}
+	<span class="comment">//cleaning the values</span>
+	<span class="reserved">this</span>.movingPoint = null;
+	<span class="reserved">this</span>.elementOver = null;
+};
+
+<span class="comment">/**
+ * removes all drag listeners
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.removeListeners = <span class="reserved">function</span>() {
+	<span class="comment">//removes all the handlers set by this droparea</span>
+	Zapatec.GlobalEvents.removeEventListener(<span class="literal">"onDragInit"</span>, <span class="reserved">this</span>.tmp.onDragInit);
+	Zapatec.GlobalEvents.removeEventListener(<span class="literal">"onDragMove"</span>, <span class="reserved">this</span>.tmp.onDragMove);
+	Zapatec.GlobalEvents.removeEventListener(<span class="literal">"onDragEnd"</span>, <span class="reserved">this</span>.tmp.onDragEnd);
+}
+
+<span class="comment">/**
+ * adds all drag listeners
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.addListeners = <span class="reserved">function</span>() {
+	<span class="comment">//Sets Draggable global handlers</span>
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.tmp) {
+		<span class="reserved">this</span>.tmp = {};
+	}
+	<span class="reserved">this</span>.tmp.onDragInit = <span class="reserved">function</span>(ev, movable) {
+		<span class="reserved">this</span>.returnValue(self.dragInit(ev, movable));
+	};
+	<span class="reserved">this</span>.tmp.onDragMove = <span class="reserved">function</span>(ev, movable) {
+		<span class="reserved">this</span>.returnValue(self.dragMove(ev, movable));
+	};
+	<span class="reserved">this</span>.tmp.onDragEnd = <span class="reserved">function</span>(ev, movable) {
+		<span class="reserved">this</span>.returnValue(self.dragEnd(ev, movable));
+	};
+	Zapatec.GlobalEvents.addEventListener(<span class="literal">"onDragInit"</span>, <span class="reserved">this</span>.tmp.onDragInit);
+	Zapatec.GlobalEvents.addEventListener(<span class="literal">"onDragMove"</span>, <span class="reserved">this</span>.tmp.onDragMove);
+	Zapatec.GlobalEvents.addEventListener(<span class="literal">"onDragEnd"</span>, <span class="reserved">this</span>.tmp.onDragEnd);
+}
+
+<span class="comment">/**
+ * Destroys the droparea.
+ */</span>
+Zapatec.Utils.DropArea.<span class="reserved">prototype</span>.destroy = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.dropArea = null;
+	<span class="reserved">this</span>.removeListeners();
+};</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

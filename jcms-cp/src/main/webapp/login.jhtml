@@ -1,0 +1,20 @@
+<p>
+  <b>Please log in.</b>
+</p>
+
+<form action="index.jsp" method="post">
+  <table class="login">
+    <tr>
+      <td class="login" align="right">Username</td>
+      <td class="login"><input type="text" size="32" name="user_username" /></td>
+    </tr>
+    <tr>
+      <td class="login" align="right">Password</td>
+      <td class="login"><input type="password" size="16" name="user_password" /></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td class="login"><input class="login" type="submit" name="login" value="Log In" /></td>
+    </tr>
+  </table>
+</form>

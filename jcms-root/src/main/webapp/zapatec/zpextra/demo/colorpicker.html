@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content="">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Zapatec.ColorPicker</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<script type='text/javascript' src='../../utils/colorpicker.js'></script>
+	<link href="../themes/colorpicker/default.css" rel="stylesheet" type="text/css">
+	<link href="../../zpslider/themes/default.css" rel="stylesheet" type="text/css">
+
+	<style type="text/css">
+		DIV.local {
+			border: 1px dotted black;
+			background-color: beige;
+			padding: 10px;
+			margin: 10px;
+		}
+	</style>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Zapatec.ColorPicker</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+			</ul>
+		</div>
+
+
+
+This page demonstrates how to use Zapatec.ColorPicker class.<br />
+
+    <div class="local">
+        Select color: <input id="color" size="7" maxlength="7">&nbsp;<img id="inputAnchor" src="icon.gif" border="0">
+    </div>
+    <div class="local">
+        My favorite color is <span id="spanInput" style="border: 1px dotted black"> color will be put here</span>.&nbsp;<img id="spanAnchor" src="icon.gif" border="0">
+    </div>
+    <div style="height: 50; width: 150;" id="bgDiv" class="local">
+         Background of this DIV will be changed on color select <img id="bgAnchor" src="icon.gif" border="0">.  This ColorPicker uses <i>singleClick</i> option.
+    </div>
+
+<script type="text/javascript">
+	/*
+	 * Check external components
+	 */
+	if (typeof Zapatec.Slider == 'undefined') {
+		alert('The ColorPicker uses different Zapatec components. It works only if Zapatec Slider component was purchased.');
+	}
+	
+	var colorInputPicker = new Zapatec.ColorPicker({
+		button : 'inputAnchor',
+		inputField: 'color',
+		color: '#CCCCFF',
+		title: 'Custom title Color Picker',
+		offset: 0
+	});
+	var colorSpanPicker = new Zapatec.ColorPicker({
+		button : 'spanAnchor',
+		inputField: 'spanInput'
+	});
+	var colorEventPicker = new Zapatec.ColorPicker({
+		button : 'bgAnchor',
+		color: '#CCCCFF',
+		singleClick: true, 
+		eventListeners:{select: function (color) {
+			document.getElementById('bgDiv').style.backgroundColor = color;
+		}}
+	});
+
+</script>
+
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

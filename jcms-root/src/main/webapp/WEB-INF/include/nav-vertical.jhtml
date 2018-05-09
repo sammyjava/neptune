@@ -1,0 +1,36 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/nav-vertical.jhtml" %>
+<% if (!customVerticalNav) { %>
+<!-- primary nav -->
+<table id="navpri" cellspacing="0" width="100%">
+<%
+  NodeListIterator rootIterator = root.getNodeListIterator(application);
+  while (rootIterator.hasNext()) {
+    Node n1 = rootIterator.nextNode();
+    if (n1.isVisible() && (!accessEnabled || au.mayAccess(application, n1))) {
+      String overClass = "navpri navpri-over navpri-"+n1.num+" navpri-"+n1.num+"-over";
+      String outClass = "navpri";
+      String aClass = "navpri";
+      if (level1!=null && n1.equals(level1)) {
+        outClass += " navpri-on navpri-"+n1.num+" navpri-"+n1.num+"-on";
+	aClass += " navpri-on navpri-"+n1.num+" navpri-"+n1.num+"-on";
+	overClass = outClass;
+      } else {
+        outClass += " navpri-off navpri-"+n1.num+" navpri-"+n1.num+"-off";
+        aClass += " navpri-off navpri-"+n1.num+" navpri-"+n1.num+"-off";
+      }
+      String url = n1.url;
+  %>
+  <tr>
+    <td class="<%=outClass%>" onMouseOver="this.className='<%=overClass%>'" onMouseOut="this.className='<%=outClass%>'">
+      <% if (n1.equals(n)) { %><%=n1.nodename%><% } else { %><a <% if (n1.isExternal()) { %>target="_blank"<% } %> class="<%=aClass%>" href="<%=url%>"><%=n1.nodename%></a><% } %>
+      <% if (!n.isDefault() && n1.equals(level1)) { %><%@ include file="nav-secondary.jhtml" %><% } %>
+    </td>
+  </tr>
+<%
+} // end if au.mayAccess
+} // end while
+  %>
+</table>
+<% } %>
+<!--startindex-->

@@ -1,0 +1,362 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="preloadimages.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>preloadimages.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec PreloadImages class definition. Preloads one or several
+ images at once.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec PreloadImages class definition. Preloads one or several
+ * images at once.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: preloadimages.js 15736 2009-02-06 15:29:25Z nikolai $ */</span>
+
+<span class="comment">/**
+ * Zapatec PreloadImages class.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {object} objArgs Object properies
+ */</span>
+zapatecImagePreloader =
+Zapatec.ImagePreloader = <span class="reserved">function</span>(objArgs) {
+	<span class="comment">// Zapatec.PreloadImages object</span>
+	<span class="reserved">this</span>.job = null;
+	<span class="comment">// Image object</span>
+	<span class="reserved">this</span>.image = null;
+	<span class="comment">// Initialize</span>
+	<span class="reserved">if</span> (arguments.length &gt; 0) <span class="reserved">this</span>.init(objArgs);
+};
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * &lt;pre&gt;
+ * Takes in following object:
+ * {
+ *   job: [object] Zapatec.PreloadImages object,
+ *   url: [string] image URL,
+ *   timeout: [number, optional] number of milliseconds to wait for onload
+ *    event before forcing it
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs Object properies
+ */</span>
+Zapatec.ImagePreloader.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!objArgs || !objArgs.job) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Attach to PreloadImages</span>
+	<span class="reserved">this</span>.job = objArgs.job;
+	<span class="comment">// Create new Image</span>
+	<span class="reserved">this</span>.image = new Image();
+	<span class="reserved">this</span>.job.images.push(<span class="reserved">this</span>.image);
+	var objPreloader = <span class="reserved">this</span>;
+	<span class="reserved">this</span>.image.onload = <span class="reserved">function</span>() {
+		objPreloader.job.loadedUrls.push(objArgs.url);
+		<span class="comment">// IE needs timeout to set image dimensions correctly</span>
+		setTimeout(<span class="reserved">function</span>() {
+			objPreloader.onLoad();
+		}, 0);
+	};
+	<span class="reserved">this</span>.image.onerror = <span class="reserved">function</span>() {
+		objPreloader.job.invalidUrls.push(objArgs.url);
+		objPreloader.onLoad();
+	};
+	<span class="reserved">this</span>.image.onabort = <span class="reserved">function</span>() {
+		objPreloader.job.abortedUrls.push(objArgs.url);
+		objPreloader.onLoad();
+	};
+	<span class="reserved">this</span>.image.src = objArgs.url;
+	<span class="reserved">if</span> (typeof objArgs.timeout == <span class="literal">'number'</span>) {
+		setTimeout(<span class="reserved">function</span>() {
+			<span class="reserved">if</span> (objPreloader.job) {
+				<span class="comment">// Onload didn't fire</span>
+				<span class="reserved">if</span> (objPreloader.image.complete) {
+					objPreloader.job.loadedUrls.push(objArgs.url);
+				} <span class="reserved">else</span> {
+					objPreloader.job.abortedUrls.push(objArgs.url);
+				}
+				objPreloader.onLoad();
+			}
+		}, objArgs.timeout);
+	}
+};
+
+<span class="comment">/**
+ * Image onload event handler.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.ImagePreloader.<span class="reserved">prototype</span>.onLoad = <span class="reserved">function</span>() {
+	<span class="comment">// May be called more than once</span>
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.job) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Remove handlers to prevent further calls</span>
+	<span class="reserved">this</span>.image.onload = null;
+	<span class="reserved">this</span>.image.onerror = null;
+	<span class="reserved">this</span>.image.onabort = null;
+	<span class="comment">// Detach from PreloadImages</span>
+	var objJob = <span class="reserved">this</span>.job;
+	<span class="reserved">this</span>.job = null;
+	<span class="comment">// Reduce counter</span>
+	objJob.leftToLoad--;
+	<span class="comment">// If this was last image</span>
+	<span class="reserved">if</span> (objJob.leftToLoad == 0 &amp;&amp; typeof objJob.onLoad == <span class="literal">'function'</span>) {
+		<span class="comment">// We don't need onload handler any more after last image was loaded</span>
+		var funcOnLoad = objJob.onLoad;
+		objJob.onLoad = null;
+		<span class="comment">// onLoad callback</span>
+		funcOnLoad(objJob);
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {object} objArgs Object properies
+ */</span>
+zapatecPreloadImages =
+Zapatec.PreloadImages = <span class="reserved">function</span>(objArgs) {
+	<span class="comment">// Array of Image objects</span>
+	<span class="reserved">this</span>.images = [];
+	<span class="comment">// Counter to know when all images are loaded</span>
+	<span class="reserved">this</span>.leftToLoad = 0;
+	<span class="comment">// Array of successfully loaded URLs</span>
+	<span class="reserved">this</span>.loadedUrls = [];
+	<span class="comment">// Array of invalid URLs</span>
+	<span class="reserved">this</span>.invalidUrls = [];
+	<span class="comment">// Array of aborted URLs</span>
+	<span class="reserved">this</span>.abortedUrls = [];
+	<span class="comment">// Onload event handler</span>
+	<span class="reserved">this</span>.onLoad = null;
+	<span class="comment">// Initialize</span>
+	<span class="reserved">if</span> (arguments.length &gt; 0) <span class="reserved">this</span>.init(objArgs);
+};
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * &lt;pre&gt;
+ * Takes in following object:
+ * {
+ *   urls: [object] array of absolute or relative image URLs to preload,
+ *   onLoad: [function, optional] onload event handler,
+ *   timeout: [number, optional] number of milliseconds to wait for onload
+ *    event before forcing it
+ * }
+ *
+ * onLoad callback function will be called in any case, even if errors occured
+ * during loading or loading process was aborted. onLoad callback function
+ * receives Zapatec.Transport.PreloadImages object. Its various properies can
+ * be used:
+ * {
+ *   images: [object] array of Image objects,
+ *   loadedUrls: [object] array of successfully loaded URLs,
+ *   invalidUrls: [object] array of URLs that were not loaded due to errors,
+ *   abortedUrls: [object] array of URLs that were not loaded due to abort,
+ *   leftToLoad: [number] how many images left to load if event was forced
+ * }
+ *
+ * If onLoad event doesn't fire during long period of time, it can be forced
+ * using "timeout" argument.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs Object properies
+ */</span>
+Zapatec.PreloadImages.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!objArgs) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (!objArgs.urls || !objArgs.urls.length) {
+		<span class="reserved">if</span> (typeof objArgs.onLoad == <span class="literal">'function'</span>) {
+			<span class="comment">// onLoad callback</span>
+			objArgs.onLoad(<span class="reserved">this</span>);
+		}
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Run job</span>
+	<span class="reserved">this</span>.images = [];
+	<span class="reserved">this</span>.leftToLoad = objArgs.urls.length;
+	<span class="reserved">this</span>.loadedUrls = [];
+	<span class="reserved">this</span>.invalidUrls = [];
+	<span class="reserved">this</span>.abortedUrls = [];
+	<span class="reserved">this</span>.onLoad = objArgs.onLoad;
+	<span class="comment">// Go through URLs array</span>
+	<span class="reserved">for</span> (var iUrl = 0; iUrl &lt; objArgs.urls.length; iUrl++) {
+		<span class="comment">// Preload URL</span>
+		new Zapatec.ImagePreloader({
+			job: <span class="reserved">this</span>,
+			url: objArgs.urls[iUrl],
+			timeout: objArgs.timeout
+		});
+	}
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

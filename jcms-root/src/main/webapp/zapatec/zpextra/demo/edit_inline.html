@@ -1,0 +1,90 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" This demo shows how to use Zapatec.EditInline widget. It allows you to edit text in elements on the page You can show edit window in 2 ways 	 		call Zapatec.EditInline constructor and send reference to element as target config option (click at 'First' and 'Second' to see this) 		create instance of Zapatec.EditInline and call show() method. It accepts reference to target element as first argument.(click at 'Third' and 'Fourth' to see this) 	 ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Edit inline</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<script type='text/javascript' src='../../utils/edit_inline.js'></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Edit inline</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>This demo shows how to use Zapatec.EditInline widget. It allows you to edit text in elements on the page</li>
+<li>You can show edit window in 2 ways
+	<ul>
+		<li>call Zapatec.EditInline constructor and send reference to element as <i>target</i> config option (click at "First" and "Second" to see this)</li>
+		<li>create instance of Zapatec.EditInline and call <b>show()</b> method. It accepts reference to target element as first argument.(click at "Third" and "Fourth" to see this)</li>
+	</ul>
+
+			</ul>
+		</div>
+
+
+
+<div id="first" style="width: 100px">First</div>
+<div id="second" style="position: absolute; left: 200px; top: 200px">Second</div>
+<div id="third" style="width: 100px">Third</div>
+<div id="fourth" style="position: absolute; left: 400px; top: 200px">Fourth</div>
+
+<script type="text/javascript">
+	var elements = ["first", "second"];
+	for(var ii = 0; ii < elements.length; ii++){
+		var element = document.getElementById(elements[ii]);
+
+		element.onclick = function(){
+			if(this.zpEditInline){
+				this.zpEditInline.show();
+			} else {
+				new Zapatec.EditInline({target: this});
+			}
+		}
+	}
+
+	elements = ['third', 'fourth'];
+	var editInline = new Zapatec.EditInline({});
+	for(var ii = 0; ii < elements.length; ii++){
+		var element = document.getElementById(elements[ii]);
+
+		element.onclick = function(){
+			editInline.show(this);
+		}
+	}
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

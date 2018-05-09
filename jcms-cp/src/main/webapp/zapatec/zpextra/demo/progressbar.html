@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content="">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Progress Bar with Slider</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../../zpslider/themes/default.css" rel="stylesheet" type="text/css">
+	<link href="../themes/progressbar/default.css" rel="stylesheet" type="text/css">
+	<link href="../themes/progressbar/solid.css" rel="stylesheet" type="text/css">
+	<link href="../themes/progressbar/image.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="../../utils/progressbar.js"></script>
+	<script type="text/javascript" src="../../zpslider/src/slider.js"></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Progress Bar with Slider</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+			</ul>
+		</div>
+
+
+
+This page demonstrates how to use Zapatec.ProgressBar class with Slider.<br />
+
+<table width="50%" border="0" align="center">
+	<tr>
+		<td>Progress (default theme):</td>
+		<td id="progressBarContainerDefault"></td>
+	</tr>
+	<tr>
+		<td>Progress (solid theme):</td>
+		<td id="progressBarContainerSolid"></td>
+	</tr>
+	<tr>
+		<td>Progress (image theme):</td>
+		<td id="progressBarContainerImage"></td>
+	</tr>
+	<tr>
+		<td>Progress (float values):</td>
+		<td id="progressBarContainerFloat"></td>
+	</tr>
+	<tr>
+		<td>Set progress</td>
+		<td>
+			<div id="slider"></div>
+		</td>
+	</tr>
+	<tr>
+		<td>Control:</td>
+		<td>
+			<input type="button" id="buttonRun" value="Run" onclick="run()">
+			<input type="button" id="buttonCancel" value="Cancel" onclick="progressBarDefault.cancel()" disabled="true">
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	var timeoutId;
+	
+	function run() {
+		document.getElementById('buttonRun').disabled='true';
+		document.getElementById('buttonCancel').disabled='';
+		increaseProgress(0);
+	}
+	
+	function stop() {
+		clearTimeout(timeoutId);
+		document.getElementById('buttonRun').disabled='';
+		document.getElementById('buttonCancel').disabled='true';
+	}
+	
+	
+	function increaseProgress(progress) {
+		slider.setPos(progress++);
+		if (progress <= 100) {
+			timeoutId = setTimeout(function() {increaseProgress(progress)},50);
+		} else {
+			stop();
+		}
+	}
+
+	var progressBarDefault = new Zapatec.ProgressBar({
+		parent : 'progressBarContainerDefault',
+		maxValue : 100,
+		value: 38,
+		width: 300,
+		height: 30,
+		showLabels: 'percents',
+		title: 'Loading: ',
+		eventListeners:{cancel: function (progress) {
+			stop();
+			alert('Cancelled at: ' + progress);
+		}}
+	});
+	var progressBarSolid = new Zapatec.ProgressBar({
+		parent : 'progressBarContainerSolid',
+		minValue : 0,
+		maxValue : 100,
+		value: 38,
+		width: 300,
+		height: 30,
+		theme: 'solid',
+		showLabels: 'values',
+		title: 'Items loaded: ',
+		eventListeners:{cancel: function (progress) {
+			alert('Cancelled at: ' + progress);
+		}}
+	});
+	var progressBarImage = new Zapatec.ProgressBar({
+		parent : 'progressBarContainerImage',
+		minValue : 0,
+		maxValue : 100,
+		value: 38,
+		width: 300,
+		height: 30,
+		theme: 'image',
+		showLabels: 'none',
+		eventListeners:{cancel: function (progress) {
+			alert('Cancelled at: ' + progress);
+		}}
+	});
+	var progressBarFloat = new Zapatec.ProgressBar({
+		parent : 'progressBarContainerFloat',
+		minValue : 0,
+		maxValue : 1,
+		value: 0.34,
+		width: 300,
+		height: 30,
+		theme: 'solid',
+		showLabels: 'values',
+		eventListeners:{cancel: function (progress) {
+			alert('Cancelled at: ' + progress);
+		}}
+	});
+
+	var slider = new Zapatec.Slider({
+		div : 'slider',
+		length : 100,
+		step: 1,
+		start : progressBarDefault.getProgress(),
+		orientation : 'H',
+		onChange : function (pos) {
+			progressBarDefault.setProgress(pos);
+			progressBarSolid.setProgress(pos);
+			progressBarImage.setProgress(pos);
+			progressBarFloat.setProgress(pos/100);
+		}
+	});
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

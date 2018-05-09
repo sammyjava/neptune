@@ -1,0 +1,188 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Zapatec DHTML Editor Manual</title><link rel="stylesheet" href="../../utils/dhelp/themes/print.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.71.0"><link rel="start" href="#id2406059" title="Zapatec DHTML Editor Manual"><link rel="next" href="#get_files" title="Chapter 1. Get the Zapatec DHTML Editor Files"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2406059"></a>Zapatec DHTML Editor Manual</h1></div></div><hr></div><div class="toc"><dl><dt><span class="chapter"><a href="#get_files">1. Get the Zapatec DHTML Editor Files</a></span></dt><dd><dl><dt><span class="sect1"><a href="#id2405815">1. Download the Zip File</a></span></dt><dt><span class="sect1"><a href="#unzip_files">2. Extract zpeditor.zip</a></span></dt></dl></dd><dt><span class="chapter"><a href="#quick_startup">2. Quick Startup</a></span></dt><dd><dl><dt><span class="sect1"><a href="#set_up_editor">1. Set Up Your Editor</a></span></dt><dd><dl><dt><span class="sect2"><a href="#path_warn">1.1. Path Warning</a></span></dt></dl></dd><dt><span class="sect1"><a href="#create_editor">2. Create the Editor</a></span></dt><dt><span class="sect1"><a href="#copy_files">3. Copy Files to Your Web Server</a></span></dt><dt><span class="sect1"><a href="#test_editor">4. Test the Editor Application</a></span></dt></dl></dd><dt><span class="chapter"><a href="#conf_opt">3. Configuration Options</a></span></dt><dd><dl><dt><span class="sect1"><a href="#prop_field">1. field (string or HTMLTextArea, required)</a></span></dt><dt><span class="sect1"><a href="#toolbarElements">2. toolbarElements (array)</a></span></dt><dt><span class="sect1"><a href="#prop_maximizedBorder">3. maximizedBorder (number, default: 6)</a></span></dt><dt><span class="sect1"><a href="#prop_enableTooltips">4. enableTooltips (boolean, default: false)</a></span></dt><dt><span class="sect1"><a href="#prop_dumpHtml">5. dumpHtml (boolean, default: false)</a></span></dt><dt><span class="sect1"><a href="#prop_generateXhtml">6. generateXhtml (boolean, default: false)</a></span></dt><dt><span class="sect1"><a href="#prop_customUndo">7. customUndo (boolean, default: true)</a></span></dt><dt><span class="sect1"><a href="#prop_preserveImgSrc">8. preserveImgSrc (boolean, default: false)</a></span></dt><dt><span class="sect1"><a href="#preserveAnchorHref">9. preserveAnchorHref (boolean)</a></span></dt><dt><span class="sect1"><a href="#externalBrowserNoScript">10. externalBrowserNoScript (boolean)</a></span></dt><dt><span class="sect1"><a href="#prop_persistPath">11. persistPath (string, default: '')</a></span></dt><dt><span class="sect1"><a href="#prop_theme">12. theme (string, default: 'default')</a></span></dt><dt><span class="sect1"><a href="#fullPage">13. fullPage (boolean, default: false)</a></span></dt><dd><dl><dt><span class="sect2"><a href="#BrowserSpecificCustom">13.1. Browser-Specific Customization</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#scenarios">4. Scenarios</a></span></dt><dd><dl><dt><span class="sect1"><a href="#minimal">1. Minimal</a></span></dt><dt><span class="sect1"><a href="#full">2. Full</a></span></dt><dt><span class="sect1"><a href="#save">3. Save</a></span></dt><dt><span class="sect1"><a href="#get_content_as_html">4. Get Content as HTML String</a></span></dt></dl></dd></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="get_files"></a>Chapter 1. Get the Zapatec DHTML Editor Files</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2405815"></a>1. Download the Zip File</h2></div></div></div><p>The DHTML Editor files are bundled in a zip file. Click the download link in the Editor section of Zapatec web site, and follow the instructions to download the file.
+
+
+</p><p>Save the zpeditor.zip file  to the website root folder on your computer or server.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="unzip_files"></a>2. Extract zpeditor.zip</h2></div></div></div><div class="orderedlist"><ol type="1"><li><p>On your computer, go to the folder where you saved the zpeditor.zip file.
+</p></li><li><p>zpeditor.zip resides in  the zapatec folder that contains  all the files you will need to create your editor.
+</p></li><li><p>Double click  zpeditor.zip to extract  it.
+</p></li></ol></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="quick_startup"></a>Chapter 2. Quick Startup</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="set_up_editor"></a>1. Set Up Your Editor</h2></div></div></div><p>In your web editor (Dreamweaver, UltraEdit, etc.), open the web page where you
+want the editor placed.  Paste the following script paths before the ending &lt;/head&gt; tag:</p><pre class="programlisting">&lt;!-- Javascript Zapatec utilities file --&gt;
+&lt;script type="text/javascript" src="zapatec/utils/zapatec.js"&gt;&lt;/script&gt;
+
+&lt;!-- Javascript file to support Editor --&gt;
+&lt;script type="text/javascript" src="zapatec/zpeditor/src/zpeditor.js"&gt;&lt;/script&gt;
+
+&lt;!-- optional Javascript file to support tooltips --&gt;
+&lt;script type="text/javascript" src="zapatec/zptooltip/src/zptooltip.js"&gt;&lt;/script&gt;
+
+&lt;!-- optional Javascript file to support color picker --&gt;
+&lt;script type="text/javascript" src="zapatec/utils/colorpicker.js"&gt;&lt;/script&gt;
+
+&lt;!-- optional Javascript file to support insert special character --&gt;
+&lt;script type="text/javascript" src="zapatec/zpwin/src/window.js"&gt;&lt;/script&gt;</pre><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="path_warn"></a>1.1. Path Warning</h3></div></div></div><p>If your web page containing the editor is saved in the zpeditor folder, these
+lines will work without any changes. If, however, you save your web page
+in another location (for example, directly under your website root folder), you will
+need to specify the path for these files in the header script.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="create_editor"></a>2. Create the Editor</h2></div></div></div><p>The easiest way to create the editor is to insert the following code anywhere on your page:
+</p><pre class="programlisting">&lt;script type='text/javascript'&gt;
+  new Zapatec.MinimalEditor({
+    field: "target"  // This is the ID of your textarea field
+  });
+&lt;/script&gt;</pre><p>Considering the code above, you will also need to have a &lt;textarea&gt; element somewhere on your page in order to make it  work.  Pay attention  that the Javascript code to call the Zapatec Editor must be provided after this text area is rendered.
+Moreover, the id of your textarea must be the same that you have set for the  <a href="#prop_field" title="1. field (string or HTMLTextArea, required)">
+          <span class="property">field</span>
+        </a> config option during editor creation.</p><p>The following is an example of a textarea html you can insert in your page to make the code above work:
+</p><pre class="programlisting">&lt;textarea id="target" rows="10" cols="80"&gt;&lt;b&gt;Some&lt;/b&gt; &lt;i&gt;predefined&lt;/i&gt; content&lt;/textarea&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="copy_files"></a>3. Copy Files to Your Web Server</h2></div></div></div><p>Using your editing or FTP program, copy your web page and the entire
+editor folder to the root of your website.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="test_editor"></a>4. Test the Editor Application</h2></div></div></div><p>Using your web browser, navigate to the web page that you created to include
+the Zapatec DHTML Editor.  Congratulations! You have set up the most
+basic version of the Zapatec DHTML Editor. Now,  you can change  this highly adaptable application with the help of multiple features provided.</p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="conf_opt"></a>Chapter 3. Configuration Options</h2></div></div></div><p>As mentioned earlier, you create an editor using the following syntax:</p><pre class="programlisting"> new Zapatec.MinimalEditor({
+  field: "target",
+  theme: "default",
+  toolbarElements: [...]
+      });</pre><p>To control the editor behavior, pass a set of<a href="#conf_opt" title="Chapter 3. Configuration Options"> configuration parameters</a> when you create the editor.</p><p>This section describes the editor configuration options.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_field"></a>1. field (string or HTMLTextArea, required)</h2></div></div></div><p>The <span class="property">field</span> option specifies the TextArea element to be converted into an editor. 
+The editor being created (including the toolbar) will fit inside the boundaries of this textarea. </p><p>The <span class="property">field</span> option can be a string id of a textarea element on the page or an actual reference to the textarea DOM element.</p><p>This option is required.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="toolbarElements"></a>2. toolbarElements (array)</h2></div></div></div><p>The <span class="property">toolbarElements</span> option controls what toolbar buttons will be available in this editor.</p><p>This option is an array of strings where each string represents a different toolbar button.
+The buttons are added to the toolbar in the order they appear in this array.</p><p>The following list represents strings recognized as  elements of the toolbarElements array and their meanings:
+</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>maximize</code></em> - A toggle button for maximizing/restoring the editor to full page boundaries.
+</p></li><li><p><em class="parameter"><code>fontName</code></em> - A font name select field.
+</p></li><li><p><em class="parameter"><code>fontSize</code></em> - A font size select field.
+</p></li><li><p><em class="parameter"><code>foreColor</code></em> - A font color picker toolbar button.
+</p></li><li><p><em class="parameter"><code>backColor</code></em> - A background color picker button.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>If you are using one of the color options above you will need to include the following script file in your page:</p><pre class="programlisting">&lt;script type="text/javascript" src="zapatec/utils/colorpicker.js"&gt;&lt;/script&gt;</pre></div></li><li><p><em class="parameter"><code>insertLink</code></em> - A button for inserting hyperlinks.
+</p></li><li><p><em class="parameter"><code>insertImage</code></em> - A button for inserting images.
+</p></li><li><p><em class="parameter"><code>insertTable</code></em> - A button for inserting tables.
+</p></li><li><p><em class="parameter"><code>insertHorizontalRule</code></em> - A button for inserting horizontal rules.
+</p></li><li><p><em class="parameter"><code>insertSpecialChar</code></em> - A button that invokes  a character map window for selecting a special character to insert.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>If you use this option, you will need to include the following script file in your page:</p><pre class="programlisting">&lt;script type="text/javascript" src="zapatec/zpwin/src/window.js"&gt;&lt;/script&gt;</pre></div></li><li><p><em class="parameter"><code>bold</code></em> - A button for toggling bold style on the selected text.
+</p></li><li><p><em class="parameter"><code>italic</code></em> - A button for toggling italic style on the selected text.
+</p></li><li><p><em class="parameter"><code>underline</code></em> - A button for toggling underline style on the selected text.
+</p></li><li><p><em class="parameter"><code>justifyLef</code></em>t - A button for making paragraphs left-justified.
+</p></li><li><p><em class="parameter"><code>justifyCenter</code></em> - A button for making paragraphs centered.
+</p></li><li><p><em class="parameter"><code>justifyRight</code></em> - A button for making paragraphs right-justified.
+</p></li><li><p><em class="parameter"><code>justifyFull</code></em> -    A button for making paragraphs full justified.</p></li><li><p><em class="parameter"><code>insertOrderedList</code></em> - A button for inserting ordered numbered lists.
+</p></li><li><p><em class="parameter"><code>insertUnorderedList</code></em> - A button for inserting unordered bulleted lists.
+</p></li><li><p><em class="parameter"><code>selectAll</code></em> - A button for selecting all editor content.
+</p></li><li><p><em class="parameter"><code>copy</code></em> - A copy button.
+</p></li><li><p><em class="parameter"><code>cut</code></em> - A cut button.
+</p></li><li><p><em class="parameter"><code>paste</code></em> - A paste button.
+</p></li><li><p><em class="parameter"><code>outdent</code></em> - A button for decreasing indentation.
+</p></li><li><p><em class="parameter"><code>indent</code></em> - A button for increasing indentation.
+</p></li><li><p><em class="parameter"><code>undo</code></em> - An undo button.
+</p></li><li><p><em class="parameter"><code>redo</code></em> - A redo button.
+</p></li><li><p><em class="parameter"><code>about</code></em> - About this editor button.
+</p></li><li><p><em class="parameter"><code>browser</code></em> - A button for previewing editor html content in a new browser window.
+</p></li><li><p><em class="parameter"><code>switcher</code></em> - A toggle button to switch between HTML and WYSIWYG mode.
+</p></li><li><p><em class="parameter"><code>fetch</code></em> - A button for loading editor html content from a remote location.
+</p></li><li><p><em class="parameter"><code>save</code></em> - A button for sending editor html content to a remote location.
+</p></li><li><p><em class="parameter"><code>newPanel</code></em> - This element will make the next button appear in a new toolbar panel.
+</p></li><li><p><em class="parameter"><code>newRow</code></em> - This element will make the next button appear in a new row.
+</p></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_maximizedBorder"></a>3. maximizedBorder (number, default: 6)</h2></div></div></div><p>The <span class="property">maximizedBorder</span> option specifies the border in pixels around the editor when it is in maximized state.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_enableTooltips"></a>4. enableTooltips (boolean, default: false)</h2></div></div></div><p>The <span class="property">enableTooltips</span> option defines whether tooltips are to be created for all toolbar buttons. If you set this option to true, you will need to include the following script:</p><pre class="programlisting">&lt;script type="text/javascript" src="zapatec/zptooltip/src/zptooltip.js"&gt;&lt;/script&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_dumpHtml"></a>5. dumpHtml (boolean, default: false)</h2></div></div></div><p>The <span class="property">dumpHtml</span> option specifies how the editor content is converted to html. The
+fastest way to do this is by using browser DOM innerHtml. It is also the
+most browser-compatible way. Pass true to this option to switch to an alternative custom
+method of dumping editor content root node into html.</p><p>If you use this option, you will have to manually include the following script in your file:</p><pre class="programlisting">&lt;script type="text/javascript" src="zapatec/utils/dump.js"&gt;&lt;/script&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_generateXhtml"></a>6. generateXhtml (boolean, default: false)</h2></div></div></div><p>The <span class="property">generateXhtml</span> option determines whether the valid xhtml 1.0 strict output document is needed. Set this option to true to make the editor message the output html before returning it.</p><p>You will need to include the following script line manually if you are using this option:</p><pre class="programlisting">&lt;script type="text/javascript" src="zapatec/utils/html2xhtml.js"&gt;&lt;/script&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_customUndo"></a>7. customUndo (boolean, default: true)</h2></div></div></div><p>The <span class="property">customUndo</span> option specifies how undo operates. If this option is true,
+a custom JavaScript undo stack will be maintained. Otherwise, <code class="methodname">execCommand</code>
+will be used to call browser specific undo/redo behavior.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_preserveImgSrc"></a>8. preserveImgSrc (boolean, default: false)</h2></div></div></div><p>The <span class="property">preserveImgSrc</span> option determines if any extra measures are to be taken to protect img src attributes from being resolved into absolute URLs under IE. If this option is set to true,
+a workaround that preserves original img src attributes becomes activated. This occurs only in IE.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="preserveAnchorHref"></a>9. preserveAnchorHref (boolean)</h2></div></div></div><p>Under IE, relative anchor hrefs are automatically converted to absolute href URLs. Set this option to TRUE in order to pre-process the html every time the user switches from HTML to WYSIWYG mode and vice versa. Default is TRUE for IE, overwise, FALSE.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="externalBrowserNoScript"></a>10. externalBrowserNoScript (boolean)</h2></div></div></div><p>Setting this option to TRUE will remove all script tags from html being previewed when "View in external browser window" is pressed. Default is FALSE.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_persistPath"></a>11. persistPath (string, default: '')</h2></div></div></div><p>The <span class="property">persistPath</span> option specifies the remote location to be used for storing to and fetching from html content. POST and GET http requests will be sent to the script at this path as result of save and load.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_theme"></a>12. theme (string, default: 'default')</h2></div></div></div><p>The <span class="property">theme</span> option specifies the CSS used to present the editor.</p><p>The string argument is the name of the theme:</p><pre class="programlisting">theme : "default"</pre><p>or the absolute or relative path to the theme file:</p><pre class="programlisting">theme : "themes/default.css"</pre><p>The theme name is case-insensitive. </p><p>If the <span class="property">theme</span> option is not specified, the default.css file in the themes folder is used. There are 2 editor themes provided in the themes folder: default and winxp.</p><p>To use your own CSS throughout the enterprise without specifying the <span class="property">theme</span> option for each page by renaming  default.css file and moving it to the themes folder.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="fullPage"></a>13. fullPage (boolean, default: false)</h2></div></div></div><p>This option inputs the whole document inside the editor including the root  html tag.</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="BrowserSpecificCustom"></a>13.1. Browser-Specific Customization</h3></div></div></div><p>Reinstall keyboard and mouse listeners for the WYSIWYG document after switching to WYSIWYG in IE.</p><p>Remove contentEditable=true attribute from the &lt;body&gt; tags in getFullHtml when <span class="property">dumpHtml</span> is set to FALSE in IE.</p><p>Add opening and closing &lt;html&gt; tags when the <span class="property">dumpHtml</span> option is set to FALSE.</p><p>Always remove contents of the &lt;head&gt; tag in Safari (as we cannot  change it and the default script needs to be removed every time).</p></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="scenarios"></a>Chapter 4. Scenarios</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="minimal"></a>1. Minimal</h2></div></div></div><p>We use the following code in the <a href="../demo/minimal_editor.html" target="_top">Minimal Editor demo</a> to create a basic editor.</p><pre class="programlisting">&lt;textarea id="target" rows="10" cols="80"&gt;&lt;b&gt;Some&lt;/b&gt; &lt;i&gt;predefined&lt;/i&gt; content&lt;/textarea&gt;
+&lt;script type="text/javascript"&gt;
+ var objEditor = new Zapatec.MinimalEditor({
+  field: "target",
+  theme: "default",
+  toolbarElements: [
+   'fontSize',
+   'newPanel',
+   
+   'bold',
+   'italic',
+   'underline',
+   'newPanel',
+
+   'justifyLeft',
+   'justifyCenter',
+   'justifyRight',
+   'newPanel',
+   
+   'insertOrderedList',
+   'insertUnorderedList'
+  ]
+ });
+&lt;/script&gt;</pre><p>
+This creates an editor with only basic functionality available on its toolbar.</p><p>
+The following keyboard shortcuts are available in all editor configurations:
+</p><div class="itemizedlist"><ul type="disc"><li><p><span><strong class="keycap">Ctrl</strong></span>-<span><strong class="keycap">B</strong></span> - Toggles bold style on the current text selection
+</p></li><li><p><span><strong class="keycap">Ctrl</strong></span>-<span><strong class="keycap">U</strong></span> - Toggles underline style on the current text selection
+</p></li><li><p><span><strong class="keycap">Ctrl</strong></span>-<span><strong class="keycap">I</strong></span> - Toggles italic style on the current text selection
+</p></li><li><p><span><strong class="keycap">Ctrl</strong></span>-<span><strong class="keycap">C</strong></span> - Copy
+</p></li><li><p><span><strong class="keycap">Ctrl</strong></span>-<span><strong class="keycap">X</strong></span> - Cut
+</p></li><li><p><span><strong class="keycap">Ctrl</strong></span>-<span><strong class="keycap">V</strong></span>  - Paste
+</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>To enable the Cut, Copy, and Paste features in Mozilla, please follow <a href="http://www.mozilla.org/editor/midasdemo/securityprefs.html" target="_top">this link</a>.</p></div></li></ul></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="full"></a>2. Full</h2></div></div></div><p>We use the following code in the <a href="../demo/full_editor.html" target="_top">Full Editor demo</a> to create a full editor.</p><pre class="programlisting">&lt;textarea id="target" rows="10" cols="80"&gt;&lt;b&gt;Some&lt;/b&gt; &lt;i&gt;predefined&lt;/i&gt; content&lt;/textarea&gt;
+&lt;script type="text/javascript"&gt;
+ var objEditor = new Zapatec.MinimalEditor({
+  field: "target",
+  theme: "default",
+  toolbarElements: [
+   'maximize',
+   'newPanel',
+
+   'fontName',
+   'fontSize',
+   'newPanel',
+
+   'bold',
+   'italic',
+   'underline',
+   'newPanel',
+
+   'foreColor',
+   'backColor',
+   'insertLink',
+   'insertImage',
+   'insertTable',
+   'insertHorizontalRule',
+   'insertSpecialChar',
+
+   'newRow',
+
+   'justifyLeft',
+   'justifyCenter',
+   'justifyRight',
+   'newPanel',
+
+   'insertOrderedList',
+   'insertUnorderedList',
+   'newPanel',
+
+   'selectall',
+   'copy',
+   'cut',
+   'paste',
+   'newPanel',
+
+   'outdent',
+   'indent',
+   'newPanel',
+
+   'undo',
+   'redo',
+   'newPanel',
+
+   'switcher',
+   'newPanel',
+
+   'browser',
+   'about'
+  ]
+ });
+&lt;/script&gt;</pre><p>
+This code creates an editor with all available functionality shown on its toolbar.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="save"></a>3. Save</h2></div></div></div><p>We use the following code in the <a href="../demo/save.html" target="_top">Editor Save/Load demo</a> to illustrate how the editor content can be stored to and loaded from a remote server location.</p><pre class="programlisting">&lt;script type="text/javascript"&gt;
+  new Zapatec.MinimalEditor({
+    field: "target",
+    theme: "default",
+    toolbarElements: [
+      ...
+      'fetch',
+      'save'
+    ],
+    persistPath: "processKey.php"
+  });
+&lt;/script&gt;</pre><p>
+</p><p>This code illustrates how the editor html content can be stored to and fetched from a remote location. The <a href="#prop_persistPath" title="11. persistPath (string, default: '')">
+          <span class="property">persistPath</span>
+        </a> config
+option specifies the URL to be used for that. To store the content, use a POST http request, and to fetch - use a  regular GET request. A <em class="parameter"><code>keyword</code></em> parameter is passed to the server indicating the storage we are reading or writing to. Go to  <a href="../demo/processKey.php" target="_top">processKey.php</a> for a reference implementation of a server-side store/load functionality.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="get_content_as_html"></a>4. Get Content as HTML String</h2></div></div></div><p>You can easily obtain editor content as an HTML string by using the following statement:</p><pre class="programlisting">&lt;script type="text/javascript"&gt;
+  var html = objEditor.getHTML();
+&lt;/script&gt;</pre></div></div></div></body></html>

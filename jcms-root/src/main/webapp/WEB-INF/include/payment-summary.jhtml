@@ -1,0 +1,41 @@
+<%
+// retrieve PayPal data from session vars if this is a printable version
+  if (!paymentFinished) {
+    paypalTransactionId = Util.getString(session,"paypalTransactionId");
+    paypalAmount = Util.getString(session,"paypalAmount");
+    paypalTimestamp = Util.getString(session,"paypalTimestamp");
+  }
+%>
+    <p><%=payment.thankyou%></p>
+
+    <div class="payment-summary">
+
+      <h3><%=paymentOption.name%></h3>
+      <% if (paymentOption.description!=null) { %><p><%=paymentOption.description%></p><% } %>
+      
+      <h3>Amount: $<%=paypalAmount%></h3>
+      
+      <p>
+	<%=firstname%> <%=lastname%><br/>
+	<%=street%><br/>
+	<%=city%>, <%=state%> <%=zip%><br/>
+      </p>
+      <p>
+	Phone: <%=phone%><br/>
+	Email: <%=email%>
+      </p>
+      
+      <% if (comments.length()>0) { %><p><%=comments%></p><% } %>
+      
+      <p>
+	PayPal timestamp: <%=paypalTimestamp%><br/>
+	PayPal transaction ID: <%=paypalTransactionId%>
+      </p>
+
+      <% if (paymentFinished) { %>
+      <p>
+	<a target="_blank" href="<%=request.getRequestURI()%>?<%=request.getQueryString()%>&printable">Printer-Friendly Version</a>
+      </p>
+      <% } %>
+
+    </div>

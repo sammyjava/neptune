@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content="Shows a collapsed Javascript Tree where you can click  both the categories and the nodes. Use right tree to call different methods on tree.">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Basic features</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Basic features</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				<li>Shows a collapsed Javascript Tree where you can click  both the categories and the nodes. Use right tree to call different methods on tree.</li>
+			</ul>
+		</div>
+
+
+
+<table width="100%"><tr><td width="40%" valign="top">
+<ul id="tree">
+	<li id="games">
+		Games
+		<ul>
+			<li>Video Games
+				<ul>
+					<li>SPS</li>
+					<li>X-Box</li>
+				</ul>
+			</li>
+			<li>RPG
+				<ul>
+					<li>Gamebooks</li>
+					<li>Live Action</li>
+					<li>Tabletop</li>
+				</ul>
+			</li>
+			<li>Gambling
+				<ul>
+					<li>Baccarat</li>
+					<li>Bingo</li>
+					<li>Roulette</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li id="computers">Computers
+		<ul>
+			<li>Computer Science
+				<ul>
+					<li>Academic Departments</li>
+					<li>Artificial Intelligence</li>
+					<li>Research Institutes</li>
+					<li>Theoretical</li>
+				</ul>
+			</li>
+			<li id="internet">Internet
+				<ul>
+					<li>Chat</li>
+					<li>DHTML libraries
+						<ul>
+							<li id="zapatec">Zapatec Suite</li>
+						</ul>
+					</li>
+					<li>E-mail</li>
+				</ul>
+			</li>
+			<li>Security
+				<ul>
+					<li>Authentification</li>
+					<li>Cryptography</li>
+					<li>Internet security</li>
+					<li>Secure Programming</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>Business</li>
+</ul>
+</td>
+<td valign="top">
+	<ul id="navigationTree">
+		<li>
+			Expand/collapse many nodes at once
+			<ul>
+				<li><span onclick='tree.expandAll()'>Expand all</span></li>
+				<li><span onclick='tree.collapseAll()'>Collapse all</span></li>
+				<li><span onclick='tree.expandToLevel(1)'>Expand to second level</span></li>
+				<li><span onclick='tree.collapseToLevel(1)'>Collapse to second level</span></li>
+				<li><span onclick='tree.expandToLevel(2)'>Expand to third level</span></li>
+				<li><span onclick='tree.collapseToLevel(2)'>Collapse to third level</span></li>
+			</ul>
+		</li>
+		<li>
+			Expand/collapse branches
+			<ul>
+				<li><span onclick='tree.getNode("computers").expandBranch()'>Expand branch "Computers"</span></li>
+				<li><span onclick='tree.getNode("computers").collapseBranch()'>Collapse branch "Computers"</span></li>
+			</ul>
+		</li>
+		<li>
+			Expand/collapse nodes
+			<ul>
+				<li><span onclick='tree.getNode("computers").expand()'>Expand node "Computers"</span></li>
+				<li><span onclick='tree.getNode("computers").collapse()'>Collapse node "Computers"</span></li>
+				<li><span onclick='tree.getNode("internet").expand()'>Expand node "Internet"</span></li>
+				<li><span onclick='tree.getNode("internet").collapse()'>Collapse node "Internet"</span></li>
+			</ul>
+		</li>
+		<li>
+			Select nodes
+			<ul>
+				<li><span onclick="tree.getNode('games').select()">Select node "Games"</span></li>
+				<li><span onclick="tree.getNode('internet').select()">Select node "Internet"</span></li>
+			</ul>
+		</li>
+		<li>
+			Sync nodes
+			<ul>
+				<li><span onclick='tree.getNode("games").sync()'>Sync to node "Games"</span></li>
+				<li><span onclick='tree.getNode("zapatec").sync()'>Sync to node "Zapatec"</span></li>
+			</ul>
+		</li>
+		<li>
+			Find nodes
+			<ul>
+				<li><span onclick='displayResult1(tree.find(function(node){return node.data.label.match(/before/)}))'>Find first node that has word "before"</span></li>
+				<li><span onclick='displayResult2(tree.findAll(function(node){return node.data.children}))'>Find all nodes that has children</span></li>
+				<li><span onclick='removeResult3(tree.findAll(function(node){return node.data.label.match(/am/)}))'>Find all nodes that has letters "am" in their names and remove them</span></li>
+			</ul>
+		</li>
+		<li>
+			Change themes
+			<ul>
+				<li><span onclick='tree.reconfigure({theme: "basic"})'>Basic</span></li>
+				<li><span onclick='tree.reconfigure({theme: "default"})'>Default</span></li>
+				<li><span onclick='tree.reconfigure({theme: "demos"})'>Demos</span></li>
+				<li><span onclick='tree.reconfigure({theme: "image"})'>Image</span></li>
+				<li><span onclick='tree.reconfigure({theme: "lines"})'>Lines</span></li>
+			</ul>
+		</li>
+	</ul>
+</td>
+</tr></table>
+
+<script type="text/javascript">
+	var tree = new Zapatec.Tree({
+		tree: "tree",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true
+	});
+	
+	new Zapatec.Tree({
+		tree: "navigationTree",
+		expandOnLabelClick: true
+	});
+
+	function displayResult1(result){
+		if(result == null){
+			alert("No node found");
+		} else {
+			result.sync();
+		}
+	}
+
+	function displayResult2(result){
+		if(result == null || result.length == 0){
+			alert("No nodes found");
+		} else {
+			var content = [];
+
+			for(var ii = 0; ii < result.length; ii++){
+				var str = result[ii].data.label.replace(/\n/g, "").replace(/^\s*/, "").replace(/\s*$/, "");
+				content.push("'" + str + "' found");
+			}
+
+			alert(content.join("\n"));
+		}
+	}
+
+	function removeResult3(result){
+		if(result == null || result.length == 0){
+			alert("No nodes found");
+		} else {
+			var content = ["Following nodes were removed:"];
+			
+			for(var ii = 0; ii < result.length; ii++){
+				var str = result[ii].data.label.replace(/\n/g, "").replace(/^\s*/, "").replace(/\s*$/, "");
+				result[ii].destroy();
+				content.push("'" + str + "'");
+			}
+
+			alert(content.join("\n"));
+		}
+	}
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

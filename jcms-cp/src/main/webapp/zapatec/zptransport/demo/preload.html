@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Transport Widget - Preload Images Demo</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Preload Images Demo</div>
+
+
+
+<p>
+Demonstrates how to use <b>Zapatec.Transport.preloadImages</b> to preload images.
+</p>
+<p>
+After all the images are loaded, they are displayed.
+</p>
+
+<div id="images"></div>
+
+<script type="text/javascript">
+
+// Load CSS file
+Zapatec.Transport.preloadImages({
+	// Images to preload
+	urls: [
+		'sample1.jpg?' + Math.random(),
+		'sample2.jpg?' + Math.random(),
+		'sample3.jpg?' + Math.random()
+	],
+	// onload event handler
+	onLoad: function(objArgs) {
+		var arrLoadedUrls = objArgs.loadedUrls;
+		for (var iUrl = 0; iUrl < arrLoadedUrls.length; iUrl++) {
+			var objImage = document.createElement('img');
+			objImage.src = arrLoadedUrls[iUrl];
+			document.getElementById('images').appendChild(objImage);
+		}
+	},
+	// force onload event in 5 seconds if it doesn't fire
+	timeout: 5000
+});
+
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Transport Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

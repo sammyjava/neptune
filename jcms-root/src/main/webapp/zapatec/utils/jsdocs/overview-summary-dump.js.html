@@ -1,0 +1,326 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="dump.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>dump.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'dump.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: dump.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/*
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/*
+ * Dumpe the dom, for an item, often the body.
+ * 
+ * Use with something like 
+ * &lt;a href='#' onclick='new dump(document.getElementsByTagName("body")[0], true);' &gt;Dump DOM &lt;/a&gt;
+ * $Id: dump.js 15736 2009-02-06 15:29:25Z nikolai $
+ * 
+ * Heavily borrowed from htmlarea. 
+ */</span>
+
+dump = <span class="reserved">function</span> (domElement, bWindow) {
+  <span class="comment">// Use destination window to print the tree or create a new</span>
+  <span class="comment">// window, then print the tree into that window</span>
+  var strDump=dump.getHTML(domElement, false, 0)
+  <span class="reserved">if</span> (!bWindow) <span class="reserved">return</span> strDump
+
+  var outputWindow;
+  outputWindow=window.open(<span class="literal">""</span>,<span class="literal">"dumpdom"</span>);
+  outputWindow.focus();
+
+  outputWindow.document.open(<span class="literal">"text/html"</span>, <span class="literal">"replace"</span>);
+  outputWindow.document.write(<span class="literal">"&lt;HTML&gt;&lt;HEAD&gt;&lt;TITLE&gt;DOM&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;\n"</span>);
+  outputWindow.document.write(<span class="literal">"&lt;textarea rows=20 cols=60&gt;"</span>)
+  outputWindow.document.write(strDump)
+  outputWindow.document.write(<span class="literal">"&lt;/textarea&gt;"</span>)
+  outputWindow.document.write(<span class="literal">"&lt;/BODY&gt;&lt;/HTML&gt;\n"</span>);
+  outputWindow.document.close();
+}
+
+dump.RE_tagName = /(&lt;\/|&lt;)\s*([^ \t\n&gt;]+)/ig;
+
+dump.getHTML = <span class="reserved">function</span>(root, outputRoot, intDeep) {
+	var i2;
+	var html = <span class="literal">""</span>;
+	<span class="reserved">for</span> (i2=0; i2 &lt; intDeep; i2++) html+=<span class="literal">"  "</span>
+	switch (root.nodeType) {
+		case 1: <span class="comment">// Node.ELEMENT_NODE</span>
+		case 11: <span class="comment">// Node.DOCUMENT_FRAGMENT_NODE</span>
+			var closed;
+			var i;
+			var root_tag = (root.nodeType == 1) ? root.tagName.toLowerCase() : <span class="literal">''</span>;
+			<span class="reserved">if</span> (Zapatec.is_ie &amp;&amp; root_tag == <span class="literal">"head"</span>) {
+				<span class="reserved">if</span> (outputRoot)
+					html += <span class="literal">"\n&lt;head&gt;\n"</span>;
+				<span class="comment">// lowercasize</span>
+				var save_multiline = RegExp.multiline;
+				RegExp.multiline = true;
+				var txt = root.innerHTML.replace(dump.RE_tagName, <span class="reserved">function</span>(str, p1, p2) {
+						<span class="reserved">return</span> p1 + p2.toLowerCase();
+						});
+				RegExp.multiline = save_multiline;
+				html += <span class="literal">'\n'</span> + txt;
+				<span class="reserved">if</span> (outputRoot)
+					html += <span class="literal">"\n&lt;/head&gt;\n"</span>;
+				break;
+			} <span class="reserved">else</span> <span class="reserved">if</span> (outputRoot) {
+				closed = (!(root.hasChildNodes() || dump.needsClosingTag(root)));
+				html += <span class="literal">"&lt;"</span> + root.tagName.toLowerCase();
+				var attrs = root.attributes;
+				<span class="reserved">for</span> (i = 0; i &lt; attrs.length; ++i) {
+					var a = attrs.item(i);
+					<span class="reserved">if</span> (!a.specified) {
+						continue;
+					}
+					var name = a.nodeName.toLowerCase();
+					<span class="reserved">if</span> (/_moz|contenteditable|_msh/.test(name)) {
+						<span class="comment">// avoid certain attributes</span>
+						continue;
+					}
+					var value;
+					<span class="reserved">if</span> (name != <span class="literal">"style"</span>) {
+						<span class="comment">// IE5.5 reports 25 when cellSpacing is</span>
+						<span class="comment">// 1; other values might be doomed too.</span>
+						<span class="comment">// For this reason we extract the</span>
+						<span class="comment">// values directly from the root node.</span>
+						<span class="comment">//</span>
+
+						value = a.nodeValue;
+
+						<span class="comment">// IE seems not willing to return the original values - it converts to absolute</span>
+						<span class="comment">// links using a.nodeValue, a.value, a.stringValue, root.getAttribute("href")</span>
+						<span class="comment">// So we have to strip the baseurl manually -/</span>
+						<span class="reserved">if</span> (name == <span class="literal">"href"</span> || name == <span class="literal">"src"</span>) {
+							<span class="reserved">if</span> (value &amp;&amp; Zapatec.is_ie) {
+								value = <span class="reserved">this</span>.stripBaseURL(value);
+							}
+						}
+					} <span class="reserved">else</span> { <span class="comment">// IE fails to put style in attributes list</span>
+						<span class="comment">// FIXME: cssText reported by IE is UPPERCASE</span>
+						value = root.style.cssText;
+					}
+					<span class="reserved">if</span> (/(_moz|^$)/.test(value)) {
+						<span class="comment">// Mozilla reports some special tags</span>
+						<span class="comment">// here; we don't need them.</span>
+						continue;
+					}
+					html += <span class="literal">" "</span> + name + <span class="literal">'="'</span> + value + <span class="literal">'"'</span>;
+				}
+				html += closed ? <span class="literal">" /&gt;\n"</span> : <span class="literal">"&gt;\n"</span>;
+			}
+
+
+			<span class="reserved">for</span> (i = root.firstChild; i; i = i.nextSibling) {
+				html += <span class="reserved">this</span>.getHTML(i, true, intDeep+1)
+			}
+
+			<span class="reserved">if</span> (outputRoot &amp;&amp; !closed) {
+				<span class="reserved">for</span> (i2=0; i2 &lt; intDeep; i2++) html+=<span class="literal">"  "</span>
+				html += <span class="literal">"&lt;/"</span> + root.tagName.toLowerCase() + <span class="literal">"&gt;"</span>;
+				<span class="reserved">if</span> (0 != i2 || !outputRoot) html += <span class="literal">"\n"</span>;
+			}
+			break;
+		case 3: <span class="comment">// Node.TEXT_NODE</span>
+			<span class="comment">// If a text node is alone in an element and all spaces, replace it with an non breaking one</span>
+			<span class="comment">// This partially undoes the damage done by moz, which translates '&amp;nbsp;'s into spaces in the data element</span>
+			var textHtml = /^script|style$/i.test(root.parentNode.tagName) ? root.data : <span class="reserved">this</span>.htmlEncode(root.data);
+			textHtml = textHtml.replace(/^(\s|\n)*/, <span class="literal">''</span>);
+			textHtml = textHtml.replace(/(\s|\n)*$/, <span class="literal">''</span>);
+			html += textHtml;
+			html += <span class="literal">"\n"</span>;
+			break;
+		case 8: <span class="comment">// Node.COMMENT_NODE</span>
+			html += <span class="literal">"&lt;!--"</span> + root.data + <span class="literal">"--&gt;"</span>;
+			break;		<span class="comment">// skip comments, for now.</span>
+	}
+
+	<span class="reserved">return</span> html;
+};
+
+dump.stripBaseURL = <span class="reserved">function</span>(string) {
+	var baseurl = string;
+
+	<span class="comment">// strip to last directory in case baseurl points to a file</span>
+	baseurl = baseurl.replace(/[^\/]+$/, <span class="literal">''</span>);
+	var basere = new RegExp(baseurl);
+	string = string.replace(basere, <span class="literal">""</span>);
+
+	<span class="comment">// strip host-part of URL which is added by MSIE to links relative to server root</span>
+	baseurl = baseurl.replace(/^(https?:\/\/[^\/]+)(.*)$/, <span class="literal">'$1'</span>);
+	basere = new RegExp(baseurl);
+	<span class="reserved">return</span> string.replace(basere, <span class="literal">""</span>);
+};
+
+<span class="comment">// performs HTML encoding of some given string</span>
+dump.htmlEncode = <span class="reserved">function</span>(str) {
+	<span class="comment">// we don't need regexp for that, but.. so be it for now.</span>
+	str = str.replace(/&amp;/ig, <span class="literal">"&amp;amp;"</span>);
+	str = str.replace(/&lt;/ig, <span class="literal">"&amp;lt;"</span>);
+	str = str.replace(/&gt;/ig, <span class="literal">"&amp;gt;"</span>);
+	str = str.replace(/\x22/ig, <span class="literal">"&amp;quot;"</span>);
+	<span class="comment">// \x22 means '"' -- we use hex reprezentation so that we don't disturb</span>
+	<span class="comment">// JS compressors (well, at least mine fails.. ;)</span>
+	<span class="reserved">return</span> str;
+};
+
+dump.needsClosingTag = <span class="reserved">function</span>(el) {
+	var closingTags = <span class="literal">" head script style div span tr td tbody table em strong font a title "</span>;
+	<span class="reserved">return</span> (closingTags.indexOf(<span class="literal">" "</span> + el.tagName.toLowerCase() + <span class="literal">" "</span>) != -1);
+};
+
+
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<div class="payments">
+  
+  <% if (paymentFinished || request.getParameter("printable")!=null) { %>
+  
+  <%@ include file="payment-summary.jhtml" %>
+  
+  <% } else if (confirmEC) { %>
+
+  <%   if (error.length()>0) { %><div class="error"><%=error%></div><% } else { %><%@ include file="payment-confirmation.jhtml" %><% } %>
+  
+  <% } else { %>
+  
+  <%@ include file="payment-form.jhtml" %>
+  
+  <% } %>
+      
+</div>

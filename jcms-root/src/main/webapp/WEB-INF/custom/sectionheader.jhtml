@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom section header, set customSectionHeader=true and put code here.
+ */
+  boolean customSectionHeader = false;
+%>

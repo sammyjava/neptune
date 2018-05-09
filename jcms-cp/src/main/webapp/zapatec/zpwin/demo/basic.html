@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 			You can close a window. 			You can resize a window. 			You can minimize a window. 			You can move the focus to a window by clicking its title (to enable activation on clicking anywhere in the window use raiseOnlyOnTitle option). Except first window uses the option and can reach focus by clicking anywhere on it. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Window Widget - Basic Windows Example</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/window.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+		<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+		<link href="../../zpextra/themes/indicator/default.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="../../utils/indicator.js"></script>
+
+		<style type="text/css">
+			.zpScroll {
+				height:8em;
+				width:100%;
+				overflow: auto;
+			} 
+		</style>
+		<script type='text/javascript'>
+		var win1, win2, win3, win4, win5;
+
+		win1 = Zapatec.Window.setup({
+			left:50,
+			top:130,
+			raiseOnlyOnTitle:false,
+			content : '<span>Window 1. I am getting a focus when user clicks at any part of me.</span>'
+		});
+		win2 = Zapatec.Window.setup({
+			left:400,
+			top:300,
+			width:250,
+			height:80,
+			raiseOnlyOnTitle:true,
+			content : '<span>This is <strong> window 2</strong></span>'
+		});
+		win3 = Zapatec.Window.setup({
+			left:150,
+			top:400,
+			width:120,
+			height: 80,
+			raiseOnlyOnTitle:true,
+			content : '<span>This is window 3. It has quite a bit of text. More than can fit in a window this size, so it needs a scroller</span>'
+		});
+		win4 = Zapatec.Window.setup({
+			left:300,
+			top:400,
+			width:150,
+			height: 80,
+			title: 'Custom <strong> title </strong>',
+			raiseOnlyOnTitle:true,
+			content : "<span>SuperCalaFragalisticExpialidotious\n to force a scroller</span>"
+		});
+		win5 = Zapatec.Window.setup({
+			left:480,
+			top:275,
+			width:150,
+			height: 120,
+			raiseOnlyOnTitle:true,
+			content : "<span>Overlaps window 2</span>"
+		});
+		</script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Basic Windows Example</div>
+
+		This example shows several windows open in different locations on the page.
+		<br/>
+		Notice that the windows behave for the most part the way you would expect them to.
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+			<li>You can close a window.</li>
+			<li>You can resize a window.</li>
+			<li>You can minimize a window.</li>
+			<li>You can move the focus to a window by clicking its title (to enable activation on clicking anywhere in the window use raiseOnlyOnTitle option). Except first window uses the option and can reach focus by clicking anywhere on it.</li>
+
+			</ul>
+		</div>
+
+
+				You can also programmatically control windows. Click the links below to see
+				how to close and activate windows.
+
+				<br/>
+			<a href="#" onclick='win2.activate(); return false;'> Move the focus to window 2</a> <br/>
+			<a href="#" onclick='win5.activate(); return false;'> Move the focus to window 5</a> <br/>
+			<a href="#" onclick='win2.close(); return false;'> Close window 2</a> <br/>
+			<a href="#" onclick='win3.hide(); return false;'> Hide window 3</a> <br/>
+			<a href="#" onclick='win3.show(); return false;'> Show window 3</a> <br/>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Window Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

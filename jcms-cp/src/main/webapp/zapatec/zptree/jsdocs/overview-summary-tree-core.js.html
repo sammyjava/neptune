@@ -1,0 +1,1147 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Tree Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="tree-core.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Tree</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>tree-core.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec Tree core.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec Tree core.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: tree-core.js 15736 2009-02-06 15:29:25Z nikolai $ */</span>
+
+<span class="comment">/**
+ * Tree core.
+ * &lt;pre&gt;
+ * &lt;strong&gt;Input data formats:&lt;/strong&gt;
+ *
+ * &lt;strong&gt;JSON:&lt;/strong&gt;
+ * [
+ *	{
+ *		label: [string], // node label. It will be clickable. Required.
+ *		isExpanded: [boolean, optional], // if this branch is expanded. Default value - false. This option will be ignored if "children" section is null
+ *		isSelected: [boolean, optional], // if this node is selected. Default value - false.
+ *		isChecked: [boolean, optional], // if tree displays checkboxes for all items - if this is true - checkbox will be checked
+ *		expandedIcon: [string, optional], // string with IMG tag. This image will be shown when branch is expanded. This option will be ignored if "children" section is null.
+ *		collapsedIcon: [string, optional], // string with IMG tag. This image will be shown when branch is collapsed. This option will be ignored if "children" section is null.
+ *		fetchingIcon: [string, optional], // string with IMG tag. This image will be shown when branch is fetching its content. This option will be ignored if "children" section is null.
+ *		elementIcon: [string, optional], // string with IMG tag. This image will be shown for single node (without branch)
+ *		source: [string, optional], // if given - on expand tree will fetch content from given source. If "children" section is null - it will be put to empty array.
+ *		sourceType: [string, optional], // type of source that will be fetched. See Zapatec.Widget documentation for examples.
+ *		loadAlways: [boolean, optional], // if true - node children will be reloaded on each expand. Default - false.
+ *		attributes: {
+ *			attributeName: atrtibuteValue [string, optional], // this value will be added to TD element that contains node content.
+ *			...
+ *		},
+ *		children: [ // child nodes. If null - no +/- sign will be displayed.
+ *			...
+ *		]
+ *	}
+ * ]
+ * &lt;strong&gt;HTML:&lt;/strong&gt;
+ * Common HTML list - &amp;lt;UL&amp;gt;&amp;lt;LI&amp;gt;...&amp;lt;/LI&amp;gt;...&amp;lt;/UL&amp;gt;
+ * &lt;strong&gt;XML:&lt;/strong&gt;
+ * See demo/tree.dtd for DTD Scheme
+ *	&lt;list&gt;
+ *		&lt;item
+ *			isExpanded="true|false" // if this branch is expanded. Default value - false. This option will be ignored if "children" section is null
+ *			isSelected="true|false" // if this branch is selected. Default value - false. This option will be ignored if "children" section is null
+ *			expandedIcon="" // string with IMG tag. This image will be shown when branch is expanded. This option will be ignored if "children" section is null.
+ *			collapsedIcon="" // string with IMG tag. This image will be shown when branch is collapsed. This option will be ignored if "children" section is null.
+ *			fetchingIcon="" // string with IMG tag. This image will be shown when branch is fetching its content. This option will be ignored if "children" section is null.
+ *			elementIcon="" // string with IMG tag. This image will be shown for single node (without branch)
+ *			source="" // if given - on expand tree will fetch content from given source. If "children" section is null - it will be put to empty array.
+ *			sourceType="" // type of source that will be fetched. See Zapatec.Widget documentation for examples.
+ *			loadAlways="" // if "true" - node children will be reloaded on each expand. Default - false.
+ *		&gt;
+ *			&lt;attribute	// this value will be added to TD element that contains node content. Optional.
+ *				name="attributeName" // Attribute name
+ *			&gt;attributeValue&lt;/attribute&gt; // Attribute value.
+ *			&lt;label&gt;&lt;/label&gt; // node label. It will be clickable. Required.
+ *			&lt;list&gt;&lt;/list&gt; // You can define other ITEM nodes here. They will be displayed as child nodes for current node. Optional.
+ *		&lt;/item&gt;
+ *	&lt;list&gt;
+ */</span>
+Zapatec.Tree = <span class="reserved">function</span>() {
+	var objArgs = {};
+
+	switch(arguments.length){
+		case 1:
+			objArgs = arguments[0];
+			break;
+		case 2:
+			<span class="comment">// backward compartibility for 1.x version</span>
+			objArgs = arguments[1];
+			objArgs.tree = arguments[0];
+			break;
+	}
+	
+	Zapatec.Tree.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecTree = Zapatec.Tree;
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Tree.id = <span class="literal">"Zapatec.Tree"</span>;
+
+<span class="comment">/**
+ * Array stores references to all Zapatec.Tree instances. Array key - Zapatec.Tree#id or value of ID attribute of UL element specified by "tree" config option
+ * This array is need for backward compatibility with &amp;lt;2.0 versions. Use Zapatec.Widget.getWidgetById() instead.
+ */</span>
+Zapatec.Tree.all = {};
+
+<span class="comment">// Inherit SuperClass</span>
+Zapatec.inherit(Zapatec.Tree, Zapatec.Widget);
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Initializes tree.
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(config) {
+	<span class="reserved">this</span>.container = null; <span class="comment">// reference to element containing tree</span>
+	<span class="reserved">this</span>.internalContainer = null;
+	<span class="reserved">this</span>.allNodes = []; <span class="comment">// stores references to all nodes in a tree. You could use it to apply some function to all nodes in a tree, for example.</span>
+	<span class="reserved">this</span>.id2Obj = {}; <span class="comment">// Hash - node ID to Zapatec.Tree.Node instance</span>
+	<span class="reserved">this</span>.rootNode = null; <span class="comment">// root node for tree. It is not displayed - it doesn't have label or content - just child nodes.</span>
+	<span class="reserved">this</span>.expandToLevelNum = 0;
+	<span class="reserved">this</span>.isClicked = false; <span class="comment">// flag to determine if last click was done on tree element</span>
+	<span class="reserved">this</span>.isActive = false; <span class="comment">// flag to determine if user currently working with this tree.</span>
+	<span class="reserved">this</span>.editInline = null; <span class="comment">// if config.editable == true - this variable will hold reference to Zapatec.EditInline object</span>
+	<span class="reserved">this</span>.isSaveStateDone = false; <span class="comment">// flag to indicate if saveState feature was used.</span>
+
+	<span class="comment">// &lt;2.2 support</span>
+	<span class="reserved">if</span>(config.tree){
+		var tmp = Zapatec.Widget.getElementById(config.tree);
+
+		<span class="reserved">if</span>(tmp &amp;&amp; tmp.id){
+			<span class="reserved">this</span>.id = tmp.id;
+		}
+	}
+
+	Zapatec.Tree.SUPERclass.init.call(<span class="reserved">this</span>, config);
+	
+	Zapatec.Tree.all[<span class="reserved">this</span>.id] = <span class="reserved">this</span>;
+
+	<span class="comment">// create tree container. apply theme to it.</span>
+	<span class="reserved">this</span>.container = Zapatec.Utils.createElement(<span class="literal">"div"</span>, null, <span class="reserved">this</span>.config.selectable);
+	<span class="reserved">this</span>.container.className = <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpTree"</span>, suffix: <span class="literal">"Container"</span>});
+	<span class="reserved">this</span>.container.id = <span class="literal">"zpTree"</span> + <span class="reserved">this</span>.id + <span class="literal">"Container"</span>;
+
+	<span class="reserved">this</span>.internalContainer = Zapatec.Utils.createElement(<span class="literal">"div"</span>, null, <span class="reserved">this</span>.config.selectable);
+	<span class="reserved">this</span>.internalContainer.className = <span class="literal">"tree tree-top"</span>;
+	<span class="reserved">this</span>.container.appendChild(<span class="reserved">this</span>.internalContainer);
+	Zapatec.Utils.createProperty(<span class="reserved">this</span>.container, <span class="literal">"zpTree"</span>, <span class="reserved">this</span>);
+
+	<span class="comment">// all newly created nodes will be expanded to this level.</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.initLevel){
+		<span class="reserved">this</span>.expandToLevelNum = <span class="reserved">this</span>.config.initLevel;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.tree){
+		<span class="reserved">this</span>.config.tree.parentNode.insertBefore(<span class="reserved">this</span>.container, <span class="reserved">this</span>.config.tree);
+		Zapatec.Utils.destroy(<span class="reserved">this</span>.config.tree);
+	} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.config.parent){
+		<span class="reserved">this</span>.config.parent.appendChild(<span class="reserved">this</span>.container);
+	}
+
+	<span class="comment">// create root node</span>
+	<span class="reserved">this</span>.rootNode = new Zapatec.Tree.Node({
+		tree: <span class="reserved">this</span>,
+		parentNode: null,
+		level: 0,
+		isRootNode: true,
+		eventListeners: <span class="reserved">this</span>.config.eventListeners
+	});
+
+	<span class="reserved">this</span>.id2Obj[<span class="reserved">this</span>.id] = <span class="reserved">this</span>.rootNode;
+
+	<span class="reserved">this</span>.rootNode.isCreated = true;
+	<span class="reserved">this</span>.rootNode.childrenContainer = <span class="reserved">this</span>.internalContainer;
+
+	<span class="reserved">this</span>.prevSelected = null;
+
+	<span class="comment">// load data into tree</span>
+	<span class="reserved">this</span>.loadData();
+
+	<span class="comment">// check if we have an initially selected node and sync.</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.prevSelected){
+		<span class="reserved">this</span>.prevSelected.sync();
+	}
+	
+	<span class="comment">//if we're keeping track of state, and we have saved state information</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.saveState){
+		var txt = Zapatec.Utils.getCookie(<span class="literal">"Zapatec.Tree-"</span> + <span class="reserved">this</span>.config.saveId);
+		var node = <span class="reserved">this</span>.getNode(txt, true);
+
+		<span class="reserved">if</span> (node){
+			<span class="reserved">this</span>.isSaveStateDone = true;
+			node.sync();
+		}
+	}
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.editable){
+		<span class="reserved">if</span>(Zapatec.EditInline){
+			var self = <span class="reserved">this</span>;
+			
+			<span class="reserved">this</span>.editInline = new Zapatec.EditInline({
+				editAsText: <span class="reserved">this</span>.config.editAsText,
+				eventListeners: {
+					showStart: <span class="reserved">function</span>(){
+						<span class="reserved">this</span>.selectedNode = self.prevSelected;
+					},
+					saveContent: <span class="reserved">function</span>(content){
+						<span class="reserved">if</span>(<span class="reserved">this</span>.selectedNode){
+							<span class="reserved">this</span>.selectedNode.rename(content);
+							<span class="reserved">this</span>.selectedNode = null;
+						}
+					}
+				}
+			});
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.config.editable = false;
+			Zapatec.Log({description: <span class="literal">"Zapatec.EditInline class is not found. Please include 'utils/edit_inline.js' into page."</span>});
+		}
+	}
+	
+	<span class="reserved">this</span>.attachNavigation();
+};
+
+<span class="comment">/**
+ * Configures tree. Gets called from parent init method.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(objArgs) {
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'tree'</span>); <span class="comment">// Deprecated param. Use "source" option and "parent" instead. If given - Zapatec.Tree will replace "tree" element</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'parent'</span>); <span class="comment">// if given - tree will be added to this element</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'hiliteSelectedNode'</span>); <span class="comment">// Deprecated. Use "highlightSelectedNode" instead</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'highlightSelectedNode'</span>, true); <span class="comment">// Highlight selected node or not</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'defaultIcons'</span>); <span class="comment">// if given - additional cell will be added before </span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'compact'</span>, false); <span class="comment">// if true - only one branch may be expanded at a time</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'dynamic'</span>, false); <span class="comment">// deprecated. Do nothing now.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'initLevel'</span>, 1); <span class="comment">// tree will be expanded to this level on load.</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'deselectSelected'</span>, false); <span class="comment">// If option is true - then after clicking on selected node - that node will be deselected.</span>
+	
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'saveState'</span>, false); <span class="comment">// if true - tree will store ID of currently selected node into cookie. After page reload tree will be opened to that node.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'saveId'</span>); <span class="comment">// if "saveState" is true - this option is required. Cookie name.</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'expandOnSignClick'</span>, true); <span class="comment">// should branch expand on sign click</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'expandOnSignDblclick'</span>, false); <span class="comment">// should branch expand on sign double click</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'expandOnIconClick'</span>, true); <span class="comment">// should branch expand on icon click</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'expandOnIconDblclick'</span>, false); <span class="comment">// should branch expand on icon double click</span>
+	
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'expandOnLabel'</span>);<span class="comment">// deprecated. Use expandOnLabelClick. Backward compartibility for 2.1 version</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'expandOnLabelClick'</span>, false); <span class="comment">// should branch expand on label click</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'labelDblClick'</span>); <span class="comment">// deprecated. Use expandOnLabelDblclick. Backward compartibility for 2.1 version</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'expandOnLabelDblclick'</span>, false); <span class="comment">// should branch expand on label double click</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectMultiple'</span>, false); <span class="comment">// if option is true - clicking on unselected node won't unselect currently selected nodes.</span>
+	
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectOnSignClick'</span>, true); <span class="comment">// should node become selected when clicking at +/- sign</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectOnSignDblclick'</span>, true); <span class="comment">// should node become selected when double clicking at +/- sign</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectOnIconClick'</span>, true); <span class="comment">// should node become selected when clicking at icon</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectOnIconDblclick'</span>, true); <span class="comment">// should node become selected when double clicking at icon</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectOnLabelClick'</span>, true); <span class="comment">// should node become selected when clicking at label</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectOnLabelDblclick'</span>, true); <span class="comment">// should node become selected when double clicking at label</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'prevCompatible'</span>, false); <span class="comment">// turn on compatibility mode with &lt;=2.1 versions</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'quick'</span>, false); <span class="comment">// if true - tree will work faster but some feature (sync, expandAll and other operations that hurts uninitialized nodes) will be unavailable</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'putBackReferences'</span>, false); <span class="comment">// if true - TD element with content will have property zpTreeNode which will be reference to Zapatec.Tree.Node instance</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'createWholeDOM'</span>, false); <span class="comment">// if true - all DOM elements will be created when tree will be created.</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'jsonLoadCallback'</span>); <span class="comment">// deprecated. Using this config option you can define fnction that will convert JSON object from your format to Zapatec.Tree format.</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'keyboardNavigation'</span>, false); <span class="comment">// Activate keyboard navigation for tree.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'deselectOnLeave'</span>); <span class="comment">// Deselect currently active node when leaving tree (clicking somewhere on the page outside tree or pressing ESC button).</span>
+
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'putCheckboxes'</span>, false); <span class="comment">// if true - checkbox will be displayed for each node</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'dependantCheckboxes'</span>, true); <span class="comment">// if true - triggering checkbox will affect parent and child nodes.</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'selectable'</span>, false); <span class="comment">// If tree content can be selected by mouse</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'editable'</span>, false); <span class="comment">// If tree nodes can be renamed inline</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'editAsText'</span>, true); <span class="comment">// edit node content as plain text (no HTML is allowed) </span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'editOnClick'</span>, false); <span class="comment">// If tree node can be renamed when clicking at node</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'editOnDblclick'</span>, true); <span class="comment">// If tree node can be renamed when double clicking at node</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'disableContextMenu'</span>, false); <span class="comment">// If true - no browser context menu will be displayed while clicking on node labels.</span>
+
+	<span class="comment">// super call</span>
+	Zapatec.Tree.SUPERclass.configure.call(<span class="reserved">this</span>, objArgs);
+
+	<span class="reserved">this</span>.config.parent = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.parent);
+	<span class="reserved">this</span>.config.tree = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.tree);
+
+	<span class="comment">// processing deprecated 'tree' option.</span>
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.config.tree != null
+	){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.source == null){
+			<span class="reserved">this</span>.config.source = <span class="reserved">this</span>.config.tree;
+		} <span class="reserved">else</span> {
+<span class="comment">//			Zapatec.Log({description: "'tree' config option is deprecated. Please use 'source' instead. Option ignored."})</span>
+		}
+	}
+	
+	<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.config.hiliteSelectedNode) != <span class="literal">'undefined'</span> &amp;&amp; <span class="reserved">this</span>.config.hiliteSelectedNode != null){
+		<span class="reserved">this</span>.config.highlightSelectedNode = <span class="reserved">this</span>.config.hiliteSelectedNode;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.parent == null &amp;&amp; <span class="reserved">this</span>.config.tree == null){
+		Zapatec.Log({description: <span class="literal">"No 'parent' or 'tree' config options given. Unable to add tree."</span>});
+		throw(<span class="literal">"No 'parent' or 'tree' config options given. Unable to add tree."</span>);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.labelDblClick != null){
+<span class="comment">//		Zapatec.Log({description: "'labelDblClick' config option is deprecated. Please use 'expandOnLabelDblclick' instead."})</span>
+		<span class="reserved">this</span>.config.expandOnLabelDblclick = <span class="reserved">this</span>.config.labelDblClick;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.expandOnLabel != null){
+<span class="comment">//		Zapatec.Log({description: "'expandOnLabel' config option is deprecated. Please use 'expandOnLabelClick' instead."})</span>
+		<span class="reserved">this</span>.config.expandOnLabelClick = <span class="reserved">this</span>.config.expandOnLabel;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.initLevel == false){
+		<span class="comment">//backward compartibility</span>
+		<span class="reserved">this</span>.config.initLevel = 1;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.initLevel &lt; 1){
+		<span class="reserved">this</span>.config.initLevel = 1;
+	}
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.config.saveState &amp;&amp;
+		(
+			!<span class="reserved">this</span>.config.saveId ||
+			typeof(<span class="reserved">this</span>.config.saveId) != <span class="literal">'string'</span> ||
+			<span class="reserved">this</span>.config.saveId.length == 0
+		)
+	){
+		Zapatec.Log({description: <span class="literal">"No 'saveId' is given. 'saveState' feature disabled."</span>});
+		<span class="reserved">this</span>.config.saveState = false;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.createWholeDOM &amp;&amp; <span class="reserved">this</span>.config.quick){
+		<span class="reserved">this</span>.config.quick = false;
+		Zapatec.Log({description: <span class="literal">"Config option 'createWholeDOM' overrides 'quick' config option"</span>});
+	}
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.selectMultiple){
+		<span class="comment">// disable keyboard navigation if selectMultiple feature is used.</span>
+		<span class="reserved">this</span>.config.keyboardNavigation = false;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.keyboardNavigation &amp;&amp; typeof(<span class="reserved">this</span>.config.deselectOnLeave) == <span class="literal">'undefined'</span>){
+		<span class="reserved">this</span>.config.deselectOnLeave = true;
+	}
+
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.config.putCheckboxes){
+		<span class="reserved">this</span>.config.dependantCheckboxes = false;
+	}
+};
+
+<span class="comment">/**
+ * Reconfigures the tree with new config options after it was initialized.
+ * May be used to change look or behavior of the tree after it has loaded
+ * the data. In the argument pass only values for changed config options.
+ * There is no need to pass config options that were not changed.
+ *
+ * <span class="attrib">@param</span> {object} objArgs Changes to user configuration
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(objArgs){
+	<span class="reserved">if</span>(objArgs.theme){
+		Zapatec.Utils.removeClass(<span class="reserved">this</span>.container, 
+			<span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpTree"</span>, suffix: <span class="literal">"Container"</span>}));
+	}
+
+	<span class="comment">// Call parent method</span>
+	Zapatec.Tree.SUPERclass.reconfigure.call(<span class="reserved">this</span>, objArgs);
+
+	Zapatec.Utils.addClass(<span class="reserved">this</span>.container, 
+		<span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpTree"</span>, suffix: <span class="literal">"Container"</span>}));
+};
+
+<span class="comment">/**
+ * Extends parent method.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.addStandardEventListeners = <span class="reserved">function</span>() {
+  <span class="comment">// Call parent method</span>
+  Zapatec.Tree.SUPERclass.addStandardEventListeners.call(<span class="reserved">this</span>);
+  <span class="comment">// Add tree specific event listeners</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">'fetchSourceError'</span>, <span class="reserved">this</span>.displayErrorSource);
+};
+
+<span class="comment">/**
+ * Displays error when external source is malformed.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.displayErrorSource = <span class="reserved">function</span>(oError) {
+  alert(<span class="literal">"The tree's data source, "</span> + <span class="reserved">this</span>.config.source +
+   <span class="literal">" does not contain valid data.\n"</span> + oError.errorDescription);
+};
+
+
+<span class="comment">/**
+ * Finds first node in a tree where findFunc returns true
+ * <span class="attrib">@param</span> {function} search criterion
+ * <span class="attrib">@return</span> Founded node or null if nothing founded
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.find = <span class="reserved">function</span>(findFunc){
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.allNodes.length; ii++){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.allNodes[ii] != null &amp;&amp; findFunc(<span class="reserved">this</span>.allNodes[ii])){
+			<span class="reserved">return</span> <span class="reserved">this</span>.allNodes[ii];
+		}
+	}
+};
+
+<span class="comment">/**
+ * Finds all nodes in a tree where findFunc returns true
+ * <span class="attrib">@param</span> {function} search criterion
+ * <span class="attrib">@return</span> Founded Zapatec.Tree.Node instance or null if nothing founded
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.findAll = <span class="reserved">function</span>(findFunc){
+	var result = [];
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.allNodes.length; ii++){
+		<span class="reserved">if</span>(findFunc(<span class="reserved">this</span>.allNodes[ii])){
+			result.push(<span class="reserved">this</span>.allNodes[ii]);
+		}
+	}
+	<span class="reserved">return</span> result;
+};
+
+<span class="comment">/**
+ * Call this function to toggle all items in the tree.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.toggleAll = <span class="reserved">function</span>() {
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.allNodes.length; ii++){
+		<span class="reserved">this</span>.allNodes[ii].toggle();
+	}
+};
+
+<span class="comment">/**
+ * Get node by its ID
+ * <span class="attrib">@param</span> {string} ID
+ * <span class="attrib">@param</span> {boolean} omitWarning If true - do not show error message
+ * <span class="attrib">@return</span> Founded node or null if nothing founded
+ * <span class="attrib">@type</span> Object
+*/</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.getNode = <span class="reserved">function</span>(id, omitWarning){
+	var node = <span class="reserved">this</span>.id2Obj[id];
+
+	<span class="reserved">if</span>(node == null){
+		<span class="reserved">if</span>(!omitWarning){
+			Zapatec.Log({description: <span class="literal">"No node found for id '"</span> + id + <span class="literal">"'"</span>});
+		}
+		<span class="reserved">return</span>;
+	}
+
+	<span class="reserved">return</span> node;
+};
+
+<span class="comment">/**
+ * Synchronize tree to given node. Tree will be expanded to that node and that 
+ *	node will be selected.
+ * <span class="attrib">@param</span> {string} node ID
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.sync = <span class="reserved">function</span>(itemId) {
+	var node = <span class="reserved">this</span>.getNode(itemId);
+
+	<span class="reserved">if</span>(node){
+		node.sync();
+	}
+};
+
+<span class="comment">/**
+ * You can expand, collapse or toggle a specific item
+ * <span class="attrib">@param</span> nodeId {string} node ID.
+ * <span class="attrib">@param</span> state {boolean} If true - expand node, false - collapse, null - toggle
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.toggleItem = <span class="reserved">function</span>(nodeId, state){
+	var node = <span class="reserved">this</span>.getNode(nodeId);
+
+	<span class="reserved">if</span>(!node){
+		<span class="reserved">return</span>;
+	}
+
+	<span class="reserved">if</span>(state == true){
+		node.expand();
+	} <span class="reserved">else</span> <span class="reserved">if</span>(state == false){
+		node.collapse();
+	} <span class="reserved">else</span> <span class="reserved">if</span>(state == null){
+		node.toggle();
+	}
+};
+
+<span class="comment">/**
+ * Append a child to the start or end of the given parent. 
+ * 
+ * <span class="attrib">@param</span> newChild {object} reference to an HTML element created of type LI or 
+ *	JSON object with data.
+ * <span class="attrib">@param</span> parent {object} ID of parent node where new child will be added. If 
+ *	null - add to top level.
+ * <span class="attrib">@param</span> atStart {boolean} optional. If true if the child going to be added 
+ *	at the start of the parent.
+ * <span class="attrib">@return</span> newly created node
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.appendChild = <span class="reserved">function</span>(newChild, parent, atStart) { 
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.prevCompatible){
+		<span class="comment">// backward compartibility. Before 2.1 method signature was parent, newChild, atStart</span>
+		var tmp = parent;
+		parent = newChild;
+		newChild = tmp;
+	}
+
+	<span class="reserved">if</span>(parent == null){
+		parent = <span class="reserved">this</span>.rootNode;
+	} <span class="reserved">else</span> {
+		parent = <span class="reserved">this</span>.getNode(parent);
+	}
+
+	<span class="reserved">if</span>(parent == null){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">return</span> parent.appendChild(newChild, atStart);
+};
+ 
+<span class="comment">/** 
+ * A new child can be inserted before some node.
+ * <span class="attrib">@param</span> newChild {object} New child node to be inserted into the tree. HTML 
+ *	element or JSON object.
+ * <span class="attrib">@param</span> refChild {object} ID of the child node which the new child node will 
+ *	be inserted before
+ * <span class="attrib">@return</span> newly created node
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.insertBefore = <span class="reserved">function</span>(newChild, refChild) { 
+	refChild = <span class="reserved">this</span>.getNode(refChild);
+
+	<span class="reserved">if</span>(refChild == null){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">return</span> refChild.insertBefore(newChild);
+};
+
+<span class="comment">/**
+ * A new child can be inserted after some nodes.
+ * <span class="attrib">@param</span> newChild {object} New child node to be inserted into the tree. HTML 
+ *	element or JSON object.
+ * <span class="attrib">@param</span> refChild {object} ID of the child node which the new child node will 
+ *	be inserted after.
+ * <span class="attrib">@return</span> newly created node
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.insertAfter = <span class="reserved">function</span>(newChild, refChild) { 
+	refChild = <span class="reserved">this</span>.getNode(refChild);
+
+	<span class="reserved">if</span>(refChild == null){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">return</span> refChild.insertAfter(newChild);
+};
+ 
+<span class="comment">/** 
+ * Remove child in the tree.
+ * <span class="attrib">@param</span> {object} ID of node.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.removeChild = <span class="reserved">function</span>(oldChild) { 
+	oldChild = <span class="reserved">this</span>.getNode(oldChild);
+
+	<span class="reserved">if</span>(oldChild == null){
+		<span class="reserved">return</span> null;
+	}
+
+	oldChild.destroy();
+};
+
+<span class="comment">/**
+ * Call this function to collapse all items in the tree.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.collapseAll = <span class="reserved">function</span>() {
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.allNodes.length; ii++){
+		<span class="reserved">this</span>.allNodes[ii].collapse();
+	}
+};
+
+<span class="comment">/**
+ * Collapses the tree up to the given level.
+ * <span class="attrib">@param</span> level {int} level to collapse.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.collapseToLevel = <span class="reserved">function</span>(level) {
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.allNodes.length; ii++){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.allNodes[ii].config.level &gt; level){
+			<span class="reserved">this</span>.allNodes[ii].collapse();
+		}
+	}
+};
+
+<span class="comment">/**
+ * Call this function to expand all items in the tree.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.expandAll = <span class="reserved">function</span>() {
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.allNodes.length; ii++){
+		<span class="reserved">this</span>.allNodes[ii].expand();
+	}
+};
+
+<span class="comment">/**
+ * Expands tree up to given level.
+ * <span class="attrib">@param</span> level {int} level to expand.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.expandToLevel = <span class="reserved">function</span>(level) {
+	<span class="reserved">this</span>.expandToLevelNum = level;
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.allNodes.length; ii++){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.allNodes[ii].config.level &lt;= level){
+			<span class="reserved">this</span>.allNodes[ii].expand();
+		}
+	}
+};
+
+<span class="comment">/**
+* <span class="attrib">@private</span> Function to load tree content on tree load from JSON source.
+* <span class="attrib">@param</span> objResponse {Object} Server response
+*/</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.loadDataJson = <span class="reserved">function</span>(objResponse){
+	<span class="reserved">if</span>(objResponse == null){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="comment">// remove in next releases</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.jsonLoadCallback){
+		objResponse = <span class="reserved">this</span>.config.jsonLoadCallback(objResponse);
+	}
+
+	<span class="reserved">this</span>.rootNode.data = {};
+	<span class="reserved">this</span>.rootNode.data.children = objResponse;
+	<span class="reserved">this</span>.rootNode.createChildren();	
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.rootNode.children.length; ii++){
+		<span class="reserved">this</span>.rootNode.children[ii].afterCreate();
+	}
+
+	<span class="comment">// try to use saveState for loaded subtree</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.saveState &amp;&amp; !<span class="reserved">this</span>.isSaveStateDone){
+		var txt = Zapatec.Utils.getCookie(<span class="literal">"Zapatec.Tree-"</span> + <span class="reserved">this</span>.config.saveId);
+		var node = <span class="reserved">this</span>.getNode(txt, true);
+
+		<span class="reserved">if</span> (node){
+			<span class="reserved">this</span>.isSaveStateDone = true;
+			node.sync();
+		}
+	}
+
+};
+
+<span class="comment">/**
+* <span class="attrib">@private</span> Function to load tree content on tree load
+* <span class="attrib">@param</span> objResponse {Object} Server response
+* TODO add format description
+*/</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.loadDataXml = <span class="reserved">function</span>(objSource){
+	<span class="reserved">if</span>(objSource == null || objSource.documentElement == null){
+		<span class="reserved">return</span> null;
+	}
+
+	var result = [];
+
+	<span class="reserved">for</span>(var jj = 0; jj &lt; objSource.documentElement.childNodes.length; jj++){
+		var tmp = Zapatec.Tree.Utils.convertXml2Json(objSource.documentElement.childNodes[jj]);
+
+		<span class="reserved">if</span>(tmp != null){
+			result.push(tmp);
+		}
+	}
+
+	<span class="reserved">return</span> <span class="reserved">this</span>.loadDataJson(result);
+};
+
+<span class="comment">/**
+* \internal Function to load tree content on tree load from HTML element
+* <span class="attrib">@param</span> objResponse {Object} Server response
+* Format description: Common HTML list - &amp;lt;UL&amp;gt;&amp;lt;LI&amp;gt;...&amp;lt;/LI&amp;gt;...&amp;lt;/UL&amp;gt;
+*/</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.loadDataHtml = <span class="reserved">function</span>(objSource){
+	<span class="reserved">if</span>(objSource == null){
+		<span class="reserved">return</span> null;
+	}
+
+	var result = [];
+
+	<span class="reserved">for</span>(var jj = 0; jj &lt; objSource.childNodes.length; jj++){
+		var tmp = Zapatec.Tree.Utils.convertLi2Json(objSource.childNodes[jj], <span class="reserved">this</span>.config.prevCompatible);
+
+		<span class="reserved">if</span>(tmp != null){
+			result.push(tmp);
+		}
+	}
+
+	<span class="reserved">return</span> <span class="reserved">this</span>.loadDataJson(result);
+};
+
+<span class="comment">/**
+* <span class="attrib">@deprecated</span>
+ * Call this function to create a html element with the optional element type specified.
+ * By default, it is a &amp;lt;LI&amp;gt; element.
+ * <span class="attrib">@param</span> html {String} html of the node; may include &amp;lt;UL&amp;gt;, &amp;lt;LI&amp;gt;
+ *	elements; user is responsible for the content of the html. 
+ * <span class="attrib">@param</span> type {String} type of the node to be created
+*/</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.makeNode = <span class="reserved">function</span>(html, type){
+	<span class="reserved">if</span> (!type) { 
+		 type = <span class="literal">"li"</span>; <span class="comment">//Make it a &lt;LI&gt; node if the type is not specified.</span>
+	}
+
+	var node = Zapatec.Utils.createElement(type);
+
+	<span class="reserved">if</span> (html) {
+	    <span class="reserved">if</span>(<span class="reserved">this</span>.config.quick){
+			node.innerHTML = html;
+		} <span class="reserved">else</span> {
+			Zapatec.Transport.setInnerHtml({html: html, container: node}); <span class="comment">//Assign the inner html of the node if it is specified.</span>
+		}
+	}
+	
+	<span class="reserved">return</span> node;
+};
+
+<span class="comment">/**
+ * Destroy this instance.
+ *
+ * <span class="attrib">@param</span> leaveDOM {boolean} If true - DOM tree will be preserved
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.discard = <span class="reserved">function</span>(leaveDOM){
+    <span class="reserved">if</span>(<span class="reserved">this</span>.rootNode){
+		<span class="reserved">this</span>.rootNode.destroy(true);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.container){
+		<span class="reserved">this</span>.container.zpTree = null;
+	}
+
+	zapatecTree.all[<span class="reserved">this</span>.id] = null;
+	
+	<span class="reserved">this</span>.allNodes = null;
+	<span class="reserved">this</span>.rootNode = null;
+	
+	<span class="reserved">if</span>(!leaveDOM){
+		zapatecUtils.destroy(<span class="reserved">this</span>.container);
+	}
+	
+	<span class="reserved">this</span>.container = null;
+	<span class="reserved">this</span>.id2Obj = null;
+	
+	<span class="comment">// Call parent method</span>
+	zapatecTree.SUPERclass.discard.call(<span class="reserved">this</span>);
+};
+
+<span class="comment">/**
+ * Simply calls {<span class="attrib">@link</span> Zapatec.Tree#discard}.
+ *
+ * <span class="attrib">@deprecated</span>
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> leaveDOM {boolean} If true - DOM tree will be preserved
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.destroy = <span class="reserved">function</span>(leaveDOM){
+	<span class="reserved">this</span>.discard(leaveDOM);
+};
+
+<span class="comment">/**
+ * <span class="attrib">@deprecated</span>
+ * Third party code can override this member in order to add an event handler
+ * that gets called each time a tree item is selected. It receives a single
+ * string parameter containing the item ID.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.onItemSelect = <span class="reserved">function</span>() {};
+
+<span class="comment">/**
+ * Returns JSON with current tree state. This object can be stored and used to
+ *	create tree with completely same structure.
+ * <span class="attrib">@return</span> JSON with tree data.
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.getState = <span class="reserved">function</span>(){
+	var result = [];
+	
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.rootNode.children.length; ii++){
+		result.push(<span class="reserved">this</span>.rootNode.children[ii].getState());
+	}
+
+	<span class="reserved">return</span> result;
+};
+
+<span class="comment">/** 
+ * Call to get the parent to append, insert or remove a child either at start 
+ * or end position or in between two nodes of the (sub-)tree. 
+ * 
+ * <span class="attrib">@deprecated</span>
+ * <span class="attrib">@param</span> id {String} -- id of the parent the new child will be added to or inserted before/at. 
+ * <span class="attrib">@param</span> mode {String} -- "I" is for inserting a child node. "R" is for removing a child node.  
+ */</span> 
+Zapatec.Tree.<span class="reserved">prototype</span>.getParent = <span class="reserved">function</span>(id, mode) { 
+	<span class="reserved">return</span> id;	
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Create and attach events for keyboard navigation
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.attachNavigation = <span class="reserved">function</span>(){
+	var self = <span class="reserved">this</span>;
+	
+	<span class="comment">// process clicks at tree container</span>
+	Zapatec.Utils.addEvent(<span class="reserved">this</span>.container, <span class="literal">"click"</span>, 
+		<span class="reserved">function</span>(){
+			self.isActive = true; 
+			self.isClicked = true;
+		}
+	);
+	
+	<span class="reserved">this</span>.setEventHandlers();
+	
+	var func = <span class="reserved">function</span>(evt){<span class="reserved">return</span> self.keyEvent(evt);};
+
+	<span class="comment">// process all document key hits</span>
+	<span class="comment">// For IE we must use "keydown" instead of "keypress"</span>
+	Zapatec.Utils.addEvent(document, (Zapatec.is_ie ? <span class="literal">"keydown"</span> : <span class="literal">"keypress"</span>), func);
+
+	<span class="reserved">this</span>.eventHandlers[<span class="literal">"key"</span>] = {
+	    element: document,
+	    event: Zapatec.is_ie ? <span class="literal">"keydown"</span> : <span class="literal">"keypress"</span>,
+	    handler: func
+	};
+	
+	func = <span class="reserved">function</span>(){
+		<span class="reserved">if</span>(!self.isClicked){
+			self.leave();
+		}
+		
+		self.isClicked = false;
+	};
+
+	<span class="comment">// process al document clicks</span>
+	Zapatec.Utils.addEvent(document, <span class="literal">'click'</span>, func);
+
+	<span class="reserved">this</span>.eventHandlers[<span class="literal">"click"</span>] = {
+	    element: document,
+	    event: <span class="literal">"click"</span>,
+	    handler: func
+	};
+
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Process key events in the document.
+ * <span class="attrib">@param</span> event {Object} Event object.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.keyEvent = <span class="reserved">function</span>(evt){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.prevSelected || !<span class="reserved">this</span>.isActive){
+		<span class="comment">// if no node is selected or this tree is not active at a moment - do nothing.</span>
+		<span class="reserved">return</span> true;
+	}
+
+	<span class="reserved">if</span>(!evt){
+		evt = window.event;
+	}
+
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.config.keyboardNavigation &amp;&amp; !<span class="reserved">this</span>.config.editable){
+		<span class="reserved">return</span>;
+	}
+
+	var res = Zapatec.Utils.getCharFromEvent(evt);
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"keypressed"</span>, res.charCode, res.chr);
+
+	<span class="reserved">if</span>(res.charCode == 27){
+		<span class="comment">// ESC key</span>
+		<span class="reserved">this</span>.leave();
+	}
+	
+	<span class="reserved">if</span>(res.chr == <span class="literal">" "</span>){
+		res.charCode = 32;
+	}
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.config.keyboardNavigation &amp;&amp; 
+		(
+			!<span class="reserved">this</span>.config.editable ||
+			<span class="reserved">this</span>.config.editable &amp;&amp;
+			<span class="reserved">this</span>.editInline &amp;&amp; !<span class="reserved">this</span>.editInline.selectedNode
+		)
+	){
+		switch(res.charCode){
+			case 32: <span class="comment">// space bar</span>
+				<span class="reserved">if</span>(<span class="reserved">this</span>.config.putCheckboxes){
+					<span class="reserved">this</span>.prevSelected.checkboxChanged();
+				}
+				<span class="comment">// fall through</span>
+			case 13: <span class="comment">// enter key</span>
+				<span class="reserved">this</span>.prevSelected.toggle();
+				Zapatec.Utils.stopEvent(evt);
+				break;
+			case 63234: <span class="comment">//left arrow in Safari</span>
+			case 37: <span class="comment">// left arrow</span>
+				<span class="reserved">if</span>(<span class="reserved">this</span>.prevSelected.data.isExpanded){
+					<span class="reserved">this</span>.prevSelected.collapse();
+				} <span class="reserved">else</span> {
+					<span class="reserved">if</span>(!<span class="reserved">this</span>.prevSelected.config.parentNode.isRootNode){
+						<span class="reserved">this</span>.prevSelected.config.parentNode.select();
+					}
+				}
+	    
+				break;
+			case 63235: <span class="comment">//right arrow in Safari</span>
+			case 39: <span class="comment">// right arrow</span>
+				<span class="reserved">if</span>(!<span class="reserved">this</span>.prevSelected.data.isExpanded){
+					<span class="reserved">this</span>.prevSelected.expand();
+				} <span class="reserved">else</span> {
+					<span class="reserved">if</span>(<span class="reserved">this</span>.prevSelected.children != null &amp;&amp; <span class="reserved">this</span>.prevSelected.children.length &gt; 0){
+						<span class="reserved">this</span>.prevSelected.children[0].select();
+					}
+				}
+				break;
+			case 63232: <span class="comment">//up arrow in Safari</span>
+			case 38: <span class="comment">// up arrow</span>
+				var prevNode = Zapatec.Tree.Utils.getPrevNode(<span class="reserved">this</span>.prevSelected);
+	    
+				<span class="reserved">if</span>(prevNode){
+					prevNode.select();
+					Zapatec.Utils.stopEvent(evt);
+				}
+	    
+				break;
+			case 63233: <span class="comment">//down arrow in Safari</span>
+			case 40: <span class="comment">// down arrow</span>
+				var nextNode = Zapatec.Tree.Utils.getNextNode(<span class="reserved">this</span>.prevSelected);
+	    
+				<span class="reserved">if</span>(nextNode){
+					nextNode.select();
+					Zapatec.Utils.stopEvent(evt);
+				}
+	    
+				break;
+		}
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.editable &amp;&amp; <span class="reserved">this</span>.editInline.selectedNode){
+		<span class="reserved">if</span>(res.charCode == 9){ <span class="comment">// tab key</span>
+			var otherNode = null;
+    
+			<span class="comment">// if tree is editable and currently some node is editing</span>
+			<span class="reserved">if</span>(evt.shiftKey){
+				otherNode = Zapatec.Tree.Utils.getPrevNode(<span class="reserved">this</span>.editInline.selectedNode);
+			} <span class="reserved">else</span> {
+				otherNode = Zapatec.Tree.Utils.getNextNode(<span class="reserved">this</span>.editInline.selectedNode);
+			}
+			
+			<span class="reserved">if</span>(otherNode){
+				<span class="reserved">this</span>.editInline.saveAndHide();
+				otherNode.select();
+				<span class="reserved">this</span>.editInline.show(otherNode.getLinkToLabelElement());
+        
+				Zapatec.Utils.stopEvent(evt);
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Leave tree.
+ */</span>
+Zapatec.Tree.<span class="reserved">prototype</span>.leave = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.prevSelected &amp;&amp; <span class="reserved">this</span>.config.deselectOnLeave){
+		<span class="reserved">this</span>.prevSelected.deselect();
+	}
+	
+	<span class="reserved">this</span>.isActive = false;
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"leave"</span>);
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Tree</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:20:00 2009</div>
+</body>
+</html>

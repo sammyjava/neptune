@@ -1,0 +1,5 @@
+<%@ include file="/WEB-INF/custom/pagetitle.jhtml" %>
+<% if (!customPagetitle) { %>
+<!-- page title -->
+<% if (p.title!=null) { %><div id="pagetitle"><%=p.title%></div><% } %>
+<% } %>

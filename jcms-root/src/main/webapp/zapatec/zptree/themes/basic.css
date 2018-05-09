@@ -1,0 +1,147 @@
+/* $Id: basic.css 9279 2007-12-21 09:38:24Z andrew $ */
+
+/* Overall the background and layoutfor the tree */
+.zpTreeBasicContainer {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  background-color:#6EA4C5;
+}
+
+/* Hrefs in a tree item */
+.zpTreeBasicContainer div.tree-item {
+  background: transparent url("img/dot.gif") no-repeat 1px 50%;
+}
+
+/* General setting of the tree */
+.zpTreeBasicContainer .tree, 
+.zpTreeBasicContainer .tree-item table.tree-table { 
+  font: 11px tahoma,verdana,sans-serif; 
+}
+
+.zpTreeBasicContainer .tree-item-more {
+  padding-left: 1px;
+}
+
+/* ie 6-7 fix of elements floating */
+* html .zpTreeBasicContainer div.tree-item { height:12px; }
+* html .zpTreeBasicContainer div.tree-item table.tree-table { float:left; clear:both;  } 
+*:first-child+html .zpTreeBasicContainer div.tree-item { height:12px; }
+*:first-child+html .zpTreeBasicContainer div.tree-item table.tree-table { float:left; clear:both;  } 
+/* end of fix */
+
+.zpTreeBasicContainer .tree-item .label { 
+  cursor: pointer; 
+  cursor: hand;
+}
+
+.zpTreeBasicContainer .tree-item table.tree-table td.label{ 
+  padding: 0 2px; 
+}
+
+.zpTreeBasicContainer .tree-item .tgb {
+  width: 9px; 
+  height: 9px; 
+  vertical-align:middle; 
+  cursor: default;
+}
+
+.zpTreeBasicContainer .tree-item .icon { 
+  cursor: pointer; 
+  cursor: hand;
+  width: 18px; 
+  height: 18px; 
+  text-align: center; 
+  vertical-align: middle; 
+}
+
+.zpTreeBasicContainer .tree-item-selected table.tree-table td.label { 
+  background-color: #8DD1FB; 
+  color: #000;
+} 
+
+.zpTreeBasicContainer div.tree-item, 
+.zpTreeBasicContainer div.tree-item:hover {
+  cursor:pointer;
+  cursor: hand;
+  margin-bottom: 1px;
+  padding:2px;
+  text-align:center;
+  font-weight:bold;
+  color:#DDDDDD;
+}
+
+.zpTreeBasicContainer div.tree-item a{
+  text-decoration:none;
+}
+
+.zpTreeBasicContainer div.tree-item:hover {
+  background-color:#8DD1FB;
+}
+
+.zpTreeBasicContainer div.tree-item-expanded, 
+.zpTreeBasicContainer div.tree-item-expanded:hover, 
+.zpTreeBasicContainer div.tree-item-collapsed, 
+.zpTreeBasicContainer div.tree-item-collapsed:hover {
+  cursor:pointer;
+  cursor: hand;
+  margin-bottom: 1px;
+  padding-left: 1px;
+  padding:2px;
+  text-align:center;
+  font-weight:bold;
+  font-size:140%;
+  color:#DDDDDD;
+}
+
+.zpTreeBasicContainer div.tree-item-expanded div.tree-item-collapsed{
+  background-color:#6EA4C5;
+}
+
+/* "expanded" folder */
+.zpTreeBasicContainer div.tree-item-expanded:hover {
+  background-color:#89CCF5;
+}
+
+/* "closed" folder */
+.zpTreeBasicContainer div.tree-item-collapsed:hover {
+  background-color:#89CCF5;
+}
+
+/* Makes an indent for each subtree */
+.zpTreeBasicContainer .tree {
+  padding-left: 10px;
+}
+
+/* the area of the tree that is expanded */
+.zpTreeBasicContainer .tree-lined {
+  background-color:#7EBBE0;
+}
+
+.zpTreeBasicContainer .menutitle,
+.zpTreeBasicContainer .submenu{
+  text-indent:10px;
+
+}
+
+.zpTreeBasicContainer .checkboxContainer {
+  cursor: pointer; 
+  cursor: hand;
+  width: 12px; 
+  height: 12px; 
+  text-align: center; 
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: 1px 50%;
+}
+
+.zpTreeBasicContainer .checkboxChecked {
+	background-image: url(img/checkbox_checked.png);
+}
+
+.zpTreeBasicContainer .checkboxUnchecked {
+	background-image: url(img/checkbox_unchecked.png);
+}
+
+.zpTreeBasicContainer .checkboxHalfChecked {
+	background-image: url(img/checkbox_halfchecked.png);
+}

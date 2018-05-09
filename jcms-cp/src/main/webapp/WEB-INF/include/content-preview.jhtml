@@ -1,0 +1,30 @@
+<%
+  // layout_id and pane must be set before this is included
+  //
+  String layoutClass = "l"+layout_id;
+  String paneClass = "l"+layout_id+"_p"+pane;
+%>
+
+<% if (content.moduleurl!=null && content.moduleabove) { %>
+<div align="center"><b><%=content.modulecontext%><%=content.moduleurl%></b></div>
+<hr/>
+<% } %>
+
+<div style="border:1px solid gray">
+<table id="main" cellspacing="0">
+  <tr>
+    <td id="main-right" valign="top">
+      <table id="<%=layoutClass%>" cellspacing="0">
+        <tr>
+          <td id="<%=paneClass%>"><%=Util.blankIfNull(content.copy)%></td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  </table>
+</div>
+
+<% if (content.moduleurl!=null && !content.moduleabove) { %>
+<hr/>
+<div align="center"><b><%=content.modulecontext%><%=content.moduleurl%></b></div>
+<% } %>

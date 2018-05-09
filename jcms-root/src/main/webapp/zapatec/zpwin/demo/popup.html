@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 		Trigger element -- This can be a DIV, an HREF (link), a button or another HTML element.  		Alignment -- You can control where the popup appears  relative to the triggering element. 		Trigger event -- These are standard DOM events such as click, mouseover and mouseup.  		Popup elements -- Since popups are standard windows, you can choose to include or exclude the standard minimize, 			maximize, close and resize elements. If you choose not to include a close button, 			you will need to provide a different way for the user to close the popup.  ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Window Widget - Popup Windows Example</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/window.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+		<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+		<link href="../../zpextra/themes/indicator/default.css" rel="stylesheet" type="text/css">
+		<script type="text/javascript" src="../../utils/indicator.js"></script>
+
+		<style type="text/css">
+			.zpScroll {
+				height:8em;
+				width:100%;
+				overflow: auto;
+			}
+		</style>
+
+		<script type='text/javascript'>
+		function zpLoad() {
+			Zapatec.Window.setup({
+				width:150, 
+				height: 120,
+				content : "<span>Trigger element is button</span>",
+				popup : "Button1"
+			});
+			Zapatec.Window.setup({
+				width:150, 
+				height: 120,
+				content : "<span>Trigger element is a link</span>",
+				popup : "Refference1",
+				align : "TR"
+			});
+			Zapatec.Window.setup({
+				width:150, 
+				height: 120,
+				content : "<span>Trigger element is div</span>",
+				popup : "Div1",
+				align : "CC",
+				showMaxButton : false, 
+				showMinButton : false,
+				showCloseButton : true,
+				canResize : false,
+			  	showStatus : false,
+				triggerEvent : "mouseover"
+			});
+		}
+		</script>
+
+
+</head>
+<body onload="zpLoad();">	<div class='zpCalSubHeader' style='text-align:center;'>Popup Windows Example</div>
+
+	This example shows several popup windows that use different options.<br/>
+	Notice that you can control:
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+		<li>Trigger element -- This can be a DIV, an HREF (link), a button or another HTML element. </li>
+		<li>Alignment -- You can control where the popup appears  relative to the triggering element.</li>
+		<li>Trigger event -- These are standard DOM events such as click, mouseover and mouseup. </li>
+		<li>Popup elements -- Since popups are standard windows, you can choose to include or exclude the standard minimize,
+			maximize, close and resize elements. If you choose not to include a close button,
+			you will need to provide a different way for the user to close the popup. </li>
+
+			</ul>
+		</div>
+
+
+
+				<br/>
+			<button id="Button1">Show the popup under </button><br/><br/>
+			<a href="#" id="Refference1">Popup with different alignment</a> <br/><br/>
+			<div style="border : solid 3px blue; width : 300px; text-align : center; font-family : Verdana; font-size : 21px;" id="Div1">Mouseover popup</div>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Window Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

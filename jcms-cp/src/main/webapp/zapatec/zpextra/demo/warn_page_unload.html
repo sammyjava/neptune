@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Catch page leaving or reload</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Catch page leaving or reload</div>
+
+
+
+You can use this feature to warn a user who indicates readiness to leave the current page by clicking a link or using javascript that there are still  unsaved changes on the page. <br />
+<p style="color: red">Opera does not support this feature.</p>
+Just use <i>Zapatec.Utils.warnUnload('your message')</i> to setup message. Use <i>Zapatec.Utils.unwarnUnload()</i> to remove warning call.<br />
+
+<input name="test" id="turn_on_warning" type="radio" onchange="Zapatec.Utils.warnUnload('Your message will be displayed here.')" checked="checked" /> Turn on warning<br />
+<input name="test" id="turn_off_warning" type="radio" onchange="Zapatec.Utils.unwarnUnload()"> Turn off warning<br />
+
+<a href="http://www.zapatec.com/">Link to leave page</a><br />
+<script type="text/javascript">
+Zapatec.Utils.warnUnload('Your message will be displayed here.');
+
+if(Zapatec.is_opera){
+	alert("Sorry, this example won't work in Opera.");
+}
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

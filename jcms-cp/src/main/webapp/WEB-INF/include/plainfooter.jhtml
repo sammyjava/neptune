@@ -1,0 +1,7 @@
+    <% if (debug && debugMessage.length()>0) { %>
+    <p class="debug">DEBUG: <%=debugMessage%></p>
+    <% } %>
+
+  </body>
+</html>
+

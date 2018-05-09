@@ -1,0 +1,637 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="demo.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>demo.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		<pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/DemoExplorer.html">Zapatec.DemoExplorer</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> 
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: demo.js 15736 2009-02-06 15:29:25Z nikolai $ */</span>
+
+<span class="comment">/**
+ * Demo explorer widget class.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@extends</span> Zapatec.Widget
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.DemoExplorer = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Call constructor of superclass</span>
+	Zapatec.DemoExplorer.SUPERconstructor.call(<span class="reserved">this</span>, oArg);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for
+ * {<span class="attrib">@link</span> Zapatec#inherit} to determine and store path to this file correctly
+ * when it is included using {<span class="attrib">@link</span> Zapatec#include}. When this file is included
+ * using {<span class="attrib">@link</span> Zapatec#include} or path to this file is obtained using
+ * {<span class="attrib">@link</span> Zapatec#getPath}, this value must be specified as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.DemoExplorer.id = <span class="literal">'Zapatec.DemoExplorer'</span>;
+Zapatec.DemoExplorer.demoData = {};
+
+<span class="comment">// Inherit Widget</span>
+Zapatec.inherit(Zapatec.DemoExplorer, Zapatec.Widget);
+
+<span class="comment">/**
+ * Configures the widget. Gets called from init and reconfigure methods of
+ * superclass.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.DemoExplorer.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(oArg) {
+    <span class="reserved">this</span>.defineConfigOption(<span class="literal">"currentWidget"</span>);
+    <span class="reserved">this</span>.defineConfigOption(<span class="literal">"showFirstDemo"</span>, false);
+	<span class="comment">// Call parent method</span>
+	Zapatec.DemoExplorer.SUPERclass.configure.call(<span class="reserved">this</span>, oArg);
+};
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.DemoExplorer.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">this</span>.currentDemo = {};
+	<span class="reserved">this</span>.tabsObj = null;
+	<span class="reserved">this</span>.treeObj = null;
+    <span class="reserved">this</span>.htmlTab = null;
+    <span class="reserved">this</span>.cssTab = null;
+
+	<span class="comment">// Call init method of superclass</span>
+	Zapatec.DemoExplorer.SUPERclass.init.call(<span class="reserved">this</span>, oArg);
+
+	var self = <span class="reserved">this</span>;
+
+	<span class="comment">// HTML elements for displaying CSS and HTML sources</span>
+    <span class="reserved">this</span>.htmlTab = document.getElementById(<span class="literal">"html_source"</span>);
+    <span class="reserved">this</span>.cssTab = document.getElementById(<span class="literal">"css_source"</span>);
+
+    <span class="comment">// Create a new demo|css|html tabs widget instance</span>
+    <span class="reserved">this</span>.objTabs = new Zapatec.Tabs({
+        tabBar : <span class="literal">"tabBar"</span>,
+        tabs : <span class="literal">"tabs"</span>,
+        source: {
+			tabs : [
+				{
+					id : <span class="literal">"demo"</span>,
+					linkInnerHTML : <span class="literal">"Demo"</span>,
+					title : <span class="literal">"demo"</span>,
+					tabType : <span class="literal">"iframe"</span>
+				},
+				{
+					id : <span class="literal">"html"</span>,
+					linkInnerHTML : <span class="literal">"HTML"</span>,
+					title : <span class="literal">"HTML part of the demo."</span>,
+					content : document.getElementById(<span class="literal">"html_source"</span>),
+					tabType : <span class="literal">"div"</span>
+				},
+				{
+					id : <span class="literal">"css"</span>,
+					linkInnerHTML : <span class="literal">"CSS"</span>,
+					title : <span class="literal">"CSS part of the demo."</span>,
+					content : document.getElementById(<span class="literal">"css_source"</span>),
+					tabType : <span class="literal">"div"</span>
+				}
+			]
+		},
+        sourceType : <span class="literal">"json"</span>,
+        themePath : Zapatec.zapatecPath + <span class="literal">'/dhelp/themes/'</span>,
+        changeUrl : false,
+        theme: <span class="literal">'default'</span>,
+        ignoreUrl: true,
+        onTabChange: <span class="reserved">function</span>(oCfg){
+        	<span class="reserved">if</span>(oCfg.newTabId == <span class="literal">'demo'</span>){
+        		self.setDemoPaneHeight();
+        	}
+        }
+    });
+    
+    <span class="comment">// get information about demo from URL</span>
+	var tmp = Zapatec.DemoExplorer.extractDataFromURL();
+
+	<span class="reserved">if</span>(tmp){
+	    <span class="comment">// backward compatibility - if no data about widget in URL - use this.config.currentWidget</span>
+		<span class="reserved">if</span>(!tmp.widget){
+			tmp.widget = <span class="reserved">this</span>.config.currentWidget;
+		}
+
+		<span class="reserved">this</span>.changeDemo(tmp.demo, tmp.widget);
+	}
+
+	<span class="comment">// create navigation tree</span>
+	<span class="reserved">this</span>.navTree = new Zapatec.Tree({
+        <span class="literal">'tree'</span>: <span class="literal">"tree"</span>,
+        <span class="literal">'expandOnLabelClick'</span>: true,
+        <span class="literal">'expandOnLabel'</span>: true,
+        <span class="literal">'theme'</span>: <span class="literal">'demos'</span>,
+        <span class="literal">'highlightSelectedNode'</span>: true,
+        <span class="literal">'eventListeners'</span>: {
+            <span class="literal">'select'</span>: <span class="reserved">function</span>() {
+                <span class="reserved">if</span> (
+                	<span class="reserved">this</span>.data &amp;&amp; 
+                	<span class="reserved">this</span>.data.attributes &amp;&amp; 
+                	<span class="reserved">this</span>.data.attributes.demo &amp;&amp; 
+                	(
+						<span class="reserved">this</span>.data.attributes.demo != self.currentDemo.demo ||
+						<span class="reserved">this</span>.data.attributes.demo == self.currentDemo.demo &amp;&amp;
+	    	            <span class="reserved">this</span>.data.attributes.widget != self.currentDemo.widget
+                	)
+                ){
+                	<span class="comment">// show corresponding demo on screen when clicking on tree nodes</span>
+                    self.changeDemo(<span class="reserved">this</span>.data.attributes.demo, <span class="reserved">this</span>.data.attributes.widget);
+                }
+            },
+            <span class="literal">"loadDataEnd"</span>: <span class="reserved">function</span>(){
+           		<span class="reserved">if</span>(
+           		    <span class="comment">// if we need to show some demo on start and current node is demo node - show this demo.</span>
+           		    self.config.showFirstDemo &amp;&amp;
+           			!self.currentDemo.demo &amp;&amp;
+           			!self.currentDemo.widget &amp;&amp;
+           			<span class="reserved">this</span>.data &amp;&amp; 
+           			<span class="reserved">this</span>.data.attributes &amp;&amp; 
+           			<span class="reserved">this</span>.data.attributes.demo ||
+           			<span class="comment">// or if this node is node that is shown - show it.</span>
+           			<span class="reserved">this</span>.data &amp;&amp; 
+           			<span class="reserved">this</span>.data.attributes &amp;&amp; 
+           			<span class="reserved">this</span>.data.attributes.demo &amp;&amp;
+           			self.currentDemo.widget &amp;&amp;
+           			self.currentDemo.demo &amp;&amp;
+           			<span class="reserved">this</span>.data.attributes.widget == self.currentDemo.widget &amp;&amp;
+           			<span class="reserved">this</span>.data.attributes.demo == self.currentDemo.demo &amp;&amp;
+           			!(
+           				<span class="reserved">this</span>.config.tree.prevSelected &amp;&amp;
+           				<span class="reserved">this</span>.config.tree.prevSelected.data &amp;&amp;
+           				<span class="reserved">this</span>.config.tree.prevSelected.data.attributes &amp;&amp;
+           				<span class="reserved">this</span>.config.tree.prevSelected.data.attributes.widget == self.currentDemo.widget &amp;&amp;
+           				<span class="reserved">this</span>.config.tree.prevSelected.data.attributes.demo == self.currentDemo.demo
+           			)
+           		){
+           			<span class="comment">// select current node if it is shown on screen</span>
+           			<span class="reserved">this</span>.sync();
+				}
+            }
+        }
+	});
+
+	<span class="comment">// for each entry in demoData array display data in navigation tree</span>
+	<span class="reserved">for</span>(var widgetName in Zapatec.DemoExplorer.demoData){
+		var demoBranch = <span class="reserved">this</span>.navTree.getNode(widgetName);
+
+		<span class="reserved">if</span>(!demoBranch){
+			continue;
+		}
+
+		Zapatec.DemoExplorer.assignWidget(Zapatec.DemoExplorer.demoData[widgetName].data, widgetName);
+
+		<span class="reserved">for</span>(var ii = 0; ii &lt; Zapatec.DemoExplorer.demoData[widgetName].data.children.length; ii++){
+			demoBranch.appendChild(Zapatec.DemoExplorer.demoData[widgetName].data.children[ii]);
+		}
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Set correct height for content pane
+ */</span>
+Zapatec.DemoExplorer.<span class="reserved">prototype</span>.setDemoPaneHeight = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.objTabs){
+		<span class="reserved">return</span>;
+	}
+
+	var demoTab = <span class="reserved">this</span>.objTabs.tabs[<span class="literal">"demo"</span>];
+
+	demoTab.container.fireWhenReady(<span class="reserved">function</span>(pane) {
+		var height = 0;
+		
+		var doc = <span class="reserved">this</span>.iframeDocument;
+		
+		<span class="reserved">if</span> (!doc) {
+			<span class="reserved">return</span> null;
+		}
+		try{
+			<span class="reserved">if</span> (doc.compatMode &amp;&amp; doc.compatMode == <span class="literal">'CSS1Compat'</span>) {
+				height = doc.documentElement.scrollHeight || doc.documentElement.offsetHeight;
+			} <span class="reserved">else</span> {
+				height = doc.body.scrollHeight || doc.documentElement.scrollHeight;
+			}
+    	} catch(e){}
+
+		<span class="reserved">if</span>(height &lt; 700){
+			height = 700;
+		}
+
+		<span class="reserved">this</span>.getContainer().style.height = (height + 30) + <span class="literal">"px"</span>;
+	});
+
+	demoTab.container.getContainer().style.overflow = <span class="literal">'auto'</span>;
+}
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Get demo details. Return object of following structure:
+ *	widgetLiteralName - widget name
+ *	title - demo title
+ *	baseUrl - link to widget directory
+ *	demoUrl - link to demo file
+ *	themes - array of theme
+ *		url - theme url
+ *		theme - theme name
+ */</span>
+Zapatec.DemoExplorer.<span class="reserved">prototype</span>.getDemoData = <span class="reserved">function</span>(demo, widget){
+	var allDemos = Zapatec.DemoExplorer.demoData[widget];
+	<span class="reserved">if</span>(!allDemos){
+		<span class="reserved">return</span> null;
+	}
+				
+	var demoData = Zapatec.DemoExplorer.findDemo(demo, allDemos.data.children);
+
+	<span class="reserved">if</span>(!demoData){
+		<span class="reserved">return</span> null;
+	}
+
+	var res = {
+		widgetLiteralName: Zapatec.DemoExplorer.demoData[widget].name,
+		title: demoData.label,
+		baseUrl: Zapatec.zapatecPath + <span class="literal">"../"</span> + widget + <span class="literal">"/"</span>,
+		demoUrl: Zapatec.zapatecPath + <span class="literal">"../"</span> + widget + <span class="literal">"/demo/"</span> + demo,
+		themes: []
+	};
+
+	<span class="reserved">if</span>(demoData.attributes.themes){
+		<span class="reserved">for</span>(var ii = 0; ii &lt; demoData.attributes.themes.length; ii++){
+			res.themes.push({
+				url: Zapatec.zapatecPath + <span class="literal">"../"</span> + widget + <span class="literal">"/themes/"</span> + demoData.attributes.themes[ii] + <span class="literal">".css"</span>,
+				theme: demoData.attributes.themes[ii]
+			});
+		}
+	}
+	<span class="reserved">return</span> res;
+}
+
+<span class="comment">/**
+ * Show demo for given widget and demo name.
+ */</span>
+Zapatec.DemoExplorer.<span class="reserved">prototype</span>.changeDemo = <span class="reserved">function</span>(demo, widget){
+    <span class="reserved">if</span>(!widget){
+    	widget = <span class="reserved">this</span>.config.currentWidget;
+    }
+
+	<span class="reserved">if</span>(!widget || !demo){
+		alert(<span class="literal">"No widget!"</span>);
+	}
+
+	var demoData = <span class="reserved">this</span>.getDemoData(demo, widget);
+
+	<span class="reserved">if</span>(!demoData){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">this</span>.currentDemo = {
+		demo: demo,
+		widget: widget
+	};
+
+	var rightSide = document.getElementById(<span class="literal">"rightSide"</span>);
+	
+	<span class="reserved">if</span>(rightSide){
+		rightSide.style.display = <span class="literal">"none"</span>;
+	}
+
+	document.getElementById(<span class="literal">"tabs_content"</span>).style.display = <span class="literal">"block"</span>;
+	
+	<span class="comment">// put reference to demo into URL</span>
+	Zapatec.DemoExplorer.writeDataIntoURL(demo, widget);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.navTree){
+		var treeNode = <span class="reserved">this</span>.navTree.find(<span class="reserved">function</span>(node){<span class="reserved">return</span> node.data &amp;&amp; node.data.attributes &amp;&amp; node.data.attributes.demo == demo;});
+
+		<span class="reserved">if</span>(treeNode){
+			treeNode.sync();
+		}
+	}
+
+	<span class="comment">// fix pane height</span>
+	<span class="reserved">this</span>.setDemoPaneHeight();
+
+	<span class="comment">// set document title</span>
+	document.title = <span class="literal">"AJAX "</span> + demoData.widgetLiteralName + <span class="literal">" - "</span> + demoData.title;
+
+	var res = [];
+
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">this</span>.cssTab.value = <span class="literal">""</span>;
+	<span class="reserved">this</span>.htmlTab.value = <span class="literal">""</span>;
+	
+	<span class="comment">// load themes</span>
+	<span class="reserved">for</span>(var ii = 0; ii &lt; demoData.themes.length; ii++){
+		<span class="reserved">if</span> (demoData.themes[ii].theme == <span class="literal">'none'</span>) {
+			<span class="reserved">this</span>.cssTab.value = <span class="literal">"There is no theme for this demo"</span>;
+			break;
+		}
+
+		Zapatec.DemoExplorer.loadTheme(<span class="reserved">this</span>.cssTab, demoData.themes[ii].theme, demoData.themes[ii].url);
+	}
+
+	<span class="comment">// load HTML source</span>
+	Zapatec.Transport.fetch({
+		url : demoData.demoUrl + (Zapatec.is_opera ? <span class="literal">"?"</span> : <span class="literal">""</span>),
+		onLoad : <span class="reserved">function</span>(response) {
+			self.htmlTab.value = response.responseText;
+		},
+		onError : <span class="reserved">function</span>(error) {
+			alert(error.errorDescription);
+		}
+	});
+
+	<span class="comment">// show demo inside content pane</span>
+	<span class="reserved">this</span>.objTabs.tabs[<span class="literal">"demo"</span>].container.setPaneContent(demoData.demoUrl, <span class="literal">"html/url"</span>);
+}
+
+<span class="comment">/**
+ * Extract demo details from URL.
+ * url must be following: demo.jsp#widget/demo.html or just demo.jsp#demo.html - in this case this.config.currentWidget will be used.
+ */</span>
+Zapatec.DemoExplorer.extractDataFromURL = <span class="reserved">function</span>(){
+    var hash = document.location.hash.slice(1);
+
+    <span class="reserved">if</span>(!hash || hash.length == 0){
+    	<span class="reserved">return</span> null;
+    }
+
+    var tmp = hash.split(<span class="literal">"/"</span>, 2);
+
+	<span class="reserved">if</span>(tmp.length == 2){
+		<span class="reserved">return</span> {
+			widget: tmp[0],
+			demo: tmp[1]
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> {
+			widget: null,
+			demo: hash
+		}
+	}
+}
+
+<span class="comment">/**
+ * Save information about widget and demo into URL.
+ */</span>
+Zapatec.DemoExplorer.writeDataIntoURL = <span class="reserved">function</span>(demo, widget){
+    var hash;
+    
+	<span class="reserved">if</span> (widget) {
+		hash = widget + <span class="literal">"/"</span>;
+	} 
+	
+	hash += demo;
+		
+	document.location.href = document.location.href.substring(0, document.location.href.length - document.location.hash.length) + <span class="literal">'#'</span> + hash;
+}
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * find demo with given name in given array
+ */</span>
+Zapatec.DemoExplorer.findDemo = <span class="reserved">function</span>(demo, children){
+	<span class="reserved">if</span>(!demo || !children){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; children.length; ii++){
+		var currDemo = children[ii];
+
+		<span class="reserved">if</span>(currDemo.attributes &amp;&amp; currDemo.attributes.demo &amp;&amp; currDemo.attributes.demo == demo){
+			<span class="reserved">return</span> currDemo;
+		}
+
+		<span class="reserved">if</span>(currDemo.children){
+			var newDemo = Zapatec.DemoExplorer.findDemo(demo, currDemo.children);
+
+			<span class="reserved">if</span>(newDemo){
+				<span class="reserved">return</span> newDemo;
+			}
+		}
+	}
+
+	<span class="reserved">return</span> null;
+}
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Fetch given theme and put its content to textarea
+ */</span>
+Zapatec.DemoExplorer.loadTheme = <span class="reserved">function</span>(textarea, theme, url){
+	Zapatec.Transport.fetch({
+		url : url,
+		onLoad : <span class="reserved">function</span>(response) {
+			textarea.value += <span class="literal">"/* "</span> + theme + <span class="literal">" */\n"</span> + response.responseText + <span class="literal">"\n"</span>;
+		},
+		onError : <span class="reserved">function</span>(error) {
+			alert(error.errorDescription);
+		}
+	});
+}
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * add "widget" property to every demo
+ */</span>
+Zapatec.DemoExplorer.assignWidget = <span class="reserved">function</span>(node, widget){
+	<span class="reserved">if</span>(node){
+		<span class="reserved">if</span>(!node.attributes){
+			node.attributes = {};
+		}
+		
+		node.attributes.widget = widget;
+	}
+
+	<span class="reserved">if</span>(node.children){
+		<span class="reserved">for</span>(var ii = 0; ii &lt; node.children.length; ii++){
+		 	Zapatec.DemoExplorer.assignWidget(node.children[ii], widget);
+		}
+	}
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

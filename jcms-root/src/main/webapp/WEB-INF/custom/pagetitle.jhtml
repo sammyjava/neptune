@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom pagetitle, set customPagetitle=true and put code here.
+ */
+  boolean customPagetitle = false;
+%>

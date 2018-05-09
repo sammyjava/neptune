@@ -1,0 +1,143 @@
+    <p>
+      <%=payment.instructions%>
+    </p>
+
+    <% if (error.length()>0) { %><div class="error"><%=error%></div><% } %>
+
+    <form method="post">
+    
+      <h3 <% if (missing.contains("paymentoption_id")) out.print("class=\"error\""); %>><%=Setting.getString(application,"payments_optionsheading")%></h3>
+      <table class="payments" cellspacing="0">
+	<% for (int i=0; i<paymentOptions.length; i++) { %>
+	  <tr>
+	    <td class="payment-option"><input type="radio" name="paymentoption_id" <% if (paymentOption.equals(paymentOptions[i])) out.print("checked"); %> value="<%=paymentOptions[i].paymentoption_id%>"/></td>
+	    <% if (paymentOptions[i].amount==0.00) { %>
+	    <% if (paymentOption.equals(paymentOptions[i])) { %>
+	    <td class="payment-amount"><input type="text" size="7" name="amount_<%=paymentOptions[i].paymentoption_id%>" value="<%=mf.format(amount)%>"/></td>
+	    <% } else { %>
+	    <td class="payment-amount"><input type="text" size="7" name="amount_<%=paymentOptions[i].paymentoption_id%>" value=""/></td>
+	    <% } %>
+	    <% } else { %>
+	    <td class="payment-amount"><%=mf.format(paymentOptions[i].amount)%></td>
+	    <% } %>
+	    <td class="payment-description">
+	      <span class="payment-name"><%=paymentOptions[i].name%></span><br/>
+	      <%=Util.blankIfNull(paymentOptions[i].description)%>
+	    </td>
+	  </tr>
+	  <% } %>
+      </table>
+  
+
+      <h3><%=Setting.getString(application,"payments_contactheading")%></h3>
+      <p>
+	If you are paying with a credit card, this should match your credit card billing contact information.
+      </p>
+      
+      <table class="form" cellspacing="0">
+	<tr>
+	  <td class="required<% if (missing.contains("firstname")) out.print(" error"); %>">
+	    First Name<br/>
+	    <input type="text" size="16" name="firstname" value="<%=firstname%>"/>
+	  </td>
+	  <td colspan="2" class="required<% if (missing.contains("lastname")) out.print(" error"); %>">
+	    Last Name<br/>
+	    <input type="text" size="16" name="lastname" value="<%=lastname%>"/>
+	  </td>
+	</tr>
+	<tr>
+	  <td colspan="3" class="required<% if (missing.contains("street")) out.print(" error"); %>">
+	    Street<br/>
+	    <input type="text" size="48" name="street" value="<%=street%>"/>
+	  </td>
+	</tr>
+	<tr>
+	  <td class="required<% if (missing.contains("city")) out.print(" error"); %>">
+	    City<br/>
+	    <input type="text" size="16" maxlength="16" name="city" value="<%=city%>"/>
+	  </td>
+	  <td class="required<% if (missing.contains("state")) out.print(" error"); %>">
+	    State/Province<br/>
+	    <select name="state">
+	      <option value="">--</option>
+	    <% for (int i=0; i<PayPal.states.length; i++) { %>
+	      <option <% if (state.equals(PayPal.states[i])) out.print("selected"); %> value="<%=PayPal.states[i]%>"><%=PayPal.states[i]%></option>
+	      <% } %>
+	      <% for (int i=0; i<PayPal.provinces.length; i++) { %>
+		<option <% if (state.equals(PayPal.provinces[i])) out.print("selected"); %> value="<%=PayPal.provinces[i]%>"><%=PayPal.provinces[i]%></option>
+		<% } %>
+	    </select>
+	  </td>
+	  <td class="required<% if (missing.contains("zip")) out.print(" error"); %>">Zip<br/><input type="text" name="zip" value="<%=zip%>" size="10" maxlength="10"/></td>
+	</tr>
+	<tr>
+	  <td class="required<% if (missing.contains("phone")) out.print(" error"); %>">Phone Number<br/><input type="text" name="phone" value="<%=phone%>" size="14" maxlength="12"/></td>
+	  <td class="required<% if (missing.contains("email")) out.print(" error"); %>" colspan="2">E-mail Address<br/><input type="text" name="email" value="<%=email%>" size="24"/></td>
+	</tr>
+	<tr>
+	  <td colspan="3" class="optional">
+	    Comments<br/>
+	    <textarea name="comments" rows="4" cols="60"><%=comments%></textarea>
+	  </td>
+	</tr>
+      </table>
+
+
+      <h3><%=Setting.getString(application,"payments_paypalheading")%></h3>
+      <input type="image" name="expresscheckout" value="true" src="https://www.paypalobjects.com/en_US/i/btn/btn_xpressCheckout.gif" />
+  
+      <h3><%=Setting.getString(application,"payments_creditcardheading")%></h3>
+      <table class="creditcard" cellspacing="0">
+	<tr>
+	  <td class="creditcard required<% if (missing.contains("cardtype")) out.print(" error"); %>" align="right">Credit Card Type:</td>
+	  <td>
+	    <select name="cardtype">
+	      <option <% if (cardtype.equals("Visa")) out.print("selected"); %> value="Visa"/>Visa</option>
+	      <option <% if (cardtype.equals("MasterCard")) out.print("selected"); %> value="MasterCard"/>MasterCard</option>
+	      <option <% if (cardtype.equals("Discover")) out.print("selected"); %> value="Discover"/>Discover</option>
+	      <option <% if (cardtype.equals("Amex")) out.print("selected"); %> value="Amex"/>American Express</option>
+	    </select>
+	  </td>
+	</tr>
+	<tr>
+	  <td class="creditcard required<% if (missing.contains("cardname")) out.print(" error"); %>" align="right">Name on Credit Card:</td>
+	  <td><input type="text" size="32" name="cardname" value="<%=cardname%>"/></td>
+	</tr>
+	<tr>
+	  <td class="creditcard required<% if (missing.contains("cardaccount")) out.print(" error"); %>" align="right">Credit Card Number:</td>
+	  <td><input type="text" size="18" maxlength="16" name="cardaccount" value="<%=cardaccount%>"/> (no spaces or hyphens)</td>
+	</tr>
+	<tr>
+	  <td class="creditcard required<% if (missing.contains("cardexpmonth") || missing.contains("cardexpyear")) out.print(" error"); %>" align="right">Credit Card Expiration:</td>
+	  <td>
+	    <% String[] months = { "01","02","03","04","05","06","07","08","09","10","11","12" }; %>
+	    <select name="cardexpmonth">
+	      <option value="">--</option>
+	    <% for (int i=0; i<months.length; i++) { %>
+	      <option <% if (cardexpmonth.equals(months[i])) out.print("selected"); %> value="<%=months[i]%>"><%=months[i]%></option>
+	      <% } %>
+	    </select>
+	      <% int currentYear = Calendar.getInstance().get(Calendar.YEAR); %>
+	      <select name="cardexpyear">
+		<option value="">----</option>
+	      <% for (int year=currentYear; year<currentYear+6; year++) { %>
+		<option <% if (cardexpyear.equals(""+year)) out.print("selected"); %> value="<%=year%>"><%=year%></option>
+		<% } %>
+	      </select>
+	  </td>
+	</tr>
+	<tr>
+	  <td class="creditcard required<% if (missing.contains("cardcvv2")) out.print(" error"); %>" align="right">Credit Card Security Code:</td>
+	  <td><input type="text" size="4" maxlength="4" name="cardcvv2" value="<%=cardcvv2%>"/> (3- or 4-digit code on back of card)</td>
+	</tr>
+	<tr>
+	  <td align="right">
+	    <% if (showNetSolSeal) { %><script language="JavaScript" type="text/javascript">SiteSeal("https://seal.networksolutions.com/images/basicsqgreen.gif", "NETSB", "none");</script><% } %>
+	  </td>
+	  <td><input type="image" src="<%=Setting.getString(application,"payments_creditcardbutton")%>" border="0" name="directpayment" value="true" /></td>
+	</tr>
+      </table>
+
+    </form>
+
+  </div>

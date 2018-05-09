@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" Setting editable config option to true you define that tree nodes can be edited. editOnClick and editOnDblclick config option defines whenever editing must start. By default - on element double click. When renaming node - 'rename' event is fired. It receives old value as first argument and new value as second argument. You can use zpTreeNodeObj.data.label to access node label or save state of whole Zapatec.Tree using zpTreeObj.saveState() method Also you need to add &lt;script type='text/javascript' src='zapatec/utils/edit_inline.js'&gt;&lt;/script&gt; to your page. You can finish node editing by pressing Ctrl+Enter Use Tab and Shift-Tab to switch bettwen the nodes while editing. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Editable tree</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<script type="text/javascript" src="../../utils/edit_inline.js"></script>
+	<link href="../themes/default.css" rel="stylesheet" type="text/css"> 
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Editable tree</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>Setting <i>editable</i> config option to true you define that tree nodes can be edited.</li>
+<li><i>editOnClick</i> and <i>editOnDblclick</i> config option defines whenever editing must start. By default - on element double click.</li>
+<li>When renaming node - "rename" event is fired. It receives old value as first argument and new value as second argument.</li>
+<li>You can use <b>zpTreeNodeObj.data.label</b> to access node label or save state of whole Zapatec.Tree using <b>zpTreeObj.saveState()</b> method</li>
+<li>Also you need to add <b>&lt;script type="text/javascript" src="zapatec/utils/edit_inline.js"&gt;&lt;/script&gt;</b> to your page.</li>
+<li>You can finish node editing by pressing <b>Ctrl+Enter</b></li>
+<li>Use <b>Tab</b> and <b>Shift-Tab</b> to switch bettwen the nodes while editing.</li>
+
+			</ul>
+		</div>
+
+
+
+<div id="container"></div>
+<br />
+<input type="button" onclick="alert(tree.getNode('games').data.label)" value="Show 'games' node content"/>
+<script type="text/javascript">
+	var source = [
+		{
+			label: "Games",
+			attributes: {
+				id: "games"
+			},
+			children: [
+				{
+					label: "Video Games",
+					children: [
+						{label: "PSP"},
+						{label: "X-Box"}
+					]
+				},
+				{
+					label: "RPG",
+					children: [
+						{label: "Gamebooks"},
+						{label: "Live Action"},
+						{label: "Tabletop"}
+					]
+				},
+				{
+					label: "Gambling",
+					children: [
+						{label: "Baccarat"},
+						{label: "Bingo"},
+						{label: "Roulette"}
+					]
+				}
+			]
+		},
+		{
+			label: "Computers",
+			children: [
+				{
+					label: "Computer Science",
+					children: [
+						{label: "Academic Departments"},
+						{label: "Artificial Intelligence"},
+						{label: "Research Institutes"},
+						{label: "Theoretical"}
+					]
+				},
+				{
+					label: "Internet",
+					children: [
+						{label: "Chat"},
+						{
+							label: "DHTML libraries",
+							children: [
+								{label: "Zapatec Suite"}
+							]
+						},
+						{label: "E-mail"}
+					]
+				},
+				{
+					label: "Security",
+					children: [
+						{label: "Authentification"},
+						{label: "Cryptography"},
+						{label: "Internet security"},
+						{label: "Secure Programming"}
+					]
+				}
+			]
+		},
+		{label: "Business"}
+	];
+
+	var tree = new Zapatec.Tree({
+		parent: "container",
+		source: source,
+		sourceType: "json",
+		expandOnLabelClick: false,
+		highlightSelectedNode: true,
+		editable: true	
+	});
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+/* $Id: outlook.css 11230 2008-05-01 12:39:56Z smaxim $ */
+.zpButtonOutlookContainer, .zpButtonImageOutlookContainer{
+  padding: 0;
+  border: 0;
+}
+
+.zpButtonImageOutlookContainer .internalContainer{
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+}
+
+.zpButtonOutlookContainer .internalContainer{
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  color:#2255AA;
+}
+
+.zpButtonOutlookContainer .internalContainer img{
+  border: 0;
+}
+
+.zpButtonOutlookContainer .disabled .internalContainer{
+  filter: Alpha(Opacity=70);
+  -moz-opacity: 0.70;
+  border: 1px solid #6392CE;
+  background:url(outlook/unpressed.png) repeat-x;
+  padding:3px 10px;
+}
+
+/*Mouseout img*/
+.zpButtonOutlookContainer .mouseOut .internalContainer{
+  background:url(outlook/unpressed.png) repeat-x;
+  border: 1px solid #6392CE;
+  height:24px;
+  padding:3px 10px;
+}
+
+/*Mouseover img*/
+.zpButtonOutlookContainer .mouseOver .internalContainer{
+  background:url(outlook/overed.png) repeat-x;
+  border: 1px solid #6392CE;
+  height:24px;
+  padding:3px 10px;      
+}
+
+/*Mousedown img*/
+.zpButtonOutlookContainer .mouseDown .internalContainer{
+  background:url(outlook/selected.png) repeat-x;
+  border: 1px solid #6392CE;
+  height:24px;
+  padding:3px 10px;
+}
+

@@ -1,0 +1,12 @@
+/* $Id: sample.css 7323 2007-06-01 21:05:51Z alex $ */
+/*
+	Sample CSS file.
+*/
+
+.sample {
+	background: url(sample1.jpg);
+	font: bold x-large arial;
+	color: #f00;
+	padding: 10px;
+	border: 2px dashed #0f0;
+}

@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom breadcrumbs, set customBreadcrumbs=true and put code here.
+ */
+  boolean customBreadcrumbs = false;
+%>

@@ -1,0 +1,187 @@
+/* $Id: default.css 7091 2007-05-08 21:29:19Z vkulov $ */
+.zpEditorDefaultToolbar{
+	border: 1px solid black;
+	background-color: #DDDDDD;
+}
+
+.zpEditorDefaultToolbar .toolbarPanel select.zpEditorSelect{
+	border: 2px solid #CCCCCC;
+	margin: 0;
+}
+
+.zpEditorDefaultToolbar .toolbarPanel{
+	margin: 0 0 0 3px;
+	padding: 0px 3px 0 1px;
+	border-left: 2px solid #666666;
+	height: 26px;
+	overflow: hidden;
+	float: left;
+}
+
+.zpEditorDefaultTextarea {
+  border: none;
+}
+
+.zpEditorDefaultEditorPanel {
+  border: 1px solid;
+}
+
+.zpEditorDefaultToolbar .zpEditorButton{
+	display: block;
+	float: left;
+	width: 21px;
+	height: 20px;
+	background-repeat: no-repeat;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .forecolor{
+  background-image: url(default/forecolor.gif);
+  width: 25px;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .backcolor{
+  background-image: url(default/backcolor.gif);
+  width: 25px;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .dropdown{background-image: url(default/dropdown.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .link{background-image: url(default/link.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .image{background-image: url(default/image.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .table{background-image: url(default/table.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .bold{background-image: url(default/bold.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .italic{background-image: url(default/italic.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .underline{background-image: url(default/underline.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .justifyleft{background-image: url(default/justifyleft.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .justifycenter{background-image: url(default/justifycenter.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .justifyright{background-image: url(default/justifyright.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .justifyfull{background-image: url(default/justifyfull.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .orderedlist{background-image: url(default/orderedlist.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .unorderedlist{background-image: url(default/unorderedlist.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .copy{background-image: url(default/copy.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .cut{background-image: url(default/cut.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .paste{background-image: url(default/paste.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .outdent{background-image: url(default/outdent.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .indent{background-image: url(default/indent.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .undo{background-image: url(default/undo.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .redo{background-image: url(default/redo.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .hr{background-image: url(default/hr.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .insertspecial{background-image: url(default/insertspecial.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .selectall{background-image: url(default/selectall.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .maximize{background-image: url(default/maximize.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .restore{background-image: url(default/restore.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .fetch{background-image: url(default/fetch.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .save{background-image: url(default/save.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .browser{background-image: url(default/browser.gif);}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .about{font-weight: bold;}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .html{
+	background-image: url(default/html.gif);
+	width: 75px;
+}
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .wysiwyg{
+	background-image: url(default/wysiwyg.gif);
+	width: 75px;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer, .zpButtonImageDefaultContainer{
+	padding: 0;
+	border: 0;
+}
+
+.zpEditorDefaultToolbar .zpButtonImageDefaultContainer .internalContainer{
+	cursor: pointer;
+	padding: 0 2px 0 2px;
+	margin: 0;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .internalContainer{
+	background-color: #C0C0C0;
+	cursor: pointer;
+	padding: 0 2px 0 2px;
+	margin: 0;
+	color: #000000;
+	border: 2px solid #C0C0C0;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .internalContainer img{
+	border: 0;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .disabled .internalContainer{
+	filter: Alpha(Opacity=50);
+	-moz-opacity: 0.50;
+	border: 2px solid #C0C0C0;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .mouseOut .internalContainer{
+	border: 2px solid #C0C0C0;
+}
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .mouseOver .internalContainer{
+	border: 2px outset;
+}
+
+
+.zpEditorDefaultToolbar .zpButtonDefaultContainer .mouseDown .internalContainer{
+	border: 2px inset;
+}
+
+.zpEditorDefaultColorMark {
+  position: absolute;
+  margin-top: 15px;
+  width: 16px;
+  height: 4px;
+  font-size: 1px;
+}
+
+.zpEditorDefaultDropDown {
+  margin-left: 20px;
+  height: 100%;
+}
+
+.zpEditorDefaultPane {
+  background: #fff;
+}
+
+/* style for character map table */
+table.charmap {
+  cursor:pointer;
+  background-color:#ADAD9C;
+  border:1px inset;
+}
+
+/* style for character map table cell */
+td.character {
+  font-family:Verdana,Arial,Helvetica,sans-serif;
+  font-size:14px;
+  font-weight:bold;
+  text-align:center;
+  background:#fff;
+  padding:4px;
+}
+
+/* style for hilighted character map table cell */
+td.character-hilite {
+  background:#ffd760;
+}
+
+.zpEditorDefaultLinkLabel {
+  margin: 5px 10px 0 10px;
+  width: 120px;
+  float: left;
+}
+
+.zpEditorDefaultLinkInput {
+  margin: 5px 0 0 0;
+}
+
+.zpEditorDefaultLinkButtonPane {
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+
+.zpEditorDefaultLinkOk {
+  margin: 0 10px 0 0;
+}
+
+.zpEditorDefaultLinkInputPane {
+}

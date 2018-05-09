@@ -1,0 +1,39 @@
+<table class="debug">
+  <tr>
+    <td>init</td>
+    <td align="right"><%=initTime%></td>
+  </tr>
+  <tr>
+    <td>layout</td>
+    <td align="right"><%=layoutTime%></td>
+  </tr>
+  <tr>
+    <td>head</td>
+    <td align="right"><%=headTime%></td>
+  </tr>
+  <tr>
+    <td>header</td>
+    <td align="right"><%=headerTime%></td>
+  </tr>
+  <tr>
+    <td>nav-primary</td>
+    <td align="right"><%=navPrimaryTime%></td>
+  </tr>
+  <tr>
+    <td>subheader</td>
+    <td align="right"><%=subheaderTime%></td>
+  </tr>
+  <tr>
+    <td>nav-secondary</td>
+    <td align="right"><%=navSecondaryTime%></td>
+  </tr>
+  <tr>
+    <td>content</td>
+    <td align="right"><%=contentTime%></td>
+  </tr>
+  <tr>
+    <td>footer</td>
+    <td align="right"><%=footerTime%></td>
+  </tr>
+</table>
+      

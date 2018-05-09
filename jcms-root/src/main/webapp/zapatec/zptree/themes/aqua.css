@@ -1,0 +1,156 @@
+/* $Id: aqua.css 11101 2008-04-23 13:42:25Z mike $ */
+
+.treeArea
+{
+	position:absolute;
+	top:60px; bottom:0px; left:0px;
+	width:250px;
+	background-color:#DDE6EE;
+	padding-top:5px;
+	padding-bottom:5px;
+	overflow: auto;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+}
+
+/* $Id: aqua.css 11101 2008-04-23 13:42:25Z mike $ */
+.tree, 
+.tree-item table.tree-table { 
+	font: 11px Lucida Grande, Helvetica, sans-serif; cursor:default;
+	}
+
+.tree { 
+	padding-left: 20px;
+}
+
+.tree-top { 
+	padding-left: 0; 
+}
+
+.tree-item { 
+  padding-left: 28px;	/* this is the div for each row in the outline	 */
+}
+
+.tree-item-more {
+  padding-left: 8px;
+}
+
+.tree-item td.label { }
+.tree-item table.tree-table { }
+.tree-item table.tree-table td.label span.label { }
+
+/* Overall the background and layoutfor the tree */
+div.scroll-tree {
+
+}
+
+/* Hrefs in a tree item */
+div.tree-item td.a {
+	text-decoration:none;
+}
+
+div.tree-item a{
+	color:#000000;
+	font-weight:normal;
+	font-size: 11px;
+}
+
+/* General setting of the tree */
+.tree {
+	border: 0px solid blue;
+}
+
+.tree, 
+.tree-item table.tree-table { 
+	color:#000000;
+	font-size: 11px;
+}
+
+.tree-item  .menutitle {
+
+  	padding-left: 1px;
+}
+
+.tree-item span.label { 
+	white-space: nowrap;
+	border: 0px solid red;
+}
+
+.tree-item-selected table.tree-table td.label,
+.tree-item-selected table.tree-table,
+.tree-item-selected {  
+	background-color: #666666; color: white;
+	font-weight:bold;  
+}
+
+.tree-item-selected {
+	border: 0px solid red;
+	background-color: #666666;
+	
+}
+
+.tree-item .tgb {
+  width: 8px; min-width: 8px; height: 9px; vertical-align: middle; border: 0px solid blue;
+}
+
+.tree-item .plus {
+  background: transparent url("img/distri-plus.png") no-repeat 0 50%;
+  padding-right: 12px;
+}
+
+.tree-item .minus {
+  background: transparent url("img/distri-minus.png") no-repeat 0 50%;
+  padding-right: 12px;
+}
+
+.tree-item-selected .plus {
+  background: transparent url("img/distri-plus-sel.png") no-repeat 0 50%;
+  padding-right: 12px;
+}
+
+.tree-item-selected .minus {
+  background: transparent url("img/distri-minus-sel.png") no-repeat 0 50%;
+  padding-right: 12px;
+}
+
+.tree-item .icon { 
+	width: 20px; 
+	min-width:20px; 
+	height: 18px; 
+	text-align: center; 
+	vertical-align: middle; 
+	border:0px solid red;
+}
+
+div.tree-item td.customIcon {
+	background: url("aqua/document.png") no-repeat 0 50%;
+}
+
+div.tree-item-expanded td.customIcon {
+	background: url("aqua/folderopen.png") no-repeat 0 50%;
+}
+
+div.tree-item-collapsed td.customIcon {
+	background: url("aqua/folder.png") no-repeat 0 50%;
+}
+
+.zpTreeAquaContainer .checkboxContainer {
+	cursor:pointer;
+	width:12px;
+	height:12px;
+	text-align:center;
+	background-repeat:no-repeat;
+	background-position:1px 50%;
+}
+
+.zpTreeAquaContainer .checkboxChecked {
+	background-image:url(img/checkbox_checked.png);
+}
+
+.zpTreeAquaContainer .checkboxHalfChecked {
+	background-image:url(img/checkbox_halfchecked.png);
+}
+
+.zpTreeAquaContainer .checkboxUnchecked {
+	background-image:url(img/checkbox_unchecked.png);
+}

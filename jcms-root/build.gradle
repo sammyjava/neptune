@@ -1,0 +1,108 @@
+plugins {
+    id 'war'
+    id "org.akhikhl.gretty" version "2.0.0"
+    id "com.bmuschko.cargo" version "2.3"
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+    maven { url "http://repo.enonic.com/public/" }
+    maven { url "http://dist.wso2.org/maven2/" }
+    maven { url "https://maven.repository.redhat.com/ga/" }
+    // this should pull code from GitHub but seems to be error-prone
+    maven { url "https://jitpack.io" }
+}
+
+//-----------------------------------------------------------------------------------
+// Use gretty tasks if you'd like to fire up a Jetty or Tomcat instance during development.
+//-----------------------------------------------------------------------------------
+gretty {
+    // supported values: 'jetty7', 'jetty8', 'jetty9', 'jetty9.3', 'jetty9.4', 'tomcat7', 'tomcat8'
+    // port = 8080
+    contextPath = 'jcms-root'
+    servletContainer = 'tomcat8'
+}
+
+dependencies {
+
+    providedCompile 'javax.servlet:javax.servlet-api:3.1.0'
+    
+    testCompile 'junit:junit:4.12'
+
+    compile group: 'commons-collections', name: 'commons-collections', version: '3.2.2'
+    compile group: 'commons-lang', name: 'commons-lang', version: '2.6'
+    compile group: 'commons-codec', name: 'commons-codec', version: '1.11'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
+
+    compile group: 'org.apache.httpcomponents', name: 'httpclient', version: '4.5.5'
+    compile group: 'org.apache.httpcomponents', name: 'httpmime', version: '4.5.5'
+    compile group: 'org.apache.axis', name: 'axis', version: '1.4'
+    
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.1'
+    compile group: 'javax.xml.rpc', name: 'javax.xml.rpc-api', version: '1.1.2'
+
+    // javax.json-api only runs under JDK 9, fixed version placed in libs
+    // compile group: 'javax.json', name: 'javax.json-api', version: '1.1.2'
+
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+
+    compile group: 'com.servlets', name: 'cos', version: '09May2002'
+
+    compile group: 'org.json', name: 'json', version: '20180130'
+
+    compile group: 'com.google.android', name: 'android', version: '4.1.1.4'
+
+    compile group: 'com.paypal.sdk', name: 'paypal-core', version: '1.7.2'
+    compile group: 'com.paypal.sdk', name: 'paypal-base', version: '1.1.0'
+    compile group: 'com.paypal.sdk', name: 'paypal-soap', version: '1.1.0'
+
+    compile group: 'net.tanesha.recaptcha4j', name: 'recaptcha4j', version: '0.0.7'
+
+    compile group: 'org.devlib.schmidt', name: 'imageinfo', version: '1.9'
+
+    // REPO: https://maven.repository.redhat.com/ga/
+    compile group: 'com.google.gdata', name: 'gdata-client-1.0', version: '1.41.5'
+
+    // REPO: http://repo.enonic.com/public/
+    compile group: 'nl.captcha', name: 'simplecaptcha', version: '1.2.1'
+    
+    // LIBS: jcms.jar plus jars I couldn't find in a repo
+    // javas.json-api has a file removed for Java 8 compatibility
+    compile files('../jcms/build/libs/jcms.jar','libs/javacsv.jar','libs/lmapi.jar','libs/javax.json-api-1.1.2.jar')
+
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Use cargo to deploy the webapp to an existing Tomcat instance, either via the HTTP Tomcat manager or local file copy.
+// ---------------------------------------------------------------------------------------------------------------------
+cargo {
+    
+    // change this to match your Tomcat major version (keep the x)
+    containerId = 'tomcat8x'
+
+    // change this to the Tomcat root of your choice (no need if you're using Apache in front)
+    deployable {
+        context = 'jcms-root'
+    }
+
+    // change these to match your Tomcat host and tomcat-users config
+    remote {
+        hostname = 'localhost'
+        username = 'scriptmanager'
+        password = 'script#manager'
+    }
+
+    // local deployment - copies files to Tomcat rather than using Tomcat manager
+    local {
+        homeDir = file('/home/user/dev/tools/apache-tomcat-6.0.32')
+        outputFile = file('build/output.log')
+        timeout = 60000
+
+        containerProperties {
+            property 'cargo.tomcat.ajp.port', 9099
+        }
+    }
+
+}

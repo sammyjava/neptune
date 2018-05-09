@@ -1,0 +1,10 @@
+<table width="100%">
+  <tr>
+    <td>
+      <h2><% if (pageHeading==null) out.print(pageTitle); else out.print(pageHeading); %></h2>
+    </td>
+    <% if (user!=null && userLoggedIn) { %>
+    <td align="right"><%=user.getFirstname()%> <%=user.getLastname()%></td>
+    <% } %>
+  </tr>
+</table>

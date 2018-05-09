@@ -1,0 +1,133 @@
+/* $Id: demos.css 9279 2007-12-21 09:38:24Z andrew $ */
+.zpTreeDemosContainer .tree,
+.zpTreeDemosContainer .tree-item .tree-table td.submenu a,
+.zpTreeDemosContainer .tree-item table.tree-table{
+  font: 11px tahoma,verdana,sans-serif;
+  padding: 3px;
+}
+
+.zpTreeDemosContainer .tree-item .tree-table td.submenu a {
+text-decoration:none;
+font-weight: normal;
+color: #000000;
+}
+.zpTreeDemosContainer .tree-item .tree-table td.label:hover,
+.zpTreeDemosContainer .tree-item .tree-table td.submenu a:hover {
+color:blue;
+}
+
+.zpTreeDemosContainer .tree {
+  margin-left: 10px;
+  padding-left: 0px;
+}
+
+.zpTreeDemosContainer .tree-top {
+  padding-left: 0px;
+}
+
+.zpTreeDemosContainer .tree-item { 
+  margin-left: 0px;
+  padding-left: 17px;
+  background: transparent url("img/dot.gif") no-repeat 1px 50%;
+  border-top: solid 1px #EBEBEB;
+}
+
+.zpTreeDemosContainer .tree-item-more {
+  background: none;
+  padding-left: 1px;
+}
+
+.zpTreeDemosContainer .tree-item td.label {
+  cursor: pointer;
+}
+
+.zpTreeDemosContainer .tree-item table.tree-table td.label{
+  padding: 0px 2px; 
+}
+
+.zpTreeDemosContainer .tree-item .tgb {
+  width: 9px; 
+  height: 9px; 
+  vertical-align: middle; 
+  cursor: default;
+}
+
+.zpTreeDemosContainer .tree-item .plus {
+  background: transparent url("img/arrow-grey.gif") no-repeat 1px 50%;
+  padding-right: 7px;
+}
+
+.zpTreeDemosContainer .tree-item .minus {
+  background: transparent url("img/down-arrow-grey.gif") no-repeat 1% 50%;
+  padding-right: 7px;
+}
+
+.zpTreeDemosContainer .tree-item .fetching {
+  background: transparent url("img/fetching.gif") no-repeat 1% 50%;
+  padding-right: 7px;
+}
+
+.zpTreeDemosContainer .tree-item .icon {
+  cursor: pointer; 
+  cursor: hand;
+  width: 18px; 
+  height: 18px; 
+  text-align: center; 
+  vertical-align: middle;
+}
+
+.zpTreeDemosContainer .tree-item-selected table.tree-table td.label {
+  background-color: #ddd; 
+  color: #000;
+}
+
+.zpTreeDemosContainer .checkboxContainer {
+  cursor: pointer; 
+  cursor: hand;
+  width: 12px; 
+  height: 12px; 
+  text-align: center; 
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: 1px 50%;
+}
+
+/*IE6 fix for first/last lines bullet aligment */
+* html .zpTreeDemosContainer .tree-lines-t .tgb  {background-position: 1px 4px !important; } 
+* html .zpTreeDemosContainer .tree-lines-t .checkboxContainer { background-position: 1px 4px !important; }
+* html .zpTreeDemosContainer .tree-lines-b .tgb  {background-position: 1px 7px !important;} 
+* html .zpTreeDemosContainer .tree-lines-b .checkboxContainer { background-position: 1px 7px !important; }
+
+/*IE7 fix for first/last lines bullet aligment */
+*:first-child+html .zpTreeDemosContainer .tree-lines-t .tgb  {background-position: 1px 4px !important; } 
+*:first-child+html .zpTreeDemosContainer .tree-lines-t .checkboxContainer { background-position: 1px 4px !important; }
+*:first-child+html .zpTreeDemosContainer .tree-lines-b .tgb  {background-position: 1px 7px !important;} 
+*:first-child+html .zpTreeDemosContainer .tree-lines-b .checkboxContainer { background-position: 1px 7px !important; }
+
+.zpTreeDemosContainer .tree-lines-t .plus {
+  background:url(img/arrow-grey-top.gif) no-repeat 1% 50% !important;
+}
+
+.zpTreeDemosContainer .tree-lines-b .plus {
+  background:url(img/arrow-grey-bottom.gif) no-repeat 1% 50% !important;
+}
+
+.zpTreeDemosContainer .tree-lines-t .minus {
+  background:url(img/down-arrow-grey-top.gif) no-repeat 1% 50% !important;
+}
+
+.zpTreeDemosContainer .tree-lines-b .minus {
+  background:url(img/down-arrow-grey-bottom.gif) no-repeat 1% 50% !important;
+}
+
+.zpTreeDemosContainer .checkboxChecked {
+	background-image: url(img/checkbox_checked.png);
+}
+
+.zpTreeDemosContainer .checkboxUnchecked {
+	background-image: url(img/checkbox_unchecked.png);
+}
+
+.zpTreeDemosContainer .checkboxHalfChecked {
+	background-image: url(img/checkbox_halfchecked.png);
+}

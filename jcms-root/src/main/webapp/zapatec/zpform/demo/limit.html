@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	You can limit the keystrokes that the user can type into specific fields. See zpFormAllowed. 	In the INPUT class, define zpFormAllowed - {d | w | s} - to indicate which keystrokes are allowed  		(digits, alphanumeric or white space). ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Limit Allowed Keystrokes</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/lightgreen.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Limit Allowed Keystrokes</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>lightgreen theme</b>.</li>
+				
+	<li>You can limit the keystrokes that the user can type into specific fields. See zpFormAllowed.</li>
+	<li>In the INPUT class, define zpFormAllowed - {d | w | s} - to indicate which keystrokes are allowed 
+		(digits, alphanumeric or white space).</li>
+
+			</ul>
+		</div>
+
+
+
+The following are the Limit Keystroke rules.
+<pre  style='background: #f7f7f7; border: 1px solid #d7d7d7; margin: 1em 1.75em; padding: .25em; overflow: auto;'>
+d             Digits only
+
+w             a-z A-Z _
+
+s             whitespace
+</pre>
+
+<br />
+<br />
+
+<form action="limit.html" id='userForm' method="post">
+	<div id='errOut' class="errOutput"></div>
+	<fieldset>
+		<legend>Limit Key Strokes</legend>
+
+		<label class='zpFormLabel'>Alphanumeric only</label>
+		<input value="" size="23" name="alpha" type="text" class='zpFormRequired zpFormAllowed-w'>
+		<br />
+		<br />
+
+		<label class='zpFormLabel'>Digits only</label>
+		<input value="" size="15" name="digits" type="text" class='zpFormAllowed-d'>
+		<br />
+		<br />
+    
+		<label class='zpFormLabel'>Only letters</label>
+		<input value="" size="23" name="letters" type="text" class='zpFormAllowedChars=A-Za-z'>
+		<br />
+		<br />
+    
+		<label class='zpFormLabel'>Allowed chars: AaBbCc and 123</label>
+		<input value="" size="23" name="zpFormAllowedChars" type="text" class='zpFormAllowedChars=AaBbCc123'>
+		<br />
+		<br />
+    
+	</fieldset>
+    <input value="Submit" name="Submit" onclick="" type="submit" class="button" >
+    <input value="Clear" name="Clear" onclick="" type="reset" class="button" >
+</form>
+<script type="text/javascript">
+new Zapatec.Form({
+	form: 'userForm',
+	statusImgPos: 'afterField',
+	showErrorsOnSubmit: true,
+	theme: "lightgreen",
+	showErrors: "afterField"
+});
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/breadcrumbs.jhtml" %>
+<% if (!customBreadcrumbs) { %>
+<!-- breadcrumbs -->
+<div id="breadcrumbs">
+  <% if (greatgrandparent!=null && greatgrandparent.getDepth()>0) { %>
+  <a class="breadcrumbs" href="<%=root.url%>"><%=root.nodename%></a> <%=breadCrumbsSeparator%>
+  <% } %>
+
+  <% if (greatgrandparent!=null) { %>
+  <%   if (greatgrandparent.getCurrentNodeLink(application).isRedirect() || !greatgrandparent.isVisible()) { %>
+  <%=greatgrandparent.nodename%> <%=breadCrumbsSeparator%>
+  <%   } else { %>
+  <a class="breadcrumbs" href="<%=greatgrandparent.url%>"><%=greatgrandparent.nodename%></a> <%=breadCrumbsSeparator%>
+  <%   } %>
+  <% } %>
+
+  <% if (grandparent!=null) { %>
+  <%   if (grandparent.getCurrentNodeLink(application).isRedirect() || !grandparent.isVisible()) { %>
+  <%=grandparent.nodename%> <%=breadCrumbsSeparator%>
+  <%   } else { %>
+  <a class="breadcrumbs" href="<%=grandparent.url%>"><%=grandparent.nodename%></a> <%=breadCrumbsSeparator%>
+  <%   } %>
+  <% } %>
+
+  <% if (parent!=null) { %>
+  <%   if (parent.getCurrentNodeLink(application).isRedirect() || !parent.isVisible()) { %>
+  <%=parent.nodename%> <%=breadCrumbsSeparator%>
+  <%   } else { %>
+  <a class="breadcrumbs" href="<%=parent.url%>"><%=parent.nodename%></a> <%=breadCrumbsSeparator%>
+  <%   } %>
+  <% } %>
+
+  <% if (!n.isDefault()) { %><%=n.nodename%><% } %>
+</div>
+<% } %>
+<!--startindex-->
+

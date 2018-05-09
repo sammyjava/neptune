@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Transport Widget - Transport JSON Demo</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Transport JSON Demo</div>
+
+
+
+<p>
+Demonstrates how to use the <b>Zapatec.Transport.fetchJsonObj</b> to import a JSON object from an external file on the server.
+</p>
+
+<a href='#' onclick='fetchJson("sample.json")'> Load from JSON file sample.json</a>.
+<div id="container"></div>
+
+<script type="text/javascript">
+
+// Fetch HTML fragment
+function fetchJson(urlName) {
+Zapatec.Transport.fetchJsonObj({
+
+	// URL to fetch
+	url: urlName + '?' + Math.random(),
+
+	// Onload event handler
+	onLoad: function(objJson) {
+		// Get container element
+		var objContainer = document.getElementById('container');
+		// Check fetched object
+		if (objJson && objJson.students && objJson.students.length) {
+			// Display data
+			var arrHtml = [];
+			arrHtml.push('<table border="1" cellpadding="3" cellspacing="1">');
+			arrHtml.push('<tr><th>Student</th><th>Department</th><th>Program</th></tr>');
+			for (var iStudent = 0; iStudent < objJson.students.length; iStudent++) {
+				arrHtml.push('<tr><td>');
+				arrHtml.push(objJson.students[iStudent].name);
+				arrHtml.push('</td><td>');
+				arrHtml.push(objJson.students[iStudent].department);
+				arrHtml.push('</td><td>');
+				arrHtml.push(objJson.students[iStudent].program);
+				arrHtml.push('</td></tr>');
+			}
+			arrHtml.push('</table>');
+			objContainer.innerHTML = arrHtml.join('');
+		} else {
+			// Display error
+			objContainer.innerHTML = '<div style="color: #f00"><b>No data</b></div>';
+		}
+	}
+
+});
+}
+
+</script>
+
+<br/>
+<a href='sample.json' target='_blank'> Show sample.json</a>.
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Transport Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

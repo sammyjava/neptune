@@ -1,0 +1,201 @@
+/* $Id: form_wizard.css 8334 2007-09-27 16:21:52Z smaxim $ */
+
+#pane-prefs label{
+	cursor: pointer;
+	float:left;
+}
+
+*html #tab-bar {
+	height:25px; 
+}
+
+td.label{
+	width: 250px;
+	text-align: right;
+}
+
+td.control{
+	width: 200px;
+	text-align: left;
+}
+
+td.control input {
+ width:220px; 
+ border: 1px solid #c4c2ab; 
+ background:#ebebdf; 
+ padding:2px;
+
+}
+
+td.control select {
+ border: 1px solid #c4c2ab; 
+ background:#ebebdf; 
+ padding:2px;
+ width:150px;
+}
+
+td.control input.checkboxitem {
+ width:auto;
+ border:none;
+ background:none;
+}
+
+td.tooltip .zpTooltipDefaultDfn {
+  font-size: 120%;
+  font-style:normal;
+  font-weight: bold;
+  margin-left: 0.5em;
+  margin-right: 1em;
+  color:#F48452;
+  border: 1px solid #c4c2ab;
+  background-color: #FFF;
+  padding: 0 5px;
+  z-index: 100;
+  cursor: default;
+}
+
+
+td.tooltip {
+}
+
+td.separator{  /*form contents Separator*/
+	border-right:1px solid #777/*#dcdbd4*/;
+	border-left:1px solid #fff;
+}
+
+div.input{ /*form cont - left dragable field*/
+	border: 1px solid #b5b4b4;
+	width: 200px;
+	text-align: center;
+	height: 25px;
+	margin:5px 0px;
+	line-height:25px;
+	font-size:12px;
+	cursor:move;
+}
+
+div.input:hover {
+ background-color:#fff;
+}
+
+#designPreview{     /* FC - right container */
+	overflow: auto;
+	border: 1px solid #dcdbd4;
+	padding: 5px;
+	height: 300px; 
+	width: 100%;
+	
+}
+
+.editButton{   /*FC - E Button */
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	top: 5px;
+	right: 20px;
+}
+
+/*.editButton {  
+	right: 20px;
+}                */
+
+.elementHolder{ /* FC - element container */
+	position: relative;
+	padding: 0px 5px 0px 25px;
+	margin:10px;
+	min-height: 30px;
+	border:1px solid #b5b4b4;
+	line-height:35px;
+}
+
+* html .elementHolder{ /* FC - element container */
+	position: relative;
+	padding: 8px 5px 8px 0px;
+	line-height:35px;
+}
+
+* html .elementHolder label {
+  margin-left:20px;
+}
+
+.elementHolder input,
+.elementHolder select {
+  margin-bottom:0px !important;
+}
+
+*:first-child+html .elementHolder input { margin-top:5px;}
+
+.elementHolder textarea {
+  vertical-align:middle;
+  margin-top:5px;
+  margin-bottom:5px;
+}  
+
+/*div.elementHolder:hover, */
+.elementHighlight{
+	background-color: #fff !important;
+	border: 1px dotted #000;
+}
+
+.highlighted{
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+
+.option_parent {
+	margin: 5px;
+	padding: 5px;
+	border: 1px dotted black;
+}
+
+#editForm label{
+	margin: 5px 20px 5px 10px; 
+}
+
+.dragHandle{  /*DnD handler */
+	width: 17px;
+	height: 33px;
+	position: absolute;
+	left:0px;
+	top:0px;
+	float:left;
+	cursor: move;
+	background-image: url(move3.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+*html .elementHolder .dragHandle {margin-top:1px; margin-bottom:1px; }
+
+.highlighted .dragHandle {
+  background-image: url(move4.gif) !important;
+}
+
+.header {
+  font-size:18px;
+  font-family:Arial, Verdana;
+  color:#F4733A;
+  font-weight:bold;
+  border-bottom:1px solid #dcdbd4;
+  margin-bottom:10px;
+  padding-bottom:5px;
+}
+
+.header2 {
+  font-size:15px;
+  font-family:Arial, Verdana;
+  color:#888;
+  font-weight:bold;
+  border-bottom:1px solid #dcdbd4;
+  margin-bottom:10px;
+  padding-bottom:5px;
+}
+
+#designPreview .zpFormDefault {
+  background:transparent;
+  border:none;
+  font-family:"MS Sans Serif",Arial,Tahoma,Verdana,sans-serif;
+  font-size:11px;
+  padding:0px;
+}
+

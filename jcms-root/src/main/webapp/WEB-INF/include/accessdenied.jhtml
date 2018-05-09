@@ -1,0 +1,8 @@
+<!-- content panes -->
+<table id="l1" cellspacing="0" width="100%">
+  <tr>
+    <td valign="top" id="l1_p1">
+      <%@ include file="access.jhtml" %>
+    </td>
+  </tr>
+</table>

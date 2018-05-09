@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Transport Widget - Transport XML Demo</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Transport XML Demo</div>
+
+
+
+<p>
+Demonstrates how to use <b>Zapatec.Transport.fetchXmlDoc</b> to import an XML document object from an external file on the server.
+</p>
+
+<div id="container"></div>
+
+<script type="text/javascript">
+
+// Fetch HTML fragment
+Zapatec.Transport.fetchXmlDoc({
+
+	// URL to fetch
+	url: 'sample.xml?' + Math.random(),
+
+	// Onload event handler
+	onLoad: function(objXmlDoc) {
+
+		// Get container element
+		var objContainer = document.getElementById('container');
+
+		// Check fetched object
+		if (objXmlDoc && objXmlDoc.documentElement) {
+
+			// Display data
+			var arrHtml = [];
+			arrHtml.push('<table border="1" cellpadding="3" cellspacing="1">');
+			arrHtml.push('<tr><th>Student</th><th>Department</th><th>Program</th></tr>');
+
+			// Parse XML document object
+			var arrStudents = objXmlDoc.documentElement.getElementsByTagName('student');
+			var arrNodes = null;
+			for (var iStudent = 0; iStudent < arrStudents.length; iStudent++) {
+				arrHtml.push('<tr><td>');
+
+				// Get name
+				arrNodes = arrStudents[iStudent].getElementsByTagName('name');
+				if (arrNodes && arrNodes.length) {
+					var objNode = arrNodes[0].firstChild;
+					while (objNode) {
+						if (objNode.data) {
+							arrHtml.push(objNode.data);
+						}
+						objNode = objNode.nextSibling;
+					}
+				}
+
+				arrHtml.push('</td><td>');
+
+				// Get department
+				arrNodes = arrStudents[iStudent].getElementsByTagName('department');
+				if (arrNodes && arrNodes.length) {
+					var objNode = arrNodes[0].firstChild;
+					while (objNode) {
+						if (objNode.data) {
+							arrHtml.push(objNode.data);
+						}
+						objNode = objNode.nextSibling;
+					}
+				}
+
+				arrHtml.push('</td><td>');
+
+				// Get program
+				arrNodes = arrStudents[iStudent].getElementsByTagName('program');
+				if (arrNodes && arrNodes.length) {
+					var objNode = arrNodes[0].firstChild;
+					while (objNode) {
+						if (objNode.data) {
+							arrHtml.push(objNode.data);
+						}
+						objNode = objNode.nextSibling;
+					}
+				}
+
+				arrHtml.push('</td></tr>');
+			}
+
+			arrHtml.push('</table>');
+			objContainer.innerHTML = arrHtml.join('');
+
+		} else {
+
+			// Display error
+			objContainer.innerHTML = '<div style="color: #f00"><b>No data</b></div>';
+
+		}
+	}
+
+});
+
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Transport Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

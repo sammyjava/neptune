@@ -1,0 +1,17 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/subheader.jhtml" %>
+<% if (!customSubheader) { %>
+<!-- subheader -->
+<table id="subheader" cellspacing="0" width="100%">
+  <tr>
+    <td class="subheader-left"></td>
+    <%
+      String tdClass = "subheader";
+      UtilityContent[] uc = UtilityContent.getByLocation(application, 'S');
+    %>
+    <%@ include file="utilitycontent.jhtml" %>
+    <td class="subheader-right"></td>
+  </tr>
+</table>
+<% } %>
+<!--startindex-->

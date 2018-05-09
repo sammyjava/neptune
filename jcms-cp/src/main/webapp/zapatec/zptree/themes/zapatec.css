@@ -1,0 +1,145 @@
+/* $Id: zapatec.css 7245 2007-05-23 12:54:03Z andrew $ */
+
+/* Overall the background and layoutfor the tree */
+.zpTreeZapatecContainer {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  width :180px;
+  background-color: #F3F4FE;
+}
+
+/* Hrefs in a tree item */
+.zpTreeZapatecContainer div.tree-item td.a {
+  text-decoration: none;
+}
+
+.zpTreeZapatecContainer div.tree-item a{
+  color:#000000;
+  font-weight:normal;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+
+.zpTreeZapatecContainer div.tree-item a:hover{
+  color: #000000;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+
+/* General setting of the tree */
+.zpTreeZapatecContainer .tree, 
+.zpTreeZapatecContainer .tree-item table.tree-table { 
+  color:#525152;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight:bold;
+}
+
+.zpTreeZapatecContainer .tree-item-more {
+  padding-left: 1px;
+}
+
+.zpTreeZapatecContainer .tree-item .label { 
+  cursor: pointer; 
+  cursor: hand;
+}
+
+.zpTreeZapatecContainer .tree-item table.tree-table td.label { 
+  padding: 0px 1px; 
+}
+
+.zpTreeZapatecContainer .tree-item .tgb {
+  width: 9px; 
+  height: 9px; 
+  vertical-align: middle; 
+  cursor: default;
+}
+
+.zpTreeZapatecContainer .tree-item .icon { 
+  cursor: pointer; 
+  cursor: hand;
+  width: 18px; 
+  height: 18px; 
+  text-align: center; 
+  vertical-align: middle; 
+}
+
+
+.zpTreeZapatecContainer .tree-item-selected table.tree-table td.label { 
+  background:#bfdcff;
+  color:#000;
+}
+
+.zpTreeZapatecContainer .tree-item-selected table.tree-table td.menutitle { 
+  background:#bfdcff;
+  border:1px outset #000;
+  color:#000;
+}
+
+
+.zpTreeZapatecContainer div.tree-item, 
+.zpTreeZapatecContainer div.tree-item:hover {
+  cursor:pointer;
+  cursor: hand;
+  margin-bottom: 5px;
+  text-align: left;
+  font-weight:bold;
+  color:#DDDDDD;
+}
+
+.zpTreeZapatecContainer div.tree-item a{
+  text-decoration:none;
+}
+
+/* custom icons for expanded and closed folder */
+
+.zpTreeZapatecContainer div.tree-item-expanded td.customIcon {
+  background: url("zapatec/arrow_down.gif") no-repeat 0 50%;
+  line-height:17px;
+}
+
+.zpTreeZapatecContainer div.tree-item-collapsed td.customIcon {
+  background: url("zapatec/arrow_right.gif") no-repeat 0 50%;
+  line-height:17px;
+  width:18px;
+}
+
+/* Makes an indent for each subtree */
+.zpTreeZapatecContainer .tree { 
+  padding-left: 5px; 
+  padding-right: 5px;
+}
+
+/* the area of the tree that is expanded */
+.zpTreeZapatecContainer .menutitle{
+  width:130px;
+  line-height:20px;
+  color:#000000;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: url("zapatec/bg_menutitle.gif")  100% 100%;
+  text-indent:5px;
+  margin-left:-2px;
+  margin-top:0px;
+}
+
+.zpTreeZapatecContainer .menutitle:hover{
+  text-decoration:underline;
+  background: url("zapatec/bg_menutitle_on.gif")  100% 100%;
+}
+
+.zpTreeZapatecContainer .submenu{
+  width:125px;
+  line-height:20px;
+  color:#006EA3;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-indent:5px;
+  margin-left:-2px;
+  margin-top:0px;
+}
+
+.zpTreeZapatecContainer .submenu:hover{
+  text-decoration:underline;
+}

@@ -1,0 +1,953 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Form Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="form-utils.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Form</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>form-utils.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'form-utils.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: form-utils.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/**
+ *
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ */</span>
+
+<span class="comment">// various form functions</span>
+Zapatec.Form.Utils = [];
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * function for retrieving pairs of key=value from string
+ * TODO: extend description
+ */</span>
+Zapatec.Form.Utils.getTokens = <span class="reserved">function</span>(className, separator){
+	<span class="reserved">if</span>(typeof(separator) != <span class="literal">'string'</span> || separator.length == 0){
+		<span class="comment">// setting default value</span>
+		separator = <span class="literal">" "</span>;
+	}
+
+	var arr = {};
+
+	<span class="reserved">if</span>(className != null &amp;&amp; className.length &gt; 0){
+		var isInQuotes = false;
+		var quoteChar = null;
+		var key = <span class="literal">""</span>;
+		var value = <span class="literal">""</span>;
+		var isInValue = false;
+
+		<span class="reserved">for</span>(var ii = 0; ii &lt; className.length; ii++){
+			var currChar = className.charAt(ii);
+
+			<span class="reserved">if</span>(currChar == <span class="literal">"\\"</span>){
+				<span class="comment">// if current char is \ - store next char in any case</span>
+				ii++;
+
+				currChar = className.charAt(ii);
+			} <span class="reserved">else</span> <span class="reserved">if</span>(!isInValue &amp;&amp; currChar == <span class="literal">"="</span>){
+				<span class="comment">// if current char is = - this means that key is finished - all</span>
+				<span class="comment">// other before next space is value</span>
+
+				isInValue = true;
+				var nextChar = className.charAt(ii + 1);
+
+				<span class="comment">// supporting old behaviour - value could be putted into quotes</span>
+				<span class="reserved">if</span>(nextChar == <span class="literal">"'"</span> || nextChar == <span class="literal">'"'</span>){
+					quoteChar = nextChar;
+					ii++;
+				}
+
+				continue;
+			} <span class="reserved">else</span> <span class="reserved">if</span>(currChar == <span class="literal">" "</span>){
+				<span class="reserved">if</span>(key.length == 0){
+					continue;
+				}
+				<span class="comment">// if this is space - then current pair of key&amp;value is</span>
+				<span class="comment">// ready.</span>
+
+				<span class="reserved">if</span>(quoteChar != null){
+					<span class="comment">// supporting old behaviour:</span>
+					<span class="comment">//	if last character is same as quote after '=' - ignore</span>
+					<span class="comment">//		last symbol.</span>
+					<span class="comment">//	in other case - add quote after '=' to value</span>
+					<span class="reserved">if</span>(quoteChar == value.charAt(value.length - 1)){
+						quoteChar = null;
+						value = value.substr(0, value.length - 1);
+					} <span class="reserved">else</span> {
+						value = quoteChar + value;
+					}
+				}
+
+				<span class="comment">// store pair</span>
+				arr[key] = value.length == 0 ? null : value;
+
+				<span class="comment">//clear variables</span>
+				isInValue = false;
+				key = <span class="literal">""</span>;
+				value = <span class="literal">""</span>;
+				quoteChar = null;
+
+				continue;
+			}
+
+			<span class="reserved">if</span>(ii &lt; className.length){
+				<span class="comment">// if we are here - currChar is non-system char. Store it.</span>
+				<span class="reserved">if</span>(isInValue){
+					value += currChar;
+				} <span class="reserved">else</span> {
+					key += currChar;
+				}
+			}
+		}
+
+		<span class="comment">// processing last argument</span>
+		<span class="reserved">if</span>(key.length &gt; 0){
+			<span class="reserved">if</span>(quoteChar != null){
+				<span class="comment">// supporting old behaviour:</span>
+				<span class="comment">//	if last character is same as quote after '=' - ignore</span>
+				<span class="comment">//		last symbol.</span>
+				<span class="comment">//	in other case - add quote after '=' to value</span>
+				<span class="reserved">if</span>(quoteChar == value.charAt(value.length - 1)){
+					quoteChar = null;
+					value = value.substr(0, value.length - 1);
+				} <span class="reserved">else</span> {
+					value = quoteChar + value;
+				}
+			}
+
+			arr[key] = (value.length == 0 ? null : value);
+		}
+	}
+
+	<span class="reserved">return</span> arr;
+};
+
+<span class="comment">/**
+* Toggle visibility of given element and disable/enable all form elements
+* inside given element.
+* <span class="attrib">@param</span> field [Object] reference to element - DOM or String ID
+* <span class="attrib">@param</span> show {boolean} if true - show element. Otherwise - hide.
+* <span class="attrib">@param</span> useVisibility {boolean} if true - field visibility would be changed
+*	using field.style.visibility property. Otherwise - field.style.display
+*/</span>
+Zapatec.Form.Utils.toggleFormElements = <span class="reserved">function</span>(field, show, useVisibility){
+	field = Zapatec.Widget.getElementById(field);
+
+	<span class="reserved">if</span>(field == null){
+		<span class="reserved">return</span> null;
+	}
+
+	var inputs = Zapatec.Form.Utils.getFormElements(field);
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; inputs.length; ii++){
+		var input = inputs[ii];
+		
+		<span class="reserved">if</span>(show){
+			<span class="reserved">if</span>(typeof(input.zpOrigDisabled) != <span class="literal">'undefined'</span>){
+				input.disabled = input.zpOrigDisabled;
+		
+				var undef;
+				input.zpOrigDisabled = undef;
+			}
+		} <span class="reserved">else</span> {
+			<span class="reserved">if</span>(typeof(input.zpOrigDisabled) == <span class="literal">'undefined'</span>){
+				input.zpOrigDisabled = input.attributes[<span class="literal">"disabled"</span>] &amp;&amp; input.getAttribute(<span class="literal">"disabled"</span>) != <span class="literal">""</span> ? input.getAttribute(<span class="literal">"disabled"</span>) : false;
+				input.disabled = true;
+			}
+		}
+
+		<span class="comment">// if we are showing Zapatec.Form.Field - we must validate it.</span>
+		<span class="reserved">if</span>(show &amp;&amp; input.zpFormField != null){
+			input.zpFormField.validate();
+		}
+	}
+
+	<span class="reserved">if</span>(useVisibility){
+		field.style.visibility = (show ? <span class="literal">'visible'</span> : <span class="literal">'hidden'</span>);
+	} <span class="reserved">else</span> {
+		field.style.display = (show ? <span class="literal">''</span> : <span class="literal">'none'</span>);
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Returns array of form elements inside given element.
+ * <span class="attrib">@param</span> el {Object} reference to element - DOM element or string ID.
+ * <span class="attrib">@return</span> array of form elements inside given element.
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Form.Utils.getFormElements = <span class="reserved">function</span>(el){
+	el = Zapatec.Widget.getElementById(el);
+
+	<span class="reserved">if</span>(el == null){
+		<span class="reserved">return</span> null;
+	}
+
+	var inputs = [];
+	var children = el.all ? el.all : el.getElementsByTagName(<span class="literal">"*"</span>);
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; children.length; ii++){
+		<span class="reserved">if</span>(Zapatec.Form.Utils.isInputField(children[ii])){
+			inputs.push(children[ii]);
+		}
+	}
+
+	<span class="reserved">return</span> inputs;
+};
+
+<span class="comment">/**
+ * Returns value of given element
+ * <span class="attrib">@param</span> element {Object} reference to element. DOM reference or string ID.
+ * <span class="attrib">@return</span> Field value
+ * <span class="attrib">@type</span> String
+ */</span>
+Zapatec.Form.Utils.getValue = <span class="reserved">function</span>(element) {
+	element = Zapatec.Widget.getElementById(element);
+
+	<span class="reserved">if</span>(element == null || typeof(element.tagName) == <span class="literal">'undefined'</span>){
+		<span class="reserved">return</span> null;
+	}
+
+	switch (element.tagName.toLowerCase()) {
+		case <span class="literal">"select"</span>:
+			<span class="reserved">if</span>(
+				!Zapatec.is_ie &amp;&amp;
+				element.hasAttribute(<span class="literal">"multiple"</span>) ||
+				Zapatec.is_ie &amp;&amp;
+				element.attributes[<span class="literal">'multiple'</span>] &amp;&amp; element.attributes[<span class="literal">'multiple'</span>].nodeValue
+			){
+				var res = [];
+				<span class="reserved">for</span>(var ii = 0; ii &lt; element.options.length; ii++){
+					var oOption = element.options[ii];
+					<span class="reserved">if</span>(oOption.selected){
+						res.push(oOption.value)
+					}
+				}
+
+				<span class="reserved">return</span> res;
+			} <span class="reserved">else</span> {
+				<span class="reserved">if</span>(element.selectedIndex &lt; 0){
+					<span class="comment">// IE weird. Sometimes selectedIndex is -1</span>
+					<span class="reserved">return</span> <span class="literal">""</span>;
+				}
+				
+				var option = element.options[element.selectedIndex];
+	    
+				<span class="reserved">if</span>(option != null){
+					<span class="reserved">return</span> option.value;
+				} <span class="reserved">else</span> {
+					<span class="reserved">return</span> <span class="literal">""</span>;
+				}
+			}
+		case <span class="literal">"input"</span>:
+			<span class="reserved">return</span> element.value;
+		case <span class="literal">"textarea"</span>:
+			<span class="reserved">return</span> element.value;
+	}
+
+	<span class="reserved">return</span> null;
+};
+
+<span class="comment">/**
+ * Sets given value for given element
+ * <span class="attrib">@param</span> element {Object} reference to element. DOM reference or string ID
+ * <span class="attrib">@param</span> value - [string] value
+ */</span>
+Zapatec.Form.Utils.setValue = <span class="reserved">function</span>(element, value) {
+	element = Zapatec.Widget.getElementById(element);
+
+	<span class="reserved">if</span>(element == null || typeof(element.tagName) == <span class="literal">'undefined'</span>){
+		<span class="reserved">return</span> null;
+	}
+
+	switch (element.tagName.toLowerCase()) {
+		case <span class="literal">"input"</span>:
+			var elType = element.type.toLowerCase();
+			<span class="reserved">if</span>(elType != <span class="literal">"file"</span> &amp;&amp; elType != <span class="literal">"button"</span>){
+				element.value = value;
+			}
+
+			break;
+		case <span class="literal">"textarea"</span>:
+			element.value = value;
+
+			break;
+		case <span class="literal">"select"</span>:
+			<span class="reserved">if</span>(
+				(
+					!Zapatec.is_ie &amp;&amp;
+					element.hasAttribute(<span class="literal">"multiple"</span>) ||
+					element.attributes[<span class="literal">'multiple'</span>]
+				) &amp;&amp;
+				value.length
+			){
+				<span class="reserved">for</span>(var ii = element.options.length - 1; ii &gt;= 0 ; ii--){
+					var oOption = element.options[ii];
+
+					<span class="reserved">for</span>(var jj = value.length; jj &gt;= 0; jj--){
+						<span class="reserved">if</span>(oOption.value == value[jj]){
+							oOption.selected = true;
+							break;
+						}
+					}
+				}
+			} <span class="reserved">else</span> {
+				<span class="reserved">for</span>(var i = 0; i &lt; element.options.length; i++){
+					<span class="reserved">if</span> (element.options[i].value == value){
+						element.selectedIndex = i;
+						break;
+					}
+				}
+			}
+	}
+
+	<span class="reserved">return</span> value;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Check if given element is form field.
+ * <span class="attrib">@return</span> true, if current field is input-able field.
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Form.Utils.isInputField = <span class="reserved">function</span>(el){
+	<span class="reserved">if</span>(el.nodeType != 1){
+		<span class="reserved">return</span> false;
+	}
+	
+	var nodeName = el.nodeName.toLowerCase();
+	
+	<span class="reserved">return</span> (
+		nodeName == <span class="literal">'input'</span> ||
+		nodeName == <span class="literal">'textarea'</span> ||
+		nodeName == <span class="literal">'select'</span>
+	);
+};	
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Should we ignore this field.
+ * <span class="attrib">@param</span> field {Object} reference to element. DOM element or string ID.
+ * <span class="attrib">@return</span> true if Zapatec.Form shouldn't process this field.
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Form.Utils.ignoreField = <span class="reserved">function</span>(field) {
+	field = Zapatec.Widget.getElementById(field);
+
+	<span class="reserved">if</span>(
+		!field ||
+		field.nodeType != 1 ||
+		( <span class="comment">// if field className has "zpIgnoreField" - do not process this field.</span>
+			field.className &amp;&amp;
+			/\bzpIgnoreField\b/.test(field.className)
+		) ||
+		!Zapatec.Form.Utils.isInputField(field) ||
+		( <span class="comment">// IE bug - it thinks that &lt;FIELDSET&gt; is form element</span>
+			field.nodeType == 1 &amp;&amp;
+			field.nodeName.toLowerCase() == <span class="literal">'fieldset'</span>
+		)
+	){
+		<span class="reserved">return</span> true;
+	}
+
+	var type = field.type.toLowerCase();
+	var ignoreList = [<span class="literal">'submit'</span>, <span class="literal">'reset'</span>, <span class="literal">'button'</span>];
+
+	<span class="reserved">for</span> (var ii = 0; ii &lt; ignoreList.length; ii++) {
+		<span class="reserved">if</span> (type.toLowerCase() == ignoreList[ii]) {
+			<span class="reserved">return</span> true; <span class="comment">//ignore</span>
+		}
+	}
+
+	<span class="reserved">return</span> false; <span class="comment">//not in the list; don't ignore</span>
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * zpFormMask related function.
+ * Checks if key that was pressed is not alphanumeric key.
+ * <span class="attrib">@param</span> charCode {int} data, retrieved from this.getInputData()[0]
+ * <span class="attrib">@param</span> newChar {char} data, retrieved from this.getInputData()[1]
+ * <span class="attrib">@return</span> true if key that was pressed is not alphanumeric key.
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Form.Utils.isSpecialKey = <span class="reserved">function</span>(charCode, newChar){
+	<span class="reserved">return</span> (
+		(
+			newChar == null &amp;&amp;
+			charCode != 8 &amp;&amp;
+			charCode != 46
+		) ||
+		charCode == 9	|| <span class="comment">// tab</span>
+		charCode == 13	|| <span class="comment">// enter</span>
+		charCode == 16	|| <span class="comment">// shift</span>
+		charCode == 17	|| <span class="comment">// ctrl</span>
+		charCode == 18	|| <span class="comment">// alt</span>
+		charCode == 20	|| <span class="comment">// caps lock</span>
+		charCode == 27	|| <span class="comment">// escape</span>
+		charCode == 33	|| <span class="comment">// page up</span>
+		charCode == 34	|| <span class="comment">// page down</span>
+		charCode == 35	|| <span class="comment">// home</span>
+		charCode == 36	|| <span class="comment">// end</span>
+		charCode == 37	|| <span class="comment">// left arrow</span>
+		charCode == 38	|| <span class="comment">// up arrow</span>
+		charCode == 39	|| <span class="comment">// right arrow</span>
+		charCode == 40	|| <span class="comment">// down arrow</span>
+		charCode == 45	|| <span class="comment">// insert</span>
+		charCode == 144	|| <span class="comment">// num lock</span>
+		charCode &gt; 256 <span class="comment">// Safari strange bug</span>
+	);
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Function for initializing multiple elements in form.
+ * <span class="attrib">@param</span> currEl {Object} link to DOM element, that is processed.
+ * <span class="attrib">@param</span> firstRun {boolean} Should be setted to true, if this function is
+ * called at first time.(in other case you would get problems with table layout)
+ * <span class="attrib">@param</span> form {Object} reference to Zapatec.Form instance
+ */</span>
+Zapatec.Form.Utils.initMultipleField = <span class="reserved">function</span>(currEl, firstRun, form){
+	var md = null;
+
+	<span class="comment">// check if this element can be copied</span>
+	<span class="reserved">if</span>(
+		!currEl ||
+		!currEl.className ||
+		!(md = currEl.className.match(/zpFormMultiple(Inside|Outside)?/)) ||
+	    currEl.zpRelatedElements != null
+	){
+		<span class="reserved">return</span> null;
+	}
+	
+	var outside = true;
+	
+	<span class="reserved">if</span>(
+		md[1] == <span class="literal">"Inside"</span> ||
+		currEl.nodeName.toLowerCase() == <span class="literal">"td"</span> ||
+		currEl.nodeName.toLowerCase() == <span class="literal">"th"</span> ||
+		currEl.nodeName.toLowerCase() == <span class="literal">"tr"</span>
+	){
+		<span class="comment">// for table elements button could be added only inside element</span>
+		outside = false;
+	}
+
+	<span class="reserved">if</span>(
+		currEl.nodeName.toLowerCase() == <span class="literal">"input"</span> ||
+		currEl.nodeName.toLowerCase() == <span class="literal">"textarea"</span> ||
+		currEl.nodeName.toLowerCase() == <span class="literal">"select"</span> ||
+		currEl.nodeName.toLowerCase() == <span class="literal">"image"</span>
+	){
+		<span class="comment">// for this elements button could be added only outside element</span>
+		outside = true;
+	}
+
+	var appendEl = currEl;
+
+	<span class="comment">// if marker sticked to TR - we should create TD element at the end to add</span>
+	<span class="comment">// button to it. To save table structure - we also should add empty cells to</span>
+	<span class="comment">// all other rows.</span>
+	<span class="comment">// but we should do this only on form init</span>
+	<span class="reserved">if</span>(currEl.nodeName.toLowerCase() == <span class="literal">"tr"</span>){
+		<span class="reserved">function</span> findParentTable(el){
+			<span class="reserved">if</span> (
+				el.parentNode != null &amp;&amp;
+				el.parentNode.nodeType == 1 &amp;&amp;
+				el.parentNode.tagName.toLowerCase() != <span class="literal">"table"</span>
+			){
+				<span class="reserved">return</span> findParentTable(el.parentNode);
+			}
+
+			<span class="reserved">return</span> el.parentNode;
+		}
+
+		var table = findParentTable(currEl);
+		
+		<span class="reserved">for</span>(var jj = table.rows.length - 1; jj &gt;=0 ; jj--){
+			var td = document.createElement(<span class="literal">'td'</span>);
+			td.className = Zapatec.Form.IGNORE_CLASSNAME;
+			td.innerHTML = <span class="literal">"&amp;nbsp;"</span>;
+			
+			<span class="reserved">if</span>(
+				jj == currEl.rowIndex ||
+				table.rows[jj] == currEl <span class="comment">// Opera 9 has some problems with rowIndex property</span>
+			){
+				appendEl = td;
+			}
+
+			<span class="reserved">if</span>(firstRun || jj == currEl.rowIndex){
+				table.rows[jj].appendChild(td);
+			}
+		}
+	}
+
+	var button = Zapatec.Utils.createElement(<span class="literal">'input'</span>);
+	button.type = <span class="literal">"button"</span>;
+	button.className = Zapatec.Form.IGNORE_CLASSNAME + <span class="literal">" multipleButton"</span>;
+	Zapatec.Utils.createProperty(button, <span class="literal">"zpMultipleElement"</span>, currEl);
+
+	<span class="comment">// if this is root element (where "+" mark is placed)</span>
+	<span class="reserved">if</span>(currEl.zpOriginalNode == null){
+		<span class="comment">// variable to store references to cloned elements</span>
+		Zapatec.Utils.createProperty(currEl, <span class="literal">"zpMultipleChildren"</span>, []);
+		Zapatec.Utils.createProperty(currEl, <span class="literal">"zpMultipleChilds"</span>, []);
+
+		button.value = <span class="literal">"+"</span>;
+
+		<span class="comment">// on button click - clone element</span>
+		button.onclick = <span class="reserved">function</span>(){
+			<span class="reserved">if</span>(!<span class="reserved">this</span>.disabled){
+				Zapatec.Form.Utils.cloneElement(currEl, form);
+			}
+		}
+	} <span class="reserved">else</span> {
+		<span class="comment">// if this is cloned element</span>
+		button.value = <span class="literal">"-"</span>;
+
+		var parent = currEl.zpOriginalNode;
+		<span class="comment">// add reference to newly created element to parent's zpMultipleChildren array</span>
+		parent.zpMultipleChilds.push(currEl);
+		parent.zpMultipleChildren.push(currEl);
+
+		button.onclick = <span class="reserved">function</span>(){
+			<span class="reserved">if</span>(!<span class="reserved">this</span>.disabled){
+				Zapatec.Form.Utils.removeClonedElement(currEl, form);
+			}
+		}
+	}
+
+	<span class="comment">// append button to DOM tree</span>
+	<span class="reserved">if</span>(outside){
+		Zapatec.Utils.insertAfter(appendEl, button);
+	} <span class="reserved">else</span> {
+		<span class="reserved">if</span> (form.config.showErrors == <span class="literal">'last'</span>) {
+			<span class="comment">// Add + button before errors text</span>
+			var childrenCount = appendEl.childNodes.length;
+			appendEl = appendEl.childNodes[childrenCount -1];
+			<span class="reserved">while</span> (appendEl.nodeType != 1 || (appendEl.id &amp;&amp; appendEl.id.match(/ErrorText$/))) {
+				appendEl = appendEl.previousSibling;
+			}
+			appendEl = appendEl.nextSibling;
+			appendEl.parentNode.insertBefore(button, appendEl);
+		}
+		<span class="reserved">else</span> {
+			appendEl.appendChild(button);
+		}
+	}
+
+	<span class="comment">// in this array stored elements, that should be deleted when element would be deleted.</span>
+	Zapatec.Utils.createProperty(currEl, <span class="literal">"zpRelatedElements"</span>, [button, currEl]);
+
+	<span class="comment">// store reference to button</span>
+	Zapatec.Utils.createProperty(currEl, <span class="literal">"zpMultipleButton"</span>, button);
+
+	<span class="comment">// get configuration for this field</span>
+	var tokens = Zapatec.Form.Utils.getTokens(currEl.className);
+
+	<span class="comment">// if element has "zpFormMultipleLimit" property - save it.</span>
+	<span class="reserved">if</span>(typeof(tokens[<span class="literal">'zpFormMultipleLimit'</span>]) != <span class="literal">'undefined'</span> &amp;&amp; !isNaN(parseInt(tokens[<span class="literal">'zpFormMultipleLimit'</span>]))){
+		Zapatec.Utils.createProperty(currEl, <span class="literal">"zpFormMultipleLimit"</span>, parseInt(tokens[<span class="literal">'zpFormMultipleLimit'</span>]) - 2);
+
+		<span class="reserved">if</span>(isNaN(currEl.zpFormMultipleLimit)){
+			currEl.zpFormMultipleLimit = -1;
+		}
+	} <span class="reserved">else</span> {
+		Zapatec.Utils.createProperty(currEl, <span class="literal">"zpFormMultipleLimit"</span>, -1);
+	}
+
+	<span class="comment">// check if this is input field</span>
+	<span class="reserved">if</span>(currEl.zpFormField != null){
+		<span class="comment">// store reference to elements that must be destroyed together with this.</span>
+		currEl.zpRelatedElements = [
+			currEl.zpFormField.statusImg1,
+			currEl.zpFormField.statusImg2,
+			currEl.zpFormField.statusImg3,
+			currEl.zpFormField.statusImg4,
+			currEl.zpFormField.statusImg,
+			currEl.zpFormField.errorText
+		].concat(currEl.zpRelatedElements);
+	} <span class="reserved">else</span> {
+		Zapatec.Utils.createProperty(currEl, <span class="literal">"zpLastNode"</span>, (outside ? button : currEl));
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Handles click on "+" button near zpFormMultiple element
+ * <span class="attrib">@param</span> field {Object} DOM reference to element that must be cloned
+ * <span class="attrib">@param</span> form {Object} reference to Zapatec.Form instance. Optional.
+ */</span>
+Zapatec.Form.Utils.cloneElement = <span class="reserved">function</span>(field, form){
+	<span class="comment">// if zpFormMultipleLimit exceeded - do nothing</span>
+	<span class="reserved">if</span>(
+		field.zpFormMultipleLimit &gt;= 0 &amp;&amp; field.zpMultipleChildren != null &amp;&amp; 
+		field.zpMultipleChildren.length &gt; field.zpFormMultipleLimit
+	){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// determine where to insert new element</span>
+	var insertAfterNode = field.zpLastNode;
+
+	<span class="reserved">if</span>(field.zpMultipleChildren != null &amp;&amp; field.zpMultipleChildren.length &gt; 0){
+		insertAfterNode = field.zpMultipleChildren[field.zpMultipleChildren.length - 1].zpLastNode;
+	}
+
+	<span class="comment">// clone node</span>
+	var clone = field.cloneNode(true);
+
+	<span class="comment">// store reference to parent node</span>
+	Zapatec.Utils.createProperty(clone, <span class="literal">"zpOriginalNode"</span>, field);
+
+	Zapatec.Utils.insertAfter(insertAfterNode, clone);
+
+	<span class="comment">// init all nodes in created subtree if needed (included newly created node)</span>
+	var childElements = [clone];
+	var originalElements = [field];
+
+	var tmpArr = clone.all ? clone.all : clone.getElementsByTagName(<span class="literal">"*"</span>);
+	var originalArr = field.all ? field.all : field.getElementsByTagName(<span class="literal">"*"</span>);
+	
+	<span class="reserved">for</span>(var ii = 0; ii &lt; tmpArr.length; ii++){
+		childElements.push(tmpArr[ii]);
+		originalElements.push(originalArr[ii]);
+	}
+
+	<span class="comment">// check all child elements for this element.</span>
+	<span class="reserved">for</span>(var ii = 0; ii &lt; childElements.length; ii++){
+		var currEl = childElements[ii];
+		
+		<span class="comment">// if field has "ignore" mark - delete it.</span>
+		<span class="reserved">if</span>(currEl.className.indexOf(Zapatec.Form.IGNORE_CLASSNAME) &gt;= 0){
+			Zapatec.Utils.destroy(currEl);
+			continue;
+		}
+
+		<span class="comment">// If element is input field - clear its value and create</span>
+		<span class="comment">// corresponding Zapatec.Form.Field object.</span>
+		<span class="reserved">if</span>(Zapatec.Form.Utils.isInputField(currEl)){
+			Zapatec.Form.Utils.setValue(currEl, <span class="literal">""</span>);
+
+			<span class="reserved">if</span>(currEl.form &amp;&amp; currEl.form.zpForm){
+				var zpForm = currEl.form.zpForm;
+
+				var zpField = originalElements[ii].zpFormField;
+				currEl.zpFormField = null;
+
+				new Zapatec.Form.Field({
+					form: zpForm, 
+					field: currEl,
+					langId: zpForm.config.langId,
+					lang: zpForm.config.lang,
+					langCountryCode: zpForm.config.langCountryCode,
+					langEncoding: zpForm.config.langEncoding,
+					formConfig: (zpForm ? zpForm.config : {}),
+					inheritFrom: zpField
+				});
+			}
+		}
+
+		<span class="comment">// clear internal properties</span>
+		currEl.zpMultipleElement = null;
+		currEl.zpMultipleChilds = null;
+		currEl.zpMultipleChildren = null;
+		currEl.zpRelatedElements = null;
+		currEl.zpMultipleButton = null;
+		currEl.zpFormMultipleLimit = null;
+
+		<span class="comment">// init this field if it is multiple</span>
+		Zapatec.Form.Utils.initMultipleField(currEl, false, form);
+
+		<span class="reserved">if</span>(form &amp;&amp; typeof(form.config.multipleCallback) == <span class="literal">'function'</span>){
+			form.config.multipleCallback(field, clone, currEl, field.zpMultipleChildren);
+		}
+	}
+
+	<span class="comment">// if zpFormMultipleLimit clones were created - hide button and disable it</span>
+	<span class="reserved">if</span>(
+		field.zpFormMultipleLimit &gt;= 0 &amp;&amp; 
+		field.zpMultipleChildren != null &amp;&amp; 
+		field.zpMultipleChildren.length &gt; field.zpFormMultipleLimit
+	){
+		field.zpMultipleButton.style.visibility = <span class="literal">'hidden'</span>;
+		field.zpMultipleButton.disabled = true;
+	}
+
+	<span class="reserved">if</span>(form){
+		form.fireEvent(<span class="literal">"afterCloneMultiple"</span>, field, clone);
+	}
+
+	<span class="reserved">return</span> clone;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Handles click on "-" button near cloned zpFormMultiple element
+ * <span class="attrib">@param</span> field {Object} DOM reference to element that must be removed
+ */</span>
+Zapatec.Form.Utils.removeClonedElement = <span class="reserved">function</span>(field, form){
+	<span class="comment">// Do nothing if this is not cloned field.</span>
+	<span class="reserved">if</span>(field == null || field.zpOriginalNode == null){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// remove current element from array of cloned elements in parent node.</span>
+	var children = field.zpOriginalNode.zpMultipleChildren;
+
+	<span class="reserved">if</span>(form){
+		form.fireEvent(<span class="literal">"beforeDeleteMultiple"</span>, field, field.zpOriginalNode);
+	}
+	
+	<span class="reserved">for</span>(var ii = 0; ii &lt; children.length; ii++){
+		<span class="reserved">if</span>(children[ii] == field){
+			var original = field.zpOriginalNode;
+			
+			original.zpMultipleChilds = children.slice(0, ii).concat(children.slice(ii + 1));
+			original.zpMultipleChildren = children.slice(0, ii).concat(children.slice(ii + 1));
+	    
+			<span class="comment">// show "+" button</span>
+			<span class="reserved">if</span>(
+				original.zpFormMultipleLimit &gt;= 0 &amp;&amp;
+				original.zpMultipleChildren.length &lt;= original.zpFormMultipleLimit
+			){
+				original.zpMultipleButton.style.visibility = <span class="literal">'visible'</span>;
+				original.zpMultipleButton.disabled = false;
+			}
+
+			break;
+		}
+	}
+
+	<span class="comment">// destroy all related elements for this element.</span>
+	<span class="reserved">if</span>(field.zpRelatedElements != null &amp;&amp; field.zpRelatedElements.length &gt; 0){
+		<span class="reserved">for</span>(var ii = 0; ii &lt; field.zpRelatedElements.length; ii++){
+			<span class="reserved">if</span>(
+				typeof(field.zpRelatedElements[ii]) != <span class="literal">'undefined'</span> &amp;&amp;
+				field.zpRelatedElements[ii] != null
+			){
+				Zapatec.Utils.destroy(field.zpRelatedElements[ii]);
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * This is default function for processing cloned elements.
+ * <span class="attrib">@param</span> original {Object} Reference to original DOM element
+ * <span class="attrib">@param</span> cloneParent {Object} Reference to cloned container
+ * <span class="attrib">@param</span> cloned {Object} cloned element inside 
+ * <span class="attrib">@param</span> children {Array} Array of all cloned elements for original node
+ */</span>
+Zapatec.Form.Utils.generateMultipleId = <span class="reserved">function</span>(original, cloneParent, cloned, children){
+	<span class="reserved">if</span>(!cloneParent.zpIsCloned){
+		cloneParent.zpIsCloned = true;
+	}
+	
+	<span class="comment">// if element has 'id' attribute - make it unique.</span>
+	<span class="reserved">if</span>(
+		typeof(cloned.id) != <span class="literal">'undefined'</span> &amp;&amp; 
+		cloned.id != null &amp;&amp; 
+		cloned.id != <span class="literal">""</span>
+	){
+		cloned.id += <span class="literal">"-"</span> + original.zpMultipleChildren.length;
+	}
+
+	<span class="comment">// if element has 'name' attribute - make it unique.</span>
+	<span class="reserved">if</span>(
+		typeof(cloned.name) != <span class="literal">'undefined'</span> &amp;&amp; 
+		cloned.name != null &amp;&amp; 
+		cloned.name != <span class="literal">""</span>
+	){
+		cloned.name += <span class="literal">"-"</span> + original.zpMultipleChildren.length;
+	}
+};
+
+<span class="comment">/**
+ * This is default handler for removing cloned element.
+ */</span>
+Zapatec.Form.Utils.beforeDeleteMultiple = <span class="reserved">function</span>(el, original){
+	<span class="reserved">if</span>(!el || !original || !original.zpMultipleChildren){
+		<span class="reserved">return</span>;
+	}
+
+	var cc = 1;
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; original.zpMultipleChildren.length; ii++){
+		var node = original.zpMultipleChildren[ii];
+
+		<span class="reserved">if</span>(node === el){
+			continue;
+		}
+
+		var childElements = [node];
+		var tmpArr = node.all ? node.all : node.getElementsByTagName(<span class="literal">"*"</span>);
+	    
+		<span class="reserved">for</span>(var jj = 0; jj &lt; tmpArr.length; jj++){
+			childElements.push(tmpArr[jj]);
+		}
+	    
+		<span class="comment">// check all child elements for this element.</span>
+		<span class="reserved">for</span>(var jj = 0; jj &lt; childElements.length; jj++){
+			var currEl = childElements[jj];
+
+			<span class="reserved">if</span>(currEl.id){
+				currEl.id = currEl.id.replace(/-\d+$/, <span class="literal">"-"</span> + cc);
+			}
+
+			<span class="reserved">if</span>(currEl.name){
+				currEl.name = currEl.name.replace(/-\d+$/, <span class="literal">"-"</span> + cc);
+			}
+		}
+	
+		cc++;
+	}
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Form</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:46 2009</div>
+</body>
+</html>

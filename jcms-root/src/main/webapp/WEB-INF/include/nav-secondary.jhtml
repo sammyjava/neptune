@@ -1,0 +1,48 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/nav-secondary.jhtml" %>
+<% if (!customSecondaryNav) { %>
+<!-- secondary and tertiary navigation -->
+<div id="navsec-box">
+  <div id="navsec-top"></div>
+  <%
+    if (n.getDepth()>0) {
+      NodeListIterator level1Iterator = level1.getNodeListIterator(application);
+      while (level1Iterator.hasNext()) {
+        Node n2 = level1Iterator.nextNode();
+        boolean n2shown = n2.isVisible() && (!accessEnabled || au.mayAccess(application, n2));
+        if (n2shown) {
+          String secClass = "navsec navsec-off";
+          boolean n2selected = (n2.equals(n) || n2.equals(parent) || (grandparent!=null && n2.equals(grandparent)));
+          if (n2selected) secClass = "navsec navsec-on";
+  %>
+  <div <% if (!n2selected) { %>onMouseOver="this.className='navsec navsec-over'" onMouseOut="this.className='<%=secClass%>'"<% } %> class="<%=secClass%>"><a class="<%=secClass%>" <% if (n2.isExternal()) { %>target="_blank"<% } %> href="<%=n2.url%>"><%=n2.nodename%></a></div>
+  <%
+    if (n2selected && n2.hasVisibleChildren(application)) {
+  %>
+  <div class="navter-box">
+    <%
+      NodeListIterator level2Iterator = n2.getNodeListIterator(application);
+      while (level2Iterator.hasNext()) {
+        Node n3 = level2Iterator.nextNode();
+        boolean n3shown = n3.isVisible() && (!accessEnabled || au.mayAccess(application, n3));
+        if (n3shown) {
+          String terClass = "navter navter-off";
+          boolean n3selected = (n3.equals(n) || n3.equals(parent));
+          if (n3selected) terClass = "navter navter-on";
+    %>
+    <div <% if (!n3selected) { %>onMouseOver="this.className='navter navter-over'" onMouseOut="this.className='<%=terClass%>'"<% } %> class="<%=terClass%>"><a class="<%=terClass%>" <% if (n3.isExternal()) { %>target="_blank"<% } %> href="<%=n3.url%>"><%=n3.nodename%></a></div>
+    <%
+    } // end if visible
+  } // end while
+    %>
+  </div>
+  <%
+  } // end if equals
+} // end if visible
+} // end while
+} // end if depth>0
+  %>
+  <div id="navsec-bottom"></div>
+</div>
+<% } %>
+<!--startindex-->

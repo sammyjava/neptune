@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	This page demonstrates customized error messages that override the standard error messages. 	If you want to use your own error message for some datatype - please define variable called  		&lt;your_validatorName&gt;Error='your\ error\ message' 	For example if you want to define custom error message for zpFormInt you should write the following:  		&lt;input value='' size='23' name='only_digits' type='text' class='zpFormInt zpFormIntError='Oh!\ This\ is\ not\ digits!'' /&gt; 	Don't forget to put slashes before spaces in value. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Custom Error Messages</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Custom Error Messages</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>winxp theme</b>.</li>
+				
+	<li>This page demonstrates customized error messages that override the standard error messages.</li>
+	<li>If you want to use your own error message for some datatype - please define variable called 
+		<i><b>&lt;your_validatorName&gt;</b>Error="your\ error\ message"</i></li>
+	<li>For example if you want to define custom error message for zpFormInt you should write the following: <br />
+		<i>&lt;input value="" size="23" name="only_digits" type="text" class='zpFormInt zpFormIntError="Oh!\ This\ is\ not\ digits!"' /&gt;</i></li>
+	<li>Don't forget to put slashes before spaces in value.</li>
+
+			</ul>
+		</div>
+
+
+<br />
+<form action="custom_errors.html" id="userForm" method="post">
+	<fieldset>
+		<legend>Custom errors</legend>
+		<div id="errOut" class="errOutput"></div>
+		<table width="100%">
+			<tr>
+				<th width="30%"></th>
+				<th width="70%" align="left">Standard errors:</th>
+			</tr>
+		    <tr>
+				<td>
+					<label class="zpFormLabel">zpFormInt</label>
+				</td>
+				<td><input value="letter" size="15" name="digits" type="text" class="zpFormInt" /></td>
+			</tr>
+			<tr>
+				<td>zpFormRequired</td>
+				<td><input value="" size="23" name="required" type="text" class="zpFormRequired" /><br /></td>
+			</tr>
+			<tr>
+				<td>zpFormCreditCard and zpFormMask</td>
+				<td><input value="1234" size="20" name="credit_card" type="text" class='zpFormCreditCard zpFormMask="4000-0000-0000-0000"' /></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th width="30%"></th> 
+				<th width="70%" align="left">Customized errors:</th>	
+			</tr>
+			<tr>
+				<td><label class="zpFormLabel">zpFormInt</label></td>
+				<td><input value="letter" size="23" name="custom_digits" type="text" class='zpFormInt zpFormIntError="Oh!\ This\ is\ not\ digits!"' /></td>
+			</tr>
+			<tr>
+				<td>zpFormRequired</td>
+				<td><input value="" size="23" name="custom_required" type="text" class='zpFormRequired zpFormRequiredError="Warning!\ This\ field\ is\ required!"' /><br /></td>
+			</tr>
+			<tr>
+				<td>zpFormCreditCard and zpFormMask</td>
+				<td><input value="1234" size="20" name="custom_credit_card" type="text" class='zpFormCreditCard zpFormMask="4000-0000-0000-0000" zpFormMaskError="Please\ fill\ this\ with\ digits" zpFormCreditCardError="This\ is\ not\ credit\ card\ number"' /></td>
+			</tr>
+		</table>
+	</fieldset>
+
+	<input value="Submit" name="Submit" onclick="" type="submit" class="button" />
+	<input value="Clear" name="Clear" onclick="" type="reset" class="button" />
+</form>
+
+<script type="text/javascript">
+new Zapatec.Form({
+	form: 'userForm',
+	showErrors: 'afterField',
+	statusImgPos: 'beforeField', 
+	showErrorsOnSubmit: true, 
+	submitErrorFunc: testErrOutput,
+	theme: "WinXP"
+});
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

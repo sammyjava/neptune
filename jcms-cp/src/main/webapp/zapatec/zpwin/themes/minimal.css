@@ -1,0 +1,149 @@
+/* $Id: minimal.css 6183 2007-02-05 12:42:26Z slip $ */
+@import url("base.css");
+
+.zpWinMinimalContainer .zpWinBack {
+	background-color: #F3F2F8;
+	border-color: #CCCCCC;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.zpWinMinimalContainer .zpWinFront {
+	background-color: #DCE9FC;
+	border-color: #A0B5D9;
+	border-style: solid;
+	border-width: 1px;
+}
+
+.zpWinMinimalContainer .zpWinTitleArea {
+	height:20px;
+	text-align:left;
+	line-height: 20px;
+	font-family: Tahoma, Verdana, Arial, sans-serif;
+    font-size: 11px;
+}
+
+.zpWinMinimalContainer .zpWinFront .zpWinTitleArea td{
+	color: #333333;
+	background: #9EBFF6;
+}
+
+.zpWinMinimalContainer .zpWinBack .zpWinTitleArea td{
+	color: #D2D9D0;
+	background: #F3F2F8;
+}
+
+.zpWinMinimalContainer .zpWinTitleText {
+    white-space: nowrap;
+    padding-top: 0px;
+	padding-left : 6px;
+}
+
+.zpWinMinimalContainer td.zpWinTitleFirstCell,
+.zpWinMinimalContainer td.zpWinTitleLastCell {
+	display : none;
+}
+
+.zpWinMinimalContainer .zpWinCloseButton, 
+.zpWinMinimalContainer .zpWinMinButton, 
+.zpWinMinimalContainer .zpWinMaxButton, 
+.zpWinMinimalContainer .zpWinRestoreButton {
+	height: 14px;
+	width: 16px;
+	margin : 3px 1px;
+	display : block;
+	overflow : hidden;
+}
+
+.zpWinMinimalContainer .zpWinButtonHolder {
+	height : 20px;
+	width : 18px;
+}
+
+.zpWinMinimalContainer .zpWinFront .zpWinCloseButton{
+  background: url(minimal/close2.gif) no-repeat;
+}
+
+.zpWinMinimalContainer .zpWinFront .zpWinMinButton{
+  background: url(minimal/minimize2.gif) no-repeat;
+}
+
+.zpWinMinimalContainer .zpWinFront .zpWinMaxButton{
+  background: url(minimal/maximize2.gif) no-repeat;
+}
+
+.zpWinMinimalContainer .zpWinFront .zpWinRestoreButton {
+	background: url(minimal/restore2.gif) no-repeat 0 0;
+}
+
+.zpWinMinimalContainer .zpWinBack .zpWinCloseButton{
+  background: url(minimal/close.gif) no-repeat;
+}
+
+.zpWinMinimalContainer .zpWinBack .zpWinMinButton{
+  background: url(minimal/minimize.gif) no-repeat;
+}
+
+.zpWinMinimalContainer .zpWinBack .zpWinMaxButton{
+  background: url(minimal/maximize.gif) no-repeat;
+}
+
+.zpWinMinimalContainer .zpWinBack .zpWinRestoreButton {
+	background: url(minimal/restore.gif) no-repeat 0 0;
+}
+
+.zpWinMinimalContainer td.zpWinContentCell {
+}
+
+.zpWinMinimalContainer .zpWinFront .zpWinContentBorder {
+	border-color: #387fd1 #F3F2F8 #387fd1 #F3F2F8;
+}
+
+.zpWinMinimalContainer .zpWinBack .zpWinContentBorder {
+	border-color: #909090 #F3F2F8 #909090 #F3F2F8;
+}
+
+.zpWinMinimalContainer .zpWinContentBorder {
+	background-color: #fff;
+	border-style: solid;
+	border-width: 1px 1px 0px 1px;
+}
+
+.zpWinMinimalContainer .zpWinContent {
+	padding: 0px;
+}
+
+.zpWinMinimalContainer td.zpWinStatusCell {
+}
+
+.zpWinMinimalContainer .zpWinBottomBorder {
+	height : 1px;
+	line-height : 1px;
+	overflow : hidden;
+	font-size : 1px
+}
+
+.zpWinMinimalContainer .zpWinFront td.zpWinStatusCell {
+}
+
+.zpWinMinimalContainer .zpWinBack td.zpWinStatusCell {
+}
+
+.zpWinMinimalContainer .zpWinStatus {
+	height: 19px;
+	line-height: 16px;
+	text-align:left;
+	color:black;
+   	vertical-align: middle;
+   	font-family: Arial, Heltvetica, Verdana, sans-serif;
+   	font-size: 11px;
+   	padding-left: 3px;
+}
+
+.zpWinMinimalContainer .zpWinFront .zpWinStatus {
+	border-top: solid 1px #387fd1;
+}
+
+.zpWinMinimalContainer .zpWinBack .zpWinStatus {
+	border-top: solid 1px #909090;
+}

@@ -1,0 +1,290 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+
+<title>Javascript Form Builder By Zapatec</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<META Name="Robots" Content="index,follow">
+	<META Name="Googlebot" Content="index,follow">
+	
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	<link rel="stylesheet" href="../wizard/form_wizard.css" type="text/css">
+	<link href="../../zpwin/themes/dialog.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript" src="../../utils/zapatec.js"></script>
+	<script type="text/javascript" src="../../utils/button.js"></script>
+	<script type="text/javascript" src="../../utils/edit_inline.js"></script>
+	<script type="text/javascript" src="../../zptooltip/src/zptooltip.js"></script>
+	<script type="text/javascript" src="../../zpwin/src/window.js"></script>
+	<script type="text/javascript" src="../../utils/droparea.js"></script>
+	<script type='text/javascript' src='../../zpwin/src/confirm.js'></script>
+	<script type='text/javascript' src='../../zptabs/src/zptabs.js'></script>
+	<script type='text/javascript' src='../../zptabs/src/zptabs-core.js'></script>
+	<script type="text/javascript" src="../src/form.js"></script>
+	<script type="text/javascript" src="../wizard/builder.js"></script>
+	<script type="text/javascript" src="../wizard/builder-field.js"></script>
+	<script type="text/javascript" src="../wizard/builder-composer.js"></script>
+
+	<!-- Form language files -->
+	<script type="text/javascript" src="../lang/bul-ansi.js"></script>
+	<script type="text/javascript" src="../lang/bul-utf8.js"></script>
+	<script type="text/javascript" src="../lang/chn_simplified-gb2312.js"></script>
+	<script type="text/javascript" src="../lang/chn_simplified-html.js"></script>
+	<script type="text/javascript" src="../lang/chn_traditional-big5.js"></script>
+	<script type="text/javascript" src="../lang/chn_traditional-html.js"></script>
+	<script type="text/javascript" src="../lang/eng.js"></script>
+	<script type="text/javascript" src="../lang/ger-ansi.js"></script>
+	<script type="text/javascript" src="../lang/ger-utf8.js"></script>
+	<script type="text/javascript" src="../lang/ita_it-utf8.js"></script>
+	<script type="text/javascript" src="../lang/por_pt-ansi.js"></script>
+	<script type="text/javascript" src="../lang/por_pt-utf8.js"></script>
+	<script type="text/javascript" src="../lang/rus-utf8.js"></script>
+	<script type="text/javascript" src="../lang/rus-cp1251.js"></script>
+	<script type="text/javascript" src="../lang/rus-koi8r.js"></script>
+	<script type="text/javascript" src="../lang/ukr-utf8.js"></script>
+	<script type="text/javascript" src="../lang/ukr-cp1251.js"></script>
+	<script type="text/javascript" src="../lang/spa_sp-utf8.js"></script>
+	<script type="text/javascript" src="../lang/fre_fr-utf8.js"></script>
+	<script type="text/javascript" src="../lang/jpn-shift_jis.js"></script>
+	<script type="text/javascript" src="../lang/jpn-utf8.js"></script>
+</head>
+<body>
+<br/>
+<div id="content">
+	<div id="tab-bar"></div>
+  <div style="border:1px solid #dcdbd4;">                                                                               	
+	<div id="tabs">
+		<div id="pane-introduction">
+			<label accesskey="w"><u>I</u>ntroduction</label>
+			<div class="header">Introduction to the Zapatec DHTML Form builder</div>
+		</div>
+		<div id="pane-prefs">
+			<label accesskey="c"><u>C</u>onfiguration</label>
+			<div class="header">Form configuration</div>
+			<form>
+				<table>
+					<tr>
+						<td class="label"><label for="form_path">Form path</label></td>
+						<td class="control">
+							<input type="text" name="form_path" onchange="wizard.configOptionChanged(this.name, this.value)"/>
+						</td>
+						<td class="tooltip">
+							<dfn title="Form path">
+								Put path (absolute or relative) to site root where form zip file is unpacked. This directory must contain "utils" and "zpform" folders
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_language">Language</label></td>
+						<td class="control">
+							<select id="option_language" name="language" onchange="wizard.configOptionChanged(this.name, this.options[this.selectedIndex].value)">
+								<option value="bul-ansi">Bulgarian ANSI</option>
+								<option value="bul-utf8">Bulgarian UTF8</option>
+								<option value="chn_simplified-gb2312">Chinese simplified GB2312</option>
+								<option value="chn_simplified-html">Chinese simplified HTML entities</option>
+								<option value="chn_traditional-big5">Chinese traditional Big5</option>
+								<option value="chn_traditional-html">Chinese traditional HTML entities</option>
+								<option value="eng" selected="selected">English</option>
+								<option value="ger-ansi">German ANSI</option>
+								<option value="ger-utf8">German UTF8</option>
+								<option value="ita_it-utf8">Italian UTF8</option>
+								<option value="por_pt-utf8">Portuguese (Portugal) UTF8</option>
+								<option value="por_pt-ansi">Portuguese (Portugal) ANSI</option>
+								<option value="rus-utf8">Russian UTF8</option>
+								<option value="rus-cp1251">Russian CP1251</option>
+								<option value="rus-koi8r">Russian KOI8-R</option>
+								<option value="ukr-utf8">Ukrainian UTF8</option>
+								<option value="ukr-cp1251">Ukrainian CP1251</option>
+								<option value="spa_sp-utf8">Spanish UTF8</option>
+								<option value="fre_fr-utf8">French UTF8</option>
+								<option value="jpn-shift_jis">Japanese SJIS</option>
+								<option value="jpn-utf8">Japanese UTF8</option>
+							</select>
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_theme">Theme</label></td>
+						<td class="control">
+							<select id="option_theme" name="theme" onchange="wizard.configOptionChanged(this.name, this.options[this.selectedIndex].value)">
+								<option value="alternate">Alternate</option>
+								<option value="basic">Basic</option>
+								<option value="default" selected="selected">Default</option>
+								<option value="lightgreen">LightGreen</option>
+								<option value="winxp">WinXP</option>
+							</select>
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_showErrors">Error message position</label></td>
+						<td class="control">
+							<select id="option_showErrors" name="showErrors" onchange="wizard.configOptionChanged(this.name, this.options[this.selectedIndex].value)">
+								<option value="afterField" selected="selected">After field</option>
+								<option value="tooltip">Tooltip</option>
+								<option value="beforeField">Before field</option>
+								<option value="null">Do not show</option>
+							</select>
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_statusImgPos">Status image position</label></td>
+						<td class="control">
+							<select id="option_statusImgPos" name="statusImgPos" onchange="wizard.configOptionChanged(this.name, this.options[this.selectedIndex].value)">
+								<option value="beforeField" selected="selected">Before field</option>
+								<option value="afterField">After field</option>
+								<option value="null">Do not show</option>
+							</select>
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_showErrorsOnSubmit">Show errors on submit</label></td>
+						<td class="control">
+							<input id="option_showErrorsOnSubmit" name="showErrorsOnSubmit" onchange="wizard.configOptionChanged(this.name, this.checked)" type="checkbox" class="checkboxitem" />
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_strict">Strict validation</label></td>
+						<td class="control">
+							<input id="option_strict" name="strict" onchange="wizard.configOptionChanged(this.name, this.checked)" type="checkbox" class="checkboxitem"  />
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_putTabIndexesOnError">Put tabIndexes on error</label></td>
+						<td class="control">
+							<input id="option_putTabIndexesOnError" name="putTabIndexesOnError" onchange="wizard.configOptionChanged(this.name, this.checked)" type="checkbox" class="checkboxitem" />
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_startupFocusPosition">Startup focus position</label></td>
+						<td class="control">
+							<select id="option_startupFocusPosition" name="startupFocusPosition" onchange="wizard.configOptionChanged(this.name, this.options[this.selectedIndex].value)">
+								<option value="firstField">First form field</option>
+								<option value="firstRequiredField">First required field</option>
+								<option value="firstIncorrectField">First incorrect field</option>
+								<option value="">Do not focus any field</option>
+							</select>
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+					<tr>
+						<td class="label"><label for="option_displayErrorWhileTyping">Display error message while user is in the field</label></td>
+						<td class="control">
+							<input id="option_displayErrorWhileTyping" name="displayErrorWhileTyping" onchange="wizard.configOptionChanged(this.name, this.checked)" type="checkbox" class="checkboxitem" />
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+<!--
+					<tr id="block_option_">
+						<td class="label"><label for="option_"></label></td>
+						<td class="control">
+							<input id="option_" name="" onblur="wizard.configOptionChanged(this.name, this.value)" type="text" />
+							<input id="option_" name="" onchange="wizard.configOptionChanged(this.name, this.checked)" type="checkbox" />
+							<select id="option_" name="" onchange="wizard.configOptionChanged(this.name, this.options[this.selectedIndex].value)">
+								<option value=""></option>
+							</select>
+						</td>
+						<td class="tooltip">
+							<dfn title="">
+							</dfn>
+						</td>
+					</tr>
+-->
+				</table>
+			</form>
+		</div>
+		<div id="pane-contents">
+			<label accesskey="t"><u>F</u>orm contents</label>
+			<table width="100%" height="100%">
+				<tr>
+					<td width="20%" valign="top">
+						<div class="header2">Drag from here</div>
+						<div class="input clickable" id="input-text" onclick="//wizard.addField('input-text')">INPUT type="text"</div>
+						<div class="input clickable" id="input-radio" onclick="//wizard.addField('input-radio')">INPUT type="radio"</div>
+						<div class="input clickable" id="input-checkbox" onclick="//wizard.addField('input-checkbox')">INPUT type="checkbox"</div>
+						<div class="input clickable" id="input-textarea" onclick="//wizard.addField('textarea')">TEXTAREA</div>
+						<div class="input clickable" id="input-select" onclick="//wizard.addField('select')">SELECT</div>
+					</td>
+					<td class="separator"></td>
+					<td width="80%" valign="top" id="designPreview">
+					<div id="zpForm">
+					<div id="123" class="elementHolder highlighted" style="border: 1px solid black;">&nbsp;</div>
+					<div id="234" class="elementHolder" style="border: 1px solid black;">&nbsp;</div>
+					<div id="345" class="elementHolder" style="border: 1px solid black;">&nbsp;</div>
+					</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div id="pane-code">
+			<label onclick="wizard.makeCode()" accesskey="g"><u>G</u>et your code</label>
+			<div class="header">Your code is below</div>
+
+			<div style="text-align: right; padding-bottom: 5px;">
+				<button onclick="wizard.previewFormNewWindow()">Preview form in new window</button>
+				<button onclick="document.getElementById('userCode').select()">Select all</button>
+			</div>
+			
+			<textarea id="userCode" rows="20" cols="80" style="width: 100%"></textarea>
+		</div>
+	</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+	var wizard = new Zapatec.FormBuilder({});
+	wizard.start();
+</script>
+
+<div align="center">
+	<br />
+	<a href='http://www.zapatec.com/website/main/contact.jsp' class='lnkblue'>Contact Us</a> | 
+	<a href='http://www.zapatec.com/website/main/employment.jsp' class='lnkblue'>Employment</a>
+	<br />
+	<br />
+	&copy; 2004
+	<strong>Zapatec, Inc.</strong>
+</div>
+
+</body>
+
+</html>
+

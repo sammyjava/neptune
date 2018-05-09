@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom site map, set customSitemap=true and put code here.
+ */
+  boolean customSitemap = false;
+%>

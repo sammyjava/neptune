@@ -1,0 +1,50 @@
+<!--stopindex-->
+<%@ include file="/WEB-INF/custom/nav-secondary-mobile.jhtml" %>
+<% if (!customSecondaryNav) { %>
+<!-- mobile secondary navigation -->
+<div id="navsec-box">
+  <%
+    if (n.getDepth()>0) {
+      NodeListIterator level1Iterator = level1.getNodeListIterator(application);
+      while (level1Iterator.hasNext()) {
+        Node n2 = level1Iterator.nextNode();
+        boolean n2shown = n2.isVisible() && (!accessEnabled || au.mayAccess(application, n2));
+        if (n2shown) {
+          String secClass = "navsec navsec-off";
+          boolean n2selected = (n2.equals(n) || n2.equals(parent) || (grandparent!=null && n2.equals(grandparent)));
+          if (n2selected) secClass = "navsec navsec-on";
+  %>
+  <span class="navsec"><a class="<%=secClass%>" <% if (n2.isExternal()) { %>target="_blank"<% } %> href="<%=n2.url%>"><%=n2.nodename%></a></span>
+  <%
+  } // end if visible
+} // end while
+} // end if depth>0
+  %>
+<% if (n.getDepth()==3 || (n.getDepth()==2 && n.hasVisibleChildren(application))) { %>
+<div id="navter-box">
+  <%
+    Node n2 = n;
+    if (n.getDepth()==3) n2 = n.getParent(application);
+    NodeListIterator level2Iterator = n2.getNodeListIterator(application);
+    while (level2Iterator.hasNext()) {
+      Node n3 = level2Iterator.nextNode();
+      boolean n3shown = n3.isVisible() && (!accessEnabled || au.mayAccess(application, n3));
+      if (n3shown) {
+        String terClass = "navter navter-off";
+        boolean n3selected = n3.equals(n);
+        if (n3selected) terClass = "navter navter-on";
+  %>
+  <span class="navter"><a class="<%=terClass%>" <% if (n3.isExternal()) { %>target="_blank"<% } %> href="<%=n3.url%>"><%=n3.nodename%></a></span>
+  <%
+  } // end if visible
+} // end while
+  %>
+  </div>
+<%
+  } // end if tertiary
+  %>
+    </div>
+<%
+} // end if not custom
+  %>
+<!--startindex-->

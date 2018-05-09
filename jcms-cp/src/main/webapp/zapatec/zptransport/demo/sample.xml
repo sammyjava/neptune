@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<students>
+	<student>
+		<name>Diane Ice</name>
+		<department>Department of Management</department>
+		<program>Major in Human Resource Management</program>
+	</student>
+	<student>
+		<name>John Brown</name>
+		<department>Department of Marketing</department>
+		<program>Major in Multinational Business</program>
+	</student>
+	<student>
+		<name>Betty Smith</name>
+		<department>Accounting Department</department>
+		<program>Major in Accounting</program>
+	</student>
+</students>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Loading indicator</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<script type='text/javascript' src='../../utils/indicator.js'></script>
+	<link href="../themes/indicator/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body onload="load()">	<div class='zpCalSubHeader' style='text-align:center;'>Loading indicator</div>
+
+
+
+This page demonstrates how to use Zapatec.Indicator class in modal mode.<br /><br/><br/>
+<select>
+	<option>option1</option>
+	<option>option2</option>
+	<option>option3</option>
+	<option>option4</option>
+</select>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<iframe id="iframe" style="position: absolute; left: 500px; top: 200px; width: 200px; height: 200px"></iframe>
+<input type="button" onclick="hideIframe()" value="Hide iframe" style="position: absolute; left: 550px; top: 170px; width: 100px" />
+<input type="button" onclick="show()" value="Show" />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+
+<script type="text/javascript">
+	var loader;
+
+	function load() {
+		loader = new Zapatec.Indicator({});
+
+		iframeLoader = new Zapatec.Indicator({
+			container: "iframe"
+		});
+	}
+
+	function show() {
+		loader.start('loading');
+		setTimeout("loader.stop();", 4000);
+	}
+
+	var iframeLoader = null;
+
+	function hideIframe() {
+		iframeLoader.start('loading');
+		setTimeout("iframeLoader.stop();", 4000);
+	}
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

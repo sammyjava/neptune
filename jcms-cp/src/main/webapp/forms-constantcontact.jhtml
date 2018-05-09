@@ -1,0 +1,58 @@
+<%
+  // authenticate
+  CTCTConnection conn = new CTCTConnection();
+  boolean connected = conn.authenticate(Util.CC_API_KEY, ccUsername, ccPassword);
+  if (!connected) {
+    error = "Unable to connect with Constant Contact.";
+  } else {
+    // get lists
+    ContactListIterator iterator = conn.getContactLists();
+    // Retrieve all ContactList objects
+    while(iterator.hasNextPage()) iterator.loadNextPage();
+    Object[] objects = iterator.getLoadedEntries().toArray();
+%>
+<hr/>
+<!-- ConstantContact lists -->
+<a name="constantcontact"></a>
+<% if (constantcontactupdate) { %><%@ include file="/WEB-INF/include/errormessage.jhtml" %><% } %>
+
+<p>
+  <b>Constant Contact e-mail list signup.</b><br/>
+  If you wish to display sign-up checkboxes for one or more of your Constant Contact list(s), select them below.
+  You may enter optional sign-up instructions to be shown above the list(s).  Form field <b>email</b> must be on the form, and a value must be supplied by the user.
+  (Neptune enforces an "opt-in" policy by leaving the sign-up checkboxes unchecked by default.)
+</p>
+
+<form action="#constantcontact" method="post">
+  <input type="hidden" name="form_id" value="<%=form.form_id%>"/>
+  <table>
+    <tr>
+      <td colspan="2">
+        Sign-up instructions<br/>
+        <textarea cols="50" rows="2" wrap name="signupinstructions"><%=Util.blankIfNull(form.signupinstructions)%></textarea><br/>
+      </td>
+    </tr>
+    <%
+      for (int i=0; i<objects.length; i++) {
+          ContactList list = (ContactList)objects[i];
+          String link = (String)list.getAttribute("Link");
+          String name = (String)list.getAttribute("Name");
+          FormConstantContactList formlist = new FormConstantContactList(application, form.form_id, link);
+          boolean selected = formlist.form_id!=0;
+      %>
+      <tr>
+        <td align="right" valign="top"><input type="checkbox" name="link" <% if (selected) out.print("checked"); %> value="<%=link%>"/></td>
+        <td><b><%=name%></b></td>
+      </tr>
+      <%
+      } // end for
+      %>
+      <tr>
+        <td colspan="2" align="center"><input type="submit" name="constantcontactupdate" class="update" value="Update"/></td>
+      </tr>
+  </table>
+</form>
+
+<%
+} // end else
+%>

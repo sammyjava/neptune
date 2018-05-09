@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom headlines extra , set customHeadlines=true and put code here.
+ */
+  boolean customHeadlines = false;
+%>

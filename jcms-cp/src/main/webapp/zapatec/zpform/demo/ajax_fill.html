@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	This form uses the Zapatec Transport module to communicate with the server without refreshing the page. 	You can automatically fill other form fields depending on typed value. Other field values will be retrieved from server. 	In current demo fill 'Country' field with country name and values for other fields will be retrieved from server 	 		To control this use following parameters: 		 			zpFormFillUrl - url where to send request. 			zpFormFillMethod - which HTTP method to use (GET, POST etc). The default is GET. 			zpFormFillParam - how to name the parameter. The default is the field name.  			zpFormFillQuery - string that will be added to the request query.  			Example: class='zpFormFillUrl='ajax_fill.php' zpFormFillMethod=GET zpFormFillParam='my_var' zpFormFillQuery='ajax_check=true''  			will be transformed to ajax_fill.php?ajax_check=true&my_var=&lt;CURRENT_FIELD_VALUE&gt; 		 	 ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Fill form fields using AJAX</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Fill form fields using AJAX</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>winxp theme</b>.</li>
+				
+	<li>This form uses the Zapatec Transport module to communicate with the server without refreshing the page.</li>
+	<li>You can automatically fill other form fields depending on typed value. Other field values will be retrieved from server.</li>
+	<li>In current demo fill "Country" field with country name and values for other fields will be retrieved from server</li>
+	<li>
+		To control this use following parameters:
+		<ol>
+			<li><b>zpFormFillUrl</b> - url where to send request.</li>
+			<li><b>zpFormFillMethod</b> - which HTTP method to use (GET, POST etc). The default is GET.</li>
+			<li><b>zpFormFillParam</b> - how to name the parameter. The default is the field name. </li>
+			<li><b>zpFormFillQuery</b> - string that will be added to the request query. </li>
+			Example: <i>class='zpFormFillUrl="ajax_fill.php" zpFormFillMethod=GET zpFormFillParam="my_var" zpFormFillQuery="ajax_check=true"'</i> 
+			will be transformed to <i>ajax_fill.php?ajax_check=true&my_var=&lt;CURRENT_FIELD_VALUE&gt;</i>
+		</ol>
+	</li>
+
+			</ul>
+		</div>
+
+
+
+<form action="ajax_fill.html" id='userForm' class="zpFormWinXP" method="get">
+	<div id='errOutput' class="errOutput"></div>
+
+	<fieldset>
+		<legend>Country information</legend>
+		<label class='zpFormLabel'>Country name</label>
+		<input class='zpFormRequired zpFormFillUrl="ajax_fill.php"' size="40" value="" name="country" type="text">
+		<br />
+		<br />
+
+		<label class='zpFormLabel'>Population</label>
+		<input class='zpFormInt' value="" size="40" name="population" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>Area</label>
+		<input class='zpFormInt' value="" size="40" name="area" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>GDP</label>
+		<input class='zpFormInt' value="" size="40" name="gdp" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>Birth Rate Per 1000</label>
+		<input class='zpFormFloat' value="" size="40" name="birth_rate" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>Life Expectency</label>
+		<input class='zpFormFloat' value="" size="40" name="life_expectency" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>Internet Users</label>
+		<input class='zpFormInt' value="" size="40" name="internet_users" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>Continent</label>
+		<input class='zpFormRequired' value="" size="40" name="continent" type="text" />
+		<br />
+
+	</fieldset><br />
+
+	<input value="Submit" name="Submit" onclick="" type="submit" class="button" />
+	<input value="Clear" name="Clear" onclick="" type="reset" class="button" />
+</form>
+
+<script type="text/javascript">
+// Run this to auto-activate all "zpForm" class forms in the document.
+Zapatec.Form.setupAll({
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput
+});
+
+checkIfLoadedFromHDD();
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

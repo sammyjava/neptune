@@ -1,0 +1,28 @@
+<%@ include file="/WEB-INF/custom/nav-quaternary.jhtml" %>
+<% if (!customQuaternaryNav) { %>
+<!-- quaternary navigation -->
+<div id="navquat-box">
+  <div id="navquat-top"></div>
+  <%
+    NodeListIterator level3Iterator = null;
+    if (n.getDepth()==3) {
+      level3Iterator = n.getNodeListIterator(application);
+    } else {
+      level3Iterator = parent.getNodeListIterator(application);
+    }
+    while (level3Iterator.hasNext()) {
+      Node n4 = level3Iterator.nextNode();
+      boolean n4shown = n4.isVisible() && (!accessEnabled || au.mayAccess(application, n4));
+      if (n4shown) {
+        String quatClass = "navquat navquat-off";
+        boolean n4selected = (n4.equals(n) || n4.equals(parent));
+        if (n4selected) quatClass = "navquat navquat-on";
+  %>
+  <div class="<%=quatClass%>" <% if (!n4selected) { %>onMouseOver="this.className='navquat navquat-over'" onMouseOut="this.className='<%=quatClass%>'" onClick="location.href='<%=n4.url%>'"<% } %>><% if (n4selected) { %><%=n4.nodename%><% } else { %><a class="navquat" href="<%=n4.url%>"><%=n4.nodename%></a><% } %></div>
+  <%
+      } // end if shown
+    } // end while
+  %>
+  <div id="navquat-bottom"></div>
+</div>
+<% } %>

@@ -1,0 +1,119 @@
+/* $Id: wood.css 6078 2007-01-25 14:44:47Z smaxim $ */
+
+/* Overall the background and layoutfor the tree */
+.zpTreeWoodContainer {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  background: url("wood/bg_main.gif")  100% 100%;
+}
+
+/* Hrefs in a tree item */
+.zpTreeWoodContainer div.tree-item td.a {
+  text-decoration:none;
+}
+
+.zpTreeWoodContainer div.tree-item a{
+  color:#333333;
+  font-weight:normal;
+}
+
+/* General setting of the tree */
+.zpTreeWoodContainer .tree, 
+.zpTreeWoodContainer .tree-item table.tree-table { 
+  color:#000000;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight:bold;
+}
+
+.zpTreeWoodContainer .tree-item-more {
+  padding-left: 1px;
+}
+
+.zpTreeWoodContainer .tree-item .label { 
+  cursor: pointer; 
+  cursor: hand;
+}
+
+.zpTreeWoodContainer .tree-item table.tree-table td.label { 
+  padding: 0px 1px; 
+}
+
+.zpTreeWoodContainer .tree-item .tgb {
+  width: 9px; 
+  height: 9px; 
+  vertical-align: middle; 
+  cursor: default;
+}
+
+.zpTreeWoodContainer .tree-item .icon { 
+  cursor: pointer; 
+  cursor: hand;
+  width: 17px; 
+  height: 17px; 
+  text-align: center; 
+  vertical-align: middle; 
+}
+
+/* Titlemenu selector */
+.zpTreeWoodContainer .tree-item-selected table.tree-table td.label { 
+  background-color: #E49842; 
+  color: #ff921d; 
+}
+
+/*Submenu selector*/
+.zpTreeWoodContainer .tree-item-selected table.tree-table td.submenu { 
+  color:#fff; 
+}
+
+.zpTreeWoodContainer div.tree-item, 
+.zpTreeWoodContainer div.tree-item:hover {
+  cursor:pointer;
+  cursor: hand;
+  margin-bottom: 1px;
+  padding:1px;
+  font-weight:bold;
+  color:#DDDDDD;
+}
+
+.zpTreeWoodContainer div.tree-item a{
+  text-decoration:none;
+}
+
+.zpTreeWoodContainer div.tree-item:hover {
+  background-color:#E49842;
+}
+
+/* Makes an indent for each subtree */
+.zpTreeWoodContainer .tree { 
+  padding-left: 5px; 
+  padding-right:5px;
+}
+
+/* custom icons for expanded and closed folder */
+
+.zpTreeWoodContainer .tree-item-expanded td.customIcon {
+  background: url("wood/arrow_down.gif") no-repeat 0 50%;
+  line-height: 17px;
+}
+.zpTreeWoodContainer .tree-item-collapsed td.customIcon {
+  background: url("wood/arrow_right.gif") no-repeat 0 50%;
+  line-height: 17px;
+}
+
+.zpTreeWoodContainer .menutitle{
+  width:102px;
+  line-height:17px;
+  color:#ffffff;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  background: url("wood/bg_menutitle.gif")  100% 100%;
+  text-indent:7px;
+  margin-left:-2px;
+  margin-top:1px;
+}
+
+.zpTreeWoodContainer .menutitle:hover{
+  text-decoration:underline;
+  background: url("wood/bg_menutitle_on.gif")  100% 100%;
+}

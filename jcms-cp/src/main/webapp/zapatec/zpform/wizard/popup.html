@@ -1,0 +1,45 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<title>AJAX forms by Zapatec</title>
+
+	<!-- Javascript utilities file-->
+	<script src="../../utils/zapatec.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		var wizard = window.opener.wizard;
+		
+		if(wizard.formConfig['lang'] != 'eng'){
+			var langStr = wizard.formConfig['lang'];
+
+
+			if(wizard.formConfig['langCountryCode'] && wizard.formConfig['langCountryCode'].length > 0){
+				langStr += "_" + wizard.formConfig['langCountryCode']; 
+			}
+
+			if(wizard.formConfig['langEncoding'] && wizard.formConfig['langEncoding'].length > 0){
+				langStr += "-" + wizard.formConfig['langEncoding']; 
+			}
+			
+			Zapatec.Transport.include("../lang/" + langStr + ".js");
+		}
+	</script>
+
+	<!-- basic Javascript file for the form-->
+	<script src="../src/form.js" type="text/javascript"></script>
+</head>
+<body>
+<div id="formContent"></div>
+
+<script type="text/javascript">
+document.getElementById("formContent").innerHTML = "<form action='' method='GET' id='zpForm' onsubmit='return false;'></form>";
+var form = document.getElementById("zpForm");
+form.innerHTML = wizard.constructFormHTML();
+
+new Zapatec.Form(
+	wizard.formConfig
+);
+</script>
+<a href="http://www.zapatec.com/">AJAX forms</a> by Zapatec<br/>
+<a href="#" onclick="window.close(); return false;">Close this window</a>
+</body>
+</html>

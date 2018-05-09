@@ -1,0 +1,726 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="wizard.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>wizard.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec Wizard.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Wizard.html">Zapatec.Wizard</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec Wizard.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">// $Id: wizard.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+
+<span class="comment">/**
+ * Zapatec.Wizard constructor.
+ *
+ * &lt;pre&gt;
+ * A Wizard object provides common functionality that seems to be required by
+ * any wizard:
+ *
+ *  - tabbed display
+ *  - keyboard navigation through tabs
+ *  - tab navigation bar (&lt;button&gt;-s)
+ *  - standard/advanced mode (ability to hide some elements in standard mode)
+ *  - data validation code
+ *
+ * Call the constructor like this:
+ *
+ *   var args = {
+ *      tabsID    : "tabs",
+ *      tabBarID  : "tab-bar"
+ *   };
+ *   var wizard = new Zapatec.Wizard(args);
+ *
+ * The args object contains named arguments.  As of now, the following two are
+ * required:
+ *
+ *  - tabsID -- must be the ID of an element that contains one DIV for each tab.
+ *  - tabBarID -- must be the ID of an element where the tab bar should be inserted.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} args Contains the arguments to be used, as described above
+ * <span class="attrib">@return</span> A new Zapatec.Wizard object
+ * <span class="attrib">@type</span> object
+ */</span>
+
+Zapatec.Wizard = <span class="reserved">function</span>(args) {
+	<span class="reserved">this</span>.args = args;
+	<span class="reserved">this</span>.validators = Zapatec.Wizard.defaultValidators;
+	<span class="reserved">this</span>._tabsEl = document.getElementById(args.tabsID);
+};
+
+<span class="comment">/**
+ * Static variable that implements certain common validators to be available
+ * by default in any wizard.
+ */</span>
+Zapatec.Wizard.defaultValidators = {
+	<span class="literal">"numeric.int"</span>     : <span class="reserved">function</span>(value, range) {
+		var isnum = /^-?[0-9]+$/.test(value);
+		<span class="reserved">if</span> (isnum) {
+			isnum = parseInt(value, 10);
+			range[0] = parseInt(range[0], 10);
+			range[1] = parseInt(range[1], 10);
+			<span class="reserved">if</span> (isnum &lt; range[0] || isnum &gt; range[1])
+				<span class="reserved">return</span> <span class="literal">"Must be in ["</span> + range[0] + <span class="literal">", "</span> + range[1] + <span class="literal">"]"</span>;
+			<span class="reserved">return</span> true;
+		} <span class="reserved">else</span>
+			<span class="reserved">return</span> <span class="literal">"Must be numeric, integer."</span>;
+	},
+	<span class="literal">"numeric.float"</span>   : <span class="reserved">function</span>(value, range) {
+		var isfloat = strlen(value) &gt; 0 &amp;&amp; /^-?([0-9]*)\.?([0-9]*)$/.test(value);
+		<span class="reserved">if</span> (isfloat) {
+			isfloat = parseFloat(value, 10);
+			range[0] = parseFloat(range[0], 10);
+			range[1] = parseFloat(range[1], 10);
+			<span class="reserved">if</span> (isfloat &lt; range[0] || isfloat &gt; range[1])
+				<span class="reserved">return</span> <span class="literal">"Must be in ["</span> + range[0] + <span class="literal">", "</span> + range[1] + <span class="literal">"]"</span>;
+			<span class="reserved">return</span> true;
+		} <span class="reserved">else</span>
+			<span class="reserved">return</span> <span class="literal">"Must be numeric, float."</span>;
+	},
+	<span class="literal">"email"</span>           : <span class="reserved">function</span>(value) {
+		<span class="reserved">return</span> /^([\w.-_]+)@([\w.-_]+)\.(\w+)$/.test(value) ?
+			true : <span class="literal">"Must be an email address."</span>;
+	},
+	<span class="literal">"url"</span>             : <span class="reserved">function</span>(value) {
+		<span class="reserved">return</span> /^(https?|ftps?):\/\/([^\s\x22\x27(){},]+)$/i.test(value) ?
+			true : <span class="literal">"Must be an URL."</span>;
+	}
+};
+
+<span class="comment">/**
+ * Initializes the wizard.  Developers should call this function after creating
+ * a wizard and assigning any event handlers and/or creating the standard
+ * toolbar (with Zapatec.Wizard.setupNav()).
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>._setupTabs();
+	<span class="reserved">this</span>.onInit();
+};
+
+<span class="comment">/**
+ * Display a new tab.  This function also takes care of (re)setting the
+ * visibility of buttons in the navigation bar, and of calling the appropriate
+ * event hooks.  If "onBeforeTabChange()" returns false, the operation is
+ * cancelled.
+ *
+ * <span class="attrib">@param</span> {string} newTab ID of the new tab
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.changeTab = <span class="reserved">function</span>(newTab) {
+	var currentTab = <span class="reserved">this</span>.getCurrentTab(), tab;
+	<span class="reserved">if</span> (currentTab != newTab) {
+		<span class="reserved">if</span> (!currentTab || <span class="reserved">this</span>.onBeforeTabChange(currentTab, newTab)) {
+			<span class="reserved">if</span> (currentTab) {
+				tab = <span class="reserved">this</span>.tabs[currentTab];
+				tab.cont_el.style.display = <span class="literal">"none"</span>;
+				Zapatec.Utils.removeClass(tab.tab_el, <span class="literal">"active"</span>);
+			}
+			tab = <span class="reserved">this</span>.tabs[newTab];
+			tab.cont_el.style.display = <span class="literal">"block"</span>;
+			Zapatec.Utils.addClass(tab.tab_el, <span class="literal">"active"</span>);
+			<span class="reserved">this</span>.tabsArray.current = tab.index;
+			window.location = tab.tab_el.href;
+			<span class="reserved">this</span>.onTabChange(currentTab, newTab);
+			<span class="reserved">if</span> (<span class="reserved">this</span>.btnHome)
+				<span class="reserved">this</span>.btnHome.style.visibility = <span class="reserved">this</span>.isFirstTab() ? <span class="literal">"hidden"</span> : <span class="literal">"visible"</span>;
+			<span class="reserved">if</span> (<span class="reserved">this</span>.btnPrev)
+				<span class="reserved">this</span>.btnPrev.style.visibility = <span class="reserved">this</span>.isFirstTab() ? <span class="literal">"hidden"</span> : <span class="literal">"visible"</span>;
+			<span class="reserved">if</span> (<span class="reserved">this</span>.btnNext)
+				<span class="reserved">this</span>.btnNext.style.visibility = <span class="reserved">this</span>.isLastTab() ? <span class="literal">"hidden"</span> : <span class="literal">"visible"</span>;
+			<span class="reserved">if</span> (<span class="reserved">this</span>.btnEnd)
+				<span class="reserved">this</span>.btnEnd.style.visibility = <span class="reserved">this</span>.isLastTab() ? <span class="literal">"hidden"</span> : <span class="literal">"visible"</span>;
+			<span class="reserved">if</span> (<span class="reserved">this</span>.btnAdvanced)
+				<span class="reserved">this</span>._updateAdvancedButton();
+			<span class="reserved">if</span> (tab.tab_el.__msh_onclick_action) {
+				var func = tab.tab_el.__msh_onclick_action;
+				<span class="reserved">if</span> (typeof func == <span class="literal">"string"</span>)
+					eval(func);
+				<span class="reserved">else</span> <span class="reserved">if</span> (typeof func == <span class="literal">"function"</span>)
+					func();
+			}
+		}
+	}
+	<span class="reserved">return</span> <span class="reserved">this</span>;
+};
+
+<span class="comment">/**
+ * Move to the next tab.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.nextTab = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.tabsArray.current &lt; <span class="reserved">this</span>.tabsArray.length - 1)
+		<span class="reserved">this</span>.changeTab(<span class="reserved">this</span>.tabsArray[<span class="reserved">this</span>.tabsArray.current + 1].id);
+	<span class="reserved">return</span> <span class="reserved">this</span>;
+};
+
+<span class="comment">/**
+ * Move to the previous tab.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.prevTab = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.tabsArray.current &gt; 0)
+		<span class="reserved">this</span>.changeTab(<span class="reserved">this</span>.tabsArray[<span class="reserved">this</span>.tabsArray.current - 1].id);
+	<span class="reserved">return</span> <span class="reserved">this</span>;
+};
+
+<span class="comment">/**
+ * Move to the first tab.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.firstTab = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.changeTab(<span class="reserved">this</span>.tabsArray[0].id);
+};
+
+<span class="comment">/**
+ * Move to the last tab.  Usually needed by buttons like "finish wizard".
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.lastTab = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.changeTab(<span class="reserved">this</span>.tabsArray[<span class="reserved">this</span>.tabsArray.length - 1].id);
+};
+
+<span class="comment">/**
+ * <span class="attrib">@return</span> ID of the currently displayed tab
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.getCurrentTab = <span class="reserved">function</span>() {
+	var tab = <span class="reserved">this</span>.tabsArray[<span class="reserved">this</span>.tabsArray.current];
+	<span class="reserved">return</span> tab ? tab.id : null;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@return</span> true if we are at the first tab, false otherwise
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.isFirstTab = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.tabsArray.current == 0;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@return</span> true if we are at the last tab, false otherwise
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.isLastTab = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.tabsArray.current == <span class="reserved">this</span>.tabsArray.length - 1;
+};
+
+<span class="comment">/**
+ * Toggles "advanced mode" for the currently displayed tab.  This operation
+ * involves displaying or hiding any fields that have the class "advanced".
+ * This is actually achieved by simply adding or removing the class to those
+ * elements, accordingly.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.toggleAdvanced = <span class="reserved">function</span>() {
+	var
+		tab = <span class="reserved">this</span>.tabs[<span class="reserved">this</span>.getCurrentTab()],
+		a = tab.advanced_els,
+		el,
+		i = 0,
+		visible = (tab.advanced =! tab.advanced);
+	<span class="reserved">while</span> (el = a[i++]) {
+		Zapatec.Utils.removeClass(el, <span class="literal">"wizard-advanced"</span>);
+		<span class="reserved">if</span> (!visible)
+			Zapatec.Utils.addClass(el, <span class="literal">"wizard-advanced"</span>);
+	}
+	<span class="reserved">this</span>._updateAdvancedButton();
+};
+
+<span class="comment">/**
+ * Creates a default navigation bar for the wizard and appends it into the
+ * given parent.  The default buttons are:
+ *
+ * &lt;pre&gt;
+ *  - "advanced mode" (only visible if the current tab has advanced elements)
+ *  - "Begin" (moves to first tab)
+ *  - "Prev." (moves to previous tab)
+ *  - "Next" (moves to next tab)
+ *  - "End" (moves to last tab)
+ *
+ * Any of these buttons is assigned a certain class name, which helps
+ * customizing the look through external CSS.  The classes are (in the same
+ * order as above): "btn-advanced", "btn-begin", "btn-prev", "btn-next",
+ * "btn-finish".
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} parent the parent of the tab navigation bar
+ * <span class="attrib">@return</span> Reference to the DIV containing the navigation bar
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.setupNav = <span class="reserved">function</span>(parent) {
+	var div = Zapatec.Utils.createElement(<span class="literal">"div"</span>, parent || <span class="reserved">this</span>._tabsEl.parentNode);
+	div.className = <span class="literal">"navigation"</span>;
+	var self = <span class="reserved">this</span>, btn;
+
+	btn = Zapatec.Utils.createElement(<span class="literal">"button"</span>, div);
+	btn.innerHTML = <span class="literal">"Show advanced options"</span>;
+	btn.className = <span class="literal">"btn-advanced"</span>;
+	btn.onclick = <span class="reserved">function</span>() { self.toggleAdvanced(); };
+	<span class="reserved">this</span>.btnAdvanced = btn;
+
+	btn = Zapatec.Utils.createElement(<span class="literal">"button"</span>, div);
+	btn.innerHTML = <span class="literal">"Begin"</span>;
+	btn.className = <span class="literal">"btn-begin"</span>;
+	btn.onclick = <span class="reserved">function</span>() { self.firstTab(); };
+	<span class="reserved">this</span>.btnHome = btn;
+
+	btn = Zapatec.Utils.createElement(<span class="literal">"button"</span>, div);
+	btn.innerHTML = <span class="literal">"&amp;laquo; &lt;u&gt;P&lt;/u&gt;rev."</span>;
+	btn.accessKey = <span class="literal">"p"</span>;
+	btn.className = <span class="literal">"btn-prev"</span>;
+	btn.onclick = <span class="reserved">function</span>() { self.prevTab(); };
+	<span class="reserved">this</span>.btnPrev = btn;
+
+	btn = Zapatec.Utils.createElement(<span class="literal">"button"</span>, div);
+	btn.innerHTML = <span class="literal">"&lt;u&gt;N&lt;/u&gt;ext &amp;raquo;"</span>;
+	btn.accessKey = <span class="literal">"n"</span>;
+	btn.className = <span class="literal">"btn-next"</span>;
+	btn.onclick = <span class="reserved">function</span>() { self.nextTab(); };
+	<span class="reserved">this</span>.btnNext = btn;
+
+	btn = Zapatec.Utils.createElement(<span class="literal">"button"</span>, div);
+	btn.innerHTML = <span class="literal">"Finish"</span>;
+	btn.className = <span class="literal">"btn-finish"</span>;
+	btn.onclick = <span class="reserved">function</span>() { self.lastTab(); };
+	<span class="reserved">this</span>.btnEnd = btn;
+
+	<span class="reserved">return</span> div;
+};
+
+<span class="comment">/**
+ * Call this function given the value and the validator to match it against.
+ * WARNING, this function throws an exception if the validator is not defined.
+ * You do not normally need to call this function manually, as all the
+ * validation checks are being done automatically when the field requiring
+ * validation loses focus.
+ *
+ * <span class="attrib">@param</span> {string} value the string to test
+ * <span class="attrib">@param</span> {string} validator the validator name
+ * <span class="attrib">@return</span> true if it validates, false otherwise
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.validate = <span class="reserved">function</span>(value, validator, args) {
+	var f = <span class="reserved">this</span>.validators[validator];
+	<span class="reserved">if</span> (f)
+		<span class="reserved">return</span> f(value, args, validator);
+	<span class="reserved">else</span>
+		throw <span class="literal">"Validator “"</span> + validator + <span class="literal">"” is NOT defined."</span>;
+};
+
+<span class="comment">/**
+ * Create a custom validator.  You need to specify the ID of the validator, and
+ * a function that does the validation checks.  The function specification is
+ * simple:
+ *
+ * &lt;pre&gt;
+ *    function validate(value, args, validator);
+ *
+ * The 3 arguments are:
+ *
+ * - value -- the value that we should check validation against; usually the
+ *            \em value attribute of the input field.
+ * - args -- any arguments that might be passed to the validator in the class
+ *           name.  Note that this might be null.
+ * - validator -- the ID of the validator, useful if you wish to use the same
+ *                handler function for multiple validators.
+ * &lt;/pre&gt;
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.addCustomValidator = <span class="reserved">function</span>(name, func) {
+	<span class="reserved">if</span> (!/^[a-z0-9.]+$/i.test(name)) {
+		throw <span class="literal">"Illegal validator ID: '"</span> + name +
+			<span class="literal">"'.  Accepted values can only contain letters, digits and the dot sign."</span>;
+	} <span class="reserved">else</span>
+		<span class="reserved">this</span>.validators[name] = func;
+	<span class="reserved">return</span> <span class="reserved">this</span>;
+};
+
+<span class="comment">/**
+ * Add a simple validator.  Pass the regexp that should match and the error
+ * message that should be displayed if it doesn't.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.addValidator = <span class="reserved">function</span>(name, regexp, error) {
+	<span class="reserved">this</span>.addCustomValidator(name, <span class="reserved">function</span>(value) {
+		<span class="reserved">return</span> regexp.test(value) ? true : error;
+	});
+};
+
+<span class="comment">/**
+ * Initializes the wizard tabs and internal data.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>._setupTabs = <span class="reserved">function</span>() {
+	var self = <span class="reserved">this</span>;
+	var tabs = <span class="reserved">this</span>._tabsEl;
+	Zapatec.Utils.addClass(tabs, <span class="literal">"tabs"</span>);
+	var bar = document.getElementById(<span class="reserved">this</span>.args.tabBarID);
+	Zapatec.Utils.addClass(bar, <span class="literal">"tab-bar"</span>);
+	<span class="reserved">this</span>.tabs = {};		<span class="comment">// maintain by ID</span>
+	<span class="reserved">this</span>.tabsArray = [];	<span class="comment">// maintain by index</span>
+	<span class="reserved">for</span> (var i = tabs.firstChild; i; i = i.nextSibling) {
+		<span class="reserved">if</span> (i.nodeType != 1)
+			continue;
+		var tab = {
+			tab_el       : Zapatec.Utils.createElement(<span class="literal">"a"</span>, bar),
+			cont_el      : i,
+			id           : i.id,
+			index        : <span class="reserved">this</span>.tabsArray.length,
+			advanced     : false,
+			advanced_els : []
+		};
+		tab.tab_el.href = <span class="literal">"#"</span> + i.id;
+		var tmp = Zapatec.Utils.getFirstChild(i, <span class="literal">"label"</span>);
+		<span class="reserved">if</span> (tmp)
+			<span class="reserved">while</span> (tmp.firstChild)
+				tab.tab_el.appendChild(tmp.firstChild);
+		<span class="reserved">if</span> (tmp.accessKey) {
+			tab.tab_el.accessKey = tmp.accessKey;
+			tmp.accessKey = <span class="literal">""</span>;
+		}
+		tab.tab_el.title = tmp.title;
+		tab.tab_el.__msh_onclick_action = tmp.onclick;
+		tmp.parentNode.removeChild(tmp);
+		tab.tab_el.__msh_info = tab;
+		tab.tab_el.onclick = <span class="reserved">function</span>() {
+			self.changeTab(<span class="reserved">this</span>.__msh_info.id);
+			<span class="reserved">if</span> (typeof <span class="reserved">this</span>.blur == <span class="literal">"function"</span>)
+				<span class="reserved">this</span>.blur();
+			<span class="reserved">return</span> false;
+		};
+		<span class="reserved">if</span> (Zapatec.is_ie)
+			tab.tab_el.onfocus = tab.tab_el.onclick;
+		<span class="reserved">this</span>.tabsArray[<span class="reserved">this</span>.tabsArray.length] = tab;
+		<span class="reserved">this</span>.tabs[tab.id] = tab;
+		i.style.display = <span class="literal">"none"</span>;
+		<span class="reserved">this</span>._populateLists(tab);
+	}
+	<span class="reserved">this</span>.tabsArray.current = -1;
+
+	var currentTab = <span class="reserved">this</span>.tabsArray[0].id;
+	<span class="reserved">if</span> (/#([^\/]+)$/.test(document.URL) &amp;&amp; <span class="reserved">this</span>.tabs[RegExp.$1])
+		currentTab = RegExp.$1;
+	<span class="reserved">this</span>.changeTab(currentTab);
+};
+
+<span class="comment">/**
+ * Populates some internal arrays in the given tab object, analyzing
+ * all elements in the tab.  At this time, this function initializes:
+ *
+ * &lt;pre&gt;
+ * - the list of advanced elements (those that should be visible only if
+ *   the tab is in "show advanced options" mode).
+ * - the list of fields that require validation.  Also, all these fields get
+ *   installed an "onblur" handler that checks validation.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} tab reference to the internally defined tab object
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>._populateLists = <span class="reserved">function</span>(tab) {
+	var a = tab.cont_el.getElementsByTagName(<span class="literal">"*"</span>), i = 0, el, c, self = <span class="reserved">this</span>;
+	<span class="reserved">while</span> (el = a[i++]) {
+		var c = el.className;
+		<span class="reserved">if</span> (/(^|\s)wizard-advanced(\s|$)/i.test(c))
+			tab.advanced_els[tab.advanced_els.length] = el;
+		<span class="reserved">if</span> (/(^|\s)validate-([^\s-]+)(-[^\s]+)?/i.test(c)) {
+			el.__msh_validator = RegExp.$2;
+			el.__msh_validator_args = RegExp.$3;
+			el.onblur = <span class="reserved">function</span>(ev) {
+				ev || (ev = window.event);
+				<span class="reserved">return</span> self._validateField(
+					<span class="reserved">this</span>, <span class="reserved">this</span>.__msh_validator,
+					<span class="reserved">this</span>.__msh_validator_args, ev);
+			};
+		}
+	}
+};
+
+<span class="comment">/**
+ * Called by the "onblur" handler for any fields that might required
+ * validation, this function parses arguments, calls the appropriate validating
+ * code and outputs the error message if it's the case.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} field a reference to a HTMLInputElement (usually) to be validated.
+ * <span class="attrib">@param</span> {string} validator the ID of a validator.
+ * <span class="attrib">@param</span> {string} args the validator arguments, as specified in the class name.
+ * <span class="attrib">@param</span> {object} event the Event object, useful if we want to stop propagation.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>._validateField = <span class="reserved">function</span>(field, validator, args, event) {
+	var value, tag = field.tagName.toLowerCase(), div, message;
+	<span class="reserved">if</span> (typeof args != <span class="literal">"undefined"</span>) {
+		args = args.replace(/^-/, <span class="literal">''</span>);
+		args = args.split(/-/);
+	} <span class="reserved">else</span>
+		args = null;
+	try {
+		<span class="reserved">if</span> (tag == <span class="literal">"input"</span> || tag == <span class="literal">"select"</span> || tag == <span class="literal">"textarea"</span>) {
+			message = <span class="reserved">this</span>.validate(field.value, validator, args);
+			<span class="reserved">if</span> (typeof message == <span class="literal">"boolean"</span> &amp;&amp; !message)
+				<span class="comment">// No message provided, let's think of one..</span>
+				message = <span class="literal">"This field must validate by “"</span> + validator + <span class="literal">"”"</span>;
+			<span class="reserved">if</span> (typeof message == <span class="literal">"string"</span>) {
+				div = field.__msh_message;
+				<span class="reserved">if</span> (!div) {
+					<span class="comment">// create the message area</span>
+					div = field.__msh_message = Zapatec.Utils.createElement(<span class="literal">"div"</span>);
+					div.className = <span class="literal">"validation-error"</span>;
+					field.parentNode.insertBefore(div, field.nextSibling);
+				}
+				div.innerHTML = message;
+				<span class="comment">// FIXME: this doesn't work, for some reason</span>
+				<span class="comment">// field.focus();</span>
+				<span class="comment">// field.select();</span>
+				Zapatec.Utils.addClass(field, <span class="literal">"field-error"</span>);
+				Zapatec.Utils.stopEvent(event);
+				<span class="reserved">return</span> false;
+			} <span class="reserved">else</span> {
+				div = field.__msh_message;
+				<span class="reserved">if</span> (div) {
+					div.parentNode.removeChild(div);
+					field.__msh_message = null;
+				}
+				Zapatec.Utils.removeClass(field, <span class="literal">"field-error"</span>);
+			}
+		} <span class="reserved">else</span>
+			<span class="comment">// FIXME: what should we do here?</span>
+			throw <span class="literal">"I don't know how to validate &lt;"</span> + tag + <span class="literal">"&gt; elements."</span>;
+	} catch(e) {
+		alert(<span class="literal">"Error: "</span> + e); <span class="comment">// FIXME: what should we do here?</span>
+	}
+};
+
+<span class="comment">/**
+ * Updates the state of the "advanced" button.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} tab Optional. Reference to the tab to check the state
+ * against.  If not passed, the current tab is assumed.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>._updateAdvancedButton = <span class="reserved">function</span>(tab) {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.btnAdvanced) {
+		<span class="reserved">if</span> (!tab)
+			tab = <span class="reserved">this</span>.tabs[<span class="reserved">this</span>.getCurrentTab()];
+		<span class="reserved">this</span>.btnAdvanced.innerHTML = tab.advanced ? <span class="literal">"Hide advanced options"</span> : <span class="literal">"Show advanced options"</span>;
+		<span class="reserved">this</span>.btnAdvanced.style.visibility = tab.advanced_els.length == 0 ? <span class="literal">"hidden"</span> : <span class="literal">"visible"</span>;
+	}
+};
+<span class="comment">//@}</span>
+
+<span class="comment">/* Customizable event hooks
+ *
+ * Event hooks provide a way for the developer to insert special code that is
+ * executed when wizard events occur.  For instance, one could write the
+ * following:
+ *
+ *    function myOnInit() {
+ *        this.changeTab("tab-3");
+ *        alert("Look, we changed to the third tab! &gt;8-]");
+ *    };
+ *    wizard.onInit = myOnInit;
+ */</span>
+
+<span class="comment">/**
+ * A "do nothing" handler used for default event hooks.
+ */</span>
+Zapatec.Wizard._doNothing = <span class="reserved">function</span>() { <span class="reserved">return</span> true; };
+
+<span class="comment">/**
+ * Called when the wizard is created.  Users can perform
+ * problem-specific initializations at this stage.  No
+ * arguments.
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.onInit = Zapatec.Wizard._doNothing;
+
+<span class="comment">/**
+ * Called _after_ the tab was changed.
+ *
+ * <span class="attrib">@param</span> {string} oldTab ID of the old tab
+ * <span class="attrib">@param</span> {string} newTab ID of the new tab
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.onTabChange = Zapatec.Wizard._doNothing;
+
+<span class="comment">/**
+ * Called when the tab is about to be changed, just _before_.
+ *
+ * <span class="attrib">@param</span> {string} oldTab ID of the old (current) tab
+ * <span class="attrib">@param</span> {string} newTab ID of the new tab
+ * <span class="attrib">@return</span> false if the tab should not change
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Wizard.<span class="reserved">prototype</span>.onBeforeTabChange = Zapatec.Wizard._doNothing;
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

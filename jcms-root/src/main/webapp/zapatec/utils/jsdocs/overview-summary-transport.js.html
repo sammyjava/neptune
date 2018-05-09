@@ -1,0 +1,2428 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="transport.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>transport.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec Transport library. Used to fetch data from the server,
+ parse and serialize XML and JSON data.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec Transport library. Used to fetch data from the server,
+ * parse and serialize XML and JSON data.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">// $Id: transport.js 15970 2009-02-18 19:31:55Z andrew $</span>
+
+<span class="reserved">if</span> (typeof zapatecTransport != <span class="literal">'function'</span>) {
+
+<span class="reserved">if</span> (typeof Zapatec == <span class="literal">'undefined'</span>) {
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span> Namespace definition.
+	 */</span>
+	Zapatec = <span class="reserved">function</span>() {};
+}
+
+<span class="comment">/**
+ * <span class="attrib">@constructor</span>
+ */</span>
+zapatecTransport =
+Zapatec.Transport = <span class="reserved">function</span>() {};
+
+<span class="comment">// Determine most current versions of ActiveX objects available</span>
+<span class="reserved">if</span> (typeof ActiveXObject != <span class="literal">'undefined'</span>) {
+
+	<span class="comment">/**
+	 * String variable with most current version of XMLDOM ActiveX object name
+	 * available.
+	 * <span class="attrib">@private</span>
+	 */</span>
+	Zapatec.Transport.XMLDOM = null;
+
+	<span class="comment">/**
+	 * String variable with Most current version of XMLHTTP ActiveX object name
+	 * available.
+	 * <span class="attrib">@private</span>
+	 */</span>
+	Zapatec.Transport.XMLHTTP = null;
+
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span>
+	 * Returns first available ActiveX object name from the given list.
+	 *
+	 * <span class="attrib">@param</span> {object} aVersions List of ActiveX object names to test
+	 * <span class="attrib">@return</span> First available ActiveX object name or null
+	 * <span class="attrib">@type</span> string
+	 */</span>
+	Zapatec.Transport.pickActiveXVersion = <span class="reserved">function</span>(aVersions) {
+		<span class="reserved">for</span> (var iVn = 0; iVn &lt; aVersions.length; iVn++) {
+			try {
+				var oDoc = new ActiveXObject(aVersions[iVn]);
+				<span class="reserved">if</span> (oDoc) {
+					<span class="comment">// If it gets to this point, the string worked</span>
+					<span class="reserved">return</span> aVersions[iVn];
+				}
+			} catch (oExpn) {};
+		}
+		<span class="reserved">return</span> null;
+	};
+
+	<span class="comment">/**
+	 * Most current version of XMLDOM ActiveX object.
+	 * <span class="attrib">@private</span>
+	 */</span>
+	Zapatec.Transport.XMLDOM = zapatecTransport.pickActiveXVersion([
+		<span class="literal">'Msxml2.DOMDocument.4.0'</span>,
+		<span class="literal">'Msxml2.DOMDocument.3.0'</span>,
+		<span class="literal">'MSXML2.DOMDocument'</span>,
+		<span class="literal">'MSXML.DOMDocument'</span>,
+		<span class="literal">'Microsoft.XMLDOM'</span>
+	]);
+
+	<span class="comment">/**
+	 * Most current version of XMLHTTP ActiveX object.
+	 * <span class="attrib">@private</span>
+	 */</span>
+	Zapatec.Transport.XMLHTTP = zapatecTransport.pickActiveXVersion([
+		<span class="literal">'Msxml2.XMLHTTP.4.0'</span>,
+		<span class="literal">'MSXML2.XMLHTTP.3.0'</span>,
+		<span class="literal">'MSXML2.XMLHTTP'</span>,
+		<span class="literal">'Microsoft.XMLHTTP'</span>
+	]);
+
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span> We don't need this anymore.
+	 */</span>
+	Zapatec.Transport.pickActiveXVersion = null;
+
+}
+
+<span class="comment">/**
+ * Creates cross browser XMLHttpRequest object.
+ *
+ * <span class="attrib">@return</span> New XMLHttpRequest object.
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Transport.createXmlHttpRequest = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (typeof ActiveXObject != <span class="literal">'undefined'</span>) {
+		try {
+			<span class="reserved">return</span> new ActiveXObject(zapatecTransport.XMLHTTP);
+		} catch (oExpn) {};
+	}
+	<span class="reserved">if</span> (typeof XMLHttpRequest != <span class="literal">'undefined'</span>) {
+		<span class="reserved">return</span> new XMLHttpRequest();
+	}
+	<span class="reserved">return</span> null;
+};
+
+<span class="comment">/**
+ * Checks if animated GIF is already displayed in the specified div.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   busyContainer: [object or string] element where to put animated GIF,
+ *   busyImage: [string, optional] standard image name or custom image URL
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ * <span class="attrib">@return</span> True if image is displayed
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Transport.isBusy = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Get container</span>
+	var oContr = oArg.busyContainer;
+	<span class="reserved">if</span> (typeof oContr == <span class="literal">'string'</span>) {
+		oContr = document.getElementById(oContr);
+	}
+	<span class="reserved">if</span> (!oContr) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Get image name</span>
+	var sImage = oArg.busyImage;
+	<span class="reserved">if</span> (typeof sImage != <span class="literal">'string'</span>) {
+		sImage = <span class="literal">''</span>;
+	}
+	sImage = sImage.split(<span class="literal">'/'</span>).pop();
+	<span class="reserved">if</span> (!sImage.length) {
+		sImage = <span class="literal">'zpbusy.gif'</span>;
+	}
+	<span class="comment">// Check if image is displayed</span>
+	var oFC = oContr.firstChild;
+	<span class="reserved">if</span> (oFC) {
+		oFC = oFC.firstChild;
+		<span class="reserved">if</span> (oFC) {
+			oFC = oFC.firstChild;
+			<span class="reserved">if</span> (oFC &amp;&amp; oFC.tagName &amp;&amp; oFC.tagName.toLowerCase() == <span class="literal">'img'</span>) {
+				var sSrc = oFC.getAttribute(<span class="literal">'src'</span>);
+				<span class="reserved">if</span> (typeof sSrc == <span class="literal">'string'</span> &amp;&amp; sSrc.length) {
+					<span class="comment">// Get last token</span>
+					sSrc = sSrc.split(<span class="literal">'/'</span>).pop();
+					<span class="reserved">if</span> (sSrc == sImage) {
+						<span class="reserved">return</span> true;
+					}
+				}
+			}
+		}
+	}
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Shows animated GIF in the specified div.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   busyContainer: [object or string] element where to put animated GIF,
+ *   busyImage: [string, optional] standard image name or custom image URL,
+ *   busyImageWidth: [number or string, optional] image width,
+ *   busyImageHeight: [number or string, optional] image height
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ */</span>
+Zapatec.Transport.showBusy = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Make sure image is not displayed yet</span>
+	<span class="reserved">if</span> (zapatecTransport.isBusy(oArg)) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Get container</span>
+	var oContr = oArg.busyContainer;
+	<span class="reserved">if</span> (typeof oContr == <span class="literal">'string'</span>) {
+		oContr = document.getElementById(oContr);
+	}
+	<span class="reserved">if</span> (!oContr) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Get image name and dimensions</span>
+	var sImage = oArg.busyImage;
+	var sImageWidth = oArg.busyImageWidth;
+	var sImageHeight = oArg.busyImageHeight;
+	<span class="reserved">if</span> (typeof sImage != <span class="literal">'string'</span> || !sImage.length) {
+		sImage = <span class="literal">'zpbusy.gif'</span>;
+	} <span class="reserved">else</span> {
+		<span class="reserved">if</span> (typeof sImageWidth == <span class="literal">'number'</span> ||
+		 (typeof sImageWidth == <span class="literal">'string'</span> &amp;&amp; /\d$/.test(sImageWidth))) {
+			sImageWidth += <span class="literal">'px'</span>;
+		}
+		<span class="reserved">if</span> (typeof sImageHeight == <span class="literal">'number'</span> ||
+		 (typeof sImageHeight == <span class="literal">'string'</span> &amp;&amp; /\d$/.test(sImageHeight))) {
+			sImageHeight += <span class="literal">'px'</span>;
+		}
+	}
+	<span class="reserved">if</span> (!sImageWidth) {
+		sImageWidth = <span class="literal">'65px'</span>;
+	}
+	<span class="reserved">if</span> (!sImageHeight) {
+		sImageHeight = <span class="literal">'35px'</span>;
+	}
+	<span class="comment">// Get path</span>
+	var sPath = <span class="literal">''</span>;
+	<span class="comment">// Check if path is specified</span>
+	<span class="reserved">if</span> (sImage.indexOf(<span class="literal">'/'</span>) &lt; 0) {
+		<span class="comment">// Use default path</span>
+		<span class="reserved">if</span> (Zapatec.zapatecPath) {
+			sPath = Zapatec.zapatecPath;
+		} <span class="reserved">else</span> {
+			sPath = zapatecTransport.getPath(<span class="literal">'transport.js'</span>);
+		}
+	}
+	<span class="comment">// Form tag</span>
+	var aImg = [];
+	aImg.push(<span class="literal">'&lt;img src="'</span>);
+	aImg.push(sPath);
+	aImg.push(sImage);
+	aImg.push(<span class="literal">'"'</span>);
+	<span class="reserved">if</span> (sImageWidth || sImageHeight) {
+		aImg.push(<span class="literal">' style="'</span>);
+		<span class="reserved">if</span> (sImageWidth) {
+			aImg.push(<span class="literal">'width:'</span>);
+			aImg.push(sImageWidth);
+			aImg.push(<span class="literal">';'</span>);
+		}
+		<span class="reserved">if</span> (sImageHeight) {
+			aImg.push(<span class="literal">'height:'</span>);
+			aImg.push(sImageHeight);
+		}
+		aImg.push(<span class="literal">'"'</span>);
+	}
+	aImg.push(<span class="literal">' /&gt;'</span>);
+	<span class="comment">// Get container dimensions</span>
+	var iContainerWidth = oContr.offsetWidth;
+	var iContainerHeight = oContr.offsetHeight;
+	<span class="comment">// Display image</span>
+	var oBusyContr = zapatecUtils.createElement(<span class="literal">'div'</span>);
+	oBusyContr.style.position = <span class="literal">'relative'</span>;
+	oBusyContr.style.zIndex = 2147483583;
+	var oBusy = zapatecUtils.createElement(<span class="literal">'div'</span>, oBusyContr);
+	oBusy.style.position = <span class="literal">'absolute'</span>;
+	oBusy.innerHTML = aImg.join(<span class="literal">''</span>);
+	oContr.insertBefore(oBusyContr, oContr.firstChild);
+	<span class="comment">// Move to the center of container</span>
+	var iBusyWidth = oBusy.offsetWidth;
+	var iBusyHeight = oBusy.offsetHeight;
+	<span class="reserved">if</span> (iContainerWidth &gt; iBusyWidth) {
+		oBusy.style.left = oContr.scrollLeft +
+		 (iContainerWidth - iBusyWidth) / 2 + <span class="literal">'px'</span>;
+	}
+	<span class="reserved">if</span> (iContainerHeight &gt; iBusyHeight) {
+		oBusy.style.top = oContr.scrollTop +
+		 (iContainerHeight - iBusyHeight) / 2 + <span class="literal">'px'</span>;
+	}
+};
+
+<span class="comment">/**
+ * Removes animated GIF which was put by {<span class="attrib">@link</span> Zapatec.Transport#showBusy}
+ * from the specified div.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   busyContainer: [object or string] element where to put animated GIF,
+ *   busyImage: [string, optional] standard image name or custom image URL
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ */</span>
+Zapatec.Transport.removeBusy = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Get container</span>
+	var oContr = oArg.busyContainer;
+	<span class="reserved">if</span> (typeof oContr == <span class="literal">'string'</span>) {
+		oContr = document.getElementById(oContr);
+	}
+	<span class="reserved">if</span> (!oContr) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Make sure image is displayed</span>
+	<span class="reserved">if</span> (zapatecTransport.isBusy(oArg)) {
+		<span class="comment">// Remove image</span>
+		oContr.removeChild(oContr.firstChild);
+	}
+};
+
+<span class="comment">/**
+ * Fetches specified URL using new XMLHttpRequest object.
+ *
+ * &lt;pre&gt;
+ * Asynchronous mode is recommended because it is safer and there is no risk of
+ * having your script hang in case of network problem. Synchronous mode means
+ * that the code will hang until a response comes back.
+ *
+ * When request is completed, one of provided callback functions is called:
+ * onLoad on success or onError on error. In synchronous mode onLoad callback
+ * can be omitted. Instead use returned object.
+ *
+ * onLoad callback function receives XMLHttpRequest object as argument and may
+ * use its various properties like responseText, responseXML, etc.
+ *
+ * onError callback function receives following object:
+ * {
+ *   errorCode: server status number (404, etc.) [number],
+ *   errorDescription: human readable error description [string]
+ * }
+ *
+ * Note: Some browsers implement caching for GET requests. Caching can be
+ * prevented by adding 'r=' + Math.random() parameter to URL.
+ *
+ * If you use POST method, content argument should be something like
+ * 'var1=value1&amp;var2=value2' with urlencoded values. If you wish to send other
+ * content, set appropriate contentType. E.g. 'multipart/form-data', 'text/xml',
+ * etc.
+ *
+ * If server response contains non-ASCII characters, server must send
+ * corresponding content-type header. E.g.
+ * "Content-type: text/plain; charset=utf-8" or
+ * "Content-type: text/plain; charset=windows-1251".
+ *
+ * Arguments object format:
+ * {
+ *   url: [string] relative or absolute URL to fetch,
+ *   method: [string, optional] method ('GET', 'POST', 'HEAD', 'PUT'),
+ *   async: [boolean, optional] use asynchronous mode (default: true),
+ *   contentType: [string, optional] content type when using POST,
+ *   content: [string or object, optional] postable string or DOM object data
+ *    when using POST,
+ *   onLoad: [function, optional] function reference to call on success,
+ *   onError: [function, optional] function reference to call on error,
+ *   username: [string, optional] username,
+ *   password: [string, optional] password,
+ *   busyContainer: [object or string, optional] element or id of element where
+ *    to put "Busy" animated GIF,
+ *   busyImage: [string, optional] standard image name or custom image URL,
+ *   busyImageWidth: [number or string, optional] image width,
+ *   busyImageHeight: [number or string, optional] image height
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ * <span class="attrib">@return</span> XMLHttpRequest object or null on error
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Transport.fetch = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (oArg == null || typeof oArg != <span class="literal">'object'</span>) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (!oArg.url) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (!oArg.method) {
+		oArg.method = <span class="literal">'GET'</span>;
+	}
+	<span class="reserved">if</span> (typeof oArg.async == <span class="literal">'undefined'</span>) {
+		oArg.async = true;
+	}
+	<span class="reserved">if</span> (!oArg.contentType &amp;&amp; oArg.method.toUpperCase() == <span class="literal">'POST'</span>) {
+		oArg.contentType = <span class="literal">'application/x-www-form-urlencoded'</span>;
+	}
+	<span class="reserved">if</span> (!oArg.content) {
+		oArg.content = null;
+	}
+	<span class="reserved">if</span> (!oArg.onLoad) {
+		oArg.onLoad = null;
+	}
+	<span class="reserved">if</span> (!oArg.onError) {
+		oArg.onError = null;
+	}
+	<span class="comment">// Request URL</span>
+	var oRequest = zapatecTransport.createXmlHttpRequest();
+	<span class="reserved">if</span> (oRequest == null) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="comment">// Show "Busy" animated GIF</span>
+	zapatecTransport.showBusy(oArg);
+	<span class="comment">// IE 6 calls onreadystatechange and then raises exception if local file was</span>
+	<span class="comment">// not found. This flag is used to prevent duplicate onError calls.</span>
+	var bErrorDisplayed = false;
+	<span class="comment">// Onready handler</span>
+	var funcOnReady = <span class="reserved">function</span>() {
+		<span class="comment">// Remove "Busy" animated GIF</span>
+		zapatecTransport.removeBusy(oArg);
+		<span class="comment">// Process response</span>
+		try {
+			<span class="reserved">if</span> (oRequest.status == 200 || oRequest.status == 304 ||
+				(location.protocol == <span class="literal">'file:'</span> &amp;&amp; !oRequest.status)) {
+				<span class="comment">// OK or found, but determined unchanged and loaded from cache</span>
+				<span class="reserved">if</span> (typeof oArg.onLoad == <span class="literal">'function'</span>) {
+					oArg.onLoad(oRequest);
+				}
+			} <span class="reserved">else</span> <span class="reserved">if</span> (!bErrorDisplayed) {
+				bErrorDisplayed = true;
+				<span class="comment">// 404 Not found, etc.</span>
+				zapatecTransport.displayError(
+					oRequest.status,
+					<span class="literal">"Error: Can't fetch "</span> + oArg.url + <span class="literal">'. '</span> + (oRequest.statusText || <span class="literal">''</span>),
+					oArg.onError
+				);
+			}
+		} catch (oExpn) {
+			<span class="reserved">if</span> (oExpn.name == <span class="literal">'NS_ERROR_NOT_AVAILABLE'</span>) {
+				<span class="comment">// Firefox 1.5 raises exception on attempt to access any property of</span>
+				<span class="comment">// oRequest if URL was not found</span>
+				<span class="reserved">if</span> (!bErrorDisplayed) {
+					bErrorDisplayed = true;
+					zapatecTransport.displayError(
+						0,
+						<span class="literal">"Error: Can't fetch "</span> + oArg.url + <span class="literal">'. File not found.'</span>,
+						oArg.onError
+					);
+				}
+			} <span class="reserved">else</span> {
+				<span class="comment">// Other exception</span>
+				throw(oExpn);
+			}
+		};
+	};
+	try {
+		<span class="comment">// Open request</span>
+		<span class="reserved">if</span> (typeof oArg.username != <span class="literal">'undefined'</span> &amp;&amp;
+			typeof oArg.password != <span class="literal">'undefined'</span>) {
+			oRequest.open(
+				oArg.method,
+				oArg.url,
+				oArg.async,
+				oArg.username,
+				oArg.password
+			);
+		} <span class="reserved">else</span> {
+			oRequest.open(
+				oArg.method,
+				oArg.url,
+				oArg.async
+			);
+		}
+		<span class="comment">// Prevent duplicate funcOnReady call in synchronous mode</span>
+		<span class="reserved">if</span> (oArg.async) {
+			<span class="comment">// Set onreadystatechange handler</span>
+			oRequest.onreadystatechange = <span class="reserved">function</span>() {
+				<span class="reserved">if</span> (oRequest.readyState == 4) {
+					<span class="comment">// Request complete</span>
+					funcOnReady();
+					<span class="comment">// Prevent memory leak</span>
+					oRequest.onreadystatechange = {};
+				}
+			};
+		}
+		<span class="comment">// Set content type if needed</span>
+		<span class="reserved">if</span> (oArg.contentType) {
+			oRequest.setRequestHeader(<span class="literal">'Content-Type'</span>, oArg.contentType);
+		}
+		<span class="comment">// Send request</span>
+		oRequest.send(oArg.content);
+		<span class="comment">// In synchronous mode result is ready on next line</span>
+		<span class="reserved">if</span> (!oArg.async) {
+			funcOnReady();
+		}
+		<span class="reserved">return</span> oRequest;
+	} catch (oExpn) {
+		<span class="comment">// Remove "Busy" animated GIF</span>
+		zapatecTransport.removeBusy(oArg);
+		<span class="comment">// Process error</span>
+		<span class="reserved">if</span> (oExpn.name &amp;&amp; oExpn.name == <span class="literal">'NS_ERROR_FILE_NOT_FOUND'</span>) {
+			<span class="reserved">if</span> (!bErrorDisplayed) {
+				bErrorDisplayed = true;
+				zapatecTransport.displayError(
+					0,
+					<span class="literal">"Error: Can't fetch "</span> + oArg.url + <span class="literal">'. File not found.'</span>,
+					oArg.onError
+				);
+			}
+		} <span class="reserved">else</span> {
+			<span class="comment">// Other exception</span>
+			throw(oExpn);
+		}
+	};
+	<span class="reserved">return</span> null;
+};
+
+<span class="comment">/**
+ * Parses HTML fragment into HTMLElement object.
+ *
+ * <span class="attrib">@param</span> {string} sHtml HTML fragment
+ * <span class="attrib">@param</span> {object} oContainer Optional. Container element, which must be
+ * populated with parsed HTML fragment.
+ * <span class="attrib">@return</span> If no container passed, div element containing parsed HTML fragment.
+ * If container passed, undefined.
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Transport.parseHtml = <span class="reserved">function</span>(sHtml, oContainer) {
+	<span class="comment">// Convert to string</span>
+	sHtml += <span class="literal">''</span>;
+	<span class="comment">// Remove leading whitespace characters because Firefox and Opera don't parse</span>
+	<span class="comment">// fragment that starts from whitespace character</span>
+	sHtml = sHtml.replace(/^\s+/g, <span class="literal">''</span>);
+	<span class="comment">// Create temporaty container</span>
+	var oTmpContr;
+	<span class="reserved">if</span> (document.createElementNS) {
+		<span class="comment">// use the XHTML namespace</span>
+		oTmpContr =
+		 document.createElementNS(<span class="literal">'http://www.w3.org/1999/xhtml'</span>, <span class="literal">'div'</span>);
+	} <span class="reserved">else</span> {
+		oTmpContr = document.createElement(<span class="literal">'div'</span>);
+	}
+	<span class="comment">// Parse HTML fragment</span>
+	oTmpContr.innerHTML = sHtml;
+	<span class="comment">// If there is container</span>
+	<span class="reserved">if</span> (oContainer) {
+		<span class="comment">// Populate container</span>
+		var oEl = oTmpContr.firstChild;
+		<span class="reserved">while</span> (oEl) {
+			oContainer.appendChild(oEl);
+			oEl = oTmpContr.firstChild;
+		}
+	} <span class="reserved">else</span> {
+		<span class="comment">// Return temporary container element</span>
+		<span class="reserved">return</span> oTmpContr;
+	}
+};
+
+<span class="comment">/**
+ * Evaluates javascript in global scope.
+ *
+ * &lt;p&gt;&lt;b&gt;
+ * Note: Global variables must be declared without "var" keyword. Otherwise
+ * they will be ignored by Safari.
+ * &lt;/b&gt;&lt;/p&gt;
+ *
+ * <span class="attrib">@param</span> {string} sScript Script to evaluate
+ */</span>
+Zapatec.Transport.evalGlobalScope = <span class="reserved">function</span>(sScript) {
+	<span class="reserved">if</span> (typeof sScript != <span class="literal">'string'</span> || !sScript.match(/\S/)) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (window.execScript) {
+		<span class="comment">// IE</span>
+		window.execScript(sScript, <span class="literal">'javascript'</span>);
+	} <span class="reserved">else</span> <span class="reserved">if</span> (window.eval) {
+		<span class="comment">// Others</span>
+		window.eval(sScript);
+<span class="comment">/*
+ This should never be reached
+	} else {
+		var funcScript = new Function(sScript);
+		funcScript.call(window);
+*/</span>
+	}
+};
+
+<span class="comment">/**
+ * Assigns passed HTML fragment to the specified element's innerHTML property
+ * and evaluates in global scope javascripts found in the fragment.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   html: [string] HTML fragment,
+ *   container: [object or string, optional] element or id of element to put
+ *    HTML fragment into
+ * }
+ * &lt;/pre&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;
+ * Note: Scripts are executed after HTML fragment is assigned to innerHTML.
+ * If external scripts are used, they are loaded asynchronously and execution
+ * sequence is not preserved.
+ * &lt;/b&gt;&lt;/p&gt;
+ *
+ * &lt;p&gt;&lt;b&gt;
+ * Note: Global variables must be declared without "var" keyword. Otherwise
+ * they will be ignored by Safari.
+ * &lt;/b&gt;&lt;/p&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ */</span>
+Zapatec.Transport.setInnerHtml = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg || typeof oArg.html != <span class="literal">'string'</span>) {
+		<span class="reserved">return</span>;
+	}
+	var sHtml = oArg.html;
+	<span class="comment">// Get container</span>
+	var oContr = null;
+	<span class="reserved">if</span> (typeof oArg.container == <span class="literal">'string'</span>) {
+		oContr = document.getElementById(oArg.container);
+	} <span class="reserved">else</span> <span class="reserved">if</span> (typeof oArg.container == <span class="literal">'object'</span>) {
+		oContr = oArg.container;
+	}
+	<span class="comment">// Extract javascripts</span>
+	var aScripts = [];
+	<span class="reserved">if</span> (sHtml.match(/&lt;\s*\/\s*script\s*&gt;/i)) {
+		<span class="comment">// Split whole string by &lt;/script&gt;</span>
+		var aTokens = sHtml.split(/&lt;\s*\/\s*script\s*&gt;/i);
+		var aHtml = [];
+		<span class="reserved">for</span> (var iToken = aTokens.length - 1; iToken &gt;= 0; iToken--) {
+			var sToken = aTokens[iToken];
+			<span class="reserved">if</span> (sToken.match(/\S/)) {
+				<span class="comment">// Search &lt;script ... &gt; in the middle of each token</span>
+				var aMatch = sToken.match(/&lt;\s*script([^&gt;]*)&gt;/i);
+				<span class="reserved">if</span> (aMatch) {
+					<span class="comment">// Separate HTML from javascript</span>
+					var aCouple = sToken.split(/&lt;\s*script[^&gt;]*&gt;/i);
+					<span class="comment">// IE doesn't put empty tokens into the array</span>
+					<span class="reserved">while</span> (aCouple.length &lt; 2) {
+						<span class="reserved">if</span> (sToken.match(/^&lt;\s*script[^&gt;]*&gt;/i)) {
+							<span class="comment">// HTML part is absent</span>
+							aCouple.unshift(<span class="literal">''</span>);
+						} <span class="reserved">else</span> {
+							<span class="comment">// javascript part is absent</span>
+							aCouple.push(<span class="literal">''</span>);
+						}
+					}
+					<span class="comment">// Save HTML fragment</span>
+					aHtml.unshift(aCouple[0]);
+					<span class="comment">// Get script attributes</span>
+					var sAttrs = aMatch[1];
+					<span class="comment">// Get script text</span>
+					var srtScript = aCouple[1];
+					<span class="comment">// Ignore script text if "src" attribute is present</span>
+					<span class="reserved">if</span> (sAttrs.match(/\s+src\s*=/i)) {
+						srtScript = <span class="literal">''</span>;
+					} <span class="reserved">else</span> {
+						<span class="comment">// Fix functions: function aaa() -&gt; aaa = function()</span>
+						srtScript = srtScript.replace(/<span class="reserved">function</span>\s+([^(]+)/g, <span class="literal">'$1=function'</span>);
+					}
+					aScripts.push([sAttrs, srtScript]);
+				} <span class="reserved">else</span> <span class="reserved">if</span> (iToken &lt; aTokens.length - 1) {
+					<span class="comment">// On error assume this token is a part of previous token</span>
+					aTokens[iToken - 1] += <span class="literal">'&lt;/script&gt;'</span> + sToken;
+				} <span class="reserved">else</span> {
+					<span class="comment">// If this is last token, assume it is HTML fragment</span>
+					aHtml.unshift(sToken);
+				}
+			} <span class="reserved">else</span> {
+				<span class="comment">// Empty token</span>
+				aHtml.unshift(sToken);
+			}
+		}
+		<span class="comment">// Get HTML part</span>
+		sHtml = aHtml.join(<span class="literal">''</span>);
+	}
+	<span class="comment">// Set inner HTML</span>
+	<span class="reserved">if</span> (oContr) {
+		<span class="comment">// Opera hack</span>
+		<span class="reserved">if</span> (window.opera) {
+			<span class="comment">// Without this line Opera will not form correct DOM structure if HTML</span>
+			<span class="comment">// fragment contains forms</span>
+			oContr.innerHTML = <span class="literal">'&lt;form&gt;&lt;/form&gt;'</span>;
+		}
+		oContr.innerHTML = sHtml;
+	}
+	<span class="comment">// Evaluate javascripts</span>
+	<span class="reserved">for</span> (var iScript = 0; iScript &lt; aScripts.length; iScript++) {
+		<span class="reserved">if</span> (aScripts[iScript][1].length) {
+			<span class="comment">// Evaluate in global scope</span>
+			zapatecTransport.evalGlobalScope(aScripts[iScript][1]);
+		}
+		<span class="comment">// Load external script</span>
+		var sAttrs = aScripts[iScript][0];
+		sAttrs = zapatecUtils.multispacekill(sAttrs).replace(/ = /g, <span class="literal">'='</span>);
+		<span class="reserved">if</span> (sAttrs.indexOf(<span class="literal">'src='</span>) &gt;= 0) {
+			<span class="comment">// Get container</span>
+			var oContr = document.body;
+			<span class="reserved">if</span> (!oContr) {
+				oContr = document.getElementsByTagName(<span class="literal">'head'</span>)[0];
+				<span class="reserved">if</span> (!oContr) {
+					oContr = document;
+				}
+			}
+			<span class="comment">// Get attributes</span>
+			var aAttrs = sAttrs.split(<span class="literal">' '</span>);
+			<span class="comment">// Load script</span>
+			var oScript = zapatecUtils.createElement(<span class="literal">'script'</span>);
+			<span class="reserved">for</span> (var iAttr = 0; iAttr &lt; aAttrs.length; iAttr++) {
+				var aAttr = aAttrs[iAttr].split(<span class="literal">'='</span>);
+				<span class="reserved">if</span> (aAttr.length &gt; 1) {
+					oScript.setAttribute(aAttr[0],
+					 aAttr[1].match(/^[\s|<span class="literal">"|']*([\s|\S]*[^'|"</span>])[\s|<span class="literal">"|']*$/)[1]);
+				} else {
+					oScript.setAttribute(aAttr[0], aAttr[0]);
+				}
+			}
+			// It's important for Safari to assign attributes before appending
+			oContr.appendChild(oScript);
+		}
+	}
+};
+
+/**
+ * Fetches and parses XML document from the specified URL.
+ *
+ * &lt;pre&gt;
+ * When XML document is fetched and parsed, one of provided callback functions
+ * is called: onLoad on success or onError on error. In synchronous mode onLoad
+ * callback can be omitted. Instead use returned object.
+ *
+ * onLoad callback function receives XMLDocument object as argument and may use
+ * its documentElement and other properties.
+ *
+ * onError callback function receives following object:
+ * {
+ *   errorCode: error code [number],
+ *   errorDescription: human readable error description [string]
+ * }
+ * Error code will be 0 unless Zapatec.Transport.fetch was used to fetch URL
+ * and there was a problem during fetching.
+ *
+ * If method argument is not defined, more efficient XMLDOM in IE and
+ * document.implementation.createDocument in Mozilla will be used to fetch
+ * and parse document. Otherwise Zapatec.Transport.fetch will be used to fetch
+ * document and Zapatec.Transport.parseXml to parse.
+ *
+ * Note: Some browsers implement caching for GET requests. Caching can be
+ * prevented by adding 'r=' + Math.random() parameter to URL.
+ *
+ * If you use POST method, content argument should be something like
+ * 'var1=value1&amp;var2=value'. If you wish to send other content, set appropriate
+ * contentType. E.g. to send XML string, you should set contentType: 'text/xml'.
+ *
+ * If server response contains non-ASCII characters, encoding must be specified.
+ * E.g. &lt;?xml version="</span>1.0<span class="literal">" encoding="</span>utf-8<span class="literal">"?&gt; or 
+ * &lt;?xml version="</span>1.0<span class="literal">" encoding="</span>windows-1251<span class="literal">"?&gt;.
+ *
+ * If server response contains non-ASCII characters, server must send
+ * corresponding content-type header. E.g.
+ * "</span>Content-type: text/xml; charset=utf-8<span class="literal">" or
+ * "</span>Content-type: text/xml; charset=windows-1251<span class="literal">".
+ *
+ * Arguments object format:
+ * {
+ *   url: [string] relative or absolute URL to fetch,
+ *   method: [string, optional] method ('GET', 'POST', 'HEAD', 'PUT'),
+ *   async: [boolean, optional] use asynchronous mode (default: true),
+ *   contentType: [string, optional] content type when using POST,
+ *   content: [string or object, optional] postable string or DOM object data
+ *    when using POST,
+ *   onLoad: [function, optional] function reference to call on success,
+ *   onError: [function, optional] function reference to call on error,
+ *   username: [string, optional] username,
+ *   password: [string, optional] password,
+ *   busyContainer: [object or string, optional] element or id of element where
+ *    to put "</span>Busy<span class="literal">" animated GIF,
+ *   busyImage: [string, optional] standard image name or custom image URL,
+ *   busyImageWidth: [number or string, optional] image width,
+ *   busyImageHeight: [number or string, optional] image height
+ * }
+ * &lt;/pre&gt;
+ *
+ * @param {object} oArg Arguments object
+ * @return XMLHttpRequest in asynchronous mode; XMLDocument in synchronous mode;
+ * DOMDocument in IE in both synchronous and asynchronous modes; null on error
+ * @type object
+ */
+Zapatec.Transport.fetchXmlDoc = function(oArg) {
+	// Check arguments
+	if (oArg == null || typeof oArg != 'object') {
+		return null;
+	}
+	if (!oArg.url) {
+		return null;
+	}
+	if (typeof oArg.async == 'undefined') {
+		oArg.async = true;
+	}
+	if (!oArg.onLoad) {
+		oArg.onLoad = null;
+	}
+	if (!oArg.onError) {
+		oArg.onError = null;
+	}
+	// Try more efficient methods first
+	if (!oArg.method &amp;&amp; typeof oArg.username == 'undefined' &amp;&amp;
+		typeof oArg.password == 'undefined') {
+		if (document.implementation &amp;&amp; document.implementation.createDocument) {
+			// Mozilla
+			var oDoc = null;
+			if (!oArg.reliable) {
+				oArg.reliable = false;
+			}
+			// Form argument for fetch
+			var oFetchArg = {};
+			for (var sKey in oArg) {
+				oFetchArg[sKey] = oArg[sKey];
+			}
+			if (oArg.async) {
+				oFetchArg.onLoad = function(oRequest) {
+					// Prevent onload being called more than once
+					oFetchArg.onLoad = null;
+					// Parse xml response string
+					var parser = new DOMParser();
+					oDoc = parser.parseFromString(oRequest.responseText, "</span>text/xml<span class="literal">");
+					// Remove "</span>Busy<span class="literal">" animated GIF
+					zapatecTransport.removeBusy(oArg);
+					// Process response
+					zapatecTransport.onXmlDocLoad(oDoc, oArg.onLoad, oArg.onError);
+				};
+			} else {
+				// Prevent duplicate parseXml call in synchronous mode
+				oFetchArg.onLoad = null;
+			}
+			// Fetch URL
+			var oRequest = zapatecTransport.fetch(oFetchArg);
+			if (oRequest) {
+				if (oArg.async) {
+					return oRequest;
+				} else {
+					// In synchronous mode result is ready on next line
+					// Parse xml response string
+					var parser = new DOMParser();
+					oDoc = parser.parseFromString(oRequest.responseText, "</span>text/xml<span class="literal">");
+					// Remove "</span>Busy<span class="literal">" animated GIF
+					zapatecTransport.removeBusy(oArg);
+					// Process response
+					zapatecTransport.onXmlDocLoad(oDoc, oArg.onLoad, oArg.onError);
+					return oDoc;
+				}
+			}
+			return null;
+		}
+		if (typeof ActiveXObject != 'undefined') {
+			// IE
+			// Show "</span>Busy<span class="literal">" animated GIF
+			zapatecTransport.showBusy(oArg);
+			// Load document
+			try {
+				var oDoc = new ActiveXObject(zapatecTransport.XMLDOM);
+				oDoc.async = oArg.async;
+				// Prevent duplicate onXmlDocLoad call in synchronous mode
+				if (oArg.async) {
+					oDoc.onreadystatechange = function() {
+						if (oDoc.readyState == 4) {
+							// Remove "</span>Busy<span class="literal">" animated GIF
+							zapatecTransport.removeBusy(oArg);
+							// Process response
+							zapatecTransport.onXmlDocLoad(oDoc, oArg.onLoad, oArg.onError);
+							// Prevent memory leak
+							oDoc.onreadystatechange = {};
+						}
+					};
+				}
+				oDoc.load(oArg.url);
+				// In synchronous mode result is ready on next line
+				if (!oArg.async) {
+					// Remove "</span>Busy<span class="literal">" animated GIF
+					zapatecTransport.removeBusy(oArg);
+					// Process response
+					zapatecTransport.onXmlDocLoad(oDoc, oArg.onLoad, oArg.onError);
+				}
+				return oDoc;
+			} catch (oExpn) {
+				// Remove "</span>Busy<span class="literal">" animated GIF
+				zapatecTransport.removeBusy(oArg);
+			};
+		}
+	}
+	// Try XMLHttpRequest
+	// Form argument for fetch
+	var oFetchArg = {};
+	for (var sKey in oArg) {
+		oFetchArg[sKey] = oArg[sKey];
+	}
+	if (oArg.async) {
+		oFetchArg.onLoad = function(oRequest) {
+			zapatecTransport.parseXml({
+				strXml: oRequest.responseText,
+				onLoad: oArg.onLoad,
+				onError: oArg.onError
+			});
+		};
+	} else {
+		// Prevent duplicate parseXml call in synchronous mode
+		oFetchArg.onLoad = null;
+	}
+	// Fetch URL
+	var oRequest = zapatecTransport.fetch(oFetchArg);
+	if (oRequest) {
+		if (oArg.async) {
+			return oRequest;
+		} else {
+			// In synchronous mode result is ready on next line
+			return zapatecTransport.parseXml({
+				strXml: oRequest.responseText,
+				onLoad: oArg.onLoad,
+				onError: oArg.onError
+			});
+		}
+	}
+	return null;
+};
+
+/**
+ * Parses XML string into XMLDocument object.
+ *
+ * &lt;pre&gt;
+ * When XML string is parsed, one of provided callback functions is called:
+ * onLoad on success or onError on error. In synchronous mode onLoad callback
+ * can be omitted. Instead use returned object.
+ *
+ * onLoad callback function receives XMLDocument object as argument and may use
+ * its documentElement and other properties.
+ *
+ * onError callback function receives following object:
+ * {
+ *   errorCode: error code [number],
+ *   errorDescription: human readable error description [string]
+ * }
+ * Error code will be always 0.
+ *
+ * Returns XMLDocument object, so onLoad callback function is optional.
+ * Returned value and its documentElement property should be checked before
+ * use because they can be null or undefined.
+ *
+ * If XML string contains non-ASCII characters, encoding must be specified.
+ * E.g. &lt;?xml version="</span>1.0<span class="literal">" encoding="</span>utf-8<span class="literal">"?&gt; or 
+ * &lt;?xml version="</span>1.0<span class="literal">" encoding="</span>windows-1251<span class="literal">"?&gt;.
+ *
+ * Arguments object format:
+ * {
+ *   strXml: XML string to parse [string],
+ *   onLoad: function reference to call on success [function] (optional),
+ *   onError: function reference to call on error [function] (optional)
+ * }
+ * &lt;/pre&gt;
+ *
+ * @param {object} oArg Arguments object
+ * @return XMLDocument object or null
+ * @type object
+ */
+Zapatec.Transport.parseXml = function(oArg) {
+	if (oArg == null || typeof oArg != 'object') {
+		return null;
+	}
+	if (!oArg.strXml) {
+		return null;
+	}
+	if (!oArg.onLoad) {
+		oArg.onLoad = null;
+	}
+	if (!oArg.onError) {
+		oArg.onError = null;
+	}
+	if (window.DOMParser) {
+		// Mozilla
+		try {
+			var oDoc = (new DOMParser()).parseFromString(oArg.strXml, 'text/xml');
+			zapatecTransport.onXmlDocLoad(oDoc, oArg.onLoad, oArg.onError);
+			return oDoc;
+		} catch (oExpn) {
+			zapatecTransport.displayError(
+				0,
+				'Error: Cannot parse. String does not appear to be a valid XML fragment.',
+				oArg.onError
+			);
+		};
+		return null;
+	}
+	if (typeof ActiveXObject != 'undefined') {
+		// IE
+		try {
+			var oDoc = new ActiveXObject(zapatecTransport.XMLDOM);
+			oDoc.loadXML(oArg.strXml);
+			zapatecTransport.onXmlDocLoad(oDoc, oArg.onLoad, oArg.onError);
+			return oDoc;
+		} catch (oExpn) {};
+	}
+	return null;
+};
+
+/**
+ * Checks if there were errors during XML document fetching and parsing and
+ * calls onLoad or onError callback function correspondingly.
+ *
+ * @private
+ * @param {object} oDoc XMLDocument object
+ * @param {function} onLoad Callback function provided by user
+ * @param {function} onError Callback function provided by user
+ */
+Zapatec.Transport.onXmlDocLoad = function(oDoc, onLoad, onError) {
+	var sError = null;
+	if (oDoc.parseError) {
+		// Parsing error in IE
+		sError = oDoc.parseError.reason;
+		if (oDoc.parseError.srcText) {
+			sError += 'Location: ' + oDoc.parseError.url +
+			 '\nLine number ' + oDoc.parseError.line + ', column ' +
+			 oDoc.parseError.linepos + ':\n' +
+			 oDoc.parseError.srcText + '\n';
+		}
+	} else if (oDoc.documentElement &amp;&amp;
+	 oDoc.documentElement.tagName == 'parsererror') {
+		// If an error is caused while parsing, Mozilla doesn't throw an exception.
+		// Instead, it creates an XML string containing the details of the error:
+		// &lt;parsererror xmlns="</span>http:<span class="comment">//www.w3.org/1999/xhtml"&gt;XML Parsing Error: ...</span>
+		<span class="comment">// Check if strings has been generated.</span>
+		sError = oDoc.documentElement.firstChild.data + <span class="literal">'\n'</span> +
+		 oDoc.documentElement.firstChild.nextSibling.firstChild.data;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (!oDoc.documentElement) {
+		sError = <span class="literal">'String does not appear to be a valid XML fragment.'</span>;
+	}
+	<span class="reserved">if</span> (sError) {
+		<span class="comment">// Parsing error</span>
+		zapatecTransport.displayError(
+			0,
+			<span class="literal">'Error: Cannot parse. '</span> + sError,
+			onError
+		);
+	} <span class="reserved">else</span> {
+		<span class="comment">// Success</span>
+		<span class="reserved">if</span> (typeof onLoad == <span class="literal">'function'</span>) {
+			onLoad(oDoc);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Serializes XMLDocument object into XML string.
+ *
+ * <span class="attrib">@param</span> {object} oDoc XMLDocument object
+ * <span class="attrib">@return</span> XML string
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Transport.serializeXmlDoc = <span class="reserved">function</span>(oDoc) {
+	<span class="reserved">if</span> (window.XMLSerializer) {
+		<span class="comment">// Mozilla</span>
+		<span class="reserved">return</span> (new XMLSerializer).serializeToString(oDoc);
+	}
+	<span class="reserved">if</span> (oDoc.xml) {
+		<span class="comment">// IE</span>
+		<span class="reserved">return</span> oDoc.xml;
+	}
+};
+
+<span class="comment">/**
+ * Fetches and parses JSON object from the specified URL.
+ *
+ * &lt;pre&gt;
+ * When JSON object is fetched and parsed, one of provided callback functions
+ * is called: onLoad on success or onError on error. In synchronous mode onLoad
+ * callback can be omitted. Instead use returned object.
+ *
+ * onLoad callback function receives JSON object as argument.
+ *
+ * onError callback function receives following object:
+ * {
+ *   errorCode: error code [number],
+ *   errorDescription: human readable error description [string]
+ * }
+ * Error code will be 0 unless there was a problem during fetching.
+ *
+ * Note: Some browsers implement caching for GET requests. Caching can be
+ * prevented by adding 'r=' + Math.random() parameter to URL.
+ *
+ * If you use POST method, content argument should be something like
+ * 'var1=value1&amp;var2=value'. If you wish to send other content, set appropriate
+ * contentType. E.g. to send XML string, you should set contentType: 'text/xml'.
+ *
+ * If server response contains non-ASCII characters, server must send
+ * corresponding content-type header. E.g.
+ * "Content-type: text/plain; charset=utf-8" or
+ * "Content-type: text/plain; charset=windows-1251".
+ *
+ * Arguments object format:
+ * {
+ *   url: [string] relative or absolute URL to fetch,
+ *   reliable: [boolean, optional] false (string will be parsed) or true
+ *   (evaluated) (default: false),
+ *   method: [string, optional] method ('GET', 'POST', 'HEAD', 'PUT'),
+ *   async: [boolean, optional] use asynchronous mode (default: true),
+ *   contentType: [string, optional] content type when using POST,
+ *   content: [string or object, optional] postable string or DOM object data
+ *    when using POST,
+ *   onLoad: [function, optional] function reference to call on success,
+ *   onError: [function, optional] function reference to call on error,
+ *   username: [string, optional] username,
+ *   password: [string, optional] password,
+ *   busyContainer: [object or string, optional] element or id of element where
+ *    to put "Busy" animated GIF,
+ *   busyImage: [string, optional] standard image name or custom image URL,
+ *   busyImageWidth: [number or string, optional] image width,
+ *   busyImageHeight: [number or string, optional] image height
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ * <span class="attrib">@return</span> JSON in synchronous mode; XMLHttpRequest in asynchronous mode; null
+ * on error
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Transport.fetchJsonObj = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (oArg == null || typeof oArg != <span class="literal">'object'</span>) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (!oArg.url) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (typeof oArg.async == <span class="literal">'undefined'</span>) {
+		oArg.async = true;
+	}
+	<span class="reserved">if</span> (!oArg.reliable) {
+		oArg.reliable = false;
+	}
+	<span class="comment">// Form argument for fetch</span>
+	var oFetchArg = {};
+	<span class="reserved">for</span> (var sKey in oArg) {
+		oFetchArg[sKey] = oArg[sKey];
+	}
+	<span class="reserved">if</span> (oArg.async) {
+		oFetchArg.onLoad = <span class="reserved">function</span>(oRequest) {
+			zapatecTransport.parseJson({
+				strJson: oRequest.responseText,
+				reliable: oArg.reliable,
+				onLoad: oArg.onLoad,
+				onError: oArg.onError
+			});
+		};
+	} <span class="reserved">else</span> {
+		<span class="comment">// Prevent duplicate parseJson call in synchronous mode</span>
+		oFetchArg.onLoad = null;
+	}
+	<span class="comment">// Fetch URL</span>
+	var oRequest = zapatecTransport.fetch(oFetchArg);
+	<span class="reserved">if</span> (oRequest) {
+		<span class="reserved">if</span> (oArg.async) {
+			<span class="reserved">return</span> oRequest;
+		} <span class="reserved">else</span> {
+			<span class="comment">// In synchronous mode result is ready on next line</span>
+			<span class="reserved">return</span> zapatecTransport.parseJson({
+				strJson: oRequest.responseText,
+				reliable: oArg.reliable,
+				onLoad: oArg.onLoad,
+				onError: oArg.onError
+			});
+		}
+	}
+	<span class="reserved">return</span> null;
+};
+
+<span class="comment">/**
+ * Parses JSON string into object.
+ *
+ * &lt;pre&gt;
+ * When JSON string is parsed, one of provided callback functions is called:
+ * onLoad on success or onError on error.
+ *
+ * onLoad callback function receives JSON object as argument.
+ *
+ * onError callback function receives following object:
+ * {
+ *   errorCode: error code [number],
+ *   errorDescription: human readable error description [string]
+ * }
+ * Error code will be always 0.
+ *
+ * Returns JSON object, so onLoad callback function is optional.
+ * Returned value should be checked before use because it can be null.
+ *
+ * Arguments object format:
+ * {
+ *   strJson: JSON string to parse [string],
+ *   reliable: false (string will be parsed) or true (evaluated) [boolean]
+ *   (optional, false by default),
+ *   onLoad: function reference to call on success [function] (optional),
+ *   onError: function reference to call on error [function] (optional)
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ * <span class="attrib">@return</span> JSON object or null
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Transport.parseJson = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (oArg == null || typeof oArg != <span class="literal">'object'</span>) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (!oArg.reliable) {
+		oArg.reliable = false;
+	}
+	<span class="reserved">if</span> (!oArg.onLoad) {
+		oArg.onLoad = null;
+	}
+	<span class="reserved">if</span> (!oArg.onError) {
+		oArg.onError = null;
+	}
+	var oJson = null;
+	
+	<span class="reserved">if</span>(typeof(oArg.strJson) == <span class="literal">"string"</span> &amp;&amp; oArg.strJson.length &gt; 0){
+		try {
+			<span class="reserved">if</span> (oArg.reliable) {
+				<span class="reserved">if</span> (oArg.strJson) {
+					oJson = eval(<span class="literal">'('</span> + oArg.strJson + <span class="literal">')'</span>);
+				}
+			} <span class="reserved">else</span> {
+				oJson = zapatecTransport.parseJsonStr(oArg.strJson);
+			}
+		} catch (oExpn) {
+			var sError =
+				<span class="literal">'Error: Cannot parse. String does not appear to be a valid JSON fragment: '</span> +
+				oExpn.message;
+			<span class="reserved">if</span> (typeof oExpn.text == <span class="literal">'string'</span>) {
+				sError += <span class="literal">'\n'</span> + oExpn.text;
+			}
+			sError += <span class="literal">'\n'</span> + oArg.strJson;
+			zapatecTransport.displayError(0, sError, oArg.onError);
+			<span class="comment">// onLoad should not be called in this case</span>
+			<span class="reserved">return</span> null;
+		};
+	}
+	
+	<span class="reserved">if</span> (typeof oArg.onLoad == <span class="literal">'function'</span>) {
+		oArg.onLoad(oJson);
+	}
+	<span class="reserved">return</span> oJson;
+};
+
+<span class="comment">/**
+ * Parses JSON string into object.
+ *
+ * &lt;pre&gt;
+ * Throws exception if parsing error occurs.
+ *
+ * JSON format is described at http://json.org/js.html.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} text JSON string to parse
+ * <span class="attrib">@return</span> JSON object
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Transport.parseJsonStr = <span class="reserved">function</span>(text) {
+	var p = /^\s*(([,:{}\[\]])|<span class="literal">"(\\.|[^\x00-\x1f"</span>\\])*<span class="literal">"|-?\d+(\.\d*)?([eE][+-]?\d+)?|true|false|null)\s*/,
+			token,
+			operator;
+	function error(m, t) {
+			throw {
+					name: 'JSONError',
+					message: m,
+					text: t || operator || token
+			};
+	}
+	function next(b) {
+			if (b &amp;&amp; b != operator) {
+					error("</span>Expected <span class="literal">'" + b + "'</span><span class="literal">");
+			}
+			if (text) {
+					var t = p.exec(text);
+					if (t) {
+							if (t[2]) {
+									token = null;
+									operator = t[2];
+							} else {
+									operator = null;
+									try {
+											token = eval(t[1]);
+									} catch (e) {
+											error("</span>Bad token<span class="literal">", t[1]);
+									}
+							}
+							text = text.substring(t[0].length);
+					} else {
+							error("</span>Unrecognized token<span class="literal">", text);
+					}
+			} else {
+					// undefined changed to null because it is not supported in IE 5.0
+					token = operator = null;
+			}
+	}
+	function val() {
+			var k, o;
+			switch (operator) {
+			case '{':
+					next('{');
+					o = {};
+					if (operator != '}') {
+							for (;;) {
+									if (operator || typeof token != 'string') {
+											error("</span>Missing key<span class="literal">");
+									}
+									k = token;
+									next();
+									next(':');
+									o[k] = val();
+									if (operator != ',') {
+											break;
+									}
+									next(',');
+							}
+					}
+					next('}');
+					return o;
+			case '[':
+					next('[');
+					o = [];
+					if (operator != ']') {
+							for (;;) {
+									o.push(val());
+									if (operator != ',') {
+											break;
+									}
+									next(',');
+							}
+					}
+					next(']');
+					return o;
+			default:
+					if (operator !== null) {
+							error("</span>Missing value<span class="literal">");
+					}
+					k = token;
+					next();
+					return k;
+			}
+	}
+	next();
+	return val();
+};
+
+/**
+ * Serializes JSON object into JSON string.
+ *
+ * @param {object} v JSON object
+ * @param {boolean} bAllowFunctions If true, functions are not ignored
+ * @return JSON string
+ * @type string
+ */
+Zapatec.Transport.serializeJsonObj = function(v, bAllowFunctions) {
+	var a = [];
+	// Emit a string.
+	var e = function(s) {
+		a[a.length] = s;
+	};
+	// Convert a value.
+	var g = function(x) {
+		var c, i, l, v;
+		switch (typeof x) {
+		case 'object':
+			if (x) {
+				if (x instanceof Array) {
+					e('[');
+					l = a.length;
+					for (i = 0; i &lt; x.length; i += 1) {
+						if (l &lt; a.length) {
+							e(',');
+						}
+						g(x[i]);
+					}
+					e(']');
+					return;
+				} else if (x instanceof Date) {
+					e('"</span><span class="literal">');
+					e(x.toString());
+					e('</span><span class="literal">"');
+					return;
+				} else if (typeof x.toString != 'undefined') {
+					e('{');
+					l = a.length;
+					for (i in x) {
+						v = x[i];
+						if (x.hasOwnProperty(i) &amp;&amp; typeof v != 'undefined' &amp;&amp;
+							(bAllowFunctions || typeof v != 'function')) {
+							if (l &lt; a.length) {
+								e(',');
+							}
+							g(i);
+							e(':');
+							g(v);
+						}
+					}
+					e('}');
+					return;
+				}
+			}
+			e('null');
+			return;
+		case 'number':
+			e(isFinite(x) ? +x : 'null');
+			return;
+		case 'string':
+			l = x.length;
+			e('"</span><span class="literal">');
+			for (i = 0; i &lt; l; i += 1) {
+				c = x.charAt(i);
+				if (c &gt;= '</span> <span class="literal">') {
+					if (c == '</span>\\<span class="literal">' || c == '</span><span class="literal">"') {
+						e('\\');
+					}
+					e(c);
+				} else {
+					switch (c) {
+						case '\b':
+							e('\\b');
+							break;
+						case '\f':
+							e('\\f');
+							break;
+						case '\n':
+							e('\\n');
+							break;
+						case '\r':
+							e('\\r');
+							break;
+						case '\t':
+							e('\\t');
+							break;
+						default:
+							c = c.charCodeAt();
+							e('\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16));
+					}
+				}
+			}
+			e('"</span><span class="literal">');
+			return;
+		case '</span>boolean<span class="literal">':
+			e(String(x));
+			return;
+		case '</span><span class="reserved">function</span><span class="literal">':
+			if (bAllowFunctions) {
+				e(x.toString().replace(/function anonymous/g, '</span><span class="reserved">function</span><span class="literal">'));
+			} else {
+				e('</span>null<span class="literal">');
+			}
+			return;
+		default:
+			e('</span>null<span class="literal">');
+			return;
+		}
+	};
+	g(v);
+	return a.join('</span><span class="literal">');
+};
+
+/**
+ * Displays error message.
+ *
+ * &lt;pre&gt;
+ * Calls onError callback function with following argument:
+ * {
+ *   errorCode [number]: error code,
+ *   errorDescription [string]: human readable error description
+ * }
+ *
+ * If onError is not passed, displays human readable error description into
+ * debug window ({@link Zapatec#Debug} is required).
+ * &lt;/pre&gt;
+ *
+ * @private
+ * @param {number} iErrCode Error code
+ * @param {string} sError Human readable error description
+ * @param {function} onError Callback function provided by user
+ */
+Zapatec.Transport.displayError = function(iErrCode, sError, onError) {
+	if (typeof onError == '</span><span class="reserved">function</span><span class="literal">') {
+		onError({
+			errorCode: iErrCode,
+			errorDescription: sError
+		});
+	} else if (typeof zapatecDebug == '</span><span class="reserved">function</span><span class="literal">') {
+		zapatecDebug.log.error('</span>Zapatec.Transport: <span class="literal">' + sError);
+	}
+};
+
+/**
+ * Translates a URL to the URL relative to the specified or to absolute URL.
+ * Calls {@link Zapatec.Transport#fixUrl} for the URL.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   url: [string] absolute or relative URL to translate; absolute URLs are not
+ *    translated, only fixed,
+ *   relativeTo: [string, optional] "url" will be translated to the URL relative
+ *    to this absolute or relative URL; default: current page URL
+ * }
+ * &lt;/pre&gt;
+ *
+ * @param {object} oArg Arguments object
+ * @return Translated URL
+ * @type string
+ */
+Zapatec.Transport.translateUrl = function(oArg) {
+	if (!oArg || !oArg.url) {
+		return null;
+	}
+	// Cut arguments part from url
+	var aFullUrl = oArg.url.split('</span>?<span class="literal">', 2);
+	var sUrl = aFullUrl[0];
+	// Check url
+	if (sUrl.indexOf('</span>:<span class="literal">') &gt;= 0) {
+		// Absolute URL
+		aFullUrl[0] = zapatecTransport.fixUrl(sUrl);
+		return aFullUrl.join('</span>?<span class="literal">');
+	}
+	var oLocation = document.location;
+	var sPort = oLocation.port;
+	if (sPort) {
+		sPort = '</span>:<span class="literal">' + sPort;
+	}
+	if (sUrl.charAt(0) == '</span>/<span class="literal">') {
+		// Add hostname and return absolute URL
+		aFullUrl[0] = [
+			oLocation.protocol,
+			'</span><span class="comment">//',</span>
+			oLocation.hostname,
+			sPort,
+			zapatecTransport.fixUrl(sUrl)
+		].join(<span class="literal">''</span>);
+	} <span class="reserved">else</span> {
+		<span class="comment">// Get relativeTo</span>
+		var sLocation;
+		<span class="reserved">if</span> (sPort) {
+			sLocation = [
+				oLocation.protocol,
+				<span class="literal">'//'</span>,
+				oLocation.hostname,
+				sPort,
+				oLocation.pathname
+			].join(<span class="literal">''</span>);
+		} <span class="reserved">else</span> {
+			sLocation = oLocation.toString();
+		}
+		var sRelativeTo;
+		<span class="reserved">if</span> (typeof oArg.relativeTo != <span class="literal">'string'</span>) {
+			<span class="comment">// By default relative to current page URL</span>
+			sRelativeTo = sLocation.split(<span class="literal">'?'</span>, 2)[0];
+		} <span class="reserved">else</span> {
+			<span class="comment">// Remove arguments from relativeTo</span>
+			sRelativeTo = oArg.relativeTo.split(<span class="literal">'?'</span>, 2)[0];
+			<span class="comment">// Check relativeTo</span>
+			<span class="reserved">if</span> (sRelativeTo.indexOf(<span class="literal">'/'</span>) &lt; 0) {
+				<span class="comment">// Relative to current page URL</span>
+				sRelativeTo = sLocation.split(<span class="literal">'?'</span>, 2)[0];
+			} <span class="reserved">else</span> <span class="reserved">if</span> (sRelativeTo.charAt(0) != <span class="literal">'/'</span> &amp;&amp;
+			 sRelativeTo.indexOf(<span class="literal">':'</span>) &lt; 0) {
+				<span class="comment">// Transform relativeTo to absolute URL to be able to translate URLs</span>
+				<span class="comment">// starting from ../</span>
+				sRelativeTo = zapatecTransport.translateUrl({
+					url: sRelativeTo
+				});
+			}
+		}
+		<span class="comment">// Remove #</span>
+		sRelativeTo = sRelativeTo.split(<span class="literal">'#'</span>)[0];
+		<span class="comment">// Remove file name</span>
+		sRelativeTo = sRelativeTo.split(<span class="literal">'/'</span>);
+		sRelativeTo.pop();
+		sRelativeTo = sRelativeTo.join(<span class="literal">'/'</span>);
+		<span class="comment">// Form new URL</span>
+		aFullUrl[0] = zapatecTransport.fixUrl(sRelativeTo + <span class="literal">'/'</span> + sUrl);
+	}
+	<span class="comment">// Restore arguments part</span>
+	<span class="reserved">return</span> aFullUrl.join(<span class="literal">'?'</span>);
+};
+
+<span class="comment">/**
+ * Removes '/../' and '/./' from URL.
+ *
+ * <span class="attrib">@param</span> {string} sUrl URL
+ * <span class="attrib">@return</span> Fixed URL
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Transport.fixUrl = <span class="reserved">function</span>(sUrl) {
+	<span class="comment">// Split URL</span>
+	var aTokens = sUrl.split(<span class="literal">'/'</span>);
+	<span class="comment">// Form new URL</span>
+	var aUrl = [];
+	var iTokens = aTokens.length;
+	var sToken;
+	<span class="reserved">for</span> (var iToken = 0; iToken &lt; iTokens; iToken++) {
+		sToken = aTokens[iToken];
+		<span class="reserved">if</span> (sToken == <span class="literal">'..'</span>) {
+			aUrl.pop();
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sToken != <span class="literal">'.'</span>) {
+			aUrl.push(sToken);
+		}
+	}
+	<span class="reserved">return</span> aUrl.join(<span class="literal">'/'</span>);
+};
+
+<span class="comment">/**
+ * Holds currently loading URLs to prevent duplicate loads.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Transport.loading = {};
+
+<span class="comment">/**
+ * Prevents duplicate loads of the same URL when second request is done before
+ * first request is completed.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   url: [string] absolute URL,
+ *   force: [boolean, optional] force reload if it is already loaded,
+ *   onLoad: [function, optional] function reference to call on success,
+ *   onError: [function, optional] function reference to call on error
+ * }
+ *
+ * Returned object format:
+ *
+ * If this URL is already loading by another process:
+ * {
+ *   loading: [boolean] always true
+ * }
+ *
+ * Otherwise:
+ * {
+ *   onLoad: [function, optional] replacement for function to call on success,
+ *   onError: [function, optional] replacement for function to call on error
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ * <span class="attrib">@return</span> Returned object
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Transport.setupEvents = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg) {
+		<span class="reserved">return</span> {};
+	}
+	<span class="comment">// If loading is forced, we don't need to check if it is already loading</span>
+	<span class="comment">// If EventDriven is not available, operate as in older versions</span>
+	<span class="comment">// Check if URL is passed</span>
+	<span class="reserved">if</span> (oArg.force || !Zapatec.EventDriven || !oArg.url) {
+		<span class="reserved">return</span> {
+			onLoad: oArg.onLoad,
+			onError: oArg.onError
+		};
+	}
+	var sUrl = oArg.url;
+	<span class="comment">// Add onLoad listener</span>
+	<span class="reserved">if</span> (typeof oArg.onLoad == <span class="literal">'function'</span>) {
+		Zapatec.EventDriven.addEventListener(<span class="literal">'zpTransportOnLoad'</span> + sUrl,
+		 oArg.onLoad);
+	}
+	<span class="comment">// Add onError listener</span>
+	<span class="reserved">if</span> (typeof oArg.onError == <span class="literal">'function'</span>) {
+		Zapatec.EventDriven.addEventListener(<span class="literal">'zpTransportOnError'</span> + sUrl,
+		 oArg.onError);
+	}
+	<span class="comment">// Check if it is already loading</span>
+	<span class="reserved">if</span> (zapatecTransport.loading[sUrl]) {
+		<span class="reserved">return</span> {
+			loading: true
+		};
+	} <span class="reserved">else</span> {
+		<span class="comment">// Flag</span>
+		zapatecTransport.loading[sUrl] = true;
+		<span class="comment">// Replace original callbacks</span>
+		<span class="reserved">return</span> {
+			onLoad: new Function(<span class="literal">"Zapatec.EventDriven.fireEvent('zpTransportOnLoad"</span> +
+			 sUrl + <span class="literal">"');Zapatec.EventDriven.removeEvent('zpTransportOnLoad"</span> +
+			 sUrl + <span class="literal">"');Zapatec.EventDriven.removeEvent('zpTransportOnError"</span> +
+			 sUrl + <span class="literal">"');zapatecTransport.loading['"</span> + sUrl + <span class="literal">"'] = false;"</span>),
+			onError: new Function(<span class="literal">'oError'</span>,
+			 <span class="literal">"Zapatec.EventDriven.fireEvent('zpTransportOnError"</span> +
+			 sUrl + <span class="literal">"',oError);Zapatec.EventDriven.removeEvent('zpTransportOnLoad"</span> +
+			 sUrl + <span class="literal">"');Zapatec.EventDriven.removeEvent('zpTransportOnError"</span> +
+			 sUrl + <span class="literal">"');zapatecTransport.loading['"</span> + sUrl + <span class="literal">"'] = false;"</span>)
+		};
+	}
+};
+
+<span class="comment">/**
+ * Holds URLs of already loaded JS files to prevent duplicate loads.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Transport.loadedJS = {};
+
+<span class="comment">/**
+ * Checks if specified JS file is already loaded.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} sUrl Absolute or relative URL of JS file
+ * <span class="attrib">@param</span> {string} sAbsUrl Optional. Absolute URL of JS file
+ * <span class="attrib">@return</span> Loaded or not
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Transport.isLoadedJS = <span class="reserved">function</span>(sUrl, sAbsUrl) {
+	<span class="comment">// Get absolute URL of the JS file</span>
+	<span class="reserved">if</span> (typeof sAbsUrl == <span class="literal">'undefined'</span>) {
+		sAbsUrl = zapatecTransport.translateUrl({url: sUrl});
+	}
+	<span class="comment">// Check in the list of loaded</span>
+	<span class="reserved">if</span> (zapatecTransport.loadedJS[sAbsUrl]) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">// Try to find script tag</span>
+	var aScripts = document.getElementsByTagName(<span class="literal">'script'</span>);
+	<span class="reserved">for</span> (var iScript = 0; iScript &lt; aScripts.length; iScript++) {
+		var sSrc = aScripts[iScript].getAttribute(<span class="literal">'src'</span>) || <span class="literal">''</span>;
+		<span class="reserved">if</span> (sSrc == sUrl) {
+			<span class="comment">// Add this URL to the list of loaded</span>
+			zapatecTransport.loadedJS[sAbsUrl] = true;
+			<span class="reserved">return</span> true;
+		}
+	}
+	<span class="comment">// Not found</span>
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Returns path to the specified js file. Iterates over all loaded script
+ * elements starting from the end. Finds specified js file in src attribute of
+ * the script element. Splits src attribute value and returns path without js
+ * file name.
+ *
+ * <span class="attrib">@param</span> {string} sScriptFileName Script file name, e.g. 'zpmywidget.js'
+ * <span class="attrib">@return</span> Path to the script, e.g. '../src/' or '' if path is not found
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Transport.getPath = <span class="reserved">function</span>(sScriptFileName) {
+	<span class="comment">// Get all script elements</span>
+	var aScripts = document.getElementsByTagName(<span class="literal">'script'</span>);
+	<span class="comment">// Find the script in the list</span>
+	<span class="reserved">for</span> (var iScript = aScripts.length - 1; iScript &gt;= 0; iScript--) {
+		var sSrc = aScripts[iScript].getAttribute(<span class="literal">'src'</span>) || <span class="literal">''</span>;
+		var aTokens = sSrc.split(<span class="literal">'/'</span>);
+		<span class="comment">// Remove last token</span>
+		var sLastToken = aTokens.pop();
+		<span class="reserved">if</span> (sLastToken == sScriptFileName) {
+			<span class="reserved">return</span> aTokens.length ? aTokens.join(<span class="literal">'/'</span>) + <span class="literal">'/'</span> : <span class="literal">''</span>;
+		}
+	}
+	<span class="comment">// Search in loaded JS files</span>
+	<span class="reserved">for</span> (var sSrc in zapatecTransport.loadedJS) {
+		var aTokens = sSrc.split(<span class="literal">'/'</span>);
+		<span class="comment">// Remove last token</span>
+		var sLastToken = aTokens.pop();
+		<span class="reserved">if</span> (sLastToken == sScriptFileName) {
+			<span class="reserved">return</span> aTokens.length ? aTokens.join(<span class="literal">'/'</span>) + <span class="literal">'/'</span> : <span class="literal">''</span>;
+		}
+	}
+	<span class="comment">// Not found</span>
+	<span class="reserved">return</span> <span class="literal">''</span>;
+};
+
+<span class="comment">/**
+ * Writes script tag to the document. Checks if specified JS file is already
+ * loaded unless bForce argument is true.
+ *
+ * &lt;pre&gt;
+ * Note: This function must be invoked during page load because it uses
+ * document.write method.
+ *
+ * If special zapatecDoNotInclude flag is set, this function does nothing.
+ *
+ * This function overwrites {<span class="attrib">@link</span> Zapatec#include}.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sSrc Src attribute value of the script element
+ * <span class="attrib">@param</span> {string} sId Optional. Id of the script element
+ * <span class="attrib">@param</span> {boolean} bForce Optional. Force reload if it is already loaded
+ */</span>
+Zapatec.Transport.include = <span class="reserved">function</span>(sSrc, sId, bForce) {
+	<span class="comment">// Check flag</span>
+	<span class="reserved">if</span> (zapatecDoNotInclude) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Get absolute URL of the JS file</span>
+	var sAbsUrl = zapatecTransport.translateUrl({url: sSrc});
+	<span class="comment">// Check if it is already loaded</span>
+	<span class="reserved">if</span> (!bForce &amp;&amp; zapatecTransport.isLoadedJS(sSrc, sAbsUrl)) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Include file</span>
+	document.write(<span class="literal">'&lt;script type="text/javascript" src="'</span> + sSrc +
+	 (typeof sId == <span class="literal">'string'</span> ? <span class="literal">'" id="'</span> + sId : <span class="literal">''</span>) + <span class="literal">'"&gt;&lt;/script&gt;'</span>);
+	<span class="comment">// Add this URL to the list of loaded</span>
+	zapatecTransport.loadedJS[sAbsUrl] = true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@ignore</span> Overwrite.
+ */</span>
+Zapatec.include = zapatecTransport.include;
+
+<span class="comment">/**
+ * Includes JS file into the page. Allows URLs from foreign domains. Doesn't
+ * check if the JS file is already included. File is loaded asynchronously.
+ *
+ * <span class="attrib">@param</span> {string} sSrc Src attribute value of the script element
+ * <span class="attrib">@param</span> {string} sId Optional. Id of the script element
+ */</span>
+Zapatec.Transport.includeJS = <span class="reserved">function</span>(sSrc, sId) {
+	<span class="comment">// Make sure it is asynchronous in all browsers</span>
+	setTimeout(<span class="reserved">function</span>() {
+		<span class="comment">// Include file</span>
+		var oContr = document.body;
+		<span class="reserved">if</span> (!oContr) {
+			oContr = document.getElementsByTagName(<span class="literal">'head'</span>)[0];
+			<span class="reserved">if</span> (!oContr) {
+				oContr = document;
+			}
+		}
+		var oScript = document.createElement(<span class="literal">'script'</span>);
+		oScript.type = <span class="literal">'text/javascript'</span>;
+		oScript.src = sSrc;
+		<span class="reserved">if</span> (typeof sId == <span class="literal">'string'</span>) {
+			oScript.id = sId;
+		}
+		<span class="comment">// This is important for Safari to assign attributes before appending</span>
+		oContr.appendChild(oScript);
+	}, 0);
+};
+
+<span class="comment">/**
+ * Fetches JS file using fetch and evaluates it in global scope.
+ *
+ * &lt;pre&gt;
+ * When JS file is loaded successfully, onLoad callback function is called
+ * without arguments. URL is added into Zapatec.Transport.loadedJS array
+ * and will not be fetched again on next function call unless force argument is
+ * set to true.
+ *
+ * onError callback function receives following object:
+ * {
+ *   errorCode: [number] server status number (404, etc.),
+ *   errorDescription: [string] human readable error description
+ * }
+ *
+ * One of the arguments: module or url is required. When url is passed,
+ * module argument is ignored.
+ *
+ * If module argument is used, function gets all "script" elements using
+ * getElementsByTagName and searches for the first element having "src"
+ * attribute value ending with (relativeModule + ".js") (default relativeModule
+ * value is "transport"). Path to the module is taken from that src attribute
+ * value and will be the same as path to relativeModule file.
+ *
+ * Arguments object format:
+ * {
+ *   url: [string, optional] absolute or relative URL of JS file,
+ *   module: [string, optional] module name (file name without .js extension);
+ *    ignored when "url" is defined,
+ *   path: [string, optional] path where to search "module" (default is
+ *    Zapatec.zapatecPath if it is defined); ignored when "url" is defined,
+ *   async: [boolean, optional] use asynchronous mode (default: true),
+ *   force: [boolean, optional] force reload if it is already loaded,
+ *   onLoad: [function, optional] function reference to call on success,
+ *   onError: [function, optional] function reference to call on error
+ * }
+ *
+ * Note: If "force" is used, you should add 'r=' + Math.random() parameter to
+ * URL to prevent loading from browser cache.
+ *
+ * &lt;b&gt;
+ * Note: Global variables must be declared without "var" keyword. Otherwise
+ * they will be ignored by Safari.
+ * &lt;/b&gt;
+ *
+ * If special zapatecDoNotInclude flag is set, this function just calls onLoad
+ * callback function.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ */</span>
+Zapatec.Transport.loadJS = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!(oArg instanceof Object)) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (typeof oArg.async == <span class="literal">'undefined'</span>) {
+		oArg.async = true;
+	}
+	<span class="comment">// Get URL of JS file</span>
+	var sUrl = null;
+	<span class="reserved">if</span> (oArg.url) {
+		sUrl = oArg.url;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (oArg.module) {
+		var sPath = <span class="literal">''</span>;
+		<span class="reserved">if</span> (typeof oArg.path != <span class="literal">'undefined'</span>) {
+			sPath = oArg.path;
+		} <span class="reserved">else</span> <span class="reserved">if</span> (typeof Zapatec.zapatecPath != <span class="literal">'undefined'</span>) {
+			sPath = Zapatec.zapatecPath;
+		}
+		sUrl = sPath + oArg.module + <span class="literal">'.js'</span>;
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Get absolute URL of the JS file</span>
+	var sAbsUrl = zapatecTransport.translateUrl({url: sUrl});
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oArg.onLoad) {
+		oArg.onLoad = null;
+	}
+	<span class="reserved">if</span> (!oArg.onError) {
+		oArg.onError = null;
+	}
+	<span class="comment">// Check if it is already loaded</span>
+	<span class="reserved">if</span> (zapatecDoNotInclude ||
+	 (!oArg.force &amp;&amp; zapatecTransport.isLoadedJS(sUrl, sAbsUrl))) {
+		<span class="comment">// onLoad callback</span>
+		<span class="reserved">if</span> (typeof oArg.onLoad == <span class="literal">'function'</span>) {
+			oArg.onLoad();
+		}
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Setup onLoad and onError events</span>
+	var oHandlers = zapatecTransport.setupEvents({
+		url: sAbsUrl,
+		force: oArg.force,
+		onLoad: oArg.onLoad,
+		onError: oArg.onError
+	});
+	<span class="comment">// Don't need to continue if this url is already loading by another process</span>
+	<span class="reserved">if</span> (oHandlers.loading) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Load JS file</span>
+	zapatecTransport.fetch({
+		url: sUrl,
+		async: oArg.async,
+		onLoad: <span class="reserved">function</span>(oRequest) {
+			<span class="comment">// Can be loaded in two processes simultaneously</span>
+			<span class="reserved">if</span> (oArg.force || !zapatecTransport.loadedJS[sAbsUrl]) {
+				var aTokens = sUrl.split(<span class="literal">'/'</span>);
+				<span class="comment">// Remove last token</span>
+				var sLastToken = aTokens.pop();
+				<span class="comment">// Store path to current module</span>
+				Zapatec.lastLoadedModule = aTokens.join(<span class="literal">'/'</span>) + <span class="literal">'/'</span>;
+				<span class="comment">// Evaluate code in global scope</span>
+				zapatecTransport.evalGlobalScope(oRequest.responseText);
+				<span class="comment">// clear path to last loaded module</span>
+				Zapatec.lastLoadedModule = null;
+				<span class="comment">// Add this URL to the list of loaded</span>
+				zapatecTransport.loadedJS[sAbsUrl] = true;
+			}
+			<span class="comment">// onLoad callback</span>
+			<span class="reserved">if</span> (typeof oHandlers.onLoad == <span class="literal">'function'</span>) {
+				oHandlers.onLoad();
+			}
+		},
+		onError: oHandlers.onError
+	});
+};
+
+<span class="comment">/**
+ * Includes CSS file into the page. Allows URLs from foreign domains. Doesn't
+ * check if the CSS file is already included. File is loaded asynchronously.
+ * Requires that head section of the page already exists because link tag
+ * may appear only inside head.
+ *
+ * <span class="attrib">@param</span> {string} sHref Href attribute value of the link element
+ */</span>
+Zapatec.Transport.includeCSS = <span class="reserved">function</span>(sHref) {
+	<span class="comment">// May appear only inside head</span>
+	var oContr = document.getElementsByTagName(<span class="literal">'head'</span>)[0];
+	<span class="reserved">if</span> (!oContr) {
+		<span class="reserved">return</span>;
+	}
+	var oLink = document.createElement(<span class="literal">'link'</span>);
+	oLink.setAttribute(<span class="literal">'rel'</span>, <span class="literal">'stylesheet'</span>);
+	oLink.setAttribute(<span class="literal">'type'</span>, <span class="literal">'text/css'</span>);
+	oLink.setAttribute(<span class="literal">'href'</span>, sHref);
+	oContr.appendChild(oLink);
+};
+
+<span class="comment">/**
+ * Holds URLs of already loaded CSS files to prevent duplicate loads.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Transport.loadedCss = {};
+
+<span class="comment">/**
+ * Fetches style sheet using fetch and loads it into the document. Requires
+ * utils/stylesheet.js module.
+ *
+ * &lt;pre&gt;
+ * When stylesheet is loaded successfully, onLoad callback function is called
+ * without arguments. URL is added into Zapatec.Transport.loadedCss array
+ * and will not be fetched again on next function call unless force argument is
+ * set to true.
+ *
+ * onError callback function receives following object:
+ * {
+ *   errorCode: server status number (404, etc.) [number],
+ *   errorDescription: human readable error description [string]
+ * }
+ *
+ * Arguments object format:
+ * {
+ *   url: absolute or relative URL of CSS file [string],
+ *   async: [boolean, optional] use asynchronous mode (default: true),
+ *   force: [boolean, optional] force reload if it is already loaded,
+ *   onLoad: [function, optional] function reference to call on success,
+ *   onError: [function, optional] function reference to call on error
+ * }
+ *
+ * Note: If "force" is used, you should add 'r=' + Math.random() parameter to
+ * URL to prevent loading from browser cache.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ */</span>
+Zapatec.Transport.loadCss = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!(oArg instanceof Object)) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (!oArg.url) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (typeof oArg.async == <span class="literal">'undefined'</span>) {
+		oArg.async = true;
+	}
+	<span class="comment">// Get absolute URL of the CSS file</span>
+	var sAbsUrl = zapatecTransport.translateUrl({url: oArg.url});
+	<span class="comment">// Check if it is already loaded</span>
+	<span class="reserved">if</span> (!oArg.force) {
+		<span class="reserved">if</span> (zapatecTransport.loadedCss[sAbsUrl]) {
+			<span class="comment">// onLoad callback</span>
+			<span class="reserved">if</span> (typeof oArg.onLoad == <span class="literal">'function'</span>) {
+				oArg.onLoad();
+			}
+			<span class="reserved">return</span>;
+		}
+		var aLinks = document.getElementsByTagName(<span class="literal">'link'</span>);
+		<span class="reserved">for</span> (var iLnk = 0; iLnk &lt; aLinks.length; iLnk++) {
+			var sHref = aLinks[iLnk].getAttribute(<span class="literal">'href'</span>) || <span class="literal">''</span>;
+			<span class="comment">// Make it absolute</span>
+			sHref = zapatecTransport.translateUrl({url: sHref});
+			<span class="reserved">if</span> (sHref == sAbsUrl) {
+				<span class="comment">// Add this url to the list of loaded</span>
+				zapatecTransport.loadedCss[sAbsUrl] = true;
+				<span class="comment">// onLoad callback</span>
+				<span class="reserved">if</span> (typeof oArg.onLoad == <span class="literal">'function'</span>) {
+					oArg.onLoad();
+				}
+				<span class="reserved">return</span>;
+			}
+		}
+	}
+	<span class="comment">// Setup onLoad and onError events</span>
+	var oHandlers = zapatecTransport.setupEvents({
+		url: sAbsUrl,
+		force: oArg.force,
+		onLoad: oArg.onLoad,
+		onError: oArg.onError
+	});
+	<span class="comment">// Don't need to continue if this url is already loading by another process</span>
+	<span class="reserved">if</span> (oHandlers.loading) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Load CSS file</span>
+	zapatecTransport.fetch({
+		url: sAbsUrl,
+		async: oArg.async,
+		onLoad: <span class="reserved">function</span>(oRequest) {
+			<span class="comment">// Parse CSS file.</span>
+			<span class="comment">// Find URLs and translate them to absolute.</span>
+			<span class="comment">// Find <span class="attrib">@import</span> rules and load corresponding CSS files.</span>
+			var sCss = oRequest.responseText;
+			var aResultCss = [];
+			<span class="comment">// Will hold image URLs to preload</span>
+			var aImgUrls = [];
+			<span class="comment">// Will hold CSS URLs to load</span>
+			var aCssUrls = [];
+			<span class="comment">// Move first cursor to the beginning of the string</span>
+			var iPos = 0;
+			<span class="comment">// Move second cursor to the pattern</span>
+			var iNextPos = sCss.indexOf(<span class="literal">'url('</span>, iPos);
+			<span class="reserved">while</span> (iNextPos &gt;= 0) {
+				<span class="comment">// Move first cursor to the URL</span>
+				iNextPos += 4;
+				<span class="comment">// Check if this is <span class="attrib">@import</span> rule</span>
+				var sToken = sCss.substring(iPos, iNextPos);
+				var bIsImport = /@import\s+url\($/.test(sToken);
+				<span class="comment">// Add part of the string before URL</span>
+				aResultCss.push(sToken);
+				<span class="comment">// Move second cursor to the new location to start the search from</span>
+				iPos = iNextPos;
+				<span class="comment">// Search the end of URL</span>
+				iNextPos = sCss.indexOf(<span class="literal">')'</span>, iPos);
+				<span class="reserved">if</span> (iNextPos &gt;= 0) {
+					<span class="comment">// Remove quotes</span>
+					var sImgUrl = sCss.substring(iPos, iNextPos);
+					sImgUrl = sImgUrl.replace(/[<span class="literal">'"]/g, '</span><span class="literal">');
+					// Translate image URL relative to CSS file URL
+					sImgUrl = zapatecTransport.translateUrl({
+						url: sImgUrl,
+						relativeTo: oArg.url
+					});
+					// Convert to absolute URL
+					sImgUrl = zapatecTransport.translateUrl({
+						url: sImgUrl
+					});
+					// Add translated URL
+					aResultCss.push(sImgUrl);
+					// Add URL to the list
+					if (bIsImport) {
+						// Add CSS URL to load list
+						aCssUrls.push(sImgUrl);
+					} else {
+						// Add image URL to preload list
+						aImgUrls.push(sImgUrl);
+					}
+					// Move second cursor to the new location to start the search from
+					iPos = iNextPos;
+					// Search next pattern
+					iNextPos = sCss.indexOf('</span>url(<span class="literal">', iPos);
+				}
+			}
+			// Add the rest of string
+			aResultCss.push(sCss.substr(iPos));
+			// Get translated CSS text
+			sCss = aResultCss.join('</span><span class="literal">');
+			// Load CSS files
+			zapatecTransport.loadCssList({
+				urls: aCssUrls,
+				async: oArg.async,
+				onLoad: function() {
+					// Add style sheet rules into the page
+					(new Zapatec.StyleSheet()).addParse(sCss);
+					// Fire event
+					if (typeof oHandlers.onLoad == '</span><span class="reserved">function</span><span class="literal">') {
+						oHandlers.onLoad();
+					}
+				}
+			});
+			// Add this URL to the list of loaded
+			zapatecTransport.loadedCss[sAbsUrl] = true;
+			// Preload images
+			zapatecTransport.preloadImages({
+				urls: aImgUrls,
+				timeout: 60000 // 1 minute
+			});
+		},
+		onError: oHandlers.onError
+	});
+};
+
+/**
+ * Loads several CSS files one by one it into the document.
+ *
+ * &lt;pre&gt;
+ * This function behaves differently from other Zapatec.Transport functions.
+ * onLoad callback function will be called in any case, even if errors occured
+ * during loading. If there are multiple errors, onError callback function will
+ * be called once for every passed URL that wasn'</span>t loaded successfully.
+ *
+ * onLoad callback <span class="reserved">function</span> is called without arguments.
+ *
+ * onError callback <span class="reserved">function</span> receives following object:
+ * {
+ *   errorCode: server status number (404, etc.) [number],
+ *   errorDescription: human readable error description [string]
+ * }
+ *
+ * Arguments object format:
+ * {
+ *   urls: array of absolute or relative URLs of CSS files to load [object]
+ *    (files will be loaded in order they appear in the array),
+ *   async: [boolean, optional] use asynchronous mode (default: true),
+ *   force: [boolean, optional] force reload <span class="reserved">if</span> it is already loaded,
+ *   onLoad: <span class="reserved">function</span> reference to call on completion [<span class="reserved">function</span>] (optional),
+ *   onError: <span class="reserved">function</span> reference to call on error [<span class="reserved">function</span>] (optional)
+ * }
+ *
+ * Note: If <span class="literal">"force"</span> is used, you should add <span class="literal">'r='</span> + Math.random() parameter to
+ * URL to prevent loading from browser cache.
+ * &lt;/pre&gt;
+ *
+ * @param {object} oArg Arguments object
+ */
+Zapatec.Transport.loadCssList = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!(oArg instanceof Object)) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (typeof oArg.async == <span class="literal">'undefined'</span>) {
+		oArg.async = true;
+	}
+	<span class="reserved">if</span> (!oArg.onLoad) {
+		oArg.onLoad = null;
+	}
+	<span class="reserved">if</span> (!oArg.onError) {
+		oArg.onError = null;
+	}
+	<span class="reserved">if</span> (!oArg.urls || !oArg.urls.length) {
+		<span class="comment">// onLoad callback</span>
+		<span class="reserved">if</span> (typeof oArg.onLoad == <span class="literal">'function'</span>) {
+			oArg.onLoad();
+		}
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Get first URL in the array</span>
+	var sUrl = oArg.urls.shift();
+	<span class="comment">// CSS file onLoad handler</span>
+	var funcOnLoad = <span class="reserved">function</span>() {
+		<span class="comment">// Load the rest of URLs</span>
+		zapatecTransport.loadCssList({
+			urls: oArg.urls,
+			async: oArg.async,
+			force: oArg.force,
+			onLoad: oArg.onLoad,
+			onError: oArg.onError
+		});
+	};
+	<span class="comment">// Load CSS file</span>
+	zapatecTransport.loadCss({
+		url: sUrl,
+		async: oArg.async,
+		force: oArg.force,
+		onLoad: funcOnLoad,
+		onError: <span class="reserved">function</span>(oError) {
+			zapatecTransport.displayError(oError.errorCode, oError.errorDescription,
+			 oArg.onError);
+			funcOnLoad();
+		}
+	});
+};
+
+<span class="comment">/**
+ * Holds image preloads.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Transport.imagePreloads = [];
+
+<span class="comment">/**
+ * Preloads one or several images at once. Requires utils/preloadimages.js
+ * module. See Zapatec.PreloadImages class (utils/preloadimages.js) for details.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   urls: [object] array of absolute or relative image URLs to preload,
+ *   onLoad: [function, optional] onload event handler,
+ *   timeout: [number, optional] number of milliseconds to wait for onload
+ *    event before forcing it
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object
+ */</span>
+Zapatec.Transport.preloadImages = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (typeof zapatecPreloadImages == <span class="literal">'function'</span>) {
+		zapatecTransport.imagePreloads.push(new zapatecPreloadImages(oArg));
+	}
+};
+
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

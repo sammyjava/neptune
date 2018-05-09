@@ -1,0 +1,183 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" This demo uses labelRightClick and iconRightClick tree events. Custom Zapatec.Menu is shown instead of standard browser context menu. Since Opera doesn't allow to redefine browser context menu - Opera users must left-click tree nodes to see context menu. For Safari use Meta+left click to show context menu. This demo uses Zapatec.Menu - you need to download and add zpmenu package to use it. Set disableContextMenu to true to disable standard browser context menu while clicking on tree labels and icons. Doesn't work for Opera and Safari. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Capture right-clicks</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+    <link href="../themes/default.css" rel="stylesheet" type="text/css"> 
+	<link href="../../zpmenu/themes/office_blue.css" rel="stylesheet" type="text/css"> 
+	<link href="../themes/kde1.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../zpmenu/src/zpmenu.js"></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Capture right-clicks</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>This demo uses <i>labelRightClick</i> and <i>iconRightClick</i> tree events. Custom Zapatec.Menu is shown instead of standard browser context menu.</li>
+<li>Since Opera doesn't allow to redefine browser context menu - Opera users must left-click tree nodes to see context menu.</li>
+<li>For Safari use Meta+left click to show context menu.</li>
+<li>This demo uses Zapatec.Menu - you need to download and add zpmenu package to use it.</li>
+<li>Set <i>disableContextMenu</i> to true to disable standard browser context menu while clicking on tree labels and icons. Doesn't work for Opera and Safari.</li>
+
+			</ul>
+		</div>
+
+
+
+<table width="100%"><tr><td width="40%" valign="top">
+<ul id="tree">
+	<li id="games">
+		Games
+		<ul>
+			<li>Video Games
+				<ul>
+					<li>SPS</li>
+					<li>X-Box</li>
+				</ul>
+			</li>
+			<li>RPG
+				<ul>
+					<li>Gamebooks</li>
+					<li>Live Action</li>
+					<li>Tabletop</li>
+				</ul>
+			</li>
+			<li>Gambling
+				<ul>
+					<li>Baccarat</li>
+					<li>Bingo</li>
+					<li>Roulette</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li id="computers">Computers
+		<ul>
+			<li>Computer Science
+				<ul>
+					<li>Academic Departments</li>
+					<li>Artificial Intelligence</li>
+					<li>Research Institutes</li>
+					<li>Theoretical</li>
+				</ul>
+			</li>
+			<li id="internet">Internet
+				<ul>
+					<li>Chat</li>
+					<li>DHTML libraries
+						<ul>
+							<li id="zapatec">Zapatec Suite</li>
+						</ul>
+					</li>
+					<li>E-mail</li>
+				</ul>
+			</li>
+			<li>Security
+				<ul>
+					<li>Authentification</li>
+					<li>Cryptography</li>
+					<li>Internet security</li>
+					<li>Secure Programming</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+	<li>Business</li>
+</ul>
+</td>
+<td valign="top">
+<div id="console"></div>
+</td>
+</tr></table>
+<ul style="display: none" id="contextMenu">
+	<li>Download</li>
+	<li>Rename</li>
+	<li>Delete</li>
+</ul>
+
+<script type="text/javascript">
+if(!Zapatec.Menu){
+	alert('This demo shows interaction between different Zapatec components. It works only if Zapatec Menu component is purchased.');
+} else {
+	var contextMenu = new Zapatec.Menu({
+		source: 'contextMenu',
+		vertical: true,
+		zIndex: 10,
+		theme: 'office_blue',
+		dropShadow: 50,
+		triggerEvent: "no_event" // hack. To hide menu on document clicks outside menu.
+	});
+
+	contextMenu.hideMenu(); // hide menu after creating
+}
+
+function showContextMenuAt(x, y){
+	if(!contextMenu){
+		return false;
+	}
+
+	// show menu in 0.1 second - without this delay standard context menu won't be canceled
+	setTimeout(function(){contextMenu.popupMenu(x, y);}, 100);
+}
+
+function onRightClick(ev){
+	var coords = Zapatec.Utils.getMousePos(ev);
+
+	showContextMenuAt(coords.pageX, coords.pageY);
+
+	document.getElementById("console").innerHTML = "Node with label '" + 
+		this.data.label.replace(/^\s*/, "").replace(/\s*$/, '') + "' was " + 
+		" clicked. Absolute click coordinates: " + coords.pageX + "x" + 
+		coords.pageY;
+}
+
+var tree = new Zapatec.Tree({
+	tree: "tree",
+	defaultIcons: "customIcon",
+	expandOnLabelClick: true,
+	highlightSelectedNode: true,
+	disableContextMenu: true,
+	eventListeners: {
+		'labelRightClick': onRightClick,
+		'iconRightClick': onRightClick
+	}
+});
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

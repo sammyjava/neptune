@@ -1,0 +1,393 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="stylesheet.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>stylesheet.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec StyleSheet class definition. Used to manipulate with
+ style sheets.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/StyleSheet.html">Zapatec.StyleSheet</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec StyleSheet class definition. Used to manipulate with
+ * style sheets.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: stylesheet.js 15736 2009-02-06 15:29:25Z nikolai $ */</span>
+
+<span class="reserved">if</span> (typeof Zapatec == <span class="literal">'undefined'</span>) {
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span> Namespace definition.
+	 */</span>
+	Zapatec = <span class="reserved">function</span>() {};
+}
+
+<span class="comment">/**
+ * Zapatec StyleSheet class.
+ *
+ * &lt;pre&gt;
+ * Important: Try not to have more than 30 style tags on the page because
+ * http://support.microsoft.com/kb/262161
+ *
+ * When IE raises exception due to the limitation above, last style tag on the
+ * page is used instead of creating new one. In this case use of
+ * {<span class="attrib">@link</span> Zapatec.StyleSheet#removeRules} is not recommended.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@param</span> {boolean} bUseLast Optional. If true, will try to find last style tag
+ * and use it. Will create new style tag only if there are no styles on the page
+ */</span>
+Zapatec.StyleSheet = <span class="reserved">function</span>(bUseLast) {
+	<span class="reserved">if</span> (bUseLast) {
+		<span class="comment">// Use last style tag</span>
+		<span class="reserved">if</span> (document.createStyleSheet) {
+			<span class="comment">// IE</span>
+			<span class="reserved">if</span> (document.styleSheets.length) {
+				<span class="reserved">this</span>.styleSheet = document.styleSheets[document.styleSheets.length - 1];
+			}
+		} <span class="reserved">else</span> {
+			<span class="comment">// Others</span>
+			var aStyleSheets = document.getElementsByTagName(<span class="literal">'style'</span>);
+			<span class="reserved">if</span> (aStyleSheets.length) {
+				<span class="reserved">this</span>.styleSheet = aStyleSheets[aStyleSheets.length - 1];
+			}
+<span class="comment">/* Works properly only in Firefox
+			if (document.styleSheets) {
+				this.n = document.styleSheets.length - 1;
+			}
+*/</span>
+		}
+	}
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.styleSheet) {
+		<span class="reserved">if</span> (document.createStyleSheet) {
+			<span class="comment">// IE</span>
+			try {
+				<span class="reserved">this</span>.styleSheet = document.createStyleSheet();
+			} catch(oException) {
+				<span class="comment">// There is a limit of 30 style tags in Internet Explorer</span>
+				<span class="reserved">this</span>.styleSheet = document.styleSheets[document.styleSheets.length - 1];
+			};
+		} <span class="reserved">else</span> {
+			<span class="comment">// Others</span>
+			<span class="reserved">this</span>.styleSheet = document.createElement(<span class="literal">'style'</span>);
+			<span class="reserved">this</span>.styleSheet.type = <span class="literal">'text/css'</span>;
+			var oHead = document.getElementsByTagName(<span class="literal">'head'</span>)[0];
+			<span class="comment">// If there is no head tag on the page (Opera only)</span>
+			<span class="reserved">if</span> (!oHead) {
+				oHead = document.documentElement;
+			}
+			<span class="reserved">if</span> (oHead) {
+				oHead.appendChild(<span class="reserved">this</span>.styleSheet);
+			}
+<span class="comment">/* Works properly only in Firefox
+			if (document.styleSheets) {
+				this.n = document.styleSheets.length - 1;
+			}
+*/</span>
+		}
+	}
+};
+
+<span class="comment">/**
+ * Adds a rule to the style sheet.
+ *
+ * <span class="attrib">@param</span> {string} strSelector Rule selector
+ * <span class="attrib">@param</span> {string} strDeclarations Rule declarations
+ */</span>
+Zapatec.StyleSheet.<span class="reserved">prototype</span>.addRule = <span class="reserved">function</span>(strSelector, strDeclarations) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.styleSheet) {
+		<span class="comment">// Object in not initialized properly</span>
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (document.createStyleSheet) {
+		<span class="comment">// IE</span>
+<span class="comment">/* Any unsupported selector in addRule crashes IE 6
+		this.styleSheet.addRule(strSelector, strDeclarations);
+*/</span>
+		<span class="reserved">this</span>.styleSheet.cssText += strSelector + <span class="literal">' { '</span> + strDeclarations + <span class="literal">' }'</span>;
+<span class="comment">/* Works properly only in Firefox
+	} else if (document.styleSheets) {
+		// Firefox, Safari, Konqueror
+		var objStyleSheet = document.styleSheets.item(this.n);
+		objStyleSheet.insertRule(strSelector + ' { ' + strDeclarations + ' }',
+		 objStyleSheet.cssRules.length);
+*/</span>
+	} <span class="reserved">else</span> {
+		<span class="comment">// Opera</span>
+		<span class="reserved">this</span>.styleSheet.appendChild(
+		 document.createTextNode(strSelector + <span class="literal">' { '</span> + strDeclarations + <span class="literal">' }'</span>)
+		);
+	}
+};
+
+<span class="comment">/**
+ * Removes all rules from the style sheet.
+ */</span>
+Zapatec.StyleSheet.<span class="reserved">prototype</span>.removeRules = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.styleSheet) {
+		<span class="comment">// Object in not initialized properly</span>
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (document.createStyleSheet) {
+		<span class="comment">// IE</span>
+		var iRules = <span class="reserved">this</span>.styleSheet.rules.length;
+		<span class="reserved">for</span> (var iRule = 0; iRule &lt; iRules; iRule++) {
+			<span class="reserved">this</span>.styleSheet.removeRule();
+		}
+<span class="comment">/* Works properly only in Firefox
+	} else if (document.styleSheets) {
+		// Firefox, Safari, Konqueror
+		var objStyleSheet = document.styleSheets.item(this.n);
+		var iRules = objStyleSheet.cssRules.length;
+		for (var iRule = 0; iRule &lt; iRules; iRule++) {
+			objStyleSheet.deleteRule(0);
+		}
+*/</span>
+	} <span class="reserved">else</span> {
+		<span class="comment">// Opera</span>
+		<span class="reserved">while</span> (<span class="reserved">this</span>.styleSheet.firstChild) {
+			<span class="reserved">this</span>.styleSheet.removeChild(<span class="reserved">this</span>.styleSheet.firstChild);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Parses a CSS string and adds rules into the style sheet.
+ *
+ * <span class="attrib">@param</span> {string} strStyleSheet CSS string
+ */</span>
+Zapatec.StyleSheet.<span class="reserved">prototype</span>.addParse = <span class="reserved">function</span>(strStyleSheet) {
+	<span class="comment">// Remove comments</span>
+	var arrClean = [];
+	var arrTokens = strStyleSheet.split(<span class="literal">'/*'</span>);
+	<span class="reserved">for</span> (var iTok = 0; iTok &lt; arrTokens.length; iTok++) {
+		var arrTails = arrTokens[iTok].split(<span class="literal">'*/'</span>);
+		arrClean.push(arrTails[arrTails.length - 1]);
+	}
+	strStyleSheet = arrClean.join(<span class="literal">''</span>);
+	<span class="comment">// Remove at-rules</span>
+	strStyleSheet = strStyleSheet.replace(/@[^{]*;/g, <span class="literal">''</span>);
+	
+	<span class="reserved">if</span>(!Zapatec.is_opera){
+		<span class="reserved">this</span>.addRules(strStyleSheet);
+	} <span class="reserved">else</span> {
+		<span class="comment">// Opera does not understands cssText feature.</span>
+		<span class="comment">// So split to styles</span>
+		var arrStyles = strStyleSheet.split(<span class="literal">'}'</span>);
+		<span class="reserved">for</span> (var iStl = 0; iStl &lt; arrStyles.length; iStl++) {
+			<span class="comment">// Split to selector and declarations</span>
+			var arrRules = arrStyles[iStl].split(<span class="literal">'{'</span>);
+			<span class="reserved">if</span> (arrRules[0] &amp;&amp; arrRules[1]) {
+				<span class="comment">// Split selector</span>
+				var arrSelectors = arrRules[0].split(<span class="literal">','</span>);
+				<span class="reserved">for</span> (var iSel = 0; iSel &lt; arrSelectors.length; iSel++) {
+					<span class="reserved">this</span>.addRule(arrSelectors[iSel], arrRules[1]);
+				}
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * Creates &amp;lt;STYLE&amp;gt; element with given content. Does not work for Opera.
+ * <span class="attrib">@param</span> cssStr {String} CSS text to add.
+ */</span>
+Zapatec.StyleSheet.<span class="reserved">prototype</span>.addRules = <span class="reserved">function</span>(cssStr){
+	<span class="reserved">if</span>(!cssStr || Zapatec.is_opera){ 
+		<span class="reserved">return</span>;
+	}
+
+	<span class="reserved">if</span>(Zapatec.is_ie){
+		<span class="comment">// IE</span>
+		<span class="reserved">if</span>(<span class="reserved">this</span>.styleSheet.disabled){
+			var self = <span class="reserved">this</span>;
+			setTimeout(<span class="reserved">function</span>(){self.styleSheet.cssText = cssStr;}, 10);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.styleSheet.cssText = cssStr;
+		}
+	} <span class="reserved">else</span> {
+		<span class="comment">// other</span>
+		var cssText = document.createTextNode(cssStr);
+		<span class="reserved">this</span>.styleSheet.appendChild(cssText);
+	}
+}
+                       
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+/* $Id: picker.css 5796 2006-12-27 23:59:28Z vkulov $ */
+/*     CORE CLASSES      */
+
+/* class for displaying main picker container */
+#colorPickerContainer{
+	position: absolute;
+	left: -1000px;
+	top: -1000px;
+	background-color: #FFFFCC;
+	color: black;
+	z-index: 999;
+	display: block;
+	padding: 1px 3px 1px 3px;
+	border: 1px solid black;
+}
+
+/* one cell into palette */
+.cell{
+	cursor: pointer;
+	border: 1px solid black;
+	width: 10px;
+	height: 10px;
+}
+
+/* cell in palette under mouse pointer */
+.hl{
+	border: 1px solid white;
+}
+
+/* marker for default colors in palette */
+#defColor1, #defColor2{
+	border: 1px solid red;
+}
+
+/* element for color preview */
+#colorViewer{
+	height: 17px;
+	width: 40px;
+	border: 1px solid black;
+}
+
+/* input element in palette for displaying HEX value */
+#colorValue{
+	padding: 0;
+}
+
+/*        HTML classes. Change them to integrate with your application           */
+
+/* style for color displayer */
+.colorDisplayer{
+	border: 1px solid black;
+	padding: 0;
+}
+
+/* button, for calling picker */
+.pickerButton{
+	cursor: pointer;
+}
+
+

@@ -1,0 +1,224 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Show/Hide Widget</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../../zpwin/themes/winxp.css" rel="stylesheet" type="text/css">
+	<link href="../themes/indicator/default.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../zpeffects/src/effects.js"></script>
+	<script type="text/javascript" src="../../zpwin/src/window.js"></script>
+	<script type="text/javascript">
+		var win = Zapatec.Window.setup({
+			left:50, 
+			top:130, 
+			raiseOnlyOnTitle:false, 
+			content : "<span>Window content</span>",
+			theme: "winxp"
+		});
+	</script>
+
+	<style type="text/css">
+		.demo {
+			text-align:center;
+			border: 1px dotted black;
+			background-color: #CCC; 
+			height: 70px;
+			position: absolute;
+			top:335px;
+			cursor: pointer;
+			z-index:10;
+		}
+	</style>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Show/Hide Widget</div>
+
+
+<li>This demo shows example of usage for showContainer/hideContainer feature.</li>
+<li>Use it to show/hide whole widget. Buttons are disabled till you choose the effect.</li>
+<br />
+
+<div class="controls" style="padding: 10px 10px 10px 200px; border: 1px solid black;">
+<input type="button" id="hide" value="hide window">
+<input type="button" id="restore" value="show window">
+Effects:<br>
+<table border="0" style="font-size: inherit;">
+	<tr>
+		<td valign="top">
+			<input onclick="changeExample()" type="checkbox" id="fade"> fade 
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="">&lt;none&gt;<br>
+		</td>
+		<td>
+		</td>
+		<td>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="wipe"> wipe<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="slide"> slide<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="glide"> glide<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="unfurl"> unfurl<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="slideTop"> slideTop<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="glideTop"> glideTop<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="shrink"> shrink<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="slideRight"> slideRight<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="glideRight"> glideRight<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="slideBottom"> slideBottom<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="glideBottom"> glideBottom<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="slideLeft"> slideLeft<br>
+		</td>
+		<td>
+			<input onclick="changeExample()" name="clip" type="radio" id="glideLeft"> glideLeft<br>
+		</td>
+	</tr>
+</table>
+Animation speed: <select id="speed" onchange="changeExample()">
+	<option value="1">1</option>
+	<option value="2">2</option>
+	<option value="3">3</option>
+	<option value="4">4</option>
+	<option value="5" selected>5</option>
+	<option value="10">10</option>
+	<option value="15">15</option>
+	<option value="20">20</option>
+	<option value="50">50</option>
+	<option value="100">100</option>
+</select>
+</div>
+
+<div style='height:435px'></div>
+
+<script type="text/javascript">
+var arrEffects = [
+	'fade',
+	'wipe',
+	'unfurl',
+	'shrink',
+	'slide',
+	'slideTop',
+	'slideRight',
+	'slideBottom',
+	'slideLeft',
+	'glide',
+	'glideTop',
+	'glideRight',
+	'glideBottom',
+	'glideLeft'
+];
+
+var elExample = document.getElementById("hide");
+var elRestore = document.getElementById("restore");
+var speedEl = document.getElementById('speed');
+var resultCode = document.getElementById('resultCode');
+
+// Set the disabled attribute for the checkbox effects
+function changeExample(){
+	var effects = [];
+
+	for(var i = 0; i < arrEffects.length; i++){
+		if(document.getElementById(arrEffects[i]).checked){
+			effects[effects.length] = arrEffects[i];
+		}
+	}
+
+	var speed = parseInt(speedEl.options[speedEl.selectedIndex].value);
+
+	if(speed == null || isNaN(speed)){
+		speed = 5;
+	}
+
+	if (effects.length == 0){
+		elExample.disabled = true;
+		elRestore.disabled = true
+	} else {
+		elExample.disabled = false;
+		elRestore.disabled = false;
+
+
+		elExample.onclick = function() {
+			win.hideContainer(effects, speed);
+		}
+
+		// Restore Example button
+		elRestore.onclick = function() {
+			win.showContainer(effects, speed);
+		}
+	}
+
+
+}
+
+window.onload = changeExample;
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

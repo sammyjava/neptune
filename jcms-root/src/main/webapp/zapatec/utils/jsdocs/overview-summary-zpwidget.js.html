@@ -1,0 +1,1948 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="zpwidget.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>zpwidget.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Zapatec Widget library. Base Widget class.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Widget.html">Zapatec.Widget</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Zapatec Widget library. Base Widget class.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: zpwidget.js 15857 2009-02-13 14:37:28Z andrew $ */</span>
+
+<span class="reserved">if</span> (typeof Zapatec == <span class="literal">'undefined'</span>) {
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span> Namespace definition.
+	 */</span>
+	Zapatec = <span class="reserved">function</span>() {};
+}
+
+<span class="comment">/**
+ * Base widget class.
+ *
+ * &lt;pre&gt;
+ * Defines following config options:
+ *
+ * &lt;b&gt;theme&lt;/b&gt; [string] URL of theme file, absolute or relative to the widget's
+ * js file. Default: "../themes/default.css". File extension must be "css".
+ *
+ * Alternatively may contain only theme name. Example: "default". In this case
+ * URL of the file will be formed automatically from the theme name and value of
+ * the &lt;b&gt;themePath&lt;/b&gt; config option.
+ *
+ * Special theme "auto" is used to detect theme automatically depending from OS.
+ * It is replaced automatically with one of the following values:
+ *
+ * &lt;i&gt;winvista&lt;/i&gt; for Windows Vista
+ * &lt;i&gt;winxp&lt;/i&gt; for Windows XP
+ * &lt;i&gt;win2k&lt;/i&gt; for other Windows
+ * &lt;i&gt;macosx&lt;/i&gt; for Mac OSX
+ * &lt;i&gt;default&lt;/i&gt; for other OS
+ *
+ * Make sure all these themes exist before using "auto" theme for the widget.
+ *
+ * &lt;b&gt;themePath&lt;/b&gt; [string] URL of the themes directory, absolute or relative
+ * to the widget's js file. Default: "../themes/". Trailing slash is mandatory.
+ * Path specified in the &lt;b&gt;theme&lt;/b&gt; config option overwrites this config
+ * option. Use only if you pass theme name instead of the URL in the
+ * &lt;b&gt;theme&lt;/b&gt; config option.
+ *
+ * &lt;b&gt;asyncTheme&lt;/b&gt; [boolean] Load theme asynchronously. This means that script
+ * execution will not be suspended until theme is loaded. Theme will be applied
+ * once it is loaded. Default: false.
+ *
+ * &lt;b&gt;templateFile&lt;/b&gt; [string] URL of template file, absolute or relative to
+ * the widget's js file. Default: "../templates/default.html". File extension
+ * must be "html".
+ *
+ * Alternatively may contain only template name. Example: "default". In this
+ * case URL of the file will be formed automatically from the template name and
+ * value of the &lt;b&gt;templatePath&lt;/b&gt; config option.
+ *
+ * Template file is supposed to contain a set of templates used in the widget.
+ * Each template must be enclosed in &amp;lt;textarea&amp;gt; tag having ID, which is
+ * used as template name in &lt;b&gt;templates&lt;/b&gt; config option. Each
+ * &amp;lt;textarea&amp;gt; tag must have style attribute with "display: hidden".
+ * Example:
+ * &amp;lt;textarea id="zpWidgetTemplateMain" style="display: none"&amp;gt;
+ *   Template HTML Source
+ * &amp;lt;/textarea&amp;gt;
+ * Each template is HTML source passed to new Zapatec.Template.
+ * See {<span class="attrib">@link</span> Zapatec.Widget#loadTemplate}
+ *
+ * &lt;b&gt;templateFilePath&lt;/b&gt; [string] URL of the templates directory, absolute or
+ * relative to the widget's js file. Default: "../templates/". Trailing slash is
+ * mandatory. Path specified in the &lt;b&gt;template&lt;/b&gt; config option overwrites
+ * this config option. Use only if you pass template name instead of the URL in
+ * the &lt;b&gt;templateFile&lt;/b&gt; config option.
+ *
+ * &lt;b&gt;templates&lt;/b&gt; [object] associates template IDs from template file with
+ * template names. Specific to each widget. Example:
+ * {
+ *   "main": "zpWidgetTemplateMain",
+ *   ...
+ * }
+ * Where "main" is template name and "zpWidgetTemplateMain" is template ID in
+ * the templates file.
+ *
+ * Templates are initialized (see {<span class="attrib">@link</span> Zapatec.Widget#initTemplates}) and then
+ * each template (Zapatec.Template) object can be accessed using its name.
+ * Example: this.templates.main is reference to Zapatec.Template object, which
+ * was initialized with HTML source taken from "zpWidgetTemplateMain" textarea.
+ *
+ * &lt;b&gt;source&lt;/b&gt; Depends on "sourceType" option. Possible sources:
+ * -----------------------------------------------------------------------------
+ * sourceType     | source
+ * ---------------|-------------------------------------------------------------
+ * 1) 'html'      | [object or string] HTMLElement or its id.
+ * 2) 'html/text' | [string] HTML fragment.
+ * 3) 'html/url'  | [string] URL of HTML fragment.
+ * 4) 'json'      | [object or string] JSON object or string (http://json.org).
+ * 5) 'json/url'  | [string] URL of JSON data source.
+ * 6) 'xml'       | [object or string] XMLDocument object or XML string.
+ * 7) 'xml/url'   | [string] URL of XML data source.
+ * -----------------------------------------------------------------------------
+ *
+ * &lt;b&gt;sourceType&lt;/b&gt; [string] Used together with "source" option to specify how
+ * source should be processed. Possible source types:
+ * 'html', 'html/text', 'html/url', 'json', 'json/url', 'xml', 'xml/url'.
+ * Default: 'html'.
+ * JSON format is described at http://www.json.org.
+ *
+ * &lt;b&gt;sourceFetchMethod&lt;/b&gt; [string] Source fetch method 'GET' or 'POST'.
+ * Default: 'GET'.
+ *
+ * &lt;b&gt;sourceFetchContentType&lt;/b&gt; [string] Content type when "sourceFetchMethod"
+ * is 'POST'.
+ *
+ * &lt;b&gt;sourceFetchContent&lt;/b&gt; [string or object] postable string or DOM object
+ * data when "sourceFetchMethod" is 'POST'.
+ *
+ * &lt;b&gt;callbackSource&lt;/b&gt; [function] May be used instead of "source",
+ * "sourceType" and "sourceFetchMethod" config options to get source depending
+ * on passed arguments. Called in scope of the widget. Receives object with
+ * passed arguments. Must return following object:
+ * {
+ *   source: [object or string] see table above for possible sources,
+ *   sourceType: [string] see table above for possible source types,
+ *   method: [string, optional] method ('GET' or 'POST'),
+ *   contentType: [string, optional] content type when using POST,
+ *   content: [string or object, optional] postable string or DOM object data
+ *    when using POST
+ * }
+ *
+ * &lt;b&gt;asyncSource&lt;/b&gt; [boolean] Load source asynchronously. This means that
+ * script execution will not be suspended until source is loaded. Source will be
+ * processed once it is loaded. Default: true.
+ *
+ * &lt;b&gt;reliableSource&lt;/b&gt; [boolean] Used together with "json" or "json/url"
+ * sourceType to skip JSON format verification. It saves a lot of time for large
+ * data sets. Default: true.
+ *
+ * &lt;b&gt;callbackConvertSource&lt;/b&gt; [function] May be used to convert input data
+ * passed with "source" config option from custom format into internal format of
+ * the widget. Must return converted source.
+ *
+ * &lt;b&gt;eventListeners&lt;/b&gt; [object] Associative array with event listeners:
+ * {
+ *   [string] event name: [function or object] event listener or array of event
+ *    listeners,
+ *   ...
+ * }
+ *
+ * Defines internal property &lt;b&gt;config&lt;/b&gt;.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@extends</span> Zapatec.EventDriven
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.Widget = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Save args</span>
+	<span class="reserved">this</span>.arg = oArg;
+	<span class="comment">// User configuration</span>
+	<span class="reserved">this</span>.config = {};
+	<span class="comment">// Call constructor of superclass</span>
+	zapatecWidget.SUPERconstructor.call(<span class="reserved">this</span>);
+	<span class="comment">// Initialize object</span>
+	<span class="reserved">this</span>.init(oArg);
+};
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecWidget = Zapatec.Widget;
+
+<span class="comment">// Inherit EventDriven</span>
+Zapatec.inherit(zapatecWidget, zapatecEventDriven);
+
+<span class="comment">/**
+ * Unique static id of the class.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Widget.id = <span class="literal">'Zapatec.Widget'</span>;
+
+<span class="comment">/**
+ * Holds path to this file.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Widget.path = Zapatec.getPath(<span class="literal">'Zapatec.Widget'</span>);
+
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * &lt;pre&gt;
+ * Important: Before calling this method, define config options for the widget.
+ * Initially "this.config" object should contain all config options with their
+ * default values. Then values of config options will be changed with user
+ * configuration in this method. Config options provided by user that were not
+ * found in "this.config" object will be ignored.
+ *
+ * Defines internal property &lt;b&gt;id&lt;/b&gt;.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Call parent method</span>
+	zapatecWidget.SUPERclass.init.call(<span class="reserved">this</span>);
+	<span class="comment">// Add this widget to the list</span>
+	<span class="reserved">if</span> (typeof <span class="reserved">this</span>.id == <span class="literal">'undefined'</span>) {
+		<span class="comment">// Find id</span>
+		var iId = 0;
+		<span class="reserved">while</span> (zapatecWidgetAll[iId]) {
+			iId++;
+		}
+		<span class="reserved">this</span>.id = iId;
+		zapatecWidgetAll[iId] = <span class="reserved">this</span>;
+	}
+	<span class="comment">// Configure</span>
+	<span class="reserved">this</span>.configure(oArg);
+	<span class="comment">// Add custom event listeners</span>
+	<span class="reserved">this</span>.addUserEventListeners();
+	<span class="comment">// Add standard event listeners</span>
+	<span class="reserved">this</span>.addStandardEventListeners();
+	<span class="comment">// init language variables</span>
+	<span class="reserved">this</span>.initLang();
+	<span class="comment">// Load theme</span>
+	<span class="reserved">this</span>.loadTheme();
+	<span class="comment">// Load template</span>
+	<span class="reserved">this</span>.loadTemplate();
+};
+
+<span class="comment">/**
+ * Reconfigures the widget with new config options after it was initialized.
+ * May be used to change look or behavior of the widget after it has loaded
+ * the data. In the argument pass only values for changed config options.
+ * There is no need to pass config options that were not changed.
+ *
+ * &lt;pre&gt;
+ * Note: "eventListeners" config option is ignored by this method because it is
+ * useful only on initialization. To add event listener after the widget was
+ * initialized, use addEventListener method instead.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Optional. Changes to user configuration
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Configure</span>
+	<span class="reserved">this</span>.configure(oArg);
+	<span class="comment">// Load theme</span>
+	<span class="reserved">this</span>.loadTheme();
+	<span class="comment">// Load template</span>
+	<span class="reserved">this</span>.loadTemplate();
+	<span class="comment">// reinit language variables</span>
+	<span class="reserved">if</span>(oArg &amp;&amp; (oArg.lang || oArg.langCountryCode || oArg.langEncoding)){
+		<span class="reserved">this</span>.langStr = <span class="reserved">this</span>.config.lang;
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.langCountryCode &amp;&amp; <span class="reserved">this</span>.config.langCountryCode.length &gt; 0){
+			<span class="reserved">this</span>.langStr += <span class="literal">"_"</span> + <span class="reserved">this</span>.config.langCountryCode; 
+		}
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.langEncoding &amp;&amp; <span class="reserved">this</span>.config.langEncoding.length &gt; 0){
+			<span class="reserved">this</span>.langStr += <span class="literal">"-"</span> + <span class="reserved">this</span>.config.langEncoding; 
+		}
+	}
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.config.lang &amp;&amp; 
+		<span class="reserved">this</span>.config.lang.length &gt; 0 &amp;&amp;
+		!(
+			Zapatec.Langs[<span class="reserved">this</span>.config.langId] &amp;&amp;
+			Zapatec.Langs[<span class="reserved">this</span>.config.langId][<span class="reserved">this</span>.langStr]
+		)
+	){
+		<span class="reserved">this</span>.debug(
+			<span class="reserved">this</span>.config.lang + (
+				<span class="reserved">this</span>.config.langCountryCode ? 
+				<span class="literal">" and country code "</span> + <span class="reserved">this</span>.config.langCountryCode : <span class="literal">""</span>
+			) + (
+				<span class="reserved">this</span>.config.langEncoding ? 
+				<span class="literal">" and encoding "</span> + <span class="reserved">this</span>.config.langEncoding : <span class="literal">""</span>
+			)
+		);
+		<span class="reserved">this</span>.config.lang = null;
+		<span class="reserved">this</span>.config.langEncoding = null;
+		<span class="reserved">this</span>.langStr = null;
+	}
+};
+
+<span class="comment">/**
+ * Reconfigures the widget with original config options. May be used to reset
+ * configuration to defaults if the widget provides means to configure it by end
+ * user.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.reset = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.config = {};
+	<span class="reserved">this</span>.reconfigure(<span class="reserved">this</span>.arg);
+};
+
+<span class="comment">/**
+ * Configures widget.
+ *
+ * &lt;pre&gt;
+ * After processing of argument, tries to get &lt;b&gt;Zapatec.Config&lt;/b&gt; cookie,
+ * parses it and overwrites config options with respective values from result
+ * object. This can be useful if some widget provides means to configure it by
+ * end user.
+ *
+ * If Zapatec.Config cookie exists, it is supposed to be following JSON string:
+ * {
+ *   "Zapatec.Widget": {
+ *     "configOptionName": "configOptionValue",
+ *     ...
+ *   },
+ *   ...
+ * }
+ * Where "Zapatec.Widget" is a widget class name.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Default configuration</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'theme'</span>, <span class="literal">'default'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'templateFile'</span>, <span class="literal">'default'</span>);
+	var sPath = <span class="reserved">this</span>.constructor.path;
+	<span class="reserved">if</span> (typeof sPath != <span class="literal">'undefined'</span>) {
+		<span class="reserved">this</span>.defineConfigOption(<span class="literal">'themePath'</span>, zapatecTransport.translateUrl({
+			url: <span class="literal">'../themes/'</span>,
+			relativeTo: sPath
+		}));
+		<span class="reserved">this</span>.defineConfigOption(<span class="literal">'templateFilePath'</span>, zapatecTransport.translateUrl({
+			url: <span class="literal">'../templates/'</span>,
+			relativeTo: sPath
+		}));
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.defineConfigOption(<span class="literal">'templateFilePath'</span>, <span class="literal">'../templates/'</span>);
+	}
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'templates'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'asyncTheme'</span>, false);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'source'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'sourceType'</span>, <span class="literal">'html'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'sourceFetchMethod'</span>, <span class="literal">'GET'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'sourceFetchContentType'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'sourceFetchContent'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'callbackSource'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'asyncSource'</span>, true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'reliableSource'</span>, true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'callbackConvertSource'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'eventListeners'</span>, {});
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'langId'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'lang'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'langCountryCode'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'langEncoding'</span>);
+	<span class="comment">// Get user configuration</span>
+	var oConfig = <span class="reserved">this</span>.config;
+	var sOption;
+	<span class="reserved">if</span> (oArg) {
+		<span class="reserved">for</span> (sOption in oArg) {
+			<span class="reserved">if</span> (typeof oConfig[sOption] != <span class="literal">'undefined'</span>) {
+				oConfig[sOption] = oArg[sOption];
+			} <span class="reserved">else</span> {
+				<span class="reserved">this</span>.debug(<span class="literal">'Unknown config option: '</span> + sOption + <span class="literal">'.'</span>, <span class="literal">'warn'</span>);
+			}
+		}
+	}
+	<span class="comment">// Overwrite some config options with values from cookies</span>
+	var sConstructorId = <span class="reserved">this</span>.constructor.id;
+	<span class="reserved">if</span> (sConstructorId) {
+		var oCookie = zapatecTransport.parseJson({
+			strJson: zapatecUtils.getCookie(<span class="literal">'Zapatec.Config'</span>)
+		});
+		<span class="reserved">if</span> (oCookie) {
+			oCookie = oCookie[sConstructorId];
+			<span class="reserved">if</span> (oCookie) {
+				<span class="reserved">for</span> (sOption in oCookie) {
+					<span class="reserved">if</span> (typeof oConfig[sOption] != <span class="literal">'undefined'</span>) {
+						oConfig[sOption] = oCookie[sOption];
+					}
+				}
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * Returns current configuration of the widget.
+ *
+ * <span class="attrib">@return</span> Current configuration
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.getConfiguration = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.config;
+};
+
+<span class="comment">/**
+ * Array to access any widget on the page by its id number.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Widget.all = [];
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecWidgetAll = zapatecWidget.all;
+
+<span class="comment">/**
+ * Finds a widget by id.
+ *
+ * <span class="attrib">@param</span> {number} Widget id
+ * <span class="attrib">@return</span> Widget or undefined if not found
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Widget.getWidgetById = <span class="reserved">function</span>(iId) {
+	<span class="reserved">return</span> zapatecWidgetAll[iId];
+};
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecWidgetGetWidgetById = zapatecWidget.getWidgetById;
+
+<span class="comment">/**
+ * Saves a property that must be set to null on window unload event. Should be
+ * used for properties that can't be deleted by garbage collector in IE 6 due to
+ * circular references.
+ *
+ * &lt;pre&gt;
+ * Defines internal property &lt;b&gt;widgetCircularRefs&lt;/b&gt;.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oElement DOM object
+ * <span class="attrib">@param</span> {string} sProperty Property name
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.addCircularRef = <span class="reserved">function</span>(oElement, sProperty) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.widgetCircularRefs) {
+		<span class="comment">// Holds properties of DOM objects that must be set to null on window unload</span>
+		<span class="comment">// event to prevent memory leaks in IE 6</span>
+		<span class="reserved">this</span>.widgetCircularRefs = [];
+	}
+	<span class="reserved">this</span>.widgetCircularRefs.push([oElement, sProperty]);
+};
+
+<span class="comment">/**
+ * Assigns a value to a custom property of DOM object. This property will be
+ * set to null on window unload event. Use this function to create properties
+ * that can't be deleted by garbage collector in IE 6 due to circular
+ * references.
+ *
+ * <span class="attrib">@param</span> {object} oElement DOM object
+ * <span class="attrib">@param</span> {string} sProperty Property name
+ * <span class="attrib">@param</span> {any} val Property value
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.createProperty = <span class="reserved">function</span>(oElement, sProperty, val) {
+	oElement[sProperty] = val;
+	<span class="reserved">this</span>.addCircularRef(oElement, sProperty);
+};
+
+<span class="comment">/**
+ * Removes circular references previously defined with method
+ * {<span class="attrib">@link</span> Zapatec.Widget#addCircularRef} or
+ * {<span class="attrib">@link</span> Zapatec.Widget#createProperty} to prevent memory leaks in IE 6.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.removeCircularRefs = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.widgetCircularRefs) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">for</span> (var iRef = <span class="reserved">this</span>.widgetCircularRefs.length - 1; iRef &gt;= 0; iRef--) {
+		var oRef = <span class="reserved">this</span>.widgetCircularRefs[iRef];
+		try{
+			oRef[0][oRef[1]] = null;
+		} catch (e){};
+		oRef[0] = null;
+	}
+};
+
+<span class="comment">/**
+ * Deletes event handlers, control widgets, templates and references to the
+ * object to let JavaScript garbage collector to delete the object.
+ *
+ * &lt;pre&gt;
+ * Calls {<span class="attrib">@link</span> Zapatec.Widget#discardEventHandlers},
+ * {<span class="attrib">@link</span> Zapatec.Widget#discardControls},
+ * {<span class="attrib">@link</span> Zapatec.Widget#discardTemplates}.
+ * Deletes a reference to the object from the internal list.
+ * Calls {<span class="attrib">@link</span> Zapatec.Widget#removeCircularRefs}.
+ * This lets JavaScript garbage collector to delete an object unless there are
+ * any external references to it.
+ *
+ * Id of discarded object is reused. When you create a new instance of the
+ * Widget, it obtains id of previously discarded object.
+ * &lt;/pre&gt;
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.discard = <span class="reserved">function</span>() {
+	<span class="comment">// Delete event handlers</span>
+	<span class="reserved">this</span>.discardEventHandlers();
+	<span class="comment">// Delete controls</span>
+	<span class="reserved">this</span>.discardControls();
+	<span class="comment">// Delete templates</span>
+	<span class="reserved">this</span>.discardTemplates();
+	<span class="comment">// Delete configuration</span>
+	<span class="reserved">this</span>.arg = null;
+	<span class="reserved">this</span>.config = null;
+	<span class="comment">// Delete references to this object</span>
+	zapatecWidgetAll[<span class="reserved">this</span>.id] = null;
+	<span class="reserved">this</span>.removeCircularRefs();
+};
+
+<span class="comment">/**
+ * Calls method {<span class="attrib">@link</span> Zapatec.Widget#removeCircularRefs} for each instance of
+ * Widget on the page. Should be called only on window unload event.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Widget.removeCircularRefs = <span class="reserved">function</span>() {
+	var oWidget;
+	<span class="reserved">for</span> (var iWidget = zapatecWidgetAll.length - 1; iWidget &gt;= 0; iWidget--) {
+		oWidget = zapatecWidgetAll[iWidget];
+		<span class="reserved">if</span> (oWidget &amp;&amp; typeof oWidget.discard == <span class="literal">'function'</span>) {
+			oWidget.discard();
+		}
+	}
+};
+
+<span class="comment">// Remove circular references on window uload event to prevent memory leaks in</span>
+<span class="comment">// IE 6</span>
+zapatecUtils.addEvent(window, <span class="literal">'unload'</span>, zapatecWidget.removeCircularRefs);
+
+<span class="comment">/**
+ * Defines config option if it is not defined yet. Sets default value of new
+ * config option. If default value is not specified, it is set to null.
+ *
+ * <span class="attrib">@param</span> {string} sOption Config option name
+ * <span class="attrib">@param</span> {any} val Optional. Config option default value
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.defineConfigOption = <span class="reserved">function</span>(sOption, val) {
+	<span class="reserved">if</span> (typeof <span class="reserved">this</span>.config[sOption] == <span class="literal">'undefined'</span>) {
+		<span class="reserved">if</span> (typeof val == <span class="literal">'undefined'</span>) {
+			<span class="reserved">this</span>.config[sOption] = null;
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.config[sOption] = val;
+		}
+	}
+};
+
+<span class="comment">/**
+ * Adds custom event listeners.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.addUserEventListeners = <span class="reserved">function</span>() {
+	var oListeners = <span class="reserved">this</span>.config.eventListeners;
+	var fListener, iListeners, iListener;
+	<span class="reserved">for</span> (var sEvent in oListeners) {
+		<span class="reserved">if</span> (oListeners.hasOwnProperty(sEvent)) {
+			vListener = oListeners[sEvent];
+			<span class="reserved">if</span> (vListener instanceof Array) {
+				iListeners = vListener.length;
+				<span class="reserved">for</span> (iListener = 0; iListener &lt; iListeners; iListener++) {
+					<span class="reserved">this</span>.addEventListener(sEvent, vListener[iListener]);
+				}
+			} <span class="reserved">else</span> {
+				<span class="reserved">this</span>.addEventListener(sEvent, vListener);
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * Adds standard event listeners.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.addStandardEventListeners = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.addEventListener(<span class="literal">'fetchSourceError'</span>, zapatecWidget.loadSourceError);
+	<span class="reserved">this</span>.addEventListener(<span class="literal">'loadThemeError'</span>, zapatecWidget.loadThemeError);
+	<span class="reserved">this</span>.addEventListener(<span class="literal">'loadTemplateError'</span>, zapatecWidget.loadTemplateError);
+};
+
+<span class="comment">/**
+ * Displays the reason why the theme was not loaded.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oError Error received from Zapatec.Transport.loadCss
+ */</span>
+Zapatec.Widget.loadThemeError = <span class="reserved">function</span>(oError) {
+	<span class="reserved">this</span>.debug(<span class="literal">'Cannot load theme: '</span> + 
+		(oError &amp;&amp; oError.errorDescription ? oError.errorDescription : <span class="literal">''</span>) + <span class="literal">'.'</span>);
+};
+
+<span class="comment">/**
+ * Displays the reason why the template was not loaded.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oError Error received from Zapatec.Transport.fetch
+ */</span>
+Zapatec.Widget.loadTemplateError = <span class="reserved">function</span>(oError) {
+	<span class="reserved">this</span>.debug(<span class="literal">'Cannot load template: '</span> + 
+		(oError &amp;&amp; oError.errorDescription ? oError.errorDescription : <span class="literal">''</span>) + <span class="literal">'.'</span>);
+};
+
+<span class="comment">/**
+ * Displays the reason why the source was not loaded.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oError Error received from Zapatec.Transport.fetch
+ */</span>
+Zapatec.Widget.loadSourceError = <span class="reserved">function</span>(oError) {
+	<span class="reserved">this</span>.debug(<span class="literal">'Cannot load source: '</span> + 
+		(oError &amp;&amp; oError.errorDescription ? oError.errorDescription : <span class="literal">''</span>) + <span class="literal">'.'</span>);
+};
+
+<span class="comment">/**
+ * Loads specified theme.
+ *
+ * &lt;pre&gt;
+ * Fires events:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;loadThemeStart&lt;/i&gt; before theme loading starts&lt;/li&gt;
+ * &lt;li&gt;&lt;i&gt;loadThemeEnd&lt;/i&gt; after theme was loaded or theme loading has failed&lt;/li&gt;
+ * &lt;li&gt;&lt;i&gt;loadThemeError&lt;/i&gt; after theme loading has failed. Passes one argument
+ * to the listener: error object received from
+ * {<span class="attrib">@link</span> Zapatec.Transport#loadCss}.&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * If special zapatecDoNotLoadThemes flag is set, this function does not load
+ * theme CSS file. Theme CSS file must be included manually.
+ *
+ * Defines internal property &lt;b&gt;themeLoaded&lt;/b&gt;.
+ * &lt;/pre&gt;
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadTheme = <span class="reserved">function</span>() {
+	var oConfig = <span class="reserved">this</span>.config;
+	<span class="comment">// Correct theme config option</span>
+	<span class="reserved">if</span> (typeof oConfig.theme == <span class="literal">'string'</span> &amp;&amp; oConfig.theme.length) {
+		<span class="comment">// Remove path</span>
+		var iPos = oConfig.theme.lastIndexOf(<span class="literal">'/'</span>);
+		<span class="reserved">if</span> (iPos &gt;= 0) {
+			iPos++; <span class="comment">// Go to first char of theme name</span>
+			oConfig.themePath = oConfig.theme.substring(0, iPos);
+			oConfig.theme = oConfig.theme.substring(iPos);
+		}
+		<span class="comment">// Remove file extension</span>
+		iPos = oConfig.theme.lastIndexOf(<span class="literal">'.'</span>);
+		<span class="reserved">if</span> (iPos &gt;= 0) {
+			oConfig.theme = oConfig.theme.substring(0, iPos);
+		}
+		<span class="comment">// Make lower case</span>
+		oConfig.theme = oConfig.theme.toLowerCase();
+		<span class="comment">// Auto theme</span>
+		<span class="reserved">if</span> (oConfig.theme == <span class="literal">'auto'</span>) {
+			var sUserAgent = navigator.userAgent;
+			<span class="reserved">if</span> (sUserAgent.indexOf(<span class="literal">'Windows NT 6'</span>) != -1) {
+				oConfig.theme = <span class="literal">'winvista'</span>;
+			} <span class="reserved">else</span> <span class="reserved">if</span> (sUserAgent.indexOf(<span class="literal">'Windows NT 5'</span>) != -1) {
+				oConfig.theme = <span class="literal">'winxp'</span>;
+			} <span class="reserved">else</span> <span class="reserved">if</span> (sUserAgent.indexOf(<span class="literal">'Win'</span>) != -1) {
+				oConfig.theme = <span class="literal">'win2k'</span>;
+			} <span class="reserved">else</span> <span class="reserved">if</span> (sUserAgent.indexOf(<span class="literal">'Mac'</span>) != -1) {
+				oConfig.theme = <span class="literal">'macosx'</span>;
+			} <span class="reserved">else</span> {
+				oConfig.theme = <span class="literal">'default'</span>;
+			}
+		}
+	} <span class="reserved">else</span> {
+		oConfig.theme = <span class="literal">''</span>;
+	}
+	<span class="comment">// Load theme</span>
+	<span class="reserved">if</span> (oConfig.theme) {
+		<span class="reserved">this</span>.fireEvent(<span class="literal">'loadThemeStart'</span>);
+		<span class="reserved">if</span> (zapatecDoNotLoadThemes) {
+			<span class="reserved">this</span>.themeLoaded = true;
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadThemeEnd'</span>);
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.themeLoaded = false;
+			var oWidget = <span class="reserved">this</span>;
+			zapatecTransport.loadCss({
+				<span class="comment">// URL of theme file</span>
+				url: oConfig.themePath + oConfig.theme + <span class="literal">'.css'</span>,
+				<span class="comment">// Suspend script execution until theme is loaded or error received</span>
+				async: oConfig.asyncTheme,
+				<span class="comment">// Load handler</span>
+				onLoad: <span class="reserved">function</span>() {
+					<span class="reserved">if</span> (!oWidget) {
+						<span class="reserved">return</span>;
+					}
+					oWidget.themeLoaded = true;
+					oWidget.fireEvent(<span class="literal">'loadThemeEnd'</span>);
+					<span class="comment">// Clean up</span>
+					oWidget = null;
+				},
+				<span class="comment">// Error handler</span>
+				onError: <span class="reserved">function</span>(oError) {
+					<span class="reserved">if</span> (!oWidget) {
+						<span class="reserved">return</span>;
+					}
+					oWidget.themeLoaded = true;
+					oWidget.fireEvent(<span class="literal">'loadThemeEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadThemeError'</span>, oError);
+					<span class="comment">// Clean up</span>
+					oWidget = null;
+				}
+			});
+		}
+	}
+};
+
+<span class="comment">/**
+ * Loads specified template file.
+ *
+ * &lt;pre&gt;
+ * Fires events:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;loadTemplateStart&lt;/i&gt; before template loading starts&lt;/li&gt;
+ * &lt;li&gt;&lt;i&gt;loadTemplateEnd&lt;/i&gt; after template file was loaded or template loading
+ * has failed&lt;/li&gt;
+ * &lt;li&gt;&lt;i&gt;loadTemplateError&lt;/i&gt; after template loading has failed. Passes one
+ * argument to the listener: error object received from
+ * {<span class="attrib">@link</span> Zapatec.Transport#fetch}.&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * Once template file is loaded, converts templates into DOM objects, calls
+ * {<span class="attrib">@link</span> Zapatec.Widget#initTemplates} and then {<span class="attrib">@link</span> Zapatec.Widget#display}.
+ *
+ * Defines internal property &lt;b&gt;templateLoaded&lt;/b&gt;.
+ * &lt;/pre&gt;
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadTemplate = <span class="reserved">function</span>() {
+	var oConfig = <span class="reserved">this</span>.config;
+	<span class="comment">// Correct template config option</span>
+	<span class="reserved">if</span> (typeof oConfig.templateFile == <span class="literal">'string'</span> &amp;&amp; oConfig.templateFile.length) {
+		<span class="comment">// Remove path</span>
+		var iPos = oConfig.templateFile.lastIndexOf(<span class="literal">'/'</span>);
+		<span class="reserved">if</span> (iPos &gt;= 0) {
+			<span class="comment">// Go to first char of template file name</span>
+			iPos++;
+			oConfig.templateFilePath = oConfig.templateFile.substring(0, iPos);
+			oConfig.templateFile = oConfig.templateFile.substring(iPos);
+		}
+		<span class="comment">// Remove file extension</span>
+		iPos = oConfig.templateFile.lastIndexOf(<span class="literal">'.'</span>);
+		<span class="reserved">if</span> (iPos &gt;= 0) {
+			oConfig.templateFile = oConfig.templateFile.substring(0, iPos);
+		}
+		<span class="comment">// Make lower case</span>
+		oConfig.templateFile = oConfig.templateFile.toLowerCase();
+	} <span class="reserved">else</span> {
+		oConfig.templateFile = <span class="literal">''</span>;
+	}
+	<span class="comment">// Load template</span>
+	<span class="reserved">if</span> (oConfig.templateFile &amp;&amp; oConfig.templates) {
+		<span class="reserved">this</span>.fireEvent(<span class="literal">'loadTemplateStart'</span>);
+		<span class="reserved">this</span>.templateLoaded = false;
+		<span class="comment">// See if it was preloaded</span>
+		var sTemplateFile = <span class="reserved">this</span>.constructor.templateFiles;
+		<span class="reserved">if</span> (sTemplateFile) {
+			sTemplateFile = sTemplateFile[oConfig.templateFile];
+		}
+		<span class="reserved">if</span> (sTemplateFile) {
+			<span class="comment">// File was preloaded</span>
+			<span class="reserved">this</span>.parseTemplate(sTemplateFile);
+		} <span class="reserved">else</span> {
+			<span class="comment">// Fetch file</span>
+			var oWidget = <span class="reserved">this</span>;
+			zapatecTransport.fetch({
+				<span class="comment">// URL of template file</span>
+				url: oConfig.templateFilePath + oConfig.templateFile + <span class="literal">'.html'</span> +
+					(typeof zapatecDebug == <span class="literal">'function'</span> ? <span class="literal">'?'</span> + Math.random() : <span class="literal">''</span>),
+				<span class="comment">// Load handler</span>
+				onLoad: <span class="reserved">function</span>(oRequest) {
+					<span class="reserved">if</span> (!oWidget) {
+						<span class="reserved">return</span>;
+					}
+					<span class="comment">// Init templates and compile main template</span>
+					oWidget.parseTemplate(oRequest.responseText);
+					<span class="comment">// Clean up</span>
+					oWidget = null;
+				},
+				<span class="comment">// Error handler</span>
+				onError: <span class="reserved">function</span>(oError) {
+					<span class="reserved">if</span> (!oWidget) {
+						<span class="reserved">return</span>;
+					}
+					oWidget.templateLoaded = true;
+					oWidget.fireEvent(<span class="literal">'loadTemplateEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadTemplateError'</span>, oError);
+					<span class="comment">// Clean up</span>
+					oWidget = null;
+				}
+			});
+		}
+	}
+};
+
+<span class="comment">/**
+ * Parses just loaded template file.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {string} sHtml Template file contents
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.parseTemplate = <span class="reserved">function</span>(sHtml) {
+	<span class="comment">// Insert template sources into the page</span>
+	var oContainer = zapatecTransport.parseHtml(sHtml);
+	oContainer.style.display = <span class="literal">'none'</span>;
+	document.body.insertBefore(oContainer, document.body.firstChild);
+	<span class="comment">// Init templates</span>
+	<span class="reserved">this</span>.initTemplates();
+	<span class="comment">// Template sources are not needed anymore</span>
+	document.body.removeChild(oContainer);
+	oContainer = null;
+	<span class="comment">// Fire event</span>
+	<span class="reserved">this</span>.templateLoaded = true;
+	<span class="reserved">this</span>.fireEvent(<span class="literal">'loadTemplateEnd'</span>);
+	<span class="comment">// Compile main template</span>
+	<span class="reserved">this</span>.display();
+};
+
+<span class="comment">/**
+ * Initializes templates. Requires Zapatec.Template. Deletes all existing
+ * templates and creates new Zapatec.Template objects from the
+ * &lt;b&gt;templates&lt;/b&gt; config option.
+ *
+ * &lt;pre&gt;
+ * Defines internal property &lt;b&gt;templates&lt;/b&gt;, which gives ability to access
+ * each template object using its name. Example: this.templates.main.
+ *
+ * All template objects containing in the &lt;b&gt;templates&lt;/b&gt; property are deleted
+ * automatically in {<span class="attrib">@link</span> Zapatec.Widget#discardTemplates} and
+ * {<span class="attrib">@link</span> Zapatec.Widget#discard} methods.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@requires</span> Zapatec.Template Requires zptemplate/src/zptemplate.js
+*/</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.initTemplates = <span class="reserved">function</span>() {
+	<span class="comment">// Delete old controls</span>
+	<span class="reserved">this</span>.discardControls();
+	<span class="comment">// Delete old templates</span>
+	<span class="reserved">this</span>.discardTemplates();
+	<span class="comment">// Keeps template instances</span>
+	<span class="reserved">this</span>.templates = {};
+	var oTemplates = <span class="reserved">this</span>.templates;
+	<span class="comment">// Load templates</span>
+	var oTemplateContainers = <span class="reserved">this</span>.config.templates;
+	<span class="reserved">if</span> (!oTemplateContainers) {
+		<span class="reserved">this</span>.debug(<span class="literal">'Missing config option "templates".'</span>);
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (!zapatecTemplate) {
+		<span class="reserved">this</span>.debug(<span class="literal">'Cannot find Zapatec.Template class.'</span>);
+		<span class="reserved">return</span>;
+	}
+	var sTplContainer, sTplContainerId;
+	<span class="reserved">for</span> (sTplContainer in oTemplateContainers) {
+		sTplContainerId = oTemplateContainers[sTplContainer];
+		<span class="reserved">if</span> (typeof sTplContainerId == <span class="literal">'string'</span> &amp;&amp; sTplContainerId.length) {
+			oTemplates[sTplContainer] = new zapatecTemplate({
+				<span class="comment">// Use div as data source</span>
+				source: sTplContainerId,
+				sourceType: <span class="literal">'html'</span>
+			});
+		}
+	}
+};
+
+<span class="comment">/**
+ * Deletes templates created in {<span class="attrib">@link</span> Zapatec.Widget#initTemplates}.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.discardTemplates = <span class="reserved">function</span>() {
+	var oTemplates = <span class="reserved">this</span>.templates;
+	<span class="reserved">if</span> (oTemplates) {
+		var sTpl, oTpl;
+		<span class="reserved">for</span> (sTpl in oTemplates) {
+			oTpl = oTemplates[sTpl];
+			<span class="reserved">if</span> (oTpl &amp;&amp; typeof oTpl.discard == <span class="literal">'function'</span>) {
+				oTpl.discard();
+				oTemplates[sTpl] = null;
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * Must compile main template and display result. Called during initialization.
+ * Extend this in child class unless your widget must not be displayed during
+ * initialization.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.display = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.templates) {
+		<span class="reserved">this</span>.debug(<span class="literal">'Templates are not loaded.'</span>);
+	}
+};
+
+<span class="comment">/**
+ * Must initialize control widgets. Control widget is a widget initialized and
+ * used inside current widget for different purposes, e.g. to display dialog.
+ * Deletes all existing control widgets and creates new control widgets.
+ * Extend this in child class.
+ *
+ * &lt;pre&gt;
+ * Defines internal property &lt;b&gt;controls&lt;/b&gt;, which gives ability to access
+ * each control widget object using its name. Example: this.controls.dialog.
+ *
+ * All widget objects containing in the &lt;b&gt;controls&lt;/b&gt; property are deleted
+ * automatically in {<span class="attrib">@link</span> Zapatec.Widget#discardControls} and
+ * {<span class="attrib">@link</span> Zapatec.Widget#discard} methods.
+ * &lt;/pre&gt;
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.initControls = <span class="reserved">function</span>() {
+	<span class="comment">// Delete old controls</span>
+	<span class="reserved">this</span>.discardControls();
+	<span class="comment">// Keeps control widget instances</span>
+	<span class="reserved">this</span>.controls = {};
+};
+
+<span class="comment">/**
+ * Deletes widgets created in {<span class="attrib">@link</span> Zapatec.Widget#initControls}.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.discardControls = <span class="reserved">function</span>() {
+	var oControls = <span class="reserved">this</span>.controls;
+	<span class="reserved">if</span> (oControls) {
+		var sControl, oControl;
+		<span class="reserved">for</span> (sControl in oControls) {
+			oControl = oControls[sControl];
+			<span class="reserved">if</span> (oControl &amp;&amp; typeof oControl.discard == <span class="literal">'function'</span>) {
+				oControl.discard();
+				oControls[sControl] = null;
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * Must set event handlers. Deletes all existing event handlers and sets new
+ * event handlers. Extend this in child class.
+ *
+ * &lt;pre&gt;
+ * Defines internal property &lt;b&gt;eventHandlers&lt;/b&gt;, which gives ability to access
+ * each event handler function. Example: this.eventHandlers.onclick.
+ *
+ * All event handlers containing in the &lt;b&gt;eventHandlers&lt;/b&gt; property are
+ * deleted automatically in {<span class="attrib">@link</span> Zapatec.Widget#discardEventHandlers} and
+ * {<span class="attrib">@link</span> Zapatec.Widget#discard} methods.
+ * &lt;/pre&gt;
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.setEventHandlers = <span class="reserved">function</span>() {
+	<span class="comment">// Delete old event handlers</span>
+	<span class="reserved">this</span>.discardEventHandlers();
+	<span class="comment">// Keeps event handlers</span>
+	<span class="reserved">this</span>.eventHandlers = {};
+};
+
+<span class="comment">/**
+ * Adds new DOM event. Stores reference to event to internal array to remove it
+ * on widget discard.
+ * <span class="attrib">@param</span> {string} sHandlerName Unique handler name
+ * <span class="attrib">@param</span> {object} oElement Element object
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@param</span> {boolean} bUseCapture Optional. Default: false. For details see
+ *	http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/events.html#Events-EventTarget-addEventListener
+ * <span class="attrib">@param</span> {boolean} bRemoveOnUnload Optional. Default: true. remove eventlistener
+ *	on page unload.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.addEventHandler = <span class="reserved">function</span>(sHandlerName, oElement, sEvent, fListener, bUseCapture, bRemoveOnUnload){
+        <span class="comment">// if internal array is not initialized - initialize it first</span>
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.eventHandlers){
+		<span class="reserved">this</span>.setEventHandlers();
+	}
+	
+	<span class="comment">// if there is already event with such name - remove it first</span>
+	<span class="reserved">this</span>.removeEventHandler(sHandlerName);
+
+	<span class="comment">// add DOM event</span>
+	zapatecUtils.addEvent(oElement, sEvent, fListener);
+
+	<span class="comment">// store reference</span>
+	<span class="reserved">this</span>.eventHandlers[sHandlerName] = {
+		element: oElement,
+		event: sEvent,
+		handler: fListener
+	};
+};
+<span class="comment">/**
+ * Removes existing DOM event. 
+ * <span class="attrib">@param</span> {string} sHandlerName Unique handler name
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.removeEventHandler = <span class="reserved">function</span>(sHandlerName){
+        <span class="comment">// if internal array is not initialized - initialize it first</span>
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.eventHandlers || !<span class="reserved">this</span>.eventHandlers[sHandlerName]){
+		<span class="reserved">return</span>;
+	}
+
+	var oHandler = <span class="reserved">this</span>.eventHandlers[sHandlerName];
+
+	var oEl = oHandler.element;
+	var sEvent = oHandler.event;
+	var fHandler = oHandler.handler;
+
+	<span class="reserved">if</span> (oEl &amp;&amp; typeof sEvent == <span class="literal">'string'</span> &amp;&amp; typeof fHandler == <span class="literal">'function'</span>) {
+		zapatecUtils.removeEvent(oEl, sEvent, fHandler);
+		oHandler.element = null;
+		oHandler.handler = null;
+		<span class="reserved">this</span>.eventHandlers[sHandlerName] == null;
+	}
+};
+
+<span class="comment">/**
+ * Deletes event handlers set in {<span class="attrib">@link</span> Zapatec.Widget#setEventHandlers}.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.discardEventHandlers = <span class="reserved">function</span>() {
+	var oHandlers = <span class="reserved">this</span>.eventHandlers;
+
+	<span class="reserved">if</span> (oHandlers) {
+		var sHandler;
+		<span class="reserved">for</span> (sHandler in oHandlers) {
+			<span class="reserved">this</span>.removeEventHandler(sHandler);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Forms class name from theme name and provided prefix and suffix.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   prefix: [string, optional] prefix,
+ *   suffix: [string, optional] suffix
+ * }
+ * E.g. if this.config.theme == 'default' and following object provided
+ * {
+ *   prefix: 'zpWidget',
+ *   suffix: 'Container'
+ * },
+ * class name will be 'zpWidgetDefaultContainer'.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> oArg [object] Arguments object
+ * <span class="attrib">@return</span> Class name
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.getClassName = <span class="reserved">function</span>(oArg) {
+	var aClassName = [];
+	<span class="reserved">if</span> (oArg &amp;&amp; oArg.prefix) {
+		aClassName.push(oArg.prefix);
+	}
+	var sTheme = <span class="reserved">this</span>.config.theme;
+	<span class="reserved">if</span> (sTheme != <span class="literal">''</span>) {
+		aClassName.push(sTheme.charAt(0).toUpperCase());
+		aClassName.push(sTheme.substr(1));
+	}
+	<span class="reserved">if</span> (oArg &amp;&amp; oArg.suffix) {
+		aClassName.push(oArg.suffix);
+	}
+	<span class="reserved">return</span> aClassName.join(<span class="literal">''</span>);
+};
+
+<span class="comment">/**
+ * Forms unique element id from widget id, unique counter and provided prefix
+ * and suffix.
+ *
+ * &lt;pre&gt;
+ * Arguments object format:
+ * {
+ *   prefix: [string, optional] prefix, default: 'zpWidget',
+ *   suffix: [string, optional] suffix, default: '-'
+ * }
+ * E.g. if widget id is 0, unique counter is 1 and following object provided
+ * {
+ *   prefix: 'zpWidget',
+ *   suffix: 'Item'
+ * },
+ * id will be 'zpWidget0Item1'.
+ *
+ * Defines internal property &lt;b&gt;widgetUniqueIdCounter&lt;/b&gt;.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> oArg [object] Arguments object
+ * <span class="attrib">@return</span> Element id
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.formElementId = <span class="reserved">function</span>(oArg) {
+	var aId = [];
+	<span class="reserved">if</span> (oArg &amp;&amp; oArg.prefix) {
+		aId.push(oArg.prefix);
+	} <span class="reserved">else</span> {
+		aId.push(<span class="literal">'zpWidget'</span>);
+	}
+	aId.push(<span class="reserved">this</span>.id);
+	<span class="reserved">if</span> (oArg &amp;&amp; oArg.suffix) {
+		aId.push(oArg.suffix);
+	} <span class="reserved">else</span> {
+		aId.push(<span class="literal">'-'</span>);
+	}
+	<span class="reserved">if</span> (typeof <span class="reserved">this</span>.widgetUniqueIdCounter == <span class="literal">'undefined'</span>) {
+		<span class="reserved">this</span>.widgetUniqueIdCounter = 0;
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.widgetUniqueIdCounter++;
+	}
+	aId.push(<span class="reserved">this</span>.widgetUniqueIdCounter);
+	<span class="reserved">return</span> aId.join(<span class="literal">''</span>);
+};
+
+<span class="comment">/**
+ * Shows widget using given effects and animation speed. You need to define
+ * this.container to use this method.
+ * <span class="attrib">@param</span> {object} effects list of effects to apply
+ * <span class="attrib">@param</span> {number} animSpeed possible values - 1..100. Bigger value - more fast animation.
+ * <span class="attrib">@param</span> {function} onFinish Function to call on effect end.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.showContainer = <span class="reserved">function</span>(effects, animSpeed, onFinish){
+	<span class="reserved">return</span> <span class="reserved">this</span>.showHideContainer(effects, animSpeed, onFinish, true);
+}
+
+<span class="comment">/**
+ * Hides widget using given effects and animation speed. You need to define
+ * this.container to use this method.
+ * <span class="attrib">@param</span> {object} effects list of effects to apply
+ * <span class="attrib">@param</span> {number} animSpeed possible values - 1..100. Bigger value - more fast animation.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.hideContainer = <span class="reserved">function</span>(effects, animSpeed, onFinish){
+	<span class="reserved">return</span> <span class="reserved">this</span>.showHideContainer(effects, animSpeed, onFinish, false);
+}
+
+<span class="comment">/**
+ * Show/hides widget using given effects and animation speed. You need to define
+ * this.container to use this method.
+ * <span class="attrib">@param</span> {object} effects list of effects to apply
+ * <span class="attrib">@param</span> {number} animSpeed possible values - 1..100. Bigger value - more fast animation.
+ * <span class="attrib">@param</span> {boolean} show if true - show widget. Otherwise - hide.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.showHideContainer = <span class="reserved">function</span>(effects, animSpeed, onFinish, show){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.container == null){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">if</span>(effects &amp;&amp; effects.length &gt; 0 &amp;&amp; typeof(Zapatec.Effects) == <span class="literal">'undefined'</span>){
+		var self = <span class="reserved">this</span>;
+
+		zapatecTransport.loadJS({
+			url: Zapatec.zapatecPath + <span class="literal">'../zpeffects/src/effects.js'</span>,
+			onLoad: <span class="reserved">function</span>() {
+				self.showHideContainer(effects, animSpeed, onFinish, show);
+			}
+		});
+
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(animSpeed == null &amp;&amp; isNaN(parseInt(animSpeed))){
+		animSpeed = 5;
+	}
+
+	<span class="reserved">if</span>(!effects || effects.length == 0){
+		<span class="reserved">if</span>(show){
+			<span class="reserved">this</span>.container.style.display = <span class="literal">""</span>;
+		} <span class="reserved">else</span> {
+			<span class="reserved">this</span>.container.style.display = <span class="literal">'none'</span>;
+		}
+
+		<span class="reserved">if</span> (onFinish) {
+			onFinish();
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">if</span>(show){
+			Zapatec.Effects.show(<span class="reserved">this</span>.container, animSpeed, effects, onFinish);
+		} <span class="reserved">else</span> {
+			Zapatec.Effects.hide(<span class="reserved">this</span>.container, animSpeed, effects, onFinish);
+		}
+	}
+
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Loads data from the specified source.
+ *
+ * &lt;pre&gt;
+ * If source is URL, fires events:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;fetchSourceStart&lt;/i&gt; before fetching of source&lt;/li&gt;
+ * &lt;li&gt;&lt;i&gt;fetchSourceError&lt;/i&gt; if fetch failed. Passes one argument to the
+ * listener: error object received from {<span class="attrib">@link</span> Zapatec.Transport#fetch}.&lt;/li&gt;
+ * &lt;li&gt;&lt;i&gt;fetchSourceEnd&lt;/i&gt; after source is fetched or fetch failed&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * Fires events:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;loadDataStart&lt;/i&gt; before parsing of data&lt;/li&gt;
+ * &lt;li&gt;&lt;i&gt;loadDataEnd&lt;/i&gt; after data are parsed or error occured during
+ * fetch&lt;/li&gt;
+ * &lt;/ul&gt;
+ *
+ * &lt;i&gt;fetchSourceError&lt;/i&gt; is fired before &lt;i&gt;fetchSourceEnd&lt;/i&gt; and
+ * &lt;i&gt;loadDataEnd&lt;/i&gt;.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Arguments object passed to callbackSource function
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadData = <span class="reserved">function</span>(oArg) {
+	var oConfig = <span class="reserved">this</span>.config;
+	<span class="comment">// Get source using callback function</span>
+	<span class="reserved">if</span> (typeof oConfig.callbackSource == <span class="literal">'function'</span>) {
+		var oSource = oConfig.callbackSource.call(<span class="reserved">this</span>, oArg);
+		<span class="reserved">if</span> (oSource) {
+			<span class="reserved">if</span> (typeof oSource.source != <span class="literal">'undefined'</span>) {
+				oConfig.source = oSource.source;
+			}
+			<span class="reserved">if</span> (typeof oSource.sourceType != <span class="literal">'undefined'</span>) {
+				oConfig.sourceType = oSource.sourceType;
+			}
+			<span class="reserved">if</span> (typeof oSource.method != <span class="literal">'undefined'</span>) {
+				oConfig.sourceFetchMethod = oSource.method;
+			}
+			<span class="reserved">if</span> (typeof oSource.contentType != <span class="literal">'undefined'</span>) {
+				oConfig.sourceFetchContentType = oSource.contentType;
+			}
+			<span class="reserved">if</span> (typeof oSource.content != <span class="literal">'undefined'</span>) {
+				oConfig.sourceFetchContent = oSource.content;
+			}
+		}
+	}
+	<span class="comment">// Process source</span>
+	var vSource = oConfig.source;
+	var sSourceType = oConfig.sourceType;
+
+	var fConvert = oConfig.callbackConvertSource;
+
+	<span class="reserved">if</span> (typeof fConvert != <span class="literal">'function'</span>) {
+		fConvert = <span class="reserved">function</span>(obj){<span class="reserved">return</span> obj;};
+	}
+
+	<span class="reserved">if</span> (vSource &amp;&amp; typeof sSourceType == <span class="literal">'string'</span>) {
+		sSourceType = sSourceType.toLowerCase();
+		<span class="reserved">if</span> (sSourceType == <span class="literal">'html'</span>) {
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataStart'</span>);
+			vSource = fConvert(vSource);
+			<span class="reserved">this</span>.loadDataHtml(zapatecWidget.getElementById(vSource));
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataEnd'</span>);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sSourceType == <span class="literal">'html/text'</span>) {
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataStart'</span>);
+			vSource = fConvert(vSource);
+			<span class="reserved">this</span>.loadDataHtmlText(vSource);
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataEnd'</span>);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sSourceType == <span class="literal">'html/url'</span>) {
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'fetchSourceStart'</span>);
+			<span class="comment">// Fetch source</span>
+			var oWidget = <span class="reserved">this</span>;
+			<span class="reserved">this</span>.dataRequest = zapatecTransport.fetch({
+				<span class="comment">// URL of the source</span>
+				url: vSource,
+				<span class="comment">// Method GET or POST</span>
+				method: oConfig.sourceFetchMethod,
+				<span class="comment">// Suspend script execution until source is loaded or error received</span>
+				async: oConfig.asyncSource,
+				<span class="comment">// Content type when method is POST</span>
+				contentType: oConfig.sourceFetchContentType,
+				<span class="comment">// Content when method is POST</span>
+				content: oConfig.sourceFetchContent,
+				<span class="comment">// Onload event handler</span>
+				onLoad: <span class="reserved">function</span>(oRequest) {
+					oWidget.dataRequest = null;
+					oWidget.fireEvent(<span class="literal">'fetchSourceEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadDataStart'</span>);
+					oWidget.loadDataHtmlText(fConvert(oRequest.responseText));
+					oWidget.fireEvent(<span class="literal">'loadDataEnd'</span>);
+					oWidget = null;
+				},
+				<span class="comment">// Onerror event handler</span>
+				onError: <span class="reserved">function</span>(oError) {
+					oWidget.dataRequest = null;
+					oWidget.fireEvent(<span class="literal">'fetchSourceError'</span>, oError);
+					oWidget.fireEvent(<span class="literal">'fetchSourceEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadDataEnd'</span>);
+					oWidget = null;
+				}
+			});
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sSourceType == <span class="literal">'json'</span>) {
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataStart'</span>);
+			
+			<span class="reserved">if</span>(typeof vSource == <span class="literal">'string'</span>){
+				<span class="reserved">if</span> (oConfig.reliableSource) {
+					vSource = eval([<span class="literal">'('</span>, vSource, <span class="literal">')'</span>].join(<span class="literal">''</span>));
+				} <span class="reserved">else</span> {
+					vSource = zapatecTransport.parseJson({strJson: vSource});
+				}
+			}
+
+			vSource = fConvert(vSource);
+
+			<span class="reserved">this</span>.loadDataJson(vSource);
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataEnd'</span>);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sSourceType == <span class="literal">'json/url'</span>) {
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'fetchSourceStart'</span>);
+			<span class="comment">// Fetch source</span>
+			var oWidget = <span class="reserved">this</span>;
+			<span class="reserved">this</span>.dataRequest = zapatecTransport.fetchJsonObj({
+				<span class="comment">// URL of the source</span>
+				url: vSource,
+				<span class="comment">// Method GET or POST</span>
+				method: oConfig.sourceFetchMethod,
+				<span class="comment">// Suspend script execution until source is loaded or error received</span>
+				async: oConfig.asyncSource,
+				<span class="comment">// Content type when method is POST</span>
+				contentType: oConfig.sourceFetchContentType,
+				<span class="comment">// Content when method is POST</span>
+				content: oConfig.sourceFetchContent,
+				<span class="comment">// Skip JSON format verification</span>
+				reliable: oConfig.reliableSource,
+				<span class="comment">// Onload event handler</span>
+				onLoad: <span class="reserved">function</span>(oResult) {
+					oWidget.dataRequest = null;
+					oWidget.fireEvent(<span class="literal">'fetchSourceEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadDataStart'</span>);
+					oResult = fConvert(oResult);
+					oWidget.loadDataJson(oResult);
+					oWidget.fireEvent(<span class="literal">'loadDataEnd'</span>);
+					oWidget = null;
+				},
+				<span class="comment">// Onerror event handler</span>
+				onError: <span class="reserved">function</span>(oError) {
+					oWidget.dataRequest = null;
+					oWidget.fireEvent(<span class="literal">'fetchSourceError'</span>, oError);
+					oWidget.fireEvent(<span class="literal">'fetchSourceEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadDataEnd'</span>);
+					oWidget = null;
+				}
+			});
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sSourceType == <span class="literal">'xml'</span>) {
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataStart'</span>);
+			
+			<span class="reserved">if</span> (typeof vSource != <span class="literal">'object'</span>) {
+			    vSource = zapatecTransport.parseXml({
+					strXml: vSource
+				});
+			}
+
+			vSource = fConvert(vSource);
+			
+			<span class="reserved">this</span>.loadDataXml(vSource);
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataEnd'</span>);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sSourceType == <span class="literal">'xml/url'</span>) {
+			<span class="reserved">this</span>.fireEvent(<span class="literal">'fetchSourceStart'</span>);
+			<span class="comment">// Fetch source</span>
+			var oWidget = <span class="reserved">this</span>;
+			<span class="reserved">this</span>.dataRequest = zapatecTransport.fetchXmlDoc({
+				<span class="comment">// URL of the source</span>
+				url: vSource,
+				<span class="comment">// Method GET or POST</span>
+				method: oConfig.sourceFetchMethod,
+				<span class="comment">// Suspend script execution until source is loaded or error received</span>
+				async: oConfig.asyncSource,
+				<span class="comment">// Content type when method is POST</span>
+				contentType: oConfig.sourceFetchContentType,
+				<span class="comment">// Content when method is POST</span>
+				content: oConfig.sourceFetchContent,
+				<span class="comment">// Onload event handler</span>
+				onLoad: <span class="reserved">function</span>(oResult) {
+					oWidget.dataRequest = null;
+					oWidget.fireEvent(<span class="literal">'fetchSourceEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadDataStart'</span>);
+					oResult = fConvert(oResult);
+					oWidget.loadDataXml(oResult);
+					oWidget.fireEvent(<span class="literal">'loadDataEnd'</span>);
+					oWidget = null;
+				},
+				<span class="comment">// Onerror event handler</span>
+				onError: <span class="reserved">function</span>(oError) {
+					oWidget.dataRequest = null;
+					oWidget.fireEvent(<span class="literal">'fetchSourceError'</span>, oError);
+					oWidget.fireEvent(<span class="literal">'fetchSourceEnd'</span>);
+					oWidget.fireEvent(<span class="literal">'loadDataEnd'</span>);
+					oWidget = null;
+				}
+			});
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataStart'</span>);
+		vSource = fConvert(zapatecWidget.getElementById(vSource));
+		<span class="reserved">this</span>.loadDataHtml(vSource);
+		<span class="reserved">this</span>.fireEvent(<span class="literal">'loadDataEnd'</span>);
+	}
+};
+
+<span class="comment">/**
+ * Loads data from the HTML source. Override this in child class.
+ *
+ * <span class="attrib">@param</span> {object} oSource Source HTMLElement object
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadDataHtml = <span class="reserved">function</span>(oSource) {};
+
+<span class="comment">/**
+ * Loads data from the HTML fragment source.
+ *
+ * <span class="attrib">@param</span> {string} sSource Source HTML fragment
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadDataHtmlText = <span class="reserved">function</span>(sSource) {
+	<span class="comment">// Parse HTML fragment</span>
+	var oTempContainer = zapatecTransport.parseHtml(sSource);
+	<span class="comment">// Load data</span>
+	<span class="reserved">this</span>.loadDataHtml(oTempContainer.firstChild);
+};
+
+<span class="comment">/**
+ * Loads data from the JSON source. Override this in child class.
+ *
+ * <span class="attrib">@param</span> {object} oSource Source JSON object
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadDataJson = <span class="reserved">function</span>(oSource) {};
+
+<span class="comment">/**
+ * Loads data from the XML source. Override this in child class.
+ *
+ * <span class="attrib">@param</span> {object} oSource Source XMLDocument object
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadDataXml = <span class="reserved">function</span>(oSource) {};
+
+<span class="comment">/**
+ * Aborts data load from server.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.loadDataAbort = <span class="reserved">function</span>() {
+	var oRequest = <span class="reserved">this</span>.dataRequest;
+	<span class="reserved">if</span> (oRequest) {
+		<span class="reserved">this</span>.dataRequest = null;
+		oRequest.onreadystatechange = <span class="reserved">function</span>() {};
+		oRequest.abort();
+	}
+};
+
+<span class="comment">/**
+ * Loads data passed from other widget for example to view or edit them. Extend
+ * this in child class.
+ *
+ * &lt;pre&gt;
+ * Argument object format:
+ * {
+ *   widget: [object] Optional. Sender widget instance,
+ *   data: [any] Data in format specific for each widget
+ * }
+ *
+ * Saves passed widget in private property &lt;i&gt;dataSender&lt;/i&gt; for later use in
+ * {<span class="attrib">@link</span> Zapatec.Widget#replyDataReturn}.
+ *
+ * Fires event:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;receiveData&lt;/i&gt;. Listener receives argument object passed to this
+ * method.&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Argument object
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.receiveData = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (!oArg) {
+		oArg = {};
+	}
+	<span class="comment">// Save reference</span>
+	<span class="reserved">this</span>.dataSender = oArg.widget;
+	<span class="reserved">this</span>.fireEvent(<span class="literal">'receiveData'</span>, oArg);
+};
+
+<span class="comment">/**
+ * Prepares processed data to return them back to the sender in the same format
+ * as they were received in {<span class="attrib">@link</span> Zapatec.Widget#receiveData}. Extend this in
+ * child class.
+ *
+ * <span class="attrib">@return</span> Processed data in format specific for each widget.
+ * <span class="attrib">@type</span> any
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.replyData = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> null;
+};
+
+<span class="comment">/**
+ * Cancels processing of the data received from the sender in
+ * {<span class="attrib">@link</span> Zapatec.Widget#receiveData}. Ususally just hides the widget (calls
+ * hide method of the widget if it is defined).
+ *
+ * &lt;pre&gt;
+ * Removes private property &lt;i&gt;dataSender&lt;/i&gt;.
+ *
+ * Fires event:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;replyDataCancel&lt;/i&gt; before the widget is hidden&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;/pre&gt;
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.replyDataCancel = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.fireEvent(<span class="literal">'replyDataCancel'</span>);
+	<span class="reserved">if</span> (typeof <span class="reserved">this</span>.hide == <span class="literal">'function'</span>) {
+		<span class="reserved">this</span>.hide();
+	}
+	<span class="comment">// Remove reference</span>
+	<span class="reserved">this</span>.dataSender = null;
+};
+
+<span class="comment">/**
+ * Returns processed data back to the specified widget (not necessarily to the
+ * same widget from which they were received in
+ * {<span class="attrib">@link</span> Zapatec.Widget#receiveData}). Passes data to
+ * {<span class="attrib">@link</span> Zapatec.Widget#acceptData} method of that widget. Then calls
+ * {<span class="attrib">@link</span> Zapatec.Widget#replyDataCancel} to hide this widget.
+ *
+ * &lt;pre&gt;
+ * Argument object format:
+ * {
+ *   widget: [object] Optional. Receiver widget instance
+ * }
+ *
+ * If receiver widget was not specified, uses widget passed to
+ * {<span class="attrib">@link</span> Zapatec.Widget#receiveData} and saved in private property
+ * &lt;i&gt;dataSender&lt;/i&gt;.
+ *
+ * Fires event:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;replyDataReturn&lt;/i&gt; before passing data to the specified widget.
+ * Listener receives argument object passed to this method.&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Argument object
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.replyDataReturn = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">if</span> (!oArg) {
+		oArg = {};
+	}
+	<span class="reserved">this</span>.fireEvent(<span class="literal">'replyDataReturn'</span>, oArg);
+	var oWidget = oArg.widget;
+	<span class="reserved">if</span> (!oWidget) {
+		oWidget = <span class="reserved">this</span>.dataSender;
+	}
+	<span class="reserved">if</span> (!oWidget || typeof oWidget.acceptData != <span class="literal">'function'</span>) {
+		<span class="reserved">return</span>;
+	}
+	oWidget.acceptData({
+		widget: <span class="reserved">this</span>,
+		data: <span class="reserved">this</span>.replyData()
+	});
+	<span class="reserved">this</span>.replyDataCancel();
+};
+
+<span class="comment">/**
+ * Receives data back from other widget previously passed to it using its
+ * {<span class="attrib">@link</span> Zapatec.Widget#receiveData} method. Extend this in child class.
+ *
+ * &lt;pre&gt;
+ * Argument object format:
+ * {
+ *   widget: [object] Caller widget instance,
+ *   data: [any] Data in format specific for each widget
+ * }
+ *
+ * Fires event:
+ * &lt;ul&gt;
+ * &lt;li&gt;&lt;i&gt;acceptData&lt;/i&gt;. Listener receives argument object passed to this
+ * method.&lt;/li&gt;
+ * &lt;/ul&gt;
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oArg Argument object
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.acceptData = <span class="reserved">function</span>(oArg) {
+	<span class="reserved">this</span>.fireEvent(<span class="literal">'acceptData'</span>, oArg);
+};
+
+<span class="comment">/**
+ * Internal function to process language realted config options.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.initLang = <span class="reserved">function</span>(){
+	<span class="comment">// calculate hash key only once</span>
+	<span class="reserved">this</span>.langStr = <span class="reserved">this</span>.config.lang;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.langCountryCode &amp;&amp; <span class="reserved">this</span>.config.langCountryCode.length &gt; 0){
+		<span class="reserved">this</span>.langStr += <span class="literal">"_"</span> + <span class="reserved">this</span>.config.langCountryCode; 
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.langEncoding &amp;&amp; <span class="reserved">this</span>.config.langEncoding.length &gt; 0){
+		<span class="reserved">this</span>.langStr += <span class="literal">"-"</span> + <span class="reserved">this</span>.config.langEncoding; 
+	}
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.config.lang &amp;&amp; 
+		<span class="reserved">this</span>.config.lang.length &gt; 0 &amp;&amp;
+		!(
+			Zapatec.Langs[<span class="reserved">this</span>.config.langId] &amp;&amp;
+			Zapatec.Langs[<span class="reserved">this</span>.config.langId][<span class="reserved">this</span>.langStr]
+		)
+	){
+		<span class="reserved">this</span>.debug(
+			<span class="literal">"No language data found for language "</span> + 
+			<span class="reserved">this</span>.config.lang + (
+				<span class="reserved">this</span>.config.langCountryCode ? 
+				<span class="literal">" and country code "</span> + <span class="reserved">this</span>.config.langCountryCode : <span class="literal">""</span>
+			) + (
+				<span class="reserved">this</span>.config.langEncoding ? 
+				<span class="literal">" and encoding "</span> + <span class="reserved">this</span>.config.langEncoding : <span class="literal">""</span>
+			)
+		);
+
+		<span class="reserved">this</span>.config.lang = null;
+		<span class="reserved">this</span>.config.langCountryCode = null;
+		<span class="reserved">this</span>.config.langEncoding = null;
+		<span class="reserved">this</span>.langStr = null;
+	}
+};
+
+<span class="comment">/**
+ * Get message for given key, make substitutions and return.
+ * If more then 1 argument given - method will replace %1, .. %N with corresponding argument value
+ * <span class="attrib">@param</span> key {Object} String, object or anything else that can be treated as array key in Javascript. Required.
+ * <span class="attrib">@param</span> substitution1 {String} First substitution to the string. Optional.
+ * ...
+ * <span class="attrib">@param</span> substitutionN {String} Last substitution to the string. Optional.
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.getMessage = <span class="reserved">function</span>(key){
+	<span class="reserved">if</span>(arguments.length == 0){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">if</span>(
+		!Zapatec.Langs[<span class="reserved">this</span>.config.langId] || 
+		!Zapatec.Langs[<span class="reserved">this</span>.config.langId][<span class="reserved">this</span>.langStr] ||
+		!Zapatec.Langs[<span class="reserved">this</span>.config.langId][<span class="reserved">this</span>.langStr][key]
+	){
+		<span class="reserved">return</span> key;
+	}
+
+	var res = Zapatec.Langs[<span class="reserved">this</span>.config.langId][<span class="reserved">this</span>.langStr][key];
+
+	<span class="reserved">if</span>(arguments.length &gt; 1 &amp;&amp; typeof(res) == <span class="literal">"string"</span>){
+		<span class="reserved">for</span>(var ii = 1; ii &lt; arguments.length; ii++){
+			var re = new RegExp(<span class="literal">"(^|([^\\\\]))\%"</span>+ii);
+
+			res = res.replace(re, <span class="literal">"$2"</span> + arguments[ii]);
+		}
+	}
+
+	<span class="reserved">return</span> res;
+};
+
+<span class="comment">/**
+ * Finds a widget by id and calls specified method with specified arguments and
+ * returns value from that method.
+ *
+ * <span class="attrib">@param</span> {number} iWidgetId Widget id
+ * <span class="attrib">@param</span> {string} sMethod Method name
+ * <span class="attrib">@param</span> {any} any Any number of arguments
+ * <span class="attrib">@return</span> Value returned from the method
+ * <span class="attrib">@type</span> any
+ */</span>
+Zapatec.Widget.callMethod = <span class="reserved">function</span>(iWidgetId, sMethod) {
+	<span class="comment">// Get Widget object</span>
+	var oWidget = zapatecWidgetGetWidgetById(iWidgetId);
+	<span class="reserved">if</span> (oWidget &amp;&amp; typeof oWidget[sMethod] == <span class="literal">'function'</span>) {
+		<span class="comment">// Remove first two arguments</span>
+		var aArgs = [].slice.call(arguments, 2);
+		<span class="comment">// Call method</span>
+		<span class="reserved">return</span> oWidget[sMethod].apply(oWidget, aArgs);
+	}
+};
+
+<span class="comment">/**
+ * Shortcut for faster access to {<span class="attrib">@link</span> Zapatec.Widget#callMethod}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecWidgetCallMethod = zapatecWidget.callMethod;
+
+<span class="comment">/**
+ * Converts element id to reference.
+ *
+ * <span class="attrib">@param</span> {string} element Element id
+ * <span class="attrib">@return</span> Reference to element
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Widget.getElementById = <span class="reserved">function</span>(element) {
+	<span class="reserved">if</span> (typeof element == <span class="literal">'string'</span>) {
+		<span class="reserved">return</span> document.getElementById(element);
+	}
+	<span class="reserved">return</span> element;
+};
+
+<span class="comment">/**
+ * Shortcut for faster access to {<span class="attrib">@link</span> Zapatec.Widget#getElementById}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecWidgetGetElementById = zapatecWidget.getElementById;
+
+<span class="comment">/**
+ * Returns style attribute of the specified element.
+ *
+ * <span class="attrib">@param</span> {object} element Element
+ * <span class="attrib">@return</span> Style attribute value
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Widget.getStyle = <span class="reserved">function</span>(element) {
+	var style = element.getAttribute(<span class="literal">'style'</span>) || <span class="literal">''</span>;
+	<span class="reserved">if</span> (typeof style == <span class="literal">'string'</span>) {
+		<span class="reserved">return</span> style;
+	}
+	<span class="reserved">return</span> style.cssText;
+};
+
+<span class="comment">/**
+ * Keeps last window dimensions to make sure window was really resized.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Widget.windowDimensions = null;
+
+<span class="comment">/**
+ * Window onresize event listener. Checks that browser's window was really
+ * resized because in IE resize event occurs also after applying style sheet.
+ * If window was resized, fires global "windowResized" event.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Widget.onWindowResize = <span class="reserved">function</span>() {
+	var oWindowDimensions = zapatecWidget.windowDimensions;
+	<span class="reserved">if</span> (!oWindowDimensions) {
+		<span class="comment">// Widget was not initialized yet</span>
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Get window dimensions without scroll bars</span>
+	var oNewDimensions = zapatecUtils.getWindowDimensions();
+	<span class="comment">// Check that dimensions have changed</span>
+	<span class="reserved">if</span> (oWindowDimensions.width == oNewDimensions.width &amp;&amp;
+	 oWindowDimensions.height == oNewDimensions.height) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Save new dimensions</span>
+	zapatecWidget.windowDimensions = oNewDimensions;
+	<span class="comment">// Fire event</span>
+	zapatecEventDriven.fireEvent(<span class="literal">'windowResized'</span>);
+};
+
+<span class="comment">// Get window dimensions</span>
+zapatecWidget.windowDimensions = zapatecUtils.getWindowDimensions();
+
+<span class="comment">// Set window onresize event listener</span>
+zapatecUtils.addEvent(window, <span class="literal">'resize'</span>, zapatecWidget.onWindowResize, false, true);
+
+<span class="comment">/**
+ * Displays debug information.
+ *
+ * <span class="attrib">@param</span> {string} sMsg Debug message
+ * <span class="attrib">@param</span> {string} sType Optional. 'error' (default) or 'warn'
+ */</span>
+Zapatec.Widget.debug = <span class="reserved">function</span>(sMsg, sType) {
+	<span class="reserved">if</span> (typeof zapatecDebug == <span class="literal">'function'</span>) {
+		zapatecDebug.log[sType || <span class="literal">'error'</span>](sMsg);
+	}
+};
+
+<span class="comment">/**
+ * Displays debug information preceded with current widget constructor name.
+ *
+ * <span class="attrib">@param</span> {string} sMsg Debug message
+ * <span class="attrib">@param</span> {string} sType Optional. 'error' (default) or 'warn'
+ */</span>
+Zapatec.Widget.<span class="reserved">prototype</span>.debug = <span class="reserved">function</span>(sMsg, sType) {
+	zapatecWidget.debug(<span class="reserved">this</span>.constructor.id + <span class="literal">'['</span> + <span class="reserved">this</span>.id + <span class="literal">']: '</span> + sMsg, sType);
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

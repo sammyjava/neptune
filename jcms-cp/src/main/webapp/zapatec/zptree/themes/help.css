@@ -1,0 +1,13 @@
+/* $Id: help.css 5406 2006-11-30 11:28:34Z andrew $ */
+div.tree-item td.customIcon {
+	background: url("help/document.gif") no-repeat 0 50%;
+}
+
+div.tree-item-expanded td.customIcon {
+	background: url("help/book-open.gif") no-repeat 0 50%;
+}
+
+div.tree-item-collapsed td.customIcon {
+	background: url("help/book-closed.gif") no-repeat 0 50%;
+}
+

@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 		This demo demonstrates creating a window and loading the content of the window from a URL using the Zapatec AJAX Transport. 		The URL contains HTML to define the Zapatec DHTML menu, combining the window and the menu in one web page. 		There is a difference between opening content in simple window and iframe based window. 		The HTML in the simple window behaves the same as any other HTML on the page. Clicking on a a link will reload the whole page and you can not include headers in the loaded page 		HTML in the iframe window behaves like a separate page. Clicking on a link will load the page in the window. The page needs to be a full HTML page with headers. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Window Widget - Fetching Content via AJAX</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/window.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/winxp.css" rel="stylesheet" type="text/css">
+	<link href="../../zpmenu/themes/winxp1.css" rel="stylesheet" type="text/css">
+	<link href="../../zpextra/themes/indicator/default.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="../../utils/indicator.js"></script>
+	<script type="text/javascript" src="../../zpmenu/src/zpmenu.js"></script>
+
+	<script type='text/javascript'>
+		var win = null;
+		var iframeWin = null;
+		var warning = "This demo uses the Zapatec AJAX Menu. It will only show the menu if you downloaded the full Zapatec AJAX Suite.";
+		if (!Zapatec.Menu) {
+			alert(warning);
+		}
+		function openWindow() {
+			if (!Zapatec.Menu) {
+				alert(warning);
+				return false;
+			}
+			if (!win) {
+				win = Zapatec.Window.setup({
+					left:280, 
+					top:200, 
+					width:400, 
+					height: 300,
+					onClose : function() {win = null;},
+					urlContent : "win_content.html"
+				});
+			} else {
+				win.show();
+			}
+		}
+		function openWindowIframe() {
+			if (!Zapatec.Menu) {
+				alert(warning);
+				return false;
+			}
+			if (!iframeWin) {
+				iframeWin = Zapatec.Window.setup({
+					left:280, 
+					top:200, 
+					width:400, 
+					height: 300,
+					iframeContent : true,
+					onClose : function() {iframeWin = null;},
+					urlContent : "win_content_iframe.html"
+				});
+			} else {
+				iframeWin.show();
+			}
+		}
+	</script>
+  <style type="text/css">
+    .zpMenuWinxp1 .zpMenu-top {
+      background: #e7e7d6;
+      width: 100%;
+      border-top: none !important;
+      border-right: none !important;
+      border-left: none !important;
+    }
+  </style>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Fetching Content via AJAX</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+		<li>This demo demonstrates creating a window and loading the content of the window from a URL using the Zapatec AJAX Transport.</li>
+		<li>The URL contains HTML to define the Zapatec DHTML menu, combining the window and the menu in one web page.</li>
+		<li>There is a difference between opening content in simple window and iframe based window.</li>
+		<li>The HTML in the simple window behaves the same as any other HTML on the page. Clicking on a a link will reload the whole page and you can not include headers in the loaded page</li>
+		<li>HTML in the iframe window behaves like a separate page. Clicking on a link will load the page in the window. The page needs to be a full HTML page with headers.</li>
+
+			</ul>
+		</div>
+
+
+		<a href="#" onclick="openWindow(); return false;">Open Window with Menu (DIV content)</a><br>  
+		<a href="#" onclick="openWindowIframe(); return false;">Open Window with Menu (IFRAME content)</a>  
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Window Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

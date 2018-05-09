@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" This demo shows tree perfomance on very large trees. In this example you have tree with 500 nodes on first level and 100 nodes of second, third and fourth levels. To speed up tree turn on config option 'quick'. Tree init will be much more faster but you will be unable to do some actions on nodes, that are not created yet. Node is created when it is shown to user. So, on tree load - only first level nodes are created. When you expand some branch - all nodes in that branch will be created. So you can access them using getNode(), sync() or any other method. Use JSON source for creating large trees. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Very large tree</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Very large tree</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				
+<li>This demo shows tree perfomance on very large trees. In this example you have tree with 500 nodes on first level and 100 nodes of second, third and fourth levels.</li>
+<li>To speed up tree turn on config option "quick". Tree init will be much more faster but you will be unable to do some actions on nodes, that are not created yet.</li>
+<li>Node is created when it is shown to user. So, on tree load - only first level nodes are created. When you expand some branch - all nodes in that branch will be created. So you can access them using <i>getNode()</i>, <i>sync()</i> or any other method.</li>
+<li>Use JSON source for creating large trees.</li>
+
+			</ul>
+		</div>
+
+
+
+<div style="height: 400px; width: 300px; overflow: auto" id="createHere"></div>
+<div id="console2" style="background-color: #EEEEEE; border: 1px dotted black; margin-top: 10px; visibility: hidden; padding: 5px;"></div>
+
+<script type="text/javascript">
+var levels = {
+	1: 500,
+	2: 100,
+	3: 100,
+	4: 100
+};
+
+var branches = {};
+
+var maxDepth = 4;
+
+// Create some dumb data
+for(var jj = maxDepth; jj >= 1; jj--){
+	branches[jj] = [];
+
+	for(var ii = 0; ii < levels[jj]; ii++){
+		var struct = {label: "level " + jj + ", child " + (ii + 1)};
+		
+		if(jj < maxDepth){
+			struct.children = branches[jj+1];
+		}
+	
+		branches[jj].push(struct);
+	}
+}
+
+var source = branches[1];
+
+var startTime = (new Date()).getTime();
+
+var tree = new Zapatec.Tree({
+	parent: "createHere",
+	expandOnLabelClick: true,
+	quick: true,
+	source: source,
+	sourceType: "json"
+});
+
+var totalNodes = 1;
+
+for(var ii = 0; ii < maxDepth; ii++){
+	totalNodes = totalNodes * levels[ii + 1];
+}
+
+var console2 = document.getElementById("console2");
+console2.style.visibility = "visible";
+console2.innerHTML = "Time elapsed on tree creating: " + (((new Date()).getTime() - startTime)/1000) + "s. Total number of nodes: " + totalNodes;
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

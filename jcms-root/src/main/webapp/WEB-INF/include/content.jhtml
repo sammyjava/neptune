@@ -1,0 +1,35 @@
+<!-- content panes -->
+<table id="<%=layout.label%>" cellspacing="0" width="100%">
+  <tr>
+    <%
+      // loop over the panes
+      int vposition = 1;
+      int hposition = 1;
+      for (int i=0; i<panes.length; i++) {
+          // get the content for this pane, if it exists
+          Content content = p.getContent(application, panes[i].pane);
+          if (panes[i].vposition!=vposition) {
+            vposition = panes[i].vposition;
+            out.println("  </tr>");
+	    out.println("  <tr>");
+	  }
+    %>
+    <td valign="top" id="<%=panes[i].label%>" colspan="<%=panes[i].colspan%>" rowspan="<%=panes[i].rowspan%>">
+      <% if (!noCopy && content!=null && content.copy!=null && !content.moduleabove) out.println(content.copy); %>
+      <% if (content!=null && content.moduleurl!=null) { %>
+      <c:import context="<%=content.modulecontext%>" url="<%=content.moduleurl%>">
+        <c:param name="nid" value="<%=Integer.toString(n.nid)%>"/>
+        <c:param name="pid" value="<%=Integer.toString(p.pid)%>"/>
+        <c:param name="layoutpane_id" value="<%=Integer.toString(panes[i].layoutpane_id)%>"/>
+        <c:param name="cid" value="<%=Integer.toString(content.cid)%>"/>
+        <c:param name="accessuser" value="<%=au.getUsername()%>"/>
+	<%@ include file="/WEB-INF/custom/params.jhtml" %>
+      </c:import>
+      <% } %>
+      <% if (content!=null && content.copy!=null && content.moduleabove) out.println(content.copy); %>
+    </td>
+    <%
+    } // end pane loop
+    %>
+  </tr>
+</table>

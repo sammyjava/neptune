@@ -1,0 +1,106 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Zapatec DHTML Tooltips Manual</title><link rel="stylesheet" href="../../utils/dhelp/themes/print.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.71.0"><link rel="start" href="#id2406059" title="Zapatec DHTML Tooltips Manual"><link rel="next" href="#get_files" title="Chapter 1. Get the Zapatec DHTML Tooltips files"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2406059"></a>Zapatec DHTML Tooltips Manual</h1></div></div><hr></div><div class="toc"><dl><dt><span class="chapter"><a href="#get_files">1. Get the Zapatec DHTML Tooltips files</a></span></dt><dd><dl><dt><span class="sect1"><a href="#download_files">1. Download the Zip File</a></span></dt><dt><span class="sect1"><a href="#unzip_files">2. Unzip zptooltip.zip</a></span></dt></dl></dd><dt><span class="chapter"><a href="#quick_startup">2. Quick Startup</a></span></dt><dd><dl><dt><span class="sect1"><a href="#set_up">1. Set Up Your Tooltip</a></span></dt><dd><dl><dt><span class="sect2"><a href="#path_warn">1.1. Path Warning</a></span></dt><dt><span class="sect2"><a href="#upgrade_warn">1.2. Upgrade Warning</a></span></dt></dl></dd><dt><span class="sect1"><a href="#attach_tooltip">2. Attach the Zapatec Tooltip Object to your Presentation</a></span></dt><dt><span class="sect1"><a href="#copy_files">3. Copy the files to your web server</a></span></dt><dt><span class="sect1"><a href="#test_tooltip">4. Test the tooltip application</a></span></dt></dl></dd><dt><span class="chapter"><a href="#configuration_options">3. Configuration Options</a></span></dt><dd><dl><dt><span class="sect1"><a href="#prop_target">1. target (string or object)</a></span></dt><dt><span class="sect1"><a href="#prop_tooltip">2. tooltip (string or object)</a></span></dt><dt><span class="sect1"><a href="#prop_parent">3. parent (string or object)</a></span></dt><dt><span class="sect1"><a href="#prop_theme">4. theme (string)</a></span></dt><dt><span class="sect1"><a href="#prop_themePath">5. themePath (string, default &#8217;../themes&#8217;)</a></span></dt><dt><span class="sect1"><a href="#prop_movable">6. movable (boolean)</a></span></dt><dt><span class="sect1"><a href="#prop_content">7. content (string)</a></span></dt><dt><span class="sect1"><a href="#id2468667">8. offsetX (integer)</a></span></dt><dt><span class="sect1"><a href="#id2468678">9. offsetY (integer)</a></span></dt></dl></dd><dt><span class="chapter"><a href="#scenario">4. Scenarios</a></span></dt><dd><dl><dt><span class="sect1"><a href="#simple">1. Simple Tooltip</a></span></dt><dt><span class="sect1"><a href="#HTML">2. Tooltips from HTML</a></span></dt></dl></dd></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="get_files"></a>Chapter 1. Get the Zapatec DHTML Tooltips files</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="download_files"></a>1. Download the Zip File</h2></div></div></div><p>
+The DHTML Tooltips files are bundled in a zip file. Click the download link in
+the Tooltip section of Zapatec&#8217;s web site, and follow the instructions to
+download the file.</p><p>Save the file (zptooltip.zip) to your website&#8217;s root folder on your computer or
+server.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="unzip_files"></a>2. Unzip zptooltip.zip</h2></div></div></div><div class="orderedlist"><ol type="1"><li><p>On your computer, go to the folder in which you saved zptooltip.zip.
+</p></li><li><p>zptooltip.zip contains a folder called zapatec that holds all of the files you need to create your tooltips.
+</p></li><li><p>Open zptooltip.zip to unzip it.
+</p></li></ol></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="quick_startup"></a>Chapter 2. Quick Startup</h2></div></div></div><p>If you have not done so follow the <a href="#download_files" title="1. Download the Zip File">instructions</a> 
+to download and unzip the Tooltip files.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="set_up"></a>1. Set Up Your Tooltip</h2></div></div></div><p>In your web editor (Dreamweaver, UltraEdit, etc.), open the web page in which you want to place the tooltip.  Insert the cursor before the ending &lt;/head&gt; tag.
+Paste the following style path and script paths before the ending &lt;/head&gt; tag:</p><pre class="programlisting">&lt;!-- Javascript Zapatec utilities file --&gt;  
+&lt;script type="text/javascript" src="zapatec/utils/zapatec.js"&gt;&lt;/script&gt;
+&lt;!-- Javascript file to support tooltips --&gt;
+&lt;script type="text/javascript" src="zapatec/zptooltip/src/zptooltip.js"&gt;&lt;/script&gt;
+
+</pre><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="path_warn"></a>1.1. Path Warning</h3></div></div></div><p>If the web page containing the tooltip is saved in the zptooltip folder, these lines will work without any changes. If, however, you save the web page
+in another location (such as directly under the website&#8217;s root folder), you need to adjust the path for these files.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="upgrade_warn"></a>1.2. Upgrade Warning</h3></div></div></div><p>If you have been using a version of Zapatec tooltip that is older than version 2.0 and are now migrating to the current version, you need to adjust the header files. </p><p>The older utils.js, tooltips.js are no longer supported. To upgrade, replace the old lines:</p><pre class="programlisting">
+&lt;script src="utils/utils.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;script src="utils/tooltips.js" type="text/javascript"&gt;&lt;/script&gt;</pre><p>
+with</p><pre class="programlisting">
+&lt;script type="text/javascript" src="zapatec/utils/zapatec.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="zapatec/zptooltip/src/zptooltip.js"&gt;&lt;/script&gt;</pre><p>The new zptooltip.js is a full widget and accepts only one argument in the constructor as any other Zapatec widget - the config param</p><p>In addition, the use of the LINK element for CSS inclusion in pre-2.0 versions is no longer supported. For example,if you used the winxp.css in the HEAD of the HTML page your pre-2.0 version as in:</p><pre class="programlisting">&lt;link href="themes/winxp.css" rel="stylesheet" /&gt;</pre><p>you should delete this line. Instead, set the CSS using the theme option in the Zapatec.Tooltip constructor. </p><p>See the <a href="#prop_theme" title="4. theme (string)">
+            <span class="property">theme</span>
+          </a> configuration option for details.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="attach_tooltip"></a>2. Attach the Zapatec Tooltip Object to your Presentation</h2></div></div></div><p>In the HTML page, create a new Zapatec.Tooltip object to attach a tooltip to some element. Here is an example that attaches a Zapatec tooltip to a DIV whose ID is "container" and uses element with ID is "tooltip" for tooltip contents:</p><pre class="programlisting">
+&lt;!-- Tooltip target --&gt;
+&lt;div id="container"&gt;
+&lt;/div&gt;
+
+&lt;!-- Tooltip contents --&gt;
+&lt;div id="tooltip"&gt;
+Visit Zapatec for all your ajax needs.
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+  // Create a new tooltip
+  new Zapatec.Tooltip({target: 'container', tooltip: 'tooltip'});
+&lt;/script&gt;</pre><p>
+
+</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="copy_files"></a>3. Copy the files to your web server</h2></div></div></div><p>Using your editing or FTP program, copy or "put" your web page and the entire
+tree folder to the root of your website.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="test_tooltip"></a>4. Test the tooltip application</h2></div></div></div><p>Using your web browser, navigate to the web page that you created to include
+the Zapatec DHTML Tooltip.  Congratulations! You have set up the most
+basic version of the Zapatec DHTML Tooltip! Now, on to the fun and exciting
+features you can change with this widget!</p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="configuration_options"></a>Chapter 3. Configuration Options</h2></div></div></div><p>When you create a tooltip, you can pass a set of configuration options that affect the tooltip&#8217;s behavior. </p><p>
+A few configuration options are required:
+</p><div class="itemizedlist"><ul type="disc"><li><p>an option that specifies the element we want to describe by the tooltip
+</p></li><li><p>an option that specifies the element that represents the actual tooltip
+</p></li></ul></div><p>
+Other configurations are optional.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_target"></a>1. target (string or object)</h2></div></div></div><p>The <span class="property">target</span> is the element being described by the tooltip.
+The <span class="property">target</span> is a required option.</p><p>The tooltip will be shown when the mouse hovers over the target element and will disappear as soon as it leaves element boundaries.
+If it is a string, the <span class="property">target</span> value is the ID of the target element. If it is an object, the <span class="property">target</span> is a HTMLElement DOM object.</p><p>
+Here are some examples:</p><p>
+From an element ID:</p><pre class="programlisting">
+...
+target: 'myTarget' // ID of target element
+</pre><p>
+You can also define the tooltip <span class="property">target</span> as a HTMLElement object using <code class="methodname">getElementById()</code>:
+</p><pre class="programlisting">target: document.getElementById('myTarget') // Object of target
+</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_tooltip"></a>2. tooltip (string or object)</h2></div></div></div><p>The <span class="property">tooltip</span> specified the element or ID of the element that represents the actual tooltip being shown/hidden.
+The <span class="property">tooltip</span> is a required option unless the <a href="#prop_content" title="7. content (string)">
+          <span class="property">content</span>
+        </a> config option is used.</p><p>The <span class="property">tooltip</span> element is being hidden as soon as tooltip widget is created. It is also set to use absolute positioning in order to allow appearing on arbitrary point on page.
+It is automatically being shown when the mouse hovers over the <a href="#prop_target" title="1. target (string or object)">
+          <span class="property">target</span>
+        </a> element and disappears as soon as it leaves.
+</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_parent"></a>3. parent (string or object)</h2></div></div></div><p>The <span class="property">parent</span> specifies the element or ID of the element that will become a tooltip parent.
+The <span class="property">parent</span> is optional. If omitted - document.body is used by default.</p><p>The tooltip widget will move the tooltip element to its new parent as soon as it is created. Moving tooltip elements into document.body works for most layouts and allows the tooltip to appear anywhere on page.
+If your layout has other requirements for tooltip boundaries you can provide your own parent element.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_theme"></a>4. theme (string)</h2></div></div></div><p>The <a href="#prop_theme" title="4. theme (string)">
+          <span class="property">theme</span>
+        </a> option specifies the CSS used to present the tooltip.</p><p>The string argument is the name of the theme:</p><pre class="programlisting">theme : 'winxp2'</pre><p>
+or the absolute or relative path to the theme file</p><pre class="programlisting">theme : 'themes/winxp.css'</pre><p>The theme name is case-insensitive. Some themes are provided in the themes folder.</p><p>If the <span class="property">theme</span> option is not specified, the default.css file in the themes folder is used.</p><p>To use your own CSS throughout the enterprise without specifying the <span class="property">theme</span> option for each page, you can rename your CSS file "default.css" and move it to the themes folder.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_themePath"></a>5. themePath (string, default &#8217;../themes&#8217;)</h2></div></div></div><p>This is the path to the tooltip&#8217;s theme directory. If the path to the theme is passed as the argument to the <a href="#prop_theme" title="4. theme (string)">
+          <span class="property">theme</span>
+        </a> option, the <span class="property">themePath</span> is not needed.</p><p>The default works if you created the web page in zptooltip/demo or any
+other subdirectories under zptooltip. In other cases, set the <span class="property">themePath</span> explicitly.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_movable"></a>6. movable (boolean)</h2></div></div></div><p>This option should be specified to make the tooltip move with the mouse pointer once it is shown.  </p><p>If <span class="property">movable</span> option is true the tooltip follows mouse movements once it is shown. It hides as soon as the mouse leaves the target element as usual.</p><p>If <span class="property">movable</span> option is false the tooltip is shown under the mouse pointer and stays there until the mouse leaves the target element.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="prop_content"></a>7. content (string)</h2></div></div></div><p>This option specifies html content to be used as tooltip.</p><p>If specified this html content will be shown as our tooltip and<a href="#prop_tooltip" title="2. tooltip (string or object)">
+          <span class="property">tooltip</span>
+        </a> config option can be omitted.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2468667"></a>8. offsetX (integer)</h2></div></div></div><p>Use this option to set the horizontal offset from the cursor position. </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2468678"></a>9. offsetY (integer)</h2></div></div></div><p>This option defines the vertical offset from the cursor position.</p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="scenario"></a>Chapter 4. Scenarios</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="simple"></a>1. Simple Tooltip</h2></div></div></div><p>The easiest way to generate a Zapatec Tooltip in JavaScript requires only one line of code.</p><p>We use the following code in the <a href="../demo/tooltip.html" target="_top">Tooltips Demo</a> to create a Zapatec Tooltip.</p><p>The IDs for the DIV and are used later by the Javascript code
+to find the target and tooltip elements. </p><pre class="programlisting">
+&lt;div id='link1' &gt;
+  Test of tooltip
+&lt;/div&gt;
+
+&lt;div id='tooltip1' &gt;
+  Tooltip for link1
+&lt;/div&gt;
+
+</pre><p>
+This example uses the following configuration options:
+</p><div class="itemizedlist"><ul type="disc"><li><p><span class="property">target</span> : &#8217;link1&#8217; - defines the target element
+</p></li><li><p><span class="property">tooltip</span> : &#8217;tooltip1&#8217; - defines the tooltip element
+</p></li></ul></div><p>
+Here is an instance of the Zapatec Tooltip with these configuration options.</p><pre class="programlisting">&lt;script type="text/javascript"&gt;
+        new Zapatec.Tooltip({target: 'link1', tooltip: 'tooltip1'});
+&lt;/script&gt;</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="HTML"></a>2. Tooltips from HTML</h2></div></div></div><p>Another easy way to generate tooltips is to define them in html.</p><p>We use the following code in the <a href="../../zpgrid/demo/stock.html" target="_top">Grid Stock Demo</a> to create a Zapatec Tooltips.</p><p>You need to create a DFN tag for every tooltip on the page. Place the tooltip contents
+inside the DFN tag and place the tag itself where you want a tooltip to appear on the page.
+When you call <code class="methodname">setupFromDfn</code> it parses all the DFN tags and automatically creates
+a new Zapatec.Tooltip instance for each DFN tag. The tooltip content is deleted from the DFN tag
+and it becomes the tooltip <a href="#prop_target" title="1. target (string or object)">
+          <span class="property">target</span>
+        </a> element.</p><pre class="programlisting">
+
+&lt;dfn title='Google'&gt;
+  More about &lt;a href='http://www.google.com'&gt;Google&lt;/a&gt;
+&lt;/dfn&gt;
+      
+</pre><p>Once you've defined your DFN tags there's just one line you need to call to make them into full blown tooltips.</p><pre class="programlisting">&lt;script type="text/javascript"&gt;
+// Initialize tooltips
+Zapatec.Tooltip.setupFromDFN();
+&lt;/script&gt;</pre></div></div></div></body></html>

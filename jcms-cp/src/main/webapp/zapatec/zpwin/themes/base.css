@@ -1,0 +1,16 @@
+.zpWinContainer * {
+	-moz-box-sizing : border-box;
+}
+
+.zpWinContainer {
+	clear : both;
+	text-align: left;
+}
+
+.zpWinDummy * {
+	visibility : hidden;
+}
+
+.zpWinDummy {
+	border : dashed 1px;
+}

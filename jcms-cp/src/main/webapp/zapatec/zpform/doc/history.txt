@@ -1,0 +1,10 @@
+Zapatec Forms
+--
+Wed Jan  4 22:45:41 PST 2006
+Version 0.9 with initial features
+validation
+error handling
+AJAX
+---
+Thu Dec 29 2005, Initial Version
+---

@@ -1,0 +1,51 @@
+<table class="docnav" cellspacing="0">
+  <tr>
+    <td class="doc" width="30"><b>Docs</b></td>
+    <td class="doc"><a class="doc editor" href="doc-index.jsp">Overview</a></td>
+    <% if (cpuser.editor) { %>
+    <td class="doc"><a class="doc editor" href="doc-page.jsp">Pages</a></td>
+    <td class="doc"><a class="doc editor" href="doc-content.jsp">Content</a></td>
+    <td class="doc"><a class="doc editor" href="doc-nodes.jsp">Nodes</a></td>
+    <td class="doc"><a class="doc editor" href="doc-tree.jsp">Tree</a></td>
+    <td class="doc"><a class="doc editor" href="doc-media.jsp">Media</a></td>
+    <% } %>
+    <% if (cpuser.designer) { %>
+    <td class="doc"><a class="doc designer" href="doc-stylesheet.jsp">Stylesheet</a></td>
+    <td class="doc"><a class="doc designer" href="doc-utilitycontent.jsp">Utility Content</a></td>
+    <td class="doc"><a class="doc designer" href="doc-designmedia.jsp">Design Media</a></td>
+    <td class="doc"><a class="doc designer" href="doc-layout.jsp">Layouts</a></td>
+    <% } %>
+    <% if (cpuser.admin) { %>
+    <td class="doc"><a class="doc admin" href="doc-settings.jsp">Settings</a></td>
+    <td class="doc"><a class="doc admin" href="doc-access.jsp">Access</a></td>
+    <td class="doc"><a class="doc admin" href="doc-permissions.jsp">CP Permissions</a></td>
+    <td class="doc"><a class="doc admin" href="doc-extensions.jsp">Extensions</a></td>
+    <td class="doc"><a class="doc admin" href="doc-audit.jsp">Audit Log</a></td>
+    <% } %>
+  </tr>
+</table>
+
+    <% if (cpuser.editor) { %>
+      <table class="docnav" cellspacing="0">
+	<tr>
+	  <td class="doc" width="30">&nbsp;</td>
+	  <td class="doc"><a class="doc extra" href="doc-atom.jsp">Atom Feed</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-blogger.jsp">Blogger</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-calendar.jsp">Calendar</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-comments.jsp">Comments</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-forms.jsp">Contact Forms</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-flashimagerotator.jsp">Flash Image Rotator</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-headlines.jsp">Headlines</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-imagerotator.jsp">Image Rotator</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-payments.jsp">Payments</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-photosets.jsp">Photo Sets</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-polls.jsp">Polls</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-searchblox.jsp">Searchblox</a></td>
+	  <td class="doc"><a class="doc extra" href="doc-sitemap.jsp">Site Map</a></td>
+	</tr>
+      </table>
+      <% } %>
+  
+    <hr/>
+
+    <h1><%=pageTitle%></h1>

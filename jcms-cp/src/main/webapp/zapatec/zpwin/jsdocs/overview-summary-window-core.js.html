@@ -1,0 +1,687 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Window Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="window-core.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Window</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>window-core.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'window-core.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: window-core.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/**
+ *
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ */</span>
+
+<span class="comment">/**
+ * The Window object constructor.  Call it, for example, like this:
+ *
+ * \code
+ *   var win = new Zapatec.Window({
+ *    showResize : false
+ *   });
+ * \endcode
+ *
+ * The above creates a new Window object.  The Window isn't displayed
+ * instantly; using the "win" variable, the programmer can now set certain
+ * configuration variables, hook his own event handlers and then display the
+ * window using Zapatec.Window.create() and Zapatec.Window.show().
+ *
+ * <span class="attrib">@param</span> config [object] - all parameters are passed as the properties of this object.
+ *
+ * Constructor recognizes the following properties of the config object
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *   showMinButton   | whether to show minimize button (default true).
+ *   showMaxButton   | whether to show maximize button (default true).
+ *   showCloseButton | whether to show close button (default true).
+ *   showStatus      | whether to show status bar text (default true).
+ *   showTitle      | whether to show the title bar text (default true)
+ *   canResize       | whether to show resize icon (default true).
+ *   raiseOnlyOnTitle| whether to raize when clicking on title or on the whole body of the created window (default false).
+ *   canDrag         | whether you can drag the window (default true).
+ *   modal           | if true modal window will be created (default false).
+ *   onClose         | custom handler, will be called when window is closed. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onRestore       | custom handler, will be called when restore button is clicked. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onMinimize      | custom handler, will be called when min button is clicked. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onMaximize      | custom handler, will be called when max button is clicked. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onShow          | custom handler, will be called when show method is called. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onHide          | custom handler, will be called when hide method is called. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onResize        | custom handler, will be called when window is resized. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onRaise         | custom handler, will be called when window is raized. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   onContentLoad   | custom handler, will be called when content is loaded. Depricated use eventListeners
+ *                   | option instead. See Zapatec.Widget documentation.
+ *   minWidth        | minimal width of the window. Depricated use "limit" option instead.
+ *   minHeight       | minimal height of the window. Depricated use "limit" option instead.
+ *   iframeContent   | type of the content element.
+ *   hideOnClose     | whether we destroy the window or just close
+ *   dragMin         | is minimized draggable or not (default false)
+ *   bottomMinimize  | is the window minimized to the bottom or just stay at its position
+ *   lang     | set the localization for all the messages
+ *
+ * \endcode
+ */</span>
+Zapatec.Window = <span class="reserved">function</span> (config) {
+  <span class="comment">//the reference to the root HTML element of the window</span>
+  <span class="reserved">this</span>.container = null;
+  <span class="comment">//reference to the element which holds the title bar</span>
+  <span class="reserved">this</span>.titleArea = null;
+  <span class="comment">//reference to the element which holds the title text</span>
+  <span class="reserved">this</span>.titleText = null;
+  <span class="comment">//reference to the Zapatec.Button object representing minimize button</span>
+  <span class="reserved">this</span>.minButton = null;
+  <span class="comment">//reference to the Zapatec.Button object representing maximize button</span>
+  <span class="reserved">this</span>.maxButton = null;
+  <span class="comment">//reference to the Zapatec.Button object representing close button</span>
+  <span class="reserved">this</span>.closeButton = null;
+  <span class="comment">//reference to the Zapatec.Pane object representing content of the window</span>
+  <span class="reserved">this</span>.content = null;
+  <span class="comment">//reference to the element holding status area element</span>
+  <span class="reserved">this</span>.statusText = null;
+  <span class="comment">//reference to the Modal object of this window</span>
+  <span class="reserved">this</span>.modal = null;
+  <span class="comment">//flag which determines if the window is resizing</span>
+  <span class="reserved">this</span>.resizing = false;
+  <span class="comment">//type of the widget - window in our case :)</span>
+  <span class="reserved">this</span>.widgetType = <span class="literal">"window"</span>;
+  <span class="comment">//widget privillage modes</span>
+  <span class="reserved">this</span>.widgetModes = {};
+  <span class="comment">//high priority events</span>
+  <span class="reserved">this</span>.highPriorityEvents = [];
+  <span class="comment">//delayed events</span>
+  <span class="reserved">this</span>.delayedEvents = [];
+  <span class="comment">//this variable points the state of the widget in general.</span>
+  <span class="comment">//The widget has a set of states 4 of them should go one after another ('created' -&gt; 'inited' -&gt; 'loaded' -&gt; 'ready')</span>
+  <span class="comment">//and point to the stage of creation of widget. Last one should be 'ready',</span>
+  <span class="comment">//which means a fully ready for work widget. Each of the methods can require</span>
+  <span class="comment">//the state to be not lower than it needs. So we will also define a method</span>
+  <span class="comment">//to work with this variable - stateReached(state) - to get true if state reached or passed.</span>
+  <span class="reserved">this</span>.widgetState = <span class="literal">"created"</span>;
+  <span class="comment">//array of priorities for states, in other words its the number which points the order</span>
+  <span class="comment">// of states to be passed.</span>
+  <span class="reserved">this</span>.priorities = {
+    <span class="comment">//the number of states supported</span>
+    count : 7,
+    <span class="comment">//states priorities</span>
+    destroyed : 0,
+    created : 1,
+    inited : 2,
+    loaded : 3,
+    ready : 4,
+    hidden : 5,
+    shown : 6
+  };
+  <span class="reserved">this</span>.setDefaultState();
+  <span class="comment">//for backward compability</span>
+  <span class="reserved">if</span> (!config.eventListeners) {
+    config.eventListeners = {};
+  }
+  <span class="reserved">if</span> (config.onClose) {config.eventListeners.onClose = config.onClose;}
+  <span class="reserved">if</span> (config.onRestore) {config.eventListeners.onRestore = config.onRestore;}
+  <span class="reserved">if</span> (config.onMaximize) {config.eventListeners.onMaximize = config.onMaximize;}
+  <span class="reserved">if</span> (config.onMinimize) {config.eventListeners.onMinimize = config.onMinimize;}
+  <span class="reserved">if</span> (config.onShow) {config.eventListeners.onShow = config.onShow;}
+  <span class="reserved">if</span> (config.onHide) {config.eventListeners.onHide = config.onHide;}
+  <span class="reserved">if</span> (config.onResize) {config.eventListeners.onResize = config.onResize;}
+  <span class="reserved">if</span> (config.onRaise) {config.eventListeners.onRaise = config.onRaise;}
+  <span class="reserved">if</span> (config.onContentLoad) {config.eventListeners.onContentLoad = config.onContentLoad;}
+  config = Zapatec.Hash.remove(config,
+    <span class="literal">"onClose"</span>, <span class="literal">"onRestore"</span>, <span class="literal">"onMaximize"</span>, <span class="literal">"onMinimize"</span>,
+    <span class="literal">"onShow"</span>, <span class="literal">"onHide"</span>, <span class="literal">"onResize"</span>, <span class="literal">"onRaise"</span>, <span class="literal">"onContentLoad"</span>
+  );
+  <span class="comment">//calling super constructor</span>
+  Zapatec.Window.SUPERconstructor.call(<span class="reserved">this</span>, config);
+  <span class="comment">//creating SRProp object for manipulating with our object</span>
+  <span class="reserved">this</span>.restorer = new Zapatec.SRProp(<span class="reserved">this</span>);
+};
+
+Zapatec.Window.id = <span class="literal">"Zapatec.Window"</span>;
+<span class="comment">//Inheriting Zapatec.Widget class</span>
+Zapatec.inherit(Zapatec.Window, Zapatec.Widget);
+<span class="comment">//Implementing Zapatec.CommandEvent interface</span>
+Zapatec.implement(Zapatec.Window, <span class="literal">"Zapatec.CommandEvent"</span>);
+<span class="comment">//Implementing Zapatec.Movable interface</span>
+Zapatec.implement(Zapatec.Window, <span class="literal">"Zapatec.Movable"</span>);
+<span class="comment">//Implementing Zapatec.Draggable interface</span>
+Zapatec.implement(Zapatec.Window, <span class="literal">"Zapatec.Draggable"</span>);
+<span class="comment">//Implementing Zapatec.Sizable interface</span>
+Zapatec.implement(Zapatec.Window, <span class="literal">"Zapatec.Sizable"</span>);
+<span class="comment">//Implementing Zapatec.Resizable interface</span>
+Zapatec.implement(Zapatec.Window, <span class="literal">"Zapatec.Resizable"</span>);
+
+<span class="comment">/**
+ * This function inits the config object and loads HTML structure
+ * of the window, not to waste time :)
+ * <span class="attrib">@param</span> config [object] - object which holds the configuration, same as for constructor
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(config) {
+  <span class="comment">// processing Widget functionality</span>
+  Zapatec.Window.SUPERclass.init.call(<span class="reserved">this</span>, config);
+  <span class="comment">//action to be fired when privileged execution is on</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"privileged_execution_on"</span>, <span class="reserved">function</span>() {
+    <span class="comment">//array of high priority events</span>
+    <span class="reserved">this</span>.highPriorityEvents = [];
+  });
+  <span class="comment">//action to be fired when privileged execution is off</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"privileged_execution_off"</span>, <span class="reserved">function</span>() {
+    <span class="comment">//putting high priority events into the begining of array</span>
+    <span class="reserved">for</span> (var ii = <span class="reserved">this</span>.highPriorityEvents.length - 1; ii &gt;= 0; --ii) {
+      <span class="comment">//if there is listener and it was not executed moving it to events array</span>
+      <span class="reserved">if</span> (<span class="reserved">this</span>.highPriorityEvents[ii] &amp;&amp; !<span class="reserved">this</span>.highPriorityEvents[ii].executed) {
+        <span class="reserved">this</span>.addEventListener(<span class="reserved">this</span>.highPriorityEvents[ii].state, <span class="reserved">this</span>.highPriorityEvents[ii].listener, true);
+      }
+    }
+    <span class="comment">//clearing array</span>
+    <span class="reserved">this</span>.highPriorityEvents = [];
+  });
+  <span class="comment">//action to be fired when delayed execution is on</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"delayed_execution_on"</span>, <span class="reserved">function</span>() {
+    <span class="comment">//array of delayed events</span>
+    <span class="reserved">this</span>.delayedEvents = [];
+  });
+  <span class="comment">//action to be fired when delayed execution is off</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"delayed_execution_off"</span>, <span class="reserved">function</span>() {
+    <span class="comment">//trying to execute or schedule delayed events</span>
+    <span class="reserved">for</span> (var ii = <span class="reserved">this</span>.delayedEvents.length - 1; ii &gt;= 0; --ii) {
+      <span class="comment">//trying to schedule delayed event</span>
+      <span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="reserved">this</span>.delayedEvents[ii].state, <span class="reserved">this</span>.delayedEvents[ii].listener)) {
+        continue;
+      }
+      <span class="comment">//otherwise executing it</span>
+      <span class="reserved">this</span>.delayedEvents[ii].listener();
+    }
+  });
+  <span class="comment">//listener to activate Window on drag start</span>
+  <span class="comment">//also sets the status message for dragging</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"beforeDragInit"</span>, <span class="reserved">function</span>() {
+    <span class="reserved">this</span>.activate();
+    <span class="reserved">if</span> (<span class="reserved">this</span>.getConfiguration().method == <span class="literal">"cut"</span>) {
+      <span class="reserved">this</span>.setStatus(<span class="reserved">this</span>.getMessage(<span class="literal">'windowOnBeforeDragStatusMessage'</span>), <span class="literal">'temp'</span>);
+    }
+  });
+  <span class="comment">//tries to remember dummy position</span>
+  var pos = null;
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"beforeDragEnd"</span>, <span class="reserved">function</span>() {
+    <span class="reserved">if</span> (<span class="reserved">this</span>.getConfiguration().method != <span class="literal">"cut"</span>) {
+      pos = <span class="reserved">this</span>.getPosition();
+    }
+  });
+  <span class="comment">//resets status on drag end</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"onDragEnd"</span>, <span class="reserved">function</span>() {
+    <span class="reserved">if</span> (<span class="reserved">this</span>.getConfiguration().method == <span class="literal">"cut"</span>) {
+      <span class="reserved">this</span>.setStatus(<span class="literal">''</span>, <span class="literal">'restore'</span>);
+    } <span class="reserved">else</span> {
+      <span class="reserved">this</span>.setPosition(pos.x, pos.y);
+    }
+  });
+  <span class="comment">//listener to activate Window on resize start</span>
+  <span class="comment">//also sets the status message for resizing</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"onResizeInit"</span>, <span class="reserved">function</span>() {
+    <span class="reserved">this</span>.activate();
+    <span class="reserved">this</span>.setStatus(<span class="reserved">this</span>.getMessage(<span class="literal">'windowOnResizeStatusMessage'</span>), <span class="literal">'temp'</span>);
+  });
+  <span class="comment">//resets status on resize end</span>
+  <span class="reserved">this</span>.addEventListener(<span class="literal">"onResizeEnd"</span>, <span class="reserved">function</span>() {
+    <span class="reserved">this</span>.setStatus(<span class="literal">''</span>, <span class="literal">'restore'</span>);
+  });
+  <span class="comment">//changing state to "inited"</span>
+  <span class="reserved">this</span>.changeState(<span class="literal">"inited"</span>);
+  <span class="comment">//loading template for Window</span>
+  <span class="reserved">this</span>.loadData({object : <span class="reserved">this</span>, action : <span class="literal">"loadTemplate"</span>});
+};
+
+<span class="comment">/**
+ * Sets the default configuration of the object and
+ * inits it with user defined values.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(config) {
+  <span class="comment">//wether title is visible</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"showTitle"</span>, true);
+  <span class="comment">//wethter min button is visible</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"showMinButton"</span>, true);
+  <span class="comment">//wethter max button is visible</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"showMaxButton"</span>, true);
+  <span class="comment">//wethter close button is visible</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"showCloseButton"</span>, true);
+  <span class="comment">//wethter status bar is visible</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"showStatus"</span>, true);
+  <span class="comment">//wethter window is resizable</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"canResize"</span>, true);
+  <span class="comment">//resizing directions</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"resizeDirection"</span>, <span class="literal">"all"</span>);
+  <span class="comment">//wether to raise only on clicking the title</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"raiseOnlyOnTitle"</span>, false);
+  <span class="comment">//wether window is draggable</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"canDrag"</span>, true);
+  <span class="comment">//dragging method</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"dragMethod"</span>, <span class="literal">"cut"</span>);
+  <span class="comment">//dragging class name (applied only when dragging)</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"addDragCSS"</span>, null);
+  <span class="comment">//dragging class name (applied only when dragging, overwrites all others)</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"newDragCSS"</span>, null);
+  <span class="comment">//wether window is modal</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"modal"</span>, false);
+  <span class="comment">//limitations on the window</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"limit"</span>, {
+    minWidth : 120,
+    maxWidth : null,
+    minHeight : 120,
+    maxHeight : null,
+    minX : null,
+    maxX : null,
+    minY : null,
+    maxY : null
+  });
+  <span class="comment">//should we show content in IFRAME Pane or just simple div Pane</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"iframeContent"</span>, false);
+  <span class="comment">//do we hide on close or destroy</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"hideOnClose"</span>, false);
+  <span class="comment">//is minimized window draggable</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"dragMin"</span>, false);
+  <span class="comment">//do we minimize to the bottom</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"bottomMinimize"</span>, true);
+  <span class="comment">//is Window position fixed on the page</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"fixed"</span>, false);
+  <span class="comment">//default theme winxp</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"theme"</span>, <span class="literal">"winxp"</span>);
+  <span class="comment">// we do not need load structure from js file, when use 'template' config paramiter</span>
+  var template = <span class="literal">""</span>;
+  <span class="reserved">if</span> (config.template) {
+     template = true;
+  }
+  <span class="comment">//we need the HTML part of our window to be loaded, so defining the source and sourceType</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"template"</span>, Zapatec.Window.path + <span class="literal">"struc.html"</span>);
+  <span class="comment">//callback source function</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">"callbackSource"</span>, <span class="reserved">function</span>(args) {
+    <span class="comment">//getting window object that requested the load</span>
+    var win = args.object;
+    <span class="comment">//not a Zapatec.Window - no load</span>
+    <span class="reserved">if</span> (!win || win.widgetType != <span class="literal">"window"</span>) {
+      <span class="reserved">return</span> null;
+    }
+    switch (args.action) {
+      <span class="comment">//action is loading template</span>
+      case <span class="literal">"loadTemplate"</span> : {
+        <span class="reserved">if</span> (Zapatec.Window.DEFAULT_STRUCT &amp;&amp; !template) {
+          <span class="reserved">return</span>  { source : Zapatec.Window.DEFAULT_STRUCT, sourceType : <span class="literal">"html/text"</span> };
+        } <span class="reserved">else</span> {
+          <span class="reserved">return</span> { source : win.getConfiguration().template, sourceType : <span class="literal">"html/url"</span> };
+        }
+      }
+    }
+    <span class="reserved">return</span> null;
+  });
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'langId'</span>, Zapatec.Window.id);
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'lang'</span>, <span class="literal">"eng"</span>);
+  <span class="comment">// processing Widget functionality</span>
+  Zapatec.Window.SUPERclass.configure.call(<span class="reserved">this</span>, config);
+  config = <span class="reserved">this</span>.getConfiguration();
+  <span class="reserved">if</span> (config.dragMethod == <span class="literal">"copy"</span> || config.dragMethod == <span class="literal">"dummy"</span>) {
+    config.dragMethod = <span class="literal">"dummy"</span>;
+    config.newDragCSS = <span class="literal">"zpWinDummy"</span>;
+  }
+};
+
+<span class="comment">/**
+ * Reconfigures the object with new parameters.
+ * <span class="attrib">@param</span> config {object} new configuration parameters.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(config) {
+  <span class="comment">// Call parent method</span>
+  Zapatec.Window.SUPERclass.reconfigure.call(<span class="reserved">this</span>, config);
+};
+
+<span class="comment">/**
+ * We overwrite the zpwidgets loadDataHtml method to parse
+ * needed values from given HTML source.
+ * <span class="attrib">@param</span> el [HTML element] - DOM representation of or HTML part.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.loadDataHtml = <span class="reserved">function</span>(el) {
+  <span class="comment">//el is an DOM element created from the struct.html file, which contains HTML part of this widget.</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.parseDom(el)) {
+    <span class="reserved">this</span>.changeState(<span class="literal">"loaded"</span>);
+  }
+};
+
+<span class="comment">/**
+ * This function appends the loaded structure to the documents BODY,
+ * makes Window draggable, sets all the parameters of the visual elements.
+ * All its actions are closely connected with config options.
+ * <span class="attrib">@param</span> x [integer] x coordinate.
+ * <span class="attrib">@param</span> y [integer] y coordinate.
+ * <span class="attrib">@param</span> width [integer] width of the window.
+ * <span class="attrib">@param</span> height [integer] height of the window.
+ */</span>
+Zapatec.Window.<span class="reserved">prototype</span>.create = <span class="reserved">function</span> (x, y, width, height)  {
+  <span class="comment">//parsing numbers for coordinates and sizes</span>
+  <span class="reserved">if</span> (x != <span class="literal">"center"</span>) {
+    x = parseInt(x, 10) || 0;
+  }
+  <span class="reserved">if</span> (y != <span class="literal">"center"</span>) {
+    y = parseInt(y, 10) || 0;
+  }
+  <span class="reserved">if</span> (width != <span class="literal">"auto"</span>) {
+    width = parseInt(width, 10) || 0;
+  }
+  <span class="reserved">if</span> (height != <span class="literal">"auto"</span>) {
+    height = parseInt(height, 10) || 0;
+  }
+  <span class="comment">//If not everything is ready for creating the widget we should wait a little and try again.</span>
+  <span class="comment">//some kind of imitation of "threaded widget", if you know what I mean :)</span>
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.fireOnState(<span class="literal">"body_loaded"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.create(x, y, width, height);}) || !<span class="reserved">this</span>.fireOnState(<span class="literal">"loaded"</span>, <span class="reserved">function</span>() {<span class="reserved">this</span>.create(x, y, width, height);})) {
+    <span class="reserved">return</span>;
+  }
+  <span class="comment">//appending the loaded element</span>
+  document.body.appendChild(<span class="reserved">this</span>.getContainer());
+  <span class="comment">//adding a class name for using specified theme</span>
+  Zapatec.Utils.addClass(<span class="reserved">this</span>.getContainer(), <span class="reserved">this</span>.getClassName({prefix : <span class="literal">"zpWin"</span>, suffix : <span class="literal">"Container"</span>}));
+  <span class="comment">//adding buttons</span>
+  <span class="reserved">function</span> replaceButton(but, idPrefix, func) {
+    <span class="comment">//creating Zapatec.Button</span>
+    var button = new Zapatec.Button({
+      className : but.className,
+      style : but.style.cssText,
+      theme : null,
+      idPrefix : idPrefix,
+      clickAction : func
+    });
+    <span class="comment">//replaceing old one</span>
+    var nxtSbl = but.nextSibling;
+    var par = but.parentNode;
+    <span class="reserved">if</span> (but.outerHTML) {
+      <span class="comment">//but.outerHTML = "";</span>
+      but.style.display = <span class="literal">"none"</span>;
+    } <span class="reserved">else</span> {
+      par.removeChild(but);
+    }
+    <span class="comment">//putting new button</span>
+    par.insertBefore(button.getContainer(), nxtSbl);
+    <span class="comment">//returning new object</span>
+    <span class="reserved">return</span> button;
+  }
+  var self = <span class="reserved">this</span>;
+  <span class="comment">//min button</span>
+  <span class="reserved">this</span>.minButton = replaceButton(<span class="reserved">this</span>.minButton, <span class="literal">"zpWin"</span> + self.id + <span class="literal">"MinButton"</span>, <span class="reserved">function</span>() {self.minimize();});
+  <span class="comment">//max button</span>
+  <span class="reserved">this</span>.maxButton = replaceButton(<span class="reserved">this</span>.maxButton, <span class="literal">"zpWin"</span> + self.id + <span class="literal">"MaxButton"</span>, <span class="reserved">function</span>() {self.maximize();});
+  <span class="comment">//close button</span>
+  <span class="reserved">this</span>.closeButton = replaceButton(<span class="reserved">this</span>.closeButton, <span class="literal">"zpWin"</span> + self.id + <span class="literal">"CloseButton"</span>, <span class="reserved">function</span>() {self.close();});
+  <span class="comment">//restore button</span>
+  <span class="reserved">this</span>.restoreButton = replaceButton(<span class="reserved">this</span>.restoreButton, <span class="literal">"zpWin"</span> + self.id + <span class="literal">"RestoreButton"</span>, <span class="reserved">function</span>() {self.restore();});
+  <span class="comment">//customizing the structure to the options of config</span>
+  <span class="reserved">this</span>.setModeOn(<span class="literal">"immediate_execution"</span>);
+  <span class="reserved">this</span>.reconfig();
+  <span class="reserved">this</span>.setModeOff(<span class="literal">"immediate_execution"</span>);
+  <span class="comment">//saving width of the old content</span>
+  var contentWidth = Zapatec.Utils.getWidth(<span class="reserved">this</span>.content);
+  <span class="comment">//Creating a Pane object</span>
+  var pane = new Zapatec.Pane({
+    containerType : (<span class="reserved">this</span>.config.iframeContent ? <span class="literal">"iframe"</span> : <span class="literal">"div"</span>)
+  });
+  <span class="reserved">this</span>.content.getContainer = <span class="reserved">function</span>() {<span class="reserved">return</span> <span class="reserved">this</span>;};
+  <span class="comment">//Currently we will not set width auto, we'll do it</span>
+  <span class="comment">//on content load</span>
+  <span class="reserved">if</span> (width == <span class="literal">"auto"</span>) {
+    width = 0;
+    <span class="reserved">this</span>.addEventListener(<span class="literal">"onContentLoad"</span>, <span class="reserved">function</span>() {
+      <span class="reserved">this</span>.setWidth(<span class="literal">"auto"</span>);
+      <span class="reserved">this</span>.removeEventListener(<span class="literal">"onContentLoad"</span>, arguments.callee);
+    });
+  }
+  <span class="reserved">if</span> (height == <span class="literal">"auto"</span>) {
+    height = 0;
+    <span class="reserved">this</span>.addEventListener(<span class="literal">"onContentLoad"</span>, <span class="reserved">function</span>() {
+      <span class="reserved">this</span>.setHeight(<span class="literal">"auto"</span>);
+      <span class="reserved">this</span>.removeEventListener(<span class="literal">"onContentLoad"</span>, arguments.callee);
+    });
+  }
+  <span class="comment">//copying class name</span>
+  pane.getContainer().className = <span class="reserved">this</span>.content.className;
+  <span class="comment">//FIXME : these are also some tricks</span>
+  pane.fireWhenReady(<span class="reserved">function</span>() {
+    <span class="comment">//removing margin and padding</span>
+    <span class="reserved">if</span> (<span class="reserved">this</span>.getContentElement()) {
+      <span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">"iframe"</span>) {
+        <span class="reserved">this</span>.getContentElement().style.padding = <span class="literal">"0px"</span>;
+      }
+      <span class="reserved">this</span>.getContentElement().style.margin = <span class="literal">"0px"</span>;
+    }
+    <span class="comment">//removing border</span>
+    var width = Zapatec.Utils.getWidth(<span class="reserved">this</span>.getContainer());
+    <span class="reserved">this</span>.removeBorder();
+    Zapatec.Utils.setWidth(<span class="reserved">this</span>.getContainer(), width);
+  });
+  <span class="comment">//Creating WCH</span>
+  <span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">"WCH"</span>, Zapatec.Utils.createWCH());
+  <span class="reserved">if</span> (<span class="reserved">this</span>.WCH) {
+    <span class="comment">//puting WCH to right place</span>
+    <span class="reserved">this</span>.WCH.style.zIndex = Zapatec.Window.maxNumber++;
+    Zapatec.Utils.setWidth(<span class="reserved">this</span>.WCH, Zapatec.Utils.getWidth(<span class="reserved">this</span>.getContainer()));
+    Zapatec.Utils.setHeight(<span class="reserved">this</span>.WCH, Zapatec.Utils.getHeight(<span class="reserved">this</span>.getContainer()));
+    var pos = Zapatec.Utils.getElementOffset(<span class="reserved">this</span>.getContainer());
+    Zapatec.Utils.moveTo(<span class="reserved">this</span>.WCH, pos.x, pos.y);
+  }
+  <span class="comment">//manipulating with container</span>
+  <span class="reserved">this</span>.container.style.zIndex = Zapatec.Window.maxNumber++;
+  <span class="comment">//making Window movable</span>
+  <span class="reserved">this</span>.makeMovable();
+  <span class="comment">//making Window sizable</span>
+  <span class="reserved">this</span>.makeSizable();
+  <span class="comment">//making Window draggable</span>
+  <span class="reserved">this</span>.makeDraggable();
+  <span class="comment">//making Window resizable</span>
+  <span class="reserved">this</span>.makeResizable();
+  <span class="comment">//replacing content with pane</span>
+  var content = <span class="reserved">this</span>.content;
+  <span class="reserved">this</span>.content = pane;
+  <span class="reserved">this</span>.replaceWithSizable(content, <span class="reserved">this</span>.content.getContainer());
+  <span class="comment">//adding "onContentLoad" event listener launch</span>
+  <span class="reserved">this</span>.content.addEventListener(<span class="literal">"contentLoaded"</span>, <span class="reserved">function</span>() {
+    self.fireEvent(<span class="literal">'onContentLoad'</span>);
+  });
+  <span class="comment">//adding a button type for titleArea to react on dbl click</span>
+  <span class="reserved">this</span>.titleArea.buttonType = <span class="literal">"title"</span>;
+  <span class="comment">//adding a button type for content not to cancel selection</span>
+  <span class="reserved">this</span>.content.getContainer().buttonType = <span class="literal">"content"</span>;
+  <span class="comment">//adding a button type for container to limit seeking of target element</span>
+  <span class="reserved">this</span>.getContainer().buttonType = <span class="literal">"container"</span>;
+  <span class="comment">//adding event listeners</span>
+  <span class="reserved">this</span>.addEvents();
+  <span class="comment">//turning on immediate execution</span>
+  <span class="reserved">this</span>.setModeOn(<span class="literal">"immediate_execution"</span>);
+  <span class="comment">//trying to set sizes and pos by our methods</span>
+  <span class="reserved">this</span>.setSize(
+    width &gt; <span class="reserved">this</span>.getConfiguration().limit.minWidth ? width : <span class="reserved">this</span>.getConfiguration().limit.minWidth,
+    height &gt; <span class="reserved">this</span>.getConfiguration().limit.minHeight ? height : <span class="reserved">this</span>.getConfiguration().limit.minHeight
+  );
+  <span class="reserved">if</span> (<span class="reserved">this</span>.getConfiguration().fixed) {
+    Zapatec.FixateOnScreen.register(<span class="reserved">this</span>.getContainer());
+    Zapatec.FixateOnScreen.register(<span class="reserved">this</span>.WCH);
+  }
+  <span class="reserved">this</span>.setScreenPosition(x, y);
+  <span class="comment">//hiding new window</span>
+  <span class="reserved">this</span>.hide();
+  <span class="comment">//turning off immediate execution</span>
+  <span class="reserved">this</span>.setModeOff(<span class="literal">"immediate_execution"</span>);
+  <span class="comment">//setting the state to ready</span>
+  <span class="reserved">this</span>.changeState(<span class="literal">"ready"</span>);
+};
+
+<span class="comment">// Handle all the onScroll events, if theres a modal layer present, it will be updated</span>
+Zapatec.Utils.addEvent(window,<span class="literal">'scroll'</span>,<span class="reserved">function</span>(){
+	<span class="reserved">if</span>(Zapatec.Window &amp;&amp; Zapatec.Window.currentWindow &amp;&amp; Zapatec.Window.currentWindow.modal){
+		var scroll = {<span class="literal">'x'</span>:Zapatec.Utils.getPageScrollX(),<span class="literal">'y'</span>:Zapatec.Utils.getPageScrollY()};
+		Zapatec.Window.currentWindow.modal.container.style.left = scroll.x+<span class="literal">'px'</span>;
+		Zapatec.Window.currentWindow.modal.container.style.top = scroll.y+<span class="literal">'px'</span>;
+	}
+},false,true);
+
+<span class="comment">// Handle all the onResize events, if theres a modal layer present, it will be updated</span>
+Zapatec.Utils.addEvent(window,<span class="literal">'resize'</span>,<span class="reserved">function</span>(){
+	<span class="reserved">if</span>(Zapatec.Window &amp;&amp; Zapatec.Window.currentWindow &amp;&amp; Zapatec.Window.currentWindow.modal){
+		var scroll = {<span class="literal">'x'</span>:Zapatec.Utils.getPageScrollX(),<span class="literal">'y'</span>:Zapatec.Utils.getPageScrollY()};
+		var offset = Zapatec.Utils.getElementOffsetScrollable(Zapatec.Window.currentWindow.modal.container);
+		var size = Zapatec.Utils.getWindowSize();
+		Zapatec.Window.currentWindow.modal.container.style.width = size.width + <span class="literal">'px'</span>;
+		Zapatec.Window.currentWindow.modal.container.style.height = size.height + <span class="literal">'px'</span>;
+	}
+},false,true);
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Window</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:20:02 2009</div>
+</body>
+</html>

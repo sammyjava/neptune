@@ -1,0 +1,362 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	From this demo you can learn how to use Zapatec.Form events. 	First checkbox triggers function to toggle 'Personal information' block visiblity. This is same as conditional fields functionality. It uses booleanValueChanged event which invokes when checkbox changes its value. 	Second one uses valueChanged event - it is invoked after some field changes its value. 	Third block shows complex work with some of internal Zapatec.Form functions. It uses valueChanged event. Note that it is added using eventListeners config option. 	Last block shows how to implement simple wizard functionality - it is not allowed to click next step until some conditions are not met. 	Other functions listen to all form events and display log in the floating window to the right. 	Refer to manual for complete events reference. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Using form events</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/basic.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+<style type="text/css">
+#log-container {
+	width: 300px; 
+	height: 200px; 
+	overflow: auto; 
+	border: 1px solid black; 
+	background-color: #CCCCCC; 
+	position: absolute;
+	right: 10px;
+	padding: 5px;
+	opacity: 0.6;
+	filter: alpha(opacity=60);
+
+}
+
+#log div {
+	border-bottom: 1px solid black;
+}
+</style>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Using form events</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>basic theme</b>.</li>
+				
+	<li>From this demo you can learn how to use Zapatec.Form events.</li>
+	<li>First checkbox triggers function to toggle "Personal information" block visiblity. This is same as <a href="conditional.html">conditional fields</a> functionality. It uses <b>booleanValueChanged</b> event which invokes when checkbox changes its value.</li>
+	<li>Second one uses <b>valueChanged</b> event - it is invoked after some field changes its value.</li>
+	<li>Third block shows complex work with some of internal Zapatec.Form functions. It uses <b>valueChanged</b> event. Note that it is added using <b>eventListeners</b> config option.</li>
+	<li>Last block shows how to implement simple wizard functionality - it is not allowed to click next step until some conditions are not met.</li>
+	<li>Other functions listen to all form events and display log in the floating window to the right.</li>
+	<li>Refer to <a href="../doc/reference.html">manual</a> for complete events reference.</li>
+
+			</ul>
+		</div>
+
+
+<form action="events.html" id="userForm" method="post">
+	<div id="errOutput" class="errOutput"></div>
+	<div id="log-container">
+		<div style="border-bottom: 2px solid black; padding-bottom: 2px;"><b>Event log</b>
+			<a href="#" onclick="document.getElementById('log').innerHTML = ''; return false;">Clear</a>
+		</div>
+		<div id="log"></div>
+	</div>
+
+	<div class="zpFormContent">
+		<br />
+		<span>
+			<input type="checkbox" id="show_personal_info" />
+			<label for="show_personal_info" class="zpRadioLabel">Show personal info (same as zpFormDisplayWhen)</label>
+		</span>
+		<br />
+		<br />  
+
+		<fieldset id="personal_info">
+			<legend>Personal information</legend>
+			<label class='zpFormLabel'>Name</label>
+			<input class='zpFormRequired' value="" size="40" name="name" type="text" />
+			<br />
+
+			<label class='zpFormLabel'>Address</label>
+			<input class='zpFormRequired' value="" size="40" name="address" type="text" />
+			<br />
+
+			<label class='zpFormLabel'>Date of Birth</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate zpFormMask="00\/00\/0000"' />
+			<br />
+
+			<label class='zpFormLabel'>Date of Birth(d.m.y)</label>
+			<input value="" size="23" name="dob" type="text" class='zpFormDate="%d.%m.%y" zpFormMask="00\.00\.0000"' />
+			<br />
+			<br />
+
+			<label class='zpFormLabel'>Zip</label>
+			<input value="" class='zpFormRequired zpFormUSZip zpFormMask="00000"' size="10" name="zip" type="text" />
+			<br />
+
+			<label class='zpFormLabel'>US Phone</label>
+			<input value="" size="23" name="usnumber" type="text" class='zpFormUSPhone zpFormMask="\(000\)\ 000\-0000"' />
+			<br />
+
+			<label class='zpFormLabel'>Credit card number</label>
+			<input value="" size="23" name="credit_card" type="text" class='zpFormCreditCard zpFormMask="0000-0000-0000-0000"' />
+			<br />
+
+			<label class='zpFormLabel'>Resume</label>
+			<textarea name="resume" cols="40" rows="10" class="zpFormRequired"></textarea>
+			<br />
+		</fieldset>
+
+		<span>
+			<input type="checkbox" id="show_complex" />
+			<label for="show_complex" class="zpRadioLabel">Do action depending on values from two fields</label>
+		</span>
+		<br />
+		<br />
+
+		<fieldset class="zpFormDisplayWhen=showComplex">
+			<legend>Simple equations</legend>
+			<div style="text-align: center; width: 200px">
+				<input type="text" id="first_number" class='zpFormAllowed-d'><br /> 
+				+ <br />
+				<input type="text" id="second_number" class='zpFormAllowed-d'> <br />
+				=<br />
+				<input type="text" readonly="readonly" id="equation_result">
+			</div>
+		</fieldset>
+
+		<span>
+			<input type="checkbox" id="show_multiple" />
+			<label for="show_multiple" class="zpRadioLabel">Show example for usage with zpFormMultiple</label>
+		</span>
+		<br />
+		<br />
+
+		<fieldset class="zpFormDisplayWhen=showMultiple">
+			<legend>Usage with zpFormMultiple</legend>
+	
+			How many children do you have: <select id="child_num">
+				<option value="0">I have no children</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+			<br />
+			<br />
+			<br />
+			<fieldset class="zpFormMultiple" id="child_main">
+				<label class='zpFormLabel'>Age</label>
+				<input value="" size="5" name="child-age" type="text" class='zpFormRequired zpFormInt' />
+				<br />
+				<br />
+				<label class='zpFormLabel'>Gender</label>
+				<select name="child-gender" class="zpFormRequired">
+					<option value="">--choose--</option>
+					<option value="M">Male</option>
+					<option value="F">Female</option>
+				</select>
+			</fieldset>
+		</fieldset>
+
+		<span>
+			<input type="checkbox" id="show_eula" />
+			<label for="show_eula" class="zpRadioLabel">Show EULA example</label>
+		</span>
+		<br />
+		<br />
+
+		<fieldset class="zpFormDisplayWhen=showEula">
+			<legend>EULA confirmation</legend>
+			<textarea readonly="readonly" rows="5" cols="60">End user license agreement text</textarea>
+			<br />
+			<br />
+			<input type="checkbox" id="eula_cb" /><label>I agreed. Let me in.</label>
+			<br />
+			<br />
+			<input type="button" value="Next page" id="next_button" onclick="alert('you are in!')" class="button"/>
+		</fieldset>
+</div>
+	<div class="zpFormButtons">
+		<input value="Submit" name="Submit" onclick="" type="submit" class="button" />
+		<input value="Clear" name="Clear" onclick="" type="reset" class="button" />
+	</div>
+	
+</form>
+
+<script type="text/javascript">
+function showMultiple(){
+	return document.getElementById('show_multiple').checked;
+}
+
+function showEula(){
+	return document.getElementById('show_eula').checked;
+}
+
+function showComplex(){
+	return document.getElementById('show_complex').checked;
+}
+
+// Run this to auto-activate all "zpForm" class forms in the document.
+var form = new Zapatec.Form({
+	form: 'userForm',
+	showErrors: 'afterField',
+	showErrorsOnSubmit: true,
+	submitErrorFunc: testErrOutput,
+	theme: "basic",
+	eventListeners: {
+		"booleanValueChanged": function(){
+			document.getElementById('next_button').disabled = 
+				!document.getElementById('eula_cb').checked;
+		}
+	}
+});
+
+Zapatec.ScrollWithWindow.register(document.getElementById("log-container"));
+
+form.addEvent(function(evt, evtType){
+	var res = [];
+	
+	if(!evt){
+		res.push("No event given. ");
+	} else {
+		res.push("Event type: ");
+		res.push(evt.type);
+		res.push(". ");
+
+		var target = Zapatec.Utils.getElement(evt);
+		if(target){
+			if(target.name){
+				res.push("Target element's name is ");
+				res.push(target.name);
+				res.push(". ");
+			}
+
+			if(target.id){
+				res.push("Target element's ID is ");
+				res.push(target.id);
+				res.push(". ");
+			}
+		}
+	}
+
+	res.push("Form event name: ");
+	res.push(evtType);
+
+	var div = document.createElement("div");
+	div.innerHTML = res.join("");
+
+	var log = document.getElementById("log");
+	log.insertBefore(div, log.firstChild);
+});
+
+// call this function each time when checkbox or radiobutton changes value
+form.addEvent(function(ev, eventType){
+	// This is only an example - there is no need to use this complicated code
+	// for simple toggling elements depending on checkbox value - use 
+	// conditional fields.
+	Zapatec.Form.Utils.toggleFormElements(document.getElementById('personal_info'),
+		document.getElementById('show_personal_info').checked, false);
+
+	if(form.config.strict){
+		form.toggleSubmits(!form.validate());
+	}
+}, "booleanValueChanged");
+
+
+form.addEvent(function(){
+	var first = parseInt(document.getElementById("first_number").value);
+
+	if(isNaN(first)){
+		first = 0;
+	}
+
+	var second = parseInt(document.getElementById("second_number").value);
+
+	if(isNaN(second)){
+		second = 0;
+	}
+	document.getElementById("equation_result").value = first + second;
+}, "valueChanged");
+
+// using of some internal functions of Zapatec.Form
+function showChildren(evt, evtType){
+	var select = document.getElementById("child_num");
+	var childMain = document.getElementById("child_main");
+	var zpForm = select.form;
+	var children = childMain.zpMultipleChildren;
+
+	// destroy add button for multiple element on first run
+	if(evtType == "addEvent"){
+		// remove "+" button on first run.
+		Zapatec.Utils.destroy(childMain.zpMultipleButton);
+		childMain.zpLastNode = childMain;
+	}
+
+	var wantedChildrenNumber = Zapatec.Form.Utils.getValue(select);
+
+	// Special case for wantedChildrenNumber == 0 - we should hide main object then.
+	if(wantedChildrenNumber == 0){
+		childMain.zpHidden = true;
+		Zapatec.Form.Utils.toggleFormElements(childMain, false, false);
+	} else if(wantedChildrenNumber > 0 && childMain.zpHidden){
+		childMain.zpHidden = false;
+		Zapatec.Form.Utils.toggleFormElements(childMain, true, false);
+	}
+
+	var realChildrenNumber = children.length + (childMain.zpHidden ? 0 : 1);
+
+	if(wantedChildrenNumber > realChildrenNumber){
+		// add more nodes
+		for(var ii = realChildrenNumber; ii < wantedChildrenNumber; ii++){
+			var clone = Zapatec.Form.Utils.cloneElement(childMain, form);
+			Zapatec.Utils.destroy(clone.zpMultipleButton);
+			clone.zpLastNode = clone;
+		}
+	} else if(wantedChildrenNumber < realChildrenNumber){
+		// remove last nodes
+		for(var ii = (wantedChildrenNumber == 0 ? 1 : wantedChildrenNumber); ii <= realChildrenNumber; ii++){
+			Zapatec.Form.Utils.removeClonedElement(children[ii - 1]);
+		}
+	}
+
+	if(form.config.strict){
+		form.toggleSubmits(!form.validate())
+	}
+}
+
+form.addEvent(showChildren, "valueChanged");
+
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

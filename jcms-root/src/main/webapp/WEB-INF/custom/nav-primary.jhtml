@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom primary nav, set customPrimaryNav=true and put code here.
+ */
+  boolean customPrimaryNav = false;
+%>

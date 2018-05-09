@@ -1,0 +1,154 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content="This demo shows some more themes for Zapatec.Tree. To display correctly this themes need additional config option defaultsIcons: 'customIcon'">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Tree Widget - Other themes</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/tree.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<link href="../themes/zapatec.css" rel="stylesheet" type="text/css">
+	<link href="../themes/wood.css" rel="stylesheet" type="text/css">
+	<link href="../themes/purple.css" rel="stylesheet" type="text/css">
+	<link href="../themes/lightgreen.css" rel="stylesheet" type="text/css">
+	<link href="../themes/bluexp.css" rel="stylesheet" type="text/css">
+	<link href="../themes/default.css" rel="stylesheet" type="text/css">
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Other themes</div>
+
+		<div class='zpCalDemoText'>
+			<ul>
+				
+				<li>This demo shows some more themes for Zapatec.Tree. To display correctly this themes need additional config option <i>defaultsIcons: "customIcon"</i></li>
+			</ul>
+		</div>
+
+
+
+<table width="100%"><tr><td width="40%" valign="top">
+<ul id="tree">
+	<li>
+		Home
+		<ul></ul>
+	</li>
+	<li>
+		Products
+		<ul>
+			<li>Calendar
+                <ul>
+					<li>Overview</li>
+		    
+					<li>Demo</li>
+					<li>Features</li>
+					<li>Wizard</li>
+					<li>Download</li>
+		    
+					<li>Pricing</li>
+					<li>Buy</li>
+				</ul>
+			</li>
+			<li> 
+				Tree
+				<ul>
+					<li>Overview</li>
+					<li>Demo</li>
+					<li>Features</li>
+					<li>Wizard</li>
+					<li>Download</li>
+					<li>License</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+
+	<li>Support
+		<ul>
+			<li>Overview </li>
+			<li>Forum </li>
+			<li>Quick Guide </li>
+			<li>Reference Manual </li>
+			<li>Request Help </li>
+		</ul>
+	</li>
+
+	<li>
+		About Us
+		<ul>
+			<li>Company</li>
+
+			<li>Management Team</li>
+			<li>Mission Statement</li>
+			<li>Jobs</li>
+			<li>Contact Us</li>
+
+		</ul>
+	</li>
+</ul>
+</td>
+<td valign="top">
+	<ul id="navigationTree">
+		<li>
+			Change themes
+			<ul>
+				<li id="defaultTheme"><span onclick='tree.reconfigure({theme: "bluexp"})'>Blue XP</span></li>
+				<li><span onclick='tree.reconfigure({theme: "lightgreen"})'>Light green</span></li>
+				<li><span onclick='tree.reconfigure({theme: "purple"})'>Purple</span></li>
+				<li><span onclick='tree.reconfigure({theme: "wood"})'>Wood</span></li>
+				<li><span onclick='tree.reconfigure({theme: "zapatec"})'>Zapatec</span></li>
+			</ul>
+		</li>
+	</ul>
+</td>
+</tr></table>
+
+<script type="text/javascript">
+	var tree = new Zapatec.Tree({
+		tree: "tree",
+		theme: "bluexp",
+		defaultIcons: "customIcon",
+		expandOnLabelClick: true,
+		highlightSelectedNode: true,
+		compact: true
+	});
+	
+	var navigationTree = new Zapatec.Tree({
+		tree: "navigationTree",
+		initLevel: 2,
+		expandOnLabelClick: true
+	});
+
+	navigationTree.sync("defaultTheme");
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Tree Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

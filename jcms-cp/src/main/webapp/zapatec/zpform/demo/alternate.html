@@ -1,0 +1,131 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+
+	<meta name="description" content=" 	The form is a standard HTML form. 	You can specify the data types and validation of fields by adding classes to them. 	The form indicates which fields are required. 	The form provides real-time feedback on the validation process as the user enters data. 	CSS controls the look and feel of the form. It implements the following features, which are different from the Basic Forms example: 	A field is marked as incorrect only when the field loses the focus. 		CSS controls this feature as well as other behavior concerning the display of icons. 		See the zpIsEditing rule applied by the CSS. 	Icons are displayed after instead of before the field. 		See statusImgPos: 'afterField'. 	Errors on submission are displayed in an alert instead of in the page. 		See showErrorsOnSubmit: true and submitErrorFunc=null, which are the defaults. 	Error Messages are displayed after the input field. 		See showErrors: 'afterField'. ">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Form Widget - Alternate Feedback</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<script type='text/javascript' src='../src/form.js'></script>
+	<script type='text/javascript' src='demo.js'></script>
+
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+
+	<!-- Theme css -->
+	<link href="../themes/alternate.css" rel="stylesheet" type="text/css">
+
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Alternate Feedback</div>
+
+This form is similar to the <a href=basic.html> Basic</a> demo, but provides an alternate feedback mechanism. It shares the following features with the previous form: 
+
+		<div class='zpCalDemoText'>
+			<ul>
+				<li>This demo uses the <b>alternate theme</b>.</li>
+				
+	<li>The form is a standard HTML form.</li>
+	<li>You can specify the data types and validation of fields by adding classes to them.</li>
+	<li>The form indicates which fields are required.</li>
+	<li>The form provides real-time feedback on the validation process as the user enters data.</li>
+	<li>CSS controls the look and feel of the form.</li>
+</ul>
+
+It implements the following features, which are different from the Basic Forms example:
+
+<ul>
+	<li>A field is marked as incorrect only when the field loses the focus.
+		CSS controls this feature as well as other behavior concerning the display of icons.<br>
+		<i>See the zpIsEditing rule applied by the CSS.</i></li>
+	<li>Icons are displayed after instead of before the field.<br>
+		<i>See statusImgPos: 'afterField'.</i></li>
+	<li>Errors on submission are displayed in an alert instead of in the page.
+		<br><i>See showErrorsOnSubmit: true and submitErrorFunc=null, which are the defaults.</i></li>
+	<li>Error Messages are displayed after the input field.<br>
+		<i>See showErrors: 'afterField'.</i></li>
+
+			</ul>
+		</div>
+
+
+
+<form action="alternate.html" id='userForm' class="zpFormAlternate" method="post">
+	<fieldset>
+		<legend>Personal information</legend>
+		<label class='zpFormLabel'>Name</label>
+		<input class='zpFormRequired' value="" size="40" name="name" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>Address</label>
+		<input class='zpFormRequired' value="" size="40" name="address" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>Date of Birth</label>
+		<input value="" size="23" name="usnumber" type="text" class='zpFormDate zpFormMask="00/00/0000"' />
+		<br />
+
+		<label class='zpFormLabel'>Zip</label>
+		<input value="" class='zpFormRequired zpFormUSZip zpFormMask="00000"' size="10" name="zip" type="text" />
+		<br />
+
+		<label class='zpFormLabel'>US Phone</label>
+		<input value="" size="23" name="usnumber" type="text" class='zpFormUSPhone zpFormMask="\(000\)\ 000\-0000"' />
+		<br />
+	</fieldset>
+
+	<fieldset>
+		<legend>Online Information</legend>
+		<label class='zpFormLabel'>Email</label>
+		<input value="" size="40" name="email" type="text" class='zpFormEmail' />
+		<br />
+
+		<label class='zpFormLabel'>Alternate Email</label>
+		<input value="" size="40" name="email" type="text" class='zpFormRequired zpFormEmail' />
+		<br />
+
+		<label class='zpFormLabel'>URL</label>
+		<input value="" size="40" name="url" class='zpFormUrl' type="text" />
+		<br />
+	</fieldset>
+
+	<input value="Submit" name="Submit" type="submit" class="button" />
+	<input value="Clear" name="Clear" type="reset" class="button" />
+</form>
+
+<script type="text/javascript">
+Zapatec.Form.setupAll({
+	showErrors: 'afterField',
+	statusImgPos: 'afterField',
+	showErrorsOnSubmit: true,
+	displayErrorWhileTyping: false
+});
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Form Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

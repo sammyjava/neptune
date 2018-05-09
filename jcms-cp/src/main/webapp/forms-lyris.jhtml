@@ -1,0 +1,62 @@
+    <hr/>
+    <!-- Lyris lists -->
+    <a name="lyris"></a>
+    <p>
+      <b>Lyris ListManager e-mail list signup.</b><br/>
+      If you wish to display sign-up checkboxes for one or more of your Lyris ListManager list(s), enter them below, along with a description that is shown to the user.
+      You may enter optional sign-up instructions to be shown above the list(s).  Form field <b>email</b> must be on the form, and a value must be supplied by the user.
+      (Neptune enforces an "opt-in" policy by leaving the sign-up checkboxes unchecked by default.)
+    </p>
+    
+    <% if (lyrisupdate || listupdate || listdelete || listinsert) { %>
+    <%@ include file="/WEB-INF/include/errormessage.jhtml" %>
+    <% } %>
+    
+    <form action="#lyris" method="post">
+      <input type="hidden" name="form_id" value="<%=form.form_id%>"/>
+      <table>
+        <tr>
+          <td>
+            Sign-up instructions<br/>
+            <textarea cols="50" rows="2" wrap name="signupinstructions"><%=Util.blankIfNull(form.signupinstructions)%></textarea><br/>
+          </td>
+          <td><input type="submit" name="lyrisupdate" class="update" value="Update"/></td>
+        </tr>
+      </table>
+    </form>
+
+    <%
+      int listnum = 0;
+      for (int i=0; i<form.lyrislists.length; i++) {
+      listnum = form.lyrislists[i].num;
+      %>
+      <form action="#lyris" method="post">
+        <input type="hidden" name="form_id" value="<%=form.form_id%>"/>
+        <input type="hidden" name="formlyrislist_id" value="<%=form.lyrislists[i].formlyrislist_id%>"/>
+      <table>
+	<tr>
+	  <td valign="top" class="required">Num<br/><input type="text" size="2" name="num" value="<%=listnum%>"/></td>
+	  <td valign="top" class="required">List name<br/><input type="text" size="20" name="listname" value="<%=form.lyrislists[i].listname%>"/></td>
+	  <td valign="top" class="required">List description<br/><textarea name="description" rows="3" cols="64"><%=form.lyrislists[i].description%></textarea></td>
+	  <td>
+	    <input type="submit" name="listupdate" class="update" value="Update"/>
+	    <input type="checkbox" name="confirmed" value="true"/>
+	    <input type="submit" name="listdelete" class="delete" value="Delete"/>
+	  </td>
+	</tr>
+      </table>
+    </form>
+      <%
+      } // end loop over lists
+      %>
+      <form action="#lyris" method="post">
+        <input type="hidden" name="form_id" value="<%=form.form_id%>"/>
+      <table>
+	<tr>
+	  <td valign="top"><br/><input type="text" size="2" name="num" value="<%=(listnum+1)%>"/></td>
+	  <td valign="top" class="required">List name<br/><input type="text" size="20" name="listname"/></td>
+	  <td valign="top" class="required">Description<br/><textarea name="description" rows="3" cols="64"></textarea></td>
+	  <td><input type="submit" name="listinsert" class="insert" value="Insert"/></td>
+	</tr>
+      </table>
+    </form>

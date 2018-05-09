@@ -1,0 +1,205 @@
+/* $Id: winxp.css 6258 2007-02-12 19:44:18Z vkulov $ */
+
+.zpEditorWinxpToolbar{
+        border: 1px solid #647287;
+        /*background-color: #ccc;*/
+        background:url(winxp/panel.gif) repeat-x;
+}
+
+.zpEditorWinxpToolbar .toolbarPanel select.zpEditorSelect{
+        border: 1px solid #CCCCCC;
+        margin: 0;
+}
+
+.zpEditorWinxpToolbar .toolbarPanel{
+        margin: 0 0 0 3px;
+        padding: 0px 3px 0 1px;
+     /* border-left: 2px solid #666666;*/
+        height: 26px;
+        overflow: hidden;
+        position: relative;
+        float: left;
+
+}
+
+.zpEditorWinxpTextarea {
+  border: none;
+}
+
+.zpEditorWinxpEditorPanel {
+  border-right: 1px solid #647287;
+  border-left: 1px solid #647287;
+  border-bottom: 1px solid #647287;
+}
+
+.zpEditorWinxpToolbar .zpEditorButton{
+        display: block;
+        float: left;
+        width: 21px;
+        height: 20px;
+        background-repeat: no-repeat;
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .forecolor{
+  background-image: url(winxp/forecolor.gif);
+  height:22px;
+  width:30px;
+}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .backcolor{
+  background-image: url(winxp/backcolor.gif);
+  height:22px;
+  width:30px;
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .insertspecial {background-image: url(winxp/insertspecial.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .link{background-image: url(winxp/link.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .image{background-image: url(winxp/image.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .table{background-image: url(winxp/table.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .bold{background-image: url(winxp/bold.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .italic{background-image: url(winxp/italic.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .underline{background-image: url(winxp/underline.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .justifyleft{background-image: url(winxp/justifyleft.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .justifycenter{background-image: url(winxp/justifycenter.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .justifyright{background-image: url(winxp/justifyright.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .justifyfull{background-image: url(winxp/justifyfull.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .orderedlist{background-image: url(winxp/orderedlist.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .unorderedlist{background-image: url(winxp/unorderedlist.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .copy{background-image: url(winxp/copy.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .cut{background-image: url(winxp/cut.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .paste{background-image: url(winxp/paste.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .outdent{background-image: url(winxp/outdent.gif);height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .indent{background-image: url(winxp/indent.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .undo{background-image: url(winxp/undo.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .redo{background-image: url(winxp/redo.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .hr{background-image: url(winxp/hr.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .selectall{background-image: url(winxp/selectall.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .maximize{background-image: url(winxp/maximize.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .restore{background-image: url(winxp/restore.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .fetch{background-image: url(winxp/fetch.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .save{background-image: url(winxp/save.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .browser{background-image: url(winxp/browser.gif); height:22px;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .about{font-weight: bold;}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .html{
+        background-image: url(winxp/html.gif);
+        width: 75px;
+        height:22px;
+}
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .wysiwyg{
+        background-image: url(winxp/wysiwyg.gif);
+        width: 75px;
+        height:22px;        
+
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer, .zpButtonImageWinxpContainer{
+        padding: 0;
+        border: 0;
+}
+
+.zpEditorWinxpToolbar .zpButtonImageWinxpContainer .internalContainer{
+        cursor: pointer;
+        padding: 0 2px 0 2px;
+        margin: 0;
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .internalContainer{
+        background-color: #fff;
+        cursor: pointer;
+        padding: 0 2px 0 2px;
+        margin: 0;
+        color: #000000;
+        border: 1px solid #eee;
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .internalContainer img{
+        border: 0;
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .disabled .internalContainer{
+        filter: Alpha(Opacity=50);
+        -moz-opacity: 0.50;
+        margin:0px 1px 0px;
+        border: none;
+        background-color:transparent;
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .mouseOut .internalContainer{
+       /* border:1px solid;*/
+        border:none;
+        margin:0px 1px 0px;
+        background-color:transparent;
+}
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .mouseOver .internalContainer{
+        border:none;
+        margin:1px 1px 0px;
+        background-color:transparent;
+}
+
+
+.zpEditorWinxpToolbar .zpButtonWinxpContainer .mouseDown .internalContainer{
+        border: 1px inset #647287;
+        background-color:#c1d4f4;
+}
+
+.zpEditorWinxpColorMark {
+  position: absolute;
+  margin-top: 16px;
+  margin-left: 3px;
+  width: 12px;
+  height: 3px;
+  font-size: 1px;
+}
+
+.zpEditorWinxpDropDown {
+  margin-left: 16px;
+  height: 100%;
+}
+
+.zpEditorWinxpPane {
+  background: #fff;
+}
+
+/* style for character map table */
+table.charmap {
+  cursor:pointer;
+  background-color:#ADAD9C;
+  border:1px inset;
+}
+
+/* style for character map table cell */
+td.character {
+  font-family:Verdana,Arial,Helvetica,sans-serif;
+  font-size:14px;
+  font-weight:bold;
+  text-align:center;
+  background:#fff;
+  padding:4px;
+}
+
+/* style for hilighted character map table cell */
+td.character-hilite {
+  background:#ffd760;
+}
+
+.zpEditorWinxpLinkLabel {
+  margin: 5px 10px 0 10px;
+  width: 120px;
+  float: left;
+}
+
+.zpEditorWinxpLinkInput {
+  margin: 5px 0 0 0;
+}
+
+.zpEditorWinxpLinkButtonPane {
+  margin: 10px 0 0 0;
+  text-align: center;
+}
+
+.zpEditorWinxpLinkOk {
+  margin: 0 10px 0 0;
+}
+
+.zpEditorWinxpLinkInputPane {
+}

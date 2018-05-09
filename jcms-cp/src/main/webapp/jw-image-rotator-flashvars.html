@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ImageRotatorVars – JW Player</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+      <link  rel="stylesheet" type="text/css" href="cp.css" />
+	<link rel="shortcut icon" href="/design/favicon.ico" />
+  </head>
+  <body>
+
+
+    <h1 id="ImageRotatorFlashvars">Image Rotator Flashvars</h1>
+    <p>
+      Flashvars are variables you can insert into your HTML code to control both behavior and appearance of the Image Rotator. With the swfobject embed method, you add them with the addVariable() function and with the embed tag method they are inside the <em>flashvars</em> attribute, stacked with an <em>&amp;</em> symbol. 
+    </p>
+    <p>
+      Note that you must urlencode the three glyphs ? = &amp; inside flashvars, because of the way these flashvars are presented to the player. The urlencoded values for these symbols are listed here:
+    </p>
+    <ul>
+      <li><strong>?</strong> → %3F</li>
+      <li><strong>=</strong> → %3D</li>
+      <li><strong>&amp;</strong> → %26</li>
+    </ul>
+    <p>
+      So if your file to play is at the location <em>getplaylist.php?id=123&amp;type=flv</em>, you must set the file flashvar to <em>getplaylist.php%3Fid%3D123%26type%3Dflv</em>.
+    </p>
+
+    <h2 id="Basics">Basics</h2>
+    <ul>
+      <li><strong>height</strong> (320): Sets the overall height of the rotator.
+      </li><li><strong>width</strong> (260): Sets the overall width of the rotator.
+      </li><li><strong>file</strong> (undefined): Sets the location of the playlist to play. The imagerotator only plays playlists.
+      </li>
+    </ul>
+
+    <h2 id="Appearance">Appearance</h2>
+    <ul>
+      <li><strong>backcolor</strong> (<em>0xFFFFFF</em>): Backgroundcolor of the controls, in HEX format.</li>
+      <li><strong>frontcolor</strong> (<em>0x000000</em>): Texts &amp; buttons color of the controls, in HEX format.</li>
+      <li><strong>lightcolor</strong> (<em>0x000000</em>): Rollover color of the controls, in HEX format.</li>
+      <li><strong>logo</strong> (<em>undefined</em>): Set this to an image that can be put as a watermark logo in the top right corner of the display. Transparent PNG files give the best results (example).</li>
+      <li><strong>overstretch</strong> (<em>false</em>): Sets how to stretch images to make them fit the display. The default stretches to fit the display. Set this to <em>true</em> to stretch them proportionally to fill the display, <em>fit</em> to stretch them disproportionally and <em>none</em> to keep original dimensions.</li>
+      <li><strong>screencolor</strong> (<em>0x000000</em>): Color of the display area, in HEX format. With the rotator, change this to your HTML page's color make images of different sizes blend nicely.</li>
+      <li><strong>showicons</strong> (true): Set this to <em>false</em> to hide the activity icon and play button in the middle of the display.</li>
+      <li><strong>shownavigation</strong> (true): Set this to <em>false</em> to completely hide the navigation bar.</li>
+      <li><strong>transition</strong> (random): Sets the transition to use between images. The default, <em>random</em>, randomly pick a transition. To restrict to a certain transition, use these values: <em>fade</em>, <em>bgfade</em>, <em>blocks</em>, <em>bubbles</em>, <em>circles</em>, <em>flash</em>, <em>fluids</em>, <em>lines</em> or <em>slowfade</em>.</li>
+      <li><strong>usefullscreen</strong> (true): Set this to false to hide the fullscreen button and disable fullscreen.</li>
+    </ul>
+
+    <h2 id="Behaviour">Behaviour</h2>
+    <ul>
+      <li><strong>audio</strong> (<em>undefined</em>):  Assigns an additional, synchronized MP3. Use this for background music.</li>
+      <li><strong>linkfromdisplay</strong> (<em>false</em>): Set this to <em>true</em> to make a click on the display result in a jump to the webpage assigned to the <em>link</em> value in the playlist XML file.</li>
+      <li><strong>linktarget</strong> (<em>_self</em>): Set this to the frame you want hyperlinks to open in. Set it to <em>_blank</em> to open links in a new window or <em>_top</em> to open in the top frame.</li>
+      <li><strong>repeat</strong> (<em>false</em>): Set this to <em>true</em> to automatically repeat playback of all images. Set this to <em>list</em> to playback an entire playlist once.</li>
+      <li><strong>rotatetime</strong> (<em>5</em>): Sets the duration in seconds an image is shown before transitioning again.</li>
+      <li><strong>shuffle</strong> (<em>false</em>):Set this to <em>true</em> to playback the images in random order.</li>
+      <li><strong>volume</strong> (<em>80</em>): sets the startup volume of the MP3 background music.</li>
+    </ul>
+
+</body>
+</html>

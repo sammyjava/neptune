@@ -1,0 +1,853 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="pane.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>pane.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'pane.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Pane.html">Zapatec.Pane</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: pane.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/*
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/**
+* Zapatec Pane object. Creates the element for displaying content
+* and gives an interface to work with it.
+* <span class="attrib">@param</span> config [object] - pane config.
+*
+* Constructor recognizes the following properties of the config object
+* \code
+*	property name		| description
+*-------------------------------------------------------------------------------------------------
+*	parent					| [string or object] Reference to DOM element where
+*							| newly created Pane will be placed. By default -
+*							| document.body
+*	containerType			| [string] Required. Possible values: div|iframe|current -
+*							| what type of pane to create
+*							| * div - create new DIV element and add it into parent
+*							| * iframe - create new IFRAME element and add it into parent
+*							| * current - use parent as pane container
+*	sourceType				| [string] see Zapatec.Widget documentation for this option
+*	source					| [string or object] see Zapatec.Widget documentation
+*							| for this option
+*   width                   | [number] width of the Pane in "px"
+*   height                  | [number] height of the Pane in "px"
+*   autoContentWidth        | [boolean] Option which determines if the width of the Pane will be 
+*                           | determined automatically.
+*   autoContentHeight       | [boolean] Option which determines if the height of the Pane will be 
+*                           | determined automatically.
+*   id                      | [string] Optionally you can pass some string to be able to seek Pane by this ID
+*   onlyInit                | [boolean] For developing needs this option will disable calling create method
+*                           | of the Pane from init, so HTML structure will not be created after calling
+*                           | constructor.
+*   showLoadingIndicator    | [boolean] Determines if a loading progress indicator is to be shown
+*                           | inside pane during loading. Default is true.
+*   overflow                | [string] Determines pane content overflow style. Default to "auto".
+*   iframeScrolling         | [string] Determines iframe scrolling attribute value.
+* \endcode
+*/</span>
+Zapatec.Pane = <span class="reserved">function</span>(objArgs){
+	<span class="reserved">this</span>.config = {};
+
+	<span class="reserved">if</span>(arguments.length == 0){
+		objArgs = {};
+	}
+	
+	<span class="comment">//type of the widget - pane in our case :)</span>
+	<span class="reserved">this</span>.widgetType = <span class="literal">"pane"</span>;
+	<span class="comment">// internal variable that indicates if iframe was loaded</span>
+	<span class="reserved">this</span>.ready = false;
+	<span class="comment">//is the content still loading</span>
+	<span class="reserved">this</span>.loading = false;
+	<span class="comment">// internal variable to detect if Pane was prepared (prepareHtml was called)</span>
+	<span class="reserved">this</span>.prepared = false;
+	<span class="comment">// variable to store reference to pane container</span>
+	Zapatec.Utils.createProperty(<span class="reserved">this</span>, <span class="literal">"container"</span>, null);
+	<span class="comment">// variable to store the reference to the content element</span>
+	Zapatec.Utils.createProperty(<span class="reserved">this</span>, <span class="literal">"contentElement"</span>, null);
+	<span class="comment">// internal variable stores reference to IFRAME's document object</span>
+	Zapatec.Utils.createProperty(<span class="reserved">this</span>, <span class="literal">"iframeDocument"</span>, null);
+	<span class="comment">//calling superconstructor</span>
+	Zapatec.Pane.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+}
+
+Zapatec.Pane.id = <span class="literal">"Zapatec.Pane"</span>;
+
+<span class="comment">// Inherit SuperClass</span>
+Zapatec.inherit(Zapatec.Pane, Zapatec.Widget);
+
+<span class="comment">/**
+* Init function. Actually this function does the creation of element
+* itself, not the constructor.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs){
+	<span class="comment">//parent element of the Pane</span>
+	Zapatec.Utils.createProperty(<span class="reserved">this</span>.config, <span class="literal">"parent"</span>, document.body);
+	<span class="comment">//theme</span>
+	<span class="reserved">this</span>.config.theme = null;
+	<span class="comment">//initial width</span>
+	<span class="reserved">this</span>.config.width = null;
+	<span class="comment">//initial height</span>
+	<span class="reserved">this</span>.config.height = null;
+	<span class="comment">//container type "div"/"iframe"/"current"</span>
+	<span class="reserved">this</span>.config.containerType = <span class="literal">"div"</span>;
+	<span class="comment">//content source type</span>
+	<span class="reserved">this</span>.config.sourceType = null;
+	<span class="comment">//source to load content from</span>
+	<span class="reserved">this</span>.config.source = null;
+	<span class="comment">//is the Pane resized due to its content</span>
+	<span class="reserved">this</span>.config.autoContentWidth = false;
+	<span class="reserved">this</span>.config.autoContentHeight = false;
+	<span class="comment">//this option is used for disabling creation of HTML elements for the Pane.</span>
+	<span class="comment">//Developer should manually call create method if he defines this option as true.</span>
+	<span class="reserved">this</span>.config.onlyInit = false;
+	<span class="reserved">this</span>.config.showLoadingIndicator = true;
+	<span class="comment">// Determines pane overflow style. Defaults to auto for backward compatibility.</span>
+	<span class="reserved">this</span>.config.overflow = <span class="literal">"auto"</span>;
+	<span class="comment">// Determines iframe scrolling attribute value</span>
+	<span class="reserved">this</span>.config.iframeScrolling = null;
+	<span class="comment">// remove iframe border.</span>
+	<span class="reserved">this</span>.config.removeBorder = false;
+	<span class="comment">// Determines pane id</span>
+	<span class="reserved">this</span>.config.id = null;
+
+	<span class="comment">// processing Widget functionality</span>
+	Zapatec.Pane.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+	<span class="comment">//default for containerType is "div"</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.containerType == null){
+		<span class="reserved">this</span>.config.containerType = <span class="literal">"div"</span>;
+	}
+
+	<span class="comment">//caling create if enabled</span>
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.onlyInit) {
+		<span class="reserved">this</span>.create(<span class="reserved">this</span>.config.width, <span class="reserved">this</span>.config.height);
+	}
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">function</span> update() {
+		<span class="comment">//if there is loader we need to update it</span>
+		<span class="reserved">if</span> (self.loader) {
+			self.loader.update();
+		}
+	}
+	<span class="comment">//updating loader</span>
+	<span class="reserved">this</span>.addEventListener(<span class="literal">"fetchSourceStart"</span>, update);
+	<span class="reserved">this</span>.addEventListener(<span class="literal">"fetchSourceEnd"</span>, update);
+}
+
+<span class="comment">/**
+ * Creates all needed HTML elements, if we are not reusing parent.
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.prepareHtml = <span class="reserved">function</span>() {
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">'iframe'</span>){
+		<span class="comment">// create new IFRAME element</span>
+		var iframe = document.createElement(<span class="literal">"iframe"</span>);
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.iframeScrolling) {
+			iframe.scrolling = <span class="reserved">this</span>.config.iframeScrolling;
+		}
+		iframe.src = Zapatec.zapatecPath + <span class="literal">"pane_files/blank.html#"</span> + <span class="reserved">this</span>.id;
+		<span class="comment">//filling the container property</span>
+		<span class="reserved">this</span>.container = iframe;
+		iframe = null;
+	} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">'div'</span>){
+		<span class="comment">// create new DIV element</span>
+		<span class="reserved">this</span>.container = document.createElement(<span class="literal">"div"</span>);
+    <span class="comment">// If id config option is specified</span>
+    <span class="reserved">if</span> (<span class="reserved">this</span>.config.id) {
+      <span class="comment">// set pane container div id</span>
+      <span class="reserved">this</span>.container.id = <span class="reserved">this</span>.config.id;
+    }
+    <span class="reserved">this</span>.contentElement = <span class="reserved">this</span>.container;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (<span class="reserved">this</span>.config.parent &amp;&amp; <span class="reserved">this</span>.config.parent.nodeType == 1) {
+		<span class="reserved">this</span>.container = <span class="reserved">this</span>.config.parent;
+		<span class="reserved">this</span>.contentElement = <span class="reserved">this</span>.container;
+	}
+	<span class="comment">//flag to detect that this function was called</span>
+	<span class="reserved">this</span>.prepared = true;
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.removeBorder){
+		<span class="reserved">this</span>.removeBorder();
+	}
+};
+ 
+<span class="comment">/**
+ * Creates the HTML part of the Pane by calling prepareHtml, 
+ * if it was not called before and adds the container to 
+ * the document tree.
+ * <span class="attrib">@param</span> width [number] - optional, width that can be different from
+ * the config's one
+ * <span class="attrib">@param</span> height [number] - optional, height that can be different from
+ * the config's one
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.create = <span class="reserved">function</span>(width, height) {
+	<span class="comment">//if there was no preparation made we need to do it.</span>
+	<span class="comment">//this is for separating operations that do depend</span>
+	<span class="comment">//on body load from that which are indepenedent</span>
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.prepared) {
+		<span class="reserved">this</span>.prepareHtml();
+	}
+
+	<span class="comment">//searching Pane's parent</span>
+	<span class="reserved">if</span> (!(<span class="reserved">this</span>.config.parent = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.parent))) {
+		Zapatec.Log({description: <span class="literal">"No reference to parent element."</span>});
+		<span class="reserved">return</span> null;
+	}
+	<span class="comment">//I need this kind of interface to be able to pass widget objects as</span>
+	<span class="comment">//parent property of config.</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.parent.requestParentFor &amp;&amp; !(<span class="reserved">this</span>.config.parent = <span class="reserved">this</span>.config.parent.requestParentFor(<span class="reserved">this</span>))) {
+		Zapatec.Log({description: <span class="literal">"No reference to parent element after request to the Parent Widget!"</span>});
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="comment">//we can work with a container if it exists, otherwise we</span>
+	<span class="comment">//need to reuse parent</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">'div'</span> || 
+	    <span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">'iframe'</span>) {
+			<span class="comment">//appending it to the tree</span>
+			<span class="reserved">this</span>.ready = false;
+			<span class="reserved">this</span>.config.parent.appendChild(<span class="reserved">this</span>.container);
+			<span class="comment">//initing Pane to be ready for work</span>
+			<span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() != <span class="literal">'iframe'</span>) {
+				<span class="reserved">this</span>.initPane();
+			}
+	} <span class="reserved">else</span> <span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">'current'</span>) {
+		<span class="comment">//reusing parent</span>
+		<span class="reserved">this</span>.container = <span class="reserved">this</span>.config.parent;
+		<span class="reserved">this</span>.contentElement = <span class="reserved">this</span>.container;
+		<span class="reserved">this</span>.initPane();
+	} <span class="reserved">else</span> {
+		Zapatec.Log({description: <span class="literal">"Unknown container type: "</span> + <span class="reserved">this</span>.config.containerType + <span class="literal">". Possible values: iframe|div"</span>})
+	}
+	<span class="comment">//adding a theme className</span>
+	Zapatec.Utils.addClass(<span class="reserved">this</span>.container, <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpPane"</span>}));
+	<span class="comment">//setting sizes</span>
+	<span class="reserved">if</span> (width || <span class="reserved">this</span>.config.width) {
+		<span class="reserved">this</span>.setWidth(width || <span class="reserved">this</span>.config.width);
+	}
+	<span class="reserved">if</span> (height || <span class="reserved">this</span>.config.height) {
+		<span class="reserved">this</span>.setHeight(height || <span class="reserved">this</span>.config.height);
+	}
+	<span class="reserved">this</span>.getContainer().style.display = <span class="literal">"block"</span>;
+	<span class="reserved">this</span>.setPaneContent();
+};
+
+<span class="comment">/*
+* \internal For containerType=iframe this function stores reference to internal
+* document.body element and loads data from given source.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.initPane = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">'iframe'</span>){
+		var doc = null;
+		<span class="comment">//this variable determines if the Pane has the content from the same domain</span>
+		var sameDomain = true;
+		<span class="comment">//iframe's src</span>
+		var url = <span class="reserved">this</span>.container.src;
+		<span class="comment">//anchor element to make a workaround while calculating absolute URL from src</span>
+		var anchorEl = document.createElement(<span class="literal">"a"</span>);
+		<span class="comment">//is there a protocol definition in the SRC</span>
+		<span class="comment">//cause if not than this must be the same domain</span>
+		<span class="comment">//and we don't have to worry about anything</span>
+		var protocolSeparatorPos = url.indexOf(<span class="literal">"://"</span>);
+	
+		<span class="comment">//if there is protocol definition than we must check </span>
+		<span class="comment">//if domain is the same as ours(I mean the page where we use the Pane)</span>
+		<span class="reserved">if</span> (protocolSeparatorPos != -1) {
+			<span class="comment">//retreiving the domain</span>
+			var domainSeparatorPos = url.indexOf(<span class="literal">"/"</span>, protocolSeparatorPos + 3);
+			var domain = url.substring(
+				(protocolSeparatorPos &gt; 0 ? protocolSeparatorPos + 3 : 0),
+				(domainSeparatorPos &gt; 0 ? domainSeparatorPos : url.length)
+			);
+			<span class="comment">//checking if it is the same</span>
+			<span class="reserved">if</span> (domain != window.location.host) {
+				sameDomain = false;
+			}
+		}
+		<span class="comment">//if it is the same domain than we can easily work with its content</span>
+		<span class="comment">//otherwise this.contentElement will be null and all methods</span>
+		<span class="comment">//that are working with content will block their work</span>
+		<span class="reserved">if</span> (sameDomain) {
+			<span class="comment">//checking if iframes document is avaliable</span>
+			<span class="reserved">if</span>(<span class="reserved">this</span>.container.contentDocument != null){
+				doc = <span class="reserved">this</span>.container.contentDocument;
+			} <span class="reserved">else</span> <span class="reserved">if</span>(<span class="reserved">this</span>.container.contentWindow &amp;&amp; <span class="reserved">this</span>.container.contentWindow.document != null){
+				doc = <span class="reserved">this</span>.container.contentWindow.document;
+			}
+	
+			var self = <span class="reserved">this</span>;
+			<span class="comment">//a workaround to get absolute url from src property</span>
+			anchorEl.href = url;
+			url = anchorEl.href;
+			<span class="comment">//if iframe's document is unavaliable still </span>
+			<span class="comment">//fire this function again with some timeout	</span>
+			<span class="reserved">if</span> (doc == null || doc.body == null || (Zapatec.is_gecko &amp;&amp; url != <span class="reserved">this</span>.container.contentWindow.location.href)) {
+				setTimeout(<span class="reserved">function</span>(){self.initPane()}, 50);
+				<span class="reserved">return</span> false;
+			}
+			<span class="comment">// store reference to iframe's document</span>
+			<span class="reserved">this</span>.iframeDocument = doc;
+			<span class="reserved">this</span>.contentElement = doc.body;
+			<span class="reserved">if</span> (typeof <span class="reserved">this</span>.container.contentWindow.Zapatec != <span class="literal">"object"</span> &amp;&amp; typeof <span class="reserved">this</span>.container.contentWindow.Zapatec != <span class="literal">"function"</span>) {
+				<span class="reserved">this</span>.container.contentWindow.Zapatec = {};
+				<span class="reserved">this</span>.container.contentWindow.Zapatec.windowLoaded = typeof(doc.readyState) != <span class="literal">'undefined'</span> ?
+					(
+						doc.readyState == <span class="literal">'loaded'</span> || <span class="comment">// Konqueror</span>
+						doc.readyState == <span class="literal">'complete'</span> <span class="comment">// IE/Opera</span>
+					) :
+					<span class="comment">// Mozilla</span>
+					doc.getElementsByTagName != null &amp;&amp; typeof(doc.getElementsByTagName(<span class="literal">'body'</span>)[0]) != <span class="literal">'undefined'</span>
+				;
+				
+				Zapatec.Utils.addEvent(<span class="reserved">this</span>.container.contentWindow, <span class="literal">"load"</span>, <span class="reserved">function</span>() {self.container.contentWindow.Zapatec.windowLoaded = true;}, false, false);
+			}
+			<span class="reserved">if</span> (!<span class="reserved">this</span>.container.contentWindow.Zapatec || !<span class="reserved">this</span>.container.contentWindow.Zapatec.windowLoaded) {
+				setTimeout(<span class="reserved">function</span>(){self.initPane()}, 50);
+				<span class="reserved">return</span> false;
+			}
+
+			doc = null;
+		}
+	}
+
+  <span class="comment">// Check if overflow config option is specified</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.config.overflow) {
+    <span class="reserved">this</span>.getContainer().style.overflow = <span class="reserved">this</span>.config.overflow;
+  }
+  <span class="reserved">this</span>.ready = true;
+  <span class="comment">//firing the ready event</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onReady"</span>, <span class="reserved">this</span>);
+	<span class="comment">//hiding loader</span>
+	<span class="reserved">this</span>.hideIndicator();
+	<span class="comment">//pointing the end of loading</span>
+	<span class="reserved">this</span>.loading = false;
+	<span class="comment">//TODO: move this functionality to EventDriven or any other place</span>
+	<span class="reserved">this</span>.removeEvent(<span class="literal">"onReady"</span>);
+}
+
+<span class="comment">/*
+* Returns reference to data container - do not use this element to resize it or
+* do any other DOM changes!
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.getContainer = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> <span class="reserved">this</span>.container;
+}
+
+<span class="comment">/*
+* Returns reference to IFRAME's document object.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.getIframeDocument = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> <span class="reserved">this</span>.iframeDocument;
+}
+
+<span class="comment">/*
+* Returns the element which represents the content
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.getContentElement = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.contentElement;
+}
+
+<span class="comment">/*
+* Returns true if iframe was loaded succesfully
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.isReady = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> <span class="reserved">this</span>.ready;
+}
+
+
+<span class="comment">/**
+* Loads data from the HTML source.
+* \param objSource [object] source HTMLElement object.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.loadDataJson = <span class="reserved">function</span>(objSource){
+	<span class="reserved">return</span> objSource != null ? <span class="reserved">this</span>.setContent(objSource.content) : null;
+}
+
+<span class="comment">/**
+* Sets the content of the pane.
+* <span class="attrib">@param</span> content [string or object] - string content or reference to DOM element
+* <span class="attrib">@return</span> [boolean] - true if successfull, otherwise false.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.setContent = <span class="reserved">function</span>(content){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isReady()){
+		<span class="comment">// this can happen when containerType=iframe but it is not created yet.</span>
+		var self = <span class="reserved">this</span>;
+		setTimeout(<span class="reserved">function</span>(){self.setContent(content)}, 50);
+		<span class="reserved">return</span> null;
+	}
+	<span class="comment">//if there is no contentElement than this is an iframe with src from</span>
+	<span class="comment">//another domain and we can not work with it</span>
+	<span class="reserved">this</span>.loading = false;
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.getContentElement()) {
+		<span class="reserved">this</span>.hideIndicator();
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//no content no action :)</span>
+	<span class="reserved">if</span>(content === null){
+		<span class="reserved">this</span>.hideIndicator();
+		<span class="reserved">return</span> null;
+	} <span class="reserved">else</span> {
+		<span class="comment">//if this is not iframe and we have auto sizes we need to allow the</span>
+		<span class="comment">//content to be visible</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() != <span class="literal">"iframe"</span>) {
+			<span class="comment">//saving old overflow</span>
+			var oldOverflow = <span class="reserved">this</span>.getContainer().style.overflow;
+			<span class="comment">//setting needed sizes to "auto"</span>
+			<span class="reserved">if</span> (<span class="reserved">this</span>.config.autoContentWidth) {
+				<span class="comment">//setting overflow visible</span>
+				<span class="reserved">this</span>.getContainer().style.overflow = <span class="literal">"visible"</span>;
+				<span class="reserved">this</span>.getContainer().style.width = <span class="literal">"auto"</span>;
+			}
+			<span class="reserved">if</span> (<span class="reserved">this</span>.config.autoContentHeight) {
+				<span class="comment">//setting overflow visible</span>
+				<span class="reserved">this</span>.getContainer().style.overflow = <span class="literal">"visible"</span>;
+				<span class="reserved">this</span>.getContainer().style.height = <span class="literal">"auto"</span>;
+			}
+		}
+		<span class="reserved">if</span>(typeof(content) == <span class="literal">'string'</span>){
+			<span class="comment">//setting new content if it is string</span>
+			Zapatec.Transport.setInnerHtml({container : <span class="reserved">this</span>.getContentElement(), html : content});
+		} <span class="reserved">else</span> {
+			try{
+				<span class="comment">//this is temporary fix for IE as it can not appendChild in iframe</span>
+				<span class="comment">//when node was created not in iframe document</span>
+				<span class="reserved">if</span> ((Zapatec.is_ie || Zapatec.is_opera) &amp;&amp; <span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">"iframe"</span>) {
+					Zapatec.Transport.setInnerHtml({container : <span class="reserved">this</span>.getContentElement(), html : content.outerHTML});
+				} <span class="reserved">else</span> {
+		        	<span class="comment">// If content is not already added to container</span>
+		        	<span class="reserved">if</span> (content.parentNode != <span class="reserved">this</span>.getContentElement()) {
+		        		<span class="comment">//empty the element</span>
+		        		<span class="reserved">this</span>.getContentElement().innerHTML = <span class="literal">""</span>;
+		        		<span class="reserved">this</span>.getContentElement().appendChild(content);
+		        	}
+		        }
+			} catch(ex){
+				<span class="reserved">this</span>.hideIndicator();
+				<span class="reserved">return</span> null;
+			}
+		}
+		<span class="comment">//if this is not an iframe we get new sizes and set them as the size of Pane</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() != <span class="literal">"iframe"</span>) {
+			var newWidth = <span class="reserved">this</span>.getWidth();
+			var newHeight = <span class="reserved">this</span>.getHeight();
+		} <span class="reserved">else</span> {
+			<span class="comment">//if this is iframe we are using scrollWidth and scrollHeight to resize iframe.</span>
+			<span class="comment">//FIXME: This is not working correctly so needed to be fixed in new version</span>
+			var newWidth = <span class="reserved">this</span>.getContentElement().scrollWidth + 5;
+			var newHeight = <span class="reserved">this</span>.getContentElement().scrollHeight + 5;
+		}
+		<span class="comment">//restoreing overflow</span>
+		<span class="reserved">if</span> (typeof oldOverflow != <span class="literal">"undefined"</span>) <span class="reserved">this</span>.getContainer().style.overflow = oldOverflow;
+		<span class="comment">//setting new sizes</span>
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.autoContentWidth) {
+			<span class="reserved">this</span>.setWidth(newWidth);
+		}
+		<span class="reserved">if</span> (<span class="reserved">this</span>.config.autoContentHeight) {
+			<span class="reserved">this</span>.setHeight(newHeight);
+		}
+	}
+	<span class="comment">//calling listeners for contentLoad event</span>
+	<span class="comment">//use this to resize your widget which uses auto sizes feature of Pane</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"contentLoaded"</span>, <span class="reserved">this</span>);
+	<span class="reserved">this</span>.hideIndicator();
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+* Loads data from the HTML|Xml fragment source.
+* \param strSource [string] source HTML fragment.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.loadDataHtml = Zapatec.Pane.<span class="reserved">prototype</span>.loadDataXml = Zapatec.Pane.<span class="reserved">prototype</span>.setContent;
+
+Zapatec.Pane.<span class="reserved">prototype</span>.loadDataHtmlText = <span class="reserved">function</span>(content) {
+	<span class="reserved">this</span>.setContent(content);
+};
+
+<span class="comment">/*
+* Set pane width
+* \param width [int] - width to set.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.setWidth = <span class="reserved">function</span>(width){
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">this</span>.fireWhenReady(<span class="reserved">function</span>() {
+	   <span class="reserved">if</span> (width &gt;= 0) {
+			self.getContainer().style.width = width + <span class="literal">"px"</span>;
+		}
+		<span class="comment">//we do this to have the size passed be equal to offset size</span>
+		<span class="reserved">if</span> (self.getContainer().offsetWidth != width) {
+		   var newWidth = width - (self.getContainer().offsetWidth - width);
+			<span class="reserved">if</span> (newWidth &lt; 0) newWidth = 0;
+			self.getContainer().style.width = newWidth + <span class="literal">"px"</span>;
+		}
+	});
+}
+
+<span class="comment">/*
+* Returns pane width
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.getWidth = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> <span class="reserved">this</span>.getContainer().offsetWidth;
+}
+
+<span class="comment">/*
+* Set pane height
+* \param height [int] - height to set.
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.setHeight = <span class="reserved">function</span>(height){
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">this</span>.fireWhenReady(<span class="reserved">function</span>() {
+	   <span class="reserved">if</span> (height &gt;= 0) {
+   		self.getContainer().style.height = height + <span class="literal">"px"</span>;
+   	}
+		<span class="comment">//we do this to have the size passed be equal to offset size</span>
+		<span class="reserved">if</span> (self.getContainer().offsetHeight != height) {
+			var newHeight = height - (self.getContainer().offsetHeight - height);
+			<span class="reserved">if</span> (newHeight &lt; 0) newHeight = 0;
+			self.getContainer().style.height = newHeight + <span class="literal">"px"</span>;
+		}
+	});
+}
+
+<span class="comment">/*
+* Returns pane height
+*/</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.getHeight = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> <span class="reserved">this</span>.getContainer().offsetHeight;
+}
+
+<span class="comment">/*
+ * Removes the border for iframe.
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.removeBorder = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() != <span class="literal">"iframe"</span>) {
+		<span class="reserved">return</span> false;
+	}
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">this</span>.fireWhenReady(<span class="reserved">function</span>() {
+		<span class="comment">//trying to remove border</span>
+		<span class="reserved">if</span> (!Zapatec.is_ie) {
+			self.getContainer().style.border = <span class="literal">"none"</span>;
+		} <span class="reserved">else</span> {
+			<span class="reserved">if</span> (self.getContentElement()) {
+				self.getContentElement().style.border = <span class="literal">"none"</span>;
+			}
+		}
+	});
+};
+
+<span class="comment">/* The method to cover setting of content. Simply it sets the content
+ * depending on its type.
+ * <span class="attrib">@param</span> content [mixed] - value for the content
+ * <span class="attrib">@param</span> type [string] - type of content: "html", "html/text", "html/url"
+ * <span class="attrib">@return</span> [boolean] - true if successfull, otherwise false.
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.setPaneContent = <span class="reserved">function</span>(content, type) {
+	<span class="comment">//if we have no arguments passed we need to set default</span>
+	<span class="comment">//ones from config</span>
+	<span class="reserved">if</span> (!content &amp;&amp; content !== <span class="literal">""</span>) {
+		content = <span class="reserved">this</span>.config.source;
+	}
+	<span class="reserved">if</span> (!type) {
+		type = <span class="reserved">this</span>.config.sourceType;
+	}
+	<span class="comment">//we need to save the content description for reloading</span>
+	<span class="reserved">this</span>.config.source = content;
+	<span class="reserved">this</span>.config.sourceType = type;
+	<span class="comment">//if containerType == "iframe" and we are seting its content from URL,</span>
+	<span class="comment">//we should use its SRC attribute</span>
+	var self = <span class="reserved">this</span>;
+	<span class="comment">// If loading indicator is enabled</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.showLoadingIndicator) {
+		<span class="reserved">this</span>.showIndicator();
+		<span class="reserved">this</span>.loading = true;
+	}
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">"iframe"</span> &amp;&amp; type == <span class="literal">"html/url"</span>) {
+		<span class="reserved">this</span>.ready = false;
+		<span class="reserved">this</span>.fireWhenReady(<span class="reserved">function</span>() {
+			<span class="comment">//if Pane have auto sizes we need to set them</span>
+			<span class="reserved">if</span> (self.getContentElement()) {
+				try {
+					var newWidth = self.getContentElement().scrollWidth;
+					var newHeight = self.getContentElement().scrollHeight;
+					<span class="reserved">if</span> (self.config.autoContentWidth) {
+						self.setWidth(newWidth);
+					}
+					<span class="reserved">if</span> (self.config.autoContentHeight) {
+						self.setHeight(newHeight);
+					}
+				} catch(e) {}
+			}		
+			self.fireEvent(<span class="literal">"contentLoaded"</span>, self);
+			<span class="reserved">if</span> (self.events[<span class="literal">"contentLoaded"</span>]) {
+				self.events[<span class="literal">"contentLoaded"</span>].listeners = [];
+			}
+		});
+		<span class="reserved">this</span>.getContainer().src = content;
+		setTimeout(<span class="reserved">function</span>(){self.initPane()}, 50);
+		
+		<span class="reserved">return</span> true;
+	}
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">"iframe"</span> &amp;&amp; <span class="reserved">this</span>.getContainer().src.indexOf((Zapatec.zapatecPath + <span class="literal">"pane_files/blank.html#"</span> + <span class="reserved">this</span>.id).replace(/\.\.\<span class="comment">//g, "")) &lt; 0) {</span>
+		<span class="reserved">this</span>.ready = false;
+		<span class="reserved">this</span>.getContainer().src = Zapatec.zapatecPath + <span class="literal">"pane_files/blank.html#"</span> + <span class="reserved">this</span>.id;
+	}
+
+	<span class="comment">//otherwise we use zpwidget's possibilities</span>
+	<span class="reserved">this</span>.loadData();
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Shows the Pane container.
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.show = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.getContainer().style.display = <span class="literal">""</span>;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.loading) {
+		<span class="reserved">this</span>.showIndicator();
+	}
+};
+
+<span class="comment">/**
+ * Hides the Pane container.
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.hide = <span class="reserved">function</span>() {
+	<span class="reserved">this</span>.getContainer().style.display = <span class="literal">"none"</span>;
+	<span class="reserved">if</span> (<span class="reserved">this</span>.loading) {
+		<span class="reserved">this</span>.hideIndicator();
+	}
+};
+
+<span class="comment">/**
+ * Shows the indicater.
+ * <span class="attrib">@param</span> message {string} message to show.
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.showIndicator = <span class="reserved">function</span>(message) {
+	<span class="reserved">if</span> (Zapatec.Indicator) {
+		<span class="reserved">this</span>.hideIndicator();
+		<span class="comment">//creating loader</span>
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.loader) {
+			<span class="reserved">this</span>.loader = new Zapatec.Indicator({
+				container: <span class="reserved">this</span>.container,
+				themePath: Zapatec.zapatecPath + <span class="literal">"../zpextra/themes/indicator/"</span>
+			});
+		}
+		<span class="reserved">this</span>.loader.start(message || <span class="literal">'loading'</span>);
+	}
+};
+ 
+<span class="comment">/**
+ * Hides the indicater.
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.hideIndicator = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>.loader &amp;&amp; <span class="reserved">this</span>.loader.isActive()) {
+		<span class="reserved">this</span>.loader.stop();
+	}
+};
+
+<span class="comment">/* 
+ * Fires the action when widget is ready.
+ * <span class="attrib">@param</span> func [function] - the function to be fired when the widget is ready
+ */</span>
+Zapatec.Pane.<span class="reserved">prototype</span>.fireWhenReady = <span class="reserved">function</span>(func) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isReady()) {
+		<span class="reserved">this</span>.addEventListener(<span class="literal">"onReady"</span>, func);
+	} <span class="reserved">else</span> {
+		func.call(<span class="reserved">this</span>, <span class="reserved">this</span>);
+	}
+}
+
+<span class="comment">/**
+* Destroys current pane instance removing all related HTML elements.
+*/</span>
+
+Zapatec.Pane.<span class="reserved">prototype</span>.destroy = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.config){
+		<span class="reserved">return</span>;
+	}
+
+	<span class="reserved">this</span>.hideIndicator();
+
+	<span class="reserved">this</span>.contentElement = null;
+	<span class="reserved">this</span>.iframeDocument = null;
+	<span class="reserved">if</span>(Zapatec.is_ie &amp;&amp; <span class="reserved">this</span>.config.containerType.toLowerCase() == <span class="literal">'iframe'</span>){
+		<span class="reserved">this</span>.container.src = <span class="literal">"javascript:void(0)"</span>;
+	}
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>.container.outerHTML) {
+		<span class="reserved">this</span>.container.outerHTML = <span class="literal">""</span>;
+	} <span class="reserved">else</span> {
+		Zapatec.Utils.destroy(<span class="reserved">this</span>.container);
+	}
+	<span class="reserved">this</span>.container = null;
+	<span class="reserved">this</span>.ready = false;
+	<span class="reserved">this</span>.prepared = false;
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

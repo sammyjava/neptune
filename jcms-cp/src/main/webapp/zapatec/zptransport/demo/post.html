@@ -1,0 +1,118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Transport Widget - Transport Form Submission Demo</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Transport Form Submission Demo</div>
+
+
+
+<p>
+Demonstrates how to use Zapatec.Transport.fetchJsonObj to submit a form and receive the response from the server.
+Server side script receives data from the form and sends back received data inside JSON object.
+"Loading" animated GIF can be optionally displayed while data is loaded.
+</p>
+<p>
+This demo must be launched from server. To install Transport on the server,  copy the zptransport directory to anywhere in the public area on your Web server.
+</p>
+
+<div id="response" style="margin: 10px 0px"></div>
+
+<script type="text/javascript">
+
+// Check if demo loaded from server
+var strLocation = document.location.toString();
+if (strLocation.indexOf('http') != 0) {
+	alert('Since this example demonstrates interaction between server and javascript application, it must be loaded from server. This example does not work if opened from local hard drive.');
+}
+
+// Submits enterd data and displays response
+function send(objForm) {
+
+	// Form content argument
+	var strContent = 'first=' + escape(objForm.first.value) + '&last=' +
+	 escape(objForm.last.value) + '&org=' + escape(objForm.org.value);
+
+	// Submit form
+	Zapatec.Transport.fetchJsonObj({
+
+		// Server script URL
+		url: 'post.php',
+
+		// Sending method
+		method: 'POST',
+
+		// Arguments string
+		content: strContent,
+
+		// Onload event handler
+		onLoad: function(objJson) {
+			// Get container element
+			var objContainer = document.getElementById('response');
+			// Check fetched object
+			if (objJson && objJson.success) {
+				// Display success message
+				objContainer.innerHTML =
+				 '<div style="color: #090"><b>' + objJson.success + '<br />' +
+				 'First Name: ' + objJson.first + '<br />' +
+				 'Last Name: ' + objJson.last + '<br />' +
+				 'Organization: ' + objJson.org + '</b></div>';
+			} else {
+				// Display error message
+				objContainer.innerHTML = '<div style="color: #f00"><b>' +
+				 (objJson.error ? objJson.error : 'No response') + '</b></div>';
+			}
+		},
+
+		// Show "Loading" animated GIF
+		busyContainer: 'response'
+	
+	});
+
+}
+
+</script>
+
+<form onsubmit="send(this); return false;">
+Please fill the form:
+<table>
+<tr><td>First Name: </td><td><input type="text" name="first" /></td></tr>
+<tr><td>Last Name: </td><td><input type="text" name="last" /></td></tr>
+<tr><td>Organization: </td><td><input type="text" name="org" /></td></tr>
+<tr><td>&nbsp;</td><td><input type="submit" value="Submit" /></td></tr>
+</table>
+</form>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Transport Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

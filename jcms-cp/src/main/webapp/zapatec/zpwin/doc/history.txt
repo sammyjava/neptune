@@ -1,0 +1,10 @@
+Mon Nov  7 21:10:24 UTC 2005
+Beta revision 0.8.1
+
+Initial Revision 
+o Basic functionality
+  #  Close
+  # Minimize
+  # Restore
+  # Resize
+o Two themes

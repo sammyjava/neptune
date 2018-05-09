@@ -1,0 +1,19 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <!--stopindex-->
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=8" />
+    <meta name="generator" content="<%=Util.APPVERSION%>" />
+    <meta name="description" content="<%=Util.blankIfNull(p.metadescription)%>" />
+    <meta name="keywords" content="<%=Util.blankIfNull(p.metakeywords)%>" />
+    <title><% if (accessAllowed) out.print(p.headtitle); else out.print(Setting.getString(application,"access_denied_title")); %></title>
+    <link rel="shortcut icon" href="<%=designFolder%>/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="<%=cssFolder%>/root.css" />
+    <link rel="stylesheet" type="text/css" href="<%=cssFolder%>/payment.css" />
+    <link rel="stylesheet" type="text/css" href="<%=cssFolder%>/printable.css" />
+    <% if (siteHead.length()>0) out.print(siteHead); %>
+    <!--startindex-->
+  </head>
+    
+  <body>

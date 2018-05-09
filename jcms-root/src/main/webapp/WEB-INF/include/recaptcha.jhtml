@@ -1,0 +1,1 @@
+<div class="g-recaptcha" style="" data-theme="light" data-size="normal" data-sitekey="<%=application.getInitParameter("grecaptcha.sitekey")%>"></div>

@@ -1,0 +1,733 @@
+body {
+  background-color: white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+p {
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+b { 
+  font-weight: bold;
+}
+
+h1 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+h2 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 4px;
+  margin-bottom: 0px;
+  margin-left: 0px;
+}
+
+h3 {
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 0px;
+  margin-bottom: 3px;
+  margin-left: 3px;
+}
+
+hr { 
+  border: 0;
+  color: gray;
+  background-color: gray;
+  height: 1px;
+}
+
+table { 
+  empty-cells: show;
+  padding: 0px;
+  border: 0px;
+  border-spacing: 0px;
+}
+
+td {
+  padding: 3px;
+  border: 0px;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  text-decoration: none;
+}
+
+a:active {
+  text-decoration: underline;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+input {
+  background-color: #E0E0E0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  margin: 0;
+}
+
+input.checkbox { 
+  background-color: #FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  margin: 0;
+}
+
+input.radio { 
+  background-color: #FFFFFF;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  margin: 0;
+}
+
+select {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  background-color: #E0E0E0;
+  color: black;
+}
+
+textarea {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  background-color: #E0E0E0;
+  color: black;
+  margin: 0;
+}
+
+form { 
+  margin: 0;
+}
+
+ul {
+  margin: 0;
+}
+
+ol { 
+  margin: 0;
+}
+
+li {
+  padding: 3px 0 3px 0;
+  margin: 0;
+}
+
+div.list { 
+  margin: 5px 25px 5px 25px;
+}
+td.tight { 
+  padding: 0px;
+  border: 0px;
+}
+
+table.borders { 
+  empty-cells: show;
+  padding: 0px;
+  border: 1px solid black;
+  border-spacing: 0px;
+  margin-bottom: 2px;
+}
+
+td.borders {
+  padding: 3px;
+  border-bottom: 1px solid black;
+}
+
+div.subnav { 
+  margin-left: 3px;
+  padding-bottom: 1px;
+  font-size: 12px;
+  font-weight: bold;
+  border-bottom: 1px solid blue;
+}
+a.subnav:link {
+  color: blue;
+  text-decoration: none;
+}
+a.subnav:visited {
+  color: blue;
+  text-decoration: none;
+}
+a.subnav:hover {
+  color: blue;
+  text-decoration: underline;
+}
+a.subnav:active {
+  color: red;
+  text-decoration: underline;
+}
+
+input.prev { 
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+}
+input.next { 
+  background-color: blue;
+  color: white;
+  font-weight: bold;
+}
+
+a.nodeadd:link {
+  color: blue;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.nodeadd:visited {
+  color: blue;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.nodeadd:active {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.nodeadd:hover {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.deletenode:link {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.deletenode:visited {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.deletenode:active {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+a.deletenode:hover {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+
+a.createpage:link {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.createpage:visited {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.createpage:active {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+a.createpage:hover {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.editpage:link {
+  color: blue;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.editpage:visited {
+  color: blue;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+
+a.editpage:active {
+  color: red;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+a.editpage:hover {
+  color: blue;
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+a.preview:link {
+  color: blue;
+  text-decoration: underline;
+}
+
+a.preview:visited {
+  color: blue;
+  text-decoration: underline;
+}
+
+a.preview:active {
+  color: blue;
+  text-decoration: underline;
+}
+
+a.preview:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+td.logo { 
+  font-weight: bold;
+}
+
+input.insert {
+  color: white;
+  background-color: blue;
+  font-weight: bold;
+}
+input.update {
+  color: white;
+  background-color: #00AA00;
+  font-weight: bold;
+}
+input.delete {
+  color: white;
+  background-color: #AA0000;
+  font-weight: bold;
+}
+input.clone { 
+  color: white;
+  font-weight: bold;
+  background-color: #AA00AA;
+}
+input.normal { 
+  color: white;
+  background-color: #AAAAAA;
+  font-weight: bold;
+}
+
+input.browse {
+  color: black;
+  background-color: #EEEEFF;
+  font-weight: bold;
+}
+input.uploadimage, input.upload {
+  color: white;
+  background-color: #FF9900;
+  font-weight: bold;
+}
+input.download { 
+  color: white;
+  background-color: #AA00AA;
+  font-weight: bold;
+}
+
+div.footer { 
+  border-top: 2px solid blue;
+  width: 100%;
+  padding-top: 5px;
+  margin-top: 10px;
+}
+
+.audit {
+  font-size: 12px;
+  font-weight: normal;
+  color: blue;
+}
+
+.active { 
+  color: green;
+}
+
+.inactive { 
+  color: red;
+}
+
+.expired { 
+  color: red;
+}
+
+.future { 
+  color: blue;
+}
+
+table.notification { 
+  border-top: 1px solid blue;
+  border-bottom: 1px solid blue;
+  margin-top: 2px;
+  margin-bottom: 4px;
+}
+
+div#error { 
+  font-size: 14px;
+  color: red;
+}
+
+div#message {
+  font-size: 14px;
+  color: green;
+}
+
+table.docnav { 
+  margin-top: 5px;
+}
+td.doc { 
+  font-size: 12px;
+  padding: 0px 5px 0px 5px;
+}
+a.doc:link, a.doc:visited {
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: none;
+}
+a.doc:hover, a.doc:active {
+  font-size: 12px;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+div.docurl {
+  padding: 0;
+  float: right;
+}
+
+.message { 
+  font-size: 14px;
+  color: green;
+}
+
+.error {
+  font-size: 14px;
+  color: red;
+}
+
+.required {
+  color: blue;
+}
+
+a.docurl:link, a.docurl:visited { 
+  font-size: 14px;
+  font-weight: bold;
+  color: blue;
+}
+a.docurl:hover, a.docurl:active {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+td.spacer { 
+  padding: 0px;
+  border: 0px;
+  font-size: 12px;
+}
+
+table.header { 
+  border: 1px solid blue;
+}
+td.header{
+  padding: 3px 4px 3px 4px;
+  border: 0px;
+  font-size: 11px;
+  font-weight: bold;
+}
+a.header:link {
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: none;
+}
+a.header:visited {
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: none;
+}
+a.header:hover {
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+a.header:active {
+  font-size: 11px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.default { 
+  color: blue;
+}
+.editor {
+  color: blue;
+}
+.designer {
+  color: green;
+}
+.admin {
+  color: brown;
+}
+.extension {
+  color: #335599;
+}
+.extra { 
+  color: #335599;
+}
+.sitename { 
+  color: black;
+}
+
+
+
+table.nodes {
+  border: 0px solid black;
+}
+td.root {
+  padding: 0px;
+  background-color: #B0B0B0;
+  font-size: 12px;
+  font-weight: bold;
+}
+td.level1 { 
+  padding: 0px;
+  background-color: #C0C0C0;
+  font-size: 12px;
+  font-weight: bold;
+  border-left: 0px solid black;
+  border-top: 0px solid black;
+  border-right: 0px solid black;
+  border-bottom: 0px solid black;
+}
+td.level2 { 
+  padding: 0px;
+  background-color: #D0D0D0;
+  font-size: 12px;
+  font-weight: normal;
+}
+td.level3 { 
+  padding: 0px;
+  background-color: #E0E0E0;
+  font-size: 12px;
+  font-weight: normal;
+}
+td.level4 { 
+  padding: 0px;
+  background-color: #F0F0F0;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+table.tree { 
+  width: 100%;
+}
+td.tree { 
+  padding: 4px;
+  font-size: 11px;
+  font-weight: normal;
+}
+a.tree {
+  color: black;
+}
+a.permission { 
+  color: blue;
+}
+
+/* layout links */
+a.layout:link {
+  color: blue;
+  font-size: 24px;
+  font-weight: normal;
+  text-decoration: none;
+}
+a.layout:visited {
+  color: blue;
+  font-size: 24px;
+  font-weight: normal;
+  text-decoration: none;
+}
+a.layout:active {
+  color: red;
+  font-size: 24px;
+  font-weight: normal;
+  text-decoration: none;
+}
+a.layout:hover {
+  color: red;
+  font-size: 24px;
+  font-weight: normal;
+  text-decoration: none;
+}
+table.layout { 
+  border: 1px solid black;
+  border-spacing: 0px;
+}
+td.layout { 
+  border: 1px solid black;
+  border-spacing: 0px;
+}
+div.layout { 
+  font-size: 24px;
+  color: gray;
+}
+
+table.login { 
+  border: 1px solid black;
+  border-spacing: 1px;
+}
+td.login { 
+  padding: 5px;
+  font-size: 14px;
+}
+input.login { 
+  color: white;
+  background-color: green;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+table.auditlog { 
+  border: 0px;
+  border-spacing: 0px;
+}
+td.auditlog {
+  padding: 0px 3px 0px 3px;
+  font-size: 11px;
+}
+
+table.zapwindow { 
+  border: 1px solid gray;
+  background-color: #E0E0E0;
+}
+
+.classname {
+  font-size: 11px;
+}
+
+.help {
+  color: #4D99E5;
+}
+
+.debug { 
+  color: blue;
+  font-size: 11px;
+}
+
+.unrestricted { 
+  color: black;
+}
+.restricted { 
+  color: red;
+}
+.grantedaccess { 
+  color: green;
+}
+
+.setting { 
+  font-weight: bold;
+}
+
+td.l0 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 3px; }
+td.l1 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 3px; }
+td.l2 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 1em; }
+td.l3 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 2em; }
+td.l4 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 3em; }
+td.l5 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 4em; }
+td.l6 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 5em; }
+td.l7 { font-size: 11px; padding-top: 1px; padding-bottom: 1px; padding-left: 6em; }
+
+div.serverstats {
+  margin: 10px 0px 0px 0px;
+  padding: 10px;
+  background-color: #E0E0E0;
+  border: 1px solid black;
+}
+
+table.updated { 
+  border: 2px solid green;
+  margin-top: 3px;
+}
+
+div.updates { 
+  padding: 5px;
+}
+
+div.update {
+  padding-top: 10px;
+}
+
+div.update-date {
+  font-weight: bold;
+  border-bottom: 1px solid gray;
+  margin-bottom: 5px;
+}
+
+textarea#content {
+  font-family: sans-serif;
+  font-size: 12px;
+  width: 890px;
+  height: 480px;
+}
+
+form.upload {
+  border-top: 1px solid gray;
+  margin-top: 5px;
+  padding-top: 10px;
+}
+
+iframe#metaeditor {
+  border: 0;
+  margin-top: 3px;
+  width: 950px;
+  height: 280px;
+}
+
+iframe#layouteditor {
+  border: 0;
+  margin-top: 3px;
+  width: 950px;
+  height: 1000px;
+}
+
+iframe#contenteditor { 
+  border: 1px solid gray;
+  margin-top: 3px;
+  width: 930px;
+  height: 700px;
+}

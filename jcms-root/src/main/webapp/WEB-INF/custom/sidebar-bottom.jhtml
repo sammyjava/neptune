@@ -1,0 +1,6 @@
+<%
+/**
+ * Custom bottom sidebar, set customBottomSidebar=true and put code here.
+ */
+  boolean customBottomSidebar = false;
+%>

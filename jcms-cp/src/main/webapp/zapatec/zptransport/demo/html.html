@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Transport Widget - Transport HTML Demo</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Transport HTML Demo</div>
+
+
+
+<p>
+Demonstrates how to use <b>Zapatec.Transport.fetch</b> and <b>Zapatec.Transport.setInnerHtml</b> to import HTML fragments from an external file on the server.
+Fetches the sample.html file, which contains javascript, interprets the javascript, and puts the contents into the div.
+</p>
+
+<a href="#" onclick="fetchUrl('sample.html', 'sample')">Load from URL sample.html</a>.
+<div id="sample" style="display: none; border: 1px solid #00f"></div>
+<br/>
+<div id="showSrc"><a href="#" onclick="showSrc()">Show sample.html contents</a>.</div>
+<div id="hideSrc" style="display: none"><a href="#" onclick="hideSrc()">Hide sample.html contents</a></div>
+<div id="sourceCode" style="background: #ffc; border: 1px solid #ccc; display: none"></div>
+
+<script type="text/javascript">
+
+	function fetchUrl(urlName, divName) {
+
+		// Fetch HTML fragment
+		Zapatec.Transport.fetch({
+		
+			// URL to fetch
+			url: urlName + '?' + Math.random(),
+		
+			// Onload event handler
+			onLoad: function(objRequest) {
+				// Show container
+				document.getElementById(divName).style.display = '';
+
+				// Put fetched fragment into sample div
+				var strHtml = objRequest.responseText;
+				Zapatec.Transport.setInnerHtml({
+					html: strHtml,
+					container: divName
+				});
+
+				// Put fetched fragment into sourceCode div
+				var strSource = strHtml.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+				document.getElementById('sourceCode').innerHTML = '<pre>' + strSource + '</pre>';
+
+			}
+		
+		});
+
+	}
+
+	function showSrc() {
+		if (!document.getElementById('sourceCode').innerHTML) {
+			alert('Click "Load from URL sample.html" first.');
+			return;
+		}
+		document.getElementById('showSrc').style.display = 'none';
+		document.getElementById('hideSrc').style.display = 'block';
+		document.getElementById('sourceCode').style.display = 'block';
+	}
+
+	function hideSrc() {
+		document.getElementById('showSrc').style.display = 'block';
+		document.getElementById('hideSrc').style.display = 'none';
+		document.getElementById('sourceCode').style.display = 'none';
+	}
+
+</script>
+
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Transport Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

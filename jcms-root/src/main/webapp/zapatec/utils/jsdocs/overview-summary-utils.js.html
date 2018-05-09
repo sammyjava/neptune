@@ -1,0 +1,3034 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="utils.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>utils.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Common functions used in all Zapatec widgets.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Utils.html">Zapatec.Utils</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Common functions used in all Zapatec widgets.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: utils.js 16093 2009-02-27 15:32:22Z andrew $ */</span>
+
+<span class="reserved">if</span> (typeof zapatecUtils != <span class="literal">'function'</span>) {
+
+<span class="reserved">if</span> (typeof Zapatec == <span class="literal">'undefined'</span>) {
+	<span class="comment">/**
+	 * <span class="attrib">@ignore</span> Namespace definition.
+	 */</span>
+	Zapatec = <span class="reserved">function</span>() {};
+}
+
+<span class="comment">/**
+ * <span class="attrib">@constructor</span>
+ */</span>
+Zapatec.Utils = <span class="reserved">function</span>() {};
+
+<span class="comment">/**
+ * Shortcut for faster access.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecUtils = Zapatec.Utils;
+
+<span class="comment">/// Deprecated. Use Zapatec.Utils.getElementOffset instead.</span>
+<span class="comment">/// Retrieves the absolute position (relative to &lt;body&gt;) of a given element.</span>
+<span class="comment">///</span>
+<span class="comment">/// <span class="attrib">@param</span> el [HTMLElement] reference to the element.</span>
+<span class="comment">/// <span class="attrib">@return</span> [object] { x, y } containing the position.</span>
+Zapatec.Utils.getAbsolutePos = <span class="reserved">function</span>(el, scrollOff) {
+	var SL = 0, ST = 0;
+	<span class="reserved">if</span> (!scrollOff) {
+		var is_div = /^div$/i.test(el.tagName);
+		<span class="reserved">if</span> (is_div &amp;&amp; el.scrollLeft)
+			SL = el.scrollLeft;
+		<span class="reserved">if</span> (is_div &amp;&amp; el.scrollTop)
+			ST = el.scrollTop;
+	}
+	var r = { x: el.offsetLeft - SL, y: el.offsetTop - ST };
+	<span class="reserved">if</span> (el.offsetParent) {
+		var tmp = <span class="reserved">this</span>.getAbsolutePos(el.offsetParent);
+		r.x += tmp.x;
+		r.y += tmp.y;
+	}
+	<span class="reserved">return</span> r;
+};
+
+<span class="comment">/**
+ * Returns absolute position of the element on the page and its dimensions.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oEl Element object
+ * <span class="attrib">@return</span> Offset: left or x - left offset; top or y - top offset,
+ * width - element width, height - element height
+ * <span class="attrib">@object</span>
+ */</span>
+Zapatec.Utils.getElementOffset = <span class="reserved">function</span>(oEl) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!oEl) {
+		<span class="reserved">return</span>;
+	}
+	var iLeft = iTop = iWidth = iHeight = 0;
+	var sTag;
+	<span class="reserved">if</span> (typeof oEl.getBoundingClientRect == <span class="literal">'function'</span>) {
+		<span class="comment">// IE</span>
+		var oRect = oEl.getBoundingClientRect();
+		iLeft = oRect.left;
+		iTop = oRect.top;
+		iWidth = oRect.right - iLeft;
+		iHeight = oRect.bottom - iTop;
+		<span class="comment">// getBoundingClientRect returns coordinates relative to the window</span>
+		iLeft += zapatecUtils.getPageScrollX();
+		iTop += zapatecUtils.getPageScrollY();
+		<span class="reserved">if</span> (Zapatec.is_ie) {
+			<span class="comment">// Why "- 2" is explained here:</span>
+			<span class="comment">// http://msdn.microsoft.com/library/default.asp?url=/workshop/author/dhtml/reference/methods/getboundingclientrect.asp</span>
+			iLeft -= 2;
+			iTop -= 2;
+		}
+	} <span class="reserved">else</span> {
+		<span class="comment">// Others</span>
+		iWidth = oEl.offsetWidth;
+		iHeight = oEl.offsetHeight;
+		var sPos = Zapatec.Utils.getStyleProperty(oEl, <span class="literal">'position'</span>);
+		<span class="reserved">if</span> (sPos == <span class="literal">'fixed'</span>) {
+			iLeft = oEl.offsetLeft + Zapatec.Utils.getPageScrollX();
+			iTop = oEl.offsetTop + Zapatec.Utils.getPageScrollY();
+		} <span class="reserved">else</span> <span class="reserved">if</span> (sPos == <span class="literal">'absolute'</span>) {
+			<span class="reserved">while</span> (oEl) {
+				sTag = oEl.tagName;
+				<span class="reserved">if</span> (sTag) {
+					sTag = sTag.toLowerCase();
+					<span class="comment">// Safari adds margin of the body to offsetLeft and offsetTop values</span>
+					<span class="reserved">if</span> (sTag != <span class="literal">'body'</span> &amp;&amp; sTag != <span class="literal">'html'</span> || Zapatec.is_khtml) {
+						iLeft += parseInt(oEl.offsetLeft, 10) || 0;
+						iTop += parseInt(oEl.offsetTop, 10) || 0;
+					}
+				}
+				oEl = oEl.offsetParent;
+				sTag = oEl ? oEl.tagName : null;
+				<span class="reserved">if</span> (sTag) {
+					sTag = sTag.toLowerCase();
+					<span class="reserved">if</span> (sTag != <span class="literal">'body'</span> &amp;&amp; sTag != <span class="literal">'html'</span>) {
+						iLeft -= oEl.scrollLeft;
+						iTop -= oEl.scrollTop;
+					}
+				}
+			}
+		} <span class="reserved">else</span> {
+			var bMoz = (Zapatec.is_gecko &amp;&amp; !Zapatec.is_khtml);
+			var fStyle = Zapatec.Utils.getStyleProperty;
+			var oP = oEl;
+			<span class="reserved">while</span> (oP) {
+				<span class="comment">// -moz-box-sizing must be "border-box" to prevent subtraction of body</span>
+				<span class="comment">// border in Mozilla</span>
+				<span class="reserved">if</span> (bMoz) {
+					sTag = oP.tagName;
+					<span class="reserved">if</span> (sTag) {
+						sTag = sTag.toLowerCase();
+						<span class="reserved">if</span> (sTag == <span class="literal">'body'</span> &amp;&amp; !(fStyle(oP, <span class="literal">'-moz-box-sizing'</span>) == <span class="literal">'border-box'</span>)) {
+							iLeft += parseInt(fStyle(oP, <span class="literal">'border-left-width'</span>));
+							iTop += parseInt(fStyle(oP, <span class="literal">'border-top-width'</span>));
+						}
+					}
+				}
+				iLeft += parseInt(oP.offsetLeft, 10) || 0;
+				iTop += parseInt(oP.offsetTop, 10) || 0;
+				oP = oP.offsetParent;
+			}
+			oP = oEl;
+			<span class="reserved">while</span> (oP.parentNode) {
+				oP = oP.parentNode;
+				sTag = oP.tagName;
+				<span class="reserved">if</span> (sTag) {
+					sTag = sTag.toLowerCase();
+					<span class="reserved">if</span> (sTag != <span class="literal">'body'</span> &amp;&amp; sTag != <span class="literal">'html'</span> &amp;&amp; sTag != <span class="literal">'tr'</span>) {
+						iLeft -= oP.scrollLeft;
+						iTop -= oP.scrollTop;
+					}
+				}
+			}
+		}
+	}
+	<span class="reserved">return</span> {
+		left: iLeft,
+		top: iTop,
+		x: iLeft,
+		y: iTop,
+		width: iWidth,
+		height: iHeight
+	};
+};
+
+<span class="comment">/**
+ * Shortcut for faster access to {<span class="attrib">@link</span> Zapatec.Utils#getElementOffset}.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecUtilsGetElementOffset = Zapatec.Utils.getElementOffset;
+
+<span class="comment">/**
+ * Returns offset of content of a scrollable element relative to the document
+ * body. Offset is calulated as offset of an element minus scrollLeft/scrollTop
+ * value.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oEl Element object
+ * <span class="attrib">@return</span> Offset: left or x - left offset; top or y - top offset,
+ * width - element width, height - element height
+ * <span class="attrib">@object</span>
+ */</span>
+Zapatec.Utils.getElementOffsetScrollable = <span class="reserved">function</span>(oEl) {
+	var oOffset = zapatecUtilsGetElementOffset(oEl);
+	<span class="reserved">if</span> (!oOffset) {
+		<span class="reserved">return</span>;
+	}
+	<span class="reserved">if</span> (oEl.scrollLeft) {
+		oOffset.left -= oEl.scrollLeft;
+		oOffset.x = oOffset.left;
+	}
+	<span class="reserved">if</span> (oEl.scrollTop) {
+		oOffset.top -= oEl.scrollTop;
+		oOffset.y = oOffset.top;
+	}
+	<span class="reserved">return</span> oOffset;
+};
+
+<span class="comment">/**
+ * Returns position of the element relative to its first non static
+ * offsetParent.
+ *
+ * &lt;pre&gt;
+ * Example of use: Determine coordinates of static element, which optionally can
+ * be inside {<span class="attrib">@link</span> Zapatec#Win}. Then use these coordinates to tie an absolute
+ * element to the static element. The absolute element will be positioned
+ * properly regardless of the static element is inside or outside of the window.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oEl Element object
+ * <span class="attrib">@return</span> Offset: left or x - left offset; top or y - top offset,
+ * width - element width, height - element height
+ * <span class="attrib">@object</span>
+ */</span>
+Zapatec.Utils.getElementOffsetRelative = <span class="reserved">function</span>(oEl) {
+	var fOffset = zapatecUtils.getElementOffsetScrollable;
+	var oOffset = fOffset(oEl);
+	<span class="reserved">if</span> (!oOffset) {
+		<span class="reserved">return</span>;
+	}
+	var oEl = oEl.offsetParent;
+	<span class="reserved">while</span> (oEl) {
+		var sPosition = zapatecUtils.getStyleProperty(oEl, <span class="literal">'position'</span>);
+		<span class="reserved">if</span> (sPosition != <span class="literal">'static'</span>) {
+			var oOffsetParent = fOffset(oEl);
+			oOffset.left -= oOffsetParent.left;
+			oOffset.x = oOffset.left;
+			oOffset.top -= oOffsetParent.top;
+			oOffset.y = oOffset.top;
+			<span class="reserved">return</span> oOffset;
+		}
+		oEl = oEl.offsetParent;
+	}
+	<span class="reserved">return</span> oOffset;
+};
+
+<span class="comment">/// Modify the position of a box to fit in browser's view.  This function will</span>
+<span class="comment">/// modify the passed object itself, so it doesn't need to return a value.</span>
+<span class="comment">///</span>
+<span class="comment">/// <span class="attrib">@param</span> [object] box { x, y, width, height } specifying the area.</span>
+Zapatec.Utils.fixBoxPosition = <span class="reserved">function</span>(box, leave) {
+	var screenX = Zapatec.Utils.getPageScrollX();
+	var screenY = Zapatec.Utils.getPageScrollY();
+	var sizes = Zapatec.Utils.getWindowSize();
+	leave = parseInt(leave, 10) || 0;
+	<span class="reserved">if</span> (box.x &lt; screenX) {
+		box.x = screenX + leave;
+	}
+	<span class="reserved">if</span> (box.y &lt; screenY) {
+		box.y = screenY + leave;
+	}
+	<span class="reserved">if</span> (box.x + box.width &gt; screenX + sizes.width) {
+		box.x = screenX + sizes.width - box.width - leave;
+	}
+	<span class="reserved">if</span> (box.y + box.height &gt; screenY + sizes.height) {
+		box.y = screenY + sizes.height - box.height - leave;
+	}
+};
+
+<span class="comment">/// Determines if an event is related to a certain element.  This is a poor</span>
+<span class="comment">/// substitute for some events that are missing from DOM since forever (like</span>
+<span class="comment">/// onenter, onleave, which MSIE provides).  Basically onmouseover and</span>
+<span class="comment">/// onmouseout are fired even if the mouse was already in the element but moved</span>
+<span class="comment">/// from text to a blank area, so in order not to close a popup element when</span>
+<span class="comment">/// onmouseout occurs in this situation, one would need to first check if the</span>
+<span class="comment">/// event is not related to that popup element:</span>
+<span class="comment">///</span>
+<span class="comment">/// \code</span>
+<span class="comment">///      function handler_onMouseOut(event) {</span>
+<span class="comment">///         if (!Zapatec.Utils.isRelated(this, event)) {</span>
+<span class="comment">///            /// can safely hide it now</span>
+<span class="comment">///            this.style.display = "none";</span>
+<span class="comment">///         }</span>
+<span class="comment">///      }</span>
+<span class="comment">/// \endcode</span>
+<span class="comment">///</span>
+<span class="comment">/// <span class="attrib">@param</span> el [HTMLElement] reference to the element to check the event against</span>
+<span class="comment">/// <span class="attrib">@param</span> evt [Event] reference to the Event object</span>
+<span class="comment">/// <span class="attrib">@return</span> [boolean] true if the event is related to the element</span>
+Zapatec.Utils.isRelated = <span class="reserved">function</span> (el, evt) {
+	evt || (evt = window.event);
+	var related = evt.relatedTarget;
+	<span class="reserved">if</span> (!related) {
+		var type = evt.type;
+		<span class="reserved">if</span> (type == <span class="literal">"mouseover"</span>) {
+			related = evt.fromElement;
+		} <span class="reserved">else</span> <span class="reserved">if</span> (type == <span class="literal">"mouseout"</span>) {
+			related = evt.toElement;
+		}
+	}
+	try {
+		<span class="reserved">while</span> (related) {
+			<span class="reserved">if</span> (related == el) {
+				<span class="reserved">return</span> true;
+			}
+			related = related.parentNode;
+		}
+	} catch(e) {};
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/// Remove a certain [CSS] class from the given element.</span>
+<span class="comment">/// <span class="attrib">@param</span> el [HTMLElement] reference to the element.</span>
+<span class="comment">/// <span class="attrib">@param</span> className [string] the class to remove.</span>
+Zapatec.Utils.removeClass = <span class="reserved">function</span>(el, className) {
+	<span class="reserved">if</span> (!(el &amp;&amp; el.className)) {
+		<span class="reserved">return</span>;
+	}
+	var cls = el.className.split(<span class="literal">" "</span>);
+	<span class="reserved">for</span> (var i = cls.length; i &gt; 0;) {
+		<span class="reserved">if</span> (cls[--i] == className) {
+			cls.splice(i, 1);
+		}
+	}
+	el.className = cls.join(<span class="literal">" "</span>);
+};
+
+<span class="comment">/// Appends a certain [CSS] class to the given element.</span>
+<span class="comment">/// <span class="attrib">@param</span> el [HTMLElement] reference to the element.</span>
+<span class="comment">/// <span class="attrib">@param</span> className [string] the class to append.</span>
+Zapatec.Utils.addClass = <span class="reserved">function</span>(el, className) {
+	Zapatec.Utils.removeClass(el, className);
+	el.className += <span class="literal">" "</span> + className;
+};
+
+<span class="comment">/// Replaces the given class with another class.</span>
+<span class="comment">/// <span class="attrib">@param</span> el [HTMLElement] reference to the element.</span>
+<span class="comment">/// <span class="attrib">@param</span> className [string] the class to replace.</span>
+<span class="comment">/// <span class="attrib">@param</span> withClassName [string] the class to replace with.</span>
+Zapatec.Utils.replaceClass = <span class="reserved">function</span>(el, className, withClassName) {
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(el) || !className) {
+		<span class="reserved">return</span> false;
+	}
+	el.className = el.className.replace(className, withClassName);
+};
+
+<span class="comment">/// Retrieves the current target element for some event (useful when bubbling).</span>
+<span class="comment">/// This function is not actually very useful, but it's legacy from the old calendar code.</span>
+<span class="comment">/// <span class="attrib">@param</span> ev [Event] the event object.</span>
+<span class="comment">/// <span class="attrib">@return</span> [HTMLElement] window.event.srcElement for MSIE, ev.currentTarget for other browsers.</span>
+Zapatec.Utils.getElement = <span class="reserved">function</span>(ev) {
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		<span class="reserved">if</span> (window.event) {
+			<span class="reserved">return</span> window.event.srcElement;
+		} <span class="reserved">else</span> {
+			<span class="reserved">return</span> null;
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> ev.currentTarget;
+	}
+};
+
+<span class="comment">/// Retrieves the target element for some event (useful when bubbling).</span>
+<span class="comment">/// This function is not actually very useful, but it's legacy from the old calendar code.</span>
+<span class="comment">/// <span class="attrib">@param</span> ev [Event] the event object.</span>
+<span class="comment">/// <span class="attrib">@return</span> [HTMLElement] window.event.srcElement for MSIE, ev.target for other browsers.</span>
+Zapatec.Utils.getTargetElement = <span class="reserved">function</span>(ev) {
+	<span class="reserved">if</span> (Zapatec.is_ie) {
+		<span class="reserved">if</span> (window.event) {
+			<span class="reserved">return</span> window.event.srcElement;
+		} <span class="reserved">else</span> {
+			<span class="reserved">return</span> null;
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> ev.target;
+	}
+};
+
+<span class="comment">/**
+ * Returns mouse position during the event.
+ *
+ * <span class="attrib">@param</span> {object} oEv Optional. Event object
+ * <span class="attrib">@return</span> Mouse position during the event:
+ * &lt;pre&gt;
+ * {
+ *   pageX: [number] x coordinate relative to the document,
+ *   pageY: [number] y coordinate relative to the document,
+ *   clientX: [number] x coordinate relative to the window,
+ *   clientY: [number] y coordinate relative to the window
+ * }
+ * &lt;/pre&gt;
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.getMousePos = <span class="reserved">function</span>(oEv) {
+	oEv || (oEv = window.event);
+	var oPos = {
+		pageX: 0,
+		pageY: 0,
+		clientX: 0,
+		clientY: 0
+	};
+	<span class="reserved">if</span> (oEv) {
+		var bIsPageX = (typeof oEv.pageX != <span class="literal">'undefined'</span>);
+		var bIsClientX = (typeof oEv.clientX != <span class="literal">'undefined'</span>);
+		<span class="reserved">if</span> (bIsPageX || bIsClientX) {
+			<span class="reserved">if</span> (bIsPageX) {
+				oPos.pageX = oEv.pageX;
+				oPos.pageY = oEv.pageY;
+			} <span class="reserved">else</span> {
+				oPos.pageX = oEv.clientX + Zapatec.Utils.getPageScrollX();
+				oPos.pageY = oEv.clientY + Zapatec.Utils.getPageScrollY();
+			}
+			<span class="reserved">if</span> (bIsClientX) {
+				oPos.clientX = oEv.clientX;
+				oPos.clientY = oEv.clientY;
+			} <span class="reserved">else</span> {
+				oPos.clientX = oEv.pageX - Zapatec.Utils.getPageScrollX();
+				oPos.clientY = oEv.pageY - Zapatec.Utils.getPageScrollY();
+			}
+		}
+	}
+	<span class="reserved">return</span> oPos;
+};
+
+<span class="comment">/**
+ * Stops bubbling and propagation of an event.
+ *
+ * &lt;pre&gt;
+ * Note for Safari:
+ * If it doesn't work and listener is called, you can check returnValue property
+ * of the event in the listener. If it is false, don't proceed further because
+ * event has been stopped.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oEvent Optional event object. Default: window.event.
+ * <span class="attrib">@return</span> Always false
+ * <span class="attrib">@type</span> boolean
+ */</span>
+Zapatec.Utils.stopEvent = <span class="reserved">function</span>(oEvent) {
+	oEvent || (oEvent = window.event);
+	<span class="reserved">if</span> (oEvent) {
+		<span class="reserved">if</span> (oEvent.stopPropagation) {
+			oEvent.stopPropagation();
+		}
+		oEvent.cancelBubble = true;
+		<span class="reserved">if</span> (oEvent.preventDefault) {
+			oEvent.preventDefault();
+		}
+		oEvent.returnValue = false;
+	}
+	<span class="reserved">return</span> false;
+};
+
+Zapatec.Utils.removeOnUnload = [];
+
+<span class="comment">/**
+ * Adds event handler to certain element or widget using DOM addEventListener or
+ * MSIE attachEvent method. Doing this means that you can add multiple handlers
+ * for the same object and event, and they will be called in order.
+ *
+ * <span class="attrib">@param</span> {object} oElement Element object
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@param</span> {boolean} bUseCapture Optional. Default: false. For details see
+ *	http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/events.html#Events-EventTarget-addEventListener
+ * <span class="attrib">@param</span> {boolean} bRemoveOnUnload Optional. Default: true. remove eventlistener
+ *	on page unload.
+ */</span>
+Zapatec.Utils.addEvent = <span class="reserved">function</span>(oElement, sEvent, fListener, bUseCapture, bRemoveOnUnload) {
+	<span class="reserved">if</span> (oElement.addEventListener) {
+		<span class="comment">// W3C</span>
+		<span class="reserved">if</span> (!bUseCapture) {
+			bUseCapture = false;
+		}
+		oElement.addEventListener(sEvent, fListener, bUseCapture);
+	} <span class="reserved">else</span> <span class="reserved">if</span> (oElement.attachEvent) {
+		<span class="comment">// IE</span>
+		oElement.detachEvent(<span class="literal">'on'</span> + sEvent, fListener);
+		oElement.attachEvent(<span class="literal">'on'</span> + sEvent, fListener);
+		<span class="reserved">if</span> (bUseCapture) {
+			oElement.setCapture(false);
+		}
+	}
+	<span class="reserved">if</span> (typeof bRemoveOnUnload == <span class="literal">'undefined'</span>) {
+		bRemoveOnUnload = true;
+	}
+	<span class="reserved">if</span> (bRemoveOnUnload) {
+		zapatecUtils.removeOnUnload.push({
+			<span class="literal">'element'</span>: oElement,
+			<span class="literal">'event'</span>: sEvent,
+			<span class="literal">'listener'</span>: fListener,
+			<span class="literal">'capture'</span>: bUseCapture
+		});
+	}
+};
+
+<span class="comment">/**
+ * Removes event handler added with {<span class="attrib">@link</span> Zapatec.Utils#addEvent}.
+ *
+ * <span class="attrib">@param</span> {object} oElement Element object
+ * <span class="attrib">@param</span> {string} sEvent Event name
+ * <span class="attrib">@param</span> {function} fListener Event listener
+ * <span class="attrib">@param</span> {boolean} bUseCapture Optional. Default: false. For details see
+ * http://www.w3.org/TR/2000/REC-DOM-Level-2-Events-20001113/events.html#Events-EventTarget-removeEventListener
+ */</span>
+Zapatec.Utils.removeEvent = <span class="reserved">function</span>(oElement, sEvent, fListener, bUseCapture) {
+	<span class="reserved">if</span> (oElement.removeEventListener) {
+		<span class="comment">// W3C</span>
+		<span class="reserved">if</span> (!bUseCapture) {
+			bUseCapture = false;
+		}
+		oElement.removeEventListener(sEvent, fListener, bUseCapture);
+	} <span class="reserved">else</span> <span class="reserved">if</span> (oElement.detachEvent) {
+		<span class="comment">// IE</span>
+		oElement.detachEvent(<span class="literal">'on'</span> + sEvent, fListener);
+	}
+	<span class="reserved">for</span> (var iLis = Zapatec.Utils.removeOnUnload.length - 1; iLis &gt;= 0; iLis--) {
+		var oParams = Zapatec.Utils.removeOnUnload[iLis];
+		<span class="reserved">if</span> (!oParams) {
+			continue;
+		}
+		<span class="reserved">if</span> (oElement == oParams[<span class="literal">'element'</span>] &amp;&amp; sEvent == oParams[<span class="literal">'event'</span>] &amp;&amp;
+		 fListener == oParams[<span class="literal">'listener'</span>] &amp;&amp; bUseCapture == oParams[<span class="literal">'capture'</span>]) {
+			Zapatec.Utils.removeOnUnload[iLis] = null;
+			Zapatec.Utils.removeEvent(
+			 oParams[<span class="literal">'element'</span>],
+			 oParams[<span class="literal">'event'</span>],
+			 oParams[<span class="literal">'listener'</span>],
+			 oParams[<span class="literal">'capture'</span>]
+			);
+		}
+	}
+};
+
+<span class="comment">/// Create an element of a certain type using document.createElement().  A</span>
+<span class="comment">/// function was needed in order to add some common attributes to all created</span>
+<span class="comment">/// elements, but also in order to be able to use it in XHTML too (Gecko and</span>
+<span class="comment">/// other W3C-compliant browsers).</span>
+<span class="comment">///</span>
+<span class="comment">/// This function will create an element of the given type and set certain</span>
+<span class="comment">/// properties to it: unselectable for IE, and the CSS "-moz-user-select" for</span>
+<span class="comment">/// Gecko, in order to make the element unselectable in these browsers.</span>
+<span class="comment">/// Optionally, if the second argument is passed, it will appendChild() the</span>
+<span class="comment">/// newly created element to its parent.</span>
+<span class="comment">///</span>
+<span class="comment">/// <span class="attrib">@param</span> type [string] the tag name of the new element.</span>
+<span class="comment">/// <span class="attrib">@param</span> parent [HTMLElement, optional] a parent for the new element.</span>
+<span class="comment">/// <span class="attrib">@param</span> selectable [boolean] the flag to indicate wether element is selectable(rather usefull).</span>
+<span class="comment">/// <span class="attrib">@return</span> [HTMLElement] reference to the new element.</span>
+Zapatec.Utils.createElement = <span class="reserved">function</span>(type, parent, selectable) {
+	var el = null;
+	<span class="reserved">if</span> (document.createElementNS)
+		<span class="comment">// use the XHTML namespace; IE won't normally get here unless</span>
+		<span class="comment">// _they_ "fix" the DOM2 implementation.</span>
+		el = document.createElementNS(<span class="literal">"http://www.w3.org/1999/xhtml"</span>, type);
+	<span class="reserved">else</span>
+		el = document.createElement(type);
+	<span class="reserved">if</span> (typeof parent != <span class="literal">"undefined"</span> &amp;&amp; parent != null)
+		parent.appendChild(el);
+	<span class="reserved">if</span> (!selectable) {
+		<span class="reserved">if</span> (Zapatec.is_ie)
+			el.setAttribute(<span class="literal">"unselectable"</span>, true);
+		<span class="reserved">if</span> (Zapatec.is_gecko)
+			el.style.setProperty(<span class="literal">"-moz-user-select"</span>, <span class="literal">"none"</span>, <span class="literal">""</span>);
+	}
+	<span class="reserved">return</span> el;
+};
+
+<span class="comment">// Cookie management</span>
+
+<span class="comment">/// Sets a cooke given certain specifications.  It overrides any existing</span>
+<span class="comment">/// cookie with the same name.</span>
+<span class="comment">///</span>
+<span class="comment">/// <span class="attrib">@param</span> name [string] the cookie name.</span>
+<span class="comment">/// <span class="attrib">@param</span> value [string] the cookie value.</span>
+<span class="comment">/// <span class="attrib">@param</span> domain [string, optional] the cookie domain.</span>
+<span class="comment">/// <span class="attrib">@param</span> path [string, optional] the cookie path.</span>
+<span class="comment">/// <span class="attrib">@param</span> exp_days [number, optional] number of days of cookie validity.</span>
+Zapatec.Utils.writeCookie = <span class="reserved">function</span>(name, value, domain, path, exp_days) {
+	value = escape(value);
+	var ck = name + <span class="literal">"="</span> + value, exp;
+	<span class="reserved">if</span> (domain)
+		ck += <span class="literal">";domain="</span> + domain;
+	<span class="reserved">if</span> (path)
+		ck += <span class="literal">";path="</span> + path;
+	<span class="reserved">if</span> (exp_days) {
+		exp = new Date();
+		exp.setTime(exp_days * 86400000 + exp.getTime());
+		ck += <span class="literal">";expires="</span> + exp.toGMTString();
+	}
+	document.cookie = ck;
+};
+
+<span class="comment">/**
+ * Retrieves the value of a cookie.
+ *
+ * <span class="attrib">@param</span> name [string] the cookie name
+ * <span class="attrib">@return</span> [string or null] a string with the cookie value, or null if it can't be found.
+ */</span>
+
+<span class="comment">/* ? inside regular expression is not supported in IE 5.0
+Zapatec.Utils.getCookie = function(name) {
+	var re = new RegExp("(^|;\\s*)" + name + "\\s*=(.*?)(;|$)");
+	if (re.test(document.cookie)) {
+		var value = RegExp.$2;
+		value = unescape(value);
+		return (value);
+	}
+	return null;
+};
+*/</span>
+
+Zapatec.Utils.getCookie = <span class="reserved">function</span>(name) {
+	var pattern = name + <span class="literal">"="</span>;
+	var tokenPos = 0;
+	<span class="reserved">while</span> (tokenPos &lt; document.cookie.length) {
+		var valuePos = tokenPos + pattern.length;
+		<span class="reserved">if</span> (document.cookie.substring(tokenPos, valuePos) == pattern) {
+			var endValuePos = document.cookie.indexOf(<span class="literal">";"</span>, valuePos);
+			<span class="reserved">if</span> (endValuePos == -1) { <span class="comment">// Last cookie</span>
+				endValuePos = document.cookie.length;
+			}
+			<span class="reserved">return</span> unescape(document.cookie.substring(valuePos, endValuePos));
+		}
+		tokenPos=document.cookie.indexOf(<span class="literal">" "</span>,tokenPos)+1;
+		<span class="reserved">if</span> (tokenPos == 0) { <span class="comment">// No more tokens</span>
+			break;
+		}
+	}
+	<span class="reserved">return</span> null;
+};
+
+<span class="comment">/**
+ * Given an object, create a string suitable for saving the object in a cookie.
+ * This is similar to serialization.  WARNING: it does not support nested
+ * objects.
+ *
+ * <span class="attrib">@param</span> obj [Object] reference to the object to serialize.
+ * <span class="attrib">@return</span> [string] the serialized object.
+ */</span>
+Zapatec.Utils.makePref = <span class="reserved">function</span>(obj) {
+	<span class="reserved">function</span> stringify(val) {
+		<span class="reserved">if</span> (typeof val == <span class="literal">"object"</span> &amp;&amp; !val)
+			<span class="reserved">return</span> <span class="literal">"null"</span>;
+		<span class="reserved">else</span> <span class="reserved">if</span> (typeof val == <span class="literal">"number"</span> || typeof val == <span class="literal">"boolean"</span>)
+			<span class="reserved">return</span> val;
+		<span class="reserved">else</span> <span class="reserved">if</span> (typeof val == <span class="literal">"string"</span>)
+			<span class="reserved">return</span> <span class="literal">'"'</span> + val.replace(/\x22/, <span class="literal">"\\22"</span>) + <span class="literal">'"'</span>;
+		<span class="reserved">else</span> <span class="reserved">return</span> null;
+	};
+	var txt = <span class="literal">""</span>, i;
+	<span class="reserved">for</span> (i in obj)
+		txt += (txt ? <span class="literal">",'"</span> : <span class="literal">"'"</span>) + i + <span class="literal">"':"</span> + stringify(obj[i]);
+	<span class="reserved">return</span> txt;
+};
+
+<span class="comment">/**
+ * The reverse of Zapatec.Utils.makePref(), this function parses the given
+ * string and creates an object from it.
+ *
+ * <span class="attrib">@param</span> sCookie [string] Preferences string
+ * <span class="attrib">@return</span> Preferences object
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.loadPref = <span class="reserved">function</span>(sCookie) {
+	var oCookie = zapatecTransport.parseJson({
+		strJson: <span class="literal">'{'</span> + sCookie + <span class="literal">'}'</span>
+	});
+	<span class="reserved">if</span> (!oCookie || typeof oCookie != <span class="literal">'object'</span>) {
+		oCookie = {};
+	}
+	<span class="reserved">return</span> oCookie;
+};
+
+<span class="comment">/**
+ * Merges the values of the source object into the destination object.
+ *
+ * <span class="attrib">@param</span> dest [Object] the destination object.
+ * <span class="attrib">@param</span> src [Object] the source object.
+ */</span>
+Zapatec.Utils.mergeObjects = <span class="reserved">function</span>(dest, src) {
+	<span class="reserved">for</span> (var i in src)
+		dest[i] = src[i];
+};
+
+<span class="comment">// based on the WCH idea</span>
+<span class="comment">// http://www.aplus.co.yu/WCH/code3/WCH.js</span>
+
+<span class="comment">/// \defgroup WCH functions</span>
+<span class="comment">//@{</span>
+
+Zapatec.Utils.__wch_id = 0;	<span class="comment">/**&lt; [number, static] used to create ID-s for the WCH objects */</span>
+
+<span class="comment">/**
+ * Creates WCH object.
+ *
+ * &lt;pre&gt;
+ * This function does nothing if the browser is not IE 5.5 or IE 6. A WCH object
+ * is one of the most bizarre tricks to avoid a notorious IE bug: IE normally
+ * shows "windowed controls" on top of any HTML elements, regardless of any
+ * z-index that might be specified in CSS. This technique is described at:
+ * http://www.aplus.co.yu/WCH/
+ *
+ * A "WCH object" is actually an HTMLIFrame element having a certain "CSS
+ * filter" (proprietary MSIE extension) that forces opacity zero.  This object,
+ * displayed on top of a windowed control such as a select box, will completely
+ * hide the select box, allowing us to place other HTMLElement objects above.
+ *
+ * WCH stands for "Windowed Controls Hider".
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oEl Optional. Element where to create the WCH IFRAME.
+ * <span class="attrib">@return</span> New WCH IFRAME object for IE 5.5 and IE 6 or null for other browsers.
+ * Undefined in case of error.
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.createWCH = <span class="reserved">function</span>(oEl) {
+	<span class="comment">// This feature is needed only for IE 5.5 and IE 6</span>
+	<span class="reserved">if</span> (!Zapatec.is_ie || Zapatec.is_ie5 || Zapatec.is_ie7) {
+		<span class="reserved">return</span> null;
+	}
+	var sId = <span class="literal">'WCH'</span> + (++Zapatec.Utils.__wch_id);
+	<span class="comment">// javascript:false instead of about:blank prevents non-secure alert on ssl</span>
+	<span class="comment">// server in IE 6</span>
+	var sIframe = [
+		<span class="literal">'&lt;iframe id="'</span>,
+		sId,
+		<span class="literal">'" scrolling="no" frameborder="0" style="z-index:0;position:absolute;visibility:hidden;filter:progid:DXImageTransform.Microsoft.alpha(style=0,opacity=0);border:0;top:0;left:0;width:0;height:0" src="javascript:false"&gt;&lt;/iframe&gt;'</span>
+	].join(<span class="literal">''</span>)
+	<span class="reserved">if</span> (!oEl) {
+		oEl = document.body;
+	}
+	<span class="comment">// According to http://msdn2.microsoft.com/en-us/library/ms536452.aspx</span>
+	<span class="comment">// You cannot insert text while the document is loading. Wait for the onload</span>
+	<span class="comment">// event to fire before attempting to call this method.</span>
+	<span class="reserved">if</span> (Zapatec.windowLoaded) {
+		oEl.insertAdjacentHTML(<span class="literal">'beforeEnd'</span>, sIframe);
+	} <span class="reserved">else</span> {
+		Zapatec.Utils.addEvent(window, <span class="literal">'load'</span>, <span class="reserved">function</span>() {
+			oEl.insertAdjacentHTML(<span class="literal">'beforeEnd'</span>, sIframe);
+			oEl = null;
+		});
+	}
+	<span class="reserved">return</span> document.getElementById(sId);
+};
+
+<span class="comment">/**
+ * Configure a given WCH object to be displayed on top of the given element.
+ * Optionally, a second element can be passed, and in this case it will setup
+ * the WCH object to cover both elements.
+ *
+ * <span class="attrib">@param</span> f [HTMLIFrame] the WCH object
+ * <span class="attrib">@param</span> el [HTMLElement] the element to cover.
+ * <span class="attrib">@param</span> el2 [HTMLElement, optional] another element to cover.
+ */</span>
+Zapatec.Utils.setupWCH_el = <span class="reserved">function</span>(f, el, el2) {
+	<span class="reserved">if</span> (f) {
+		var pos = zapatecUtils.getElementOffsetRelative(el),
+			X1 = pos.x,
+			Y1 = pos.y,
+			X2 = X1 + el.offsetWidth,
+			Y2 = Y1 + el.offsetHeight;
+		<span class="reserved">if</span> (el2) {
+			var p2 = zapatecUtils.getElementOffsetRelative(el2),
+				XX1 = p2.x,
+				YY1 = p2.y,
+				XX2 = XX1 + el2.offsetWidth,
+				YY2 = YY1 + el2.offsetHeight;
+			<span class="reserved">if</span> (X1 &gt; XX1)
+				X1 = XX1;
+			<span class="reserved">if</span> (Y1 &gt; YY1)
+				Y1 = YY1;
+			<span class="reserved">if</span> (X2 &lt; XX2)
+				X2 = XX2;
+			<span class="reserved">if</span> (Y2 &lt; YY2)
+				Y2 = YY2;
+		}
+		Zapatec.Utils.setupWCH(f, X1, Y1, X2-X1, Y2-Y1);
+	}
+};
+
+<span class="comment">/**
+ * Configure a WCH object to cover a certain part of the screen.
+ *
+ * <span class="attrib">@param</span> f [HTMLIFrame] the WCH object.
+ * <span class="attrib">@param</span> x [number] the X coordinate.
+ * <span class="attrib">@param</span> y [number] the Y coordinate.
+ * <span class="attrib">@param</span> w [number] the width of the area.
+ * <span class="attrib">@param</span> h [number] the height of the area.
+ */</span>
+Zapatec.Utils.setupWCH = <span class="reserved">function</span>(f, x, y, w, h) {
+	<span class="reserved">if</span> (f) {
+		var s = f.style;
+		(typeof x != <span class="literal">"undefined"</span>) &amp;&amp; (s.left = x + <span class="literal">"px"</span>);
+		(typeof y != <span class="literal">"undefined"</span>) &amp;&amp; (s.top = y + <span class="literal">"px"</span>);
+		(typeof w != <span class="literal">"undefined"</span>) &amp;&amp; (s.width = w + <span class="literal">"px"</span>);
+		(typeof h != <span class="literal">"undefined"</span>) &amp;&amp; (s.height = h + <span class="literal">"px"</span>);
+		s.visibility = <span class="literal">"inherit"</span>;
+	}
+};
+
+<span class="comment">/**
+ * Hide a WCH object.
+ *
+ * <span class="attrib">@param</span> f [HTMLIFrame] object to hide.
+ */</span>
+Zapatec.Utils.hideWCH = <span class="reserved">function</span>(f) {
+	<span class="reserved">if</span> (f)
+		f.style.visibility = <span class="literal">"hidden"</span>;
+};
+
+<span class="comment">//@}</span>
+
+<span class="comment">/**
+ * Returns current document vertical scroll position.
+ *
+ * <span class="attrib">@return</span> Current document vertical scroll position
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Utils.getPageScrollY = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (window.pageYOffset) {
+		<span class="reserved">return</span> window.pageYOffset;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (document.body &amp;&amp; document.body.scrollTop) {
+		<span class="reserved">return</span> document.body.scrollTop;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (document.documentElement &amp;&amp; document.documentElement.scrollTop) {
+		<span class="reserved">return</span> document.documentElement.scrollTop;
+	}
+	<span class="reserved">return</span> 0;
+};
+
+<span class="comment">/**
+ * Returns current document horizontal scroll position.
+ *
+ * <span class="attrib">@return</span> Current document horizontal scroll position
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Utils.getPageScrollX = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (window.pageXOffset) {
+		<span class="reserved">return</span> window.pageXOffset;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (document.body &amp;&amp; document.body.scrollLeft) {
+		<span class="reserved">return</span> document.body.scrollLeft;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (document.documentElement &amp;&amp; document.documentElement.scrollLeft) {
+		<span class="reserved">return</span> document.documentElement.scrollLeft;
+	}
+	<span class="reserved">return</span> 0;
+};
+
+<span class="comment">/**
+ * Zapatec ScrollWithWindow Widget. Used to produce effect similar to
+ * "position: fixed".
+ */</span>
+Zapatec.ScrollWithWindow = {};
+
+<span class="comment">/**
+ * Holds references to fixed elements.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.ScrollWithWindow.list = [];
+
+<span class="comment">/**
+ * Stickiness parameter. Set to a number between 0 and 1, lower means longer
+ * scrolling.
+ */</span>
+Zapatec.ScrollWithWindow.stickiness = 0.25;
+
+<span class="comment">/**
+ * Registers a given object to have its style.top set equal to the window
+ * scroll position as the browser scrolls.
+ *
+ * <span class="attrib">@param</span> {object} oElement A reference to the element to scroll
+ */</span>
+Zapatec.ScrollWithWindow.register = <span class="reserved">function</span>(oElement) {
+	var iTop = oElement.offsetTop || 0;
+	var iLeft = oElement.offsetLeft || 0;
+	Zapatec.ScrollWithWindow.list.push({
+		node: oElement,
+		origTop: iTop,
+		origLeft: iLeft
+	});
+	<span class="comment">// Turn on scrolling</span>
+	<span class="reserved">if</span> (!Zapatec.ScrollWithWindow.interval) {
+		Zapatec.ScrollWithWindow.on();
+	}
+};
+
+<span class="comment">/**
+ * Unregisters a given object.
+ *
+ * <span class="attrib">@param</span> {object} oElement A reference to the element to scroll
+ */</span>
+Zapatec.ScrollWithWindow.unregister = <span class="reserved">function</span>(oElement) {
+	<span class="reserved">for</span> (var iItem = 0; iItem &lt; Zapatec.ScrollWithWindow.list.length; iItem++) {
+		var oItem = Zapatec.ScrollWithWindow.list[iItem];
+		<span class="reserved">if</span> (oElement == oItem.node) {
+			Zapatec.ScrollWithWindow.list.splice(iItem, 1);
+			<span class="comment">// Turn off scrolling when list becomes empty</span>
+			<span class="reserved">if</span> (!Zapatec.ScrollWithWindow.list.length) {
+				Zapatec.ScrollWithWindow.off();
+			}
+			<span class="reserved">return</span>;
+		}
+	}
+};
+
+<span class="comment">/**
+ * Called each time the window is scrolled to set objects' top offset.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {number} iTop New top offset
+ */</span>
+Zapatec.ScrollWithWindow.moveTop = <span class="reserved">function</span>(iTop) {
+	Zapatec.ScrollWithWindow.top += (iTop - Zapatec.ScrollWithWindow.top) *
+	 Zapatec.ScrollWithWindow.stickiness;
+	<span class="reserved">if</span> (Math.abs(Zapatec.ScrollWithWindow.top - iTop) &lt;= 1) {
+		Zapatec.ScrollWithWindow.top = iTop;
+	}
+	<span class="reserved">for</span> (var iItem = 0; iItem &lt; Zapatec.ScrollWithWindow.list.length; iItem++) {
+		var oItem = Zapatec.ScrollWithWindow.list[iItem];
+		var oElement = oItem.node;
+		oElement.style.position = <span class="literal">'absolute'</span>;
+		<span class="reserved">if</span> (!oItem.origTop &amp;&amp; oItem.origTop !== 0) {
+			oItem.origTop = parseInt(oElement.style.top) || 0;
+		}
+		oElement.style.top = oItem.origTop +
+		 parseInt(Zapatec.ScrollWithWindow.top) + <span class="literal">'px'</span>;
+	}
+};
+
+<span class="comment">/**
+ * Called each time the window is scrolled to set objects' left offset.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {number} iLeft New left offset
+ */</span>
+Zapatec.ScrollWithWindow.moveLeft = <span class="reserved">function</span>(iLeft) {
+	Zapatec.ScrollWithWindow.left += (iLeft - Zapatec.ScrollWithWindow.left) *
+	 Zapatec.ScrollWithWindow.stickiness;
+	<span class="reserved">if</span> (Math.abs(Zapatec.ScrollWithWindow.left - iLeft) &lt;= 1) {
+		Zapatec.ScrollWithWindow.left = iLeft;
+	}
+	<span class="reserved">for</span> (var iItem = 0; iItem &lt; Zapatec.ScrollWithWindow.list.length; iItem++) {
+		var oItem = Zapatec.ScrollWithWindow.list[iItem];
+		var oElement = oItem.node;
+		oElement.style.position = <span class="literal">'absolute'</span>;
+		<span class="reserved">if</span> (!oItem.origLeft &amp;&amp; oItem.origLeft !== 0) {
+			oItem.origLeft = parseInt(oElement.style.left) || 0;
+		}
+		oElement.style.left = oItem.origLeft +
+		 parseInt(Zapatec.ScrollWithWindow.left) + <span class="literal">'px'</span>;
+	}
+};
+
+<span class="comment">/**
+ * Gets called every 50 ms when scrolling is on.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.ScrollWithWindow.cycle = <span class="reserved">function</span>() {
+	var iTop = Zapatec.Utils.getPageScrollY();
+	var iLeft = Zapatec.Utils.getPageScrollX();
+	<span class="reserved">if</span> (iTop != Zapatec.ScrollWithWindow.top) {
+		Zapatec.ScrollWithWindow.moveTop(iTop);
+	}
+	<span class="reserved">if</span> (iLeft != Zapatec.ScrollWithWindow.left) {
+		Zapatec.ScrollWithWindow.moveLeft(iLeft);
+	}
+};
+
+<span class="comment">/**
+ * Turns scrolling on.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.ScrollWithWindow.on = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (Zapatec.ScrollWithWindow.interval) {
+		<span class="comment">// Already on</span>
+		<span class="reserved">return</span>;
+	}
+	Zapatec.ScrollWithWindow.top = Zapatec.Utils.getPageScrollY();
+	Zapatec.ScrollWithWindow.left = Zapatec.Utils.getPageScrollX();
+	Zapatec.ScrollWithWindow.interval =
+	 setInterval(Zapatec.ScrollWithWindow.cycle, 50);
+};
+
+<span class="comment">/**
+ * Turns scrolling off.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.ScrollWithWindow.off = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!Zapatec.ScrollWithWindow.interval) {
+		<span class="comment">// Already off</span>
+		<span class="reserved">return</span>;
+	}
+	clearInterval(Zapatec.ScrollWithWindow.interval);
+	Zapatec.ScrollWithWindow.interval = null;
+};
+
+<span class="comment">//Fixates the element on the screen.</span>
+Zapatec.FixateOnScreen = {};
+
+<span class="comment">/**
+ * Gets IE's exspression string.
+ * <span class="attrib">@param</span> coord {number or string} coordinate or string to include.
+ * <span class="attrib">@param</span> direction {string} which coordinate we form - x or y.
+ * <span class="attrib">@return</span> {string} formed expression string.
+ */</span>
+Zapatec.FixateOnScreen.getExpression = <span class="reserved">function</span>(coord, direction) {
+	<span class="reserved">return</span> <span class="literal">"Zapatec.Utils.getPageScroll"</span> + direction.toUpperCase() + <span class="literal">"() + "</span> + coord;
+};
+
+
+<span class="comment">/**
+ * Gets the actual coordinates, as if the
+ * element wasn't fixated.
+ * <span class="attrib">@param</span> element {HTML element} element to seek coordinate of.
+ * <span class="attrib">@return</span> {number} the actual coordinate.
+ */</span>
+Zapatec.FixateOnScreen.parseCoordinates = <span class="reserved">function</span>(element) {
+	<span class="comment">//maybe it is not registered</span>
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isRegistered(element)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//getting coordinates on screen</span>
+	var x = 0;
+	var y = 0;
+	var style = element.style;
+	<span class="reserved">if</span> (Zapatec.is_ie &amp;&amp; !Zapatec.is_ie7) {
+		<span class="comment">//parsing expression's value</span>
+		x = style.getExpression(<span class="literal">"left"</span>).split(<span class="literal">" "</span>);
+		x = parseInt(x[x.length - 1], 10);
+		y = style.getExpression(<span class="literal">"top"</span>).split(<span class="literal">" "</span>);  
+		y = parseInt(y[y.length - 1], 10);
+	} <span class="reserved">else</span> {
+		<span class="comment">//just parsing coordinates</span>
+		x = parseInt(style.left, 10);
+		y = parseInt(style.top, 10);
+	}
+	<span class="comment">//adding page scrolling</span>
+	x += Zapatec.Utils.getPageScrollX();
+	y += Zapatec.Utils.getPageScrollY();
+	<span class="reserved">return</span> {x : x, y : y};
+};
+
+
+<span class="comment">/**
+ * Corects coordinates of the element to become fixed.
+ * <span class="attrib">@param</span> x {number} x coordinate.
+ * <span class="attrib">@param</span> y {number} y coordinate.
+ * <span class="attrib">@return</span> {object} corrected object.
+ */</span>
+Zapatec.FixateOnScreen.correctCoordinates = <span class="reserved">function</span>(x, y) {
+	<span class="comment">//calculating screen coordinate</span>
+	position = {x : x, y : y};
+	<span class="reserved">if</span> (position.x || position.x === 0) {
+		position.x -= Zapatec.Utils.getPageScrollX();
+		<span class="reserved">if</span> (Zapatec.is_ie &amp;&amp; !Zapatec.is_ie7) {
+			<span class="comment">//for IE we use expression as CSS property value</span>
+			position.x = <span class="reserved">this</span>.getExpression(position.x, <span class="literal">"X"</span>);;
+		} <span class="reserved">else</span> {
+			position.x += <span class="literal">"px"</span>;
+		}
+	}
+	<span class="reserved">if</span> (position.y || position.y === 0) {
+		position.y -= Zapatec.Utils.getPageScrollY();
+		<span class="reserved">if</span> (Zapatec.is_ie &amp;&amp; !Zapatec.is_ie7) {
+			<span class="comment">//for IE we use expression as CSS property value</span>
+			position.y = <span class="reserved">this</span>.getExpression(position.y, <span class="literal">"Y"</span>);;
+		} <span class="reserved">else</span> {
+			position.y += <span class="literal">"px"</span>;
+		}
+	}
+	<span class="reserved">return</span> position;
+};
+
+<span class="comment">/**
+ * Registers the element to be fixated on the screen.
+ * <span class="attrib">@param</span> element {HTML element} element to be fixated.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.FixateOnScreen.register = <span class="reserved">function</span>(element) {
+	<span class="comment">//if not HTML element return false</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(element)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//maybe it is already registered</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.isRegistered(element)) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//getting element coordinates</span>
+	var pos = Zapatec.Utils.getElementOffset(element);
+	pos = {
+		x : parseInt(element.style.left, 10) || pos.x,
+		y : parseInt(element.style.top, 10) || pos.y
+	}
+	pos = <span class="reserved">this</span>.correctCoordinates(pos.x, pos.y);
+	<span class="comment">//fixating element</span>
+	<span class="reserved">if</span> (!Zapatec.is_ie || Zapatec.is_ie7) {
+		<span class="comment">//using fixed positioning for all others</span>
+		var restorer = element.restorer;
+		<span class="reserved">if</span> (!restorer || !restorer.getObject || restorer.getObject() != element) {
+			restorer = element.restorer = new Zapatec.SRProp(element);
+		}
+		restorer.saveProp(<span class="literal">"style.position"</span>);
+		element.style.position = <span class="literal">"fixed"</span>;
+		element.style.left = pos.x;
+		element.style.top = pos.y;
+	} <span class="reserved">else</span> {
+		element.style.setExpression(<span class="literal">"left"</span>, pos.x);
+		element.style.setExpression(<span class="literal">"top"</span>, pos.y);
+	}
+	<span class="comment">//adding to the list</span>
+	element.zpFixed = true;
+	<span class="reserved">return</span> true;
+};
+
+
+<span class="comment">/**                        
+ * Unregisters the element from being fixated
+ * on the screen.
+ * <span class="attrib">@param</span> element {HTML element} element to be unregistered.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.FixateOnScreen.unregister = <span class="reserved">function</span>(element) {
+	<span class="comment">//if not HTML element return false</span>
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(element)) {
+		<span class="reserved">return</span> false;
+	}
+	var pos = <span class="reserved">this</span>.parseCoordinates(element);
+	<span class="reserved">if</span> (pos === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="reserved">if</span> (Zapatec.is_ie &amp;&amp; !Zapatec.is_ie7) {
+		element.style.removeExpression(<span class="literal">"left"</span>);
+		element.style.removeExpression(<span class="literal">"top"</span>);
+	}
+	<span class="comment">//setting new coordinates</span>
+	element.style.left = pos.x + <span class="literal">"px"</span>;
+	element.style.top = pos.y + <span class="literal">"px"</span>;
+	<span class="comment">//restoring position</span>
+	<span class="reserved">if</span> (!Zapatec.is_ie || Zapatec.is_ie7) {
+		element.restorer.restoreProp(<span class="literal">"style.position"</span>, true);
+	}
+	element.zpFixed = false;
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Checks if element is registered.
+ * <span class="attrib">@param</span> element {HTML element} element to check.
+ * <span class="attrib">@return</span> {boolean} true if it is registered, otherwise false.
+ */</span>
+Zapatec.FixateOnScreen.isRegistered = <span class="reserved">function</span>(element) {
+	<span class="reserved">if</span> (element.zpFixed) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="reserved">return</span> false;
+};
+
+<span class="comment">/**
+ * Destroys the given element (remove it from the DOM tree) if it's not null
+ * and it's parent is not null.
+ *
+ * <span class="attrib">@param</span> el [HTMLElement] the element to destroy.
+ */</span>
+Zapatec.Utils.destroy = <span class="reserved">function</span>(el) {
+	<span class="reserved">if</span> (el &amp;&amp; el.parentNode)
+		el.parentNode.removeChild(el);
+};
+
+<span class="comment">/**
+ * Opens a new window at a certain URL and having some properties.
+ *
+ * <span class="attrib">@param</span> url [string] the URL to open a new window to.
+ * <span class="attrib">@param</span> windowName [string] the name of the new window (as for target attribute).
+ * <span class="attrib">@param</span> width [number] the width of the new window in pixels.
+ * <span class="attrib">@param</span> height [number] the height of the new window in pixels.
+ * <span class="attrib">@param</span> scrollbars [string] "yes" or "no" for scrollbars.
+ *
+ * <span class="attrib">@return</span> [object] the new window
+ */</span>
+Zapatec.Utils.newCenteredWindow = <span class="reserved">function</span>(url, windowName, width, height, scrollbars){
+	var leftPosition = 0;
+	var topPosition = 0;
+	<span class="reserved">if</span> (screen.width)
+		leftPosition = (screen.width -  width)/2;
+	<span class="reserved">if</span> (screen.height)
+		topPosition = (screen.height -  height)/2;
+	var winArgs =
+		<span class="literal">'height='</span> + height +
+		<span class="literal">',width='</span> + width +
+		<span class="literal">',top='</span> + topPosition +
+		<span class="literal">',left='</span> + leftPosition +
+		<span class="literal">',scrollbars='</span> + scrollbars +
+		<span class="literal">',resizable'</span>;
+	var win = window.open(url,windowName,winArgs);
+	<span class="reserved">return</span> win;
+};
+
+<span class="comment">/**
+ * Returns current browser's window size. This is the usable size and does not
+ * include the browser's menu and buttons.
+ *
+ * &lt;pre&gt;
+ * Returned object format:
+ * {
+ *   width: [number] window width in pixels,
+ *   height: [number] window height in pixels
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@return</span> Window size
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.getWindowSize = <span class="reserved">function</span>() {
+	var iWidth = 0;
+	var iHeight = 0;
+	<span class="comment">// Exception may occur if this function is called from &lt;head&gt;</span>
+	try {
+		<span class="reserved">if</span> (Zapatec.is_khtml) {
+			iWidth = window.innerWidth || 0;
+			iHeight = window.innerHeight || 0;
+		} <span class="reserved">else</span> <span class="reserved">if</span> (document.compatMode &amp;&amp; document.compatMode == <span class="literal">'CSS1Compat'</span>) {
+			<span class="comment">// Standards-compliant mode</span>
+			iWidth = document.documentElement.clientWidth || 0;
+			iHeight = document.documentElement.clientHeight || 0;
+		} <span class="reserved">else</span> {
+			<span class="comment">// Non standards-compliant mode</span>
+			iWidth = document.body.clientWidth || 0;
+			iHeight = document.body.clientHeight || 0;
+		}
+	} catch (oException) {};
+	<span class="reserved">return</span> {
+		width: iWidth,
+		height: iHeight
+	};
+};
+
+<span class="comment">/**
+ * Returns current browser's window size without scrollbars. Calls
+ * {<span class="attrib">@link</span> Zapatec.Utils#getWindowSize}, subtracts browser's scroll bar size, and
+ * returns the result.
+ *
+ * &lt;pre&gt;
+ * Returned object format:
+ * {
+ *   width: [number] window width in pixels,
+ *   height: [number] window height in pixels
+ * }
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@return</span> Window size without scrollbars
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.getWindowDimensions = <span class="reserved">function</span>() {
+	<span class="comment">// Get window size</span>
+	var oSize = zapatecUtils.getWindowSize();
+	<span class="comment">// Exception may occur if this function is called from &lt;head&gt;</span>
+	try {
+		<span class="comment">// Subtract scrollbars</span>
+		var iScrollX = window.pageXOffset || document.body.scrollLeft ||
+		 document.documentElement.scrollLeft || 0;
+		var iScrollY = window.pageYOffset || document.body.scrollTop ||
+		 document.documentElement.scrollTop || 0;
+		<span class="reserved">return</span> {
+			width: oSize.width - iScrollX,
+			height: oSize.height - iScrollY
+		};
+	} catch (oException) {
+		<span class="reserved">return</span> oSize;
+	};
+};
+
+<span class="comment">/**
+ * Given a reference to a select element, this function will select the option
+ * having the given value and optionally will call the default handler for
+ * "onchange".
+ *
+ * Deprecated: Use {<span class="attrib">@link</span> Zapatec.Utils#getRadioValue} and
+ * {<span class="attrib">@link</span> Zapatec.Utils#setRadioValue} instead.
+ *
+ * <span class="attrib">@param</span> sel [HTMLSelectElement] reference to the SELECT element.
+ * <span class="attrib">@param</span> val [string] the value that we should select.
+ * <span class="attrib">@param</span> call_default [boolean] true if the default onchange should be called.
+ */</span>
+Zapatec.Utils.selectOption = <span class="reserved">function</span>(sel, val, call_default) {
+	var a = sel.options, i, o;
+	<span class="reserved">for</span> (i = a.length; --i &gt;= 0;) {
+		o = a[i];
+		o.selected = (o.value == val);
+	}
+	sel.value = val;
+	<span class="reserved">if</span> (call_default) {
+		<span class="reserved">if</span> (typeof sel.onchange == <span class="literal">"function"</span>)
+			sel.onchange();
+		<span class="reserved">else</span> <span class="reserved">if</span> (typeof sel.onchange == <span class="literal">"string"</span>)
+			eval(sel.onchange);
+	}
+};
+
+<span class="comment">/**
+ * A more flexible way to get the "nextSibling" of a given element. If the
+ * "tag" argument is passed, then this function will return the next sibling
+ * that has a certain tag. Otherwise it will simply return el.nextSibling.
+ *
+ * <span class="attrib">@param</span> {object} el Element object
+ * <span class="attrib">@param</span> {string} tag Optional. Tag name of the returned element
+ * <span class="attrib">@param</span> {string} alternateTag Optional. Alternate tag name of the returned
+ * element
+ * <span class="attrib">@return</span> First element after el having the specified tag; null if element
+ * is not found; nextSibling if tag is not specified
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.getNextSibling = <span class="reserved">function</span>(el, tag, alternateTag) {
+	el = el.nextSibling;
+	<span class="reserved">if</span> (!tag) {
+		<span class="reserved">return</span> el;
+	}
+	tag = tag.toLowerCase();
+	<span class="reserved">if</span> (alternateTag) alternateTag = alternateTag.toLowerCase();
+	<span class="reserved">while</span> (el) {
+		<span class="reserved">if</span> (el.nodeType == 1 &amp;&amp; (el.tagName.toLowerCase() == tag ||
+		 (alternateTag &amp;&amp; el.tagName.toLowerCase() == alternateTag))) {
+			<span class="reserved">return</span> el;
+		}
+		el = el.nextSibling;
+	}
+	<span class="reserved">return</span> el;
+};
+
+<span class="comment">/**
+ * A more flexible way to get the "previousSibling" of a given element. If the
+ * "tag" argument is passed, then this function will return the previous sibling
+ * that has a certain tag. Otherwise it will simply return el.previousSibling.
+ *
+ * <span class="attrib">@param</span> {object} el Element object
+ * <span class="attrib">@param</span> {string} tag Optional. Tag name of the returned element
+ * <span class="attrib">@param</span> {string} alternateTag Optional. Alternate tag name of the returned
+ * element
+ * <span class="attrib">@return</span> First element before el having the specified tag; previousSibling if
+ * tag is not specified; null if desired element is not found
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.getPreviousSibling = <span class="reserved">function</span>(el, tag, alternateTag) {
+	el = el.previousSibling;
+	<span class="reserved">if</span> (!tag) {
+		<span class="reserved">return</span> el;
+	}
+	tag = tag.toLowerCase();
+	<span class="reserved">if</span> (alternateTag) alternateTag = alternateTag.toLowerCase();
+	<span class="reserved">while</span> (el) {
+		<span class="reserved">if</span> (el.nodeType == 1 &amp;&amp; (el.tagName.toLowerCase() == tag ||
+		 (alternateTag &amp;&amp; el.tagName.toLowerCase() == alternateTag))) {
+			<span class="reserved">return</span> el;
+		}
+		el = el.previousSibling;
+	}
+	<span class="reserved">return</span> el;
+};
+
+<span class="comment">/**
+ * Returns first child of the given element that has a specified tag.
+ *
+ * <span class="attrib">@param</span> {object} el Element object
+ * <span class="attrib">@param</span> {string} tag Optional. Tag name of the returned element
+ * <span class="attrib">@param</span> {string} alternateTag Optional. Alternate tag name of the returned
+ * element
+ * <span class="attrib">@return</span> First child of the element that has a specified tag; firstChild if
+ * tag is not specified; null if desired element is not found
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.getFirstChild = <span class="reserved">function</span>(el, tag, alternateTag) {
+	<span class="reserved">if</span> (!el) {
+		<span class="reserved">return</span> null;
+	}
+	el = el.firstChild;
+	<span class="reserved">if</span> (!el) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (!tag) {
+		<span class="reserved">return</span> el;
+	}
+	tag = tag.toLowerCase();
+	<span class="reserved">if</span> (el.nodeType == 1) {
+		<span class="reserved">if</span> (el.tagName.toLowerCase() == tag) {
+			<span class="reserved">return</span> el;
+		} <span class="reserved">else</span> <span class="reserved">if</span> (alternateTag) {
+			alternateTag = alternateTag.toLowerCase();
+			<span class="reserved">if</span> (el.tagName.toLowerCase() == alternateTag) {
+				<span class="reserved">return</span> el;
+			}
+		}
+	}
+	<span class="reserved">return</span> Zapatec.Utils.getNextSibling(el, tag, alternateTag);
+};
+
+<span class="comment">/**
+ * Returns last child of the given element that has a specified tag.
+ *
+ * <span class="attrib">@param</span> {object} el Element object
+ * <span class="attrib">@param</span> {string} tag Optional. Tag name of the returned element
+ * <span class="attrib">@param</span> {string} alternateTag Optional. Alternate tag name of the returned
+ * element
+ * <span class="attrib">@return</span> Last child of the element that has a specified tag; lastChild if
+ * tag is not specified; null if desired element is not found
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Utils.getLastChild = <span class="reserved">function</span>(el, tag, alternateTag) {
+	<span class="reserved">if</span> (!el) {
+		<span class="reserved">return</span> null;
+	}
+	el = el.lastChild;
+	<span class="reserved">if</span> (!el) {
+		<span class="reserved">return</span> null;
+	}
+	<span class="reserved">if</span> (!tag) {
+		<span class="reserved">return</span> el;
+	}
+	tag = tag.toLowerCase();
+	<span class="reserved">if</span> (el.nodeType == 1) {
+		<span class="reserved">if</span> (el.tagName.toLowerCase() == tag) {
+			<span class="reserved">return</span> el;
+		} <span class="reserved">else</span> <span class="reserved">if</span> (alternateTag) {
+			alternateTag = alternateTag.toLowerCase();
+			<span class="reserved">if</span> (el.tagName.toLowerCase() == alternateTag) {
+				<span class="reserved">return</span> el;
+			}
+		}
+	}
+	<span class="reserved">return</span> Zapatec.Utils.getPreviousSibling(el, tag, alternateTag);
+};
+
+<span class="comment">/**
+ * Function that concatenates and returns all text child nodes of the
+ * specified node.
+ *
+ * <span class="attrib">@param</span> objNode [Node] -- reference to the node.
+ * <span class="attrib">@return</span> [string] -- concatenated text child nodes
+ */</span>
+Zapatec.Utils.getChildText = <span class="reserved">function</span>(objNode) {
+	<span class="reserved">if</span> (objNode == null) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	var arrText = [];
+	var objChild = objNode.firstChild;
+	<span class="reserved">while</span> (objChild != null) {
+		<span class="reserved">if</span> (objChild.nodeType == 3) { <span class="comment">// Node.TEXT_NODE</span>
+			arrText.push(objChild.data);
+		}
+		objChild = objChild.nextSibling;
+	}
+	<span class="reserved">return</span> arrText.join(<span class="literal">' '</span>);
+};
+
+<span class="comment">/**
+ * Similar to the DOM's built in insertBefore.
+ * Insert a node after an existing node.
+ *
+ * <span class="attrib">@param</span> el [oldNode] The existing element
+ * <span class="attrib">@param</span> el [newNode] the new element to insert after the old one.
+ *
+ */</span>
+Zapatec.Utils.insertAfter = <span class="reserved">function</span>(oldNode, newNode) {
+	<span class="reserved">if</span>(oldNode.nextSibling) {
+		oldNode.parentNode.insertBefore(newNode, oldNode.nextSibling);
+	} <span class="reserved">else</span> {
+		oldNode.parentNode.appendChild(newNode);
+	}
+}
+
+Zapatec.Utils._ids = {};	<span class="comment">/**&lt; [number, static] maintains a list of generated IDs */</span>
+
+<span class="comment">/**
+ * Generates an unique ID, for a certain code (let's say "class").  If the
+ * optional "id" argument is passed, then it just returns the id for that code
+ * (no generation).  This function is sometimes useful when we need to create
+ * elements and be able to access them later by ID.
+ *
+ * <span class="attrib">@param</span> code [string] the class of ids.  User defined, can be anything.
+ * <span class="attrib">@param</span> id [string, optional] specify if the ID is already known.
+ *
+ * <span class="attrib">@return</span> [string] the unique ID
+ */</span>
+Zapatec.Utils.generateID = <span class="reserved">function</span>(code, id) {
+	<span class="reserved">if</span> (typeof id == <span class="literal">"undefined"</span>) {
+		<span class="reserved">if</span> (typeof <span class="reserved">this</span>._ids[code] == <span class="literal">"undefined"</span>)
+			<span class="reserved">this</span>._ids[code] = 0;
+		id = ++<span class="reserved">this</span>._ids[code];
+	}
+	<span class="reserved">return</span> <span class="literal">"zapatec-"</span> + code + <span class="literal">"-"</span> + id;
+};
+
+<span class="comment">/**
+*  Add a tooltip to the specified element.
+*
+*  Function that adds a custom tooltip for an element.  The "target" is the
+*  element to where the tooltip should be added to, and the "tooltip" is a DIV
+*  that contains the tooltip text.  Optionally, the tooltip DIV can have the
+*  "title" attribute set; if so, its value will be displayed highlighted as
+*  the title of the tooltip.
+*
+*  <span class="attrib">@param</span> target  reference to or ID of the target element
+*  <span class="attrib">@param</span> tooltip reference to or ID of the tooltip content element
+*/</span>
+
+Zapatec.Utils.addTooltip = <span class="reserved">function</span>(target, tooltip) {
+<span class="reserved">return</span> new Zapatec.Tooltip({target: target, tooltip: tooltip});
+};
+
+Zapatec.isLite=true;
+
+Zapatec.Utils.checkLinks = <span class="reserved">function</span>(){
+	var anchors = document.getElementsByTagName(<span class="literal">'A'</span>);
+	
+	<span class="reserved">for</span>(var ii = 0; ii &lt; anchors.length; ii++){
+		<span class="reserved">if</span>(Zapatec.Utils.checkLink(anchors[ii])){
+			<span class="reserved">return</span> true;
+		}
+	}
+	
+	<span class="reserved">return</span> false;
+}
+
+Zapatec.Utils.checkLink = <span class="reserved">function</span>(lnk){
+	<span class="reserved">if</span>(!lnk){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(!/^https?:\/\/((dev|www)\.)?zapatec\.com/i.test(lnk.href)){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// checking if link has some text inside</span>
+	var textContent = <span class="literal">""</span>
+	<span class="reserved">for</span>(var ii = 0; ii &lt; lnk.childNodes.length; ii++){
+		<span class="reserved">if</span>(lnk.childNodes[ii].nodeType == 3){
+			textContent += lnk.childNodes[ii].nodeValue;
+		}
+	}
+
+	<span class="reserved">if</span>(textContent.length &lt; 4){
+		<span class="reserved">return</span> false;
+	}
+	
+	var parent = lnk;
+
+	<span class="reserved">while</span>(parent &amp;&amp; parent.nodeName.toLowerCase() != <span class="literal">"html"</span>){
+		<span class="comment">// check if element or any of parent nodes are invisible</span>
+		<span class="reserved">if</span>(
+			Zapatec.Utils.getStyleProperty(parent, <span class="literal">"display"</span>) == <span class="literal">"none"</span> ||
+			Zapatec.Utils.getStyleProperty(parent, <span class="literal">"visibility"</span>) == <span class="literal">"hidden"</span> ||
+			Zapatec.Utils.getStyleProperty(parent, <span class="literal">"opacity"</span>) == <span class="literal">"0"</span> ||
+			Zapatec.Utils.getStyleProperty(parent, <span class="literal">"-moz-opacity"</span>) == <span class="literal">"0"</span> ||
+			/alpha\(opacity=0\)/i.test(Zapatec.Utils.getStyleProperty(parent, <span class="literal">"filter"</span>))
+			
+		){
+			<span class="reserved">return</span> false;
+		}
+		
+		
+		parent = parent.parentNode;
+	}
+
+	<span class="comment">// check if link is outside visible screen area</span>
+	var coords = Zapatec.Utils.getElementOffset(lnk);
+	<span class="reserved">if</span>(coords.left &lt; 0 || coords.top &lt; 0){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">return</span> true;
+}
+
+Zapatec.Utils.checkActivation = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!Zapatec.isLite)	<span class="reserved">return</span> true;
+
+	var arrProducts=[]
+
+	add_product=<span class="reserved">function</span>(script, webdir_in, name_in)
+	{
+	arrProducts[script]={webdir:webdir_in, name:name_in, bActive:false}
+	}
+
+	add_product(<span class="literal">'calendar.js'</span>, <span class="literal">'prod1'</span>,   <span class="literal">'Calendar'</span>)
+	add_product(<span class="literal">'zpmenu.js'</span>,   <span class="literal">'menu'</span>,   <span class="literal">'Menu'</span>)
+	add_product(<span class="literal">'tree.js'</span>,     <span class="literal">'prod3'</span>,   <span class="literal">'Tree'</span>)
+	add_product(<span class="literal">'form.js'</span>,     <span class="literal">'forms'</span>,   <span class="literal">'Forms'</span>)
+	add_product(<span class="literal">'effects.js'</span>,  <span class="literal">'effects'</span>, <span class="literal">'Effects'</span>)
+	add_product(<span class="literal">'hoverer.js'</span>,  <span class="literal">'effects'</span>, <span class="literal">'Effects - Hoverer'</span>)
+	add_product(<span class="literal">'slideshow.js'</span>,<span class="literal">'effects'</span>, <span class="literal">'Effects - Slideshow'</span>)
+	add_product(<span class="literal">'zpgrid.js'</span>,   <span class="literal">'grid'</span>,    <span class="literal">'Grid'</span>)
+	add_product(<span class="literal">'slider.js'</span>,   <span class="literal">'slider'</span>,  <span class="literal">'Slider'</span>)
+	add_product(<span class="literal">'zptabs.js'</span>,   <span class="literal">'tabs'</span>,    <span class="literal">'Tabs'</span>)
+	add_product(<span class="literal">'zptime.js'</span>,   <span class="literal">'time'</span>,    <span class="literal">'Time'</span>)
+	add_product(<span class="literal">'window.js'</span>,   <span class="literal">'windows'</span>, <span class="literal">'Window'</span>)
+
+
+	var strName, arrName, i
+	var bProduct=false <span class="comment">// Flag yes if we have a zapatec script</span>
+	var scripts = document.getElementsByTagName(<span class="literal">'script'</span>);
+	<span class="reserved">for</span> (i=0; i&lt;scripts.length; i++)
+	{
+		<span class="comment">// If wizard then do NOT do link back check, which makes wizard err out</span>
+		<span class="reserved">if</span> (/wizard.js/i.test(scripts[i].src))
+			<span class="reserved">return</span> true
+
+		arrName=scripts[i].src.split(<span class="literal">'/'</span>)
+		<span class="reserved">if</span> (arrName.length==0)
+			strName=scripts[i]
+		<span class="reserved">else</span>
+			strName=arrName[arrName.length-1]
+		strName=strName.toLowerCase()
+		<span class="comment">// Get each active product</span>
+		<span class="reserved">if</span> (typeof arrProducts[strName] != <span class="literal">'undefined'</span>)
+			{
+			bProduct=true
+			arrProducts[strName].bActive=true
+			}
+	}
+
+	<span class="comment">// Is a LITE product even being used or back link is wrong?</span>
+	<span class="reserved">if</span>(!bProduct || Zapatec.Utils.checkLinks()){
+		<span class="reserved">return</span> true;
+	}
+
+	var strMsg=<span class="literal">'You are using the Free version of the Zapatec Software.\n'</span>+
+	<span class="literal">'While using the Free version, a link to www.zapatec.com in this page is required.'</span>
+
+	<span class="reserved">for</span> (i in arrProducts)
+		<span class="comment">// Get each active product</span>
+		<span class="reserved">if</span> (arrProducts[i].bActive==true)
+			strMsg+=<span class="literal">'\nTo purchase the Zapatec '</span> + arrProducts[i].name + <span class="literal">' visit www.zapatec.com/website/main/products/'</span> + arrProducts[i].webdir + <span class="literal">'/'</span>
+
+	alert(strMsg)
+
+	<span class="reserved">return</span> false;
+}
+
+<span class="comment">/**
+ * Makes a copy of an object.
+ *
+ * <span class="attrib">@param</span> {object} oSrc Source object to clone
+ */</span>
+Zapatec.Utils.clone = <span class="reserved">function</span>(oSrc) {
+	<span class="comment">// If object and not null</span>
+	<span class="reserved">if</span> (typeof oSrc == <span class="literal">'object'</span> &amp;&amp; oSrc) {
+		var oClone = new oSrc.constructor();
+		var fClone = Zapatec.Utils.clone;
+		<span class="reserved">for</span> (var sProp in oSrc) {
+			oClone[sProp] = fClone(oSrc[sProp]);
+		}
+		<span class="reserved">return</span> oClone;
+	}
+	<span class="reserved">return</span> oSrc;
+};
+
+<span class="comment">// Browser sniffing</span>
+
+<span class="comment">/// detect Opera browser</span>
+Zapatec.is_opera = /opera/i.test(navigator.userAgent);
+
+<span class="comment">/// detect a special case of "web browser"</span>
+Zapatec.is_ie = ( /msie/i.test(navigator.userAgent) &amp;&amp; !Zapatec.is_opera );
+
+<span class="comment">/// detect IE6.0/Win</span>
+Zapatec.is_ie6 = ( Zapatec.is_ie &amp;&amp; /msie 6\.0/i.test(navigator.userAgent) );
+
+<span class="comment">/// detect IE7.0/Win</span>
+Zapatec.is_ie7 = ( Zapatec.is_ie &amp;&amp; /msie 7\.0/i.test(navigator.userAgent) );
+
+<span class="comment">/// detect IE for Macintosh</span>
+Zapatec.is_mac_ie = ( /msie.*mac/i.test(navigator.userAgent) &amp;&amp; !Zapatec.is_opera );
+
+<span class="comment">/// detect KHTML-based browsers</span>
+Zapatec.is_khtml = /Chrome|Safari|Konqueror|AppleWebKit|KHTML/i.test(navigator.userAgent);
+
+<span class="comment">/// detect Konqueror</span>
+Zapatec.is_konqueror = /Konqueror/i.test(navigator.userAgent);
+
+<span class="comment">/// detect Gecko</span>
+Zapatec.is_gecko = /Gecko/i.test(navigator.userAgent);
+
+<span class="comment">/// detect WebKit</span>
+Zapatec.is_webkit = /WebKit/i.test(navigator.userAgent);
+
+<span class="comment">/// detect WebKit version</span>
+Zapatec.webkitVersion = Zapatec.is_webkit?parseInt(navigator.userAgent.replace(
+				/.+WebKit\/([0-9]+)\..+/, <span class="literal">"$1"</span>)):-1;
+
+<span class="comment">/*
+ * Simulation of Object hasOwnProperty() method that is missing in IE 5.0.
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Object.prototype.hasOwnProperty) {
+	Object.prototype.hasOwnProperty = function(strProperty) {
+		try {
+			var objPrototype = this.constructor.prototype;
+			while (objPrototype) {
+				if (objPrototype[strProperty] == this[strProperty]) {
+					return false;
+				}
+				objPrototype = objPrototype.prototype;
+			}
+		} catch (objException) {}
+		return true;
+	};
+}
+*/</span>
+
+<span class="comment">/*
+ * Simulation of Function call() method that is missing in IE 5.0.
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Function.prototype.call) {
+	Function.prototype.call = function() {
+		var objThis = arguments[0];
+		objThis._this_func = this;
+		var arrArgs = [];
+		for (var iArg = 1; iArg &lt; arguments.length; iArg++) {
+			arrArgs[arrArgs.length] = 'arguments[' + iArg + ']';
+		}
+		var ret = eval('objThis._this_func(' + arrArgs.join(',') + ')');
+		objThis._this_func = null;
+		return ret;
+	};
+}
+*/</span>
+
+<span class="comment">/*
+ * Simulation of Function apply() method that is missing in IE 5.0.
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Function.prototype.apply) {
+	Function.prototype.apply = function() {
+		var objThis = arguments[0];
+		var objArgs = arguments[1];
+		objThis._this_func = this;
+		var arrArgs = [];
+		if (objArgs) {
+			for (var iArg = 0; iArg &lt; objArgs.length; iArg++) {
+				arrArgs[arrArgs.length] = 'objArgs[' + iArg + ']';
+			}
+		}
+		var ret = eval('objThis._this_func(' + arrArgs.join(',') + ')');
+		objThis._this_func = null;
+		return ret;
+	};
+}
+*/</span>
+
+<span class="comment">/*
+ * Simulation of Array pop() method that is missing in IE 5.0.
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Array.prototype.pop) {
+	Array.prototype.pop = function() {
+		var last;
+		if (this.length) {
+			last = this[this.length - 1];
+			this.length -= 1;
+		}
+		return last;
+	};
+}
+*/</span>
+
+<span class="comment">/*
+ * Simulation of Array push() method that is missing in IE 5.0
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Array.prototype.push) {
+	Array.prototype.push = function() {
+		for (var i = 0; i &lt; arguments.length; i++) {
+			this[this.length] = arguments[i];
+		}
+		return this.length;
+	};
+}
+*/</span>
+
+<span class="comment">/*
+ * Simulation of Array shift() method that is missing in IE 5.0.
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Array.prototype.shift) {
+	Array.prototype.shift = function() {
+		var first;
+		if (this.length) {
+			first = this[0];
+			for (var i = 0; i &lt; this.length - 1; i++) {
+				this[i] = this[i + 1];
+			}
+			this.length -= 1;
+		}
+		return first;
+	};
+}
+*/</span>
+
+<span class="comment">/*
+ * Simulation of Array unshift() method that is missing in IE 5.0.
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Array.prototype.unshift) {
+	Array.prototype.unshift = function() {
+		if (arguments.length) {
+			var i, len = arguments.length;
+			for (i = this.length + len - 1; i &gt;= len; i--) {
+				this[i] = this[i - len];
+			}
+			for (i = 0; i &lt; len; i++) {
+				this[i] = arguments[i];
+			}
+		}
+		return this.length;
+	};
+}
+*/</span>
+
+<span class="comment">/*
+ * Simulation of Array splice() method that is missing in IE 5.0.
+ */</span>
+<span class="comment">/* IE 5.0 is not supported anymore
+if (!Array.prototype.splice) {
+	Array.prototype.splice = function(index, howMany) {
+		var elements = [], removed = [], i;
+		for (i = 2; i &lt; arguments.length; i++) {
+			elements.push(arguments[i]);
+		}
+		for (i = index; (i &lt; index + howMany) &amp;&amp; (i &lt; this.length); i++) {
+			removed.push(this[i]);
+		}
+		for (i = index + howMany; i &lt; this.length; i++) {
+			this[i - howMany] = this[i];
+		}
+		this.length -= removed.length;
+		for (i = this.length + elements.length - 1; i &gt;= index + elements.length;
+		 i--) {
+			this[i] = this[i - elements.length];
+		}
+		for (i = 0; i &lt; elements.length; i++) {
+			this[index + i] = elements[i];
+		}
+		return removed;
+	};
+}
+*/</span>
+
+<span class="comment">/**
+ * Crossbrowser replacement for Array indexOf() method. See:
+ * http://developer.mozilla.org/en/docs/Core_JavaScript_1.5_Reference:Objects:Array:indexOf
+ *
+ * <span class="attrib">@param</span> {object} aArr Array to search in
+ * <span class="attrib">@param</span> {any} vSearchEl Element to locate in the array
+ * <span class="attrib">@param</span> {any} iFromInd The index at which to begin the search
+ * <span class="attrib">@return</span> The first index at which a given element can be found in the array,
+ * or -1 if it is not present
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Utils.arrIndexOf = <span class="reserved">function</span>(aArr, vSearchEl, iFromInd) {
+	<span class="reserved">if</span> (!(aArr instanceof Array)) {
+		<span class="reserved">return</span> -1;
+	}
+	<span class="reserved">if</span> (Array.<span class="reserved">prototype</span>.indexOf) {
+		<span class="reserved">return</span> aArr.indexOf(vSearchEl, iFromInd);
+	}
+	<span class="reserved">if</span> (!iFromInd) {
+		iFromInd = 0;
+	}
+	var iEls = aArr.length;
+	<span class="reserved">for</span> (var iEl = iFromInd; iEl &lt; iEls; iEl++) {
+		<span class="reserved">if</span> (aArr[iEl] == vSearchEl) {
+			<span class="reserved">return</span> iEl;
+		}
+	}
+	<span class="reserved">return</span> -1;
+};
+
+<span class="comment">/**
+ * Displays error message. Override this if needed.
+ *
+ * \param objArgs [number] error object:
+ * {
+ *   severity: [string, optional] error severity,
+ *   description: [string] human readable error description
+ * }
+ */</span>
+Zapatec.Log = <span class="reserved">function</span>(objArgs) {
+	<span class="comment">// Check arguments</span>
+	<span class="reserved">if</span> (!objArgs) {
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">// Form error message</span>
+	var strMessage = objArgs.description;
+	<span class="reserved">if</span> (objArgs.severity) {
+		strMessage = objArgs.severity + <span class="literal">':\n'</span> + strMessage;
+	}
+	<span class="comment">// Display error message</span>
+	<span class="reserved">if</span> (objArgs.type != <span class="literal">"warning"</span>) {
+		<span class="reserved">if</span> (Zapatec.Debug) {
+			<span class="comment">// zpdebug.js present</span>
+			Zapatec.Debug.log.error(strMessage);
+		} <span class="reserved">else</span> {
+			alert(strMessage);
+		}
+	}
+};
+
+<span class="comment">/// Zapatec.Utils.Array object which contains additional for arrays method</span>
+Zapatec.Utils.Array = {};
+
+<span class="comment">/**
+ * Inserts the element into array. 
+ * It influences the order in which the elements will be iterated in the for...in cycle.
+ *
+ * <span class="attrib">@param</span> arr [array] array to work with.
+ * <span class="attrib">@param</span> el [mixed] element to insert.
+ * <span class="attrib">@param</span> key [string] element to insert.
+ * <span class="attrib">@param</span> nextKey [string] element to be inserted before.
+ * <span class="attrib">@return</span> [string] new Array.
+ */</span>
+Zapatec.Utils.Array.insertBefore = <span class="reserved">function</span> (arr, el, key, nextKey) {
+	var tmp = new Array();
+	<span class="reserved">for</span>(var i in arr) {
+		<span class="reserved">if</span> (i == nextKey) {
+			<span class="reserved">if</span> (key) {
+				tmp[key] = el;
+			} <span class="reserved">else</span> {
+				tmp.push(el);
+			}
+		}
+		tmp[i] = arr[i];
+	}
+	<span class="reserved">return</span> tmp;
+}
+
+<span class="comment">/**
+ * Extends one class with another. Gives ability to access properties and
+ * methods of the superclass having the same names as in subclass.
+ *
+ * &lt;pre&gt;
+ * Zapatec.Widget specific feature: If superclass has static property
+ * &lt;b&gt;path&lt;/b&gt;, by default subclass will get path to js file from which this
+ * function is called into &lt;b&gt;path&lt;/b&gt; property instead of value from
+ * superclass. This behaviour can be changed with &lt;b&gt;leavePath&lt;/b&gt; option below.
+ *
+ * To determine path correctly when widget module is included using
+ * Zapatec.include function, static property &lt;b&gt;id&lt;/b&gt; should be set in widget
+ * class. Value of this property must be passed to Zapatec.include function as
+ * script id.
+ *
+ * Following additional options are accepted:
+ * {
+ *   keepPath: [boolean] if true, static property &lt;b&gt;path&lt;/b&gt; is inherited from
+ *    superclass; useful, for example, when you inherit a widget and want to use
+ *    the same path to themes as superclass
+ * }
+ *
+ * Should be used as follows:
+ *
+ * // Define SuperClass and its methods
+ * Zapatec.SuperClass = function(oArg) {
+ *   ...
+ * };
+ *
+ * Zapatec.SuperClass.prototype.init = function(oArg) {
+ *   ...
+ * };
+ *
+ * // Define SubClass and its methods
+ * Zapatec.SubClass = function(oArg) {
+ *   ...
+ *   // Call constructor of superclass
+ *   Zapatec.SubClass.SUPERconstructor.call(this, oArg);
+ *   ...
+ * };
+ *
+ * // Unique static id of the widget class to determine path correctly
+ * // Neded only if class is derived from Zapatec.Widget class
+ * Zapatec.SubClass.id = 'Zapatec.SubClass';
+ *
+ * // Inherit SuperClass
+ * Zapatec.inherit(Zapatec.SubClass, Zapatec.SuperClass);
+ *
+ * Zapatec.SubClass.prototype.init = function(oArg) {
+ *   ...
+ *   // Call method of superclass
+ *   Zapatec.SubClass.SUPERclass.init.call(this, oArg);
+ *   ...
+ * };
+ *
+ * Note: This function must be invoked during page load to determine path to js
+ * file from which it is called correctly.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oSubClass Inheriting class
+ * <span class="attrib">@param</span> {object} oSuperClass Class from which to inherit
+ * <span class="attrib">@param</span> {object} oArg Additional options (see above)
+ */</span>
+Zapatec.inherit = <span class="reserved">function</span>(oSubClass, oSuperClass, oArg) {
+	<span class="comment">// Duplicate prototype of superclass</span>
+	var Inheritance = <span class="reserved">function</span>() {};
+	Inheritance.<span class="reserved">prototype</span> = oSuperClass.<span class="reserved">prototype</span>;
+	oSubClass.<span class="reserved">prototype</span> = new Inheritance();
+	<span class="comment">// Fix constructor property to point to the self constructor because it is</span>
+	<span class="comment">// pointing to the nested Inheritance function</span>
+	oSubClass.<span class="reserved">prototype</span>.constructor = oSubClass;
+	<span class="comment">// Reference to constructor of superclass to be able to invoke it</span>
+	oSubClass.SUPERconstructor = oSuperClass;
+	<span class="comment">// Reference to prototype of superclass to be able to invoke its methods</span>
+	oSubClass.SUPERclass = oSuperClass.<span class="reserved">prototype</span>;
+	<span class="comment">// Path to js file from which this function is called</span>
+	<span class="reserved">if</span> (typeof oSuperClass.path != <span class="literal">'undefined'</span>) {
+		<span class="reserved">if</span> (oArg &amp;&amp; oArg.keepPath) {
+			oSubClass.path = oSuperClass.path;
+		} <span class="reserved">else</span> {
+			oSubClass.path = Zapatec.getPath(oSubClass.id);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Returns path from the script element with specified id. If id is not
+ * specified or specified id is not found on the page, returns path from the
+ * last loaded script element. Splits src attribute value and returns path
+ * without js file name. Returns empty string if path is not found.
+ *
+ * &lt;pre&gt;
+ * If specified id is not found on the page, returns last script element instead
+ * of alerting. This gives ability for developer to include script using
+ * Zapatec#include and specify id because in some cases it may be needed to get
+ * correct path; and for user to include script directly into the page without
+ * remembering internal Zapatec ids because id is not needed to determine path
+ * correctly in this case.
+ *
+ * Developer is responsible for checking that the same script id is passed to
+ * Zapatec#include and Zapatec#getPath because there is no alert if they are
+ * different and result may be wrong.
+ *
+ * Note: This function must be invoked during page load to determine path to js
+ * file from which it is called correctly.
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {string} sId Optional. Id of the script element
+ * <span class="attrib">@return</span> Path to the script, e.g. '../src/' or '' if path is not found
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.getPath = <span class="reserved">function</span>(sId) {
+	<span class="comment">// Get script source</span>
+	var sSrc;
+	<span class="reserved">if</span> (typeof sId == <span class="literal">'string'</span>) {
+		<span class="comment">// Try to use element with specified id</span>
+		var oScript = document.getElementById(sId);
+		<span class="reserved">if</span> (oScript) {
+			sSrc = oScript.getAttribute(<span class="literal">'src'</span>);
+		}
+	}
+	<span class="reserved">if</span> (!sSrc) {
+		<span class="reserved">if</span> (typeof Zapatec.lastLoadedModule == <span class="literal">'string'</span>) {
+			<span class="reserved">return</span> Zapatec.lastLoadedModule;
+		}
+		<span class="comment">// Get src from last script element</span>
+		<span class="comment">// Simply document.getElementsByTagName('script') doesn't work here because</span>
+		<span class="comment">// FF 2 delays with adding a script to the list</span>
+		<span class="reserved">if</span> (document.documentElement) {
+			var sHtml = document.documentElement.innerHTML;
+			<span class="comment">// Value from innerHTML doesn't contain redundant spaces</span>
+			var aMatch = sHtml.match(/&lt;script[^&gt;]+src=[^&gt;]+&gt;/gi);
+			<span class="reserved">if</span> (aMatch &amp;&amp; aMatch.length) {
+				sHtml = aMatch[aMatch.length - 1];
+				<span class="comment">// Value from innerHTML is always inside double quotes</span>
+				aMatch = sHtml.match(/src=<span class="literal">"([^"</span>]+)/i);
+				<span class="reserved">if</span> (aMatch &amp;&amp; aMatch.length == 2) {
+					sSrc = aMatch[1];
+				}
+			}
+		}
+		<span class="reserved">if</span> (!sSrc) {
+			<span class="reserved">return</span> <span class="literal">''</span>;
+		}
+	}
+	<span class="comment">// Backslashes are allowed in IE</span>
+	sSrc = sSrc.replace(/\\/g, <span class="literal">'/'</span>);
+	<span class="comment">// Get path</span>
+	var aTokens = sSrc.split(<span class="literal">'?'</span>);
+	aTokens = aTokens[0].split(<span class="literal">'/'</span>);
+	<span class="comment">// Remove last token</span>
+	aTokens = aTokens.slice(0, -1);
+	<span class="reserved">if</span> (!aTokens.length) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	<span class="reserved">return</span> aTokens.join(<span class="literal">'/'</span>) + <span class="literal">'/'</span>;
+};
+
+<span class="comment">/**
+ * Assigns event object to "window.event". Used in
+ * {<span class="attrib">@link</span> Zapatec.Utils#emulateWindowEvent} to prevent multiple identical event
+ * listeners. For details see:
+ * http://developer.mozilla.org/en/docs/DOM:element.addEventListener
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oEvent Event object
+ */</span>
+Zapatec.Utils.setWindowEvent = <span class="reserved">function</span>(oEvent) {
+	<span class="reserved">if</span> (oEvent) {
+		window.event = oEvent;
+	}
+};
+
+<span class="comment">/**
+ * Emulates "window.event" for certain events in Mozilla. To be able to access
+ * Event object when event handler is set using element attribute, e.g.
+ * &amp;lt;a onclick="eventHandler()"&amp;gt;.
+ *
+ * <span class="attrib">@param</span> {object} aEvents Array of event names where "window.event" is needed,
+ * e.g. ['click', 'dblclick'].
+ */</span>
+Zapatec.Utils.emulateWindowEvent = <span class="reserved">function</span>(aEvents) {
+	<span class="reserved">if</span> (document.addEventListener) {
+		<span class="comment">// Set up emulation for the events</span>
+		var iEvents = aEvents.length;
+		var oUtils = Zapatec.Utils;
+		var iEvent;
+		<span class="reserved">for</span> (iEvent = 0; iEvent &lt; iEvents; iEvent++) {
+			document.addEventListener(aEvents[iEvent], oUtils.setWindowEvent, true);
+		}
+	}
+};
+
+<span class="comment">/*
+ * Use this method to check if document is done loading
+ */</span>
+Zapatec.Utils.isWindowLoaded = <span class="reserved">function</span>() {
+  <span class="reserved">return</span> typeof(document.readyState) != <span class="literal">'undefined'</span> ?
+	(
+		document.readyState == <span class="literal">'loaded'</span> || <span class="comment">// Konqueror</span>
+		document.readyState == <span class="literal">'complete'</span> <span class="comment">// IE/Opera</span>
+	) :
+	<span class="comment">// Mozilla</span>
+	document.getElementsByTagName != null &amp;&amp; typeof(document.getElementsByTagName(<span class="literal">'body'</span>)[0]) != <span class="literal">'undefined'</span>;
+}
+
+<span class="comment">/**
+ * This is some kind of indicator that window has already loaded.
+ */</span>
+Zapatec.windowLoaded = Zapatec.Utils.isWindowLoaded();
+
+Zapatec.Utils.addEvent(window, <span class="literal">"load"</span>, <span class="reserved">function</span>() {Zapatec.windowLoaded = true;});
+
+<span class="comment">/*
+ * Use this method to display your custom message before unload event.
+ * For example you could warn user that he has some unsaved changes
+ * on page.
+ *
+ * \param msg [string] - message to display. Default value - "All your changes will be lost.":
+ * \param win [object] - reference to window object. By default - current window
+ */</span>
+Zapatec.Utils.warnUnload = <span class="reserved">function</span>(msg, win){
+		Zapatec.Utils.warnUnloadFlag = true;
+	<span class="reserved">if</span>(typeof(msg) != <span class="literal">"string"</span>){
+		msg = <span class="literal">"All your changes will be lost."</span>;
+	}
+
+	<span class="reserved">if</span>(typeof(win) == <span class="literal">'undefined'</span>){
+		win = window;
+	}
+
+	Zapatec.Utils.addEvent(win, <span class="literal">'beforeunload'</span>, <span class="reserved">function</span>(ev){
+		<span class="reserved">if</span>(Zapatec.Utils.warnUnloadFlag != true){
+			<span class="reserved">return</span> true;
+		}
+
+		<span class="reserved">if</span>(typeof(ev) == <span class="literal">'undefined'</span>){
+			ev = window.event;
+			}
+
+		ev.returnValue = msg;
+		
+		<span class="reserved">if</span>(Zapatec.is_khtml){
+			<span class="reserved">return</span> msg;
+		} <span class="reserved">else</span> {
+			<span class="reserved">return</span> false;
+		}
+	});
+}
+
+<span class="comment">/*
+ * Using this method you can remove displaying of your message on page unload.
+ */</span>
+Zapatec.Utils.unwarnUnload = <span class="reserved">function</span>(msg, win){
+		Zapatec.Utils.warnUnloadFlag = false;
+}
+
+<span class="comment">/*
+ * \internal Variable that determines if unload handler should be used.
+ */</span>
+Zapatec.Utils.warnUnloadFlag = false;
+
+<span class="comment">/**
+ * <span class="attrib">@return</span> Max z-index value
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Utils.getMaxZindex = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (window.opera || Zapatec.is_khtml) {
+		<span class="reserved">return</span> 2147483583;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.is_ie){
+		<span class="reserved">return</span> 2147483647;
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> 10737418239;
+	}
+};
+
+<span class="comment">/**
+ * Keeps max z-index value for current browser.
+ */</span>
+Zapatec.Utils.maxZindex = zapatecUtils.getMaxZindex();
+
+<span class="comment">/**
+ * Shortcut for faster access to {<span class="attrib">@link</span> Zapatec.Utils#maxZindex}.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecUtilsMaxZindex = zapatecUtils.maxZindex;
+
+<span class="comment">/**
+ * Corrects CSS length.
+ *
+ * <span class="attrib">@param</span> {any} val Value to correct
+ * <span class="attrib">@return</span> Valid CSS length
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.correctCssLength = <span class="reserved">function</span>(val) {
+	<span class="reserved">if</span> (typeof val == <span class="literal">'undefined'</span> || (typeof val == <span class="literal">'object'</span> &amp;&amp; !val)) {
+		<span class="comment">// Undefined or null</span>
+		<span class="reserved">return</span> <span class="literal">'auto'</span>;
+	}
+	<span class="comment">// Convert to string</span>
+	val += <span class="literal">''</span>;
+	<span class="reserved">if</span> (!val.length) {
+		<span class="comment">// Empty</span>
+		<span class="reserved">return</span> <span class="literal">'auto'</span>;
+	}
+	<span class="reserved">if</span> (/\d$/.test(val)) {
+		<span class="comment">// Number</span>
+		val += <span class="literal">'px'</span>;
+	}
+	<span class="reserved">return</span> val;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@ignore</span> Holds properties of DOM objects that must be set to null on window
+ * unload event to prevent memory leaks in IE.
+ */</span>
+Zapatec.Utils.destroyOnUnload = [];
+
+<span class="comment">/**
+ * Saves a property that must be set to null on window unload event. Should be
+ * used for properties that can't be destroyed by garbage collector due to
+ * circular references.
+ *
+ * <span class="attrib">@param</span> {object} objElement DOM object
+ * <span class="attrib">@param</span> {string} strProperty Property name
+ */</span>
+Zapatec.Utils.addDestroyOnUnload = <span class="reserved">function</span>(objElement, strProperty) {
+	Zapatec.Utils.destroyOnUnload.push([objElement, strProperty]);
+};
+
+<span class="comment">/**
+ * Assigns a value to a custom property of DOM object. This property will be
+ * set to null on window unload event. Use this function to create properties
+ * that can't be destroyed by garbage collector due to circular references.
+ *
+ * <span class="attrib">@param</span> {object} objElement DOM object
+ * <span class="attrib">@param</span> {string} strProperty Property name
+ * <span class="attrib">@param</span> {any} val Property value
+ */</span>
+Zapatec.Utils.createProperty = <span class="reserved">function</span>(objElement, strProperty, val) {
+	objElement[strProperty] = val;
+	Zapatec.Utils.addDestroyOnUnload(objElement, strProperty);
+};
+
+<span class="comment">// Remove circular references to prevent memory leaks in IE</span>
+Zapatec.Utils.addEvent(window, <span class="literal">'unload'</span>, <span class="reserved">function</span>() {
+	<span class="reserved">for</span> (var iObj = Zapatec.Utils.destroyOnUnload.length - 1; iObj &gt;= 0; iObj--) {
+		var objDestroy = Zapatec.Utils.destroyOnUnload[iObj];
+		objDestroy[0][objDestroy[1]] = null;
+		objDestroy[0] = null;
+	}
+
+	<span class="reserved">for</span> (var iLis = Zapatec.Utils.removeOnUnload.length - 1; iLis &gt;= 0; iLis--) {
+		var oParams = Zapatec.Utils.removeOnUnload[iLis];
+		<span class="reserved">if</span> (!oParams) {
+			continue;
+		}
+		Zapatec.Utils.removeOnUnload[iLis] = null;
+		Zapatec.Utils.removeEvent(
+		 oParams[<span class="literal">'element'</span>],
+		 oParams[<span class="literal">'event'</span>],
+		 oParams[<span class="literal">'listener'</span>],
+		 oParams[<span class="literal">'capture'</span>]
+		);
+	}
+});
+
+<span class="comment">/**
+ * Escapes all special HTML characters so string can be added via innerHTML property as-is
+ *
+ * <span class="attrib">@param</span> {string} str String to escape
+ * <span class="attrib">@return</span> escaped string
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.htmlEncode = <span class="reserved">function</span>(str) {
+    <span class="reserved">if</span>(str == null || typeof(str.replace) != <span class="literal">'function'</span>){
+    	<span class="reserved">return</span> <span class="literal">""</span>;
+    }
+
+	<span class="comment">// we don't need regexp for that, but.. so be it for now.</span>
+	str = str.replace(/&amp;/ig, <span class="literal">"&amp;amp;"</span>);
+	str = str.replace(/&lt;/ig, <span class="literal">"&amp;lt;"</span>);
+	str = str.replace(/&gt;/ig, <span class="literal">"&amp;gt;"</span>);
+	str = str.replace(/\x22/ig, <span class="literal">"&amp;quot;"</span>);
+	<span class="comment">// \x22 means '"' -- we use hex reprezentation so that we don't disturb</span>
+	<span class="comment">// JS compressors (well, at least mine fails.. ;)</span>
+
+	<span class="reserved">return</span> str;
+};
+
+
+<span class="comment">/**
+ * Applies given style to given element.
+ *	<span class="attrib">@param</span> {any} elRef reference to target element. Required.
+ *	<span class="attrib">@param</span> {string} style string value of style. Required.
+ */</span>
+Zapatec.Utils.applyStyle = <span class="reserved">function</span>(elRef, style){
+	<span class="reserved">if</span>(typeof(elRef) == <span class="literal">'string'</span>){
+		elRef = document.getElementById(elRef);
+	}
+
+	<span class="reserved">if</span>(elRef == null || style == null || elRef.style == null){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="reserved">if</span>(Zapatec.is_opera){
+		var pairs = style.split(<span class="literal">";"</span>);
+
+		<span class="reserved">for</span>(var ii =0; ii &lt; pairs.length; ii++){
+			var kv = pairs[ii].split(<span class="literal">":"</span>);
+
+			<span class="comment">// trim value</span>
+			<span class="reserved">if</span> (!kv[1]) {
+				continue;
+			}
+			var value = kv[1].replace(/^\s*/, <span class="literal">''</span>).replace(/\s*$/, <span class="literal">''</span>);
+			var key = <span class="literal">""</span>;
+
+			<span class="reserved">for</span>(var jj = 0; jj &lt; kv[0].length; jj++){
+				<span class="reserved">if</span>(kv[0].charAt(jj) == <span class="literal">"-"</span>){
+					jj++;
+
+					<span class="reserved">if</span>(jj &lt; kv[0].length){
+						key += kv[0].charAt(jj).toUpperCase();
+					}
+
+					continue;
+				}
+
+				key += kv[0].charAt(jj);
+			}
+
+			switch(key){
+				case <span class="literal">"float"</span>:
+					key = <span class="literal">"cssFloat"</span>;
+					break;
+			}
+
+			try{
+				elRef.style[key] = value;
+			} catch(e){}
+		}
+	} <span class="reserved">else</span> {
+		elRef.style.cssText = style;
+	}
+
+	<span class="reserved">return</span> true;
+}
+
+<span class="comment">/**
+ * Retrieves computed CSS property values from an element.
+ *
+ * <span class="attrib">@param</span> {object} oEl Element object
+ * <span class="attrib">@param</span> {string} sPr Property name of element's style, e.g. "borderLeftWidth"
+ * <span class="attrib">@return</span> Computed CSS property value
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.getStyleProperty = <span class="reserved">function</span>(oEl, sPr) {
+	var oDV = document.defaultView;
+	<span class="reserved">if</span> (oDV &amp;&amp; oDV.getComputedStyle) {
+		<span class="comment">// Standard</span>
+		var oCS = oDV.getComputedStyle(oEl, <span class="literal">''</span>);
+		<span class="reserved">if</span> (oCS) {
+			sPr = sPr.replace(/([A-Z])/g, <span class="literal">'-$1'</span>).toLowerCase();
+			<span class="reserved">return</span> oCS.getPropertyValue(sPr);
+		}
+	} <span class="reserved">else</span> <span class="reserved">if</span> (oEl.currentStyle) {
+		<span class="comment">// IE</span>
+		<span class="reserved">return</span> oEl.currentStyle[sPr];
+	}
+	<span class="comment">// None</span>
+	<span class="reserved">return</span> oEl.style[sPr];
+};
+
+<span class="comment">/**
+ * Returns precision of a number with floating point.
+ *
+ * <span class="attrib">@param</span> {number} dFloat Number with floating point
+ * <span class="attrib">@return</span> Precision
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Utils.getPrecision = <span class="reserved">function</span>(dFloat){
+	<span class="reserved">return</span> (dFloat + <span class="literal">''</span>).replace(/^-?\d*\.*/, <span class="literal">''</span>).length;
+};
+
+<span class="comment">/**
+ * Sets precision of a number with floating point. Useful to correct
+ * precision before displaying the result of arithmetic operation. E.g.
+ * 2.7 + 0.2 == 2.9000000000000004 and
+ * Zapatec.Utils.setPrecision(2.7 + 0.2, 1) == 2.9 .
+ *
+ * If param iPrecision is 0, returns integer.
+ *
+ * <span class="attrib">@param</span> {number} dFloat Number with floating point
+ * <span class="attrib">@param</span> {number} iPrecision Desired precision
+ * <span class="attrib">@return</span> Number with floating point with desired precision
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Utils.setPrecision = <span class="reserved">function</span>(dFloat, iPrecision){
+	<span class="comment">// Convert to number</span>
+	dFloat *= 1;
+	<span class="reserved">if</span> (dFloat.toFixed) {
+		<span class="reserved">return</span> dFloat.toFixed(iPrecision) * 1;
+	}
+	var iPow = Math.pow(10, iPrecision);
+	<span class="reserved">return</span> parseInt(dFloat * iPow, 10) / iPow;
+};
+
+<span class="comment">/**
+ * Converts a number with floating point to string with desired precision.
+ * Uses Zapatec.Utils.setPrecision to set precision. Then converts result into
+ * string and adds zeros to the end if needed.
+ *
+ * <span class="attrib">@param</span> {number} dFloat Number with floating point
+ * <span class="attrib">@param</span> {number} iPrecision Desired precision
+ * <span class="attrib">@return</span> String with floating point with desired precision
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.setPrecisionString = <span class="reserved">function</span>(dFloat, iPrecision){
+	var sFloat = Zapatec.Utils.setPrecision(dFloat, iPrecision) + <span class="literal">''</span>;
+	var iOldPrecision = Zapatec.Utils.getPrecision(sFloat);
+	var iZeros = iPrecision - iOldPrecision;
+	<span class="reserved">if</span> (iZeros) {
+		<span class="reserved">if</span> (!iOldPrecision) {
+			sFloat += <span class="literal">'.'</span>;
+		}
+		<span class="reserved">for</span> (var iZero = 0; iZero &lt; iZeros; iZero++) {
+			sFloat += <span class="literal">'0'</span>;
+		}
+	}
+	<span class="reserved">return</span> sFloat;
+};
+
+<span class="comment">/**
+ * Creates nested hash elements with given name. For example for arguments
+ * Zapatec.Utils.createNestedHash(Zapatec, ["Module", "key", "anotherKey"])
+ * Element Zapatec.Module.key.anotherKey will be created. If property does not 
+ * exist - it will be created and "{}" (new Object()) will be used as default 
+ * value.
+ *
+ * <span class="attrib">@param</span> {Object} parent Reference to element where nested properties will be 
+ *	created.
+ * <span class="attrib">@param</span> {Array} keys Array of properties to create.
+ * <span class="attrib">@param</span> {Object} value Value to assign to deepest element. Optional.
+ */</span>
+Zapatec.Utils.createNestedHash = <span class="reserved">function</span>(parent, keys, value){
+	<span class="reserved">if</span>(parent == null || keys == null){
+		<span class="reserved">return</span> null;
+	}
+
+	var tmp = parent;
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; keys.length; ii++){
+		<span class="reserved">if</span>(typeof(tmp[keys[ii]]) == <span class="literal">'undefined'</span>){
+			tmp[keys[ii]] = {};
+		}
+
+		<span class="reserved">if</span>(ii == keys.length - 1 &amp;&amp; typeof(value) != <span class="literal">'undefined'</span>){
+			tmp[keys[ii]] = value;
+		}
+
+		tmp = tmp[keys[ii]];
+		}
+}
+
+<span class="comment">/**
+ * This is a type of interface technology (mixin).
+ * It takes the methods and properties of interface
+ * object and add them to our class or object instance.
+ * If property is present in our class and is not
+ * core method of interface then it will not be added.
+ * Our class or object will also be added hasInterface
+ * method to work with interfaces.
+ * <span class="attrib">@param</span> classOrObject {object or function} the object or
+ * class to enhance with the interface.
+ * <span class="attrib">@param</span> interfaceObj {object} object holding interface logic.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.implement = <span class="reserved">function</span>(classOrObject, interfaceStr) {
+	<span class="reserved">if</span> (typeof interfaceStr != <span class="literal">"string"</span>) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//if this is class we take its prototype</span>
+	<span class="reserved">if</span> (typeof classOrObject == <span class="literal">"function"</span>) {
+		classOrObject = classOrObject.<span class="reserved">prototype</span>;
+	}
+	<span class="comment">//if itis still not object then this is some mistake</span>
+	<span class="reserved">if</span> (!classOrObject || typeof classOrObject != <span class="literal">"object"</span>) {
+		<span class="reserved">return</span> false;
+	}
+	var interfaceObj = window;
+	var objs = interfaceStr.split(<span class="literal">"."</span>);
+	try {
+		<span class="reserved">for</span>(var i = 0; i &lt; objs.length; ++i) {
+			interfaceObj = interfaceObj[objs[i]];
+		}
+	} catch(e) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="comment">//creating interface array if it doesn't exists and new interface there</span>
+	<span class="reserved">if</span> (typeof classOrObject.interfaces != <span class="literal">"object"</span>) {
+		classOrObject.interfaces = {};
+		classOrObject.interfaces[interfaceStr] = true;
+	} <span class="reserved">else</span> <span class="reserved">if</span> (classOrObject.interfaces[interfaceStr] !== true) {
+		classOrObject.interfaces = Zapatec.Utils.clone(classOrObject.interfaces);
+		classOrObject.interfaces[interfaceStr] = true;
+	} <span class="reserved">else</span> {
+		<span class="comment">//if object already has interface why executing this?</span>
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//adding new properties and methods</span>
+	<span class="reserved">for</span>(var iProp in interfaceObj) {
+		classOrObject[iProp] = interfaceObj[iProp];
+	}
+	<span class="comment">//adding hasInterface method</span>
+	classOrObject.hasInterface = <span class="reserved">function</span>(interfaceStr) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>.interfaces[interfaceStr] === true) {
+			<span class="reserved">return</span> true;
+		}
+		<span class="reserved">return</span> false;
+	};
+	<span class="comment">//defining require interface method</span>
+	classOrObject.requireInterface = <span class="reserved">function</span>(interfaceStr) {
+		<span class="reserved">if</span> (!<span class="reserved">this</span>.hasInterface(interfaceStr)) {
+			Zapatec.Log({description : <span class="literal">"The object with ID '"</span> + <span class="reserved">this</span>.id + <span class="literal">"' has no "</span> + interfaceStr + <span class="literal">" interface!"</span>});
+			<span class="reserved">return</span> false;
+		}
+		<span class="reserved">return</span> true;
+	};
+	<span class="comment">//this is a general approach for setting and getting properties of interface.</span>
+	<span class="comment">//this is done to have more flexible property naming, which can be change by implementing object.</span>
+	interfaceObj.setNamedProperty = classOrObject.setNamedProperty = <span class="reserved">function</span>(name, val) {
+		<span class="reserved">this</span>[name] = val;
+	};
+	interfaceObj.getNamedProperty = classOrObject.getNamedProperty = <span class="reserved">function</span>(name) {
+		<span class="reserved">return</span> <span class="reserved">this</span>[name];
+	};
+	
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Processes input data and returns key code and corresponding character.
+ * <span class="attrib">@param</span> event {Object} Event
+ * <span class="attrib">@return</span> returns hash with two keys:
+ * charCode - [int] code of key that was pressed(could be null for mozilla(when
+ *	alphanumeric key was pressed) and opera(when unknown key (charCode == 0)
+ *	was pressed))
+ * chr - [char] letter, that was pressed(could be null for mozilla(when
+ *	nonalphanumeric key was pressed) and opera(when unknown key (charCode == 0)
+ *	was pressed))
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Utils.getCharFromEvent = <span class="reserved">function</span>(evt){
+	<span class="reserved">if</span>(!evt) {
+		evt = window.event;
+	}
+
+	var response = {};
+
+	<span class="reserved">if</span>(Zapatec.is_gecko &amp;&amp; !Zapatec.is_khtml &amp;&amp; evt.type != <span class="literal">"keydown"</span> &amp;&amp; evt.type != <span class="literal">"keyup"</span>){
+		<span class="reserved">if</span>(evt.charCode){
+			response.chr = String.fromCharCode(evt.charCode);
+		} <span class="reserved">else</span> {
+			response.charCode = evt.keyCode;
+		}
+	} <span class="reserved">else</span> {
+		response.charCode = evt.keyCode || evt.which;
+		response.chr = String.fromCharCode(response.charCode);
+	}
+
+	<span class="reserved">if</span>(Zapatec.is_opera &amp;&amp; response.charCode == 0){
+		response.charCode = null;
+		response.chr = null;
+	}
+
+	<span class="reserved">if</span>(Zapatec.is_khtml &amp;&amp; response.charCode == 63272){
+		response.charCode = 46;
+		response.chr = null;
+	}
+
+	<span class="reserved">return</span> response;
+}
+
+<span class="comment">/**
+ * Create DOM element from text. Useful when you need to create node from HTML 
+ * fragment and add it to the DOM tree.
+ * <span class="attrib">@param</span> {Object} txt HTML string
+ * <span class="attrib">@return</span> Created object
+ * <span class="attrib">@type</span> Object
+ */</span>
+Zapatec.Utils.convertHTML2DOM = <span class="reserved">function</span>(txt){
+	<span class="comment">// return null if no content given</span>
+	<span class="reserved">if</span>(!txt){
+		<span class="reserved">return</span> null;
+	}
+
+	<span class="comment">// create temp container</span>
+	var el = document.createElement(<span class="literal">"div"</span>);
+	el.innerHTML = txt;
+
+	var currEl = el.firstChild;
+	
+	<span class="comment">// search for first element node</span>
+	<span class="reserved">while</span>(!currEl.nodeType || currEl.nodeType != 1){
+		currEl = currEl.nextSibling;
+	}
+	
+	Zapatec.Utils.destroy(currEl);
+
+	<span class="reserved">return</span> currEl;
+};
+
+<span class="comment">/**
+ * Escapes special characters in the string which will be passed as argument to
+ * the RegExp constructor.
+ *
+ * <span class="attrib">@param</span> {string} s Regular expression string
+ * <span class="attrib">@return</span> Regular expression string with escaped special characters
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.escapeRegExp = <span class="reserved">function</span>(s) {
+	<span class="reserved">return</span> s.replace(/([.*+?^${}()|[\]\/\\])/g, <span class="literal">'\\$1'</span>);
+};
+
+<span class="comment">/**
+ * Returns the value of passed radio group or select element.
+ *
+ * <span class="attrib">@param</span> {object} oGroup Rario group or select element
+ * <span class="attrib">@return</span> Selected value
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.getRadioValue = <span class="reserved">function</span>(oGroup) {
+	<span class="reserved">if</span> (!oGroup) {
+		<span class="reserved">return</span> <span class="literal">''</span>;
+	}
+	<span class="reserved">if</span> (typeof oGroup.selectedIndex == <span class="literal">'number'</span>) {
+		<span class="comment">// Select box</span>
+		<span class="reserved">return</span> oGroup[oGroup.selectedIndex].value;
+	} <span class="reserved">else</span> {
+		<span class="comment">// Radio</span>
+		var iItems = oGroup.length;
+		<span class="reserved">if</span> (!iItems) {
+			<span class="reserved">return</span> <span class="literal">''</span>;
+		}
+		var oItem;
+		<span class="reserved">for</span> (var iItem = 0; iItem &lt; iItems; iItem++) {
+			oItem = oGroup[iItem];
+			<span class="reserved">if</span> (oItem.checked) {
+				<span class="reserved">return</span> oItem.value;
+			}
+		}
+	}
+	<span class="reserved">return</span> <span class="literal">''</span>;
+};
+
+<span class="comment">/**
+ * Sets the value of passed radio group or select element.
+ *
+ * <span class="attrib">@param</span> {object} oGroup Rario group or select element
+ * <span class="attrib">@param</span> {string} sValue Selected value
+ */</span>
+Zapatec.Utils.setRadioValue = <span class="reserved">function</span>(oGroup, sValue) {
+	<span class="reserved">if</span> (!oGroup) {
+		<span class="reserved">return</span>;
+	}
+	var iItems = oGroup.length;
+	<span class="reserved">if</span> (!iItems) {
+		<span class="reserved">return</span>;
+	}
+	var oItem;
+	<span class="reserved">for</span> (var iItem = 0; iItem &lt; iItems; iItem++) {
+		oItem = oGroup[iItem];
+		<span class="reserved">if</span> (oItem.value == sValue) {
+			<span class="reserved">if</span> (typeof oGroup.selectedIndex == <span class="literal">'number'</span>) {
+				<span class="comment">// Select box</span>
+				oGroup.selectedIndex = iItem;
+			} <span class="reserved">else</span> {
+				<span class="comment">// Radio</span>
+				oItem.checked = <span class="literal">'checked'</span>;
+			}
+			<span class="reserved">return</span>;
+		}
+	}
+};
+
+<span class="comment">/**
+ * /\s+/g.
+ * <span class="attrib">@final</span>
+ */</span>
+zapatecUtilsRegexpSpacePlus =
+Zapatec.Utils.utilsRegexpSpacePlus = /\s+/g;
+
+<span class="comment">/**
+ * /^\s/.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Utils.utilsRegexpSpaceLeft = /^\s+/;
+
+<span class="comment">/**
+ * /\s$/.
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@final</span>
+ */</span>
+Zapatec.Utils.utilsRegexpSpaceRight = /\s+$/;
+
+<span class="comment">/**
+ * Removes leading (/^\s+/) and trailing (/\s+$/) white spaces.
+ *
+ * <span class="attrib">@param</span> {string} sVal Input string
+ * <span class="attrib">@return</span> Trimmed string
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.trim = <span class="reserved">function</span>(sVal) {
+	<span class="reserved">return</span> sVal
+		.replace(zapatecUtils.utilsRegexpSpaceLeft, <span class="literal">''</span>)
+		.replace(zapatecUtils.utilsRegexpSpaceRight, <span class="literal">''</span>);
+};
+
+<span class="comment">/**
+ * Replaces multiple consecutive white spaces (/\s+/g) with single space
+ * character. Also removes leading and trailing white spaces with
+ * {<span class="attrib">@link</span> Zapatec.Utils#trim}.
+ *
+ * <span class="attrib">@param</span> {string} sVal Input string
+ * <span class="attrib">@return</span> Trimmed string
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.multispacekill = <span class="reserved">function</span>(sVal) {
+	<span class="reserved">return</span> zapatecUtils.trim(sVal).replace(zapatecUtilsRegexpSpacePlus, <span class="literal">' '</span>);
+};
+
+<span class="comment">/**
+ * Removes all white spaces from the string.
+ *
+ * <span class="attrib">@param</span> {string} sVal Input string
+ * <span class="attrib">@return</span> String without spaces
+ * <span class="attrib">@type</span> string
+ */</span>
+Zapatec.Utils.spacekill = <span class="reserved">function</span>(sVal) {
+	<span class="reserved">return</span> sVal.replace(zapatecUtilsRegexpSpacePlus, <span class="literal">''</span>);
+};
+
+<span class="comment">/**
+ * Emulates CSS "text-overflow: ellipsis" in FireFox.
+ *
+ * &lt;pre&gt;
+ * Example:
+ * div {
+ *  overflow: hidden;
+ *  white-space: nowrap;
+ *  text-overflow: ellipsis;
+ *  -moz-binding: url(moz-text-overflow.xml#ellipsis);
+ * }
+ *
+ * moz-text-overflow.xml:
+ * &amp;lt;?xml version="1.0"?&amp;gt;
+ * &amp;lt;bindings xmlns="http://www.mozilla.org/xbl"&amp;gt;
+ * &amp;lt;binding id="ellipsis"&amp;gt;
+ *   &amp;lt;implementation&amp;gt;
+ *     &amp;lt;constructor&amp;gt;
+ *       &amp;lt;![CDATA[
+ *         zapatecUtils.mozTextOverflow(this);
+ *       ]]&amp;gt;
+ *     &amp;lt;/constructor&amp;gt;
+ *   &amp;lt;/implementation&amp;gt;
+ * &amp;lt;/binding&amp;gt;
+ * &amp;lt;/bindings&amp;gt;
+ * &lt;/pre&gt;
+ *
+ * <span class="attrib">@param</span> {object} oEl Target element
+ */</span>
+Zapatec.Utils.mozTextOverflow = <span class="reserved">function</span>(oEl) {
+	setTimeout(<span class="reserved">function</span>() {
+		zapatecUtils.mozTextOverflowEllipsis(oEl);
+	}, 0);
+};
+
+<span class="comment">/**
+ * Emulates CSS "text-overflow: ellipsis" in FireFox. See
+ * {<span class="attrib">@link</span> Zapatec.Utils#mozTextOverflow}.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oEl Target element
+ */</span>
+Zapatec.Utils.mozTextOverflowEllipsis = <span class="reserved">function</span>(oEl) {
+	oEl.style.position = <span class="literal">'relative'</span>;
+	var oEllipsis = oEl.zpEllipsis = document.createElement(<span class="literal">'div'</span>);
+	oEllipsis.innerHTML = <span class="literal">'&amp;hellip;'</span>;
+	var oStyle = oEllipsis.style;
+	oStyle.position = <span class="literal">'absolute'</span>;
+	oStyle.right = <span class="literal">'0'</span>;
+	oStyle.bottom = <span class="literal">'0'</span>;
+	oStyle.background = <span class="literal">'inherit'</span>;
+	oStyle.textDecoration = <span class="literal">'none'</span>;
+	oStyle.display = <span class="literal">'none'</span>;
+	oEl.appendChild(oEllipsis);
+	oEl.addEventListener(<span class="literal">'overflow'</span>, <span class="reserved">function</span>(oEv) {
+		var oEl = oEv.currentTarget;
+		var oEllipsis = oEl.zpEllipsis;
+		<span class="reserved">if</span> (oEllipsis) {
+			oEllipsis.style.display = <span class="literal">'block'</span>;
+		}
+	}, false);
+	oEl.addEventListener(<span class="literal">'underflow'</span>, <span class="reserved">function</span>(oEv) {
+		var oEl = oEv.currentTarget;
+		var oEllipsis = oEl.zpEllipsis;
+		<span class="reserved">if</span> (oEllipsis) {
+			oEllipsis.style.display = <span class="literal">'none'</span>;
+		}
+	}, false);
+};
+
+<span class="comment">/**
+ * Compares any 2 values as integers. Converts passed values to integers using
+ * parseInt function and compares them.
+ *
+ * <span class="attrib">@param</span> {any} vLeft Value to compare
+ * <span class="attrib">@param</span> {any} vRight Value to compare
+ * <span class="attrib">@return</span> 0 if integers are equal; 1 if vLeft &gt; vRight; -1 if vLeft &lt; vRight
+ * <span class="attrib">@type</span> number
+ */</span>
+Zapatec.Utils.compareInt = <span class="reserved">function</span>(vLeft, vRight) {
+	vLeft = parseInt(vLeft);
+	vRight = parseInt(vRight);
+	<span class="reserved">return</span> (vLeft &gt; vRight) - (vLeft &lt; vRight);
+};
+
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+<html>
+<head>
+	<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=utf-8">
+	<meta name="keywords" content="dhtml tools,javascript,DHTML Tools,Javascript,ajax,AJAX,Ajax,ajax tools,AJAX Tools,tools controls,simple javascript tools">
+	<title>Zapatec DHTML Extra Widget - Zapatec.Pane</title>
+
+	<!-- Common JS files -->
+	<script type='text/javascript' src='../../utils/zapatec.js'></script>
+
+	<!-- Custom includes -->	
+	<!-- ALL demos need these css -->
+	<link href="../../website/css/zpcal.css" rel="stylesheet" type="text/css">
+	<link href="../../website/css/template.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+		body {
+			width: 778px;
+		}
+	</style>
+	<link rel="SHORTCUT ICON" href="http://www.zapatec.com/website/main/favicon.ico">
+	
+
+	<script type='text/javascript' src='../../utils/pane.js'></script>
+
+
+</head>
+<body>	<div class='zpCalSubHeader' style='text-align:center;'>Zapatec.Pane</div>
+
+
+
+Pane was created to allow widgets manipulate content in usable way. Mostly this is system widget - for internal usage.<br />
+
+Pane has following config options:<br />
+<ul>
+	<li>parent<br />
+		Created pane will be added to this element.
+	</li>
+	<li>width<br />
+		Pane width.
+	</li>
+	<li>height<br />
+		Pane height.
+	</li>
+	<li>containerType<br />
+		Possible values:
+		<ul>
+			<li>iframe<br />
+				New IFRAME element will be created.
+			</li>
+			<li>div<br />
+				New DIV element will be created.
+			</li>
+			<li>current<br />
+				Use element given in "parent" option as pane container.
+			</li>
+		</ul>
+	</li>
+	<li>sourceType</li>
+	<li>source<br />
+		See Zapatec.Widget documentation for this options.
+	</li>
+</ul>
+Public methods:
+<ul>
+	<li>getContainer()<br />
+		Returns reference to Pane container - DIV or IFRAME element.
+	</li>
+	<li>getContentElement()<br />
+		Returns reference to Pane element which you can use for working with content - if containerType='div' - DIV element itself. If IFRAME - IFRAME.document.body
+	</li>
+	<li>getIframeDocument()<br />
+		If containerType='iframe' - this will return reference to iframe's document object.
+	</li>
+	<li>isReady()<br />
+		Returns true if containerType='iframe' and iframe was created.
+	</li>
+	<li>setContent(value)<br />
+		Sets pane content to given value.
+	</li>
+	<li>setWidth(newWidth)/setHeight(newHeight)<br />
+		Resize pane to given dimensions.
+	</li>
+	<li>getWidth()/getHeight<br />
+		Returns current pane dimensions.
+	</li>
+</ul>
+
+<table width="100%">
+	<tr>
+		<td id="target1" style="border: 1px solid black">
+			Pane container<br />
+			<input type="button" onclick="setPaneContent(pane1)" value="Change pane content"/>
+			<input type="button" onclick="pane1.setWidth(100)" value="Set pane width to 100px"/>
+			<input type="button" onclick="pane1.setWidth(300)" value="Set pane width to 300px"/>
+		</td>
+		<td id="target2" style="border: 1px solid black">
+			Iframe pane container<br />
+			<input type="button" onclick="setPaneContent(pane2)" value="Change pane content"/>
+			<input type="button" onclick="pane2.setWidth(100)" value="Set pane width to 100px"/>
+			<input type="button" onclick="pane2.setWidth(300)" value="Set pane width to 300px"/>
+		</td>
+	</tr>
+</table>
+
+<script type="text/javascript">
+	var pane1 = new Zapatec.Pane({
+		parent: 'target1',
+		containerType: 'div'
+	})
+	pane1.setHeight(50);
+
+	pane1.setPaneContent("this is current pane content. Click 'Change pane content' button to put some random number here", "html/text");
+	pane1.getContainer().style.border = "2px solid";
+	pane1.getContainer().style.borderColor = "#808080 #d4d0c8 #d4d0c8 #808080";
+
+	var pane2 = new Zapatec.Pane({
+		parent: 'target2',
+		containerType: 'iframe'
+	})
+	pane2.setHeight(100);
+
+	pane2.setPaneContent("this is current pane content Click 'Change pane content' button to put some random number here", "html/text");
+
+	function setPaneContent(pane){
+		pane.setPaneContent(Math.random() + "", "html/text");
+	}
+</script>
+
+	<noscript>
+		<br/>
+		This page uses an <a href='http://www.zapatec.com/website/main/products/suite/'>
+		AJAX Component</a> - Zapatec DHTML Extra Widget, but your browser does not support Javascript.
+		<br/>
+		<br/>
+	</noscript>
+		<br/><br/><br/>
+		<div class="footer" style='width: 778px; text-align:center; margin-top:2em'>
+		&copy; 2004-2009 <strong> <a href='http://www.zapatec.com/'>Zapatec, Inc.</a> </strong>
+		</div>
+</body>
+</html>

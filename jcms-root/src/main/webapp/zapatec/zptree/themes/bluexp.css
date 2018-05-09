@@ -1,0 +1,107 @@
+/* $Id: bluexp.css 6078 2007-01-25 14:44:47Z smaxim $ */
+
+/* Overall the background and layoutfor the tree */
+.zpTreeBluexpContainer {
+  padding-top: .5em;
+  padding-bottom: .5em;
+  background: url("bluexp/bg_main.gif")  100% 100%;
+}
+
+/* Hrefs in a tree item */
+.zpTreeBluexpContainer div.tree-item td.a {
+  text-decoration:none;
+}
+
+.zpTreeBluexpContainer div.tree-item a{
+  color:#105500;
+  font-weight:normal;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+}
+
+/* General setting of the tree */
+.zpTreeBluexpContainer .tree,
+.zpTreeBluexpContainer .tree-item table.tree-table { 
+  color:#000000;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight:normal;
+}
+
+.zpTreeBluexpContainer .tree-item-more {
+  padding-left: 1px;
+}
+
+.zpTreeBluexpContainer .tree-item .label { 
+  cursor: pointer; 
+  cursor: hand;
+}
+
+.zpTreeBluexpContainer .tree-item table.tree-table td.label { 
+  padding: 0px 1px; 
+}
+
+.zpTreeBluexpContainer .tree-item-selected table.tree-table td.label { 
+  background-color: #729AB5; 
+  color: #fff; 
+}
+
+.zpTreeBluexpContainer div.tree-item, 
+.zpTreeBluexpContainer div.tree-item:hover {
+  cursor:pointer;
+  cursor: hand;
+  text-align:center;
+  font-weight:bold;
+  color:#DDDDDD;
+}
+
+.zpTreeBluexpContainer div.tree-item a{
+  text-decoration:none;
+}
+
+/* Makes an indent for each subtree */
+.zpTreeBluexpContainer .tree { 
+  padding-left: 5px; 
+  padding-right:5px;
+}
+
+.zpTreeBluexpContainer .menutitle {
+  cursor:pointer;
+  cursor: hand;
+  text-align:center;
+  width:135px;
+  line-height:24px;
+  color:#333333;
+  font-family:  Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  background: url("bluexp/bg_menutitle.gif")  100% 100%;
+  text-indent:5px;
+  margin-left:-2px;
+  margin-top:1px;
+  font-weight:bold;
+}
+
+.zpTreeBluexpContainer .menutitle:hover{
+  color:#000000;
+  background: url("bluexp/bg_menutitle_on.gif")  100% 100%;
+}
+
+.zpTreeBluexpContainer .submenu {
+  cursor:pointer;
+  cursor: hand;
+  text-align:center;
+  text-valign:middle;
+  align:center;
+  width:117px;
+  height:20px;
+  background-color:#D0D0D0;
+  margin-left:5px;
+}
+
+.zpTreeBluexpContainer .submenu:hover {
+  cursor:pointer;
+  cursor: hand;
+  text-align:center;
+  text-valign:middle;
+  align:center;
+}

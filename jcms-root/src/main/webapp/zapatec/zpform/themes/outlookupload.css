@@ -1,0 +1,149 @@
+/* $Id: outlookupload.css 15252 2009-01-19 15:12:36Z smaxim $ */
+/*
+"zpStatusImg" class images for form fields -- apply appropriate rules here.
+        The script auto-applies one of each of these CLASS attributes to a series of
+                nested <span>s with an innermost .zpStatusImg class <span> we style:
+        1) "zpIsRequired" or "zpNotRequired".
+        2) "zpIsEditing" or "zpNotEditing".
+        3) "zpIsEmpty" or "zpNotEmpty".
+        4) "zpIsValid" or "zpNotValid".
+        5) Always "zpStatusImg", this is the one styled.
+*/
+
+/*.zpFormInternalEl {display:none;}*/
+
+.zpFormOutlookupload .zpStatusImg,
+.zpFormOutlookupload .zpCheckboxStatusImg,
+.zpFormOutlookupload .zpRadioStatusImg { /* Container for field status image */
+        padding: 0px 12px;
+        height: 14px;
+        width: 13px;
+        background-repeat: no-repeat;
+        background-position: right;
+        margin-left:5px;
+        margin-right:3px;
+        display: inline-block;
+        vertical-align: top;
+} 
+
+/*
+ * Controls the look and feel of the form
+ */
+
+.zpFormOutlookupload .errOutput { /* style for error field */
+        background-color: #C70032;
+        padding: 10px;
+        margin-bottom: 20px;
+        font-weight: bold;
+        color: white;
+        display: none;
+}
+
+/*.zpFormOutlookupload .zpExpandedTable, 
+.zpFormOutlookupload .zpExpandedTable td,  
+.zpFormOutlookupload .zpExpandedTable th  { 
+        border:1px solid #6392CE;
+        border-collapse:collapse;                        
+} */
+
+.zpFormOutlookupload .zpExpandedTable span { /* fixes the table cell height error, caused by invisible spans */
+        display:none;
+}
+
+.zpFormOutlookupload .zpExpandedTable .multipleButton { /* multiply button in table container */
+        margin:2px;
+}
+
+.zpFormOutlookupload .multipleButton{ /* style for field multiply button (if present) */
+        margin-left: 10px; 
+        text-align: center;
+        width:25px;
+}
+
+* html .zpFormOutlookupload .multipleButton {  /* IE6 Fix of button height */
+        height:20px;
+}
+ 
+*:first-child+html .zpFormOutlookupload .multipleButton { /* IE7 Fix of button height */
+        height:20px;
+} 
+
+
+.zpFormOutlookupload { /* Common form properties */
+        background:#EDF3FE;
+        border:1px solid #6392CE;
+        font-size: 11px;
+        padding:10px;
+        font-family:Arial,sans-serif;
+}
+
+.zpFormOutlookupload .zpFormContent { /* Form content container style */
+        border:none;
+        margin: 0px 5px;
+        padding: 0px;
+        background:#EDF3FE;
+}
+
+* html .zpFormOutlookupload .zpFormContent{ /* IE6 fix */
+        padding-top: 10px;
+}
+
+.zpFormOutlookupload fieldset{ /* form fieldset style */
+        padding: 10px;
+        border:1px solid #6392CE;
+        background:#EDF3FE;
+}
+
+* html .zpFormOutlookupload fieldset{ /* IE6 fix */
+        margin-bottom: 10px;
+}
+
+.zpFormOutlookupload legend{ /* form legend: sign of the fieldset */
+        color: #516589;
+        padding:0px 5px;
+        font-family:Arial,sans-serif;
+        font-size:12px;
+        font-weight:bold;
+        background:#EDF3FE;
+}
+
+* html .zpFormOutlookupload legend{
+        margin-bottom: 10px;
+}
+
+.zpFormOutlookupload select {
+        background-color:none;
+        border:1px solid #6392CE;
+        margin-bottom: 5px;
+        color:#446092;
+}
+
+.zpFormOutlookupload .fieldError {
+        font-weight: bold;
+}
+
+.zpFormOutlookupload textarea {
+        border:1px solid #6392CE;
+        color:#5b8ab6;                   
+        width: 270px;
+}
+
+.zpFormOutlookupload .zpFormError{ /* text: this field is required style */
+        vertical-align:top;
+        color: #F73460;
+        padding-left: 10px;
+        font-weight: normal;
+        display: inline-block;
+        /*position for error mesage*/
+        position:relative;
+				top:3px;
+				display:none;
+}
+
+.zpFormOutlookupload .zpWrongValue{ /* highlighting field when trying to input not allowed symbol */
+        background-color: #EA888C !important;
+}
+
+.zpFormOutlookupload span.zpFormInternalEl {
+  display:none !important;
+}

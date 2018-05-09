@@ -1,0 +1,311 @@
+/* $Id: lightgreen.css 10008 2008-02-15 12:00:49Z smaxim $ */
+/*
+ "zpStatusImg" class images for form fields -- apply appropriate rules here.
+ The script auto-applies one of each of these CLASS attributes to a series of
+  nested <span>s with an innermost .zpStatusImg class <span> we style:
+ 1) "zpIsRequired" or "zpNotRequired".
+ 2) "zpIsEditing" or "zpNotEditing".
+ 3) "zpIsEmpty" or "zpNotEmpty".
+ 4) "zpIsValid" or "zpNotValid".
+  5) Always "zpStatusImg", this is the one styled.
+*/
+
+.zpFormLightgreen .zpStatusImg,
+.zpFormLightgreen .zpCheckboxStatusImg,
+.zpFormLightgreen .zpRadioStatusImg { /* Container for field status image */
+        padding: 0px 12px;
+        height: 14px;
+        width: 13px;
+        background-repeat: no-repeat;
+        background-position: right;
+        margin-left:5px;
+        margin-right:3px;
+        display: inline-block;
+        vertical-align: top;
+} 
+
+.zpFormLightgreen .zpCommonStatusImg {
+        opacity: 0.66;
+        filter: alpha(opacity=66);
+        padding-bottom: 5px; /* Fixes alignment of asterisk ->  don't remove! */
+}
+
+.zpFormLightgreen .zpCheckboxStatusImg,
+.zpFormLightgreen .zpRadioStatusImg { /* Container for checkbox and radio status images */
+        opacity: 1.0;
+        filter: alpha(opacity=100);
+}
+
+
+.zpFormLightgreen .zpIsRequired .zpStatusImg{
+        background-image: url(lightgreen/required.gif);
+}
+
+.zpFormLightgreen .zpIsEditing .zpStatusImg { /* properties of status image while editing field */
+       opacity: 1.0;
+       filter: alpha(opacity=100);
+}
+
+.zpFormLightgreen .zpIsEditing .zpNotEmpty .zpCommonStatusImg{
+       background-image: url(lightgreen/editing.gif);
+}
+
+.zpFormLightgreen .zpNotEditing .zpNotEmpty .zpNotValid .zpStatusImg{
+        background-image: url(lightgreen/invalid.gif);
+}
+
+.zpFormLightgreen .zpIsValid .zpStatusImg{ /* Shown when field is valid */
+        background-image: url(lightgreen/validated.gif);
+}
+
+.zpFormLightgreen .zpIsFetching .zpStatusImg { /* shown while inputing into field */
+        background-image: url(lightgreen/fetching.gif) !important;
+}
+
+/*
+ * Controls the look and feel of the form
+ */
+
+.zpFormLightgreen .errOutput { /* style for error field */
+       background-color: #C70032;
+       padding: 10px;
+       margin-bottom: 20px;
+       font-weight: bold;
+       color: white;
+       display: none;
+}
+
+.zpFormLightgreen .fieldError {
+       font-weight: bold;
+}
+
+.zpFormLightgreen input {
+       background:#FFFFFF;
+       border: solid 1px #7F9DB9;
+       margin-bottom: 8px;
+       width:auto;
+}
+
+* html .zpFormLightgreen input.zpFormRequired { /* fix for IE 6 - fixing width  */
+				width:270px;
+}
+
+.zpFormLightgreen textarea {
+       background:#FFFFFF;
+       border: solid 1px #7F9DB9;
+       margin-bottom: 8px;
+       width: 270px;
+}
+
+.zpFormLightgreen .zpFormLabel { /* style for form fields labels */
+       width: 10em;
+       float: left;
+       font-size: 11px;
+       line-height: 20px; 
+}
+
+.zpFormLightgreen { /* Common form properties */
+       background: #e2fbc9;
+       border:1px solid #4d9b09;
+       padding:10px;
+       font-size: 11px;
+       font-family: Arial, Verdana;
+}
+
+.zpFormLightgreen .zpFormContent { /* Form content container style */
+       background-color:#ebfadb;
+       border: solid 1px #6dc620;
+       margin: 0px 10px;
+       padding: 0px 10px 10px 10px;
+}
+
+* html .zpFormLightgreen .zpFormContent {
+       padding-top: 10px;
+}
+
+.zpFormLightgreen .button { /* style for form submit buttons */
+       border: none !important;                           
+       background: url("lightgreen/button.gif");
+       height: 22px;
+       width: 65px;
+       border: none;
+       line-height: 16px;
+       font-family:Verdana, "MS Sans Serif" , Arial;
+       font-size: 11px;
+       font-weight:bold;
+       margin-left: 10px;
+       padding-bottom:2px;
+       color:#516589;
+}
+
+.zpFormLightgreen .button:hover { /* style on button mouseover */ 
+        border:none;
+        background: url("lightgreen/button_hilite.gif");
+}
+
+* html .zpFormLightgreen .button {
+       padding-bottom:0px;
+}
+
+.zpFormLightgreen .zpFormButtons {
+       text-align: right;
+       margin: 10px;
+}
+
+
+.zpFormLightgreen fieldset {
+       margin: 10px 1px 10px 1px;
+       padding: 10px;
+       border: solid 1px #D0D0BF;
+}
+
+* html .zpFormLightgreen fieldset {
+       margin-bottom: 10px;
+}
+
+.zpFormLightgreen legend{ /* form legend: sign of the fieldset */
+       color: #0046DC;
+       padding: 0px 5px;
+}
+
+* html .zpFormLightgreen legend {
+       margin-bottom: 10px;
+}
+
+.zpFormLightgreen .zpFormError {  /* text: this field is required style */
+       color: #F73460;
+       vertical-align: top;
+       padding-left: 10px;
+       font-weight: normal;
+       display: inline-block;
+       /*position for error mesage*/
+       position:relative;
+			 top:3px;
+}
+
+
+.zpFormLightgreen .multipleButton { /* style for field multiply button (if present) */
+       margin-left: 10px; 
+       text-align: center;
+       width:20px;
+} 
+
+* html .zpFormLightgreen .multipleButton {  /*IE6 Fix of button height*/
+        height:20px;
+}
+ 
+*:first-child+html .zpFormLightgreen .multipleButton { /*IE7 Fix of button height*/
+        height:20px;
+} 
+
+
+.zpFormLightgreen .zpExpandedTable, 
+.zpFormLightgreen .zpExpandedTable td,
+.zpFormLightgreen .zpExpandedTable th { 
+       border:1px solid #D0D0B8;
+       border-collapse:collapse;
+       padding:0px;
+}
+
+.zpFormLightgreen .zpExpandedTable span { /* fixes the table cell height error, caused by invisible spans */
+       display:none;
+}
+
+.zpFormLightgreen .zpExpandedTable .multipleButton { /* multiply button in table container */
+       margin:2px;
+}
+
+
+.zpFormLightgreen select {
+       background:#FFFFFF;
+       border: solid 1px #7F9DB9;
+       margin-bottom: 5px;
+}
+                                   /* Dropdown styles */
+.zpFormLightgreen .dropDownArrow { /*All Browsers*/
+       background-image: url(lightgreen/down_arrow.gif);
+       padding:9px 9px; 
+       padding-top:12px;
+       background-repeat: no-repeat;
+       margin-left:-1px;
+       display: inline;
+       cursor: pointer;
+} 
+
+* html .zpFormLightgreen .dropDownArrow {  /*IE6*/
+       vertical-align:top; /*important -> don't remove*/
+       height: 20px;
+       background-image: url(lightgreen/down_arrow_hilite.gif);
+       padding: 0px 12px;
+       background-repeat: no-repeat;
+       margin-left:-1px; 
+       margin-top:1px;
+       display: inline-block;
+       cursor: pointer;
+}                                   
+
+*+html .zpFormLightgreen .dropDownArrow {  /* IE7 */
+       margin-top:1px;
+       vertical-align:top !important;
+       height: 20px;
+       background-image: url(lightgreen/down_arrow.gif);
+       padding: 0px 12px;
+       background-repeat: no-repeat;
+       margin-left:-1px;
+       display: inline-block;
+       cursor: pointer;
+} 
+
+.zpFormLightgreen .dropDownArrow:hover,
+.zpFormLightgreen .dropDownArrow:active,
+.zpFormLightgreen .dropDownArrow:focus { /*All Browsers hover*/
+       background-image: url(lightgreen/down_arrow_hilite.gif);
+} 
+                                        /* end of dropdown styles */
+                                        
+.zpFormLightgreen .zpRadioLabel { /* label for checkbox and radio elements */
+       padding-left: 5px;
+       vertical-align:top;
+}
+
+ 
+.zpFormLightgreen .zpFormCheckbox { /* checkbox style */
+       border:none !important;
+       padding:0px;
+       margin:0px;
+       width:auto;
+       background:none;
+}
+
+.zpFormLightgreen .zpFormRadio {  /* radio style */
+       border:none;
+       padding:0px;
+       margin:0px;
+       width:auto;
+       background:none;
+}
+
+* html .zpFormLightgreen .zpFormCheckbox { /* ie6 checkbox style */
+       width:14px !important;
+       margin:-3px -3px -3px -1px;
+}
+       
+* html .zpFormLightgreen .zpFormRadio { /* ie6 radio style */
+       vertical-align:3%;
+       width:14px !important;
+       margin:-3px -3px -3px -1px;
+}
+
+
+*+html .zpFormLightgreen .zpFormCheckbox { /* ie7 checkbox style */
+       margin:-3px;
+}
+       
+*+html .zpFormLightgreen .zpFormRadio { /* ie7 radio style */
+       margin:-3px;
+       vertical-align:3%;
+}
+
+.zpFormLightgreen .zpWrongValue{ /* highlighting field when trying to input not allowed symbol */
+       background-color: #EA888C !important;
+}

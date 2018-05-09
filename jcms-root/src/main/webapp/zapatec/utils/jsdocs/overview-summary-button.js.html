@@ -1,0 +1,846 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="button.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>button.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'button.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: button.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/*
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/**
+* Zapatec.Button constructor. creates new object with given parameters.
+*
+* <span class="attrib">@param</span> config [object] - button config.
+*
+* Constructor recognizes the following properties of the config object
+* \code
+*	property name			| description
+*-------------------------------------------------------------------------------------------------
+*	image			| [String] Default image for button. Also this image will
+*					|	be putted on mouseout. Default value – null.
+*	width			| [int] Button width. Default value - null.
+*	height			| [int] Button height. Default value - null.
+*	className		| [string] Default class to apply to newly created
+*					|	button. Default value – null.
+*	style			| [string] Default style to apply to newly created button.
+*					|	Default value – null.
+*	text			| [string] Text title to display on button. If
+*					|	“image” option was given – this text will be used as
+*					|	alternative title.
+*	preloadImages	| [boolean] If true – preload all images (image, overImage,
+*					|	outImage, downImage) for button. Default value – true.
+*	overStyle		| [string] Style to apply to button during mouseover event.
+*					|	Default value – null.
+*	overClass		| [string] Class to add to button during mouseover event.
+*					|	Default value – null.
+*	overImage		| [string] Show this image during mouseover event. This
+*					|	will be done only if “image” option was specified.
+*					|	Default value – null.
+*	overAction		| [function] Call this function during mouseover event.
+*					|	Default value – null.
+*	outAction		| [function] Call this function during mouseout event.
+*					|	Default value – null.
+*	downStyle		| [string] Style to apply to button during mousedown event.
+*					|	Default value – null.
+*	downClass		| [string] Class to add to button during mousedown event.
+*					|	Default value – null.
+*	downImage		| [string] Show this image during mousedown event. This
+*					|	will be done only if “image” option was specified.
+*					|	Default value – null.
+*	downAction		| [function] Call this function during mousedown event.
+*					|	Default value – null.
+*   downActionDelay | [number] The delay before second and other downAction's will be called 
+*                   | if the mouse stay pressed, default 500.
+* repeatEnabled | [boolean] If down action should be repeated after a specified interval, default true
+* repeatAcceleration| [number] The acceleration of raising downAction each next time, default 0.8.
+* repeatStartSpeed  | [number] The starting speed of repeats of downAction, default 55.
+* repeatMaxSpeed    | [number] The maximum speed of repeats of downAction, default 5.
+*	clickAction		| [function] Call this function during onclick event.
+*	theme			| [string] Theme name.
+*	themePath		| [string] Path to directory where theme files are located.
+*   idPrefix        | [string] Prefix for HTML ID's that will be assigned to controll elements.
+* \endcode
+*/</span>
+Zapatec.Button = <span class="reserved">function</span>(objArgs){
+	<span class="reserved">if</span>(arguments.length == 0){
+		objArgs = {};
+	}
+
+	<span class="comment">// Call constructor of superclass</span>
+	Zapatec.Button.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Button.id = <span class="literal">"Zapatec.Button"</span>;
+
+<span class="comment">// Inherit SuperClass</span>
+Zapatec.inherit(Zapatec.Button, Zapatec.Widget);
+
+<span class="comment">/**
+* Init function. Actually this function does the creation of element
+* itself, not the constructor.
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs){
+	<span class="reserved">this</span>.config.image = null;
+	<span class="reserved">this</span>.config.width = null;
+	<span class="reserved">this</span>.config.height = null;
+	<span class="reserved">this</span>.config.className = null;
+	<span class="reserved">this</span>.config.style = null;
+	<span class="reserved">this</span>.config.text = <span class="literal">""</span>;
+	<span class="reserved">this</span>.config.preloadImages = true;
+	<span class="reserved">this</span>.config.overStyle = null;
+	<span class="reserved">this</span>.config.overClass = null;
+	<span class="reserved">this</span>.config.overImage = null;
+	<span class="reserved">this</span>.config.overAction = null;
+	<span class="reserved">this</span>.config.outAction = null;
+	<span class="reserved">this</span>.config.downStyle = null;
+	<span class="reserved">this</span>.config.downClass = null;
+	<span class="reserved">this</span>.config.downImage = null;
+	<span class="reserved">this</span>.config.downAction = null;
+	<span class="reserved">this</span>.config.downActionDelay = 500;
+	<span class="reserved">this</span>.config.repeatEnabled = true;
+	<span class="reserved">this</span>.config.repeatAcceleration = 0.8;
+	<span class="reserved">this</span>.config.repeatStartSpeed = 55;
+	<span class="reserved">this</span>.config.repeatMaxSpeed = 5;
+	<span class="reserved">this</span>.config.clickAction = null;
+	<span class="reserved">this</span>.config.idPrefix = null;
+	<span class="reserved">this</span>.config.themePath = Zapatec.zapatecPath + <span class="literal">"../zpextra/themes/button/"</span>;
+
+	<span class="comment">// processing Widget functionality</span>
+	Zapatec.Button.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.config.idPrefix) {
+		<span class="reserved">this</span>.config.idPrefix = <span class="literal">"zpButton"</span> + <span class="reserved">this</span>.id;
+	}
+
+	<span class="comment">// store reference to root DOM object</span>
+	<span class="reserved">this</span>.container = null;
+
+	<span class="comment">// using this container we could define current button state</span>
+	<span class="reserved">this</span>.statusContainer = null;
+
+	<span class="comment">// where content actually located</span>
+	<span class="reserved">this</span>.internalContainer = null;
+
+	<span class="comment">// reference to button's image</span>
+	<span class="reserved">this</span>.img = null;
+
+	<span class="comment">// indicates current button state</span>
+	<span class="reserved">this</span>.enabled = true;
+
+	<span class="reserved">this</span>.isPressed = false;
+
+	<span class="reserved">this</span>.createButton();
+};
+
+<span class="comment">/**
+* \internal creates button object
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.createButton = <span class="reserved">function</span>(){
+    <span class="reserved">this</span>.container = Zapatec.Utils.createElement(<span class="literal">"span"</span>);
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">'container'</span>);
+	<span class="reserved">this</span>.container.id = <span class="reserved">this</span>.config.idPrefix + <span class="literal">"Container"</span>;
+    <span class="reserved">this</span>.statusContainer = Zapatec.Utils.createElement(<span class="literal">"span"</span>);
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">'statusContainer'</span>);
+	<span class="reserved">this</span>.statusContainer.className = <span class="literal">"mouseOut"</span>;
+	<span class="reserved">this</span>.statusContainer.id = <span class="reserved">this</span>.config.idPrefix + <span class="literal">"Status"</span>;
+	<span class="reserved">this</span>.container.appendChild(<span class="reserved">this</span>.statusContainer);
+    <span class="reserved">this</span>.internalContainer = Zapatec.Utils.createElement(<span class="literal">"span"</span>);
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">'container'</span>);
+	<span class="reserved">this</span>.internalContainer.className = <span class="literal">"internalContainer"</span>;
+	<span class="reserved">this</span>.internalContainer.id = <span class="reserved">this</span>.config.idPrefix + <span class="literal">"Internal"</span>;
+	<span class="reserved">this</span>.statusContainer.appendChild(<span class="reserved">this</span>.internalContainer);
+
+	Zapatec.Utils.addClass(<span class="reserved">this</span>.container, <span class="reserved">this</span>.getClassName({
+		prefix: <span class="literal">"zpButton"</span> + (<span class="reserved">this</span>.config.image != null ? <span class="literal">"Image"</span> : <span class="literal">""</span>),
+		suffix: <span class="literal">"Container"</span>
+	}));
+
+	<span class="comment">// process config options</span>
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.width != null){
+		<span class="reserved">this</span>.internalContainer.style.width = <span class="reserved">this</span>.config.width + <span class="literal">"px"</span>;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.height != null){
+		<span class="reserved">this</span>.internalContainer.style.width = <span class="reserved">this</span>.config.height + <span class="literal">"px"</span>;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.className != null){
+		Zapatec.Utils.addClass(<span class="reserved">this</span>.internalContainer, <span class="reserved">this</span>.config.className);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.style != null){
+		<span class="reserved">this</span>.applyStyle(<span class="reserved">this</span>.config.style);
+	}
+
+	var self = <span class="reserved">this</span>;
+
+	<span class="comment">// attach handlers for mouse events</span>
+    <span class="reserved">this</span>.container.onmouseover = <span class="reserved">function</span>(ev){<span class="reserved">return</span> self.onmouseover(ev, false);};
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>.container, <span class="literal">'onmouseover'</span>);
+    <span class="reserved">this</span>.container.onmouseout = <span class="reserved">function</span>(ev){<span class="reserved">return</span> self.onmouseout(ev);};
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>.container, <span class="literal">'onmouseout'</span>);
+    <span class="reserved">this</span>.container.onmousedown = <span class="reserved">function</span>(ev){<span class="reserved">return</span> self.onmousedown(ev);};
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>.container, <span class="literal">'onmousedown'</span>);
+    <span class="reserved">this</span>.container.onmouseup = <span class="reserved">function</span>(ev){<span class="reserved">return</span> self.onmouseover(ev, true);};
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>.container, <span class="literal">'onmouseup'</span>);
+
+	<span class="reserved">this</span>.setEventHandlers();
+	var func = <span class="reserved">function</span>(ev){self._mousedown = false;};
+    Zapatec.Utils.addEvent(document, <span class="literal">'mouseup'</span>, func, null, false);
+	<span class="reserved">this</span>.eventHandlers.documentMouseup = {
+		element: document,
+		event: <span class="literal">"mouseup"</span>,
+		handler: func
+	};
+    
+    <span class="reserved">this</span>.container.onclick = <span class="reserved">function</span>(ev){<span class="reserved">return</span> self.onclick(ev);};
+    <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>.container, <span class="literal">'onclick'</span>);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.image != null){
+		<span class="comment">// create image if needed</span>
+        <span class="reserved">this</span>.img = document.createElement(<span class="literal">"img"</span>);
+        <span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>, <span class="literal">'img'</span>);
+		<span class="reserved">this</span>.img.src = <span class="reserved">this</span>.config.image;
+		<span class="reserved">this</span>.img.alt = <span class="reserved">this</span>.config.text;
+		<span class="reserved">this</span>.img.title = <span class="reserved">this</span>.config.text;
+		<span class="reserved">this</span>.internalContainer.appendChild(<span class="reserved">this</span>.img);
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.internalContainer.innerHTML = <span class="reserved">this</span>.config.text;
+		<span class="reserved">this</span>.internalContainer.style.whiteSpace = <span class="literal">"nowrap"</span>;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.preloadImages == true){
+		<span class="reserved">this</span>.preloadImages();
+	}
+};
+
+<span class="comment">/**
+* \internal Handler for mouseover event
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.onmouseover = <span class="reserved">function</span>(ev, mouseup){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEnabled()){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(typeof(ev) == <span class="literal">'undefined'</span>){
+		ev = window.event;
+	}
+	<span class="reserved">if</span> (mouseup) {
+		<span class="reserved">this</span>._mousedown = false;
+	}
+
+	<span class="reserved">this</span>.toggleClass(<span class="literal">"mouseOver"</span>);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.image != null &amp;&amp; <span class="reserved">this</span>.config.overImage != null){
+		<span class="reserved">this</span>.img.src = <span class="reserved">this</span>.config.overImage;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.overClass != null){
+		Zapatec.Utils.addClass(<span class="reserved">this</span>.internalContainer, <span class="reserved">this</span>.config.overClass);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.overStyle != null){
+		<span class="reserved">this</span>.applyStyle(<span class="reserved">this</span>.config.overStyle);
+	}
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>._timeoutId) {
+		clearTimeout(<span class="reserved">this</span>._timeoutId);
+	}
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>._mousedown &amp;&amp; <span class="reserved">this</span>.config.repeatEnabled) {
+		<span class="reserved">this</span>._repeatDownAction();
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.overAction != null){
+		<span class="reserved">return</span> <span class="reserved">this</span>.config.overAction(ev, <span class="reserved">this</span>);
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+* \internal Handler for mouseout event
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.onmouseout = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEnabled()){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(typeof(ev) == <span class="literal">'undefined'</span>){
+		ev = window.event;
+	}
+
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.isPressed) {
+    <span class="reserved">this</span>.toggleClass(<span class="literal">"mouseOut"</span>);
+
+    <span class="reserved">if</span>(<span class="reserved">this</span>.config.image != null){
+      <span class="reserved">this</span>.img.src = <span class="reserved">this</span>.config.image;
+    }
+
+    <span class="reserved">if</span>(<span class="reserved">this</span>.config.outClass != null){
+      Zapatec.Utils.addClass(<span class="reserved">this</span>.internalContainer, <span class="reserved">this</span>.config.outClass);
+    }
+  }
+  <span class="reserved">else</span> {
+    <span class="reserved">this</span>.toggleClass(<span class="literal">"mouseDown"</span>);
+
+    <span class="reserved">if</span>(<span class="reserved">this</span>.config.image != null &amp;&amp; <span class="reserved">this</span>.config.downImage != null){
+      <span class="reserved">this</span>.img.src = <span class="reserved">this</span>.config.downImage;
+    }
+
+    <span class="reserved">if</span>(<span class="reserved">this</span>.config.downClass != null){
+      Zapatec.Utils.addClass(<span class="reserved">this</span>.internalContainer, <span class="reserved">this</span>.config.downClass);
+    }
+  }
+
+  <span class="reserved">if</span>(<span class="reserved">this</span>.config.style != null){
+		<span class="reserved">this</span>.applyStyle(<span class="reserved">this</span>.config.style);
+	}
+
+	<span class="reserved">if</span> (<span class="reserved">this</span>._mousedown) {
+		<span class="reserved">this</span>._pauseRepeat();
+	}
+	
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.outAction != null){
+		<span class="reserved">return</span> <span class="reserved">this</span>.config.outAction(ev, <span class="reserved">this</span>);
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+* \internal Handler for mousedown event
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.onmousedown = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEnabled()){
+		<span class="reserved">return</span> false;
+	}
+
+	var self = <span class="reserved">this</span>;
+	<span class="reserved">if</span>(typeof(ev) == <span class="literal">'undefined'</span>){
+		ev = window.event;
+	}
+	<span class="reserved">this</span>._mousedown = true;
+	<span class="reserved">this</span>.toggleClass(<span class="literal">"mouseDown"</span>);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.image != null &amp;&amp; <span class="reserved">this</span>.config.downImage != null){
+		<span class="reserved">this</span>.img.src = <span class="reserved">this</span>.config.downImage;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.downClass != null){
+		Zapatec.Utils.addClass(<span class="reserved">this</span>.internalContainer, <span class="reserved">this</span>.config.downClass);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.downStyle != null){
+		<span class="reserved">this</span>.applyStyle(<span class="reserved">this</span>.config.downStyle);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.downAction != null){
+		<span class="reserved">this</span>._timeoutId = setTimeout(<span class="reserved">function</span>() {
+			self._repeatSpeed = self.config.repeatStartSpeed;
+			self._repeatDownAction(ev);
+		}, <span class="reserved">this</span>.config.downActionDelay);
+		<span class="reserved">return</span> <span class="reserved">this</span>.config.downAction(ev, <span class="reserved">this</span>);
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+* \internal Handler for click event
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.onclick = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span>(!<span class="reserved">this</span>.isEnabled()){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(typeof(ev) == <span class="literal">'undefined'</span>){
+		ev = window.event;
+	}
+	
+	<span class="reserved">if</span> (<span class="reserved">this</span>._timeoutId) {
+		clearTimeout(<span class="reserved">this</span>._timeoutId);
+	}
+	<span class="reserved">this</span>._timeoutId = null;
+	<span class="reserved">this</span>._mousedown = false;
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.clickAction != null){
+		<span class="reserved">return</span> <span class="reserved">this</span>.config.clickAction(ev, <span class="reserved">this</span>);
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Executes down action, and schedules another one.
+ */</span>
+Zapatec.Button.<span class="reserved">prototype</span>._repeatDownAction = <span class="reserved">function</span>(ev) {
+  <span class="reserved">if</span> (<span class="reserved">this</span>.config.downAction != null) {
+    <span class="reserved">this</span>.config.downAction(ev, <span class="reserved">this</span>);
+  }
+	<span class="reserved">if</span> (<span class="reserved">this</span>.config.repeatEnabled) {
+		<span class="reserved">if</span> (<span class="reserved">this</span>._repeatSpeed &gt; <span class="reserved">this</span>.config.repeatMaxSpeed) {
+			<span class="reserved">this</span>._repeatSpeed = Math.round(<span class="reserved">this</span>.config.repeatAcceleration * <span class="reserved">this</span>._repeatSpeed);
+		}
+		var self = <span class="reserved">this</span>;
+		<span class="reserved">this</span>._timeoutId = setTimeout(<span class="reserved">function</span>() {
+			self._repeatDownAction();
+		}, <span class="reserved">this</span>._repeatSpeed);
+	}
+};
+
+<span class="comment">/**
+ * Makes a pause in down action repeats.
+ */</span>
+Zapatec.Button.<span class="reserved">prototype</span>._pauseRepeat = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (<span class="reserved">this</span>._timeoutId) {
+		clearTimeout(<span class="reserved">this</span>._timeoutId);
+		<span class="reserved">this</span>._timeoutId = null;
+	}
+};
+
+<span class="comment">/**
+* \internal Preload button images
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.preloadImages = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.image != null){
+		var images = [<span class="reserved">this</span>.config.image];
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.overImage != null){
+			images.push(<span class="reserved">this</span>.config.overImage);
+		}
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.downImage != null){
+			images.push(<span class="reserved">this</span>.config.downImage);
+		}
+
+		Zapatec.Transport.preloadImages({urls: images});
+	}
+};
+
+<span class="comment">/**
+ * Sets the button in a pressed state
+ *
+ * <span class="attrib">@param</span> isPressed [boolean] if button is to be pressed or not
+ */</span>
+Zapatec.Button.<span class="reserved">prototype</span>.setPressed = <span class="reserved">function</span>(isPressed){
+	<span class="reserved">this</span>.isPressed = isPressed;
+
+	<span class="reserved">if</span> (isPressed) {
+		<span class="reserved">this</span>.toggleClass(<span class="literal">'mouseDown'</span>);
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.toggleClass(<span class="literal">'mouseOut'</span>);
+	}
+};
+
+<span class="comment">/**
+* \internal Removes all classes from buttons and adds given class.
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.toggleClass = <span class="reserved">function</span>(className){
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.statusContainer, <span class="literal">"mouseOver"</span>);
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.statusContainer, <span class="literal">"mouseOut"</span>);
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.statusContainer, <span class="literal">"mouseDown"</span>);
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.statusContainer, <span class="literal">"disabled"</span>);
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.internalContainer, <span class="reserved">this</span>.config.overClass);
+	Zapatec.Utils.removeClass(<span class="reserved">this</span>.internalContainer, <span class="reserved">this</span>.config.downClass);
+
+	<span class="reserved">if</span>(className != null){
+		Zapatec.Utils.addClass(<span class="reserved">this</span>.statusContainer, className);
+	}
+};
+
+<span class="comment">/**
+* Get reference to button main DOM object
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.getContainer = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> <span class="reserved">this</span>.container;
+};
+
+<span class="comment">/**
+* \internal apply given style to button
+*	\param style - [string] string value
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.applyStyle = <span class="reserved">function</span>(style){
+	Zapatec.Utils.applyStyle(<span class="reserved">this</span>.internalContainer, style);
+};
+
+<span class="comment">/**
+* Returns true if button is currently enabled
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.isEnabled = <span class="reserved">function</span>(){
+	<span class="reserved">return</span> <span class="reserved">this</span>.enabled;
+};
+
+<span class="comment">/**
+* Enable button
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.enable = <span class="reserved">function</span>(){
+	<span class="reserved">this</span>.enabled = true;
+
+	<span class="reserved">this</span>.toggleClass(<span class="literal">"mouseOut"</span>);
+};
+
+<span class="comment">/**
+* Disable button
+*/</span>
+Zapatec.Button.<span class="reserved">prototype</span>.disable = <span class="reserved">function</span>(){
+	<span class="reserved">this</span>.enabled = false;
+
+	<span class="reserved">this</span>.toggleClass(<span class="literal">"disabled"</span>);
+};
+
+<span class="comment">/**
+ * Sets the button text.
+ * <span class="attrib">@param</span> text {string} text to be set.
+ */</span>
+Zapatec.Button.<span class="reserved">prototype</span>.setText = <span class="reserved">function</span>(text) {
+	<span class="reserved">this</span>.internalContainer.innerHTML = text;
+};
+
+<span class="comment">/**
+ * Gets the button text.
+ * <span class="attrib">@return</span> {string} button text.
+ */</span>
+Zapatec.Button.<span class="reserved">prototype</span>.getText = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.internalContainer.innerHTML;
+};
+
+<span class="comment">/**
+* Takes given element (input type=”image|button|submit|reset”, button, image,
+* div or span) and replaces it with Zapatec.Button with given config. Original
+* element will be hided.
+*/</span>
+Zapatec.Button.setup = <span class="reserved">function</span>(elRef, config){
+	elRef = Zapatec.Widget.getElementById(elRef);
+
+	<span class="reserved">if</span>(elRef == null){
+		<span class="reserved">return</span> null;
+	}
+
+	elRef.zpHasButton = true;
+
+	<span class="reserved">if</span>(config == null){
+		config = {};
+	}
+
+	var nodeName = elRef.nodeName.toLowerCase();
+
+	var oldOverAction = config.overAction != null ? config.overAction : <span class="reserved">function</span>(){<span class="reserved">return</span> true;};
+	config.overAction = <span class="reserved">function</span>(ev){<span class="reserved">return</span> (
+		(elRef.onmouseover != null ? elRef.onmouseover.call(ev) : true) &amp;&amp;
+		oldOverAction(ev)
+	);};
+
+	var oldOutAction = config.outAction != null ? config.outAction : <span class="reserved">function</span>(){<span class="reserved">return</span> true;};
+	config.outAction = <span class="reserved">function</span>(ev){<span class="reserved">return</span> (
+		(elRef.onmouseout != null ? elRef.onmouseout.call(ev) : true) &amp;&amp;
+		oldOutAction(ev)
+	);};
+
+	var oldDownAction = config.downAction != null ? config.downAction : <span class="reserved">function</span>(){<span class="reserved">return</span> true;};
+	config.downAction = <span class="reserved">function</span>(ev){<span class="reserved">return</span> (
+		(elRef.onmousedown != null ? elRef.onmousedown.call(ev) : true) &amp;&amp;
+		oldDownAction(ev)
+	);};
+
+	var oldClickAction = config.clickAction != null ?
+		config.clickAction : <span class="reserved">function</span>(){<span class="reserved">return</span> true;};
+
+	config.clickAction = <span class="reserved">function</span>(ev){<span class="reserved">return</span> (
+		(elRef.onclick != null ? elRef.onclick.call(ev) : true) &amp;&amp;
+		oldClickAction(ev)
+	);};
+
+	var submitAction = <span class="reserved">function</span>(ev){
+		<span class="reserved">if</span>(elRef.form != null &amp;&amp; elRef.zpHidden == null){
+			var hidden = document.createElement(<span class="literal">"input"</span>);
+			hidden.type = <span class="literal">'hidden'</span>;
+			hidden.name = elRef.name;
+			hidden.value = elRef.value;
+			hidden.style.display = <span class="literal">'none'</span>;
+			Zapatec.Utils.insertAfter(elRef, hidden);
+			elRef.zpHidden = hidden;
+		}
+
+		<span class="reserved">if</span>(elRef.form &amp;&amp; elRef.form.onSubmit != null){
+			elRef.form.onSubmit();
+		}
+
+		<span class="reserved">return</span> (
+			(elRef.onclick != null ? elRef.onclick.call(ev) : true) &amp;&amp;
+			oldClickAction(ev) &amp;&amp;
+			(elRef.form != null ? elRef.form.submit() : true)
+		);
+	};
+
+	<span class="reserved">if</span>(nodeName == <span class="literal">'button'</span>){
+		config.text = elRef.value;
+	} <span class="reserved">else</span> <span class="reserved">if</span>(nodeName == <span class="literal">'img'</span>){
+		config.image = elRef.src;
+		config.text = elRef.title || elRef.title;
+	} <span class="reserved">else</span> <span class="reserved">if</span>(
+		nodeName == <span class="literal">'div'</span> ||
+		nodeName == <span class="literal">'span'</span>
+	){
+		config.text = elRef.innerHTML;
+	} <span class="reserved">else</span> <span class="reserved">if</span>(nodeName == <span class="literal">'input'</span>){
+		config.text = elRef.value;
+		<span class="reserved">if</span>(elRef.type.toLowerCase() == <span class="literal">'image'</span>){
+			config.image = elRef.src;
+			config.clickAction = submitAction;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(elRef.type.toLowerCase() == <span class="literal">'button'</span>){
+		} <span class="reserved">else</span> <span class="reserved">if</span>(elRef.type.toLowerCase() == <span class="literal">'submit'</span>){
+			config.clickAction = submitAction;
+		} <span class="reserved">else</span> <span class="reserved">if</span>(elRef.type.toLowerCase() == <span class="literal">'reset'</span>){
+			config.clickAction = <span class="reserved">function</span>(ev){
+				(elRef.onclick != null ? elRef.onclick.call(ev) : true) &amp;&amp;
+				oldClickAction(ev) &amp;&amp;
+				(elRef.form != null ? elRef.form.reset() : true)
+			};
+		} <span class="reserved">else</span> {
+			<span class="reserved">return</span> null;
+		}
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> null;
+	}
+
+	var button = new Zapatec.Button(config);
+	Zapatec.Utils.insertAfter(elRef, button.getContainer());
+	elRef.disabled = true;
+	elRef.style.display = <span class="literal">'none'</span>;
+
+	<span class="reserved">return</span> button;
+};
+
+<span class="comment">/**
+* Takes all suitable elements (input type=”image|button|submit|reset” or
+* button) from elRef childs and makes Zapatec.Button.setup() for each of them.
+*/</span>
+Zapatec.Button.setupAll = <span class="reserved">function</span>(elRef, config){
+	<span class="reserved">if</span>(typeof(elRef) == <span class="literal">'string'</span>){
+		elRef = document.getElementById(elRef);
+	}
+
+	<span class="reserved">if</span>(elRef == null){
+		<span class="reserved">return</span> null;
+	}
+
+	var childs = elRef.all ? elRef.all : elRef.getElementsByTagName(<span class="literal">"*"</span>);
+
+	<span class="reserved">function</span> cloneConfig(){
+		var cfg = {};
+
+		<span class="reserved">for</span>(var option in config){
+			cfg[option] = config[option];
+		}
+
+		<span class="reserved">return</span> cfg;
+	}
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; childs.length; ii++){
+		var child = childs[ii];
+		<span class="reserved">if</span>(
+			child.nodeType == 1 &amp;&amp;
+			(
+				child.nodeName.toLowerCase() == <span class="literal">'button'</span> ||
+				child.nodeName.toLowerCase() == <span class="literal">'input'</span> &amp;&amp;
+				(
+					child.type.toLowerCase() == <span class="literal">'image'</span> ||
+					child.type.toLowerCase() == <span class="literal">'button'</span> ||
+					child.type.toLowerCase() == <span class="literal">'submit'</span> ||
+					child.type.toLowerCase() == <span class="literal">'reset'</span>
+				)
+			) &amp;&amp;
+			!child.zpHasButton
+		){
+			Zapatec.Button.setup(child, cloneConfig());
+		}
+	}
+};
+
+Zapatec.Button.<span class="reserved">prototype</span>.destroy = <span class="reserved">function</span>(){
+    <span class="reserved">if</span>(!<span class="reserved">this</span>.container){
+    	<span class="comment">// already destroyed</span>
+    	<span class="reserved">return</span>;
+    }
+
+    <span class="reserved">this</span>.container.onmouseover = null;
+    <span class="reserved">this</span>.container.onmouseout = null;
+    <span class="reserved">this</span>.container.onmousedown = null;
+    <span class="reserved">this</span>.container.onmouseup = null;
+    <span class="reserved">this</span>.container.onclick = null;
+
+        
+        <span class="comment">//Zapatec.Utils.destroy(this.internalContainer)</span>
+        <span class="comment">//Zapatec.Utils.destroy(this.statusContainer)</span>
+        <span class="comment">//Zapatec.Utils.destroy(this.container)</span>
+	<span class="reserved">this</span>.internalContainer = null;
+	<span class="reserved">this</span>.statusContainer = null;
+	<span class="reserved">this</span>.container = null;
+
+	<span class="reserved">return</span> null;
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<table class="notification" cellspacing="0" width="100%">
+  <tr>
+    <td>
+      <div id="error"><%=Util.blankIfNull(error)%></div>
+      <div id="message"><%=Util.blankIfNull(message)%></div>
+    </td>
+    <td align="right"><% if (docUrl!=null) { %><a class="docurl" href="<%=docUrl%>" target="_blank">Help</a><% } %></td>
+  </tr>
+</table>

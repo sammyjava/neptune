@@ -1,0 +1,94 @@
+/* $Id: outlook.css 15241 2009-01-16 23:28:05Z alex $ */
+
+.zpTreeOutlookContainer .tree {
+padding-left:15px;
+}
+
+.zpTreeOutlookContainer .tree-top {
+padding-left:0;
+}
+
+.zpTreeOutlookContainer .tree,.zpTreeOutlookContainer .tree-item table.tree-table {
+font:12px arial,verdana,sans-serif; 
+line-height:25px;
+}
+
+.zpTreeOutlookContainer .tree-item {
+padding-left:17px;
+}
+
+.zpTreeOutlookContainer .tree-item td.label {
+cursor:pointer;
+}
+
+.zpTreeOutlookContainer .tree-item table.tree-table td.label {
+padding:0px 5px;
+white-space:nowrap !important;
+}
+
+.zpTreeOutlookContainer .tree-item-selected table.tree-table td.label {
+}
+
+.zpTreeOutlookContainer .tree-item .icon {
+cursor:pointer;
+width:18px;
+height:18px;
+text-align:center;
+}
+
+.zpTreeOutlookContainer .tree-item .tgb {
+width:9px;
+height:9px;
+cursor:default;
+}
+
+.zpTreeOutlookContainer .tree-item .minus {
+background:transparent url("img/minus.gif") no-repeat 50% 50%;
+padding-right:7px;
+}
+
+.zpTreeOutlookContainer .tree-item .plus {
+background:transparent url("img/plus.gif") no-repeat 50% 50%;
+padding-right:7px;
+}
+
+.zpTreeOutlookContainer .tree-item .fetching {
+background:transparent url("img/fetching.gif") no-repeat 50% 50%;
+padding-right:7px;
+}
+
+.zpTreeOutlookContainer .tree-item-more {
+padding-left:1px;
+}
+
+.zpTreeOutlookContainer .tree-lined {
+}
+
+.zpTreeOutlookContainer .tree-lines-c {
+}
+
+.zpTreeOutlookContainer .tree-lines-s {
+}
+
+.zpTreeOutlookContainer .tree-lines-t {
+}
+
+.zpTreeOutlookContainer .tree-lines-b {
+}
+
+
+.zpTreeOutlookContainer .tree-lines-t {
+	height:26px;
+}
+
+.zpTreeOutlookContainer .tree-lines-c {
+	height:26px;
+}
+
+.zpTreeOutlookContainer .tree-item-selected  { 
+  background:url(outlook/selected.png) repeat-x 100% 100%; 
+}
+
+.zpTreeOutlookContainer .tree-lines-b {
+	height:26px;
+}  

@@ -1,0 +1,950 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="draggable.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>draggable.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'draggable.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">//$Id: draggable.js 8730 2007-11-01 08:09:42Z vasyl $</span>
+<span class="comment">/**
+ * This is a set of functionality used for dragging object
+ * and is implemented in interface (mixin) manner.
+ */</span>
+Zapatec.Draggable = {};
+
+<span class="comment">/**
+ * Makes the element draggable. This means attaching events, 
+ * and making some preparations.
+ * <span class="attrib">@return</span> {boolean} true if success, otherwise false.
+ */</span>
+Zapatec.Draggable.makeDraggable = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.requireInterface(<span class="literal">"Zapatec.Movable"</span>)) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.requireInterface(<span class="literal">"Zapatec.CommandEvent"</span>)) {
+		<span class="reserved">return</span> false;
+	}
+	var draggables = Zapatec.Array(<span class="reserved">this</span>.getDraggableElements());
+	var hooks = Zapatec.Array(<span class="reserved">this</span>._getDraggableHooks());
+	var self = <span class="reserved">this</span>, result = false;
+	var config = <span class="reserved">this</span>.getDragConfig();
+	<span class="comment">//if method is not "cut" we can not imitate event capture</span>
+	<span class="reserved">if</span> (config.method != <span class="literal">"cut"</span>) {
+		<span class="reserved">this</span>.setDragConfig({eventCapture : false});
+	}
+	<span class="comment">//we need to save references to anonymous event listeners</span>
+	var listenersObj = <span class="reserved">this</span>._getRestorer().getSavedProps()[<span class="literal">"dragListeners"</span>] = {
+		mousedown : <span class="reserved">function</span>(ev) {
+			<span class="reserved">return</span> self.dragStart(ev);
+		},
+		mousemove : <span class="reserved">function</span>(ev) {
+			<span class="reserved">if</span> (self.isDragging()) {
+				<span class="reserved">return</span> self.dragMove(ev);
+			}
+		},
+		mouseup : <span class="reserved">function</span>(ev) {
+			<span class="reserved">if</span> (self.isDragging()) {
+				<span class="reserved">return</span> self.dragEnd(ev);
+			}
+		}
+	};
+	hooks.each(<span class="reserved">function</span>(index, hook) {
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(hook)) {
+			<span class="reserved">return</span>;
+		}
+		<span class="comment">//if we are here than there is at least one hook :)</span>
+		result = true;
+		<span class="comment">//this for disabling text selection on drag</span>
+		<span class="reserved">if</span> (Zapatec.is_gecko) {
+			hook.style.setProperty(<span class="literal">"-moz-user-select"</span>, <span class="literal">"none"</span>, <span class="literal">""</span>);
+		}
+		<span class="comment">//adding drag start event</span>
+		Zapatec.Utils.addEvent(hook, <span class="literal">'mousedown'</span>, listenersObj.mousedown);
+		<span class="comment">//imitating capturing of some events. This is used when mouse event</span>
+		<span class="comment">//is involved with hook element, cause there won't be a click event for</span>
+		<span class="comment">//that element if cover will appear over it.</span>
+		<span class="reserved">if</span> (config.eventCapture) {
+			Zapatec.Utils.addEvent(hook, <span class="literal">'mousemove'</span>, listenersObj.mousemove);
+			Zapatec.Utils.addEvent(hook, <span class="literal">'mouseup'</span>, listenersObj.mouseup);
+		}
+	});
+	draggables.each(<span class="reserved">function</span>(index, draggable) {
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(draggable)) {
+			<span class="reserved">return</span>;
+		}
+		<span class="comment">//this is for backward compability and to be able to</span>
+		<span class="comment">//get draggable object with only a reference to HTML element</span>
+		self.createProperty(draggable, <span class="literal">"dragObj"</span>, self);
+	});
+	<span class="comment">//returning result</span>
+	<span class="reserved">return</span> result;	
+};
+
+<span class="comment">/**
+ * This is an event handler for the mouse down event 
+ * of the hook element.
+ * <span class="attrib">@param</span> ev {MouseEvent} this is mouse event triggered by
+ * mouse down action.
+ * <span class="attrib">@return</span> {false} false for stoping events in some browsers.
+ */</span>
+Zapatec.Draggable.dragStart = <span class="reserved">function</span>(ev) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.canDrag()) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//getting event object</span>
+	ev = ev || window.event;
+	<span class="comment">//check mouse button, only left one is valid</span>
+	var iButton = ev.button || ev.which;
+	<span class="reserved">if</span> (iButton &gt; 1) {
+		<span class="reserved">return</span> false;
+	}
+	var self = <span class="reserved">this</span>;
+	var config = <span class="reserved">this</span>.getDragConfig();
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"beforeDragInit"</span>, ev) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//calling global event handler</span>
+	<span class="reserved">if</span> (Zapatec.GlobalEvents.fireEvent(<span class="literal">"beforeDragInit"</span>, ev, <span class="reserved">this</span>) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//now we started dragging!</span>
+	<span class="reserved">this</span>._setDragging(true);
+	<span class="comment">//workaround for dummy and copy methods to capture events correctly</span>
+	<span class="reserved">if</span> (config.eventCapture &amp;&amp; (config.method == <span class="literal">"dummy"</span> || config.method == <span class="literal">"copy"</span>)) {
+		var draggables = Zapatec.Array(<span class="reserved">this</span>.getDraggableElements());
+		draggables.each(<span class="reserved">function</span>(index, draggable) {
+			draggable.restorer.saveProp(<span class="literal">"style.zIndex"</span>);
+			draggable.style.zIndex = 2000001;
+		});
+	}
+	<span class="comment">//preparing elements</span>
+	<span class="reserved">this</span>._proceedDraggableElements(<span class="literal">"dragStart"</span>);
+	<span class="comment">//lets get the starting position of the mouse</span>
+	var oPos = Zapatec.Utils.getMousePos(ev);
+	var mouseX = oPos.pageX;
+	var mouseY = oPos.pageY;
+	<span class="comment">//making object movable</span>
+	<span class="reserved">this</span>.makeMovable();
+	<span class="comment">//starting movement</span>
+	<span class="reserved">this</span>.startMove();
+	<span class="comment">//preparing movable elements</span>
+	var elements = Zapatec.Array(<span class="reserved">this</span>.getMovableElements());
+	elements.each(<span class="reserved">function</span>(index, movable) {
+		<span class="reserved">if</span> (Zapatec.isHtmlElement(movable)) {
+			<span class="comment">//giving z-index</span>
+			movable.restorer.saveProp(<span class="literal">"style.zIndex"</span>);
+			movable.style.zIndex = 1000000 + (parseInt(movable.style.zIndex, 10) || 0);
+			<span class="comment">//applying styles</span>
+			self._proceedDragStyles(movable, <span class="literal">"dragStart"</span>);
+			<span class="comment">//assigning proper cursor if event capture</span>
+			<span class="reserved">if</span> (config.eventCapture) {
+				movable.restorer.saveProp(<span class="literal">"style.cursor"</span>);
+				movable.style.cursor = <span class="literal">"move"</span>;
+			}
+		} <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isMovableObj(movable)) {
+			<span class="comment">//making recursive iterating through all child movables</span>
+			var elems = Zapatec.Array(movable.getMovableElements());
+			elems.each(arguments.calee);
+		}
+	});
+	Zapatec.Utils.cover.show(
+		config.eventCapture ? 999999 : 2000000,
+		<span class="literal">"move"</span>,
+		<span class="reserved">function</span>(ev) {
+			<span class="reserved">return</span> self.dragMove(ev);
+		},
+		<span class="reserved">function</span>(ev) {
+			<span class="reserved">return</span> self.dragEnd(ev);
+		}
+	);
+	<span class="reserved">this</span>._setMovingPoint(mouseX, mouseY);
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragInit"</span>, ev);
+
+	<span class="comment">//calling the global handler</span>
+	Zapatec.GlobalEvents.fireEvent(<span class="literal">"onDragInit"</span>, ev, <span class="reserved">this</span>);
+	
+	<span class="reserved">if</span> (config.stopEvent) {
+		<span class="reserved">return</span> Zapatec.Utils.stopEvent(ev);
+	} <span class="reserved">else</span> {
+		<span class="reserved">return</span> true;
+	}
+};
+
+<span class="comment">/**
+ * This is an event handler for the mouse move event 
+ * of the cover element.
+ * <span class="attrib">@param</span> ev {MouseEvent} this is mouse event triggered by
+ * mouse move action.
+ * <span class="attrib">@return</span> {false} false for stoping events in some browsers.
+ */</span>
+Zapatec.Draggable.dragMove = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isDragging()) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//getting event object</span>
+	ev = ev || window.event;
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"beforeDragMove"</span>, ev) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//calling global event handler</span>
+	<span class="reserved">if</span> (Zapatec.GlobalEvents.fireEvent(<span class="literal">"beforeDragMove"</span>, ev, <span class="reserved">this</span>) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="reserved">if</span> (Zapatec.Utils.cover.style.zIndex != 2000000) {
+		var config = <span class="reserved">this</span>.getDragConfig();
+		<span class="comment">//workaround for dummy and copy methods to handle eventCapture corectly</span>
+		<span class="reserved">if</span> (config.eventCapture &amp;&amp; (config.method == <span class="literal">"dummy"</span> || config.method == <span class="literal">"copy"</span>)) {
+			var draggables = Zapatec.Array(<span class="reserved">this</span>.getDraggableElements());
+			draggables.each(<span class="reserved">function</span>(index, draggable) {
+				draggable.restorer.restoreProp(<span class="literal">"style.zIndex"</span>);
+			});
+		}
+		<span class="comment">//putting cover over everything</span>
+		Zapatec.Utils.cover.style.zIndex = 2000000;
+	}
+	<span class="comment">//mouse position</span>
+	var oPos = Zapatec.Utils.getMousePos(ev);
+	var mouseX = oPos.pageX;
+	var mouseY = oPos.pageY;
+	var movePoint = <span class="reserved">this</span>.getMovingPoint();
+	<span class="reserved">this</span>.moveFor(mouseX - movePoint.x, mouseY - movePoint.y);
+	<span class="reserved">this</span>._setMovingPoint(mouseX, mouseY);
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragMove"</span>, ev);
+
+	<span class="comment">//calling global event handler</span>
+	Zapatec.GlobalEvents.fireEvent(<span class="literal">"onDragMove"</span>, ev, <span class="reserved">this</span>);
+
+	<span class="comment">// Stop event</span>
+	<span class="reserved">return</span> Zapatec.Utils.stopEvent(ev);
+};
+
+<span class="comment">/**
+ * This is an event handler for the mouse up event 
+ * of the cover element.
+ * <span class="attrib">@param</span> ev {MouseEvent} this is mouse event triggered by
+ * mouse up action.
+ * <span class="attrib">@return</span> {false} false for stoping events in some browsers.
+ */</span>
+Zapatec.Draggable.dragEnd = <span class="reserved">function</span>(ev){
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isDragging()) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//getting event object</span>
+	ev = ev || window.event;
+	var self = <span class="reserved">this</span>;
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">if</span> (<span class="reserved">this</span>.fireEvent(<span class="literal">"beforeDragEnd"</span>, ev) === false) {
+		<span class="reserved">return</span> true;
+	}
+	<span class="comment">//calling global event handler</span>
+	<span class="reserved">if</span> (Zapatec.GlobalEvents.fireEvent(<span class="literal">"beforeDragEnd"</span>, ev, <span class="reserved">this</span>) === false) {
+		<span class="reserved">return</span> true;
+	}
+	var config = <span class="reserved">this</span>.getDragConfig();
+	<span class="comment">//workaround for dummy and copy methods to handle eventCapture corectly</span>
+	<span class="reserved">if</span> (config.eventCapture &amp;&amp; (config.method == <span class="literal">"dummy"</span> || config.method == <span class="literal">"copy"</span>)) {
+		var draggables = Zapatec.Array(<span class="reserved">this</span>.getDraggableElements());
+		draggables.each(<span class="reserved">function</span>(index, draggable) {
+			draggable.restorer.restoreProp(<span class="literal">"style.zIndex"</span>, true);
+		});
+	}
+	<span class="comment">//restoring movable elements</span>
+	var elements = Zapatec.Array(<span class="reserved">this</span>.getMovableElements());
+	elements.each(<span class="reserved">function</span>(index, movable) {
+		<span class="reserved">if</span> (Zapatec.isHtmlElement(movable)) {
+			movable.restorer.restoreProp(<span class="literal">"style.zIndex"</span>);
+			movable.restorer.restoreProp(<span class="literal">"style.cursor"</span>);
+			<span class="comment">//clearing styles</span>
+			self._proceedDragStyles(movable, <span class="literal">"dragEnd"</span>);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isMovableObj(movable)) {
+			<span class="comment">//making recursive iterating through all child movables</span>
+			var elems = Zapatec.Array(movable.getMovableElements());
+			elems.each(arguments.calee);
+		}
+	});
+
+	<span class="comment">//unprepareing elements</span>
+	<span class="reserved">this</span>._proceedDraggableElements(<span class="literal">"dragEnd"</span>);
+	<span class="comment">//hiding the cover</span>
+	Zapatec.Utils.cover.hide();
+	<span class="comment">//clearing moving point</span>
+	<span class="reserved">this</span>._setMovingPoint(null, null);
+	<span class="comment">//now we ended dragging!</span>
+	<span class="reserved">this</span>._setDragging(false);
+	<span class="comment">//ending movement</span>
+	<span class="reserved">this</span>.endMove();
+	<span class="comment">//calling the handler</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"onDragEnd"</span>, ev);
+
+	<span class="comment">//calling global event handler</span>
+	Zapatec.GlobalEvents.fireEvent(<span class="literal">"onDragEnd"</span>, ev, <span class="reserved">this</span>);
+
+	<span class="comment">// Stop event</span>
+	<span class="reserved">return</span> Zapatec.Utils.stopEvent(ev);
+};
+
+<span class="comment">/** 
+ * returns element to its original place where it was taken from.
+ * Applicable only for the cut method!
+ */</span>
+Zapatec.Draggable.restorePos = <span class="reserved">function</span>(){
+	<span class="reserved">this</span>.restoreOfMove();
+};
+
+<span class="comment">/**
+ * Restores object from dragging.
+ */</span>
+Zapatec.Draggable.restoreOfDrag = <span class="reserved">function</span>() {
+	<span class="comment">//we need to save references to anonymous event listeners</span>
+	var listenersObj = <span class="reserved">this</span>._getRestorer().getSavedProps()[<span class="literal">"dragListeners"</span>];
+	<span class="reserved">if</span> (!listenersObj) {
+		<span class="reserved">return</span> false;
+	}
+	<span class="reserved">this</span>.restoreOfMove();
+	var hooks = Zapatec.Array(<span class="reserved">this</span>._getDraggableHooks());
+	var draggables = Zapatec.Array(<span class="reserved">this</span>.getDraggableElements());
+	var self = <span class="reserved">this</span>;
+	var config = <span class="reserved">this</span>.getDragConfig();
+	hooks.each(<span class="reserved">function</span>(index, hook) {
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(hook)) {
+			<span class="reserved">return</span>;
+		}
+		<span class="reserved">if</span> (Zapatec.is_gecko) {
+			hook.style.setProperty(<span class="literal">"-moz-user-select"</span>, <span class="literal">""</span>, <span class="literal">""</span>);
+		}
+		Zapatec.Utils.removeEvent(hook, <span class="literal">'mousedown'</span>, listenersObj.mousedown);
+		<span class="reserved">if</span> (config.eventCapture) {
+			Zapatec.Utils.removeEvent(hook, <span class="literal">'mousemove'</span>, listenersObj.mousemove);
+			Zapatec.Utils.removeEvent(hook, <span class="literal">'mouseup'</span>, listenersObj.mouseup);
+		}
+	});
+	draggables.each(<span class="reserved">function</span>(index, draggable) {
+		<span class="reserved">if</span> (!Zapatec.isHtmlElement(draggable)) {
+			<span class="reserved">return</span>;
+		}
+		draggable.dragObj = null;
+	});
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * This method should return the array of elements that
+ * are to be draggable. These are not always elements
+ * that are actually moved. This is almost empty method
+ * that should be overwritten in implementing class.
+ * <span class="attrib">@return</span> {array} array of draggable elements.
+ */</span>
+Zapatec.Draggable.getDraggableElements = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getContainer();
+};
+
+<span class="comment">/**
+ * This method should return the array of elements that
+ * are handles for dragging. These are elements that 
+ * trigger drag start. This is almost empty method
+ * that should be overwritten in implementing class.
+ * <span class="attrib">@return</span> {array} array of hook elements.
+ */</span>
+Zapatec.Draggable._getDraggableHooks = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getContainer();
+};
+
+<span class="comment">/**
+ * Returns container for this object.
+ */</span>
+Zapatec.Draggable.getContainer = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getDragConfig().container;
+};
+
+<span class="comment">/**
+ * This method returns true if object started
+ * dragging, otherwise false.
+ * <span class="attrib">@return</span> {boolean} true if object is dragging,
+ * otherwise false.
+ */</span>
+Zapatec.Draggable.isDragging = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.dragging;
+};
+
+<span class="comment">/**
+ * This method returns true if dragging is enabled,
+ * otherwise it should return false.
+ * <span class="attrib">@return</span> {boolean} true if dragging enabled, otherwise false.
+ */</span>
+Zapatec.Draggable.canDrag = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.canDrag;
+};
+
+<span class="comment">/**
+ * Turns on or off dragging.
+ * <span class="attrib">@param</span> on {boolean} whether we want to 
+ * turn on or off dragging.
+ */</span>
+Zapatec.Draggable._setCanDrag = <span class="reserved">function</span>(on) {
+	<span class="reserved">this</span>.canDrag = on;
+};
+
+<span class="comment">/**
+ * Should returns the dragging configuration.
+ * <span class="attrib">@return</span> {object} configuration object.
+ */</span>
+Zapatec.Draggable.getDragConfig = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration();
+};
+
+<span class="comment">/**
+ * Sets the dragging configuration.
+ * <span class="attrib">@param</span> config {object} a set of new configuration.
+ */</span>
+Zapatec.Draggable.setDragConfig = <span class="reserved">function</span>(config) {
+	<span class="reserved">this</span>.reconfigure(config);
+};
+
+<span class="comment">/**
+ * Sets the flag of dragging to on or off.
+ * <span class="attrib">@param</span> on {boolean} true to turn on, otherwise false.
+ */</span>
+Zapatec.Draggable._setDragging = <span class="reserved">function</span>(on) {
+	<span class="reserved">this</span>.dragging = on;
+};
+
+<span class="comment">/**
+ * This method handles overflow of the dragging coordinate.
+ * <span class="attrib">@param</span> limit {number} limit that was overflowed.
+ * <span class="attrib">@param</span> dimension {string} dimension of coordinate.
+ * <span class="attrib">@return</span> {number or boolean} new coordinate or false.
+ */</span>
+Zapatec.Draggable._handleCoordOverflow = <span class="reserved">function</span>(limit, dimension) {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.isDragging()) {
+		Zapatec.Movable._handleCoordOverflow.call(<span class="reserved">this</span>, limit, dimension);
+	}
+	<span class="reserved">return</span> limit;
+};
+
+<span class="comment">/**
+ * Returns the Zapatec.SRProp object.
+ * It is used for saving and restoring
+ * object properties.
+ * <span class="attrib">@return</span> {object} Zapatec.SRProp object.
+ */</span>
+Zapatec.Draggable._getRestorer = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.restorer) {
+		<span class="reserved">this</span>.restorer = new Zapatec.SRProp(<span class="reserved">this</span>);
+	}
+	<span class="reserved">return</span> <span class="reserved">this</span>.restorer;
+};
+
+<span class="comment">/**
+ * Proceeds the array of draggable elements, to create
+ * a separate array for elements that are actually moving.
+ * This is used to handle method of dragging.
+ * <span class="attrib">@param</span> dragState {string} "dragStart" or "dragEnd" string 
+ * to point the state of dragging.
+ */</span>
+Zapatec.Draggable._proceedDraggableElements = <span class="reserved">function</span>(dragState) {
+	<span class="comment">//drag configuration</span>
+	var config = <span class="reserved">this</span>.getDragConfig(), 
+	restorer = <span class="reserved">this</span>._getRestorer(),
+	copies = null, measurement = null, self = <span class="reserved">this</span>,
+	listenersObj = restorer.getProp(<span class="literal">"dragListeners"</span>);
+	<span class="reserved">function</span> toggleEvents(action, hooks, listenersObj) {
+		hooks.each(<span class="reserved">function</span>(index, hook) {
+			Zapatec.Utils[action + <span class="literal">"Event"</span>](hook, <span class="literal">"mousedown"</span>, listenersObj.mousedown);
+			<span class="reserved">if</span> (config.eventCapture) {
+				Zapatec.Utils[action + <span class="literal">"Event"</span>](hook, <span class="literal">'mousemove'</span>, listenersObj.mousemove);
+				Zapatec.Utils[action + <span class="literal">"Event"</span>](hook, <span class="literal">'mouseup'</span>, listenersObj.mouseup);
+			}
+		});
+	}
+	switch (config.method) {
+		case <span class="literal">"copy"</span> : case <span class="literal">"dummy"</span> : {
+			<span class="reserved">if</span> (dragState == <span class="literal">"dragStart"</span>) {
+				var elements = Zapatec.Array(<span class="reserved">this</span>.getDraggableElements());
+				var hooks = Zapatec.Array(<span class="reserved">this</span>._getDraggableHooks());
+				copies = Zapatec.Array();
+				<span class="comment">//removing listeners so the elements will be cloned</span>
+				<span class="comment">//without them.</span>
+				toggleEvents(<span class="literal">"remove"</span>, hooks, listenersObj);
+				<span class="comment">//copying elements</span>
+				elements.each(<span class="reserved">function</span>(index, movable) {
+					<span class="reserved">if</span> (Zapatec.isHtmlElement(movable)) {
+						<span class="comment">//cloning a node</span>
+						var newNode = movable.cloneNode(config.copyChilds);
+						newNode.dragObj = self;
+						<span class="comment">//adding event listeners</span>
+						<span class="reserved">if</span> (config.eventCapture) {
+							Zapatec.Utils.addEvent(newNode, <span class="literal">'mousemove'</span>, listenersObj.mousemove);
+							Zapatec.Utils.addEvent(newNode, <span class="literal">'mouseup'</span>, listenersObj.mouseup);
+						}
+						<span class="comment">//inserting it to the place where the original one is</span>
+						movable.parentNode.insertBefore(newNode, movable);
+						<span class="comment">//fix for unknown problem in IE6</span>
+						newNode.style.visibility = <span class="literal">"visible"</span>;
+						<span class="comment">//adding copy to array</span>
+						copies.push(newNode);
+						<span class="comment">//assigning new measurement</span>
+						<span class="reserved">if</span> (movable == self.getMovableMeasurement()) {
+							measurement = newNode;
+						}
+					} <span class="reserved">else</span> <span class="reserved">if</span> (Zapatec.isMovableObj(movable)) {
+						<span class="comment">//making recursive iterating through all child movables</span>
+						var elems = Zapatec.Array(movable.getMovableElements());
+						elems.each(arguments.calee);
+					}
+				});
+				<span class="comment">//adding listeners back</span>
+				toggleEvents(<span class="literal">"add"</span>, hooks, listenersObj);
+				<span class="comment">//if there was no measurement copied we take the</span>
+				<span class="comment">//original one</span>
+				<span class="reserved">if</span> (!measurement) {
+					measurement = <span class="reserved">this</span>.getMovableMeasurement();
+				}
+				<span class="comment">//we substitute methods of Zapatec.Movable</span>
+				<span class="comment">//interface to get needed result</span>
+				restorer.saveProp(<span class="literal">"getMovableElements"</span>);
+				restorer.saveProp(<span class="literal">"isMovableSafely()"</span>);
+				<span class="comment">//new elements need to be movable safely</span>
+				<span class="reserved">this</span>._setMovableSafely(false);
+				<span class="comment">//we need to move copies</span>
+				<span class="reserved">this</span>.getMovableElements = <span class="reserved">function</span>(resetArray) {
+					var arr = copies;
+					copies = resetArray ? null : copies;
+					<span class="reserved">return</span> arr;
+				};
+				restorer.saveProp(<span class="literal">"getMovableMeasurement"</span>);
+				<span class="comment">//we need to use copied measurement if such exists</span>
+				<span class="reserved">this</span>.getMovableMeasurement = <span class="reserved">function</span>() {
+					<span class="reserved">return</span> measurement;
+				};
+			} <span class="reserved">else</span> <span class="reserved">if</span> (dragState == <span class="literal">"dragEnd"</span>) {
+				<span class="comment">//destroying elements if needed</span>
+				var elements = Zapatec.Array(<span class="reserved">this</span>.getMovableElements(true));
+				elements.each(<span class="reserved">function</span>(index, movable) {
+					<span class="reserved">if</span> (config.method == <span class="literal">"dummy"</span>) {
+						movable.parentNode.removeChild(movable);
+					}
+					movable.dragObj = null;
+					<span class="comment">//removing event listeners</span>
+					<span class="reserved">if</span> (config.eventCapture) {
+						Zapatec.Utils.removeEvent(movable, <span class="literal">'mousemove'</span>, listenersObj.mousemove);
+						Zapatec.Utils.removeEvent(movable, <span class="literal">'mouseup'</span>, listenersObj.mouseup);
+					}
+				});
+				<span class="reserved">this</span>.restoreOfMove();
+				<span class="comment">//returning old methods and values</span>
+				restorer.restoreProp(<span class="literal">"getMovableElements"</span>);
+				<span class="reserved">this</span>._setMovableSafely(restorer.getProp(<span class="literal">"isMovableSafely()"</span>));
+				restorer.restoreProp(<span class="literal">"isMovableSafely()"</span>);
+				restorer.restoreProp(<span class="literal">"getMovableMeasurement"</span>);
+			}
+			break;
+		}
+		default : {
+			break;
+		}
+	}
+};
+
+<span class="comment">/**
+ * Proceeds each movable element with some
+ * styling routines on drag start and end.
+ * <span class="attrib">@param</span> movable {HTML element} element to proceed.
+ * <span class="attrib">@param</span> dragState {string} string pointing to drag state.
+ */</span>
+Zapatec.Draggable._proceedDragStyles = <span class="reserved">function</span>(movable, dragState) {
+	var config = <span class="reserved">this</span>.getDragConfig();
+	<span class="comment">//overwriting class with new one if needed</span>
+	<span class="reserved">if</span> (config.overwriteCSS) {
+		<span class="reserved">if</span> (dragState == <span class="literal">"dragStart"</span>) {
+			movable.restorer.saveProp(<span class="literal">"className"</span>);
+			movable.className = config.overwriteCSS;
+		} <span class="reserved">else</span> <span class="reserved">if</span> (dragState == <span class="literal">"dragEnd"</span>) {
+			movable.restorer.restoreProp(<span class="literal">"className"</span>);
+		}
+	}
+	<span class="comment">//adding drag class if needed</span>
+	<span class="reserved">if</span> (config.dragCSS) {
+		<span class="reserved">if</span> (dragState == <span class="literal">"dragStart"</span>) {
+			Zapatec.Utils.addClass(movable, config.dragCSS);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (dragState == <span class="literal">"dragEnd"</span>) {
+			Zapatec.Utils.removeClass(movable, config.dragCSS);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Sets the coordinates of the point which is thought as
+ * the center of movement of the object.
+ * <span class="attrib">@param</span> x {number} x coordinate of the point.
+ * <span class="attrib">@param</span> y {number} y coordinate of the point.
+ */</span>
+Zapatec.Draggable._setMovingPoint = <span class="reserved">function</span>(x, y) {
+	var movingPoint = <span class="reserved">this</span>._getMovingPointObject();
+	<span class="comment">//this means drag end, so we should reset the object</span>
+	<span class="reserved">if</span> (x === null || y === null) {
+		movingPoint.x = null;
+		movingPoint.y = null;
+		movingPoint.offsetX = null;
+		movingPoint.offsetY = null;
+		<span class="reserved">return</span>;
+	}
+	<span class="comment">//this means drag start, so we fill object</span>
+	<span class="reserved">if</span> (movingPoint.x === null || movingPoint.y === null) {
+		var pos = <span class="reserved">this</span>.getPagePosition();
+		movingPoint.x = x;
+		movingPoint.y = y;
+		movingPoint.offsetX = x - pos.x;
+		movingPoint.offsetY = y - pos.y;
+	} <span class="reserved">else</span> {<span class="comment">//changing point coordinates as this is drag move</span>
+		var pos = <span class="reserved">this</span>.getPagePosition();
+		movingPoint.x = pos.x + movingPoint.offsetX;
+		movingPoint.y = pos.y + movingPoint.offsetY;
+	}
+	<span class="reserved">return</span>;
+};
+
+<span class="comment">/**
+ * Returns the coordinate of the moving point.
+ * Its the point which is thought to be the 
+ * center of movement.
+ * <span class="attrib">@return</span> {object} object with x and y properties.
+ */</span>
+Zapatec.Draggable.getMovingPoint = <span class="reserved">function</span>() {
+	var movingPoint = <span class="reserved">this</span>._getMovingPointObject();
+	<span class="reserved">return</span> {x : movingPoint.x, y : movingPoint.y};
+};
+
+<span class="comment">/**
+ * Returns the object which holds the information about moving point.
+ * <span class="attrib">@return</span> {object} object with x, y, offsetX and offsetY properties.
+ */</span>
+Zapatec.Draggable._getMovingPointObject = <span class="reserved">function</span>() {
+	<span class="reserved">if</span> (!<span class="reserved">this</span>.movingPoint || typeof <span class="reserved">this</span>.movingPoint != <span class="literal">"object"</span>) {
+		<span class="reserved">this</span>.movingPoint = {x : null, y : null, offsetX : null, offsetY : null};
+	}
+	<span class="reserved">return</span> <span class="reserved">this</span>.movingPoint;
+};
+
+<span class="comment">/**
+ * This is Zapatec.Utils.Draggable object definition.
+ * It represents most of the routines and
+ * events connected to dragging of the object.
+ * <span class="attrib">@param</span> config {object} - all parameters are passed as the properties of this object.
+ * 
+ * Constructor recognizes the following properties of the config object (rest options are inherited
+ * from Zapatec.Utils.Movable object, see movable.js comments)
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *  method           | {string} Method of dragging, can be "cut", "copy" or "dummy" (default "cut").
+ *  stopEvent        | {boolean} Should we stop mousedown event of the handler (default true). 
+ *  eventCapture     | {boolean} This is a workaround for capturing some events like click or double
+ *                   | click for the element that triggers dragging. Otherwise there will happen no
+ *                   | such event at all (default false).
+ *  handler          | {HTML element} Handle of dragging, otherwise container will be used (default null).
+ *  dragCSS          | {string} Class name that will be added to the element while it is dragging (default "").
+ *  overwriteCSS     | {string} Class name that will overwrite all the classes of the element (default "").
+ *
+ * \endcode
+ * There have been made some changes into the structure of DnD routines, so many options were changed.
+ * They are still working for keeping backward compability, but are depricated for the future use.
+ * Here is the list of the options and their equivalents:
+ * \code
+ *    prop. name     | description
+ *  -------------------------------------------------------------------------------------------------
+ *  left, top, right,| Use "limit" option of the Zapatec.Utils.Movable object!
+ *  bottom           |
+ *  dragLayer        | Use "moveLayer" option of the Zapatec.Utils.Movable object!
+ *  beforeDragInit,  | Use standart Zapatec.Widget option "listeners"
+ *  beforeDragMove,  |
+ *  beforeDragEnd,   |
+ *  onDragInit,      |
+ *  onDragMove,      |
+ *  onDragEnd        |
+ *  stopEv           | Use "stopEvent" form instead.
+ *
+ * \endcode
+ */</span>
+Zapatec.Utils.Draggable = <span class="reserved">function</span>(config) {
+	<span class="reserved">if</span> (arguments.length &gt; 1) {
+		var args = arguments[1];
+		args.container = config;
+		config = args;
+	}
+	<span class="comment">//for backward compability</span>
+	<span class="reserved">if</span> (typeof config.left != <span class="literal">"undefined"</span> || typeof config.right != <span class="literal">"undefined"</span> ||
+	    typeof config.top != <span class="literal">"undefined"</span> || typeof config.bottom != <span class="literal">"undefined"</span>) {
+			config.limit = {
+				minX : config.left, 
+				maxX : config.right, 
+				minY : config.top, 
+				maxY : config.bottom
+			};
+	}
+	<span class="reserved">if</span> (config.dragLayer) {config.moveLayer = config.dragLayer;}
+	<span class="reserved">if</span> (!config.eventListeners) {
+		config.eventListeners = {};
+	}
+	<span class="reserved">if</span> (config.beforeDragInit) {config.eventListeners.beforeDragInit = config.beforeDragInit;}
+	<span class="reserved">if</span> (config.beforeDragMove) {config.eventListeners.beforeDragMove = config.beforeDragMove;}
+	<span class="reserved">if</span> (config.beforeDragEnd) {config.eventListeners.beforeDragEnd = config.beforeDragEnd;}
+	<span class="reserved">if</span> (config.onDragInit) {config.eventListeners.onDragInit = config.onDragInit;}
+	<span class="reserved">if</span> (config.onDragMove) {config.eventListeners.onDragMove = config.onDragMove;}
+	<span class="reserved">if</span> (config.onDragEnd) {config.eventListeners.onDragEnd = config.onDragEnd;}
+	<span class="reserved">if</span> (config.stopEv) {config.stopEvent = config.stopEv;}
+	config = Zapatec.Hash.remove(config, 
+		<span class="literal">"left"</span>, <span class="literal">"top"</span>, <span class="literal">"right"</span>, <span class="literal">"bottom"</span>, <span class="literal">"dragLayer"</span>,
+		<span class="literal">"beforeDragInit"</span>, <span class="literal">"beforeDragMove"</span>, <span class="literal">"beforeDragEnd"</span>,
+		<span class="literal">"onDragInit"</span>, <span class="literal">"onDragMove"</span>, <span class="literal">"onDragEnd"</span>, <span class="literal">"stopEv"</span>
+	);
+	Zapatec.Utils.Draggable.SUPERconstructor.call(<span class="reserved">this</span>, config);
+};
+
+Zapatec.Utils.Draggable.id = <span class="literal">"Zapatec.Utils.Draggable"</span>;
+Zapatec.inherit(Zapatec.Utils.Draggable, Zapatec.Utils.Movable);
+Zapatec.implement(Zapatec.Utils.Draggable, <span class="literal">"Zapatec.Draggable"</span>);
+
+<span class="comment">/**
+ * Inits the object with set of config options.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Draggable.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(config) {
+	<span class="comment">//calling parent init</span>
+	Zapatec.Utils.Draggable.SUPERclass.init.call(<span class="reserved">this</span>, config);
+	<span class="comment">//making draggable</span>
+	<span class="reserved">this</span>.makeDraggable();
+};
+
+<span class="comment">/**
+ * Sets the default configuration of the object and
+ * inits it with user defined values.
+ * <span class="attrib">@param</span> config {object} configuration parameters.
+ */</span>
+Zapatec.Utils.Draggable.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(config) {
+	<span class="comment">//method of dragging</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"method"</span>, <span class="literal">"cut"</span>);
+	<span class="comment">//should we stop mouse down event!</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"stopEvent"</span>, true);
+	<span class="comment">//should we capture mouse down event!</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"eventCapture"</span>, false);
+	<span class="comment">//the handler for dragging</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"handler"</span>, null);
+	<span class="comment">//dragging class name, will be added to all present classes</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"dragCSS"</span>, null);
+	<span class="comment">//dragging overwrite class name, will overwrite all present </span>
+	<span class="comment">//classes, but they will be restored on drag end</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"overwriteCSS"</span>, null);
+	<span class="comment">//this option is only useful for dummy or copy methods</span>
+	<span class="comment">//and determines whether we copy child content of the elements</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"copyChilds"</span>, true);
+	<span class="comment">//redefining the makeMovable option to cancel the action</span>
+	<span class="comment">//defined in Zapatec.Movable class</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">"makeMovable"</span>, false);
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.Draggable.SUPERclass.configure.call(<span class="reserved">this</span>, config);
+	config = <span class="reserved">this</span>.getConfiguration();
+	<span class="comment">//Opera has strange behaviour - when you just click element starts draging,</span>
+	<span class="comment">//although mouseup should have been called.</span>
+	<span class="reserved">if</span> (Zapatec.is_opera) {
+		config.eventCapture = true;
+	}
+	<span class="comment">//correcting handler option</span>
+	config.handler = Zapatec.Widget.getElementById(config.handler);
+	config.handler = Zapatec.Utils.img2div(config.handler);
+	<span class="reserved">if</span> (!Zapatec.isHtmlElement(config.handler)) {
+		config.handler = config.container;
+	}
+};
+
+<span class="comment">/**
+ * Reconfigures the object with new parameters.
+ * <span class="attrib">@param</span> config {object} new configuration parameters.
+ */</span>
+Zapatec.Utils.Draggable.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(config) {
+	<span class="comment">// Call parent method</span>
+	Zapatec.Utils.Draggable.SUPERclass.reconfigure.call(<span class="reserved">this</span>, config);
+};
+
+<span class="comment">/**
+ * Returns the array of all draggable elements.
+ * <span class="attrib">@return</span> {array} array of draggable elements.
+ */</span>
+Zapatec.Utils.Draggable.<span class="reserved">prototype</span>.getDraggableElements = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.movableElements;
+};
+
+<span class="comment">/**
+ * Returns the handler.
+ * <span class="attrib">@return</span> {HTML element} handler element.
+ */</span>
+Zapatec.Utils.Draggable.<span class="reserved">prototype</span>._getDraggableHooks = <span class="reserved">function</span>() {
+	<span class="reserved">return</span> <span class="reserved">this</span>.getConfiguration().handler;
+};
+
+<span class="comment">/**
+ * searches elements with className=class and makes them draggable(useful to call it on document load)
+ * <span class="attrib">@param</span> class {string} searcable element's CSSclassname.
+ * <span class="attrib">@param</span> el {HTMLElement} reference to the element.
+ * <span class="attrib">@param</span> recursive {boolean} searches in childs.
+ * <span class="attrib">@param</span> config {object} config object for draggable.
+ * <span class="attrib">@return</span> {array} array of draggable objects
+ */</span>
+Zapatec.Utils.initDragObjects = <span class="reserved">function</span>(className, el, recursive, config){
+	<span class="comment">//only by class name :)</span>
+	<span class="reserved">if</span> (!className) <span class="reserved">return</span>;
+	<span class="comment">//array of elements to make draggable</span>
+	var elements = Zapatec.Utils.getElementsByAttribute(<span class="literal">'className'</span>, className, el, recursive, true);
+	<span class="comment">//returning result</span>
+	<span class="reserved">return</span> Zapatec.Utils.applyToElements(Zapatec.Utils.Draggable, elements, config);
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

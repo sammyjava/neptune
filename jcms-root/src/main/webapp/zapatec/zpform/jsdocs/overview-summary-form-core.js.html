@@ -1,0 +1,1206 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Form Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="form-core.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Form</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>form-core.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		No overview generated for 'form-core.js'<BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: form-core.js 15736 2009-02-06 15:29:25Z nikolai $</span>
+<span class="comment">/**
+ *
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ */</span>
+
+<span class="comment">/**
+* The Zapatec.Form object constructor. Call it, for example, like this:
+*
+* &lt;pre&gt;
+*	new Zapatec.Form({
+*		form: 'userForm',
+*		showErrors: 'afterField',
+*		showErrorsOnSubmit: true,
+*		submitErrorFunc: testErrOutput,
+*		theme: "WinXP"
+*	});
+* &lt;/pre&gt;
+*
+* The above creates a new Form object. During initialization constructor
+* would change page layout to display special marks near each field. Also
+* standard form submit and reset would be replaced with custom handlers.
+* You always could retrieve reference to this object:
+* &lt;pre&gt;
+*	document.getElementById('yourForm').zpForm
+* &lt;/pre&gt;
+*
+*	<span class="attrib">@param</span> formRef [string or object] - reference to &lt;FORM&gt; element (deprecated.
+*	use 'form' config option instead)
+*	<span class="attrib">@param</span> config [object] - all parameters are passed as the properties of this object.
+*
+* Constructor recognizes the following properties of the config object
+* &lt;pre&gt;
+*	property name		| description
+*-------------------------------------------------------------------------------------------------
+*	form				| [string or object]. Reference to &lt;FORM&gt; object
+*	statusImgPos		| [string] Where to put status icon. Possible values:
+*						|	'afterField' - icon would be putted after target field
+*						|	'beforeField' - before target field(default value)
+*						|	null - icon would not be displayed
+*	showErrors			| [string] Where to put error text. Possible values:
+*						|	'tooltip' - display error text as tooltip for field
+*						|	'afterField' - text would be putted after target field
+*						|	'beforeField' - before target field
+*						|	function - use this function to display error
+*						|	null - error text would not be displayed(default value) //TODO
+*	showErrorsOnSubmit	| If setted to true - function, given by submitErrorFunc parameter would be
+*						|	invoked on form submit. Default value - true.
+*	submitErrorFunc 	| [function] Callback function reference to call on
+*						| error. Callback function receives following object:
+*						| {
+*						| 	serverSide: true if this is server response or false if validation
+*						| 	result [boolean],
+*						| 	generalError: "Human readable error description" [string],
+*						| 	fieldErrors: [
+*						| 		{
+*						| 			field: field element object [object],
+*						| 			errorMessage: "Human readable error description" [string]
+*						| 		},
+*						| 		...
+*						| 	]
+*						| }
+*						| fieldErrors property may be undefined.
+*						| By default Zapatec.Form.prototype.submitErrorFunc is
+*						| used. It displays errors as alert message.
+*	submitValidFunc		| [function] Callback function reference to call after
+*						| validation is passed. Useful to remove old error
+*						| messages produced by submitErrorFunc during previous
+*						| validation attempt.
+*						| Default value - Zapatec.Form.prototype.submitValidFunc
+*	asyncSubmitFunc		| [function] Callback function reference to call after
+*						| the form is sent to the server using
+*						| Zapatec.Transport.fetchJsonObj and "success" response
+*						| is received from the server.
+*						| Server response should be a valid JSON string in the following format:
+*						| {
+*						| 	"success": true | false,
+*						| 	"callbackArgs": object that will be passed to callback function,
+*						| 	"generalError": "Human readable error description",
+*						| 	"fieldErrors": {
+*						| 		"fieldName1": "Human readable error description",
+*						| 		"fieldName2": "Human readable error description",
+*						| 		...
+*						| 	}
+*						| }
+*						| Callback function receives callbackArgs object.
+*						| callbackArgs, generalError and fieldErrors properties are optional.
+*						| submitErrorFunc callback function is called on error.
+*	themePath			| [string] Relative or absolute URL to the form themes directory.
+*						| Trailing slash is required.
+*						| You may also include path into "theme" option below instead of using
+*						| themePath option. Default value: "../themes/"
+*	theme				| [string] Theme name that will be used to display the form.
+*						| Corresponding CSS file will be picked and added into the HTML document
+*						| head element automatically.
+*						| Case insensitive.
+*						| May also contain relative or absolute URL to the form themes directory.
+*						| E.g. ../themes/default.css or http://my.web.host/themes/default.css
+*	strict				| [boolean] If true - submit buttons will be disabled until all fields
+*						| will pass validation succesfully
+*	ajaxDebugFunc		| [function] If given - this function will be used to
+*						| display debug information about AJAX requests.
+*						| Function signature consists of one argument - string
+*						| message.
+*	dropDownTheme		| [string] use this theme for drop-down list in fields.
+*	hideUntilThemeLoaded| [boolean] Hide form until theme is fully loaded. Default: false.
+*	putTabIndexesOnError| If true then on submit if form was not filled 
+*						|	correctly you can iterate through invalid keys 
+*						|	using TAB key.
+*	startupFocusPosition| Determines which field will be focused on form init. 
+*						| Possible values: 
+*						|	firstField - first field in the form
+*						|	firstRequiredField  - first required field in the form
+*						|	firstIncorrectField  - first invalid field in the form
+*						|	null - do not put focus at all.
+*	displayErrorWhileTyping | Display error message while user is typing in the
+*							field. Default value - true.
+*	multipleCallback	| Function to generate name and ID for cloned elements. 
+*						| It receives reference to original element, reference 
+*						| to cloned element and list of all cloned elements.
+*						| By default it just adds unique numbers to cloned elements.
+*	serverCallback		| Contains name of JS function that must be called from 
+*						| server after processing request.
+*	disableButtonsWhenAsyncSubmit| this option determines if submit buttons 
+*						| will be disabled during asynchronous submit(when 
+*						| asyncSubmitFunc parameter is given). If true - user 
+*						| will be unable to submit form while response from 
+*						| server is not received. default value - true. 
+*	conditionalEvents	| Defines on which events conditional fields will be 
+*						| checked. Possible values: focus, blur, keyup, 
+*						| keydown, keypress, valueChanges, booleanValueChanged.
+*						| By default - conditional fields will be checked on 
+*						| all form events.
+*	busyConfig			| Array of values similar for Zapatec.Transport.showBusy
+*	autocompleteConfig| Array of values similar for Zapatec.AutoComplete configuration
+*	maskPlaceholder| Defines character that should be displayed as placeholder when mask is used. Default - underscore.
+* &lt;/pre&gt;
+*/</span>
+
+Zapatec.Form = <span class="reserved">function</span>() {
+	var objArgs = {};
+	switch(arguments.length){
+		case 1:
+			objArgs = arguments[0];
+			break;
+		case 2:
+			objArgs = arguments[1];
+			objArgs.form = arguments[0];
+			break;
+	}
+
+	<span class="comment">// Call constructor of superclass</span>
+	Zapatec.Form.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Form.id = <span class="literal">"Zapatec.Form"</span>;
+
+<span class="comment">// Inherit SuperClass</span>
+Zapatec.inherit(Zapatec.Form, Zapatec.Widget);
+
+Zapatec.Form.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs){
+	<span class="reserved">this</span>.container = null; <span class="comment">// reference to widget's FORM tag</span>
+	
+	<span class="comment">// processing Widget functionality</span>
+	Zapatec.Form.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.form.zpForm != null){
+		Zapatec.Log({description: <span class="reserved">this</span>.getMessage(<span class="literal">'initializeError'</span>)});
+		<span class="reserved">return</span> null;
+	}
+	
+	<span class="reserved">this</span>.container = <span class="reserved">this</span>.config.form;
+
+	<span class="comment">// setting backlink to Zapatec.Form object</span>
+	<span class="reserved">this</span>.createProperty(<span class="reserved">this</span>.container, <span class="literal">"zpForm"</span>, <span class="reserved">this</span>);
+	<span class="reserved">this</span>.addCircularRef(<span class="literal">"container"</span>);
+
+	<span class="reserved">this</span>.container.className = <span class="reserved">this</span>.container.className.replace(/\bzpForm.*?\b/, <span class="literal">""</span>) + <span class="literal">" "</span> + <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpForm"</span>});
+
+	var self = <span class="reserved">this</span>;
+
+	<span class="comment">// storing reference to previous onsubmit function</span>
+	var oldOnSubmit = <span class="reserved">this</span>.container.onsubmit || <span class="reserved">function</span>(){<span class="reserved">return</span> true;};
+
+	<span class="reserved">if</span> (typeof(<span class="reserved">this</span>.config.asyncSubmitFunc) == <span class="literal">'function'</span>){
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.serverCallback){
+			<span class="comment">// we need to create some hidden fields in this case, hidden iframe</span>
+			<span class="comment">// and point form to submit into that iframe</span>
+			var targetName = <span class="literal">"form-iframe-"</span> + <span class="reserved">this</span>.id; 
+			var tmp = document.createElement(<span class="literal">"span"</span>);
+			tmp.innerHTML = <span class="literal">'&lt;iframe name="'</span>+targetName+<span class="literal">'" style="display: none"&gt;&lt;/iframe&gt;'</span>;
+			var iframe= tmp.firstChild;
+
+			<span class="reserved">this</span>.container.parentNode.insertBefore(iframe, <span class="reserved">this</span>.container);
+			<span class="reserved">this</span>.container.setAttribute(<span class="literal">"target"</span>, targetName);
+
+			var hidden = document.createElement(<span class="literal">"input"</span>);
+			hidden.setAttribute(<span class="literal">"type"</span>, <span class="literal">"hidden"</span>);
+			hidden.setAttribute(<span class="literal">"name"</span>, <span class="reserved">this</span>.config.serverCallback);
+			hidden.setAttribute(<span class="literal">"value"</span>, 
+				<span class="literal">"window.parent.Zapatec.Widget.getWidgetById("</span> + <span class="reserved">this</span>.id + <span class="literal">").processAsyncResponse"</span>);
+			<span class="reserved">this</span>.container.appendChild(hidden);
+		} 
+
+		<span class="reserved">this</span>.container.onsubmit = <span class="reserved">function</span>(ev){var retVal = oldOnSubmit(ev); <span class="reserved">return</span> self.asyncSubmit(ev) &amp;&amp; retVal;};
+	} <span class="reserved">else</span> {
+		<span class="reserved">this</span>.container.onsubmit = <span class="reserved">function</span>(ev){<span class="reserved">return</span> self.submit(ev) &amp;&amp; oldOnSubmit(ev);};
+	}
+	
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>.container, <span class="literal">"onsubmit"</span>);
+
+	<span class="reserved">this</span>.container.onreset = <span class="reserved">function</span>(ev){setTimeout(<span class="reserved">function</span>(ev){self.reset(ev);}, 1);};
+	<span class="reserved">this</span>.addCircularRef(<span class="reserved">this</span>.container, <span class="literal">"onreset"</span>);
+
+	var focusedFlag = false;
+	var els = []; <span class="comment">// copy FORM.elements array here because it changes while creating field</span>
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.container.elements.length; ii++){
+		els.push(<span class="reserved">this</span>.container.elements[ii]);
+	}
+
+	<span class="comment">// process all form elements</span>
+	<span class="reserved">for</span> (var ii = 0; ii &lt; els.length; ii++) {
+		var el = els[ii];
+
+		<span class="comment">// if this is field</span>
+		<span class="reserved">if</span>(!Zapatec.Form.Utils.ignoreField(el)) {
+		    <span class="comment">// trying to init form field</span>
+			var zpField = new Zapatec.Form.Field({
+				form:<span class="reserved">this</span>, 
+				field: el,
+				langId: <span class="reserved">this</span>.config.langId,
+				lang: <span class="reserved">this</span>.config.lang,
+				langCountryCode: <span class="reserved">this</span>.config.langCountryCode,
+				langEncoding: <span class="reserved">this</span>.config.langEncoding,
+				formConfig: <span class="reserved">this</span>.config
+			});
+
+			<span class="reserved">if</span>(<span class="reserved">this</span>.config.startupFocusPosition){
+				<span class="comment">// if field was initialized (zpFormField variable assigned) - focus on </span>
+				<span class="comment">// first visible field in form</span>
+				<span class="reserved">if</span>(
+					el.zpFormField != null &amp;&amp;
+					focusedFlag == false &amp;&amp;
+					typeof(el.focus) != <span class="literal">'undefined'</span> &amp;&amp;
+					(
+						typeof(el.type) == <span class="literal">'undefined'</span> ||
+						typeof(el.type) != <span class="literal">'undefined'</span> &amp;&amp;
+						el.type.toLowerCase() != <span class="literal">'hidden'</span>
+					) &amp;&amp;
+					!el.disabled &amp;&amp; <span class="comment">// Internet Explorer can't focus</span>
+					!el.readOnly    <span class="comment">// on disabled or readonly field</span>
+				){
+					<span class="reserved">if</span>(
+						<span class="reserved">this</span>.config.startupFocusPosition == <span class="literal">"firstField"</span> ||
+						(
+							<span class="reserved">this</span>.config.startupFocusPosition == <span class="literal">"firstRequiredField"</span> &amp;&amp; 
+							zpField.hasFeature(<span class="literal">"zpFormRequired"</span>)
+						) ||
+						(
+							<span class="reserved">this</span>.config.startupFocusPosition == <span class="literal">"firstIncorrectField"</span> &amp;&amp; 
+							zpField.validate(true) != null &amp;&amp;
+							zpField.validate(true).length &gt; 0
+						) 
+					){
+						
+					<span class="comment">// https://bugzilla.mozilla.org/show_bug.cgi?id=236791</span>
+					var tmp = el.getAttribute(<span class="literal">"autocomplete"</span>);
+
+					<span class="comment">// if element is not visible - IE throws an exception. Catch it.</span>
+					try{
+						el.setAttribute(<span class="literal">'autocomplete'</span>,<span class="literal">'off'</span>);
+						el.focus();
+						focusedFlag = true;
+					} catch(e){}
+
+					el.setAttribute(<span class="literal">'autocomplete'</span>,tmp);
+					}
+				}
+			}
+		}
+	}
+
+	<span class="comment">// process all elements inside form</span>
+	var childElements = <span class="reserved">this</span>.container.all ? <span class="reserved">this</span>.container.all : <span class="reserved">this</span>.container.getElementsByTagName(<span class="literal">"*"</span>);
+
+	<span class="reserved">for</span>(var ii = childElements.length - 1; ii &gt;= 0 ; ii--){
+		var el = childElements[ii];
+
+	    <span class="comment">// initialize multiple elements</span>
+		Zapatec.Form.Utils.initMultipleField(el, true, <span class="reserved">this</span>);
+
+		<span class="comment">// initialize conditional fields</span>
+		<span class="reserved">this</span>.initConditionalField(el);
+	}
+
+	<span class="reserved">if</span>(Zapatec.windowLoaded){
+		<span class="reserved">this</span>.formLoaded();
+	} <span class="reserved">else</span> {
+		<span class="comment">// otherwise - schedule on window load</span>
+		Zapatec.Utils.addEvent(window, <span class="literal">"load"</span>, new Function(<span class="literal">"Zapatec.Widget.callMethod("</span> + <span class="reserved">this</span>.id + <span class="literal">", 'formLoaded')"</span>));
+	}
+};
+
+<span class="comment">/**
+ * Configures form. Gets called from parent init method.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(objArgs){
+	<span class="comment">// Set defaults config options </span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'langId'</span>, Zapatec.Form.id);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'lang'</span>, <span class="literal">"en"</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'form'</span>, null);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'statusImgPos'</span>, <span class="literal">'beforeField'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'showErrors'</span>, null);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'showErrorsOnSubmit'</span>, true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'submitErrorFunc'</span>, Zapatec.Form.submitErrorFunc);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'submitValidFunc'</span>, null);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'asyncSubmitFunc'</span>, null);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'strict'</span>, false);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'asyncTheme'</span>, true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'theme'</span>, <span class="literal">"alternate"</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'ajaxDebugFunc'</span>, null);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'dropDownTheme'</span>, <span class="literal">"default"</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'hideUntilThemeLoaded'</span>,	false);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'putTabIndexesOnError'</span>,	true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'startupFocusPosition'</span>, <span class="literal">"firstField"</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'displayErrorWhileTyping'</span>, true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'multipleCallback'</span>, Zapatec.Form.Utils.generateMultipleId);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'serverCallback'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'disableButtonsWhenAsyncSubmit'</span>, true);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'conditionalEvents'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'busyConfig'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'autoCompleteConfig'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'maskPlaceholder'</span>, <span class="literal">'_'</span>);
+	
+	<span class="comment">// Call parent method</span>
+	Zapatec.Form.SUPERclass.configure.call(<span class="reserved">this</span>, objArgs);
+
+	<span class="reserved">this</span>.config.form = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.form);
+
+	<span class="reserved">if</span>(
+		<span class="reserved">this</span>.config.form == null || 
+		!<span class="reserved">this</span>.config.form.nodeName ||
+		<span class="reserved">this</span>.config.form.nodeName.toLowerCase() != <span class="literal">"form"</span>
+	){
+		<span class="comment">// no form found for given ID or it is not &lt;FORM&gt; element</span>
+		Zapatec.Log({description: <span class="reserved">this</span>.getMessage(<span class="literal">'noFormError'</span>)});
+		throw <span class="reserved">this</span>.getMessage(<span class="literal">'noFormError'</span>);
+	}
+	
+	<span class="comment">// if conditionalEvents is a string - convert it to array</span>
+	<span class="reserved">if</span>(typeof(<span class="reserved">this</span>.config.conditionalEvents) == <span class="literal">'string'</span>){
+		<span class="reserved">this</span>.config.conditionalEvents = [<span class="reserved">this</span>.config.conditionalEvents];
+	}
+};
+
+<span class="comment">/**
+ * Reconfigures the widget with new config options after it was initialized.
+ * May be used to change look or behavior of the widget after it has loaded
+ * the data. In the argument pass only values for changed config options.
+ * There is no need to pass config options that were not changed.
+ *
+ * <span class="attrib">@param</span> {object} objArgs Changes to user configuration
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(objArgs) {
+	<span class="reserved">if</span>(objArgs.theme){
+		Zapatec.Utils.removeClass(<span class="reserved">this</span>.container, <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpForm"</span>}));
+	}
+	
+	<span class="comment">// Call parent method</span>
+	Zapatec.Form.SUPERclass.reconfigure.call(<span class="reserved">this</span>, objArgs);
+
+	Zapatec.Utils.addClass(<span class="reserved">this</span>.container, <span class="reserved">this</span>.getClassName({prefix: <span class="literal">"zpForm"</span>}));
+
+	<span class="comment">// TODO support other options</span>
+};
+
+Zapatec.Form.<span class="reserved">prototype</span>.addStandardEventListeners = <span class="reserved">function</span>(){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.multipleCallback == Zapatec.Form.Utils.generateMultipleId){
+		<span class="comment">// if standard multiple generator mechanism is used - add event on deleting field</span>
+		<span class="reserved">this</span>.addEventListener(<span class="literal">"beforeDeleteMultiple"</span>, Zapatec.Form.Utils.beforeDeleteMultiple);
+	}
+}
+
+<span class="comment">/**
+ * Handler for async form submit.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.asyncSubmit = <span class="reserved">function</span>(){
+	var self = <span class="reserved">this</span>;
+
+	<span class="comment">// check if form is already submitted and result not received</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.processing == true){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// Validate if needed</span>
+	<span class="reserved">if</span> (
+		<span class="reserved">this</span>.config.showErrorsOnSubmit &amp;&amp;
+		typeof(<span class="reserved">this</span>.config.submitErrorFunc) == <span class="literal">'function'</span> &amp;&amp;
+		!<span class="reserved">this</span>.submit()
+	){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// submit form where its action attribute points</span>
+	var strUrl = <span class="reserved">this</span>.container.getAttribute(<span class="literal">"action"</span>);
+
+	<span class="reserved">if</span>(Zapatec.is_ie){
+		<span class="comment">// IE return reference to &lt;input name="action" ..&gt; element if it is present in the form</span>
+		strUrl = <span class="reserved">this</span>.container.attributes[<span class="literal">"action"</span>];
+
+		<span class="reserved">if</span>(strUrl){
+			strUrl = strUrl.nodeValue;
+		}
+	}
+	
+	<span class="reserved">if</span>(!strUrl){
+		<span class="reserved">return</span> false;
+	}
+
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.disableButtonsWhenAsyncSubmit){
+		<span class="comment">// disabling all &lt;input type="submit"&gt; element in the form</span>
+		<span class="reserved">this</span>.toggleSubmits(true);
+		<span class="reserved">this</span>.processing = true;
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.busyConfig){
+		Zapatec.Transport.showBusy(<span class="reserved">this</span>.config.busyConfig);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.serverCallback){
+		<span class="reserved">return</span> true;
+	}
+	
+	<span class="comment">// Get urlencoded content</span>
+	var arrContent = [];
+	var objFormElements = <span class="reserved">this</span>.container.elements;
+
+	<span class="reserved">for</span> (var iElm = 0; iElm &lt; objFormElements.length; iElm++) {
+		var formEl = objFormElements[iElm];
+
+		<span class="comment">// skip field that has no name or is disabled</span>
+		<span class="reserved">if</span> (!formEl.name || formEl.disabled){
+			continue;
+		}
+
+		<span class="comment">// skip not checked radiobuttons and checkboxes</span>
+		<span class="reserved">if</span>(
+			formEl.nodeName.toLowerCase() == <span class="literal">'input'</span> &amp;&amp;
+			(
+				formEl.type.toLowerCase() == <span class="literal">'radio'</span> ||
+				formEl.type.toLowerCase() == <span class="literal">'checkbox'</span>
+			) &amp;&amp;
+			!formEl.checked
+		){
+			continue;
+		}
+
+		var val = Zapatec.Form.Utils.getValue(formEl);
+		
+		<span class="reserved">if</span>(val &amp;&amp; val instanceof Array){
+			<span class="reserved">for</span>(var ii = 0; ii &lt; val.length; ii++){
+				arrContent.push(formEl.name + <span class="literal">'='</span> + encodeURIComponent(val[ii]));
+			}
+		} <span class="reserved">else</span> {
+			arrContent.push(formEl.name + <span class="literal">'='</span> + encodeURIComponent(val));
+		}
+
+	}
+
+	var strMethod = <span class="reserved">this</span>.container.getAttribute(<span class="literal">"method"</span>);
+
+	<span class="reserved">if</span>(Zapatec.is_ie){
+		<span class="comment">// IE return reference to &lt;input name="action" ..&gt; element if it is present in the form</span>
+		strMethod = <span class="reserved">this</span>.container.attributes[<span class="literal">"method"</span>];
+
+		<span class="reserved">if</span>(strMethod){
+			strMethod = strMethod.nodeValue;
+		}
+	}
+	
+	<span class="reserved">if</span>(strMethod){
+		strMethod = strMethod.toUpperCase();
+	}
+
+	var strContent = arrContent.join(<span class="literal">'&amp;'</span>);
+
+	<span class="reserved">if</span>(strMethod != <span class="literal">'POST'</span>){
+		<span class="reserved">if</span>(strMethod === <span class="literal">''</span>){
+			strMethod = <span class="literal">"GET"</span>;
+		}
+
+		strUrl += <span class="literal">'?'</span> + strContent;
+		strContent = null;
+	}
+
+	<span class="comment">// show debug information</span>
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.ajaxDebugFunc){
+		<span class="reserved">this</span>.config.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugSeparator'</span>));
+		<span class="reserved">this</span>.config.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugSubmitTitle'</span>));
+		<span class="reserved">this</span>.config.ajaxDebugFunc(strMethod + <span class="literal">" "</span> + strUrl);
+		<span class="reserved">this</span>.config.ajaxDebugFunc(<span class="reserved">this</span>.getMessage(<span class="literal">'ajaxDebugQuery'</span>, strContent));
+	}
+	
+	var strEncoding = <span class="reserved">this</span>.container.getAttribute(<span class="literal">"encoding"</span>);
+
+	<span class="reserved">if</span>(Zapatec.is_ie){
+		<span class="comment">// IE return reference to &lt;input name="encoding" ..&gt; element if it is present in the form</span>
+		strEncoding= <span class="reserved">this</span>.container.attributes[<span class="literal">"encoding"</span>];
+
+		<span class="reserved">if</span>(strEncoding){
+			strEncoding = strEncoding.nodeValue;
+		}
+	}
+
+	<span class="comment">// Submit form</span>
+	Zapatec.Transport.fetch({
+		url: strUrl,
+		method: strMethod,
+		contentType: strEncoding,
+		content: strContent,
+		onLoad: <span class="reserved">function</span>(objText){
+			<span class="reserved">if</span>(self.config.ajaxDebugFunc){
+				self.config.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponse'</span>, objText.responseText));
+			}
+
+			<span class="reserved">if</span>(self.config.disableButtonsWhenAsyncSubmit){
+				self.processing = false;
+
+				<span class="comment">// enabling all &lt;input type="submit"&gt; element in the form</span>
+				self.toggleSubmits(false);
+			}
+
+			<span class="reserved">if</span> (objText.responseText == null) {
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxSubmitNoResponseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			var objResponse = Zapatec.Transport.parseJson({strJson: objText.responseText});
+
+			<span class="reserved">if</span>(objResponse == null){
+				Zapatec.Log({description: self.getMessage(<span class="literal">'ajaxSubmitCantParseError'</span>, objText.responseText)});
+				<span class="reserved">return</span> null;
+			}
+
+			<span class="reserved">return</span> self.processAsyncResponse(objResponse);
+		},
+		onError: <span class="reserved">function</span>(objError) {
+			<span class="reserved">if</span>(self.config.disableButtonsWhenAsyncSubmit){
+				self.processing = false;
+
+				<span class="comment">// enabling all &lt;input type="submit"&gt; element in the form</span>
+				self.toggleSubmits(false);
+			}
+
+			var strError = <span class="literal">''</span>;
+
+			<span class="reserved">if</span> (objError.errorCode) {
+				strError = objError.errorCode + <span class="literal">' '</span>;
+			}
+
+			strError += objError.errorDescription;
+
+			<span class="reserved">if</span>(self.config.ajaxDebugFunc){
+				self.config.ajaxDebugFunc(self.getMessage(<span class="literal">'ajaxDebugResponseError'</span>, strError));
+			}
+
+			<span class="reserved">if</span>(
+				self.config.showErrorsOnSubmit &amp;&amp;
+				typeof(self.config.submitErrorFunc) == <span class="literal">'function'</span>
+			){
+				self.config.submitErrorFunc({
+					serverSide: true,
+					generalError: strError
+				});
+			}
+		}
+	});
+
+	<span class="reserved">return</span> false;
+};
+
+Zapatec.Form.<span class="reserved">prototype</span>.processAsyncResponse = <span class="reserved">function</span>(objResponse){
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.disableButtonsWhenAsyncSubmit){
+		<span class="reserved">this</span>.processing = false;
+
+		<span class="comment">// enabling all &lt;input type="submit"&gt; element in the form</span>
+		<span class="reserved">this</span>.toggleSubmits(false);
+	}
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.busyConfig){
+		Zapatec.Transport.removeBusy(<span class="reserved">this</span>.config.busyConfig);
+	}
+
+	<span class="reserved">if</span> (objResponse){
+		<span class="reserved">if</span> (objResponse.success) {
+			<span class="comment">// Success</span>
+			<span class="reserved">this</span>.config.asyncSubmitFunc(objResponse.callbackArgs);
+		} <span class="reserved">else</span> <span class="reserved">if</span> (<span class="reserved">this</span>.config.showErrorsOnSubmit) {
+			<span class="comment">// Error</span>
+			<span class="comment">// Array with error messages</span>
+			var arrFieldErrors = [];
+
+			<span class="comment">// Flag to indicate that focus is already set</span>
+			var boolFocusSet = false;
+
+			<span class="comment">// Go through errors received from the server</span>
+			<span class="reserved">if</span> (objResponse.fieldErrors){
+				<span class="reserved">for</span> (var strFieldName in objResponse.fieldErrors) {
+					<span class="comment">// Find corresponding form field</span>
+					<span class="reserved">for</span> (var iElm = 0; iElm &lt; <span class="reserved">this</span>.container.elements.length; iElm++) {
+						var objField = <span class="reserved">this</span>.container.elements[iElm];
+
+						<span class="reserved">if</span> (objField.name &amp;&amp; objField.name == strFieldName) {
+							<span class="comment">// Add error message to the array</span>
+							arrFieldErrors.push({
+								field: objField,
+								errorMessage: objResponse.fieldErrors[strFieldName],
+								validator: <span class="literal">''</span>
+							});
+
+							<span class="comment">// Set icon and status</span>
+							<span class="reserved">if</span>(objField.zpFormField != null){
+								objField.zpFormField.setImageStatus(objResponse.fieldErrors[strFieldName]);
+							}
+
+							<span class="comment">// Field is found</span>
+							break;
+						}
+					}
+				}
+			}
+
+			<span class="reserved">if</span> (typeof(<span class="reserved">this</span>.config.submitErrorFunc) == <span class="literal">'function'</span>) {
+				<span class="reserved">this</span>.config.submitErrorFunc({
+					serverSide: true,
+					generalError: objResponse.generalError || <span class="literal">''</span>,
+					fieldErrors: arrFieldErrors
+				});
+			}
+		}
+	} <span class="reserved">else</span> <span class="reserved">if</span>(
+		<span class="reserved">this</span>.config.showErrorsOnSubmit &amp;&amp;
+		typeof(<span class="reserved">this</span>.config.submitErrorFunc) == <span class="literal">'function'</span>
+	){
+		<span class="comment">// No response</span>
+		<span class="reserved">this</span>.config.submitErrorFunc({
+			serverSide: true,
+			generalError: <span class="reserved">this</span>.getMessage(<span class="literal">'ajaxSubmitNoResponseError'</span>)
+		});
+	}
+};
+
+<span class="comment">/**
+ * Turn on/off submit buttons into form. 
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> disable {boolean} If true - disable all submits in a form. Otherwise - enable
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.toggleSubmits = <span class="reserved">function</span>(disable){
+	var inputs = <span class="reserved">this</span>.container.getElementsByTagName(<span class="literal">"input"</span>);
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; inputs.length; ii++){
+		<span class="reserved">if</span>(inputs[ii].type == <span class="literal">"submit"</span>){
+			inputs[ii].disabled = disable == true;
+		}
+	}
+};
+
+<span class="comment">/**
+ * Reset handler for form. It is called _after_ resetting form.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.reset = <span class="reserved">function</span>(ev){
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.container.elements.length; ii++){
+		var field = <span class="reserved">this</span>.container.elements[ii].zpFormField;
+
+		<span class="reserved">if</span>(field != null){
+			field.setValueFromField();
+
+			field.firstRun = true;
+
+			field.blur();
+		}
+	}
+
+	<span class="reserved">if</span>(!ev){
+		ev = window.event;
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"reset"</span>, ev);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, ev, <span class="literal">"reset"</span>);
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * This function is called on form submit. If config.showErrorsOnSubmit
+ * is true and config.submitErrorFunc is defined - then they would be called
+ * after validation.
+ * If there was no errors and config.submitValidFunc was defined - it would be called.
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.submit = <span class="reserved">function</span>(ev){
+	var errors = <span class="reserved">this</span>.validate(false);
+
+	<span class="reserved">if</span>(
+		errors != null &amp;&amp;
+		errors.length &gt; 0 &amp;&amp;
+		<span class="reserved">this</span>.config.showErrorsOnSubmit &amp;&amp;
+		typeof(<span class="reserved">this</span>.config.submitErrorFunc) == <span class="literal">'function'</span>
+	){
+		<span class="reserved">this</span>.config.submitErrorFunc({
+			serverSide: false,
+			generalError: errors.length == 1 ? <span class="reserved">this</span>.getMessage(<span class="literal">'submitOneError'</span>) : <span class="reserved">this</span>.getMessage(<span class="literal">'submitManyErrors'</span>, errors.length),
+			fieldErrors: errors
+		});
+
+		try{
+			errors[0].field.focus();
+		} catch(e){}
+
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="comment">// call submitValidFunc callback is validation passed</span>
+	<span class="reserved">if</span> (typeof(<span class="reserved">this</span>.config.submitValidFunc) == <span class="literal">'function'</span>) {
+		<span class="reserved">this</span>.config.submitValidFunc();
+	}
+
+	<span class="reserved">if</span>(!ev){
+		ev = window.event;
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"submit"</span>, ev);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, ev, <span class="literal">"submit"</span>);
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * Validate all elements in form.
+ * <span class="attrib">@param</span> onlyValidate {boolean} if true - then no visual marks will be added 
+ * to fields. Default value - true. 
+ * <span class="attrib">@return</span> null if validation passed succesfully or return array of errors in 
+ * other case.
+ * <span class="attrib">@type</span> object
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.validate = <span class="reserved">function</span>(onlyValidate){
+	<span class="reserved">if</span>(typeof(onlyValidate) == <span class="literal">"undefined"</span>){
+		onlyValidate = true;
+	}
+
+	var valid = true;
+	var tabIndex = 1;
+	var errors = [];
+	
+	<span class="reserved">for</span> (var ii = 0; ii &lt; <span class="reserved">this</span>.container.elements.length; ii++){
+		var el = <span class="reserved">this</span>.container.elements[ii];
+
+		<span class="reserved">if</span>(el.zpFormField == null){
+			continue;
+		}
+		
+		<span class="reserved">if</span>(!onlyValidate){
+			el.zpFormField.firstRun = false;
+		}
+
+		var validate = el.zpFormField.validate(onlyValidate);
+		var fieldValid = (validate == null || validate.length == 0);
+
+		<span class="reserved">if</span>(<span class="reserved">this</span>.config.putTabIndexesOnError){
+			<span class="reserved">if</span>(fieldValid){
+				el.tabIndex = 100 + tabIndex++;
+				
+				<span class="reserved">if</span>(!Zapatec.is_ie){
+					delete(el.tabIndex);
+				}
+			} <span class="reserved">else</span> {
+				el.tabIndex = tabIndex;
+			}
+		}
+
+		<span class="reserved">if</span>(!fieldValid)	{
+			<span class="reserved">for</span>(var jj = 0; jj &lt; validate.length; jj++){
+				errors.push(validate[jj]);
+			}
+		}
+
+		valid = valid &amp;&amp; fieldValid;
+	}
+
+	<span class="reserved">if</span>(errors.length == 0){
+		errors = null;
+	}
+
+	<span class="reserved">return</span> errors;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * This method is used to process conditional elements into form.
+ * <span class="attrib">@param</span> field {object} reference to element.
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.initConditionalField = <span class="reserved">function</span>(field){
+	var md = null;
+
+	<span class="reserved">if</span>(
+		field.className &amp;&amp;
+		(md = field.className.match(/zpForm(Display|Visible)When=([^\s]+)/))
+	){
+		var func = eval(md[2]);
+
+		<span class="reserved">if</span>(typeof(func) != <span class="literal">"function"</span>){
+			<span class="reserved">return</span> null;
+		}
+
+		var handler = null;
+
+		var self = <span class="reserved">this</span>;
+		
+		<span class="reserved">if</span>(md[1] == <span class="literal">'Display'</span>){
+			handler = <span class="reserved">function</span>(){
+				var tmp = func();
+
+				Zapatec.Form.Utils.toggleFormElements(field, tmp, false);
+
+				<span class="reserved">if</span>(field.zpFormField){
+					Zapatec.Form.Utils.toggleFormElements(field.zpFormField.errorText, tmp, false);
+					Zapatec.Form.Utils.toggleFormElements(field.zpFormField.requiredMark, tmp, false);
+				}
+
+				<span class="reserved">if</span>(field.zpMultipleButton){
+					Zapatec.Form.Utils.toggleFormElements(field.zpFormField.requiredMark, tmp, false);
+				}
+
+				<span class="reserved">if</span>(self.config.strict){
+					self.toggleSubmits(self.validate() != null);
+				}
+			};
+		} <span class="reserved">else</span> <span class="reserved">if</span>(md[1] == <span class="literal">'Visible'</span>){
+			handler = <span class="reserved">function</span>(){
+				var tmp = func();
+
+				Zapatec.Form.Utils.toggleFormElements(field, tmp, true);
+
+				<span class="reserved">if</span>(field.zpFormField){
+					Zapatec.Form.Utils.toggleFormElements(field.zpFormField.errorText, tmp, true);
+					Zapatec.Form.Utils.toggleFormElements(field.zpFormField.requiredMark, tmp, true);
+				}
+
+				<span class="reserved">if</span>(field.zpMultipleButton){
+					Zapatec.Form.Utils.toggleFormElements(field.zpFormField.requiredMark, tmp, true);
+				}
+				
+				<span class="reserved">if</span>(self.config.strict){
+					self.toggleSubmits(self.validate() != null);
+				}
+			};
+		}
+
+		handler();
+
+		var eventTypes = <span class="reserved">this</span>.config.conditionalEvents;
+
+		<span class="reserved">if</span>(
+			!eventTypes || 
+			eventTypes.length == 0
+		){
+			eventTypes = [<span class="literal">"all"</span>];
+		}
+
+		<span class="reserved">for</span>(var ii = 0; ii &lt; eventTypes.length; ii++){
+			<span class="reserved">this</span>.addEventListener(eventTypes[ii], handler);
+		}
+	}
+};
+
+<span class="comment">/**
+ * Allows to add function, that would be called when any form element changes its value.
+ * This method is deprecated - use form eventListeners instead of.
+ * <span class="attrib">@deprecated</span>
+ * <span class="attrib">@param</span> func {function} reference to function
+ * <span class="attrib">@param</span> eventType {string or array} When to call this conditional handler. Can be single string or 
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.addEvent = Zapatec.Form.<span class="reserved">prototype</span>.addChangeHandler = <span class="reserved">function</span>(func, eventTypes){
+	<span class="reserved">if</span>(typeof(func) == <span class="literal">'string'</span>){
+		func = eval(func);
+	}
+
+	<span class="reserved">if</span>(typeof(func) != <span class="literal">'function'</span>){
+		<span class="reserved">return</span> false;
+	}
+
+	<span class="reserved">if</span>(!eventTypes || eventTypes.length == 0){
+		eventTypes = [<span class="literal">"all"</span>];
+	}
+
+	<span class="reserved">if</span>(typeof(eventTypes) == <span class="literal">'string'</span>){
+		eventTypes = [eventTypes];
+	}
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; eventTypes.length; ii++){
+		<span class="reserved">this</span>.addEventListener(eventTypes[ii], func);
+	}
+	
+	func(null, <span class="literal">"addEvent"</span>);
+
+	<span class="reserved">if</span>(<span class="reserved">this</span>.config.strict){
+		<span class="reserved">this</span>.toggleSubmits(<span class="reserved">this</span>.validate() != null);
+	}
+
+	<span class="reserved">return</span> true;
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@deprecated</span>
+ * Runs all changeHandlers for this form. This is stub for all changeHandlers functionality
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.runChangeHandlers = <span class="reserved">function</span>(){
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, null, <span class="literal">"runChangeHandlers"</span>);
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * When window is loaded - validate all fields in the form and run change 
+ *	handlers
+ */</span>
+Zapatec.Form.<span class="reserved">prototype</span>.formLoaded = <span class="reserved">function</span>(){
+	<span class="comment">// if window loaded - run immediatly</span>
+	<span class="reserved">for</span>(var ii = 0; ii&lt;<span class="reserved">this</span>.container.elements.length; ii++){
+		var zpField = <span class="reserved">this</span>.container.elements[ii].zpFormField;
+
+		<span class="reserved">if</span>(zpField != null){
+			zpField.setValueFromField(true);
+		}
+	}
+
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"formLoaded"</span>);
+	<span class="reserved">this</span>.fireEvent(<span class="literal">"all"</span>, null, <span class="literal">"formLoaded"</span>);
+};
+
+Zapatec.Form.<span class="reserved">prototype</span>.destroy = <span class="reserved">function</span>(){
+	<span class="reserved">for</span>(var ii = 0; ii &lt; <span class="reserved">this</span>.container.elements.length; ii++){
+		var field = <span class="reserved">this</span>.container.elements[ii];
+	
+		<span class="reserved">if</span>(field.zpFormField){
+			field.zpFormField.destroy();
+		}
+	}
+	
+	<span class="reserved">this</span>.discard();
+};
+
+<span class="comment">/**
+* Setup function that auto-activates all forms, which has classNames, that
+* starts from "zpForm".
+* Accepts same params as Zapatec.Form constructor(except 'form' parameter).
+* If no 'theme' parameter was given - it would retrieve it from form className.
+*/</span>
+Zapatec.Form.setupAll = <span class="reserved">function</span>(params) {
+	var forms = document.getElementsByTagName(<span class="literal">'form'</span>);
+
+	<span class="reserved">if</span>(!params){
+		params = {};
+	}
+	
+	<span class="reserved">if</span>(!params.startupFocusPosition){
+		params.startupFocusPosition = null;
+	}
+
+	<span class="reserved">if</span>(forms &amp;&amp; forms.length){
+		<span class="reserved">for</span>(var ff = forms.length - 1; ff &gt;= 0; ff--){
+			<span class="reserved">if</span>(forms[ff].zpForm){
+				<span class="comment">// if form is already initialized - do nothing</span>
+				continue;
+			}
+			
+			var arrMatch = forms[ff].className.match(/zpForm(\S*)/);
+
+			<span class="reserved">if</span>(arrMatch){
+				<span class="comment">// Get theme name</span>
+				var strThemeName = arrMatch[1];
+
+				<span class="comment">// Duplicate configuration object</span>
+				var objConfig = Zapatec.Utils.clone(params);
+
+				<span class="comment">// Modify configuration</span>
+				<span class="reserved">if</span> (
+					(objConfig.theme == null || objConfig.theme == <span class="literal">""</span>) &amp;&amp;
+					strThemeName
+				){
+					objConfig.theme = strThemeName;
+				}
+
+				objConfig.form = forms[ff];
+
+				new Zapatec.Form(objConfig);
+			}
+		}
+	}
+};
+
+<span class="comment">/**
+ * <span class="attrib">@private</span>
+ * Default function for displaying validation errors.
+ * <span class="attrib">@param</span> objErrors {object} Errors object of following structure:
+ *	{
+ *		serverSide: true if this is server response or false if validation
+ *		result [boolean],
+ *		generalError: "Human readable error description" [string],
+ *		fieldErrors: [
+ *			{
+ *				field: field element object [object],
+ *				errorMessage: "Human readable error description" [string]
+ *			},
+ *			...
+ *		]
+ *	}
+ *	fieldErrors property may be undefined.
+ */</span>
+Zapatec.Form.submitErrorFunc = <span class="reserved">function</span>(objErrors){
+	var message = objErrors.generalError + <span class="literal">'\n'</span>;
+
+	<span class="reserved">if</span> (objErrors.fieldErrors &amp;&amp; objErrors.fieldErrors.length) {
+		<span class="reserved">for</span> (var ii = 0; ii &lt; objErrors.fieldErrors.length; ii++) {
+			message += (ii + 1) + <span class="literal">': Field '</span> + objErrors.fieldErrors[ii].field.name +
+				<span class="literal">' '</span> + objErrors.fieldErrors[ii].errorMessage + <span class="literal">"\n"</span>;
+		}
+
+		message = message.substr(0 ,message.length - 1);
+	}
+
+	alert(message);
+};
+
+<span class="comment">// class to mark element as interal element of Zapatec.Form(needed for cloning elements)</span>
+Zapatec.Form.IGNORE_CLASSNAME = <span class="literal">"zpFormInternalEl"</span>;
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Form</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:46 2009</div>
+</body>
+</html>

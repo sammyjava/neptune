@@ -1,0 +1,290 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="zpwidget-sample.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>zpwidget-sample.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		Sample of widget class derived from Widget. See description of
+ base Widget class at http://trac.zapatec.com:8000/trac/wiki/Widget.
+
+ <pre>
+ Copyright (c) 2004-2009 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/ChildWidget.html">Zapatec.ChildWidget</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">/**
+ * <span class="attrib">@fileoverview</span> Sample of widget class derived from Widget. See description of
+ * base Widget class at http://trac.zapatec.com:8000/trac/wiki/Widget.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/* $Id: zpwidget-sample.js 15736 2009-02-06 15:29:25Z nikolai $ */</span>
+
+<span class="comment">/**
+ * Sample widget class.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@extends</span> Zapatec.Widget
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.ChildWidget = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Call constructor of superclass</span>
+	Zapatec.ChildWidget.SUPERconstructor.call(<span class="reserved">this</span>, oArg);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for
+ * {<span class="attrib">@link</span> Zapatec#inherit} to determine and store path to this file correctly
+ * when it is included using {<span class="attrib">@link</span> Zapatec#include}. When this file is included
+ * using {<span class="attrib">@link</span> Zapatec#include} or path to this file is obtained using
+ * {<span class="attrib">@link</span> Zapatec#getPath}, this value must be specified as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.ChildWidget.id = <span class="literal">'Zapatec.ChildWidget'</span>;
+
+<span class="comment">// Inherit Widget</span>
+Zapatec.inherit(Zapatec.ChildWidget, Zapatec.Widget);
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.ChildWidget.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Call init method of superclass</span>
+	Zapatec.ChildWidget.SUPERclass.init.call(<span class="reserved">this</span>, oArg);
+	<span class="comment">// Event sample</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">'initStart'</span>);
+	<span class="comment">// Continue initialization</span>
+	<span class="comment">// ...</span>
+	<span class="comment">// Call parent method to load data from the specified source</span>
+	<span class="reserved">this</span>.loadData();
+	<span class="comment">// ...</span>
+	<span class="comment">// Event sample</span>
+	<span class="reserved">this</span>.fireEvent(<span class="literal">'initDone'</span>, <span class="literal">'sample argument1'</span>, <span class="literal">'sample argument2'</span>);
+};
+
+<span class="comment">/**
+ * Reconfigures the widget with new config options after it was initialized.
+ * May be used to change look or behavior of the widget after it has loaded
+ * the data. In the argument pass only values for changed config options.
+ * There is no need to pass config options that were not changed.
+ *
+ * <span class="attrib">@param</span> {object} oArg Changes to user configuration
+ */</span>
+Zapatec.ChildWidget.<span class="reserved">prototype</span>.reconfigure = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Call parent method</span>
+	Zapatec.ChildWidget.SUPERclass.reconfigure.call(<span class="reserved">this</span>, oArg);
+	<span class="comment">// Redraw or do something else</span>
+	<span class="comment">// ...</span>
+};
+
+<span class="comment">/**
+ * Configures the widget. Gets called from init and reconfigure methods of
+ * superclass.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} oArg User configuration
+ */</span>
+Zapatec.ChildWidget.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(oArg) {
+	<span class="comment">// Overwrite default config options if needed</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'theme'</span>, <span class="literal">''</span>);
+	<span class="comment">// Define new config options</span>
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'option1'</span>, <span class="literal">'default value'</span>);
+	<span class="reserved">this</span>.defineConfigOption(<span class="literal">'option2'</span>, <span class="literal">'default value'</span>);
+	<span class="comment">// Call parent method</span>
+	Zapatec.ChildWidget.SUPERclass.configure.call(<span class="reserved">this</span>, oArg);
+	<span class="comment">// Check passed config options and correct them if needed</span>
+	<span class="comment">// ...</span>
+};
+
+<span class="comment">/**
+ * Loads data from the HTML source. Transforms input data from the HTMLElement
+ * object. If needed, loadDataHtmlText, loadDataJson and loadDataXml methods can
+ * be implemented as well.
+ *
+ * <span class="attrib">@param</span> {object} oSource HTMLElement object
+ */</span>
+Zapatec.ChildWidget.<span class="reserved">prototype</span>.loadDataHtml = <span class="reserved">function</span>(oSource) {
+	<span class="comment">// Parse source</span>
+	var oChild = oSource.firstChild;
+	<span class="reserved">while</span> (oChild) {
+		<span class="comment">// Do something with child element</span>
+		<span class="comment">// ...</span>
+		<span class="comment">// Go to next element</span>
+		oChild = oChild.nextSibling;
+	}
+};
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

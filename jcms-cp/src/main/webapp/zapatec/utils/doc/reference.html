@@ -1,0 +1,505 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Zapatec AJAX Widget Documentation</title><link rel="stylesheet" href="../../utils/dhelp/themes/print.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.71.0"><link rel="start" href="#id2468277" title="Zapatec AJAX Widget Documentation"><link rel="next" href="#installation_procedure" title="Chapter 1. Installation Procedure"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2468277"></a>Zapatec AJAX Widget Documentation</h1></div></div><hr></div><div class="toc"><dl><dt><span class="chapter"><a href="#installation_procedure">1. Installation Procedure</a></span></dt><dd><dl><dt><span class="sect1"><a href="#extracting_zpSomeWidget">1. Downloading Zapatec DHTML Widget Files</a></span></dt><dt><span class="sect1"><a href="#extract_widget">2. Extracting zpSomeWidget.zip</a></span></dt></dl></dd><dt><span class="chapter"><a href="#setting_up_your_widget">2. Setting Up Your Widget</a></span></dt><dt><span class="chapter"><a href="#creating_widget_instance">3. Creating Widget Instance</a></span></dt><dd><dl><dt><span class="sect1"><a href="#defining_SubClass_and_Calling_SuperClass">1. Defining SubClass and Calling SuperClass Constructor</a></span></dt><dt><span class="sect1"><a href="#unique_widget_id">2. Unique Widget Class ID </a></span></dt><dt><span class="sect1"><a href="#inheritance">3. Inheritance</a></span></dt><dt><span class="sect1"><a href="#initializing_widget_object">4. Initializing Widget Object</a></span></dt><dt><span class="sect1"><a href="#configuring_widget_instance">5. Configuring Widget Instance</a></span></dt><dt><span class="sect1"><a href="#predefined_config_options">6. Predefined Configuration Options</a></span></dt><dd><dl><dt><span class="sect2"><a href="#prop_theme">6.1. theme (string)</a></span></dt><dt><span class="sect2"><a href="#prop_themePath">6.2. themePath (string)</a></span></dt><dt><span class="sect2"><a href="#prop_asyncTheme">6.3. asyncTheme (boolean)</a></span></dt><dt><span class="sect2"><a href="#templateFile">6.4. templateFile (string)</a></span></dt><dt><span class="sect2"><a href="#templateFilePath">6.5. templateFilePath (string)</a></span></dt><dt><span class="sect2"><a href="#templates">6.6. templates (object)</a></span></dt><dt><span class="sect2"><a href="#prop_source">6.7. source (string or object)</a></span></dt><dt><span class="sect2"><a href="#prop_sourceType">6.8. sourceType (string)</a></span></dt><dt><span class="sect2"><a href="#prop_sourceFetchMethod">6.9. sourceFetchMethod (string)</a></span></dt><dt><span class="sect2"><a href="#prop_sourceFetchContentType">6.10. sourceFetchContentType (string)</a></span></dt><dt><span class="sect2"><a href="#prop_sourceFetchContent">6.11. sourceFetchContent (string or object)</a></span></dt><dt><span class="sect2"><a href="#prop_callbackSource">6.12. callbackSource (string)</a></span></dt><dt><span class="sect2"><a href="#prop_asyncSource">6.13. asyncSource (boolean)</a></span></dt><dt><span class="sect2"><a href="#prop_reliableSource">6.14. reliableSource (boolean)</a></span></dt><dt><span class="sect2"><a href="#prop_callbackConvertSource">6.15. callbackConvertSource (function)</a></span></dt><dt><span class="sect2"><a href="#prop_eventListeners">6.16. eventListeners (object)</a></span></dt></dl></dd><dt><span class="sect1"><a href="#properties_available_in_child_class">7. Properties Available in Child Class</a></span></dt><dd><dl><dt><span class="sect2"><a href="#this.id">7.1. this.id (integer)</a></span></dt><dt><span class="sect2"><a href="#this.constructor.path">7.2. this.constructor.path (string)</a></span></dt></dl></dd><dt><span class="sect1"><a href="#widget_reconfiguration">8. Widget Reconfiguration</a></span></dt><dt><span class="sect1"><a href="#current_widget_configuration">9. Current Widget Configuration</a></span></dt><dt><span class="sect1"><a href="#finding_widget_by_id">10. Finding Widget by Id</a></span></dt><dt><span class="sect1"><a href="#adding_circular_references">11. Adding Circular References</a></span></dt><dt><span class="sect1"><a href="#creating_properties">12. Creating Properties</a></span></dt><dt><span class="sect1"><a href="#removing_circular_references">13. Removing Circular References</a></span></dt><dt><span class="sect1"><a href="#defining_config_options">14. Defining Configuration Options</a></span></dt><dt><span class="sect1"><a href="#adding_event_listeners">15. Adding Custom and Standard Event Listeners</a></span></dt><dt><span class="sect1"><a href="#theme_loading">16. Theme Loading</a></span></dt><dt><span class="sect1"><a href="#load_template">17. Loading Templates</a></span></dt><dt><span class="sect1"><a href="#localization">18. Localization</a></span></dt><dd><dl><dt><span class="sect2"><a href="#using_localization">18.1. Using Localization</a></span></dt><dt><span class="sect2"><a href="#substitution">18.2. Substitution</a></span></dt><dt><span class="sect2"><a href="#creating_loc_resource_file">18.3. Creating Localization Resource File</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setting_class_name">19. Setting ClassName</a></span></dt><dt><span class="sect1"><a href="#forming_element_id">20. Forming Element Id</a></span></dt><dt><span class="sect1"><a href="#showing_hiding_widget">21. Showing/Hiding Widget</a></span></dt><dt><span class="sect1"><a href="#load_data_from_specified_source">22. Loading Data from the Specified Source</a></span></dt><dt><span class="sect1"><a href="#source_data_processing">23. Communication API</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ComApiOverview">23.1. Overview</a></span></dt><dt><span class="sect2"><a href="#comApiFuncSpec">23.2. Functional Specification</a></span></dt><dt><span class="sect2"><a href="#comApiPublicMethods">23.3. Public Methods</a></span></dt><dt><span class="sect2"><a href="#comApiUseCases">23.4. Use Cases</a></span></dt></dl></dd><dt><span class="sect1"><a href="#base_class_APIs">24. Base Class APIs</a></span></dt><dd><dl><dt><span class="sect2"><a href="#method_acceptData">24.1. acceptData</a></span></dt><dt><span class="sect2"><a href="#method_addCircularRef">24.2. addCircularRef</a></span></dt><dt><span class="sect2"><a href="#method_addStandardEventListeners">24.3. addStandardEventListeners</a></span></dt><dt><span class="sect2"><a href="#method_addUserEventListeners">24.4. addUserEventListeners</a></span></dt><dt><span class="sect2"><a href="#method_configure">24.5. configure</a></span></dt><dt><span class="sect2"><a href="#method_createProperty">24.6. createProperty</a></span></dt><dt><span class="sect2"><a href="#method_defineConfigOption">24.7. defineConfigOption</a></span></dt><dt><span class="sect2"><a href="#method_discard">24.8. discard</a></span></dt><dt><span class="sect2"><a href="#method_discardTemplates">24.9. discardTemplates</a></span></dt><dt><span class="sect2"><a href="#method_display">24.10. display</a></span></dt><dt><span class="sect2"><a href="#method_formElementId">24.11. formElementId</a></span></dt><dt><span class="sect2"><a href="#method_getClassName">24.12. getClassName</a></span></dt><dt><span class="sect2"><a href="#method_getConfiguration">24.13. getConfiguration</a></span></dt><dt><span class="sect2"><a href="#method_hideContainer">24.14. hideContainer</a></span></dt><dt><span class="sect2"><a href="#method_init">24.15. init</a></span></dt><dt><span class="sect2"><a href="#method_initTemplate">24.16. initTemplates</a></span></dt><dt><span class="sect2"><a href="#method_loadData">24.17. loadData</a></span></dt><dt><span class="sect2"><a href="#method_loadDataHtml">24.18. loadDataHtml</a></span></dt><dt><span class="sect2"><a href="#method_loadDataHtmlText">24.19. loadDataHtmlText</a></span></dt><dt><span class="sect2"><a href="#method_loadDataJson">24.20. loadDataJson</a></span></dt><dt><span class="sect2"><a href="#method_loadDataXml">24.21. loadDataXml</a></span></dt><dt><span class="sect2"><a href="#load_Template">24.22. loadTemplate</a></span></dt><dt><span class="sect2"><a href="#method_loadTheme">24.23. loadTheme</a></span></dt><dt><span class="sect2"><a href="#method_receiveData">24.24. receiveData</a></span></dt><dt><span class="sect2"><a href="#method_reconfigure">24.25. reconfigure</a></span></dt><dt><span class="sect2"><a href="#method_replyData">24.26. replyData</a></span></dt><dt><span class="sect2"><a href="#mehtod_replyDataCancel">24.27. replyDataCancel</a></span></dt><dt><span class="sect2"><a href="#method_replyDataReturn">24.28. replyDataReturn</a></span></dt><dt><span class="sect2"><a href="#method_showContainer">24.29. showContainer</a></span></dt></dl></dd><dt><span class="sect1"><a href="#static_methods">25. Static Methods</a></span></dt><dd><dl><dt><span class="sect2"><a href="#statmethod_Zapatec.Widget.getWidgetById">25.1. Zapatec.Widget.getWidgetById</a></span></dt><dt><span class="sect2"><a href="#stmethod_Zapatec.Widget.callMethod">25.2. Zapatec.Widget.callMethod</a></span></dt></dl></dd><dt><span class="sect1"><a href="#utility_functions">26. Utility Functions</a></span></dt><dd><dl><dt><span class="sect2"><a href="#utilfunction_Zapatec.Widget.getElementById">26.1. Zapatec.Widget.getElementById</a></span></dt><dt><span class="sect2"><a href="#utilfunction_Zapatec.Widget.getStyle">26.2. Zapatec.Widget.getStyle</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#base_event_driven_class">4. Base Event-Driven Class</a></span></dt><dd><dl><dt><span class="sect1"><a href="#child_event_driven_class_definition">1. Child Event-Driven Class Definition</a></span></dt><dt><span class="sect1"><a href="#using_child_event_driven_class">2. Using Child Event-Driven Class</a></span></dt><dt><span class="sect1"><a href="#event_driven_class_functionality">3. Event-Driven Class Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#meth_addEventListener">3.1. addEventListener</a></span></dt><dt><span class="sect2"><a href="#meth_removeEventListener">3.2. removeEventListener</a></span></dt><dt><span class="sect2"><a href="#meth_isEvent">3.3. isEvent</a></span></dt><dt><span class="sect2"><a href="#meth_removeEvent">3.4. removeEvent</a></span></dt><dt><span class="sect2"><a href="#meth_fireEvent">3.5. fireEvent</a></span></dt><dt><span class="sect2"><a href="#meth_getEventListeners">3.6. getEventListeners</a></span></dt><dt><span class="sect2"><a href="#meth_isEventListener">3.7. isEventListener</a></span></dt><dt><span class="sect2"><a href="#unshiftEventListener">3.8. unshiftEventListener</a></span></dt></dl></dd><dt><span class="sect1"><a href="#event_driven_static_methods">4. Static Methods ¶</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ed_static_meth_addEventListener">4.1. Zapatec.EventDriven.addEventListener</a></span></dt><dt><span class="sect2"><a href="#ed_static_meth_removeEventListener">4.2. Zapatec.EventDriven.removeEventListener</a></span></dt><dt><span class="sect2"><a href="#ed_static_meth_isEvent">4.3. Zapatec.EventDriven.isEvent</a></span></dt><dt><span class="sect2"><a href="#ed_static_meth_removeEvent">4.4. Zapatec.EventDriven.removeEvent</a></span></dt><dt><span class="sect2"><a href="#ed_static_meth_fireEvent">4.5. Zapatec.EventDriven.fireEvent</a></span></dt></dl></dd></dl></dd></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="installation_procedure"></a>Chapter 1. Installation Procedure</h2></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extracting_zpSomeWidget"></a>1. Downloading Zapatec DHTML Widget Files</h2></div></div></div><p>The DHTML Widget files are bundled in a zip file. Click the download link in the appropriate widget section on Zapatec web site and follow the instructions to download the file.</p><p>Save the zpSomeWidget.zip file  to your website root folder on the computer or server.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="extract_widget"></a>2. Extracting zpSomeWidget.zip</h2></div></div></div><div class="itemizedlist"><ul type="disc"><li><p>On your computer, browse to the folder where you saved  the zpSomeWidget.zip file.</p></li><li><p>zpSomeWidget.zip contains a folder called zapatec that holds all  the files you  need to create your widget.</p></li><li><p>Double-click zpSomeWidget.zip to extract it.</p></li></ul></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="setting_up_your_widget"></a>Chapter 2. Setting Up Your Widget</h2></div></div></div><p>In your web editor (Dreamweaver, UltraEdit, etc.), open the web page where you
+want the widget instance  to be placed.  Position a  cursor before the ending &lt;/head&gt; tag.
+Paste the  following script paths before the ending &lt;/head&gt; tag. For example,</p><pre class="programlisting">&lt;!-- Javascript Zapatec utilities file --&gt;  
+&lt;script type="text/javascript" src="utils/zapatec.js"&gt;&lt;/script&gt;
+&lt;!-- Javascript file to support your widget instance --&gt;
+&lt;script type="text/javascript" src="zpSomeWidget/src/SomeWidget.js"&gt;&lt;/script&gt;</pre><p>The zapatec.js file, which contains the general Zapatec utilities, is located in the utils folder.</p><p>The SomeWidget.js file contains sources of the specified widget and resides  in the src subfolder in the zpSomeWidget folder.</p><p>To combine several widgets in a single web page, follow the instructions for inserting the header files given for the individual components. Include a single copy of the zapatec.js file and the core files for the components you are using. For example, if you are using the window and menu components, the header will be:</p><pre class="programlisting">&lt;!-- Javascript Zapatec utilities file --&gt;   
+&lt;script type="text/javascript" src="../utils/zapatec.js"&gt;&lt;/script&gt; 
+&lt;!-- Javascript file to support window --&gt; 
+&lt;script type="text/javascript" src="../zpwin/src/window.js"&gt;&lt;/script&gt;  
+&lt;!-- Javascript file to support menu --&gt; 
+&lt;script type="text/javascript" src="../zpmenu/src/zpmenu.js"&gt;&lt;/script&gt;</pre></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="creating_widget_instance"></a>Chapter 3. Creating Widget Instance</h2></div></div></div><p>This chapter provides information on how to create your own instance of the widget by inheriting the basic super class functionality and extending it to suite your needs. The sections in this chapter represent the logical consequence of actions to be performed for the proper construction and functioning  of your widget class.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="defining_SubClass_and_Calling_SuperClass"></a>1. Defining SubClass and Calling SuperClass Constructor</h2></div></div></div><p>If you are going to create your Widget instance, the first thing to be done is to define the subclass and call the constructor of superclass.</p><p>The following code illustrates how this procedure was performed when  creating Zapatec Form instance:</p><pre class="programlisting">Zapatec.Form = function() {
+    var objArgs = {};
+    switch(arguments.length){
+        case 1:
+            objArgs = arguments[0];
+            break;
+        case 2:
+            objArgs = arguments[1];
+            objArgs.form = arguments[0];
+            break;
+    }
+
+    // Call constructor of superclass
+    Zapatec.Form.SUPERconstructor.call(this, objArgs);
+};</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="unique_widget_id"></a>2. Unique Widget Class ID </h2></div></div></div><p>To determine path correctly when widget module is included using <code class="methodname">Zapatec.include</code>, the static  <span class="property">id</span> property should be set in the widget class. This property value must be passed to <code class="methodname">Zapatec.include</code> as a script id. </p><p>For illustration how to set the unique id for any widget class, see the following code:</p><pre class="programlisting">Zapatec.SubClass.id = 'Zapatec.SubClass';</pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>The unique static id for the widget class is only needed if the subclass is derived from the Zapatec.Widget class.</p></div><p>Setting unique widget class id enables  <code class="methodname">Zapatec.inherit</code> to
+  determine and store path to the widget module  correctly when it is included using
+  Zapatec.include.</p><p>If you have defined the unique id for your widget instance, you are now able to call the <code class="methodname">Zapatec.inherit</code> function.  </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="inheritance"></a>3. Inheritance</h2></div></div></div><p><code class="methodname">Zapatec.inherit</code> function defined in utils/utils.js module provides inheritance for Widget. It gives ability to access properties and methods of the superclass having the same names  in subclass.</p><p>The  code below represents Zapatec.Calendar  inheritance from Zapatec.Widget:</p><pre class="programlisting">// Inherit SuperClass
+Zapatec.inherit(Zapatec.Calendar, Zapatec.Widget);</pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>This function should not be called from another function. It must be invoked during page load to determine path to js file from which it is called correctly.</p></div><p>The same method should be applied to all widget instances you are going to create.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="initializing_widget_object"></a>4. Initializing Widget Object</h2></div></div></div><p>Initializing object is realized with the help of the <code class="methodname">init</code> method. The function defines the internal <span class="property">id</span> property and receives  an object containing user configuration as a parameter. This method initializes your widget with the private  properties that should be specified in the object received.</p><p>See the following code for details: </p><pre class="programlisting">Zapatec.ChildWidget.prototype.init = function(oArg) {
+    // Call init method of superclass
+    Zapatec.ChildWidget.SUPERclass.init.call(this, oArg);
+    // Event sample
+    this.fireEvent('initStart');
+    // Continue initialization
+    // ...
+    // Call parent method to load data from the specified source
+    this.loadData();
+    // ...
+    // Event sample
+    this.fireEvent('initDone', 'sample argument1', 'sample argument2');
+};</pre><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>Before calling this method, define configuration  options for the widget.
+ Initially this.config object  contains all configuration options with their
+ default values. These values may be changed  with the  user
+ configuration defined in the object that is  to be received by the <code class="methodname">init</code>  method as a parameter. Configuration  options that are not included in  this.config object will be ignored.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="configuring_widget_instance"></a>5. Configuring Widget Instance</h2></div></div></div><p>You can configure  your widget instance using the <code class="methodname">configure</code> method of the Widget. As a parameter, it receives object containing  the user configuration.</p><p>The public properties to be used in your widget instance should be  specified in the object passed to the <code class="methodname">configure</code> method.</p><p>The following provides details on how to configure your widget instance:</p><pre class="programlisting">Zapatec.ChildWidget.prototype.configure = function(oArg) {
+    // Overwrite default config options if needed
+    this.defineConfigOption('theme', '');
+    // Define new config options
+    this.defineConfigOption('option1', 'default value');
+    this.defineConfigOption('option2', 'default value');
+    // Call parent method
+    Zapatec.ChildWidget.SUPERclass.configure.call(this, oArg);
+    // Check passed config options and correct them if needed
+    // ...
+};</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="predefined_config_options"></a>6. Predefined Configuration Options</h2></div></div></div><p>The following section outlines the  configuration  options that are predefined in the base Widget class and will be inherited by your widget instance:</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_theme"></a>6.1. theme (string)</h3></div></div></div><p>This option defines the theme name that will be used to display the widget. Corresponding CSS file will be picked and added into the HTML document
+  automatically. The string value is case insensitive. The default value is  "default".
+  The string may also contain relative or absolute URL to  the themes directory.
+  E.g. "../themes/default.css" or "http://my.web.host/themes/default.css".</p><p>The special theme "auto" is used to detect a theme automatically depending on OS. It is replaced automatically with any of the following values: </p><div class="itemizedlist"><ul type="disc"><li><p>winvista &#8212; for Windows Vista</p></li><li><p>winxp &#8212; for Windows XP</p></li><li><p>win2k &#8212; for other Windows</p></li><li><p>macosx &#8212; for Mac OSX</p></li><li><p>default &#8212; for other OS</p></li></ul></div><p>Make sure all these themes exist before using "auto" theme for the widget.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_themePath"></a>6.2. themePath (string)</h3></div></div></div><p>Use   this option to set  the relative or absolute URL to the themes directory.
+ Trailing slash is required. The default value: a  path to the child widget's file +
+ "../themes/". You may also specify the  path in the <span class="property">theme</span> option instead of using
+ <span class="property">themePath</span> option.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_asyncTheme"></a>6.3. asyncTheme (boolean)</h3></div></div></div><p>By using this option you may load your  theme asynchronously. Consequently,  the script
+  execution will not be suspended until theme is loaded. Your theme will be applied
+  once it is loaded.  This option defaults to FALSE.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="templateFile"></a>6.4. templateFile (string)</h3></div></div></div><p>URL of the template file, absolute or relative to
+  the widget's js file. Default: "../templates/default.html". File extension
+  must be "html".
+</p><p>Alternatively, this option may contain only template name. Example: "default". In this
+  case URL of the file will be formed automatically from the template name, and
+ the value of the <span class="property">templatePath</span> config option.</p><p>Template file is supposed to contain a set of templates used in the widget.
+  Each template must be enclosed in &lt;textarea&gt; tag having ID, which is
+  used as a template name in <span class="property">templates</span> config option. Each
+ &lt;textarea&gt; tag must have the style attribute with "display: hidden".
+ See the following for example,</p><pre class="programlisting">textarea id="zpWidgetTemplateMain" style="display: none</pre><p>Each template is an HTML source passed to a new Zapatec.Template.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="templateFilePath"></a>6.5. templateFilePath (string)</h3></div></div></div><p>URL of the templates directory, absolute or
+  relative to the widget's js file. Default: "../templates/". Trailing slash is
+  mandatory. Path specified in the <span class="property">templates</span> config option overwrites
+  this config option. Use only if you pass the template name instead of the URL in
+  the <span class="property">
+            <span class="property">templateFile</span>
+          </span> config option.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="templates"></a>6.6. templates (object)</h3></div></div></div><p>This option associates template IDs from the template file with
+ template names. Specific for each widget. See the following for example,</p><pre class="programlisting">{
+ "main": "zpWidgetTemplateMain",
+ ...
+}</pre><p>Where "main" is the template name and "zpWidgetTemplateMain" is the template ID in
+  the templates file.</p><p>Templates are initialized,  and then
+  each template (Zapatec.Template) object can be accessed using its name.
+  Example: this.templates.main is a reference to the Zapatec.Template object, which
+ was initialized with HTML source taken from "zpWidgetTemplateMain" textarea.0</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_source"></a>6.7. source (string or object)</h3></div></div></div><p>This option defines  the source of data to be retrieved by the widget. The data source  depends on the <span class="property">sourceType</span> option value.</p><p>The  <span class="property">source</span> option is used together with the <span class="property">sourceType</span>  option. For the details on correspondence between the <span class="property">source</span> and <span class="property">sourceType</span> values, see the following table: </p><div class="informaltable"><table border="1"><colgroup><col><col></colgroup><thead><tr><th>sourceType</th><th>source</th></tr></thead><tbody><tr><td>"html"</td><td>[object or string] HTMLElement or its id.</td></tr><tr><td>"html/text"</td><td>[string] HTML fragment.</td></tr><tr><td>"html/url"</td><td>[string] URL of HTML fragment.</td></tr><tr><td>"json"</td><td>[object or string] JSON object or string</td></tr><tr><td>"json/url"</td><td>[string] URL of JSON data source.</td></tr><tr><td>"xml"</td><td>[object or string] XMLDocument object or XML string.</td></tr><tr><td>"xml/url"</td><td>[string] URL of XML data source.</td></tr></tbody></table></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_sourceType"></a>6.8. sourceType (string)</h3></div></div></div><p>Use this option  together with the  <span class="property">source</span> option to specify how
+  source should be processed. Possible source types:
+  "html", "html/text", "html/url", "json", "json/url", "xml", "xml/url".</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_sourceFetchMethod"></a>6.9. sourceFetchMethod (string)</h3></div></div></div><p>The <span class="property">sourceFetchMethod</span> option enables you to set either <code class="methodname">GET</code> or <code class="methodname">POST</code> as a source fetch method. The default value is <code class="methodname">GET</code>.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_sourceFetchContentType"></a>6.10. sourceFetchContentType (string)</h3></div></div></div><p>Use this option  to define the content type when the <span class="property">sourceFetchMethod</span> is set to <code class="methodname">POST</code>.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_sourceFetchContent"></a>6.11. sourceFetchContent (string or object)</h3></div></div></div><p>If  the <span class="property">sourceFetchMethod</span> is <code class="methodname">POST</code>, this option specifies a  postable string or the DOM object data.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_callbackSource"></a>6.12. callbackSource (string)</h3></div></div></div><p>You may use this option  instead of <span class="property">source</span>, 
+  <span class="property">sourceType</span> and <span class="property">sourceFetchMethod</span> configuration options to get source depending on the passed arguments.
+  The option receives object with the passed arguments and  should return the following object:</p><pre class="programlisting">{
+source: [object or string] see the above table for possible sources,
+sourceType: [string] see the above table for possible source types
+method: [string, optional] method ('GET' or 'POST'),
+contentType: [string, optional] content type when using POST,
+content: [string or object, optional] postable string or DOM object data when using POST
+}</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_asyncSource"></a>6.13. asyncSource (boolean)</h3></div></div></div><p>For possibility of  loading source asynchronously, use the <span class="property">asyncSource</span> <span class="type">boolean</span>. As a result, the 
+  script execution will not be suspended until the source is loaded. The source will be
+  processed without delay once it is loaded. By default, this option is set to TRUE.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_reliableSource"></a>6.14. reliableSource (boolean)</h3></div></div></div><p>If the <span class="property">sourceType</span> option is defined as a  "json" or "json/url", using <span class="property">reliableSource</span> boolean   will help you   skip JSON format verification. This will save  time when loading  large
+  data sets. By default the boolean value is set to TRUE.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_callbackConvertSource"></a>6.15. callbackConvertSource (function)</h3></div></div></div><p>This option may be used to convert input data
+  passed with the <span class="property">source</span> configuration  option from the custom format into the widget internal format. It should  return the converted source.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="prop_eventListeners"></a>6.16. eventListeners (object)</h3></div></div></div><p>The <span class="property">eventListeners</span> option is used to define an associative array with event listeners. For details on setting this option, see the code below: </p><pre class="programlisting">{
+[string] event name: [function or object] event listener or array of event listeners
+...
+}</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="properties_available_in_child_class"></a>7. Properties Available in Child Class</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="this.id"></a>7.1. this.id (integer)</h3></div></div></div><p>By using this option  you may set the unique id for the widget instance on your page.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="this.constructor.path"></a>7.2. this.constructor.path (string)</h3></div></div></div><p>Setting the path to directory where js file containing child class resides is realized with the help of the <span class="property">this.constructor.path</span> option.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="widget_reconfiguration"></a>8. Widget Reconfiguration</h2></div></div></div><p>After the widget was initialized, you  may still reconfigure it with the new configuration options using the <code class="methodname">reconfigure</code> method.</p><p>It may also be used to change the look or behavior of the widget after it has loaded the data. In the argument, pass only values for the changed configuration options. There is no need to pass configuration options that were not changed.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>The <span class="property">eventListeners</span>  option is ignored by this method as it is
+ only useful  on initialization. To add an event listener after the widget was
+ initialized, use the <code class="methodname">addEventListener</code> method instead.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="current_widget_configuration"></a>9. Current Widget Configuration</h2></div></div></div><p>To return current widget configuration,  use the <code class="methodname">getConfiguration</code> method.</p><p>See the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.getConfiguration = function() {
+    return this.config;
+};</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="finding_widget_by_id"></a>10. Finding Widget by Id</h2></div></div></div><p>Call the <code class="methodname">getWidgetById</code>  method to find a widget by its id. It  takes in widget id and returns the  widget object or undefined if the widget was not found.</p><p>If you need to find  all the widgets on the page, you need to specify an array of the widgets  ids to be able to access them by  id number:</p><pre class="programlisting">Zapatec.Widget.all = [];</pre><p>For details on how to find a widget by id, see the following code:</p><pre class="programlisting">Zapatec.Widget.getWidgetById = function(iId) {
+    return Zapatec.Widget.all[iId];
+};</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adding_circular_references"></a>11. Adding Circular References</h2></div></div></div><p>The <code class="methodname">addCircularRef</code> function enables you to save the  property that must be set to null on window unload event. This method should be used for properties that cannot  be deleted by garbage collector in IE 6 due to circular references.</p><pre class="programlisting">Zapatec.Widget.prototype.addCircularRef = function(oElement, sProperty) {
+    if (!this.widgetCircularRefs) {
+        // Holds properties of DOM objects that must be set to null on window unload
+        // event to prevent memory leaks in IE 6
+        this.widgetCircularRefs = [];
+    }
+    this.widgetCircularRefs.push([oElement, sProperty]);
+};</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="creating_properties"></a>12. Creating Properties</h2></div></div></div><p>To create properties that cannot be deleted by the garbage collector in IE 6 due to the circular references use the <code class="methodname">createProperty</code>  function  that  assigns a value to a custom property of the DOM object and sets it to null  on the  window unload event. This method receives a DOM object, a property name and its value as parameters.</p><p>For an example, see the code below:</p><pre class="programlisting">Zapatec.Widget.prototype.createProperty = function(oElement, sProperty, val) {
+    oElement[sProperty] = val;
+    this.addCircularRef(oElement, sProperty);
+};</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="removing_circular_references"></a>13. Removing Circular References</h2></div></div></div><p>If you want to  remove circular references previously defined by the  <code class="methodname">addCircularRef</code> and <code class="methodname">createProperty</code>  functions to prevent memory leaks in IE 6, use the <code class="methodname">removeCircularRef</code> method. </p><p>See the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.removeCircularRefs = function() {
+    if (!this.widgetCircularRefs) {
+        return;
+    }
+    for (var iRef = this.widgetCircularRefs.length - 1;          iRef &gt;= 0; iRef--) {
+        var oRef = this.widgetCircularRefs[iRef];
+        oRef[0][oRef[1]] = null;
+        oRef[0] = null;
+    }
+};</pre><p>You may also want to delete a reference to the object from the internal list and call the <code class="methodname">Zapatec.Widget.removeCircularRefs()</code> method. This enables JavaScript garbage collector to delete an object unless there are any external references to it. The id of the discarded object is reused. When you create a new instance of the Widget, it obtains the id of discarded object.</p><pre class="programlisting">Zapatec.Widget.prototype.discard = function() {
+    Zapatec.Widget.all[this.id] = null;
+    this.removeCircularRefs();
+};</pre><p>To remove circular references for each instance of widget on the page, call the static <code class="methodname">Zapatec.Widget.removeCircularRefs</code> method.</p><pre class="programlisting">Zapatec.Widget.removeCircularRefs = function() {
+    for (var iWidget = Zapatec.Widget.all.length - 1; iWidget &gt;= 0; iWidget--) {
+        var oWidget = Zapatec.Widget.all[iWidget];
+        if (oWidget &amp;&amp; oWidget.removeCircularRefs) {
+            oWidget.removeCircularRefs();
+        }
+    }
+};</pre><p>When you need to remove circular references on the onload event, provide the following code: </p><pre class="programlisting">Zapatec.Utils.addEvent(window, 'unload', Zapatec.Widget.removeCircularRefs);</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="defining_config_options"></a>14. Defining Configuration Options</h2></div></div></div><p>Use the <code class="methodname">defineConfigOption</code> function to define a  configuration  option if it has not been specified yet. It sets the default value of a new  option. If the default value is not specified, it will be  set to null. This method receives the configuration option name and its default value as parameters.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="adding_event_listeners"></a>15. Adding Custom and Standard Event Listeners</h2></div></div></div><p>Adding custom event listeners to your widget instance is possible with the help of <code class="methodname">addUserEventListeners</code> function. </p><p>See the following example for details:</p><pre class="programlisting">Zapatec.Widget.prototype.addUserEventListeners = function() {
+  var oListeners = this.config.eventListeners;
+  var fListener, iListeners, iListener;
+  for (var sEvent in oListeners) {
+      if (oListeners.hasOwnProperty(sEvent)) {
+          vListener = oListeners[sEvent];
+          if (vListener instanceof Array) {
+              iListeners = vListener.length;
+              for (iListener = 0; iListener &lt; iListeners; iListener++) {
+                  this.addEventListener(sEvent, vListener[iListener]);
+              }
+          } else {
+              this.addEventListener(sEvent, vListener);
+          }
+      }
+  }
+};</pre><p>Use <code class="methodname">addStandardEventListeners</code> function to add standard event listeners.</p><p>For details on how to do this, see the code below:</p><pre class="programlisting">Zapatec.Widget.prototype.addStandardEventListeners = function() {
+    this.addEventListener('fetchSourceError', Zapatec.Widget.loadSourceError);
+    this.addEventListener('loadThemeError', Zapatec.Widget.loadThemeError);
+};</pre><p>See the following list for available standard events listeners:</p><div class="table"><a name="id2483920"></a><p class="title"><b>Table 3.1. Standard Event Listeners</b></p><div class="table-contents"><table summary="Standard Event Listeners" border="1"><colgroup><col><col></colgroup><tbody><tr><td>loadThemeStart</td><td>before starting to load theme</td></tr><tr><td>loadThemeEnd</td><td>after theme is loaded or theme load failed</td></tr><tr><td>loadThemeError</td><td>after theme load failed</td></tr><tr><td>loadTemplateStart</td><td>before template loading starts</td></tr><tr><td>loadTemplateEnd</td><td>after the template file was loaded or template loading has failed</td></tr><tr><td>loadTemplateError</td><td>after template loading has failed</td></tr><tr><td>fetchSourceStart</td><td>before fetching of the source</td></tr><tr><td>fetchSourceError</td><td>if the source fetch failed</td></tr><tr><td>fetchSourceEnd</td><td>after the source is fetched or fetch failed</td></tr><tr><td>loadDataStart</td><td>before parsing of data</td></tr><tr><td>loadDataEnd</td><td>after data is parsed or error occurred during fetch</td></tr><tr><td>receiveData</td><td>before the widget receives data sent to it</td></tr><tr><td>replyDataCancel</td><td>before the widget is hidden</td></tr><tr><td>replyDataReturn</td><td>before passing data to the specified widget</td></tr><tr><td>acceptData</td><td>before the sending widget receives data back from the editor</td></tr><tr><td>initStart</td><td>before starting widget initialization</td></tr><tr><td>initDone</td><td>after initialization is finished</td></tr></tbody></table></div></div><p><br class="table-break"></p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="theme_loading"></a>16. Theme Loading</h2></div></div></div><p>To load the specific theme use the <a href="#method_loadTheme" title="24.23. loadTheme">
+          <code class="methodname">loadTheme</code>
+        </a> method. This function defines the external  <span class="property">themeLoaded</span> property.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="load_template"></a>17. Loading Templates</h2></div></div></div><p><a name="loading_template"></a>The <code class="methodname">loadTemplate</code> method is used to load the template of your choice. Once the template file is loaded, this method converts  templates into DOM objects, calls <code class="methodname">initTemplates</code>, and then the <code class="methodname">display</code> method.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="localization"></a>18. Localization</h2></div></div></div><p>You can make your widget to display messages in any language. To do this, you need to set <span class="property">langID</span>, <span class="property">langCountryCode</span> and <span class="property">langEncoding</span> properties.</p><p>The <span class="property">langID</span> property  value should be a 2-letter acronym taken from <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_top">http://www.loc.gov/standards/iso639-2/php/code_list.php</a> By default, <span class="property">langID</span>  is set to "en".</p><p>The <span class="property">langCountryCode</span> property value should  contain 2-letter country name acronym (see <a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html" target="_top">ISO 3166</a>). Optional. You can omit it.</p><p>The <span class="property">langEncoding</span> option sets the  character encoding. By default it is undefined.</p><p>If you intend to use the language other than English, you also have to add this line of code to your page. See the following Form example for details:</p><pre class="programlisting">&lt;script type="text/javascript" src="zpform/lang/pt_br-utf8.js"&gt;&lt;/script&gt;</pre><p>This will attach a message file with resources for this language. Now it is possible to use <span class="property">langID</span>: pt (Portuguese), <span class="property">langCountryCode</span>: br (Brazil) and <span class="property">langEncoding</span>: utf8.</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="using_localization"></a>18.1. Using Localization</h3></div></div></div><p>Use the <code class="methodname">getMessage(key,[sub1,sub2...])</code> method  to get  your message localized. It gets the message for the given key, makes the substitutions and returns localized message.</p><p>The first parameter to be passed to this method  is a key for which you want to get the  message localized. All the other parameters are optional, they represent  substitutions.</p><p>The code  below shows how to use the <span class="property">getMessage</span> option for message localization: </p><pre class="programlisting">Zapatec.Widget.prototype.getMessage = function(key){
+    if(arguments.length == 0){
+        return null;
+    }
+
+    if(
+        !Zapatec.Langs[this.config.langId] || 
+        !Zapatec.Langs[this.config.langId][this.langStr] ||
+        !Zapatec.Langs[this.config.langId][this.langStr][key]
+        ){
+//      Zapatec.Log({description: "No language data found"});
+        return key;
+    }
+
+    var res = Zapatec.Langs[this.config.langId][this.langStr][key];
+
+    if(arguments.length &gt; 1 &amp;&amp; typeof(res) == "string"){
+        for(var ii = 1; ii &lt; arguments.length; ii++){
+            var re = new RegExp("(^|([^\\\\]))\%"+ii);
+
+            res = res.replace(re, "$2" + arguments[ii]);
+        }
+    }
+
+    return res;
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="substitution"></a>18.2. Substitution</h3></div></div></div><p>You can use tokens %1, %2, %3 in every string. The  <code class="methodname">getMessage</code> method can accept as many parameters as you wish. Each parameter that you have  listed will be substituted by the given arguments and returned by <code class="methodname">getMessage()</code>. If you have specified more arguments than the number of tokens in the appropriate line,  then all the arguments will be shown "as is".</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="creating_loc_resource_file"></a>18.3. Creating Localization Resource File</h3></div></div></div><p>You can create or modify the resource file for you language. Use zpwidget/lang/default.js as a template. Use remarks and comments to make the correct translation.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Do not remove any keys from that file, even if you consider them irrelevant. Your widget  may not function properly after that.</p></div><p>After you are through  with translation,  rename this file  considering these 3 rules:</p><div class="itemizedlist"><ul type="disc"><li><p>Short form  of the language goes first («en» for English, «fr» for French etc).</p><p>To obtain the correct abbreviations,  go to <a href="http://www.loc.gov/standards/iso639-2/php/code_list.php" target="_top">http://www.loc.gov/standards/iso639-2/php/code_list.php</a></p></li><li><p>Optionally, you can specify the region using two letters abbreviation. It must be separated from language using "_".</p><p>To obtain the correct abbreviations,  go to <a href="http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html" target="_top">http://userpage.chemie.fu-berlin.de/diverse/doc/ISO_3166.html</a></p></li></ul></div><div class="itemizedlist"><ul type="disc"><li><p>If this file uses some specific character encoding, write it after "-".</p></li><li><p>Use .js extension for the file.</p></li></ul></div><p>fr_be-utf8.js &#8212; stands for French, region - Belgium and uses Unicode UTF-8.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setting_class_name"></a>19. Setting ClassName</h2></div></div></div><p>You can form the class name using the <a href="#method_getClassName" title="24.12. getClassName">
+          <code class="methodname">getClassName</code>
+        </a> method. The only thing you need to do is to pass prefix and suffix and the function will generate the class name on the basis of the theme name.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="forming_element_id"></a>20. Forming Element Id</h2></div></div></div><p>The <a href="#method_formElementId" title="24.11. formElementId">
+          <code class="methodname">formElementId</code>
+        </a> method enables you to create the  unique element id from the widget id, unique counter and the specified prefix and suffix.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="showing_hiding_widget"></a>21. Showing/Hiding Widget</h2></div></div></div><p>You can hide and display your widget using  the specified effects and animation speed that are passed to the  <a href="#method_hideContainer" title="24.14. hideContainer">
+          <code class="methodname">hideContainer</code>
+        </a> and <a href="#method_showContainer" title="24.29. showContainer">
+          <code class="methodname">showContainer</code>
+        </a> methods as parameters.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="load_data_from_specified_source"></a>22. Loading Data from the Specified Source</h2></div></div></div><p>Use the <code class="methodname">loadData</code> method to load data from the specified source. Depending on the <span class="property">
+          <a href="#prop_sourceType" title="6.8. sourceType (string)">sourceType</a>
+        </span> and <span class="property">
+          <a href="#prop_source" title="6.7. source (string or object)">source</a>
+        </span> configuration options, it  loads  data from the specified source and calls one of the methods implemented in the child class <a href="#method_loadDataHtml" title="24.18. loadDataHtml">
+          <code class="methodname">loadDataHtml</code>
+        </a>, <a href="#method_loadDataHtmlText" title="24.19. loadDataHtmlText">
+          <code class="methodname">loadDataHtmlText</code>
+        </a>, <a href="#method_loadDataJson" title="24.20. loadDataJson">
+          <code class="methodname">loadDataJson</code>
+        </a> or <a href="#method_loadDataXml" title="24.21. loadDataXml">
+          <code class="methodname">loadDataXml</code>
+        </a>.</p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="source_data_processing"></a>23. Communication API</h2></div></div></div><p>Base Widget class provides APIs for widget communication:</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ComApiOverview"></a>23.1. Overview</h3></div></div></div><p>Communication API is intended  to provide a way to exchange data between different widgets. It gives ability to extract and transfer data from one widget to another,  process the data and return processed data back to the sending widget.
+
+</p><p>Possible application: use one widget as editor for other widget, append one widget via another, communicate data between widgets, present data in different format, etc. Available ways of usage depend on the API  implementation in the specific widget.
+
+Communication API can be used to exchange data between widgets of the same type as well as between different types of widgets provided that those types have implemented this API. </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="comApiFuncSpec"></a>23.2. Functional Specification</h3></div></div></div><p>Communication API consists of several methods defined in the base Widget class. There are three groups of methods in the API:</p><div class="itemizedlist"><ul type="disc"><li><p><span class="italic">Receive Methods</span> &#8212; methods that must be implemented in the widget to enable the widget to receive data sent to it: <code class="methodname">receiveData</code>. </p></li></ul></div><div class="itemizedlist"><ul type="disc"><li><p><span class="italic">Reply Methods</span> &#8212; methods that must be implemented in the widget in addition to <span class="italic">Receive Methods</span> to be able to send the processed data back to the sending widget: <code class="methodname">replyData</code>, <code class="methodname">replyDataCancel</code>, <code class="methodname">replyDataReturn</code>. </p></li></ul></div><div class="itemizedlist"><ul type="disc"><li><p><span class="italic">Accept Methods</span> &#8212; methods that must be implemented in the sending widget to be able to receive data back from the editor: <code class="methodname">acceptData</code> </p></li></ul></div><p>To use your widget as a viewer, you must define input data format  and extend <code class="methodname">receiveData</code> method responsible for  input data processing.</p><p>To use your widget as an editor, you must at least extend <code class="methodname">replyData</code> method. It must prepare and return data in the same format as it was received in the <code class="methodname">receiveData</code> method (format previously defined by you).</p><p>To be able to receive data back from editors, you must extend <code class="methodname">acceptData</code> method in the widget. It is used as a callback function. It receives the editor widget instance and data. Use the JavaScript <em class="parameter"><code>instanceOf</code></em>  operator to determine the type of editor widget and respective input data format. Parse returned data depending on widget from which this method is called.</p><p>Optionally you may use other methods.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="comApiPublicMethods"></a>23.3. Public Methods</h3></div></div></div><p>You can load  data passed from the other widget for  viewing   or editing using the <a href="#method_receiveData" title="24.24. receiveData">
+            <code class="methodname">receiveData</code>
+          </a> method. To do this, pass the widget name and data in the format specific for this widget as parameters for this function. It fires the <em class="parameter"><code>receiveData</code></em> event. The listener receives argument object passed to this method.</p><p>The <a href="#method_replyData" title="24.26. replyData">
+            <code class="methodname">replyData</code>
+          </a> method converts  processed data to return it to the sender in the format the data was received by  the <a href="#method_receiveData" title="24.24. receiveData">
+            <code class="methodname">receiveData</code>
+          </a> function. It  returns  processed data in the format specific for the sender widget.</p><p>You may also want to cancel  processing of the data received  from the sender widget. In this case you should use the <a href="#mehtod_replyDataCancel" title="24.27. replyDataCancel">
+            <code class="methodname">replyDataCancel</code>
+          </a> method. As a rule, this method just hides the widget by calling the <code class="methodname">hide</code> method if it is defined). The <code class="methodname">replyDataCancel</code> event is fired before the widget is hidden.  </p><p>To return  processed data to the specified widget (not necessary to the sender widget), use the <a href="#method_replyDataReturn" title="24.28. replyDataReturn">
+            <code class="methodname">replyDataReturn</code>
+          </a> function. Fires the <em class="parameter"><code>replyDataReturn</code></em> event before passing data to the specified widget. Listener receives argument object passed to this method. </p><p>Use the <a href="#method_acceptData" title="24.1. acceptData">
+            <code class="methodname">acceptData</code>
+          </a> method to receive data back from the other widget previously passed to it by  the <a href="#method_receiveData" title="24.24. receiveData">
+            <code class="methodname">receiveData</code>
+          </a> method. It fires the <em class="parameter"><code>acceptData</code></em> event. The listener receives the argument object passed to this method.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="comApiUseCases"></a>23.4. Use Cases</h3></div></div></div><p>Currently Communication API is implemented in the Grid.  This  allows to select certain rows from one grid and display them in another grid in a different format. It is  also possible to use such widgets as Calendar and Editor for editing grid cells. See the <a href="../../zpgrid/demo/compare.html" target="_top">Compare Rows</a> and the <a href="../../zpgrid/demo/editors.html" target="_top">Editors</a> demos for details.</p><p>Communication between the From and the Grid functions as follows:</p><p>Instance of the Form is initialized before grid initialization and is hidden. For example, a new instance of the form is assigned to oForm variable, and a new instance of the grid is assigned to oGrid variable. oForm is passed to oGrid through special config option during initialization of the grid.</p><p>When the user clicks on a row, onclick event handler shows the form, calls <code class="methodname">oForm.receiveData</code> method and passes the row into it in the format defined by the Form. <code class="methodname">oForm.receiveData</code> method populates the form. Along with data it can pass oGrid instance to save reference to it in the form object for later use when Save button is clicked.</p><p>When the user clicks on Save button, its onclick event handler calls oForm.replyDataReturn({widget: oGrid}), which in its turn passes data back to the grid through oGrid.acceptData method (oGrid.acceptData is a callback). oForm.replyDataReturn calls oForm.replyDataCancel to hide the form.</p><p>If the user clicks another row while the form is opened, onclick event handler doesn't need to hide and show the form again. It just populates opened form by calling its oForm.receiveData method.</p><p>If the user clicks somewhere outside the grid, the form can be closed by calling oForm.replyDataCancel.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="base_class_APIs"></a>24. Base Class APIs</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_acceptData"></a>24.1. acceptData</h3></div></div></div><p>Call this method to receive data back from the other widget previously passed to it by using the <code class="methodname">Zapatec.Widget.receiveData()</code> method.</p><p>The following argument object format should be received as a parameter:</p><pre class="programlisting">{
+widget: [object] caller widget instance,
+data: [any] data in the format specific for each widget
+}</pre><p>The <em class="parameter"><code>acceptData</code></em> event is fired when the listener receives the argument object passed to this
+ method.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_addCircularRef"></a>24.2. addCircularRef</h3></div></div></div><p>The <code class="methodname">addCircularRef</code> function saves the  property that must be set to null on window unload event. This method should be used for properties that cannot  be deleted by garbage collector in IE 6 due to circular references.</p><p>Defines the internal  <span class="property">widgetCircularRefs</span> property.</p><p>This method receives the following parameters:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>oElement</code></em> &#8212; DOM object</p></li><li><p><em class="parameter"><code>sProperty</code></em> &#8212; Property name</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_addStandardEventListeners"></a>24.3. addStandardEventListeners</h3></div></div></div><p>Use this function to add standard event listeners.</p><p>For details on how to add standard event listeners, see the code below:</p><pre class="programlisting">Zapatec.Widget.prototype.addStandardEventListeners = function() {
+    this.addEventListener('fetchSourceError', Zapatec.Widget.loadSourceError);
+    this.addEventListener('loadThemeError', Zapatec.Widget.loadThemeError);
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_addUserEventListeners"></a>24.4. addUserEventListeners</h3></div></div></div><p>This method adds custom event listeners.</p><p>If you want to add custom event listeners,  see the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.addUserEventListeners = function() {
+  var oListeners = this.config.eventListeners;
+  var fListener, iListeners, iListener;
+  for (var sEvent in oListeners) {
+      if (oListeners.hasOwnProperty(sEvent)) {
+          vListener = oListeners[sEvent];
+          if (vListener instanceof Array) {
+              iListeners = vListener.length;
+              for (iListener = 0; iListener &lt; iListeners; iListener++) {
+                  this.addEventListener(sEvent, vListener[iListener]);
+              }
+          } else {
+              this.addEventListener(sEvent, vListener);
+          }
+      }
+  }
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_configure"></a>24.5. configure</h3></div></div></div><p>This method is used to configure your instance of a  widget. As a parameter, it receives object containing  the user configuration.</p><p>The following code represents the default child class configuration that was inherited from the base Widget class:</p><pre class="programlisting">Zapatec.Widget.prototype.configure = function(oArg) {
+    // Default configuration
+    this.defineConfigOption('theme', 'default');
+    var sPath = this.constructor.path;
+    if (typeof sPath != 'undefined') {
+        this.defineConfigOption('themePath', Zapatec.Transport.translateUrl({
+            url: '../themes/',
+            relativeTo: sPath
+        }));
+    } else {
+      this.defineConfigOption('themePath', '../themes/');
+    }
+    this.defineConfigOption('asyncTheme', false);
+    this.defineConfigOption('source');
+    this.defineConfigOption('sourceType');
+    this.defineConfigOption('sourceFetchMethod', 'GET');
+    this.defineConfigOption('sourceFetchContentType');
+    this.defineConfigOption('sourceFetchContent');
+    this.defineConfigOption('callbackSource');
+    this.defineConfigOption('asyncSource', true);
+    this.defineConfigOption('reliableSource', true);
+    this.defineConfigOption('callbackConvertSource');
+    this.defineConfigOption('eventListeners', {});
+    this.defineConfigOption('lang');
+    this.defineConfigOption('langId');
+    this.defineConfigOption('langCountryCode');
+    this.defineConfigOption('langEncoding');
+    // Get user configuration
+    if (oArg) {
+        var oConfig = this.config;
+        for (var sOption in oArg) {
+            if (typeof oConfig[sOption] != 'undefined') {
+                oConfig[sOption] = oArg[sOption];
+            } else {
+                Zapatec.Log({
+                    description: "Unknown config option: " + sOption
+                });
+            }
+        }
+    }
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_createProperty"></a>24.6. createProperty</h3></div></div></div><p>The <code class="methodname">createProperty</code>  function  is used to assign a value to a custom property of the DOM object. This property will be set to null on window unload event. Using   this function is rather  useful if you need to create properties that cannot  be deleted by garbage collector in IE 6 due to circular references.</p><p>This method receives the following parameters:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>oElement</code></em> &#8212; DOM object</p></li><li><p><em class="parameter"><code>sProperty</code></em> &#8212; Property name</p></li><li><p><em class="parameter"><code>val</code></em> &#8212; Property value</p></li></ul></div><p>See the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.createProperty = function(oElement, sProperty, val) {
+    oElement[sProperty] = val;
+    this.addCircularRef(oElement, sProperty);
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_defineConfigOption"></a>24.7. defineConfigOption</h3></div></div></div><p>Use this function to define a  configuration  option if it has not been specified yet. It sets the default value of a new  option. If the default value is not specified, it will be  set to null.</p><p>This method receives the following parameters:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>sOption</code></em> &#8212; Configuration option name</p></li><li><p><em class="parameter"><code>val</code></em> &#8212; Optional. Configuration option default value</p></li></ul></div><p>For information on defining  properties, see the code below: </p><pre class="programlisting">Zapatec.Widget.prototype.defineConfigOption = function(sOption, val) {
+    if (typeof this.config[sOption] == 'undefined') {
+        if (typeof val == 'undefined') {
+            this.config[sOption] = null;
+        } else {
+            this.config[sOption] = val;
+        }
+    }
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_discard"></a>24.8. discard</h3></div></div></div><p>This function deletes a reference to the object from the internal list and calls the <code class="methodname">Zapatec.Widget.removeCircularRefs()</code> method. This enables JavaScript garbage collector to delete an object unless there are any external references to it. The id of the discarded object is reused. When you create new instance of the Widget, it obtains the id of discarded object.</p><p>For an example, see the following code:</p><pre class="programlisting">Zapatec.Widget.prototype.discard = function() {
+    Zapatec.Widget.all[this.id] = null;
+    this.removeCircularRefs();
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_discardTemplates"></a>24.9. discardTemplates</h3></div></div></div><p>The method deletes templates created by the <code class="methodname">initTemplates</code> method.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_display"></a>24.10. display</h3></div></div></div><p>This method compiles the main template and display results. </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_formElementId"></a>24.11. formElementId</h3></div></div></div><p>This method enables you to create the  unique element id from the widget id, unique counter and the specified prefix and suffix.</p><p>Arguments object format:</p><pre class="programlisting">{
+prefix: [string, optional] prefix, default: 'zpWidget',
+suffix: [string, optional] suffix, default: '-'
+}</pre><p>For example, if the widget id equals to   0, the unique counter is 1, and the following object  is provided:</p><pre class="programlisting">{
+prefix: 'zpWidget',
+suffix: 'Item'
+},</pre><p>the id of the element  will be 'zpWidget0Item1'.</p><p>The <code class="methodname">formElementId</code> method also defines the internal  <span class="property">widgetUniqueIdCounter</span> property.</p><p>This method receives arguments object as a  parameter and returns element id.</p><p>The following sample code shows how to set this method:</p><pre class="programlisting">Zapatec.Widget.prototype.formElementId = function(oArg) {
+    var aId = [];
+    if (oArg &amp;&amp; oArg.prefix) {
+        aId.push(oArg.prefix);
+    } else {
+        aId.push('zpWidget');
+    }
+    aId.push(this.id);
+    if (oArg &amp;&amp; oArg.suffix) {
+        aId.push(oArg.suffix);
+    } else {
+        aId.push('-');
+    }
+    if (typeof this.widgetUniqueIdCounter == 'undefined') {
+        this.widgetUniqueIdCounter = 0;
+    } else {
+        this.widgetUniqueIdCounter++;
+    }
+    aId.push(this.widgetUniqueIdCounter);
+    return aId.join('');
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_getClassName"></a>24.12. getClassName</h3></div></div></div><p>This method forms a class name from the theme name and provided prefix and suffix. It takes in the following object:</p><pre class="programlisting">{
+prefix: [string, optional] prefix,
+suffix: [string, optional] suffix
+}</pre><p>and returns a class name.</p><p>Examples:</p><pre class="programlisting">this.getClassName({
+  prefix: 'zpWidget',
+  suffix: 'Container'
+});</pre><p>In the above example, the <code class="methodname">getClassName</code> method will return 'zpWidgetDefaultContainer', if this.config.theme == 'default'.</p><pre class="programlisting">this.getClassName({
+  prefix: 'zpWidget'
+});</pre><p>In the next example, it will return 'zpWidgetDefault', if this.config.theme == 'default'.</p><p>See the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.getClassName = function(oArg) {
+    var aClassName = [];
+    if (oArg &amp;&amp; oArg.prefix) {
+        aClassName.push(oArg.prefix);
+    }
+    var sTheme = this.config.theme;
+    if (sTheme != '') {
+        aClassName.push(sTheme.charAt(0).toUpperCase());
+        aClassName.push(sTheme.substr(1));
+    }
+    if (oArg &amp;&amp; oArg.suffix) {
+        aClassName.push(oArg.suffix);
+    }
+    return aClassName.join('');
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_getConfiguration"></a>24.13. getConfiguration</h3></div></div></div><p>This method is useful if you need to return the current configuration of the widget.</p><p>See the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.getConfiguration = function() {
+    return this.config;
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_hideContainer"></a>24.14. hideContainer</h3></div></div></div><p>This method hides a  widget using the specified effects and animation speed. You need to define this.container to use this method.</p><p>It receives the following parameters:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>effects</code></em> &#8212; specifies a list of effects to be applied</p><p>The effects library is already built into  <a href="http://www.zapatec.com/website/main/products/prod2/" target="_top">Zapatec DHTML Menu</a>. To see all the effects, go to the <a href="http://www.zapatec.com/website/main/zpmenu/doc/wizard.html" target="_top">Menu Wizard</a>,  and choose the Effects tab to see how they are implemented. Below is the list of available effects that can be used for hiding you widget instance.</p><p>* Glide</p><p>* Fade</p><p>* Slide</p><p>* Wipe</p><p>* Unfurl </p></li><li><p><em class="parameter"><code>animSpeed</code></em> &#8212; defines animation speed value in the range of  1..100 </p></li><li><p><em class="parameter"><code>onFinish</code></em> &#8212; sets function to be called on effect end</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_init"></a>24.15. init</h3></div></div></div><p>Initializing object is realized with the help of the <code class="methodname">init</code> method. The function defines the internal <span class="property">id</span> property and receives  an object containing user configuration as a parameter.</p><p>See the following code:</p><pre class="programlisting">Zapatec.ChildWidget.prototype.init = function(oArg) {
+    // Call init method of superclass
+    Zapatec.ChildWidget.SUPERclass.init.call(this, oArg);
+    // Event sample
+    this.fireEvent('initStart');
+    // Continue initialization
+    // ...
+    // Call parent method to load data from the specified source
+    this.loadData();
+    // ...
+    // Event sample
+    this.fireEvent('initDone', 'sample argument1', 'sample argument2');
+};</pre><div class="important" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Important</h3><p>Before calling this method, define configuration  options for the widget.
+ Initially this.config object  contains all configuration options with their
+ default values. These values may be changed  with the  user
+ configuration defined in the object that is  to be received by the <code class="methodname">init</code>  method as a parameter. Configuration  options that are not included in  this.config object will be ignored.</p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_initTemplate"></a>24.16. initTemplates</h3></div></div></div><p><a name="method_initTemplates"></a>This method initializes templates. Requires Zapatec.Template. Deletes all existing
+  templates and creates new Zapatec.Template objects from the
+  <span class="property">templates</span> config option.
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_loadData"></a>24.17. loadData</h3></div></div></div><p>Use this method to load data from the specified source. Depending on the <span class="property">sourceType</span> and <span class="property">source</span> configuration options, it  loads  data from the specified source and calls one of <code class="methodname">loadDataHtml</code>, <code class="methodname">loadDataHtmlText</code>, <code class="methodname">loadDataJson</code> or <code class="methodname">loadDataXml</code> methods implemented in the child class.</p><p>Below are events that can be set to fire during the data fetch:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>fetchSourceStart</code></em> before fetching of source</p></li><li><p><em class="parameter"><code>fetchSourceError</code></em> if fetch failed. Passes one argument to the
+ listener: error object received from <code class="methodname">Zapatec.Transport.fetch()</code></p></li><li><p><em class="parameter"><code>fetchSourceEnd</code></em> after source is fetched or fetch failed</p></li></ul></div><p>In the process of loading data  the following events can fire:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>loadDataStart</code></em> when data parsing is started</p></li><li><p><em class="parameter"><code>loadDataEnd</code></em> after data is parsed or an error occurred during
+ fetch</p></li></ul></div><p>fetchSourceError is fired before fetchSourceEnd and
+ loadDataEnd</p><p>This method receives arguments object passed to the <span class="property">callbackSource</span> function as a parameter.</p><p>See the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.loadData = function(oArg) {
+    var oConfig = this.config;
+    // Get source using callback function
+    if (typeof oConfig.callbackSource == 'function') {
+        var oSource = oConfig.callbackSource.call(this, oArg);
+        if (oSource) {
+            if (typeof oSource.source != 'undefined') {
+oConfig.source = oSource.source;
+            }
+            if (typeof oSource.sourceType != 'undefined') {
+oConfig.sourceType = oSource.sourceType;
+            }
+            if (typeof oSource.method != 'undefined') {
+oConfig.sourceFetchMethod = oSource.method;
+            }
+            if (typeof oSource.contentType != 'undefined') {
+oConfig.sourceFetchContentType = oSource.contentType;
+            }
+            if (typeof oSource.content != 'undefined') {
+oConfig.sourceFetchContent = oSource.content;
+            }
+        }
+    }</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_loadDataHtml"></a>24.18. loadDataHtml</h3></div></div></div><p>To load data from the HTML source, use the <code class="methodname">loadDataHtml</code> method.</p><p>For details on how to load data from the HTML source, see the following code:</p><pre class="programlisting">Zapatec.Widget.prototype.loadDataHtml = function(oSource) {};</pre><p>For details on how to load HTML data from the server in the Tree widget, see the <a href="../../zptree/demo/load_data.html" target="_top">Dynamically load data from server</a>demo.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_loadDataHtmlText"></a>24.19. loadDataHtmlText</h3></div></div></div><p>Call this function if you need to loads data from the HTML fragment source. Pass a string containing the source HTML fragment as a parameter to the method:</p><pre class="programlisting">Zapatec.Widget.prototype.loadDataHtmlText = function(sSource) {
+    // Parse HTML fragment
+    var oTempContainer = Zapatec.Transport.parseHtml(sSource);
+    // Load data
+    this.loadDataHtml(oTempContainer.firstChild);
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_loadDataJson"></a>24.20. loadDataJson</h3></div></div></div><p>This method loads data from the JSON source. As a parameter, it receives source JSON object.</p><p>Following is a code representing how this function should be set:</p><pre class="programlisting">Zapatec.Widget.prototype.loadDataJson = function(oSource) {};</pre><p>For further information on how to load JSON data from the server in the Tree widget, see the <a href="../../zptree/demo/load_data.html" target="_top">Dynamically load data from server</a>demo.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_loadDataXml"></a>24.21. loadDataXml</h3></div></div></div><p>If you want to load data from the XML source, use the <code class="methodname">loadDataXml</code> function. This option receives the source XMLDocument object as an argument.</p><p>See the code below:</p><pre class="programlisting">Zapatec.Widget.prototype.loadDataXml = function(oSource) {};</pre><p>For details on how to load XML data in the Tree widget, see the <a href="../../zptree/demo/load_data.html" target="_top">Dynamically load data from server</a>demo.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="load_Template"></a>24.22. loadTemplate</h3></div></div></div><p><a name="method_loadTemplate"></a>This method loads the specified template file.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_loadTheme"></a>24.23. loadTheme</h3></div></div></div><p>To load the specific theme use the <code class="methodname">loadTheme</code> method. This function defines the external  <span class="property">themeLoaded</span> property.</p><p>During the theme load the following events are fired:</p><div class="itemizedlist"><ul type="disc"><li><p>The <em class="parameter"><code>loadThemeStart</code></em> event is fired when you start loading the theme.</p></li><li><p>The <em class="parameter"><code>loadThemeEnd</code></em> event is fired after a theme is loaded or the theme load failed</p></li><li><p>The <em class="parameter"><code>loadThemeError</code></em> event is fired after the theme load failed. It passes an error object received from <code class="methodname">Zapatec.Transport.loadCss()</code> as an  argument to the
+ listener.</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_receiveData"></a>24.24. receiveData</h3></div></div></div><p>Call this function to load  data passed from the other widget for  viewing   or editing.</p><p>The following argument object format should be provided as a parameter:</p><pre class="programlisting">{
+widget: [object] Optional. Sender widget instance
+data: [any] data in the format specific for each widget
+}</pre><p>This method saves the passed widget in the private  <span class="property">dataSender</span> property for later use in <code class="methodname">Zapatec.Widget.replyDataReturn()</code>.</p><p>The <em class="parameter"><code>receiveData</code></em> event is fired when the listener receives the argument object passed to this
+ method.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_reconfigure"></a>24.25. reconfigure</h3></div></div></div><p>By using this method you can reconfigure the widget with the new configuration  options after it was initialized. It may also be used to change the look or behavior of the widget after it has loaded the data. In the argument, pass only values for the changed configuration options. There is no need to pass configuration options that were not changed.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>The <span class="property">eventListeners</span>  option is ignored by this method as it is
+ only useful  on initialization. To add an event listener after the widget was
+ initialized, use the <code class="methodname">addEventListener</code> method instead.
+ </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_replyData"></a>24.26. replyData</h3></div></div></div><p>This method converts the   processed  data  into the same format as it was received in <code class="methodname">Zapatec.Widget.receiveData()</code>. The processed data will be  returned in the format specific for each widget by <code class="methodname">replyDataReturn</code> method.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mehtod_replyDataCancel"></a>24.27. replyDataCancel</h3></div></div></div><p>Use this method to cancel processing of the data received  from the other widget via <code class="methodname">Zapatec.Widget.receiveData()</code>. This is usually realized by hiding  widget instance (calling the <code class="methodname">hide</code> method of the widget if it is defined).</p><p>The method removes the private  <span class="property">dataSender</span> property.</p><p>The  <em class="parameter"><code>replyDataCancel</code></em> event is fired before the widget is hidden. </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_replyDataReturn"></a>24.28. replyDataReturn</h3></div></div></div><p>This method returns  processed data  to the specified widget (not necessarily to the widget from which they were received in <code class="methodname">Zapatec.Widget.receiveData()</code>). It passes data to the <code class="methodname">Zapatec.Widget.acceptData()</code> method of that widget, and then  calls <code class="methodname">Zapatec.Widget.replyDataCancel()</code> to hide this widget.</p><p>The following argument object format should be received as a parameter:</p><pre class="programlisting">{
+widget: [object] Optional. Receiver widget instance
+}</pre><p>If the  receiver widget was not specified, this method uses the  widget passed to
+ the<code class="methodname">Zapatec.Widget.receiveData()</code> method  and saved in the private 
+ <span class="property">dataSender</span> property.</p><p>The <em class="parameter"><code>replyDataReturn</code></em> event is fired before passing data to the specified widget.
+ The event listener receives the argument object passed to this method.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="method_showContainer"></a>24.29. showContainer</h3></div></div></div><p>This method shows a widget using specified  effects and animation speed. You need to define this.container to use this method.</p><p>The following parameters should be passed to this method:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>effects</code></em> &#8212; specifies a list of effects to be applied</p><p>The effects library is already built into  <a href="http://www.zapatec.com/website/main/products/prod2/" target="_top">Zapatec DHTML Menu</a>. To see all the effects, go to the <a href="http://www.zapatec.com/website/main/zpmenu/doc/wizard.html" target="_top">Menu Wizard</a>,  and choose the Effects tab to see how they are implemented. Below is the list of available effects that can be used for showing you widget instance.</p><p>* Glide</p><p>* Fade
+    </p><p>* Slide
+    </p><p>* Wipe
+    </p><p>* Unfurl </p></li><li><p><em class="parameter"><code>animSpeed</code></em> &#8212; defines animation speed value in the range of  1..100;</p></li><li><p><em class="parameter"><code>onFinish</code></em> &#8212; sets function to be called on effect end.</p></li></ul></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="static_methods"></a>25. Static Methods</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="statmethod_Zapatec.Widget.getWidgetById"></a>25.1. Zapatec.Widget.getWidgetById</h3></div></div></div><p>Call this method to find a widget by its id. It  takes in widget id and returns the  widget object or undefined if the widget was not found.</p><p>For details on how to find a widget by id, see the following code:</p><pre class="programlisting">Zapatec.Widget.getWidgetById = function(iId) {
+    return Zapatec.Widget.all[iId];
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="stmethod_Zapatec.Widget.callMethod"></a>25.2. Zapatec.Widget.callMethod</h3></div></div></div><p>This method finds a widget by id and calls the defined  method with the specified arguments and returns value from the method. It takes in widget id, method name and any number of arguments to pass to the method. Returns value received  from the method.</p><p>Receives the following parameters:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>iWidgetId</code></em> &#8212; Widget id</p></li><li><p><em class="parameter"><code>sMethod</code></em> &#8212; Method name</p></li><li><p><em class="parameter"><code>any</code></em> &#8212; Any number of arguments</p></li></ul></div><p>For a working example, see the code below:</p><pre class="programlisting">Zapatec.Widget.callMethod = function(iWidgetId, sMethod) {
+    // Get Widget object
+    var oWidget = Zapatec.Widget.getWidgetById(iWidgetId);
+    if (oWidget &amp;&amp; typeof oWidget[sMethod] == 'function') {
+        // Remove first two arguments
+        var aArgs = [].slice.call(arguments, 2);
+        // Call method
+        return oWidget[sMethod].apply(oWidget, aArgs);
+    }
+};</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="utility_functions"></a>26. Utility Functions</h2></div></div></div><p>The following utility functions are available when the widget.js file is included:</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="utilfunction_Zapatec.Widget.getElementById"></a>26.1. Zapatec.Widget.getElementById</h3></div></div></div><p>This method converts the element id into the reference. It takes in the element id as a string  and  returns reference to the element (HTMLElement object).</p><p>For an example on how to use this method, see the code below:</p><pre class="programlisting">Zapatec.Widget.getElementById = function(element) {
+    if (typeof element == 'string') {
+        return document.getElementById(element);
+    }
+    return element;
+};</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="utilfunction_Zapatec.Widget.getStyle"></a>26.2. Zapatec.Widget.getStyle</h3></div></div></div><p>Using this method you may return the  style attribute of the specified element. It takes in an HTMLElement object and returns its style attribute value as a string.</p><p>See the following code for details:</p><pre class="programlisting">Zapatec.Widget.getStyle = function(element) {
+    var style = element.getAttribute('style') || '';
+    if (typeof style == 'string') {
+        return style;
+    }
+    return style.cssText;
+};</pre></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="base_event_driven_class"></a>Chapter 4. Base Event-Driven Class</h2></div></div></div><p>This chapter contains overview of  functions to handle events and basic methods for event-driven class.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="child_event_driven_class_definition"></a>1. Child Event-Driven Class Definition</h2></div></div></div><p>The code below defines the child event-driven class that extends the base Widget class functionality with the APIs  for event handling.</p><pre class="programlisting">/**
+ * @constructor
+ */
+Zapatec.ChildClass = function() {
+  // Call constructor of superclass
+  Zapatec.ChildClass.SUPERconstructor.call(this);
+};
+
+// Inherit EventDriven
+Zapatec.inherit(Zapatec.ChildClass, Zapatec.EventDriven);
+
+/**
+ * @private Initializes object.
+ */
+Zapatec.ChildClass.prototype.init = function() {
+  // Call init method of superclass
+  Zapatec.ChildClass.SUPERclass.init.call(this);
+  // Continue initialization
+   ...
+};
+
+/**
+ * @private Sample method.
+ */
+Zapatec.ChildClass.prototype.sampleMethod = function() {
+  // Do something
+  // ...
+  // Fire event
+  this.fireEvent('done');
+};</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using_child_event_driven_class"></a>2. Using Child Event-Driven Class</h2></div></div></div><p>The following code provides details on how  the child event-driven class may be used within your widget instance:</p><pre class="programlisting">// Initialize ChildClass
+var obj = new Zapatec.ChildClass();
+
+// Sample event listener
+function onDone() {
+  alert('Done.');
+}
+
+// Add event listener
+obj.addEventListener('done', onDone);
+
+// Call sample method which fires event
+obj.sampleMethod();
+
+// Remove event listener
+obj.removeEventListener('done', onDone);
+
+// Call sample method again
+obj.sampleMethod();</pre></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="event_driven_class_functionality"></a>3. Event-Driven Class Functionality</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="meth_addEventListener"></a>3.1. addEventListener</h3></div></div></div><p>This method adds event listener to the end of the list.</p><p>If multiple identical event listeners are registered on the same event, the
+ duplicate instances are discarded. They do not cause the event listener to be
+ called twice, and since the duplicates are discarded, they do not need to be
+ removed manually with the <code class="methodname">removeEventListener</code> method.</p><p>Takes in the following arguments:</p><p><em class="parameter"><code>sEv</code></em> &#8212; Event name</p><p><em class="parameter"><code>fLsnr</code></em> &#8212; Event listener </p><p>If you want to add custom event listeners,  see the following code for details:</p><pre class="programlisting">Zapatec.Widget.prototype.addUserEventListeners = function() {
+  var oListeners = this.config.eventListeners;
+  var fListener, iListeners, iListener;
+  for (var sEvent in oListeners) {
+      if (oListeners.hasOwnProperty(sEvent)) {
+          vListener = oListeners[sEvent];
+          if (vListener instanceof Array) {
+              iListeners = vListener.length;
+              for (iListener = 0; iListener &lt; iListeners; iListener++) {
+                  this.addEventListener(sEvent, vListener[iListener]);
+              }
+          } else {
+              this.addEventListener(sEvent, vListener);
+          }
+      }
+  }
+};</pre><p>Add standard event listeners by providing the following code:</p><pre class="programlisting">Zapatec.Widget.prototype.addStandardEventListeners = function() {
+    this.addEventListener('fetchSourceError', Zapatec.Widget.loadSourceError);
+    this.addEventListener('loadThemeError', Zapatec.Widget.loadThemeError);
+};</pre><p> There is also a static method doing the same with global events:</p><pre class="programlisting">Zapatec.EventDriven.addEventListener('globalEventName', fEventListener);</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="meth_removeEventListener"></a>3.2. removeEventListener</h3></div></div></div><p>Call this method to remove an event listener.</p><p>This method takes in the  following arguments:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>sEv</code></em> &#8212; Event name</p></li><li><p><em class="parameter"><code>fLsnr</code></em> &#8212; Event listener</p></li></ul></div><p>Returns:</p><div class="itemizedlist"><ul type="disc"><li><p>Number of listeners removed</p></li></ul></div><p>There is  also a static method doing the same with global events:</p><pre class="programlisting">Zapatec.EventDriven.removeEventListener('globalEventName', fEventListener);</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="meth_isEvent"></a>3.3. isEvent</h3></div></div></div><p>You may use this method to check if the event exists. </p><p>It takes in the following argument:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>sEv</code></em> &#8212; Event name</p></li></ul></div><p>Returns:</p><div class="itemizedlist"><ul type="disc"><li><p>Exists</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="meth_removeEvent"></a>3.4. removeEvent</h3></div></div></div><p>To remove all the listeners for the specified event, call the <code class="methodname">removeEvent</code> method.</p><p>It takes in the following argument:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>sEv</code></em> &#8212; Event name</p></li></ul></div><p>There is also a static method doing the same with global events:</p><pre class="programlisting">Zapatec.EventDriven.removeEvent('globalEventName');</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="meth_fireEvent"></a>3.5. fireEvent</h3></div></div></div><p>This method fires the specified  event. Takes in one mandatory argument <em class="parameter"><code>sEv</code></em> and optionally any number of other arguments that should be passed to the listeners.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="meth_getEventListeners"></a>3.6. getEventListeners</h3></div></div></div><p>By using this method you may return the  array of listeners for the specified event.</p><p>It takes in the following parameter:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>sEv</code></em> &#8212; Event name</p></li></ul></div><p>Returns:</p><div class="itemizedlist"><ul type="disc"><li><p>Array of function references</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="meth_isEventListener"></a>3.7. isEventListener</h3></div></div></div><p>Check if the event listener is attached to the event by calling the <code class="methodname">isEventListener</code> method.</p><p>Receives the following parameters:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>sEv</code></em> &#8212; Event name</p></li><li><p><em class="parameter"><code>fLsnr</code></em> &#8212; Event listener</p></li></ul></div><p>Returns:</p><p>TRUE if the event listener is attached to the event</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="unshiftEventListener"></a>3.8. unshiftEventListener</h3></div></div></div><p>Adds event listener to the beginning of list. Note that there is no guarantee that it will be always first in the list. It will become second once this method is called again. Never rely on that!</p><p>If multiple identical event listeners are registered on the same event, the
+ duplicate instances are discarded. They do not cause the event listener to be
+ called twice, and since the duplicates are discarded, they do not need to be
+ removed manually with the <code class="methodname">removeEventListener</code> method.</p><p>Parameters:</p><div class="itemizedlist"><ul type="disc"><li><p><em class="parameter"><code>sEv</code></em> &#8212; Event name</p></li><li><p><em class="parameter"><code>fLsnr</code></em> &#8212; Event listener</p></li></ul></div><p>There is also a static method doing the same with global events:</p><pre class="programlisting">Zapatec.EventDriven.unshiftEventListener('globalEventName', fEventListener);</pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="event_driven_static_methods"></a>4. Static Methods ¶</h2></div></div></div><p>The following static methods are available:</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ed_static_meth_addEventListener"></a>4.1. Zapatec.EventDriven.addEventListener</h3></div></div></div><p>Adds event listener to the static event. Takes in the following arguments:</p><div class="itemizedlist"><ul type="disc"><li><p>[string] Event name</p></li><li><p>[function] Event listener</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ed_static_meth_removeEventListener"></a>4.2. Zapatec.EventDriven.removeEventListener</h3></div></div></div><p>Removes event listener from static event. Takes in following arguments:</p><div class="itemizedlist"><ul type="disc"><li><p>[string] Event name</p></li><li><p>[function] Event listener</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ed_static_meth_isEvent"></a>4.3. Zapatec.EventDriven.isEvent</h3></div></div></div><p>Checks if the static event exists. Takes in the following argument:</p><div class="itemizedlist"><ul type="disc"><li><p>[string] Event name</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ed_static_meth_removeEvent"></a>4.4. Zapatec.EventDriven.removeEvent</h3></div></div></div><p>Removes all listeners for the static event. Takes in the following argument:</p><div class="itemizedlist"><ul type="disc"><li><p>[string] Event name</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ed_static_meth_fireEvent"></a>4.5. Zapatec.EventDriven.fireEvent</h3></div></div></div><p>Fires static event. Takes in the following arguments:</p><div class="itemizedlist"><ul type="disc"><li><p>[string] Event name</p></li><li><p>Any number of other arguments that should be passed to the listener</p></li></ul></div></div></div></div></div></body></html>

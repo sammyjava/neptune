@@ -1,0 +1,626 @@
+    <div class="updates">
+
+  <b>RECENT UPDATES</b>
+  
+  <div class="update">
+    <div class="update-date">2014-03-02</div>
+    I've done some tweaks to the content editor, with some changes to the stylesheet. So, if you see a really tiny content editor, <b>hit F5</b> to update the stylesheet.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2014-02-28</div>
+    <b>Contact Forms now allow a confirmation subject</b>. An oversight in the Contact Forms extra was that we provided the ability to email a confirmation message to the form submitter, but the
+    subject was automatically generated from the form title. This has been fixed - you may now enter an optional confirmation message subject in addition to the confirmation message body.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2013-06-20</div>
+    <b>New Contact Form toggles.</b> We've added two new toggles to the Contact Forms extra: (1) you may now toggle off the use of the spam-prevention CAPTCHA image on the form; (2) you may now toggle on the
+    use of a popup alert when a user enters an invalid form (missing required fields). The former is useful if you feel your audience can't deal with the CAPTCHA image very well; the latter is useful if you 
+    feel that your users don't see the error message at the top of the page after an invalid submission.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2013-02-18</div>
+    <b>ModSecurity added to web server.</b> We've put the "web firewall" ModSecurity in front of the backend Java server (Tomcat) to try to reduce the effect of floods and other unpleasant activities which are
+    omnipresent on the Internet.  If you're curious, <a href="http://www.modsecurity.org/">here's the app</a>.  The problem with ModSecurity is that it is very picky about what it allows to be served.  I have 
+    relaxed the rules so that the stock control panel should work, but note that <b>you may run into some 403 errors depending on your content.</b>  If you get a white page with a black error message after you've
+    done an update, or just a plain white page, 
+    let us know and we'll exclude the corresponding rule.  Similarly, it's possible, but less likely, that a form submission on the front end of your site will result in an error.  Again, let us know!
+  </div>
+
+  <div class="update">
+    <div class="update-date">2013-01-09</div>
+    <b>Add an existing file to a content item.</b>  If you use a particular image in more than one content item on your site, you'll like this update.
+    We've added the ability to add a file, typically an image, that is already present on the site to a content item.
+    In the content editor, you'll now see a select menu (AKA "drop-down") that displays all of the files that you've uploaded using the content tool: images, videos, Flash movies, PDFs.  So, instead of selecting
+    a file on your computer and uploading it using the "Upload File" button, as you've done in the past, you may now select an existing file and append it to your content item using the "Add Existing File" button.  The rest is the same
+    as uploading a file - you need to check which type of file it is (image, video, etc.), and if it's a video, you must enter the width and height.  Enjoy reusing your uploaded files in new content items!
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-11-19</div>
+    <b>Tree tool.</b> We've tweaked the display on the Tree tool a bit to make it easier to see which pages you have permission to edit and, if not, why not.  Pages that you may edit are linked in blue text, pages that you
+    may not edit are linked in black text.  Both the node ID and page ID are now shown in brackets like this: [n123][p456].
+    If you aren't allowed to edit a page, and you think you should be able to, chances are that it is scheduled on a different node on which you do not have edit permission.  (You may only edit
+    pages if you have edit permission on EVERY node that contains that page.)  So, say you aren't allowed to edit page p456 on node n123.  Simply do a browser search (CTRL-F) for "[p456]" on the Tree tool,
+    and you'll find the other nodes that currently schedule that page.  This will usually reveal the node that prevents you from editing that page.  (If you still can't find the node, then 
+    your page was probably scheduled on a restricted node in the past; only current scheduling is shown on the Tree tool.)
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-09-11</div>
+    <b>Stylesheet editor: search for a class.</b> We've added a handy little search to the Stylesheet editor which allows you to search for a class by name.  For example, you're looking at a page that contains
+    a class named div.foobar, and you don't know where to find div.foobar in the stylesheet editor.  Simply put "foobar" into the search and any classes that contain that text will be shown, indicating which
+    stylesheet that they belong to.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-09-29</div>
+    <b>New mini-extra: lastmodified.jsp</b>.  This extra displays the last-modified timestamp for a content item (if placed in a content item) or the entire page (if placed in utility content).  It uses two new
+    settings: <span class="setting">lastmodified_prefix</span> and <span class="setting">lastmodified_dateformat</span>.
+    The former is the text output in front of the timestamp, like "Last modified" or "&Uacute;ltima modificaci&oacute;n";
+    the latter is the Java date format for the displayed timestamp.  There are also two new styles in the "other" stylesheet: div.content-lastmodified and div.page-lastmodified.  These are the divs surrounding
+    the last-modified text in the case of a content item or page.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-03-23</div>
+    <b>WYSIWYG content editor is now default.</b>  We've removed the setting that sets your default content editor mode, since the WYSIWYG content editor already has an HTML view toggle, and it actually
+    switches a lot quicker because it does not require a page refresh.  So, if you want to edit your content HTML directly, simply click in the content editor to expose the toolbar buttons, then click the
+    HTML mode toggle button: <img style="width:16px; height:17px; background: url('xinha/images/ed_buttons_main.png') -145px -18px;"/>.  You can click it again
+    to switch back to WYSIWYG view.<br/>
+    <b>2012-03-28 UPDATE</b>: since some of our customers like to edit in HTML mode all the time, and would prefer to not use the WYSIWYG editor in general, we've added a Setting
+    <span class="setting">cp_enable_wysiwyg</span> to toggle it (default=true).  This is useful if, say, you're pasting a bunch of HTML tables into a bunch of content items and would rather cut the extra step of
+    toggling the WYSIWYG editor to HTML mode each time.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-02-27</div>
+    <b>Payments extra.</b> We've added a new extra which allows you to create simple payment forms, processed by PayPal.  These are useful for things like fundraising events, donations, etc., where you just want to 
+    provide some payment options and keep it simple.  You'll need <a target="_blank" href="https://www.paypal.com/webapps/mpp/website-payments-pro">PayPal Website Payments Pro</a>
+    to use this extra, and we need to configure your PayPal credentials on the server.  See the <a href="doc-payments.jsp">Payments doc</a> or contact us for more info.
+    <p><b>Nodes tool.</b> We've improved node numbering a bit.  You shouldn't be able to create gaps between node numbers any more.  (The only place that actually matters is in graphical primary navigation.)</p>
+    <p>The <b>Design Media</b> tool now shows file dates and sizes.</p>
+    <p><b>Printer-friendly page URLs.</b>  We've changed the syntax for printer-friendly pages.  Now, if you have a node with alias /foo, the printer-friendly URL is /foo?printable.</p>
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-02-06</div>
+    <b>Various maintenance updates.</b>  We've done a number of updates to fix bugs, add some stuff, etc.  Let us know what you think!
+    <ol>
+      <li>
+	Control panel user permissions have been tightened up - same policy, but we've fixed some bugs.
+	<ul>
+	  <li>If you have permission on a node, you may update it.</li>
+	  <li>If you have permission on EVERY node that a page is scheduled on, you may update that page.</li>
+	  <li>If you have permission on EVERY node that schedules EVERY page that a given content item is associated with, you may update that content item.</li>
+	</ul>
+	This is how permissions have always been designed, but there were a few cracks in the armor.
+      </li>
+      <li>
+	You may now filter on page id (pid) and content id (cid) on the pages and content tools.  This is handy if you know the id of an item - just type it in and hit "Filter."
+      </li>
+      <li>
+	The Comments tool now contains a <a href="comment-blacklist.jsp">Blacklisted Words</a> sub-tool.  (You have to enable it in CP Permissions to see it.) This allows you to enter words, or phrases, in order to reject
+	comments that have matching text.  Obvious choices are words like "viagra", "cialis" and some others that I shouldn't type here.
+      </li>
+      <li>
+	The Clone tool has returned to the Content editor ONLY.  It will not reappear on the Pages tool.  It's just too unclear what cloning a page means, and it did more harm
+	than good to have it.
+      </li>
+      <li>
+	<a href="content-purge.jsp">Purge Orphaned Content</a>
+	is now a separate sub-tool under the Content editor.  You should generally be very careful about purging orphaned content, since there may be some valuable nuggets in there
+	that are worth keeping.  So, we put it aside to make it less tempting.
+      </li>
+    </ol>
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-01-25</div>
+    <b>More Content/Page editor bug fixes.</b>  We've removed some of the Clone buttons until we're sure that they're working as expected. (There's actually very few cases where you should use the
+    Clone button, generally you should create a new page or content item.)  Otherwise, we've fixed some
+    more bugs on the Content/Page tools and think they're pretty close to normal functionality now.  Let us know right away if you see more bugs!
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-01-18</div>
+    <b>Content/Page editor bug fixes.</b>  We've fixed some of the bugs in the new Page and Content editor tools.  They're still not exactly how we want them, but we wanted to get the broken functionality 
+    working again.  The Delete and Clone buttons should now work as expected.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-01-16</div>
+    <b>Mobile site capability.</b>  We've added the capability to detect mobile devices like smartphones and tablets, and serve a style variation of the site to those devices, which places secondary navigation under the primary
+    navigation rather than on the left, along with any stylesheet mods that you'd like to implement for mobile browsers.  The setting is <span class="setting">mobile_enable</span>. You can provide a link to allow
+    mobile users to switch over to the 'desktop' (normal) version of the site if they want (extension /mobiletoggle.jsp).
+    If you're interested in using this new option, call IMS so we can help you set it up.  Note that this option has no effect on 
+    content other than styling - if you've got a big wide image on a page, it will still be a big wide image on that page in a mobile browser.
+  </div>
+
+  <div class="update">
+    <div class="update-date">2012-01-16</div>
+    <b>Major Control Panel update.</b>  We've made a major change to the code behind the Pages, Content and Nodes tools, in order to speed up updates.  Before, when you made a change to an item, 
+    a lot of extra data was sent back from the server to your browser.  Now, only changed data is sent back.  We've tried to preserve the look of the tools, but in some cases they look a bit
+    different, especially Pages.  How the tools are used has not changed; it's all under-the-hood stuff.
+  </div>
+
+  <!-- ARCHIVE START
+
+  <div class="update">
+  <div class="update-date">2011-11-15</div>
+  <b>Contact Forms update.</b>  We've made a minor update to the Contact Forms tool to reduce confusion.  As always, if you want to have a confirmation email sent to a form submitter, you MUST have a field
+  named "email" on the contact form.  The "confirmation sender name" and "confirmation sender email" fields at the top are now hidden if you do not have an "email" field defined.  (This was already the case with
+  "confirmation message", so it was inconsistent and therefore confusing.)  Another tweak is that we've added a Setting <span class="setting">site_email</span>, which is the email address used as the From: address
+  for contact form notification emails (the ones that come to you).  Before, we were using the "confirmation sender email" which, again, is confusing.  <span class="setting">site_email</span> defaults to webmaster@ims.net, 
+  feel free to update it, if you want (it doesn't really matter).
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-08-04</div>
+  <b>Purge orphaned content items.</b>  You may see a new button on the default Content screen that says "Purge Orphaned Content Items."  This means that you have one or more content items that have never
+  been associated with a page.  If you'd like to delete them, use this new function.  The button is only shown if you have orphaned content items.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-07-06</div>
+  <b>Contact Form updates.</b>  You can now set the text shown on the submit button on a contact form.  The default is "SEND" as before.  Also, we now display the referrer in both the email and CSV file generated
+  from posted form data.  This tells you the page on another site where the user clicked a link to your site.  (You'll often find Google listed as the referrer, because people often just enter some
+  search term in Google to get to your site, rather than typing your site's URL into their browser, in which case the referrer is empty.)
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-06-21</div>
+  <b>site_head setting.</b>  We've added a new setting, <span class="setting">site_head</span>, which allows you to place content in the HEAD tag throughout the site.  Before, you could place content
+  in the HEAD tag on a page-by-page basis, but if you'd like something to be there throughout the site, use this setting.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-06-13</div>
+  <b>Monthly Events listing.</b>  We've added an alternative Calendar extra display, events.jsp, which lists out all the events for a given month from the Calendar extra, along with a year and month selector.
+  This is handy if you don't like the mouseover interface of the calendar.  If you'd like to use it, let us know, and we'll hook it up with some styling.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-05-13</div>
+  <b>CAPTCHA updated.</b>  We've updated the routine that creates the "CAPTCHA" image on contact forms that is supposed to thwart spammers.  There are a bunch of new parameters for
+  making it more difficult for non-humans to read.  Let us know if you'd like your CAPTCHA images to use some new features, like the "fisheye" effect.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-03-23</div>
+  <b>New "hidden" form field type.</b>  We've added the ability to place a hidden form field in a contact form.  The only reason for doing this is if you want to track how folks came to the form
+  with a query string.  For example, one of our customers has a subscription form, and they're running a contest to see who can get the most subscribers.  They use a hidden field named "r" and
+  each employee gives their friends a URL like /subscribenow?r=Bob.  That will add a field "r" with value "Bob" to the form's data.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-02-08</div>
+  <b>PDF upload added to content editor.</b>  It's not an image, video or audio file, but folks said it would be handy to be able to upload a PDF file in the content editor
+  and have it automatically linked like you get with uploaded audio/video files.  So we've added PDF to the list of uploadable file types in the content editor.  Note: if you want to restrict
+  access to a PDF, you should upload it with the Media tool and apply access restriction to it there.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-01-30</div>
+  <b>Constant Contact integration.</b>  We've added Constant Contact to the email marketing services that are integrated with the Contact Forms extra.  If you use Constant Contact,
+  contact us to enable it on your site so you can easily add list sign-up checkboxes to your contact forms.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2011-01-14</div>
+  <b>PayPal integration.</b> We've added PayPal integration calls to the Neptune library, so we can now create online payment forms that use PayPal for payment.  Contact us for details!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-12-14</div>
+  <b>Fetch extra.</b> We've added a new front-end extra, /fetch.jsp, which places content from an external site into the content item.  For example, say you subscribe to a stock market listing service, which 
+  provides a chunk of HTML giving the current stock prices, at http://marketdudes.com/mystocks.jsp?id=123456.  You need the id to identify yourself as a subscriber.  You'd like to place this chunk of content
+  on your "About Us" page (especially if your stock price is up) with a red box around it.  Then just enter / as the extension context (as with all Neptune extras) and
+  /fetch.jsp?url=http://marketdudes.com/mystocks.jsp?id=123456 as the extension URL.  The Fetch extra will grab that content and place it in your content item. Important note: the Fetch extra will ONLY 
+  grab content with content type text/html.  That's because that's what the Neptune page is, and the fetched content is part of the Neptune page.  Another note: if your fetched content has URLs in it, be sure
+  that they are fully-qualified (include http://domain.com); if they are not, the links won't work, because they'll show up as links on YOUR site, not the external site.  The fetched content is wrapped with
+  &lt;div class="fetch"&gt; (located in the "other" stylesheet) so you can put that red border around it.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-12-07</div>
+  <b>Utility Content rewrite.</b>  We've rewritten, and simplified, the way in which content is placed in the "utility" regions: header, section header, subheader, top sidebar, bottom sidebar and footer.
+  Before, you could only use the (now gone) Utility Links tool to add links to these regions, and, in the case of the header and sidebars, you could add extensions.  Now, we've replaced that with much more general
+  and consistent Utility Content, which consists of HTML copy and an optional extension, much like content items.  You may now place ANY content in utility regions: text, links, Javascript, 
+  images, whatever.  There are checkboxes to display the content on the home page and inside pages (and you can disable a utility content item by leaving both unchecked).
+  We've replaced a bunch of built-in functions, like the copyright, with front-end extras that do the same thing.  Take a look at the new <a href="doc-utilitycontent.jsp">Utility Content doc page</a>.
+  Since the stylesheet has changed (and simplified), you should also look at the <a href="doc-stylesheet.jsp">stylesheet doc page</a> along with the 
+  <a href="utility-classes.png" target="_blank">utility stylesheet classes diagram</a>.  Most of the classes are familiar; the main stylesheet result of this update was to eliminate a lot
+  of special-purpose classes and settings.  And the search stylesheet was entirely eliminated, because you now place the search form into utility content &ndash; it's just HTML.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-11-16</div>
+  <b>Related Pages Extra.</b> We've added a new front-end extra which allows you to display links to "related pages" in a pane.  Pages are related if they share tags, and you'll find a new Related Page Tags
+  field on the Pages tool
+  to enter them.  Tags are separated by spaces; if you need a space inside a tag, use double quotes.  A good use for this extra is when you've got articles by various authors spread out over your site.  Maybe
+  the articles are categorized by topic, not by author.  You can enter the author's name in the tags for every article that she wrote, and then use the /related.jsp extra in a pane on an article page to show all
+  the related pages, in this case, pages by the same author.  Of course, there is a new "related" stylesheet section to customize how that list of links is displayed.  Give us a buzz if you'd like some help with this!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-11-04</div>
+  <b>Display only most recent comments.</b> You can now limit the number of comments that are shown by default with a new setting: <span class="setting">comments_numshown</span>.  If the list is shortened, a
+  link appears at the top that uses the text specified in the setting: <span class="setting">comments_viewall</span>, which defaults to "View all comments", which allows the user to see the full list of comments.
+  This is useful for pages that have generated a huge number of comments, such as on <a target="_blank" href="http://pure-gas.org/comments">pure-gas.org</a>.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-10-14</div>
+  <b>Layout clone.</b> You can now clone a layout with the Clone button.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-10-14</div>
+  <b>CAPTCHA update.</b> Visitors can now generate a new CAPTCHA (the secret code on contact and comment forms) by clicking it.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-09-14</div>
+  <b>iContact support.</b> We've added support for our new email list management provider, iContact, to Contact Forms.  If you're currently using Lyris ListManager, talk to us about the
+  advantages of switching to iContact.  We think it's a lot better.  If you don't currently do email marketing, ask us about it!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-08-18</div>
+  <b>Vertical Primary Navigation.</b> We've added a Setting, <span class="setting">navpri_vertical</span>, that places the primary navigation vertically on the left, 
+  rather than horizontally across the top below the header.  The secondary navigation opens up under the active primary level, as you'd expect.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-07-20</div>
+  <b>Atom Feed Extra.</b> We've added an extra, /atom.jsp, that displays the title, author, date and summary of entries from any Atom-enabled feed, like Wordpress and other blogs.  This is a more general extra than
+  the Blogger extra, which is designed specifically for Blogger and Blogspot feeds.  The entry list uses the blogger stylesheet classes: div.blogpost, div.blogposttitle, div.blogpostauthor, div.blogpostdate
+  and div.blogpostcontent.  There are three Settings: <span class="setting">atom_uri</span> is the URI of the Atom feed; <span class="setting">atom_dateformat</span> is the format for displaying dates; and 
+  <span class="setting">atom_maxlisted</span> limits the number of entries shown if set greater than zero.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-07-13</div>
+  <b>Xinha WYSIWYG editor!</b> We've switched the WYSIWYG content editor to the open-source Xinha editor that "works in all current browsers." It's way better than the Zapatec editor that
+  we previously used.  It has lots of extra functions that you'll like, like Undo with history (CTRL-Z shortcut), a table editor, buttons to clear MS Office tags, font tags and other spurious formatting that arise when
+  you paste content copied from a Word document, and an HTML source button so you can toggle back and forth between WYSIWYG and HTML views while editing.  It displays your text in the font family and size set
+  in your stylesheet's body class.  In short, the new Xinha editor is the cat's pajamas!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-07-09</div>
+  <b>Documentation.</b> I've added pages under Docs for front-end Extras, like the Flash Image Rotator and Headlines, that don't have an associated control panel tool, where the help doc would otherwise be linked.
+  <br/>
+  <b>Calendar export.</b> I've added the ability to export your calendar events to a standard iCalendar format file at /calendar-ics.jsp.  You can activate a linked calendar download icon on the event window
+  by updating the div.events-ics class
+  in the calendar stylesheet with a background image.  You can use the export file (named calendar.ics) to import your events to Google Calendar, iPhone and lots of other calendar applications.
+  If you want to be fancy, you can use the Google Calendar "add by URL" function to make a calendar that automatically updates as you add events here!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-07-01</div>
+  <b>Contact Forms - renumbering.</b>  I've done an update to the Contact Forms module so that form fields and options can be moved around with automatic renumbering.
+  For example, if you insert a new field at position 5, and there's already a field at 5, it will now put the new field at 5 and renumber the subsequent fields to 6 and above.  Similarly, if you delete a field it
+  it removes the "hole" and if you update a field to a new number, it does the expected reshuffling.
+  <br/>
+  <b>Contact Forms - optional redirect URL.</b>  There is now an optional post-submission redirect URL.  If you enter a full URL here, the user will be
+  redirected to that URL after a successful submission of the form.  Note that in this case, the required thank-you message will not be seen, except by users with Javascript turned off, who will not experience
+  the redirect.  (That's why it's still required.)
+  <br/>
+  <b>Pages - clone metadata.</b>  Some of you may recall that we used to have a clone button on the Pages tool.  That really confused folks, because it linked the same content items on the new, cloned page as were linked
+  on the parent page, which meant it was really easy to mess up the parent page when you thought you were just updating the new, cloned page.  Well, we've restored the page clone button, but now it only clones
+  the page's metadata and layout - the cloned page has no content items associated with it.  Hopefully this will greatly reduce errant content updates.
+  <br/>
+  <b>Tree - node aliases shown.</b>  I've added a display of the node aliases on the Tree.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-06-10</div>
+  <b>Comments RSS feed.</b> As part of the spring RSS offensive, I've added an RSS feed to Comments.  It is automatically linked if you define a background image (ie. RSS feed icon) for the new
+  div#comments-rss class.  Take a look <a href="http://pure-gas.org/comments">here</a> for an example of a comments-heavy page that benefits from RSS syndication.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-06-02</div>
+  <b>Contact Form - file upload.</b>  You may now provide a file upload field on your contact forms.  Simply enter File upload title and File upload instructions, and the form will automatically
+  include a file upload, with the given title and instructions, at the bottom.  The uploaded file will be attached to the email sent to the form recipient, and the uploaded file name will be
+  included in the CSV dump.
+  <br/>
+  <b>Headlines Extra - RSS feed.</b> We've added an RSS feed that goes along with the Headlines extra.  For example, if you're displaying headlines under parent node 111, you can link an RSS
+  feed to the same headlines with /headlines-rss.jsp?parent_nid=111.  If you need an RSS feed icon, let us know, we'll upload one to your design media.  Here's an example usage from our site:
+  <a target="_blank" href="http://ims.net/headlines-rss.jsp?parent_nid=17">IMS Webcasts RSS Feed</a>.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-05-25</div>
+  <b>Site centering</b> may now be done with DHTML dropdown navigation enabled.  If you'd like to center your site in the browser, ask us to do this for you - it requires advanced CSS skills.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-04-06</div>
+  <b>HTML 5 &lt;audio&gt; and &lt;video&gt; support.</b> We've added support for the HTML 5 &lt;audio&gt; and &lt;video&gt; tags.  These tags allow you to play audio and video files without needing a media
+  player like Flash, etc., just as the &lt;img&gt; tag works for image files.  The file types currently supported by Firefox 3.5 and later are WAV and Ogg Vorbis audio, and Ogg Theora video.  
+  Read more <a href="https://developer.mozilla.org/En/Media_formats_supported_by_the_audio_and_video_elements">here</a>. If you've got Ogg-encoded media, you can upload it with the content editor and it will 
+  be placed in the appropriate tag.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-03-30</div>
+  <b>Calendar Extra.</b> We've added a simple Calendar Extra which allows you to show links to events, one month at a time.  The events are displayed in an AJAX popup window when you mouse over a date that 
+  has events.  An event has a date, time (plain text), sort order (for more than one event on the same day), title, description and URL to turn the title into a link.  It's all style-customizable, as usual.
+  If you'd like to see a live example, take a look at <a href="http://madisonsymphony.org/">madisonsymphony.org</a>.  If you're interested in firing up a calendar on your site, drop IMS a line and we'll get
+  you started! Note: this extra has a corresponding RSS feed at /calendar-rss.jsp.  You can display a linked RSS image in the events window by putting the image as a background in the div.event-rss class.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-02-19</div>
+  <b>Headlines Extra.</b>  We've added a simple Headlines Extra which allows you to place mini-navigation within a content pane.  You simply give it the ID of a parent node, and that node's children will
+  be listed, using styles from the "headlines" stylesheet.  The node IDs are shown in brackets on the <a href="tree.jsp">Tree</a>.  This is an easy (and automated) way to display links to things like news articles
+  in a different place, like the home page.  You can also set the extra so that page meta descriptions are shown under the headlines with a "read more" link.
+  The extension context is "/", and the extension URL is "/headlines.jsp?parent_nid=#" where # is the ID of the parent node of interest.
+  Check out this <a target="_blank" href="http://ims.net/headlines">example on the IMS site</a> (you may need to hit Refresh to get the updated stylesheet).  As always, if you'd like help with it, drop us a line!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-02-17</div>
+  <b>Flash Image Rotator.</b>  We've placed the handy Longtail Video Flash image rotator in the root of the site /imagerotator.swf.  You can upload an XML file and a bunch of images using the Design Media
+  uploader, and use this image rotator to swap them at a chosen tempo.  This should not be confused with the Image Rotator Neptune extra, which switches a given image on each page load.  We've placed an
+  <a target="_blank" href="http://ims.net/imagerotator">example on the IMS site</a>.  If you'd like to learn how to use this widget, we'll help you out!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2010-02-15</div>
+  <b>The Content Editor is wider and the Page editor has been rearranged.</b>  We've made the Content Editor wider, so you can edit large chunks of content more easily.  To accomodate this, we've
+  rearranged the Page Editor to show the Content Editor on the bottom.  An advantage of the new Page Editor is that the meta data is no longer in a popup window - you edit it along with the
+  page title and stuff.  Hopefully this will encourage folks to enter the Meta RSS/Description, which is used by Facebook, Google, and other apps to describe a page.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-11-04</div>
+  <b>Got Flash?</b>  We've added an option to upload a Flash (SWF) file in the content editor, which we sort of forgot when we added the audio/video upload/embed capability.  As with video, you need to specify the
+  width and height at which to display your Flash movie.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-10-23</div>
+  <b>Rotating header images.</b>  We've added the capability to use the Image Rotator extra to enable your header to cycle through a list of images with each page request.
+  Ask us to help you set this up if you want it.  Note: there is only one Image Rotator, so if you're already using it, you cannot use it for header images, and if you do use it for the header, you won't be able to use
+  it elsewhere on your site.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-10-22</div>
+  <b>Content Editor clone button and Page layout selector.</b> We've added a Clone button to the standalone Content editor, so you can clone a content item there just as you've been able to do in the Pages tool.  We've also moved
+  the Page Layout selector down on the Pages tool - it is now separate from the "Update Page Info" and "Clone Page" operations (it's really a different thing).  Now, when you select a page layout, the change will take place
+  immediately, and the page editor will come back with content panes for the new layout.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-06-09</div>
+  <b>Uploaded files list.</b>  We've added a new tool, reached under the <b>Content</b> tool, which lists your uploaded files (image, audio and video) and lets you delete them, if you really want to.  We recommend that you
+  NOT delete uploaded files unless you really need to (if, say, they contain outdated information).  If you do need to delete an uploaded file, we recommend that you first search for it with the Content tool and remove the
+  reference (img tag or audio/video embedding code) from any content items in which it appears.  Also, we've improved the usability of the Nodes tool and WYSIWYG Content Editor!  (If the Nodes tool displays a popup window with
+  an error message, just reload it with F5 - the old Javascript is cached in your browser and you need to load the new with a full refresh.)
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-06-02</div>
+  <b>Got video? Or audio?</b> We've added a widget to the content editor that allows you to upload an audio or video file, automatically embedding it in your content.  The player,
+  the popular JWPlayer licensed from LongTail Video, plays FLV and MP4 video files and MP3 and AAC audio files. If you upload a video, you must specify its width and height as well.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-05-27</div>
+  <b>"Add This" support in Utility Links.</b>
+  We've added the ability to place an "Add This" button on utility navigation (subheader, top sidebar, bottom sidebar and footer).  "Add This" is a handy widget that enables folks to share your pages
+  on social networking sites like Facebook and Linked In.  You configure it with two Settings parameters: <span class="setting">addthis_options</span>, which sets the default sharing options, and
+  <span class="setting">addthis_pub</span>, which is an optional username that you can get from <a href="http://addthis.com/">addthis.com</a>.  You activate it by entering "addthis" as the URL in Utility Links; give us
+  a shout if you need help.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-03-11</div>
+  <b>Lyris ListManager RSS feed.</b>
+  We've added an RSS feed for your Lyris ListManager mailing list (if you have one) at <b>/lm-rss.jsp</b>.  It's a simple URL that you can use as is, or schedule on a node with your alias of choice.
+  It requires two new Settings: <span class="setting">lyris_host</span>, the host name of your Lyris ListManager server (lists.yourdomain.com, typically); and <span class="setting">lyris_list</span>,
+  the list that you'd like shown in the RSS feed.  (The RSS feed only supports one list.)
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-02-16</div>
+  <b>Sidebar utility links/extensions above secondary navigation.</b>
+  We've added a new set of sidebar utility links (and extensions) that are displayed at the top of the sidebar, above the secondary navigation.  This is useful for persistent "callout" links, perhaps with an image,
+  that you'd like to appear at the top of the sidebar on every page of your site.  The new set is called "Sidebar-top", while the original set has been renamed to "Sidebar-bottom".
+  <br/>
+  <b>Email notification of comments.</b>  We've added a new setting, <span class="setting">comments_notify</span>, that holds an optional email address of a person to be notified every time a comment is posted on your site.  If you use
+  the Comments extra, this will help you catch and delete unpleasant comments more quickly.  Simply leave <span class="setting">comments_notify</span> blank if you do not wish to be notified of comment posts.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-02-02</div>
+  <b>CP Users separate from CP Permissions.</b>
+  We've completed a long-planned separation of control panel user login administration from control panel user permissions administration.  This is done so that custom means may be used to authenticate control panel
+  users, such as the LDAP store or Windows Active Directory at your company.  The CP Permissions tool has the familiar functions; the management of control panel users has been moved to the CP Users
+  extra on the second line, which you should see if you are a site admin.  The one change is that control panel users may now be deleted.
+  <br/>
+  <b>Single update of Settings; checkboxes.</b>
+  We've added an Update button next to every setting in the Settings tool, so that you can quickly update a single setting without scrolling down and updating them all.  We've also replaced the text field
+  where you had to enter "true" or "false" for some settings with a checkbox, to make it very clear that the setting is a toggle, either off or on.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2009-01-21</div>
+  <b>Create standalone content items.</b>
+  We've added a Create button on the standalone Content editor, just like the one on the Pages tool, to allow you to create standalone content items that are not part of a page.  This is useful when
+  you have a whole bunch of content you'd like to get loaded into the database before you worry about pages and nodes.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-12-03</div>
+  <b>New Extra: Polls.</b>
+  We've added a new extra that allows you to place a poll in a content pane.  It's a bit unusual in that it has to reside in an IFRAME, so ask us to set it up for you if you're interested.  (The IFRAME
+  is necessary because the poll writes a cookie to the browser to force only one vote per poll per browser.)  The control panel tool shows you the vote tally on each choice; the front end shows the vote
+  tallies as percentages.  Polls have start and end times; outside of those times, the poll doesn't show.  You can set up multiple polls to appear at different times, and old polls are stored forever.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-11-13</div>
+  <b>New Extra: Photo Sets (BETA).</b>
+  We've added a new extra that allows you to upload photos into photo sets.  A photo set may then be displayed on your site by placing the photo set URL into the extension URL in a content pane.  If you're interested,
+  give yourself permission to use the Photo Sets extra in the CP Users tool, or ask your admin to do so if you're not an admin.
+  <br/>
+  <b>Extras are now assigned to users in the CP Users tool</b>.  We've separated Extras from custom Extensions, so admins can see all the Neptune Extras in the CP Users tool, and assign them
+  to users.  NOTE: you may have lost an Extra from your control panel navigation.  If so, just ask your admin to grant you permission
+  on that extra again with the CP Users tool (or do it yourself if you're an admin).
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-10-27</div>
+  <b>New Extra: Contact Forms (BETA).</b>
+  We've added a new extra that allows you to build contact forms.  You can set fields to be required, send an optional confirmation email to the submitter, include Lyris ListManager e-mail list signup,
+  and download a CSV file with all the respondent data.  It's a good tool for building basic contact forms; if you have more advanced requirements, ask IMS to build a custom form extension for you.
+  If you'd like to try out the Contact Forms extra, let us know, and we'll hook it up to your control panel.
+  <br/>
+  <b>The Contact Forms extra is currently in BETA release.</b>  Please be aware that some bugs may remain, and if you should find one, please report it to us immediately!
+  <br/>
+  We've also moved the SearchBlox tool to the extensions navigation row, where it belongs (it's an extra).  If you want it hooked up, let us know; you've probably never used it.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-10-09</div>
+  <b>Access page titles and instructions.</b>
+  You may now set the title and instructions on the Access Denied and Login pages in Settings.  The three new settings are: <span class="setting">access_denied_title</span>, <span class="setting">access_denied_instructions</span> and <span class="setting">access_login_title</span>.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-09-19</div>
+  <b>Media display tweaks.</b>
+  1. The "orphaned media" list has been removed from the Tree tool.  The vast majority of uploaded media tend to be linked in content, rather than scheduled on nodes, so this list wasn't very useful and got very long on some sites.<br/>
+  2. The nodes on which a given media item is scheduled are now listed on the Media tool, just like the node list you see on the Pages tool.
+  3. You can now click on a media ID in the Nodes tool to be taken to the Media tool for that media file, just as the page ID link takes you to the Pages tool.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-09-17</div>
+  <b>Media filter.</b>  We've added a filter control to the Media tool, which allows you to enter a part of the filename to narrow the list of media loaded into the selector.  It works just like the filter
+  on the Pages and Content tools.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-06-19</div>
+  <b>Email-a-Friend extra.</b>  We've added a new front-end extra which you can link from the Utility navigation.  The link launches a pop-up window with a form to enter your name and email address,
+  a friend's name and email address, as well as a message, to send the current page URL to your friend.  If you'd like it, ask us to set it up (it may require configuration of the Mailer utility on your site).
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-05-15</div>
+  <b>Media tool UI update.</b> We've updated the Media tool to show a selector with which you select a single media file in order to update it.  This is simply to speed up the page load on sites that have
+  hundreds of media files.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-04-15</div>
+  <b>Microsoft SQL Server support.</b> We've added support for Microsoft SQL Server as the Neptune database server (the standard
+  database server is PostgreSQL).  This required a number of changes to database calls, so please be on the lookout for errors - and contact IMS right away if you see any! Thanks!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-04-08</div>
+  <b>Blogger extra.</b> We've added a front-end extra which displays your Blogger blog, along with comments.  It displays a link for folks
+  to post comments on the Blogger site in a new browser window.  This extension uses the
+  Google Blogger API, which is also supported by Wordpress, so we believe that this will work with Wordpress blogs as well.  Ask us how to set it up.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-04-02</div>
+  <b>Page editor: page and content Clone button.</b>
+  We've added Clone buttons as a shortcut for you to clone a page or a content item on a page.  This saves you the step of cutting and pasting.
+  If you have a content item used as a template (with some HTML formatting you use a lot), you can now just hit
+  the Clone button to copy that content into a new content item on the current page, ready to be edited.  NOTE: cloning a page does NOT clone its content items!  The
+  new page contains the same content items as the original page.  If you want to make a new version of a page with cloned content, you must clone the
+  content items individually after cloning the page.  And, remember to update the labels!!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-03-26</div>
+  <b>Content editor: use page label.</b>  We've added a shortcut "use page label" link on the content editor in the Pages tool, to fill the
+  content label field with the page label.  Use this when you have a unique page/content item relationship, which is very common.  Note
+  that you still have to click the Update Content button - this shortcut just fills the field.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-03-25</div>
+  <b>Content editor tool.</b>  We've added a new tool (to the right of Pages above) that allows you to simply search and edit content without reference to
+  pages that display it.  It has no functionality beyond the content editor on the Pages tool, but is a quicker way to search and replace text, or just edit content
+  items that you know by label.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-02-27</div>
+  <b>Nodes and Pages speed improvement.</b> With some larger sites coming online with Neptune, we've needed to improve the speed of the Nodes and Pages tools significantly.
+  We've done that, with some significant updates to core code.  If you notice any unusual behavior, please report it to us immediately.  (Note: these changes shouldn't
+  affect your content or produce any visible change other than faster loads of the Nodes and Pages tools, and faster generation of the site map and navigation
+  on the front end.)
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-02-12</div>
+  <b>Comments extra.</b> We've added an extra that allows readers to post comments on a content item, supplying their name and email address along with the comment.
+  There is a control panel tool that allows you to delete comments.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2008-01-23</div>
+  <b>Quaternary navigation.</b> We've added the capability to put quaternary (fourth-level) navigation in a DIV box on the page.  This DIV should be positioned with
+  absolute left and top values in the div#navquat-box class.  Quaternary navigation is turned off by default.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-12-26</div>
+  <b>Layouts.</b> We've added a "view diagram" link that displays a schematic of the layout in an Ajax window.  The relative pane sizes are not accurate, since it doesn't use
+  the stylesheet classes, but it should come close to showing you how the panes are arranged in the given layout.  It's very helpful when building layouts!
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-11-07</div>
+  <b>Stylesheet.</b> We've redesigned Neptune's HTML to make more use of DIVs and using id rather than class names for elements that are unique to a page.  Layouts are simpler, we've
+  eliminated the extra div inside the td, that really was redundant.  Also, the stylesheet categories have been rearranged a bit, with a new "main" category containing stuff in the
+  main area, and we renamed "content" to "layouts" to make better contact with the Layouts tool.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-10-22</div>
+  <b>Page editor.</b> We've moved the meta tag editor to an Ajax window, to conserve screen space, since it's not used a lot.  Click the "Edit META tags" link to launch the popup.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-10-12</div>
+  <b>Utility Links.</b> You may now check a box in the Utility Links tool to have the link open in a new browser window.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-10-11</div>
+  <b>Lyris extra.</b> We've added a Lyris class which allows you (or us) to write extensions which make <a target="_blank" href="http://www.lyris.com/">Lyris ListManager</a> API calls, like forms to subscribe to Lyris lists.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-10-10</div>
+  <b>Image Rotator extra.</b> We've added an Image Rotator extra which allows you to upload images to be rotated on successive page loads.  Ask us to install it if you're interested.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-10-08</div>
+  <b>RSS feed.</b> We've added <a target="_blank" href="/rss.jsp">/rss.jsp</a> to provide an RSS feed for your public pages.
+      </div>
+
+  <div class="update">
+  <div class="update-date">2007-10-08</div>
+  <b>Google site map.</b> We've added <a target="_blank" href="/sitemap-xml.jsp">/sitemap-xml.jsp</a> to provide a Google XML site map.
+      </div>
+
+  ARCHIVE END -->
+
+    </div>

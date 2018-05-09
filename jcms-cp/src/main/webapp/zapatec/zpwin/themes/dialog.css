@@ -1,0 +1,20 @@
+/* $Id: dialog.css 6472 2007-02-27 09:39:16Z slip $ */
+.zpWinAlertContent, .zpWinConfirmContent, .zpWinDialogContent {
+	text-align : center;
+	
+	/** ADDED */
+	background-color: #f5f4f0;
+}
+
+.zpWinAlertInnerContent, .zpWinConfirmInnerContent, .zpWinDialogInnerContent {
+	padding-bottom: 3px;
+}
+
+.zpWinAlertMessage, .zpWinConfirmMessage, .zpWinDialogMessage {
+	margin : 10px;
+}
+
+.zpWinAlertButton, .zpWinOkButton, .zpWinCancelButton, .zpWinDialogButton {
+	margin: .5em;
+}
+

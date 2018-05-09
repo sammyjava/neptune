@@ -1,0 +1,687 @@
+<!doctype html public "-//W3C//DTD HTML 4.0 Frameset//EN""http://www.w3.org/TR/REC-html40/frameset.dtd">
+<html>
+<head>
+<title>
+Zapatec Utils Overview
+</title>
+<link rel ="stylesheet" type="text/css" href="stylesheet.css" title="Style">
+<script>
+function asd() {
+	
+		parent.document.title="spinner.js Overview";
+	
+}
+</script>
+</head>
+<body bgcolor="white" onload="asd();">
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> 	<font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top">
+<em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<center>
+	
+	   <h2>spinner.js</h2>
+	
+</center>
+
+	
+
+
+<h4>Summary</h4>
+<p>
+	
+		A spinner widget.
+
+ <pre>
+ Copyright (c) 2004-2008 by Zapatec, Inc.
+ http://www.zapatec.com
+ 1700 MLK Way, Berkeley, California,
+ 94709, U.S.A.
+ All rights reserved.
+ </pre><BR/><BR/>
+	
+</p>
+
+<hr>
+
+
+    <table border="1" cellpadding="3" cellspacing="0" width="100%">
+    <tr bgcolor="#CCCCFF" class="TableHeadingColor">
+    <td colspan=2><font size="+2">
+    
+        <b>Class Summary</b>
+    
+    </font></td>
+    </tr>
+    
+    <tr bgcolor="white" class="TableRowColor">
+    <td width="15%"><b><a href="Zapatec/Spinner.html">Zapatec.Spinner</a></b></td>
+    <td>&nbsp;</td>
+    </tr>
+    
+    </table>
+    <hr/> 
+
+
+<!-- ========== METHOD SUMMARY =========== -->
+
+<!-- ========== END METHOD SUMMARY =========== -->
+
+
+        <pre class="sourceview"><span class="comment">// $Id: spinner.js 10591 2008-04-01 07:40:45Z nikolai $</span>
+<span class="comment">/**
+ * <span class="attrib">@fileoverview</span> A spinner widget.
+ *
+ * &lt;pre&gt;
+ * Copyright (c) 2004-2008 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ * &lt;/pre&gt;
+ */</span>
+
+<span class="comment">/**
+ * Zapatec.Spinner constructor. Creates a new spinner object with
+ * given parameters.
+ *
+ * <span class="attrib">@constructor</span>
+ * <span class="attrib">@extends</span> Zapatec.Widget
+ * <span class="attrib">@param</span> {object} objArgs Spinner configuration
+ */</span>
+Zapatec.Spinner = <span class="reserved">function</span>(objArgs) {
+  <span class="reserved">if</span>(arguments.length == 0){
+    objArgs = {};
+  }
+
+  <span class="comment">// Call constructor of superclass</span>
+  Zapatec.Spinner.SUPERconstructor.call(<span class="reserved">this</span>, objArgs);
+};
+
+<span class="comment">/**
+ * Unique static id of the widget class. Gives ability for Zapatec#inherit to
+ * determine and store path to this file correctly when it is included using
+ * Zapatec#include. When this file is included using Zapatec#include or path
+ * to this file is gotten using Zapatec#getPath, this value must be specified
+ * as script id.
+ * <span class="attrib">@private</span>
+ */</span>
+Zapatec.Spinner.id = <span class="literal">'Zapatec.Spinner'</span>;
+
+<span class="comment">// Inherit Widget</span>
+Zapatec.inherit(Zapatec.Spinner, Zapatec.Widget);
+
+<span class="comment">/**
+ * Initializes object.
+ *
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.init = <span class="reserved">function</span>(objArgs)
+{
+  <span class="comment">// Call parent init</span>
+  Zapatec.Spinner.SUPERclass.init.call(<span class="reserved">this</span>, objArgs);
+
+  <span class="reserved">this</span>.createSpinner();
+
+  <span class="reserved">this</span>.updateText();
+};
+
+<span class="comment">/**
+ * Creates elements needed by the spinner
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.createSpinner = <span class="reserved">function</span> ()  {
+  <span class="reserved">this</span>.fireEvent(<span class="literal">"beforeCreate"</span>);
+
+  var content = [];
+
+  <span class="comment">// Generate id and class for table element</span>
+  var tableId = Zapatec.Spinner.generateString(
+          <span class="literal">"zpSpin"</span>, <span class="reserved">this</span>.id, <span class="literal">"Table"</span>);
+  var tableClass = <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Table'</span>
+  });
+  content.push(<span class="literal">"&lt;table id='"</span>);
+  content.push(tableId);
+  content.push(<span class="literal">"' class='"</span>);
+  content.push(tableClass);
+  content.push(<span class="literal">"' cellSpacing='0' cellPadding='0' &gt;"</span>);
+  content.push(<span class="literal">"&lt;tbody&gt;"</span>);
+
+  <span class="comment">// Generate id and class for text field element</span>
+  var inputId = Zapatec.Spinner.generateString(
+          <span class="literal">"zpSpin"</span>, <span class="reserved">this</span>.id, <span class="literal">"Input"</span>);
+  var inputClass = <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Input'</span>
+  });
+  content.push(<span class="literal">"&lt;tr&gt;&lt;td rowspan='2' id='"</span>);
+  content.push(inputId);
+  content.push(<span class="literal">"' class='"</span>);
+  content.push(inputClass);
+  content.push(<span class="literal">"'&gt;&lt;/td&gt;"</span>);
+
+  <span class="comment">// Generate id and class for up element</span>
+  var upId = Zapatec.Spinner.generateString(
+          <span class="literal">"zpSpin"</span>, <span class="reserved">this</span>.id, <span class="literal">"Up"</span>);
+  var upClass = <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Up'</span>
+  });
+  content.push(<span class="literal">"&lt;td id='"</span>);
+  content.push(upId);
+  content.push(<span class="literal">"' class='"</span>);
+  content.push(upClass);
+  content.push(<span class="literal">"'"</span>);
+
+  <span class="reserved">this</span>.addEvents(content, <span class="literal">"up"</span>);
+
+  content.push(<span class="literal">"&gt;&lt;/td&gt;&lt;/tr&gt;"</span>);
+
+  <span class="comment">// Generate id and class for down element</span>
+  var downId = Zapatec.Spinner.generateString(
+          <span class="literal">"zpSpin"</span>, <span class="reserved">this</span>.id, <span class="literal">"Down"</span>);
+  var downClass = <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Down'</span>
+  });
+  content.push(<span class="literal">"&lt;tr&gt;&lt;td id='"</span>);
+  content.push(downId);
+  content.push(<span class="literal">"' class='"</span>);
+  content.push(downClass);
+  content.push(<span class="literal">"'"</span>);
+
+  <span class="reserved">this</span>.addEvents(content, <span class="literal">"down"</span>);
+
+  content.push(<span class="literal">"&gt;&lt;/td&gt;&lt;/tr&gt;"</span>);
+
+  content.push(<span class="literal">"&lt;tr&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;"</span>);
+
+  var html = content.join(<span class="literal">""</span>);
+
+  <span class="reserved">this</span>.fireEvent(<span class="literal">"afterCreate"</span>);
+
+  <span class="comment">// Make an intermediate html element that will hold our spinner html</span>
+  var wrapper = document.createElement(<span class="literal">"span"</span>);
+  wrapper.innerHTML = html;
+  <span class="comment">// Append html wrapper to the specified parent</span>
+  <span class="reserved">this</span>.config.parent.appendChild(wrapper);
+
+  <span class="comment">// Store reference to spin text box</span>
+  <span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">"input"</span>, wrapper.childNodes[0].
+          childNodes[0].childNodes[0].childNodes[0]);
+  <span class="comment">// Store reference to spin up arrow button</span>
+  <span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">"upButton"</span>, wrapper.childNodes[0].
+          childNodes[0].childNodes[0].childNodes[1]);
+  <span class="comment">// Store reference to spin down arrow button</span>
+  <span class="reserved">this</span>.createProperty(<span class="reserved">this</span>, <span class="literal">"downButton"</span>, wrapper.childNodes[0].
+          childNodes[0].childNodes[1].childNodes[0]);
+}
+
+<span class="comment">/**
+ * Gets current spinner value
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.getValue = <span class="reserved">function</span>()  {
+  <span class="reserved">return</span> <span class="reserved">this</span>.config.value;
+}
+
+<span class="comment">/**
+ * Sets current spinner value
+ *
+ * <span class="attrib">@param</span> {number} value New spinner value
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.setValue = <span class="reserved">function</span>(value)  {
+  <span class="reserved">this</span>.config.value = value;
+
+  <span class="reserved">this</span>.fireEvent(<span class="literal">"valueChanged"</span>);
+
+  <span class="reserved">this</span>.updateText();
+}
+
+<span class="comment">/**
+ * Update spinner text based on current value
+ *
+ * <span class="attrib">@param</span> {number} value New spinner value
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.updateText = <span class="reserved">function</span>()  {
+  <span class="comment">// Get current value</span>
+  var value = <span class="reserved">this</span>.getValue();
+
+  var str = <span class="literal">''</span>;
+  <span class="comment">// If spinner value is set</span>
+  <span class="reserved">if</span> (null != value) {
+    str += value;
+    <span class="comment">// If trailing zeros are to be added</span>
+    <span class="reserved">if</span> (<span class="reserved">this</span>.config.minTextLength) {
+      <span class="reserved">while</span> (str.length &lt; <span class="reserved">this</span>.config.minTextLength) {
+        <span class="comment">// Add a trailing zero</span>
+        str = <span class="literal">'0'</span> + str;
+      }
+    }
+  }
+  <span class="comment">// Set value</span>
+  <span class="reserved">this</span>.input.innerHTML = str;
+}
+
+<span class="comment">/**
+ * Configures the widget. Gets called from init and reconfigure methods of
+ * superclass.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} objArgs User configuration
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.configure = <span class="reserved">function</span>(objArgs) {
+  <span class="comment">// Id or reference to html element that is to contain our spinner</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'parent'</span>, null);
+  <span class="comment">// Current value</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'value'</span>, null);
+  <span class="comment">// Delta value</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'delta'</span>, 1);
+  <span class="comment">// Minimum value</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'min'</span>, null);
+  <span class="comment">// Maximum value</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'max'</span>, null);
+  <span class="comment">// Allow trailing zeros to maintain minimum text length</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'minTextLength'</span>, null);
+  <span class="comment">// Event repeat timeout</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'repeatTimeout'</span>, 500);
+  <span class="comment">// Event repeat timeout acceleration</span>
+  <span class="reserved">this</span>.defineConfigOption(<span class="literal">'repeatAcceleration'</span>, 0.8);
+
+  <span class="comment">// Call parent method</span>
+  Zapatec.Spinner.SUPERclass.configure.call(<span class="reserved">this</span>, objArgs);
+
+  <span class="comment">// Check passed config options and correct them if needed</span>
+  <span class="reserved">this</span>.config.parent = Zapatec.Widget.getElementById(<span class="reserved">this</span>.config.parent);
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.config.parent) {
+    Zapatec.Log({description: <span class="literal">"Can't find parent for spinner (\"</span>parent\<span class="literal">" config option)"</span>});
+    <span class="reserved">return</span>;
+  }
+
+  <span class="reserved">this</span>.pressedArrow = 0;
+  <span class="reserved">this</span>.repeatTimer = null;
+  <span class="reserved">this</span>.repeatTimeout = <span class="reserved">this</span>.config.repeatTimeout;
+  <span class="reserved">this</span>.repeatAcceleration = <span class="reserved">this</span>.config.repeatAcceleration;
+};
+
+<span class="comment">/**
+ * Attaches mouse event listeners to provided html element
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} el html element
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.addEvents = <span class="reserved">function</span>(content, arg) {
+
+  content.push(<span class="literal">" onmouseover='Zapatec.Widget.callMethod("</span>);
+  content.push(<span class="reserved">this</span>.id);
+  content.push(<span class="literal">", \"</span>onMouseOver\<span class="literal">", \"</span><span class="literal">");
+  content.push(arg);
+  content.push("</span>\<span class="literal">")'"</span>);
+
+  content.push(<span class="literal">" onmousedown='return Zapatec.Widget.callMethod("</span>);
+  content.push(<span class="reserved">this</span>.id);
+  content.push(<span class="literal">", \"</span>onMouseDown\<span class="literal">", \"</span><span class="literal">");
+  content.push(arg);
+  content.push("</span>\<span class="literal">");'"</span>);
+
+  content.push(<span class="literal">" onmouseup='Zapatec.Widget.callMethod("</span>);
+  content.push(<span class="reserved">this</span>.id);
+  content.push(<span class="literal">", \"</span>onMouseUp\<span class="literal">", \"</span><span class="literal">");
+  content.push(arg);
+  content.push("</span>\<span class="literal">")'"</span>);
+
+  content.push(<span class="literal">" onmouseout='Zapatec.Widget.callMethod("</span>);
+  content.push(<span class="reserved">this</span>.id);
+  content.push(<span class="literal">", \"</span>onMouseOut\<span class="literal">", \"</span><span class="literal">");
+  content.push(arg);
+  content.push("</span>\<span class="literal">")'"</span>);
+
+  <span class="comment">// Handle double clicks in IE</span>
+  <span class="reserved">if</span> (Zapatec.is_ie) {
+    content.push(<span class="literal">" ondblclick='Zapatec.Widget.callMethod("</span>);
+    content.push(<span class="reserved">this</span>.id);
+    content.push(<span class="literal">", \"</span>onMouseDblClick\<span class="literal">", \"</span><span class="literal">");
+    content.push(arg);
+    content.push("</span>\<span class="literal">")'"</span>);
+  }
+}
+
+<span class="comment">/**
+ * Change spinner value in specified direction
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {number} direction direction in which to change value
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.adjustValue = <span class="reserved">function</span>(direction) {
+  var value = <span class="reserved">this</span>.getValue();
+  <span class="reserved">if</span> (0 &lt; direction) {
+    value += <span class="reserved">this</span>.config.delta;
+  }
+  <span class="reserved">else</span> <span class="reserved">if</span> (direction &lt; 0) {
+    value -= <span class="reserved">this</span>.config.delta;
+  }
+
+  <span class="comment">// Check for lower limit</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.config.min) {
+    <span class="reserved">if</span> (value &lt; <span class="reserved">this</span>.config.min) {
+      value = <span class="reserved">this</span>.config.min;
+    }
+  }
+
+  <span class="comment">// Check for upper limit</span>
+  <span class="reserved">if</span> (<span class="reserved">this</span>.config.max) {
+    <span class="reserved">if</span> (<span class="reserved">this</span>.config.max &lt; value) {
+      value = <span class="reserved">this</span>.config.max;
+    }
+  }
+  
+  <span class="reserved">this</span>.setValue(value);
+}
+
+<span class="comment">/**
+ * Handles timeout of repeat timer
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {number} direction direction in which to change value
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.onTimeout = <span class="reserved">function</span>() {
+  <span class="comment">// If no arrow is pressed</span>
+  <span class="reserved">if</span> (!<span class="reserved">this</span>.pressedArrow) {
+    <span class="comment">// Reset repeat timer</span>
+    <span class="reserved">this</span>.resetTimer();
+
+    <span class="reserved">return</span>;
+  }
+
+  <span class="reserved">this</span>.adjustValue(<span class="reserved">this</span>.pressedArrow);
+
+  <span class="comment">// Schedule next timeout</span>
+  <span class="reserved">this</span>.invokeTimer();
+}
+
+<span class="comment">/**
+ * Reset repeat timer to initial values.
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {number} direction direction in which to change value
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.resetTimer = <span class="reserved">function</span>() {
+  <span class="comment">// Reset repeat timeout</span>
+  <span class="reserved">this</span>.repeatTimeout = <span class="reserved">this</span>.config.repeatTimeout;
+  <span class="reserved">if</span> (<span class="reserved">this</span>.repeatTimer) {
+    clearTimeout(<span class="reserved">this</span>.repeatTimer);
+  }
+}
+
+<span class="comment">/**
+ * Change spinner value in specified direction
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {number} direction direction in which to change value
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.invokeTimer = <span class="reserved">function</span>() {
+  var self = <span class="reserved">this</span>;
+  <span class="reserved">this</span>.repeatTimer = setTimeout(<span class="reserved">function</span>() {
+    self.onTimeout();
+  }, <span class="reserved">this</span>.repeatTimeout );
+
+  <span class="comment">// Adjust repeat timer timeout</span>
+  <span class="reserved">this</span>.repeatTimeout = Math.round(
+          <span class="reserved">this</span>.repeatTimeout * <span class="reserved">this</span>.config.repeatAcceleration);
+}
+
+<span class="comment">/**
+ * Get source of event
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} el html element
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.getEventSource = <span class="reserved">function</span>(arg) {
+  var source = null;
+  <span class="reserved">if</span> (arg == <span class="literal">"up"</span>) {
+    source = <span class="reserved">this</span>.upButton;
+  }
+  <span class="reserved">else</span> <span class="reserved">if</span> (arg == <span class="literal">"down"</span>) {
+    source = <span class="reserved">this</span>.downButton;
+  }
+  <span class="reserved">return</span> source;
+}
+
+<span class="comment">/**
+ * Handles mouse over events
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} ev Event
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.onMouseOver = <span class="reserved">function</span>(arg) {
+  var source = <span class="reserved">this</span>.getEventSource(arg);
+
+  Zapatec.Utils.addClass(source, <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Hover'</span>
+  }));
+}
+
+<span class="comment">/**
+ * Handles mouse down events
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} ev Event
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.onMouseDown = <span class="reserved">function</span>(arg) {
+  var source = <span class="reserved">this</span>.getEventSource(arg);
+
+  Zapatec.Utils.addClass(source, <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Pressed'</span>
+  }));
+
+  var direction;
+  <span class="reserved">if</span> (arg == <span class="literal">"up"</span>) {
+    direction = +1;
+  }
+  <span class="reserved">else</span> <span class="reserved">if</span> (arg == <span class="literal">"down"</span>) {
+    direction = -1;
+  }
+
+  <span class="comment">// Mark that arrow is pressed</span>
+  <span class="reserved">this</span>.pressedArrow = direction;
+  <span class="comment">// Change spinner value as a result to this mouse click</span>
+  <span class="reserved">this</span>.adjustValue(direction);
+
+  <span class="comment">// Reset repeat timer</span>
+  <span class="reserved">this</span>.resetTimer();
+  <span class="comment">// Start a timer for eventual event repeats</span>
+  <span class="reserved">this</span>.invokeTimer();
+
+  <span class="comment">// Create mouse up listener for the whole body</span>
+  var self = <span class="reserved">this</span>;
+  var mouseUpGlobalHandler = <span class="reserved">function</span>(ev) {
+    self.onMouseUp(arg);
+
+    Zapatec.Utils.removeEvent(document.body, <span class="literal">"mouseup"</span>, mouseUpGlobalHandler);
+  }
+  <span class="comment">// Add mouae up listener to document body</span>
+  Zapatec.Utils.addEvent(document.body, <span class="literal">"mouseup"</span>, mouseUpGlobalHandler);
+  
+  <span class="reserved">return</span> false;
+}
+
+<span class="comment">/**
+ * Handles mouse double click events
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} ev Event
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.onMouseDblClick = <span class="reserved">function</span>(arg) {
+  var source = <span class="reserved">this</span>.getEventSource(arg);
+
+  var direction;
+  <span class="reserved">if</span> (arg == <span class="literal">"up"</span>) {
+    direction = +1;
+  }
+  <span class="reserved">else</span> <span class="reserved">if</span> (arg == <span class="literal">"down"</span>) {
+    direction = -1;
+  }
+
+  <span class="comment">// Change spinner value as a result to this mouse click</span>
+  <span class="reserved">this</span>.adjustValue(direction);
+
+  <span class="reserved">return</span> false;
+}
+
+<span class="comment">/**
+ * Handles mouse up events
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} ev Event
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.onMouseUp = <span class="reserved">function</span>(arg) {
+  var source = <span class="reserved">this</span>.getEventSource(arg);
+
+  Zapatec.Utils.removeClass(source, <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Pressed'</span>
+  }));
+
+  <span class="comment">// Mark that arrow is released</span>
+  <span class="reserved">this</span>.pressedArrow = 0;
+}
+
+<span class="comment">/**
+ * Handles mouse out events
+ *
+ * <span class="attrib">@private</span>
+ * <span class="attrib">@param</span> {object} ev Event
+ */</span>
+Zapatec.Spinner.<span class="reserved">prototype</span>.onMouseOut = <span class="reserved">function</span>(arg) {
+  var source = <span class="reserved">this</span>.getEventSource(arg);
+
+  Zapatec.Utils.removeClass(source, <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Pressed'</span>
+  }));
+  Zapatec.Utils.removeClass(source, <span class="reserved">this</span>.getClassName({
+    prefix: <span class="literal">'zpSpinner'</span>,
+    suffix: <span class="literal">'Hover'</span>
+  }));
+}
+
+Zapatec.Spinner.generateString = <span class="reserved">function</span>(){
+	var arr = [];
+
+	<span class="reserved">for</span>(var ii = 0; ii &lt; arguments.length; ii++){
+		arr.push(arguments[ii]);
+	}
+
+	<span class="reserved">return</span> arr.join(<span class="literal">""</span>);
+}
+</pre>
+	<hr>
+
+
+
+<!-- ========== START OF NAVBAR ========== -->
+<a name="navbar_top"><!-- --></a>
+<table border="0" width="100%" cellpadding="1" cellspacing="0">
+<tr>
+<td colspan=2 bgcolor="#EEEEFF" class="NavBarCell1">
+<a name="navbar_top_firstrow"><!-- --></a>
+<table border="0" cellpadding="0" cellspacing="3">
+  <tr align="center" valign="top">
+  
+  
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-summary.html"><font class="NavBarFont1"><b>Overview</b></font></a>&nbsp;</td>
+  <td bgcolor="#FFFFFF" class="NavBarCell1Rev">	&nbsp;<font class="NavBarFont1Rev"><b>File</b></font>&nbsp;</td>
+  
+
+  <td bgcolor="#FFFFFF" class="NavBarCell1"> <font class="NavBarFont1">Class</font>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="overview-tree.html"><font class="NavBarFont1"><b>Tree</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="index-all.html"--><font class="NavBarFont1"><b>Index</b></font></a>&nbsp;</td>
+  <td bgcolor="#EEEEFF" class="NavBarCell1">    <a href="help-doc.html"><font class="NavBarFont1"><b>Help</b></font></a>&nbsp;</td>
+  </tr>
+</table>
+</td>
+<td bgcolor="#EEEEFF" align="right" valign="top"><em>
+<b>Zapatec Utils</b></em>
+</td>
+</tr>
+
+<tr>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+&nbsp;PREV&nbsp;
+&nbsp;NEXT</font></td>
+<td bgcolor="white" class="NavBarCell2"><font size="-2">
+  <a href="index.html" target="_top"><b>FRAMES</b></a>  &nbsp;
+&nbsp;<a href="overview-summary.html" target="_top"><b>NO FRAMES</b></a>
+&nbsp;&nbsp;
+<script>
+  <!--
+  if(window==top) {
+    document.writeln('<A HREF="allclasses-noframe.html" TARGET=""><B>All Classes</B></A>');
+  }
+  //-->
+</script>
+<noscript>
+<a href="allclasses-noframe.html" target=""><b>All Classes</b></a>
+</noscript>
+</font></td>
+</tr>
+</table>
+<!-- =========== END OF NAVBAR =========== -->
+
+<hr>
+<font size="-1">
+
+</font>
+<div class="jsdoc_ctime">Documentation generated by <a href="http://jsdoc.sourceforge.net/" target="_parent">JSDoc</a> on Thu May 21 12:19:24 2009</div>
+</body>
+</html>

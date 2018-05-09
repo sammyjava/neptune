@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+    version="2.4">
+
+  <display-name>Neptune Web CMS</display-name>
+
+  <!-- default files -->
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+
+  <!-- site timezone -->
+  <context-param>
+    <param-name>site.timezone</param-name>
+    <param-value>US/Central</param-value>
+  </context-param>
+
+  <!-- site language -->
+  <context-param>
+    <param-name>site.language</param-name>
+    <param-value>en</param-value>
+  </context-param>
+
+  <!-- site country -->
+  <context-param>
+    <param-name>site.country</param-name>
+    <param-value>US</param-value>
+  </context-param>
+
+  <!-- trap errors on index page to process redirects -->
+  <error-page>
+    <error-code>404</error-code>
+    <location>/error.jsp</location>
+  </error-page>
+
+  <!-- DB object uses this parameter to create the datasource from the JNDI context -->
+  <context-param>
+    <param-name>db.datasource</param-name>
+    <param-value>java:comp/env/jdbc/JCMSDataSource</param-value>
+  </context-param>
+
+  <!-- explicit setting of DB connection params here instead of JNDI context -->
+  <context-param>
+    <param-name>db.driver</param-name>
+    <param-value>org.postgresql.Driver</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.url</param-name>
+    <param-value>jdbc:postgresql://localhost/jcms</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.user</param-name>
+    <param-value>jcmsuser</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.password</param-name>
+    <param-value>jcms2018user</param-value>
+  </context-param>
+  <context-param>
+    <param-name>db.type</param-name>
+    <param-value>pgsql</param-value>
+  </context-param>
+
+  <!-- points to a connection pool defined in META-INF/context.xml -->
+  <resource-ref>
+    <res-ref-name>jdbc/JCMSDataSource</res-ref-name>
+    <res-type>javax.sql.DataSource</res-type>
+    <res-auth>Container</res-auth>
+    <res-sharing-scope>Shareable</res-sharing-scope>
+  </resource-ref>
+
+  <!-- media servlet, governs access to media in /uploads/media -->
+  <servlet>
+    <servlet-name>MediaServlet</servlet-name>
+    <servlet-class>net.ims.jcms.MediaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MediaServlet</servlet-name>
+    <url-pattern>/media/*</url-pattern>
+  </servlet-mapping>
+
+  <!-- simplecaptcha -->
+  <servlet>
+    <servlet-name>Captcha</servlet-name>
+    <display-name>Captcha</display-name>
+    <servlet-class>nl.captcha.servlet.CaptchaServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Captcha</servlet-name>
+    <url-pattern>/Captcha</url-pattern>
+  </servlet-mapping>
+  <init-param>
+    <param-name>cap.char.arr</param-name>
+    <param-value>2,3,4,6,7,8,a,b,c,d,e,f,g,h,k,o,r,s,t,x,y</param-value>
+  </init-param>
+  <init-param>
+    <param-name>cap.text.producer</param-name>
+    <param-value>nl.captcha.text.imp.FiveLetterFirstNameTextCreator</param-value>
+  </init-param>
+  
+  <!-- iContact authentication, uncomment if used -->
+  <!-- <context-param> -->
+  <!--   <param-name>icontact.host</param-name> -->
+  <!--   <param-value>app.icontact.com</param-value> -->
+  <!-- </context-param> -->
+  <!-- <context-param> -->
+  <!--   <param-name>icontact.username</param-name> -->
+  <!--   <param-value>user@domain.org</param-value> -->
+  <!-- </context-param> -->
+  <!-- <context-param> -->
+  <!--   <param-name>icontact.password</param-name> -->
+  <!--   <param-value>SomeFancyPassword</param-value> -->
+  <!-- </context-param> -->
+
+</web-app>

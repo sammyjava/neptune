@@ -1,0 +1,190 @@
+/* $Id: default.css 15736 2009-02-06 15:29:25Z nikolai $ */
+/*
+ * Tabs theme.
+ *
+ * Copyright (c) 2004-2009 by Zapatec, Inc.
+ * http://www.zapatec.com
+ * 1700 MLK Way, Berkeley, California,
+ * 94709, U.S.A.
+ * All rights reserved.
+ */
+
+.zpTabsDefault {
+  -moz-border-radius: 15px 15px 0 0;
+  -webkit-border-top-right-radius: 15px;
+  -webkit-border-top-left-radius: 15px;
+  background-color: white;
+  padding: 0 10px 0 10px;
+  border-width: 1px 1px 0 1px;
+  border-color: #808080;
+  border-style: solid;
+  font: small arial, sans-serif;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.zpTabsDefault a,
+.zpTabsDefault a:visited,
+.zpTabsDefault a:link {
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.zpTabsDefault .zpTab {
+  float: left;
+}
+
+.zpTabsDefault .zpTabLinkInner {
+  -moz-border-radius: 7px 7px 0 0;
+  -webkit-border-top-right-radius: 7px;
+  -webkit-border-top-left-radius: 7px;
+  cursor: pointer;
+  color: #808080;
+}
+
+.zpTabsDefault .zpTabsHover .zpTabLinkInner {
+  background-color: #D4D0C8;
+}
+
+.zpTabsDefault .zpTabLinkInner {
+  padding: 2px 15px 3px 15px;
+}
+
+.zpTabsDefault .zpTabsActive .zpTabLinkInner {
+  padding-right: 14px;
+  padding-left: 14px;
+}
+
+.zpTabsDefault .zpTabClosable {
+  padding: 2px 5px 3px 16px;
+}
+
+.zpTabsDefault .zpTabsActive .zpTabClosable {
+  padding-right: 4px;
+  padding-left: 15px;
+}
+
+
+
+.zpTabsDefault .zpTabsActive .zpTabLinkOuter {
+  margin-top: -1px;
+  *margin-top: 0;
+}
+
+.zpTabsDefault a u {
+  color: ButtonText;
+}
+
+.zpTabsDefault .zpTabsActive .zpTabLinkInner {
+  background-color: #D4D0C8;
+  border-style: solid;
+  border-width: 1px 1px 0 1px;
+  *border-width: 0px 1px 0 1px;
+  border-color: #808080;
+  color: ButtonText;
+}
+
+/* Safari only */
+body:last-child:not(:root:root) .zpTabsDefault .zpTabsActive .zpTabLinkInner {
+  border-width: 0px 1px 0 1px;
+}
+
+/* Safari only */
+body:last-child:not(:root:root) .zpTabsDefault .zpTabsActive .zpTabLinkOuter {
+  margin-top: 0;
+}
+
+
+
+
+.zpTabsDefault .zpTabsActive u {
+  color: red;
+}
+
+.zpTabsDefault .zpTabClosable .zpTabAnchorHolder {
+  float: left;
+}
+
+.zpTabsDefault .zpTabClose {
+  margin: 1px 0 0 5px;
+  float: left;
+  cursor: default;
+}
+
+.zpTabsDefault .zpTabsClearer {
+  clear: both;
+}
+
+
+.zpTabsDefaultContent {
+  border: 1px solid #808080;
+  background-color: #D4D0C8;
+  font: small arial, sans-serif;
+  clear: both;
+}
+
+/** Styles for tab scrollers **/
+.zpTabsScrolly {
+	color: #aaa;
+	cursor: pointer;
+	width: 30px;
+	float: left;
+	border: #a7b4b8 solid;
+	border-width: 1px 1px 0 1px;
+	background-color: #eee;
+}
+
+.zpTabsScrolly div {
+	padding: 0 3px;
+  float: left;
+}
+
+.zpTabsDefaultContent .zpTab,
+.zpTabsDefaultAccordionContent .zpTab {
+  overflow: hidden;
+}
+
+.zpTabsDefaultContent .zpTab {
+	width: 100%;
+	height: 100%;
+}
+
+.zpTabsDefaultContent .zpTabsNoOverflow,
+.zpTabsDefaultAccordionContent .zpTabsNoOverflow {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+/** Accordion styles **/
+.zpTabsDefaultAccordionContent
+	{
+	border: 1px solid ButtonShadow;
+	background-color: #D4D0C8;
+	font: small arial, sans-serif;
+	}
+
+.zpTabsDefaultAccordionContent div
+	{
+	background: white;
+	}
+
+.zpTabsDefaultAccordionContent div.tabChooser,
+.zpTabsDefaultAccordionContent div.tabChooser .zpTabAnchorHolder {
+	color: white;
+	background: #D4D0C8;
+	cursor: pointer;
+	}
+
+.zpTabsDefaultAccordionContent div.tabChooser a
+	{
+	color: #808080;
+	text-decoration: none;
+	margin: 0 3px;
+	line-height: 23px;
+	}
+
+.zpTabsDefaultAccordionContent div.tabChooser a u
+	{
+	color: red;
+	}
