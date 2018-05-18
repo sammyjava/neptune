@@ -4,7 +4,7 @@
   <tr>
     <td class="subheader-left"></td>
     <td class="subheader" nowrap>
-      <c:import context="/" url="/currentdate.jsp">
+      <c:import context="/jcms-root" url="/currentdate.jsp">
         <c:param name="location" value="S"/>
       </c:import>
     </td>

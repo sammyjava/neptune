@@ -3,51 +3,51 @@
 <% if (!customPrimaryNav) { %>
 <!-- primary nav -->
 <table id="navpri" cellspacing="0" width="100%">
-  <tr>
-    <td class="navpri-left" onClick="location.href='/index.jsp';"></td>
-    <% if (navPrimaryImages) { %><td class="navpri"><% }
-      {
-        boolean first = true;
-        NodeListIterator rootIterator = root.getNodeListIterator(application);
-        while (rootIterator.hasNext()) {
-          Node n1 = rootIterator.nextNode();
-          if (n1.isVisible() && (!accessEnabled || au.mayAccess(application, n1))) {
-            String layerId = "layer"+n1.num;
-            String overClass = "navpri navpri-over navpri-"+n1.num+" navpri-"+n1.num+"-over";
-            String outClass = "navpri";
-            String navImageName = "navpri"+n1.num;
-            String navImageOff = designFolder+"/"+navImageName+"-off.gif";
-            String navImageOn = designFolder+"/"+navImageName+"-on.gif";
-            String navImageOver = designFolder+"/"+navImageName+"-over.gif";
-            String navImage = null;
-            String aClass = "navpri";
-            if (level1!=null && n1.equals(level1)) {
-              outClass += " navpri-on navpri-"+n1.num+" navpri-"+n1.num+"-on";
-              aClass += " navpri-on navpri-"+n1.num+" navpri-"+n1.num+"-on";
-              navImage = navImageOn;
-              navImageOver = navImageOn;
-            } else {
-              outClass += " navpri-off navpri-"+n1.num+" navpri-"+n1.num+"-off";
-              aClass += " navpri-off navpri-"+n1.num+" navpri-"+n1.num+"-off";
-              navImage = navImageOff;
-            }
-            if (first) {
-              first = false;
-              outClass += " navpri-first";
-              overClass += " navpri-first";
-            }
-            String url = n1.url;
-            if (navPrimaryImages) {
-              %><a <% if (n1.isExternal()) { %>target="_blank"<% } %> onMouseOver="<%=navImageName%>.src='<%=navImageOver%>'; <% if (showNavPrimaryDhtml) out.print("showLayer('"+layerId+"');"); %>" onMouseOut="<%=navImageName%>.src='<%=navImage%>'; <% if (showNavPrimaryDhtml) out.print("hideLayer('"+layerId+"');"); %>" <% if (navPrimaryLevel1Enable) { %>href="<%=url%>"<% } %>><img name="<%=navImageName%>" src="<%=navImage%>" border="0" alt="<%=n1.nodename%>"/></a><%
-            } else {
-              %><td nowrap class="<%=outClass%>" onMouseOver="this.className='<%=overClass%>'; <% if (showNavPrimaryDhtml) { %>showLayer('<%=layerId%>');<% } %>" onMouseOut="this.className='<%=outClass%>'; <% if (showNavPrimaryDhtml) { %>hideLayer('<%=layerId%>');<% } %>"><% if (navPrimaryLevel1Enable) { %><a <% if (n1.isExternal()) { %>target="_blank"<% } %> class="<%=aClass%>" href="<%=url%>"><%=n1.nodename%></a><% } else { %><%=n1.nodename%><% } %></td><%
-            } // end if navPrimaryImages
-          } // end if au.mayAccess
-        } // end while
-      } // end enclosing parens
-      if (navPrimaryImages) { %></td><% } %>
-    <td class="navpri-right"></td>
-  </tr>
+    <tr>
+        <td class="navpri-left" onClick="location.href='/index.jsp';"></td>
+        <% if (navPrimaryImages) { %><td class="navpri"><% }
+            {
+                boolean first = true;
+                NodeListIterator rootIterator = root.getNodeListIterator(application);
+                while (rootIterator.hasNext()) {
+                    Node n1 = rootIterator.nextNode();
+                    if (n1.isVisible() && (!accessEnabled || au.mayAccess(application, n1))) {
+                        String layerId = "layer"+n1.num;
+                        String overClass = "navpri navpri-over navpri-"+n1.num+" navpri-"+n1.num+"-over";
+                        String outClass = "navpri";
+                        String navImageName = "navpri"+n1.num;
+                        String navImageOff = designFolder+"/"+navImageName+"-off.gif";
+                        String navImageOn = designFolder+"/"+navImageName+"-on.gif";
+                        String navImageOver = designFolder+"/"+navImageName+"-over.gif";
+                        String navImage = null;
+                        String aClass = "navpri";
+                        if (level1!=null && n1.equals(level1)) {
+                            outClass += " navpri-on navpri-"+n1.num+" navpri-"+n1.num+"-on";
+                            aClass += " navpri-on navpri-"+n1.num+" navpri-"+n1.num+"-on";
+                            navImage = navImageOn;
+                            navImageOver = navImageOn;
+                        } else {
+                            outClass += " navpri-off navpri-"+n1.num+" navpri-"+n1.num+"-off";
+                            aClass += " navpri-off navpri-"+n1.num+" navpri-"+n1.num+"-off";
+                            navImage = navImageOff;
+                        }
+                        if (first) {
+                            first = false;
+                            outClass += " navpri-first";
+                            overClass += " navpri-first";
+                        }
+                        String url = n1.url;
+                        if (navPrimaryImages) {
+                            %><a <% if (n1.isExternal()) { %>target="_blank"<% } %> onMouseOver="<%=navImageName%>.src='<%=navImageOver%>'; <% if (showNavPrimaryDhtml) out.print("showLayer('"+layerId+"');"); %>" onMouseOut="<%=navImageName%>.src='<%=navImage%>'; <% if (showNavPrimaryDhtml) out.print("hideLayer('"+layerId+"');"); %>" <% if (navPrimaryLevel1Enable) { %>href="<%=url%>"<% } %>><img name="<%=navImageName%>" src="<%=navImage%>" border="0" alt="<%=n1.nodename%>"/></a><%
+                                                                                                                                                                                                                                                                                                                                                                                                              } else {
+                            %><td nowrap class="<%=outClass%>" onMouseOver="this.className='<%=overClass%>'; <% if (showNavPrimaryDhtml) { %>showLayer('<%=layerId%>');<% } %>" onMouseOut="this.className='<%=outClass%>'; <% if (showNavPrimaryDhtml) { %>hideLayer('<%=layerId%>');<% } %>"><% if (navPrimaryLevel1Enable) { %><a <% if (n1.isExternal()) { %>target="_blank"<% } %> class="<%=aClass%>" href="<%=url%>"><%=n1.nodename%></a><% } else { %><%=n1.nodename%><% } %></td><%
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           } // end if navPrimaryImages
+                    } // end if au.mayAccess
+                } // end while
+            } // end enclosing parens
+            if (navPrimaryImages) { %></td><% } %>
+        <td class="navpri-right"></td>
+    </tr>
 </table>
 <% } %>
 <!--startindex-->

@@ -4,7 +4,7 @@
   <tr>
     <td class="footer-left"></td>
     <td class="footer">
-      <c:import context="/" url="/copyright.jsp">
+      <c:import context="/jcms-root" url="/copyright.jsp">
         <c:param name="location" value="S"/>
       </c:import>
     </td>

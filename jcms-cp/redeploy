@@ -1,0 +1,5 @@
+#!/bin/sh
+# convenience
+./gradlew clean
+./gradlew war
+./gradlew cargoRedeployRemote

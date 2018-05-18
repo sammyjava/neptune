@@ -4,27 +4,33 @@
  * Requires: String tdClass, UtilityContent[] uc.
  * Output: nid, pid, accessuser, and location
  */
-
-  for (int i=0; i<uc.length; i++) {
-      boolean show = false;
-      if (n.isDefault() && p.pid!=0) {
+for (int i=0; i<uc.length; i++) {
+    boolean show = false;
+    if (n.isDefault() && p.pid!=0) {
         show = uc[i].showhome;
-      } else {
+    } else {
         show = uc[i].showinside;
-      }
-      if (showMobile) show = uc[i].showmobile;
-      if (show) {
-  %><td class="<%=tdClass%>"><%
-	  if (uc[i].copy!=null && uc[i].copy.length()>0 && !uc[i].moduleabove) out.println(uc[i].copy);
-	  if (uc[i].modulecontext!=null && uc[i].moduleurl!=null) { %>
-	  <c:import context="<%=uc[i].modulecontext%>" url="<%=uc[i].moduleurl%>">
+    }
+    if (showMobile) show = uc[i].showmobile;
+    if (show) {
+%>
+    <td class="<%=tdClass%>">
+        <%
+        if (uc[i].copy!=null && uc[i].copy.length()>0 && !uc[i].moduleabove) out.println(uc[i].copy);
+        if (uc[i].modulecontext!=null && uc[i].moduleurl!=null) {
+        %>
+	<c:import context="<%=uc[i].modulecontext%>" url="<%=uc[i].moduleurl%>">
 	    <c:param name="nid" value="<%=Integer.toString(n.nid)%>"/>
-	      <c:param name="pid" value="<%=Integer.toString(p.pid)%>"/>
-		<c:param name="accessuser" value="<%=au.getUsername()%>"/>
-		  <c:param name="location" value="<%=Character.toString(uc[i].location)%>"/>
-		  </c:import><% }
-		  if (uc[i].copy!=null && uc[i].copy.length()>0 && uc[i].moduleabove) out.println(uc[i].copy); %></td>
-	<%
-	} // if
-	} // for
-	%>
+	    <c:param name="pid" value="<%=Integer.toString(p.pid)%>"/>
+	    <c:param name="accessuser" value="<%=au.getUsername()%>"/>
+	    <c:param name="location" value="<%=Character.toString(uc[i].location)%>"/>
+	</c:import>
+        <%
+        }
+        if (uc[i].copy!=null && uc[i].copy.length()>0 && uc[i].moduleabove) out.println(uc[i].copy);
+        %>
+    </td>
+    <%
+    } // if show
+} // for i
+%>

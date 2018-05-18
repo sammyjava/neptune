@@ -59,10 +59,10 @@ try {
 
   // uploaded and generated file folders
   String rootFolder = settings.getString("site_rootfolder");
-  String imageFolder = settings.getString("site_imagefolder");
-  String designFolder = settings.getString("site_designfolder");
-  String cssFolder = settings.getString("site_cssfolder");
-  String mediaFolder = settings.getString("site_mediafolder");
+  String imageFolder = rootFolder+settings.getString("site_imagefolder");
+  String designFolder = rootFolder+settings.getString("site_designfolder");
+  String cssFolder = rootFolder+settings.getString("site_cssfolder");
+  String mediaFolder = rootFolder+settings.getString("site_mediafolder");
 
   // enable/disable regions on root node
   boolean rootHeaderEnable = settings.getBoolean("root_header_enable");
@@ -198,6 +198,7 @@ try {
       String errorRequestURI = pageContext.getErrorData().getRequestURI();
       debugMessage = requestURI+": "+errorRequestURI;
       String alias = errorRequestURI.substring(contextPath.length()+1);
+      if (alias.startsWith("/")) alias = alias.substring(1);
       n = new Node(application, alias);
 %>
 <%@ include file="/WEB-INF/custom/node.inc" %>

@@ -25,7 +25,7 @@
         <td valign="top">
           <table cellspacing="0">
             <tr>
-              <td class="header" align="center"><a class="header sitename" target="_blank" href="/"><%=siteName%></a></td>
+              <td class="header" align="center"><a class="header sitename" target="_blank" href="<%=rootFolder%>"><%=siteName%></a></td>
             </tr>
           </table>
           <% if (userLoggedIn) { %>

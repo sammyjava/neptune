@@ -64,19 +64,19 @@ try {
   String rootFolder = settings.getString("site_rootfolder");
 
   // location of public uploaded images
-  String imageFolder = settings.getString("site_imagefolder");
+  String imageFolder = rootFolder+settings.getString("site_imagefolder");
   String imageDir = settings.getString("site_imagedir");
 
   // location of uploaded design file directory
-  String designFolder = settings.getString("site_designfolder");
+  String designFolder = rootFolder+settings.getString("site_designfolder");
   String designDir = settings.getString("site_designdir");
 
   // location of generated CSS files
-  String cssFolder = settings.getString("site_cssfolder");
+  String cssFolder = rootFolder+settings.getString("site_cssfolder");
   String cssDir = settings.getString("site_cssdir");
 
   // location of uploaded media
-  String mediaFolder = settings.getString("site_mediafolder");
+  String mediaFolder = rootFolder+settings.getString("site_mediafolder");
   String mediaDir = settings.getString("site_mediadir");
 
   // location of SearchBlox xsl files
