@@ -32,7 +32,7 @@
   <!-- localhost: 31A498BC3D2E02B7363A7F3DB7694CC0E8AFF7661FF9 --> 
   <context-param>
     <param-name>site.license</param-name>
-    <param-value>31A498BC3D2E02B7363A7F3DB7694CC0E8AFF7661FF9</param-value>
+    <param-value>3BAA7DA31869DBC43D57A6850E6306AA86B4A3B4464B29076FFF5515</param-value>
   </context-param>
 
   <!-- DB object uses this parameter to create the datasource -->
@@ -58,7 +58,7 @@
   </context-param>
   <context-param>
     <param-name>db.url</param-name>
-    <param-value>jdbc:postgresql://localhost/jcms</param-value>
+    <param-value>jdbc:postgresql://shokin-pg/jcms</param-value>
   </context-param>
   <context-param>
     <param-name>db.user</param-name>

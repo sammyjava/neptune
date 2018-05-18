@@ -57,7 +57,7 @@
   </context-param>
   <context-param>
     <param-name>db.url</param-name>
-    <param-value>jdbc:postgresql://localhost/jcms</param-value>
+    <param-value>jdbc:postgresql://shokin-pg/jcms</param-value>
   </context-param>
   <context-param>
     <param-name>db.user</param-name>
