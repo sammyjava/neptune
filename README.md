@@ -5,7 +5,7 @@ IMS Neptune Java-based Web content management system
 Builds the net.ims.net library.
 
 ## jcms-root
-The non-Bootstarap root context.
+The non-Bootstrap root context.
 
 ## jcms-cp
 The control panel context.
