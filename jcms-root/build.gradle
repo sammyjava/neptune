@@ -78,16 +78,18 @@ dependencies {
 // ---------------------------------------------------------------------------------------------------------------------
 cargo {
     
-    // change this to match your Tomcat major version (keep the x)
+    // change this to match your Tomcat major version (keep the x) and the port your server manager app is listening to
     containerId = 'tomcat8x'
+    port = 8080
 
-    // change this to the Tomcat root of your choice (no need if you're using Apache in front)
+    // change this to the Tomcat root of your choice (no need if you're proxying with HTTPD on a specific AJP port)
     deployable {
         context = 'jcms-root'
     }
 
     // change these to match your Tomcat host and tomcat-users config
     remote {
+	protocol = 'http'
         hostname = 'localhost'
         username = 'scriptmanager'
         password = 'script#manager'
