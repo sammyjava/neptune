@@ -1,12 +1,12 @@
          <Context className="org.apache.catalina.core.StandardContext"> 
 
             <Resource auth="Container" scope="Shareable" type="javax.sql.DataSource"
-                      description="Connection to jcms database."
-                      name="jdbc/JCMSDataSource"
+                      description="Connection to jcms database as admin."
+                      name="jdbc/JCMSAdminDataSource"
                       url="jdbc:postgresql://localhost/jcms"
                       driverClassName="org.postgresql.Driver"
-                      username="jcmsuser"
-                      password="jcms2018user"
+                      username="jcmsadmin"
+                      password="jcms2018admin"
                       maxActive="10"
                       maxIdle="0" />
 
