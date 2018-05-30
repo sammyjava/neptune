@@ -101,31 +101,31 @@ if (userLoggedIn) {
 boolean useZapatec = false;
 String docUrl = null;
 %>
-    <%@ include file="/WEB-INF/include/header.jhtml" %>
-        <%
-        if (user!=null && userLoggedIn) {
-            License license = new License(request);
-            // show warning if license expires in less than a month
-            Calendar expiration = Calendar.getInstance();
-            expiration.setTime(license.expiration);
-            Calendar plusMonth = Calendar.getInstance();
-            plusMonth.add(Calendar.MONTH, 1);
-            if (expiration.before(plusMonth)) error = "WARNING: your license expires in less than one month!";
-            // welcome message
-            message = "Welcome to the Neptune control panel! Please choose a tool above.";
-            %>
-            <%@ include file="/WEB-INF/include/errormessage.jhtml" %>
-            <%@ include file="updates.jhtml" %>
-            <%@ include file="serverstats.jhtml" %>
-            <%
-        } else {
-            %>
-            <%@ include file="/WEB-INF/include/errormessage.jhtml" %>
-                <%@ include file="login.jhtml" %>
-                <%
-                }
+<%@ include file="/WEB-INF/include/header.jhtml" %>
+<%
+if (user!=null && userLoggedIn) {
+    License license = new License(request);
+    // show warning if license expires in less than a month
+    Calendar expiration = Calendar.getInstance();
+    expiration.setTime(license.expiration);
+    Calendar plusMonth = Calendar.getInstance();
+    plusMonth.add(Calendar.MONTH, 1);
+    if (expiration.before(plusMonth)) error = "WARNING: your license expires in less than one month!";
+    // welcome message
+    message = "Welcome to the Neptune control panel! Please choose a tool above.";
+%>
+<%@ include file="/WEB-INF/include/errormessage.jhtml" %>
+<%@ include file="updates.jhtml" %>
+<%@ include file="serverstats.jhtml" %>
+<%
+} else {
+%>
+    <%@ include file="/WEB-INF/include/errormessage.jhtml" %>
+    <%@ include file="login.jhtml" %>
+<%
+}
 
 // clean-up tasks
 long endTime = new java.util.Date().getTime();
 %>
-    <%@ include file="/WEB-INF/include/footer.jhtml" %>
+<%@ include file="/WEB-INF/include/footer.jhtml" %>

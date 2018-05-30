@@ -40,9 +40,8 @@ dependencies {
     compile group: 'org.apache.axis', name: 'axis', version: '1.4'
     
     compile group: 'javax.servlet', name: 'jstl', version: '1.2'
-    compile group: 'javax.mail', name: 'javax.mail-api', version: '1.6.1'
     compile group: 'javax.xml.rpc', name: 'javax.xml.rpc-api', version: '1.1.2'
-
+    
     // javax.json-api only runs under JDK 9, fixed version placed in libs
     // compile group: 'javax.json', name: 'javax.json-api', version: '1.1.2'
 

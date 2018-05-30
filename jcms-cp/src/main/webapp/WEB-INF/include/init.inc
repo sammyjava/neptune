@@ -39,7 +39,7 @@ try {
     user = Util.getUser(application, cpuser.username);
     userLoggedIn = true;
   } catch (Exception ex) {
-    response.sendRedirect("/cp/index.jsp");
+    response.sendRedirect("index.jsp");
     return;
   }
 

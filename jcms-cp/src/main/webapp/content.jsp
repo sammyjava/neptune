@@ -356,7 +356,7 @@ if (!content.isDefault() && !userCanEdit && error==null) error = "You do not hav
     Content Label  &nbsp;&nbsp;&nbsp;&nbsp; <% if (!p.isDefault()) { %><a href="javascript:setPageLabel('<%=p.label%>')">use page label</a><% } %><br/>
     <input type="text" size="80" name="label" value="<%=Util.blankIfNull(content.label)%>"/>
     <!-- the all-important textarea! -->
-    <textarea id="content" name="copy" rows="31" cols="172"><%=Util.blankIfNull(content.copy)%></textarea>
+    <textarea id="content" name="copy"><%=Util.blankIfNull(content.copy)%></textarea>
     <table align="center"> 
       <tr>
         <td>extension context:<br/><input type="text" size="24" name="modulecontext" value="<%=Util.blankIfNull(content.modulecontext)%>" /></td>

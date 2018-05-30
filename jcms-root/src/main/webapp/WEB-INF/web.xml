@@ -48,30 +48,6 @@
     <res-sharing-scope>Shareable</res-sharing-scope>
   </resource-ref>
 
-  <!-- HACK? JNDI context isn't working yet -->
-  <!-- explicit setting of DB connection params here instead of JNDI context -->
-  <!-- uses jcmsuser for root connections -->
-  <context-param>
-    <param-name>db.driver</param-name>
-    <param-value>org.postgresql.Driver</param-value>
-  </context-param>
-  <context-param>
-    <param-name>db.url</param-name>
-    <param-value>jdbc:postgresql://shokin-pg/jcms</param-value>
-  </context-param>
-  <context-param>
-    <param-name>db.user</param-name>
-    <param-value>jcmsuser</param-value>
-  </context-param>
-  <context-param>
-    <param-name>db.password</param-name>
-    <param-value>jcms2018user</param-value>
-  </context-param>
-  <context-param>
-    <param-name>db.type</param-name>
-    <param-value>pgsql</param-value>
-  </context-param>
-
   <!-- media servlet, governs access to media in /uploads/media -->
   <servlet>
     <servlet-name>MediaServlet</servlet-name>

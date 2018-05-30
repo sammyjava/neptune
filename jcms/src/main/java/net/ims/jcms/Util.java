@@ -891,7 +891,7 @@ public class Util {
      * Output the ReCaptcha HTML
      */
     public static String generateReCaptcha(ServletContext context) throws SQLException, NamingException, FileNotFoundException, ClassNotFoundException {
-        return ReCaptchaFactory.newReCaptcha(Setting.getString(context,"recaptcha_public_key"), Setting.getString(context,"recaptcha_private_key"), false).createRecaptchaHtml(null, null);
+        return ReCaptchaFactory.newReCaptcha(Setting.getString(context,"recaptcha_site_key"), Setting.getString(context,"recaptcha_secret_key"), false).createRecaptchaHtml(null, null);
     }
 
     /**
@@ -900,7 +900,7 @@ public class Util {
     public static void validateReCaptcha(HttpServletRequest request) throws ValidationException, SQLException, NamingException, FileNotFoundException, ClassNotFoundException {
         String remoteAddr = request.getRemoteAddr();
         ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-        reCaptcha.setPrivateKey(Setting.getString(request.getServletContext(), "recaptcha_private_key"));
+        reCaptcha.setPrivateKey(Setting.getString(request.getServletContext(), "recaptcha_secret_key"));
         String challenge = Util.getString(request, "recaptcha_challenge_field");
         String uresponse = Util.getString(request, "recaptcha_response_field");
         if (uresponse.length()==0) {
@@ -917,7 +917,7 @@ public class Util {
     public static void validateReCaptcha(HttpServletRequest request, MultipartRequest mpr) throws ValidationException, SQLException, NamingException, FileNotFoundException, ClassNotFoundException {
         String remoteAddr = request.getRemoteAddr();
         ReCaptchaImpl reCaptcha = new ReCaptchaImpl();
-        reCaptcha.setPrivateKey(Setting.getString(request.getServletContext(), "recaptcha_private_key"));
+        reCaptcha.setPrivateKey(Setting.getString(request.getServletContext(), "recaptcha_secret_key"));
         String challenge = Util.getString(mpr, "recaptcha_challenge_field");
         String uresponse = Util.getString(mpr, "recaptcha_response_field");
         if (uresponse.length()==0) {
@@ -985,18 +985,34 @@ public class Util {
     }
 
     /**
-     * Verify a Google ReCaptcha response, throw ValidationException if no go
+     * Verify a Google reCaptcha response for an HttpServletRequest
      */
-    public static void verifyGoogleReCaptcha(HttpServletRequest request) throws ValidationException, IOException {
-        
+    public static void verifyGoogleReCaptcha(HttpServletRequest request) throws ValidationException, IOException, SQLException, NamingException, ClassNotFoundException {
         String gRecaptchaResponse = getString(request, "g-recaptcha-response");
         String remoteAddr = request.getRemoteAddr();
-        String secret = request.getServletContext().getInitParameter("grecaptcha.secret");
+        String secret = Setting.getString(request.getServletContext(), "recaptcha_secret_key");
+        verifyGoogleReCaptcha(gRecaptchaResponse, remoteAddr, secret);
+    }
+
+    /**
+     * Verify a Google reCaptcha response for a MultiPartRequest
+     */
+    public static void verifyGoogleReCaptcha(HttpServletRequest request, MultipartRequest mpr) throws ValidationException, IOException, SQLException, NamingException, ClassNotFoundException {
+        String gRecaptchaResponse = getString(mpr, "g-recaptcha-response");
+        String remoteAddr = request.getRemoteAddr();
+        String secret = Setting.getString(request.getServletContext(), "recaptcha_secret_key");
+        verifyGoogleReCaptcha(gRecaptchaResponse, remoteAddr, secret);
+    }
+
+    /**
+     * Verify a Google reCaptcha response
+     */
+    static void verifyGoogleReCaptcha(String gRecaptchaResponse, String remoteAddr, String secret) throws ValidationException {
 
         if (gRecaptchaResponse == null || gRecaptchaResponse.length()==0) {
             throw new ValidationException("Google ReCaptcha response is empty: check the box to prove that you are not a robot.");
         }
-		
+	
         try {
 
             // initialize connection

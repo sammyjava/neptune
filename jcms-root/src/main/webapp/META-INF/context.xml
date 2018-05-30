@@ -1,0 +1,22 @@
+         <Context className="org.apache.catalina.core.StandardContext"> 
+<!--
+                  path="" displayName="vilaszoo.org" docBase="/home/sites/vilaszoo/jcms/webapps/ROOT"
+                  charsetMapperClass="org.apache.catalina.util.CharsetMapper" cookies="true" crossContext="true" 
+                  privileged="false" reloadable="false" swallowOutput="false" useNaming="true"
+                  wrapperClass="org.apache.catalina.core.StandardWrapper">
+-->
+
+            <Resource auth="Container" scope="Shareable" type="javax.sql.DataSource"
+                      description="Connection to jcms database."
+                      name="jdbc/JCMSDataSource"
+                      url="jdbc:postgresql://localhost/jcms"
+                      driverClassName="org.postgresql.Driver"
+                      username="jcmsuser"
+                      password="jcms2018user"
+                      maxActive="10"
+                      maxIdle="0" />
+
+            <!-- SMTP mail resource -->
+            <Resource name="mail/Session" auth="Container" type="javax.mail.Session" mail.smtp.host="localhost"/>
+
+         </Context>

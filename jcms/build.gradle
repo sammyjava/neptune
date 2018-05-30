@@ -64,3 +64,18 @@ dependencies {
 
 }
 
+task copyJarToRoot(type: Copy) {
+	description "Copies jcms.jar to jcms-root project."
+    	dependsOn 'jar'
+	from 'build/libs'
+	into '../jcms-root/libs'
+	println "Copied jcms.jar to jcms-root/libs."
+}
+
+task copyJarToCp(type: Copy) {
+	description "Copies jcms.jar to jcms-cp project."
+	dependsOn 'jar'
+	from 'build/libs'
+	into '../jcms-cp/libs'
+	println "Copied jcms.jar to jcms-cp/libs."
+}

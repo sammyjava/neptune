@@ -1,1 +1,1 @@
-<div class="g-recaptcha" style="" data-theme="light" data-size="normal" data-sitekey="<%=Setting.getString(application,"recaptcha_public_key")%>"></div>
+<div class="g-recaptcha" style="" data-theme="light" data-size="normal" data-sitekey="<%=Setting.getString(application,"recaptcha_site_key")%>"></div>

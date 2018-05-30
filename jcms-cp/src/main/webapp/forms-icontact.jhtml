@@ -1,6 +1,6 @@
 <%
   // load iContact lists
-  Credentials creds = new Credentials(root);
+  Credentials creds = new Credentials(application);
   Account account = new Account(creds, iContactAccountId);
   ClientFolder clientFolder = new ClientFolder(creds, account, iContactClientFolderId);
   List[] lists = List.getAll(creds, account, clientFolder);
