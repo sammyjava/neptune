@@ -113,9 +113,9 @@ public class License {
 									   InvalidAlgorithmParameterException, FileNotFoundException, SQLException, NamingException, LicenseInvalidException {
     License license = new License(request);
     if (license.hostname==null) {
-      throw new LicenseInvalidException("site.license is invalid: hostname not found.");
+      throw new LicenseInvalidException("site.license is invalid: hostname is null.");
     } else if (license.expiration==null) {
-      throw new LicenseInvalidException("site.license is invalid: expiration not found.");
+      throw new LicenseInvalidException("site.license is invalid: expiration is null.");
     } else if (!license.hostname.equals(request.getServerName())) {
       throw new LicenseInvalidException("site.license is invalid: licensed hostname does not match "+request.getServerName()+".");
     } else if (license.expiration.before(new Date())) {
