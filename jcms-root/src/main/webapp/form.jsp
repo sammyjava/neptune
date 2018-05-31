@@ -71,7 +71,7 @@ try {
 } catch (Exception ex) {
     
     // set error message if isn't simply because not a multipart request
-    if (!ex.getMessage().equals("Posted content type isn't multipart/form-data")) error = ex.toString();
+    if (!ex.getMessage().equals("Posted content type isn't multipart/form-data")) error = ex.getMessage();
 
     // explain a bit more on oversize uploads
     if (error!=null && error.indexOf("java.io.IOException: Posted content length")>-1) error = error.substring(20)+".  A site administrator can increase the file upload size limit.";
