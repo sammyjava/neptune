@@ -81,6 +81,7 @@ cargo {
     
     // change this to match your Tomcat major version (keep the x)
     containerId = 'tomcat8x'
+    port = 8080
 
     // change this to the Tomcat root of your choice (no need if you're using Apache in front)
     deployable {
@@ -89,6 +90,7 @@ cargo {
 
     // change these to match your Tomcat host and tomcat-users config
     remote {
+        protocol = 'http'
         hostname = 'localhost'
         username = 'scriptmanager'
         password = 'script#manager'
